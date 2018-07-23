@@ -1,0 +1,49 @@
+image: binocarlos/cibase:v6
+
+variables:
+  DOCKER_API_VERSION: "1.23"
+  DOCKER_REGISTRY: gcr.io
+  GCP_PROJECT_ID: webkit-servers
+  GCP_ZONE: europe-west1-b
+  GCP_CLUSTER_ID: appcluster
+  NAMESPACE: px-docs-spike
+  VERSIONS_TAG: 1-4
+  VERSIONS_ALL: "1.3,1.4"
+  VERSIONS_BASE_URL: "pxdocs.wk1.co"
+  VERSIONS_CURRENT: "1.4"
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  variables:
+    BUILDER_IMAGE: $DOCKER_REGISTRY/$GCP_PROJECT_ID/px-docs-spike-builder-$VERSIONS_TAG:$CI_COMMIT_SHA
+    INDEXER_IMAGE: $DOCKER_REGISTRY/$GCP_PROJECT_ID/px-docs-spike-indexer-$VERSIONS_TAG:$CI_COMMIT_SHA
+    NGINX_IMAGE: $DOCKER_REGISTRY/$GCP_PROJECT_ID/px-docs-spike-$VERSIONS_TAG:$CI_COMMIT_SHA
+    ALGOLIA_INDEX_NAME: $VERSIONS_TAG
+  before_script:
+    - bash ci_connect.sh
+  after_script:
+    - docker rm -f $BUILDER_IMAGE || true
+    - rm -rf ./hugo_public
+  script:
+    # build the hugo static site - this produces a local 'public' folder with the build
+    - IMAGE=$BUILDER_IMAGE bash ./build.sh
+    - ls -la ./public
+    - mv public hugo_public
+    # run the indexer which updates algolia with the latest content
+    - IMAGE=$INDEXER_IMAGE bash ./algolia-index.sh
+    # we have docker ignored public but we need it for the nginx image so rename
+    - docker build -t $NGINX_IMAGE -f Dockerfile.nginx .
+    - gcloud docker -- push $NGINX_IMAGE
+
+deploy:
+  stage: deploy
+  variables:
+    IMAGE: $DOCKER_REGISTRY/$GCP_PROJECT_ID/px-docs-spike-$VERSIONS_TAG:$CI_COMMIT_SHA
+  before_script:
+    - bash ci_connect.sh
+  script:
+    - cat deploy/deployment.yaml | envsubst | kubectl apply -f -
