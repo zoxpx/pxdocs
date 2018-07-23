@@ -1,5 +1,7 @@
 # px-docs-spike
 
+[![Travis branch](https://img.shields.io/travis/portworx/pxdocs/master.svg)](https://travis-ci.org/portworx/pxdocs)
+
 A [hugo](https://gohugo.io/) implementation of the Portworx documentation.
 
 ## install & run
