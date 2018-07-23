@@ -33,8 +33,9 @@ To run hugo inside docker normally:
 ```
 ./hugo.sh --help
 ```
-
 For the rest of this document - interchange the `hugo` command for `./hugo.sh` if you are running inside Docker.
+
+For e.g to start the docs website locally using this script use: `./hugo.sh server`
 
 ### development server
 
