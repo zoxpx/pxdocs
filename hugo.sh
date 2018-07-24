@@ -15,6 +15,7 @@ if [ -n "$BUILD" ]; then
 fi
 
 docker run -ti --rm \
+  --env-file .env \
   --name px-docs-spike \
   -p 1313:1313 \
   -v "$DIR:/px-docs-spike" \
