@@ -75,22 +75,6 @@ You can always re-run the `make search` command again to re-index.
 
 Deployment of your changes is handled by Travis upon a git push to the git repo.  Once you have made changes and viewed them locally - a `git push` of the version branch you are working on will result in the content being deployed into production.
 
-## production build
-
-The following command will output the static site in the `public` folder:
-
-```
-hugo
-```
-
-If you want full debug output with no caching i.e. the cleanest build you can have (which is what should be used in CI):
-
-```
-hugo -v --debug --gc --ignoreCache --cleanDestinationDir
-```
-
-You can then serve the `public` folder as the static build of the site.
-
 ## editing content
 
 Each page is written in [Markdown](https://daringfireball.net/projects/markdown/syntax) and uses [front-matter](https://gohugo.io/content-management/front-matter/) in YAML format to describe the page.
