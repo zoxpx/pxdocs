@@ -38,7 +38,9 @@ make update-theme
 
 This will pull in the latest content from [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) - make sure you `git commit` once you have updated the theme.
 
-Make sure you update the theme for each of the version branches.
+Make sure you update the theme for each of the version branches if the theme changes.
+
+If you want to make changes to the templates or CSS - these files live in the `layouts` and `static` folder of the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo.  Make the changes there and then re-update each of the version branches.
 
 ## publish site
 
