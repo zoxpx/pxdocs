@@ -4,56 +4,78 @@
 
 A [hugo](https://gohugo.io/) implementation of the Portworx documentation.
 
-## install & run
+## develop locally
 
-You can install and run hugo in one of two ways:
+To develop the docs site locally - first ensure you have [docker](https://docs.docker.com/install/) installed and then:
 
-### locally
-
-Download hugo from the [releases page](https://github.com/gohugoio/hugo/releases) - make sure you get at least version `0.40`
-
-Then copy the `hugo` binary into `/usr/local/bin` - to check it's worked:
-
-```
-hugo version
+```bash
+make develop
 ```
 
-### with Docker
+You can then view the site in your browser at [http://localhost:1313](http://localhost:1313).  As you edit content in the `content` folder - the browser will refresh as you save files.
 
-Make sure you have Docker installed and running and use the use the `./hugo.sh` script in this repo.  It wraps the `docker run` command and mounts the code into the container for local development.
+## versions
 
-The first time you run, you must pass the `BUILD=1` var so the image is created - you can always rebuild by passing this on subsequent runs:
+Each version of the docs is kept on a different branch.  For example do `git checkout 1.3` before running `make develop` to edit the `1.3` version of the docs.
 
-```
-BUILD=1 ./hugo.sh version
-```
+To activate the version dropdown that appears in production - the following variables need to be exported before you run `make develop`:
 
-To run hugo inside docker normally:
-
-```
-./hugo.sh --help
-```
-For the rest of this document - interchange the `hugo` command for `./hugo.sh` if you are running inside Docker.
-
-For e.g to start the docs website locally using this script use: `./hugo.sh server`
-
-### development server
-
-The following command will start the development server with hot-reloading on code changes:
-
-```
-hugo server
+```bash
+export VERSIONS_ALL="1.3,1.4"
+export VERSIONS_CURRENT="1.3"
+export VERSIONS_BASE_URL="docs.portworx.wk1.co"
 ```
 
-Open [http://localhost:1313](http://localhost:1313) in your browser and you should see the site rendered.
+**note** if you use the version dropdown - it will redirect to the live site.  If you want to edit a different version locally - use `git checkout <VERSION>`
 
-Sometimes hugo will cache things and you need to restart the server - sometimes running the following command will reduce the need to do this at the cost of slightly slower build times:
+## updating the theme
 
+It's important to make sure the theme the docs site uses is up to date.  To do this:
+
+```bash
+make theme
 ```
-hugo server --disableFastRender
+
+This will pull in the latest content from [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) - make sure you `git commit` once you have updated the theme.
+
+Make sure you update the theme for each of the version branches.
+
+## publish site
+
+If you want to generate the built website locally - you can:
+
+```bash
+make publish
 ```
 
-### production build
+This will generate a `public` folder in which the static docs website for the current version branch is placed.
+
+## algolia search
+
+If you want the algolia search bar to be activated locally for testing - you will need to export the following variables - get these from an administrator:
+
+```bash
+export ALGOLIA_APP_ID=XXX
+export ALGOLIA_API_KEY=XXX
+export ALGOLIA_ADMIN_KEY=XXX
+export ALGOLIA_INDEX_NAME=local-docs
+```
+
+Then you will need to update the remote algolia index with the contents of the site:
+
+```bash
+make search
+```
+
+Finally run `make develop` as normal and the algolia search bar should display with the content of the site indexed.
+
+You can always re-run the `make search` command again to re-index.
+
+## deployment
+
+Deployment of your changes is handled by Travis upon a git push to the git repo.  Once you have made changes and viewed them locally - a `git push` of the version branch you are working on will result in the content being deployed into production.
+
+## production build
 
 The following command will output the static site in the `public` folder:
 
@@ -69,20 +91,20 @@ hugo -v --debug --gc --ignoreCache --cleanDestinationDir
 
 You can then serve the `public` folder as the static build of the site.
 
-#### sections
+## editing content
 
-The menu on the left hand side is build from the `section` pages.  A section is created by making `_index.md` file within a folder.
-
-You can make sections within sections by placing folders with `_index.md` files recursively in a folder tree - the menu will render the sections into the same tree represented by the folders.
-
-#### single content page
-
-Each page is written in Markdown and uses [front-matter](https://gohugo.io/content-management/front-matter/) in YAML format to describe the page.
+Each page is written in [Markdown](https://daringfireball.net/projects/markdown/syntax) and uses [front-matter](https://gohugo.io/content-management/front-matter/) in YAML format to describe the page.
 
 The important fields in the front-matter are as follow:
 
  * `title` - the name of the page and the name that will appear on the menu
  * `weight` - what order the page will appear in the menu and previous & next links within sections
+
+#### sections
+
+The menu on the left hand side is build from the `section` pages.  A section is created by making `_index.md` file within a folder.
+
+You can make sections within sections by placing folders with `_index.md` files recursively in a folder tree - the menu will render the sections into the same tree represented by the folders.
 
 #### reusing content
 

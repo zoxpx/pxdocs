@@ -12,6 +12,6 @@ RUN gzip -dc hugo.tar.gz | tar -xof -
 RUN mv hugo /usr/local/bin
 RUN rm -f hugo.tar.gz
 
-ADD . /px-docs-spike
-WORKDIR /px-docs-spike
+ADD . /pxdocs
+WORKDIR /pxdocs
 ENTRYPOINT ["/usr/local/bin/hugo"]
