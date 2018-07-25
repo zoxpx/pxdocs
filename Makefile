@@ -33,4 +33,4 @@ publish: image
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-v "$(PWD):/pxdocs" \
-		$(IMAGE)
+		$(IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
