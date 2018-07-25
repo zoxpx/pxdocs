@@ -9,6 +9,7 @@ before_install:
   - kubectl help
 script:
   - echo "Hello world"
+  - kubectl get no
 notifications:
   email:
     recipients:
