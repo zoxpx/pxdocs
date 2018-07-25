@@ -4,8 +4,8 @@ IMAGE?=pxdocs:developer
 image:
 	docker build -t $(IMAGE) .
 
-.PHONY: theme
-theme:
+.PHONY: update-theme
+update-theme:
 	git submodule update --remote --merge
 
 .PHONY: develop

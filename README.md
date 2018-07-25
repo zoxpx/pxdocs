@@ -33,7 +33,7 @@ export VERSIONS_BASE_URL="docs.portworx.wk1.co"
 It's important to make sure the theme the docs site uses is up to date.  To do this:
 
 ```bash
-make theme
+make update-theme
 ```
 
 This will pull in the latest content from [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) - make sure you `git commit` once you have updated the theme.
