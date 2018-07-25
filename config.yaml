@@ -4,6 +4,7 @@ title: Portworx Documentation
 pygmentsUseClasses: true
 pygmentsCodeFences: true
 enableGitInfo: true
+theme: pxdocs-theme
 
 params:
   narrowToolbarTitle: Portworx Documentation
