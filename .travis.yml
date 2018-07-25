@@ -16,7 +16,6 @@ before_install:
   # connect the GCLOUD_SERVICE_ACCOUNT_TOKEN, GCP_PROJECT_ID, GCP_ZONE and GCP_CLUSTER_ID vars -> gcloud and kubectl
   - bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh
 script:
-  - export 
   - export IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-$TRAVIS_BRANCH:$TRAVIS_COMMIT"
   - export SEARCH_INDEX_IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-indexer:$TRAVIS_COMMIT"
   - export ALGOLIA_INDEX_NAME=$(echo -n "$TRAVIS_BRANCH" | sed 's/\./-/g')
