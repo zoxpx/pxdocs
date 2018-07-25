@@ -64,7 +64,7 @@ export ALGOLIA_INDEX_NAME=local-docs
 Then you will need to update the remote algolia index with the contents of the site:
 
 ```bash
-make search
+make search-index
 ```
 
 Finally run `make develop` as normal and the algolia search bar should display with the content of the site indexed.
