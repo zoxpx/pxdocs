@@ -7,9 +7,8 @@ before_install:
   - sudo apt-get -o Dpkg::Options::="--force-confnew" install -yq docker-ce
   - wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
   - gcloud version
-  #- gcloud components --quiet install kubectl
-  #- kubectl help
-  
+  - gcloud components --quiet install kubectl
+  - kubectl help
 script:
   - echo "Hello world"
 notifications:
