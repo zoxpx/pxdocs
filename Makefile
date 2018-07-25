@@ -1,9 +1,9 @@
-IMAGE?=pxdocs:developer
+BUILDER_IMAGE?=pxdocs:developer
 SEARCH_INDEX_IMAGE?=pxdocs-search-index:developer
 
 .PHONY: image
 image:
-	docker build -t $(IMAGE) .
+	docker build -t $(BUILDER_IMAGE) .
 
 .PHONY: search-index-image
 search-index-image:
@@ -25,7 +25,7 @@ develop: image
 		-e ALGOLIA_INDEX_NAME \
 		-p 1313:1313 \
 		-v "$(PWD):/pxdocs" \
-		$(IMAGE) server --bind=0.0.0.0 --disableFastRender
+		$(BUILDER_IMAGE) server --bind=0.0.0.0 --disableFastRender
 
 .PHONY: publish
 publish: image
@@ -38,7 +38,7 @@ publish: image
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-v "$(PWD):/pxdocs" \
-		$(IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
+		$(BUILDER_IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
 
 .PHONY: search-index
 search-index: search-index-image publish
