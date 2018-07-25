@@ -50,4 +50,4 @@ search-index: search-index-image publish
 		-e ALGOLIA_ADMIN_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e ALGOLIA_INDEX_FILE=public/algolia.json \
-		$(IMAGE)
+		$(SEARCH_INDEX_IMAGE)
