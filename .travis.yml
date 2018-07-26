@@ -21,6 +21,7 @@ script:
   - export SEARCH_INDEX_IMAGE="pxdocs-indexer:$TRAVIS_COMMIT"
   - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-$TRAVIS_BRANCH:$TRAVIS_COMMIT"
   - export VERSIONS_TAG=$(echo -n "$TRAVIS_BRANCH" | sed 's/\./-/g')
+  - export VERSIONS_CURRENT=$TRAVIS_BRANCH
   - export ALGOLIA_INDEX_NAME=$VERSIONS_TAG
   # build images
   - make image
