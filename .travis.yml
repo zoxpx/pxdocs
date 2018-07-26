@@ -36,7 +36,7 @@ script:
   - gcloud docker -- push $DEPLOYMENT_IMAGE
   # deploy the image to k8s
   - echo "deploying image $DEPLOYMENT_IMAGE"
-  - IMAGE=$DEPLOYMENT_IMAGE VERSIONS_TAG=$PARSED_BRANCH cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst | kubectl apply -f -
+  - IMAGE=$DEPLOYMENT_IMAGE VERSIONS_TAG=1-3 cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst | kubectl apply -f -
 notifications:
   email:
     recipients:
