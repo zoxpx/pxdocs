@@ -1,5 +1,5 @@
 ---
-title: AWS
+title: Auto-Scaling Groups
 weight: 1
 ---
 
