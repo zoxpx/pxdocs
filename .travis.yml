@@ -22,9 +22,7 @@ script:
   - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-$TRAVIS_BRANCH:$TRAVIS_COMMIT"
   - export PARSED_BRANCH=$(echo -n "$TRAVIS_BRANCH" | sed 's/\./-/g')
   - export ALGOLIA_INDEX_NAME=$PARSED_BRANCH
-  # publish site -> public
-  - make publish
-  # update the algolia index
+  # publish site -> public & update the algolia index
   - make search-index
   # build the deployment image
   - cp -r themes/pxdocs-tooling/deploy/nginx nginx_build_folder
