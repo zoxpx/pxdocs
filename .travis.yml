@@ -31,8 +31,12 @@ script:
   - make search-index-docker
   # build the deployment image
   - make deployment-image
-  # push the image to gcloud
+  # push the image to gcr
+  - echo "pushing image $DEPLOYMENT_IMAGE"
   - gcloud docker -- push $DEPLOYMENT_IMAGE
+  # deploy the image to k8s
+  - echo "deploying image $DEPLOYMENT_IMAGE"
+  - IMAGE=$DEPLOYMENT_IMAGE VERSIONS_TAG=$PARSED_BRANCH cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst | kubectl apply -f -
 notifications:
   email:
     recipients:
