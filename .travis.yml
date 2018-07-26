@@ -20,8 +20,8 @@ script:
   - export BUILDER_IMAGE="pxdocs:$TRAVIS_COMMIT"
   - export SEARCH_INDEX_IMAGE="pxdocs-indexer:$TRAVIS_COMMIT"
   - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-$TRAVIS_BRANCH:$TRAVIS_COMMIT"
-  - export PARSED_BRANCH=$(echo -n "$TRAVIS_BRANCH" | sed 's/\./-/g')
-  - export ALGOLIA_INDEX_NAME=$PARSED_BRANCH
+  - export VERSIONS_TAG=$(echo -n "$TRAVIS_BRANCH" | sed 's/\./-/g')
+  - export ALGOLIA_INDEX_NAME=$VERSIONS_TAG
   # build images
   - make image
   - make search-index-image
@@ -36,7 +36,8 @@ script:
   - gcloud docker -- push $DEPLOYMENT_IMAGE
   # deploy the image to k8s
   - echo "deploying image $DEPLOYMENT_IMAGE"
-  - IMAGE=$DEPLOYMENT_IMAGE VERSIONS_TAG=1-3 cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst | kubectl apply -f -
+  - cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst
+  - cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst | kubectl apply -f -
 notifications:
   email:
     recipients:
