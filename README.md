@@ -6,7 +6,23 @@ A [hugo](https://gohugo.io/) implementation of the Portworx documentation.
 
 ## develop locally
 
-To develop the docs site locally - first ensure you have [docker](https://docs.docker.com/install/) installed and then:
+To develop the docs site locally - first ensure you have [docker](https://docs.docker.com/install/) installed.
+
+Then clone the repo:
+
+```bash
+git clone https://github.com/portworx/pxdocs
+cd pxdocs
+```
+
+Then we pull in the theme from the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo:
+
+```bash
+make update-theme
+```
+
+Finally - launch the website:
+
 
 ```bash
 make develop
