@@ -1,4 +1,4 @@
-# px-docs-spike
+# pxdocs
 
 [![Travis branch](https://img.shields.io/travis/portworx/pxdocs/master.svg)](https://travis-ci.org/portworx/pxdocs)
 
