@@ -1,5 +1,6 @@
 BUILDER_IMAGE?=pxdocs:developer
 SEARCH_INDEX_IMAGE?=pxdocs-search-index:developer
+DEPLOYMENT_IMAGE?=pxdocs-deployment:developer
 
 .PHONY: image
 image:
@@ -8,6 +9,13 @@ image:
 .PHONY: search-index-image
 search-index-image:
 	docker build -t $(SEARCH_INDEX_IMAGE) themes/pxdocs-tooling/deploy/algolia
+
+.PHONY: deployment-image
+deployment-image:
+	cp -r themes/pxdocs-tooling/deploy/nginx nginx_build_folder
+	cp -r public nginx_build_folder/hugo_public
+	docker build -t $DEPLOYMENT_IMAGE nginx_build_folder
+	rm -rf nginx_build_folder
 
 .PHONY: update-theme
 update-theme:
@@ -27,8 +35,8 @@ develop: image
 		-v "$(PWD):/pxdocs" \
 		$(BUILDER_IMAGE) server --bind=0.0.0.0 --disableFastRender
 
-.PHONY: publish
-publish: image
+.PHONY: publish-docker
+publish-docker:
 	docker run --rm \
 		--name pxdocs-publish \
 		-e VERSIONS_ALL \
@@ -40,8 +48,8 @@ publish: image
 		-v "$(PWD):/pxdocs" \
 		$(BUILDER_IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
 
-.PHONY: search-index
-search-index: search-index-image publish
+.PHONY: search-index-docker
+search-index-docker:
 	docker run --rm \
 		--name pxdocs-search-index \
 		-v "$(PWD)/public/algolia.json:/app/indexer/public/algolia.json" \
@@ -51,3 +59,9 @@ search-index: search-index-image publish
 		-e ALGOLIA_INDEX_NAME \
 		-e ALGOLIA_INDEX_FILE=public/algolia.json \
 		$(SEARCH_INDEX_IMAGE)
+
+.PHONY: publish
+publish: image publish.docker
+
+.PHONY: search-index
+search-index: image search-index-image publish-docker search-index-docker
