@@ -14,7 +14,7 @@ search-index-image:
 deployment-image:
 	cp -r themes/pxdocs-tooling/deploy/nginx nginx_build_folder
 	cp -r public nginx_build_folder/hugo_public
-	docker build -t $DEPLOYMENT_IMAGE nginx_build_folder
+	docker build -t $(DEPLOYMENT_IMAGE) nginx_build_folder
 	rm -rf nginx_build_folder
 
 .PHONY: update-theme

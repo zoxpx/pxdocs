@@ -32,7 +32,7 @@ script:
   # build the deployment image
   - make deployment-image
   # push the image to gcloud
-  #- gcloud docker -- push $DEPLOYMENT_IMAGE
+  - gcloud docker -- push $DEPLOYMENT_IMAGE
 notifications:
   email:
     recipients:
