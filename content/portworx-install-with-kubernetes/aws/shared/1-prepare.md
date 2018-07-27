@@ -67,7 +67,7 @@ Examples:
 * `"type=gp2,size=200"`
 * `"type=gp2,size=100","type=io1,size=200,iops=1000"`
 
-You will use the template spec later, in the _Install Portworx with Kubernetes_ topic.
+You will use the template spec later in the installation.
 
 #### Method 2: Use existing EBS volumes as templates
 
@@ -82,4 +82,4 @@ vol-0055e5913b79fb49d: 1000 GiB GP2
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group.
 
-You will use the EBS volume Id \(e.g. _vol-04e2283f1925ec9ee_\) in the _Install Portworx with Kubernetes_ topic, which is discussed next.
+You will use the EBS volume Id \(e.g. _vol-04e2283f1925ec9ee_\) later in the installation.

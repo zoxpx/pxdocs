@@ -1,6 +1,5 @@
 ---
 title: AWS
-weight: 1
+weight: 2
 ---
 
-This topic explains how to install Portworx with Kubernetes on AWS (Auto-Scaling Groups). Follow the steps in this topic in order.
