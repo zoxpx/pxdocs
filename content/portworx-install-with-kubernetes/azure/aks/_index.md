@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Service
+title: Azure Kubernetes Service (AKS)
 weight: 2
 ---
 

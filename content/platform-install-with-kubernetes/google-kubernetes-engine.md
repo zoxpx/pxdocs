@@ -1,5 +1,5 @@
 ---
-title: Google Kubernetes Engine
+title: GKE
 weight: 2
 disableprevnext: true
 ---

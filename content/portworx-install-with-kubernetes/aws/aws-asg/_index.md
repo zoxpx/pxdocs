@@ -1,5 +1,5 @@
 ---
-title: Auto-Scaling Groups
+title: Auto-Scaling Groups (ASG)
 weight: 1
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Elastic Kubernetes Service
+title: Elastic Kubernetes Service (EKS)
 weight: 2
 ---
 

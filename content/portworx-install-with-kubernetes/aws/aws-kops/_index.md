@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Operations
+title: Kubernetes Operations (KOPS)
 weight: 3
 ---
 

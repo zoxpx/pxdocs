@@ -1,5 +1,5 @@
 ---
-title: On Premise with Openshift
+title: Openshift
 weight: 3
 disableprevnext: true
 ---
