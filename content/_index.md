@@ -15,11 +15,14 @@ If you wish to get an overview of using Portworx on Kubernetes, start with inter
 
 To start your installation, click below.
 
-{{< widelink url="/start-here-installation" >}}Start Here: Installation on Kubernetes{{</widelink>}}
+{{< widelink url="/start-here-installation" >}}Start Here: Installation{{</widelink>}}
 
 ## Maintain
 
 Following your installation, the maintain section will have documentation on ongoing maintainence operations.
+
+{{< widelink url="/maintain-with-kubernetes" >}}Start Here: Maintain{{</widelink>}}
+
 
 ## Release Notes
 
