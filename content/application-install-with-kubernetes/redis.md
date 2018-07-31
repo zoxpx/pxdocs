@@ -1,4 +1,6 @@
-# Redis
+---
+title: Redis
+---
 
  This page provides instructions for deploying Redis with Portworx on Kubernetes.
 

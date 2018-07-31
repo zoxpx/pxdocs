@@ -1,4 +1,6 @@
-# WordPress and MySQL
+---
+title: WordPress and MySQL
+---
 
 This page provides instructions for deploying a WordPress site and a MySQL database with Portworx on Kubernetes.
 

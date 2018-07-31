@@ -1,4 +1,6 @@
-# Kafka with Zookeeper
+---
+title: Kafka with Zookeeper
+---
 
 This page provides instructions for deploying Apache Kafka and Zookeeper with Portworx on Kubernetes. 
 

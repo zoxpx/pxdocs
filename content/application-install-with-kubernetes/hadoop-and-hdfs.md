@@ -1,4 +1,6 @@
-# Hadoop and HDFS
+---
+title: Hadoop and HDFS
+---
 
 ## A Production Ops Guide to Deploying Hadoop in Docker Containers
 

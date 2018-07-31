@@ -1,4 +1,6 @@
-# Measuring Performance
+---
+title: Measuring Performance
+---
 
 ### About this Guide {#about-this-guide}
 

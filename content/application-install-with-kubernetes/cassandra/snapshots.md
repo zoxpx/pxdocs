@@ -1,4 +1,6 @@
-# Snapshots
+---
+title: Snapshots
+---
 
 ### Managing Snapshots {#managing-snapshots}
 

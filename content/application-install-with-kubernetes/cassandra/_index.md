@@ -1,4 +1,7 @@
-# Cassandra
+---
+title: Cassandra
+weight: 4
+---
 
 This page provides instructions for deploying Cassandra with Portworx on Kubernetes.
 

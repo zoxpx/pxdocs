@@ -1,4 +1,6 @@
-# Microsoft SQL Server
+---
+title: Microsoft SQL Server
+---
 
 This page provides instructions for deploying Microsoft SQL Server \(MS-SQL\) with Portworx on Kubernetes.
 

@@ -1,4 +1,6 @@
-# PostgreSQL
+---
+title: PostgreSQL
+---
 
 This page provides instructions for deploying PostgreSQL with Portworx on Kubernetes.
 
