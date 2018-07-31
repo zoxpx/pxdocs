@@ -1,5 +1,6 @@
 ---
 title: Hadoop and HDFS
+disableSearch: true
 ---
 
 ## A Production Ops Guide to Deploying Hadoop in Docker Containers
