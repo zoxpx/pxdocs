@@ -1,6 +1,6 @@
 ---
 title: Stateful applications on Kubernetes
-weight: 4
+weight: 5
 ---
 
 This topic explains how to install various applications for use with Portworx. It assumes you have completed the steps in the preceding topic, _Portworx Install with Kubernetes._
