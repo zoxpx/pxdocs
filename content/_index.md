@@ -5,17 +5,21 @@ hidesections: true
 disableprevnext: true
 ---
 
-This guide is divided into two parts that cover Portworx installation and maintenance.
+## Tutorials
 
-## Installation
+If you wish to get an overview of using Portworx on Kubernetes, start with interactive tutorials below. These serve as a playground for you to get an idea about the capabilities of Portworx without having to install it in your cluster.
 
-After you ensure that your system meets the installation prerequisites, you will install Portworx with Kubernetes, another container orchestrator or standalone. To start your installation, click on [_Start Here: Installation_](/start-here-installation) on the navigation tree to the left, or click the button below.
+{{< widelink url="/interactive-tutorials" >}}Interactive tutorials{{</widelink>}}
 
-{{< widelink url="/start-here-installation" >}}Start Here: Installation{{</widelink>}}
+## Install & Setup
 
-## Maintenance
+To start your installation, click below.
 
-Following your installation, refer to the maintenance documentation on this site as needed. This documentation starts with the _Reference_ topic and continues to the bottom of the site.
+{{< widelink url="/start-here-installation" >}}Start Here: Installation on Kubernetes{{</widelink>}}
+
+## Maintain
+
+Following your installation, the maintain section will have documentation on ongoing maintainence operations.
 
 ## Release Notes
 

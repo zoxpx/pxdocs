@@ -1,8 +1,7 @@
 ---
-title: "Start Here: Installation"
+title: "Prerequisites"
 weight: 1
 disableprevnext: true
-nextpage: platform-install-with-kubernetes/index.md
 ---
 
 ## Installation Prerequisites
@@ -32,10 +31,18 @@ Portworx nodes | See Note 4 below.
 
 **Note 2**:  Portworx needs a key-value store to perform its operations. As such, install a clustered key-value database \(`etcd` or `consul`\) with a three node cluster. Refer to this [article](https://coreos.com/etcd/docs/latest/op-guide/clustering.html) about `etcd` clustering and this [article](https://www.consul.io/intro/getting-started/join.html) about `consul` clustering.
 
-**Note 3:**  If you are installing Portworx 1.2, you must configure Docker to use shared mounts propagation. To do this, run `sudo mount –make-shared /` in your SSH window.  Portworx 1.3 and higher automatically enables shared mounts.
-
-**Note 4**: Portworx installations require a minimum of 3 nodes to be used on a cluster. The Portworx Enterprise edition supports up to 1000 nodes per cluster. The Portworx Developer edition does not allow more than 3 nodes per cluster.  All nodes running a Portworx container must be synchronized and NTP must be set up.
+**Note 3**: Portworx installations require a minimum of 3 nodes to be used on a cluster. The Portworx Enterprise edition supports up to 1000 nodes per cluster. The Portworx Developer edition does not allow more than 3 nodes per cluster.  All nodes running a Portworx container must be synchronized and NTP must be set up.
 
 ### Install Portworx
 
+#### Kubernetes
+
+If you are installing on Kubernetes, continue by clicking below.
+
 {{< widelink url="/platform-install-with-kubernetes" >}}Preparing your Kubernetes Platform{{</widelink>}}
+
+#### Other
+
+For all other environments, continue below.
+
+{{< widelink url="/install-with-other" >}}Install on other orchestrators{{</widelink>}}

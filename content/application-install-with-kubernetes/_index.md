@@ -1,5 +1,5 @@
 ---
-title: Stateful applications on Kubernetes
+title: Stateful applications
 weight: 4
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Install on Kubernetes
+title: Install
 weight: 3
 ---
 
