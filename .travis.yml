@@ -16,6 +16,8 @@ before_install:
   # connect the GCLOUD_SERVICE_ACCOUNT_TOKEN, GCP_PROJECT_ID, GCP_ZONE and GCP_CLUSTER_ID vars -> gcloud and kubectl
   - bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh
 script:
+  # make the build fail if there are any errors
+  - set -e
   # setup variables based on travis env
   - export BUILDER_IMAGE="pxdocs:$TRAVIS_COMMIT"
   - export SEARCH_INDEX_IMAGE="pxdocs-indexer:$TRAVIS_COMMIT"
@@ -36,6 +38,8 @@ script:
   # push the image to gcr
   - echo "pushing image $DEPLOYMENT_IMAGE"
   - gcloud docker -- push $DEPLOYMENT_IMAGE
+deploy:
+  skip_cleanup: true
   # deploy the image to k8s
   - echo "deploying image $DEPLOYMENT_IMAGE"
   - cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst
