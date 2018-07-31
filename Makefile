@@ -62,7 +62,7 @@ search-index-docker:
 		$(SEARCH_INDEX_IMAGE)
 
 .PHONY: publish
-publish: image publish.docker
+publish: image publish-docker
 
 .PHONY: search-index
 search-index: image search-index-image publish-docker search-index-docker
