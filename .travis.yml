@@ -5,7 +5,7 @@ services:
 before_install:
   # this checks if the current branch is present in the ALL_VERSIONS variable if exists early if not
   # means we can control which version branches are built without having to update each .travis.yml for new branches
-  - if [ $(bash themes/pxdocs-tooling/deploy/scripts/should_build_branch.sh) == "no" ]; then exit 0; fi
+  - if [ $(bash themes/pxdocs-tooling/deploy/scripts/versions.sh should-build-current-branch) != "yes" ]; then exit 0; fi
   # update gcloud apt source
   - export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
   - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
@@ -20,8 +20,9 @@ script:
   - export BUILDER_IMAGE="pxdocs:$TRAVIS_COMMIT"
   - export SEARCH_INDEX_IMAGE="pxdocs-indexer:$TRAVIS_COMMIT"
   - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-$TRAVIS_BRANCH:$TRAVIS_COMMIT"
-  - export VERSIONS_TAG=$(echo -n "$TRAVIS_BRANCH" | sed 's/\./-/g')
-  - export VERSIONS_CURRENT=$TRAVIS_BRANCH
+  - export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
+  - export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
+  - export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
   - export ALGOLIA_INDEX_NAME=$VERSIONS_TAG
   # build images
   - make image
