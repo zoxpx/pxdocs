@@ -1,10 +1,10 @@
-# pxdocs
+# Portworx Documentation
 
 [![Travis branch](https://img.shields.io/travis/portworx/pxdocs/master.svg)](https://travis-ci.org/portworx/pxdocs)
 
 A [hugo](https://gohugo.io/) implementation of the Portworx documentation.
 
-## develop locally
+## Development
 
 To develop the docs site locally - first ensure you have [docker](https://docs.docker.com/install/) installed.
 

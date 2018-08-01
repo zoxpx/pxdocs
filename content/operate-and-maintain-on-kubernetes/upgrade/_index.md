@@ -1,6 +1,7 @@
 ---
 title: Upgrade
-weight: 1
+weight: 2
+hidesections: true
 ---
 
 **Note:**  
@@ -8,20 +9,18 @@ We do not recommend upgrading Portworx using [Kubernetes instructions](https://k
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
-You are running Portworx as OCI if the Portworx daemonset image is _portworx/oci-monitor_. If not, you first need to migrate to OCI. To do that, click the link below.
+You are running Portworx as OCI if the Portworx daemonset image is _portworx/oci-monitor_. If not, you first need to [migrate to OCI](migrate-to-oci).
 
-{% page-ref page="migrate-to-oci.md" %}
+To upgrade to the **1.4** release, run the curl command:
 
-To upgrade to the **1.3 stable** release, run the curl command:
+```text
+curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.2
+```
+
+To upgrade to the **1.3** release, run the curl command:
 
 ```text
 curl -fsL https://install.portworx.com/upgrade | bash -s
-```
-
-To upgrade to the **1.4 tech preview** release, run the curl command:
-
-```text
-curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.0-rc1
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
@@ -106,6 +105,6 @@ minion2 192.168.56.71   3.316327   4.1 GB     ...   1.2.11.10-421c67f   Online
 If the upgrade job crashes unexpectedly and fails to restore shared applications back to their original replica counts, you can run the following command to restore them.
 
 ```text
-curl -fsL https://install.portworx.com/1.3/upgrade | bash -s -- --scaledownsharedapps off
+curl -fsL https://install.portworx.com/upgrade | bash -s -- --scaledownsharedapps off
 ```
 

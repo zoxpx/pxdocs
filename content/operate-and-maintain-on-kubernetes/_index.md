@@ -1,4 +1,4 @@
 ---
-title: Operate and Maintain on Kubernetes
+title: Operate and Maintain
 weight: 6
 ---
