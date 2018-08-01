@@ -1,6 +1,6 @@
 ---
 title: Cassandra
-weight: 4
+weight: 1
 disableSearch: true
 ---
 
