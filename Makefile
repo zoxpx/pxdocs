@@ -19,8 +19,9 @@ deployment-image:
 
 .PHONY: update-theme
 update-theme:
-	git submodule init themes/pxdocs-tooling
-	git submodule update --remote --merge
+	git submodule update 
+	git submodule foreach git checkout master 
+	git submodule foreach git pull origin master 
 
 .PHONY: develop
 develop: image
