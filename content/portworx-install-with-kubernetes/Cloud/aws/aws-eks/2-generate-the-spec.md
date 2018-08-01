@@ -4,8 +4,6 @@ description: ""
 weight: 2
 ---
 
-{{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-header.md" %}}
-
 {{<info>}}
 If you are not using instance privileges, you must also specify AWS environment variables in the DaemonSet spec file. The environment variables to specify \(for the KOPS IAM user\) are:
 

@@ -31,4 +31,4 @@ oc create secret docker-registry regcred --docker-server=registry.connect.redhat
   -n kube-system
 ```
 
-{{< widelink url="/portworx-install-with-kubernetes/openshift" >}}Install on Kubernetes with Openshift{{</widelink>}}
+{{< widelink url="/portworx-install-with-kubernetes/on-premise/openshift" >}}Install on Kubernetes with Openshift{{</widelink>}}

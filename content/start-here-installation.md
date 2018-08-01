@@ -38,7 +38,7 @@ Portworx nodes | See Note 3 below.
 
 If you are installing on Kubernetes, continue by clicking below.
 
-{{< widelink url="/platform-install-with-kubernetes" >}}Preparing your Kubernetes Platform{{</widelink>}}
+{{< widelink url="/platform-prep-with-kubernetes" >}}Preparing your Kubernetes Platform{{</widelink>}}
 
 #### Other
 

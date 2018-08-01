@@ -46,4 +46,4 @@ Ensure that these disks are created in the same zone as the GCP node group.
 
 You will use your existing GCP disk's template in the _Install Portworx with Kubernetes_ topic, which is discussed next.
 
-{{< widelink url="/portworx-install-with-kubernetes/google-kubernetes-engine" >}}Install on Kubernetes with Google Kubernetes Engine{{</widelink>}}
+{{< widelink url="/portworx-install-with-kubernetes/cloud/google-kubernetes-engine" >}}Install on Kubernetes with Google Kubernetes Engine{{</widelink>}}

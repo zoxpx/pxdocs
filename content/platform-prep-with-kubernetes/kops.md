@@ -89,4 +89,4 @@ Ensure that these EBS volumes are created in the same region as the auto scaling
 
 You will use the EBS volume Id \(e.g. _vol-04e2283f1925ec9ee_\) in the _Install Portworx with Kubernetes_ topic, which is discussed next.
 
-{{< widelink url="/portworx-install-with-kubernetes/aws" >}}Install on Kubernetes with AWS{{</widelink>}}
+{{< widelink url="/portworx-install-with-kubernetes/cloud/aws" >}}Install on Kubernetes with AWS{{</widelink>}}
