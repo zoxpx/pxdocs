@@ -1,6 +1,6 @@
 ---
 title: Update Portworx Geography Info
-weight: 8
+weight: 4
 ---
 
 ## Update Portworx Geography Info in Kubernetes

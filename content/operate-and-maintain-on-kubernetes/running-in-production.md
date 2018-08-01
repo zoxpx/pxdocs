@@ -1,17 +1,16 @@
 ---
 title: Running in Production
-weight: 5
+weight: 3
 ---
 
 ### DAY 1 Operations {#day-1-operations}
 
 #### Initial Software Setup for Production {#initial-software-setup-for-production}
 
-* Follow the instructions in the [k8s install](https://docs.portworx.com/scheduler/kubernetes/install.html) page in the docs.
+* Follow the instructions in the [k8s install](/portworx-install-with-kubernetes) page in the docs.
 * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will form the Portworx cluster
 * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
-* etcd - Setup etcd as a 3-node etcd cluster _outside_ the container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
-* Ensure you have Stork, the storage orchestrator for Kubernetes from Portworx, installed per the instructions [here](https://docs.portworx.com/scheduler/kubernetes/stork.html#install).
+* etcd - Setup etcd as a 3-node etcd cluster _outside_ the container orchestrator to ensure maximum stability. Refer to the following [page](https://etcd) on how to install etcd and also configure it for maximum stability.
 
 #### Configuring the Server or the Compute Infrastructure {#configuring-the-server-or-the-compute-infrastructure}
 
@@ -27,7 +26,7 @@ weight: 5
 
 * Make sure the following ports are open in all the servers. 9001-9015
 * Configure separate networks for Data and Management networks to isolate the traffic
-  * Data network is specified giving the ‘-d’ switch and Management networks with the ‘-m’ switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics to enable it in your scheduler.
+  * Data network is specified giving the ‘-d’ switch and Management networks with the ‘-m’ switch. Refer to [scheduler guides](/portworx-install-with-kubernetes) for specifics to enable it in your scheduler.
   * With multiple NICs, create a bonded ethernet port for data interface for improved availability and performance.
 
 #### Configuring and Provisioning Underlying Storage {#configuring-and-provisioning-underlying-storage}
@@ -46,8 +45,7 @@ This can be specificed in the args section of the px-spec.yaml used for installi
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID \(if available\) and give the block device from a HW RAID volume for Portworx to manage.
 * PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` \(or `priority_io` in kubernetes px spec\) and they offer the levels `high`, `medium` and `low`
-* The `priority_io` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](https://docs.portworx.com/maintain/maintenance-mode.html#storage-pool-commands)
-* This [page](https://docs.portworx.com/manage/class-of-service.html) offers more information on different io\_prioirty levels
+* The `priority_io` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/operate-and-maintain-on-kubernetes/maintenance-mode)
 
 **Working with drives with AWS Auto scaling group**
 
@@ -79,7 +77,7 @@ This node is in us-east-1. If PX is started in other zones, then when a volume w
 
 #### Topology in on-premise deployments: {#topology-in-on-premise-deployments}
 
-Failure domains in terms of RACK information can be passed in as described [here](https://docs.portworx.com/manage/update-px-geography.html)
+Failure domains in terms of RACK information can be passed in as described [here](operate-and-maintain-on-kubernetes/update-portworx-geography-info)
 
 #### Volume Management Best Practices {#volume-management-best-practices}
 
@@ -176,7 +174,7 @@ For e.g., for PX cluster running on AWS,
    shared: "true"
 ```
 
-This [page](https://docs.portworx.com/manage/volumes.html) gives more details on different volume types, how to create them and update the configuration for the volumes
+This [page](/reference/CLI/data-volumes) gives more details on different volume types, how to create them and update the configuration for the volumes
 
 * In order to ensure hyper-convergence, ensure you have Stork installed and running in the cluster. See the install instructions in the previous section
 
@@ -184,7 +182,7 @@ This [page](https://docs.portworx.com/manage/volumes.html) gives more details on
 
 * Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures.
 * Portworx support 64 snapshots per volume.
-* Refer to this [document](https://docs.portworx.com/manage/snapshots.html) for a brief overview on how to manage snapshots via `pxctl`. In Kubernetes, most snapshot functionality can be handled via kubernetes command line.
+* Refer to this [document](/reference/CLI/snapshots) for a brief overview on how to manage snapshots via `pxctl`. In Kubernetes, most snapshot functionality can be handled via kubernetes command line.
 * Periodic scheduled snapshots can be setup by defining the `snap_interval` in the Portworx StorageClass. An example is shown below.
 
 ```text
@@ -238,7 +236,7 @@ You can run the following command to edit your existing Portworx ClusterRole
 $ kubectl edit clusterrole node-get-put-list-role
 ```
 
-* Refer to the [Snapshots document](https://docs.portworx.com/manage/snapshots.html) in the Kubernetes section of the docs for more up to date information on snapshots.
+* Refer to the [Snapshots document](/reference/CLI/snapshots) in the Kubernetes section of the docs for more up to date information on snapshots.
 * If you have installed Stork, the snapshot operations can be executed via Stork. Follow the [link](https://github.com/libopenstorage/stork/tree/master#creating-snapshots) to see how snapshots can be done with Stork.
 * For DR, It is recommended to setup cloudsnaps as well which is covered in detail in the Day 3 - Cloudsnaps section
 
@@ -251,8 +249,7 @@ Portworx recommends setting up monitoring with Prometheus and AlertsManager to e
 
 While Prometheus can be deployed as a container within the container orchestrator, many of Portworx’s production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
-* Here is how Prometheus can be setup to monitor Portworx \[Prometheus\] \(/maintain/monitoring/prometheus/index.html\)
-* Configure Grafana via this [template](https://docs.portworx.com/maintain/monitoring/grafana/index.html)
+* Here is how Prometheus and Grafana can be setup to monitor Portworx: [configuration](operate-and-maintain-on-kubernetes/monitoring/monitoring-using-prometheus-and-grafana)
 * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](https://docs.portworx.com/maintain/monitoring/alerting.html)
 * List of Portworx Alerts are documented [here](https://docs.portworx.com/maintain/monitoring/portworx-alerts.html)
 
