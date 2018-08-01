@@ -1,7 +1,6 @@
 ---
 title: Running in Production
 weight: 5
-disableSearch: true
 ---
 
 ### DAY 1 Operations {#day-1-operations}

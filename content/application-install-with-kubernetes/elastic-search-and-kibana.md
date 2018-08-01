@@ -1,6 +1,5 @@
 ---
 title: Elastic Search and Kibana
-disableSearch: true
 ---
 
 These below instructions will provide you with a step by step guide in deploying the Elasticstack \(Elastic Search, Logstash, Kibana\) with Portworx on Kubernetes.

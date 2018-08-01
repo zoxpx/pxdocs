@@ -1,7 +1,6 @@
 ---
 title: Cassandra
 weight: 1
-disableSearch: true
 ---
 
 This page provides instructions for deploying Cassandra with Portworx on Kubernetes.

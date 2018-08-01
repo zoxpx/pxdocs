@@ -1,7 +1,6 @@
 ---
 title: Monitoring Using Prometheus and Grafana
 weight: 11
-disableSearch: true
 ---
 
 ### About Prometheus {#about-prometheus}
