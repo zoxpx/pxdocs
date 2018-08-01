@@ -7,7 +7,7 @@ before_install:
   # means we can control which version branches are built without having to update each .travis.yml for new branches
   # if it's a pull request on any branch we want to do the build - there is an exit 0 further down to exit before
   # search index & deploy if TRAVIS_PULL_REQUEST == true
-  - if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh should-build-current-branch)" != "yes" ]; then exit 0; fi
+  - if [ "${TRAVIS_PULL_REQUEST}" != "true" ] && [ "$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh should-build-current-branch)" != "yes" ]; then exit 0; fi
   # update gcloud apt source
   - export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
   - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
