@@ -1,4 +1,4 @@
 ---
-title: Storage Operations
+title: Storage operations
 weight: 5
 ---

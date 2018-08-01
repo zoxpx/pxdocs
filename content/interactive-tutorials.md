@@ -1,5 +1,5 @@
 ---
-title: Interactive Tutorials
+title: Interactive tutorials
 weight: 1
 ---
 
