@@ -1,6 +1,6 @@
 ---
 title: Create and Use Snapshots
-weight: 3
+weight: 1
 ---
 
 This page will show you how to create snapshots of Portworx volumes and how you can clone those snapshots to use them in pods.
