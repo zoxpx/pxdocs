@@ -1,5 +1,5 @@
 ---
-title: Standalone (OCI)
+title: Install
 ---
 
 Why OCI
