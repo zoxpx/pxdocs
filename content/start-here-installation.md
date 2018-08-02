@@ -2,6 +2,7 @@
 title: "Prerequisites"
 weight: 1
 disableprevnext: true
+equalizeTableWidths: "50%"
 ---
 
 ## Installation Prerequisites
