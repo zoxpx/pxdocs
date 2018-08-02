@@ -3,11 +3,6 @@ dist: trusty
 services:
   - docker
 before_install:
-  # this checks if the current branch is present in the ALL_VERSIONS variable if exists early if not
-  # means we can control which version branches are built without having to update each .travis.yml for new branches
-  # if it's a pull request on any branch we want to do the build - there is an exit 0 further down to exit before
-  # search index & deploy if TRAVIS_PULL_REQUEST == true
-  - if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh should-build-current-branch)" != "yes" ]; then exit 0; fi
   # update gcloud apt source
   - export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
   - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
@@ -15,8 +10,6 @@ before_install:
   # install docker-ce and kubectl
   - sudo apt-get update -yq
   - sudo apt-get -o Dpkg::Options::="--force-confnew" install -yq docker-ce kubectl
-  # connect the GCLOUD_SERVICE_ACCOUNT_TOKEN, GCP_PROJECT_ID, GCP_ZONE and GCP_CLUSTER_ID vars -> gcloud and kubectl
-  - bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh
 script:
   # make the build fail if there are any errors
   - set -e
@@ -34,12 +27,16 @@ script:
   - make publish-docker
   # if this is a pull request then we don't want to update algolia or deploy
   - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
+  # this checks if the current branch is present in the BRANCH_VERSION_CONFIG variable if exists if not
+  - if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh should-build-current-branch)" != "yes" ]; then exit 0; fi
   # update the algolia index
   - make search-index-image
   # update the algoilia index
   - make search-index-docker
   # build the deployment image
   - make deployment-image
+  # connect the GCLOUD_SERVICE_ACCOUNT_TOKEN, GCP_PROJECT_ID, GCP_ZONE and GCP_CLUSTER_ID vars -> gcloud and kubectl
+  - bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh
   # push the image to gcr
   - echo "pushing image $DEPLOYMENT_IMAGE"
   - gcloud docker -- push $DEPLOYMENT_IMAGE
