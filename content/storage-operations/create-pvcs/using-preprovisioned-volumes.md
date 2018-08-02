@@ -122,5 +122,5 @@ spec:
       claimName: testvol-pvc
 ```
 
-> **Note:** To access PV/PVCs with a non-root user refer [here](https://docs.portworx.com/scheduler/kubernetes/non-root.html)
+> **Note:** To access PV/PVCs with a non-root user refer [here](/storage-operations/create-pvcs/access-via-non-root-users)
 

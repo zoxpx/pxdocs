@@ -14,7 +14,7 @@ Using Dynamic Provisioning and Storage Classes you don’t need to create Portwo
 | repl | Replication factor for the volume: 1\|2\|3 | repl: “3” |
 | shared | Flag to create a globally shared namespace volume which can be used by multiple pods | shared: “true” |
 | priority\_io | IO Priority: low\|medium\|high | priority\_io: “high” |
-| io\_profile | IO Profile can be used to override the I/O algorithm Portworx uses for the volumes. Supported values are [db](https://docs.portworx.com/maintain/performance/tuning.html#db), [sequential](https://docs.portworx.com/maintain/performance/tuning.html#sequential), [random](https://docs.portworx.com/maintain/performance/tuning.html#random), [cms](https://docs.portworx.com/maintain/performance/tuning.html#cms) | io\_profile: “db” |
+| io\_profile | IO Profile can be used to override the I/O algorithm Portworx uses for the volumes. Supported values are [db](/install-with-other/operate-and-maintain/performance-tuning/tuning#db), [sequential](https://docs.portworx.com/maintain/performance/tuning.html#sequential), [random](https://docs.portworx.com/maintain/performance/tuning#random), [cms](https://docs.portworx.com/maintain/performance/tuning#cms) | io\_profile: “db” |
 | group | The group a volume should belong too. Portworx will restrict replication sets of volumes of the same group on different nodes. If the force group option ‘fg’ is set to true, the volume group rule will be strictly enforced. By default, it’s not strictly enforced. | group: “volgroup1” |
 | fg | This option enforces volume group policy. If a volume belonging to a group cannot find nodes for it’s replication sets which don’t have other volumes of same group, the volume creation will fail. | fg: “true” |
 | label | List of comma-separated name=value pairs to apply to the Portworx volume | label: “name=mypxvol” |
@@ -156,7 +156,7 @@ kubectl get pod pvpod
    pvpod       1/1     Running   0          48m
 ```
 
-> **Note:** To access PV/PVCs with a non-root user refer [here](https://docs.portworx.com/scheduler/kubernetes/non-root.html)
+> **Note:** To access PV/PVCs with a non-root user refer [here](/storage-operations/create-pvcs/access-via-non-root-users)
 
 #### Delete volumes {#delete-volumes}
 
