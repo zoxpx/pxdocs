@@ -1,5 +1,6 @@
 ---
 title: GKE
+logo: /logos/gke.png
 weight: 1
 ---
 
