@@ -1,6 +1,6 @@
 ---
-title: Install on other orchestrators
-weight: 99
+title: Portworx on other orchestrators
+weight: 3
 ---
 
 Click on your platform below for instructions on Portworx installation. 

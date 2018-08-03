@@ -21,7 +21,7 @@ To start your installation, click below.
 
 Following your installation, the maintain section will have documentation on ongoing maintainence operations.
 
-{{< widelink url="/maintain-with-kubernetes" >}}Start Here: Maintain{{</widelink>}}
+{{< widelink url="/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes" >}}Start Here: Maintain{{</widelink>}}
 
 
 ## Release Notes

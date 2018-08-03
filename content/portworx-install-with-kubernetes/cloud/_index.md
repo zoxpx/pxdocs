@@ -1,5 +1,5 @@
 ---
-title: Cloud
+title: Install on cloud
 logoList: true
 weight: 1
 ---

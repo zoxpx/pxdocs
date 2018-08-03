@@ -25,4 +25,4 @@ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl status
 You are now ready to install an application that uses Portworx. This is discussed in the next topic.
 
 
-{{< widelink url="/application-install-with-kubernetes" >}}Stateful applications on Kubernetes{{</widelink>}}
+{{< widelink url="/portworx-install-with-kubernetes/application-install-with-kubernetes" >}}Stateful applications on Kubernetes{{</widelink>}}

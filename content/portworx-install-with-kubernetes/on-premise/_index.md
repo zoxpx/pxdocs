@@ -1,4 +1,4 @@
 ---
-title: On-premise
+title: Install on-premise
 weight: 2
 ---
