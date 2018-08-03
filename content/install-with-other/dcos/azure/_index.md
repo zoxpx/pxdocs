@@ -1,5 +1,5 @@
 ---
-title: Install
+title: Azure
 ---
 
 To set up the Azure Container Service Engine with DCOS to use Portworx, follow the steps below.
