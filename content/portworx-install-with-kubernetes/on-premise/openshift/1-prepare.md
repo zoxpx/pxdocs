@@ -1,7 +1,6 @@
 ---
-title: Openshift
-weight: 3
-disableprevnext: true
+title: 1. Prepare your platform
+weight: 1
 ---
 
 Portworx supports Openshift 3.7 and above.
@@ -30,5 +29,3 @@ oc create secret docker-registry regcred --docker-server=registry.connect.redhat
   --docker-username=john-rhel --docker-password=s3cret --docker-email=test@acme.org \
   -n kube-system
 ```
-
-{{< widelink url="/portworx-install-with-kubernetes/on-premise/openshift" >}}Install on Kubernetes with Openshift{{</widelink>}}

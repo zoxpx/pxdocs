@@ -10,7 +10,7 @@ params:
   narrowToolbarTitle: Portworx Documentation
   wideToolbarTitle: Documentation
   description: The documentation for Portworx
-  githubRepo: https://github.com/binocarlos/px-docs-spike
+  githubRepo: https://github.com/portworx/pxdocs
   algolia:
     vars:
       - title

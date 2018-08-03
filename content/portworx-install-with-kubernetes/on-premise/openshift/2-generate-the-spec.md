@@ -1,7 +1,7 @@
 ---
-title: 1. Generate the Spec
+title: 2. Generate the Spec
 description: ""
-weight: 1
+weight: 2
 ---
 
 {{<info>}}

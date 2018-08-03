@@ -33,16 +33,10 @@ Portworx nodes | See Note 3 below.
 
 **Note 3**: Portworx installations require a minimum of 3 nodes to be used on a cluster. The Portworx Enterprise edition supports up to 1000 nodes per cluster. The Portworx Developer edition does not allow more than 3 nodes per cluster.  All nodes running a Portworx container must be synchronized and NTP must be set up.
 
-### Install Portworx
+## Installation
 
-#### Kubernetes
+For Kubernetes, continue below,
+{{< widelink url="/portworx-install-with-kubernetes" >}}Portworx on Kubernetes{{</widelink>}}
 
-If you are installing on Kubernetes, continue by clicking below.
-
-{{< widelink url="/platform-prep-with-kubernetes" >}}Preparing your Kubernetes Platform{{</widelink>}}
-
-#### Other
-
-For all other environments, continue below.
-
-{{< widelink url="/install-with-other" >}}Install on other orchestrators{{</widelink>}}
+For all other environments, continue below,
+{{< widelink url="/install-with-other" >}}Portworx on other orchestrators{{</widelink>}}
