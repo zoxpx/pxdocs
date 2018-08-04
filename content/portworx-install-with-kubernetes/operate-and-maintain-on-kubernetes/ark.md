@@ -1,6 +1,6 @@
 ---
 title: "Using Ark with Portworx"
-weight: 2
+weight: 7
 ---
 
 * TOC

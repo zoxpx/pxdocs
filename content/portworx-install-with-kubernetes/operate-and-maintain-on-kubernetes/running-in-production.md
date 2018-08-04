@@ -1,6 +1,6 @@
 ---
 title: Running in Production
-weight: 3
+weight: 4
 ---
 
 ### DAY 1 Operations {#day-1-operations}
