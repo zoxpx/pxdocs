@@ -7,7 +7,7 @@ weight: 5
 
 The cloud provider credentials are stored in an external secret store. Before you use these commands, you should configure a secret provider of your choice with Portworx. For more information, click the link below.
 
-[Key Management](/key-management)
+[Key Management](/reference/key-management)
 
 **pxctl credentials**
 
