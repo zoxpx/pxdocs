@@ -171,6 +171,14 @@ redirect_from:
 ---
 ```
 
+#### Updating the HEAD meta tags (title, keywords & description)
+
+To change the site HEAD meta tags - change the following values in `config.yaml`:
+
+ * title
+ * params.description
+ * params.keywords
+
 ## hugo docs
 
 Because the site is based on hugo - you can use any of the shortcodes, functions and variables listed in the [hugo documentation](https://gohugo.io/documentation/)
