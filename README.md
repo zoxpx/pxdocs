@@ -155,6 +155,22 @@ The `_index.md` page of a section can contain content and it will list all of th
 
 You can disable the list of child links using the `hidesections` property of the front-matter in the `_index.md` page - then it will only render the section page content.
 
+#### Redirects
+
+To control redirecting from old page URLs to new pages - you must put a `redirect_from` parameter into the front-matter of the new page.
+
+An example to redirect two stale URLs to a page:
+
+```yaml
+---
+title: 1. Prepare your platform
+weight: 1
+redirect_from:
+  - /cloud/azure/k8s_tectonic.html
+  - /apples/pears.html
+---
+```
+
 ## hugo docs
 
 Because the site is based on hugo - you can use any of the shortcodes, functions and variables listed in the [hugo documentation](https://gohugo.io/documentation/)

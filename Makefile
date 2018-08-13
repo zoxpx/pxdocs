@@ -14,6 +14,7 @@ search-index-image:
 deployment-image:
 	cp -r themes/pxdocs-tooling/deploy/nginx nginx_build_folder
 	cp -r public nginx_build_folder/hugo_public
+	cat public/redirects.json | docker run --rm -i stedolan/jq -r '.[] | "rewrite ^\(.from)$$ \(.to) permanent;"' > nginx_build_folder/pxdocs-directs.conf
 	docker build -t $(DEPLOYMENT_IMAGE) nginx_build_folder
 	rm -rf nginx_build_folder
 
