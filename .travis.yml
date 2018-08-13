@@ -30,9 +30,9 @@ script:
   # build the deployment image
   - make deployment-image
   # start a container using the deployment image
-  - make start-deployment-container
+  #- make start-deployment-container
   # check the links in the deployment container
-  - make check-links
+  #- make check-links
   # if this is a pull request then we don't want to update algolia or deploy
   - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
   # this checks if the current branch is present in the BRANCH_VERSION_CONFIG variable if exists if not
