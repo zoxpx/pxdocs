@@ -34,6 +34,7 @@ develop: image
 		-e ALGOLIA_APP_ID \
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
+		-e TRAVIS_BRANCH \
 		-p 1313:1313 \
 		-v "$(PWD):/pxdocs" \
 		$(BUILDER_IMAGE) server --bind=0.0.0.0 --disableFastRender
@@ -48,6 +49,7 @@ publish-docker:
 		-e ALGOLIA_APP_ID \
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
+		-e TRAVIS_BRANCH \
 		-v "$(PWD):/pxdocs" \
 		$(BUILDER_IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
 
