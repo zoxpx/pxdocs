@@ -66,6 +66,22 @@ search-index-docker:
 		-e ALGOLIA_INDEX_FILE=public/algolia.json \
 		$(SEARCH_INDEX_IMAGE)
 
+.PHONY: start-deployment-container
+start-deployment-container:
+	docker run -d \
+		--name pxdocs-deployment \
+		$(DEPLOYMENT_IMAGE)
+
+.PHONY: stop-deployment-container
+stop-deployment-container:
+	docker rm -f pxdocs-deployment
+
+.PHONY: check-links
+check-links:
+	docker run --rm \
+		--link pxdocs-deployment:pxdocs-deployment \
+		linkchecker/linkchecker http://pxdocs-deployment --check-extern
+
 .PHONY: publish
 publish: image publish-docker
 
