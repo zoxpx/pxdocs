@@ -29,9 +29,15 @@ outputFormats:
     isPlainText: true
     mediaType: application/json
     notAlternative: true
+  Redirects:
+    baseName: redirects
+    isPlainText: true
+    mediaType: application/json
+    notAlternative: true
 
 outputs:
   home:
     - HTML
     - RSS
     - Algolia
+    - Redirects
