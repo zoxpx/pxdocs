@@ -1,7 +1,13 @@
 ---
-title: "Logging"
+layout: page
+title: "PX Log Storage and Management with Elastic Search, Kibana and, Fluentd on K8s"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, elastic, fluentd, elastic search, kibana, cluster logging, log management
+sidebar: home_sidebar
 ---
+
+* TOC
+{:toc}
+
 PX Logs management on Kubernetes using Elastic search, Kibana and Fluentd. 
 
 ## PX Logs on Kubernetes
@@ -73,21 +79,20 @@ data:
   fluent.conf: |
 
     <source>
-      @type systemd
-      path /run/log/journal
-      filters [{ "_SYSTEMD_UNIT": "portworx.service" }]
-      pos_file /mnt/portworx-service.pos
-      tag journal.portworx
+      type tail
+      path /var/log/containers/portworx*.log
+      pos_file /var/log/px-container.log.pos
+      time_format %Y-%m-%dT%H:%M:%S.%N
+      tag portworx.*
+      format json
       read_from_head true
-      strip_underscores true
+      keep_time_key true
     </source>
-
-    <filter **>
-      @type kubernetes_metadata
+    <filter kubernetes.**>
+      type kubernetes_metadata
     </filter>
-
-    <match journal.portworx.**>
-       @type elasticsearch
+    <match portworx.**>
+       type elasticsearch
        log_level info
        include_tag_key true
        logstash_prefix px-log ## Prefix for creating an Elastic search index. 
