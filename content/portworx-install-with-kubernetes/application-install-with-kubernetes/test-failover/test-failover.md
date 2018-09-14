@@ -1,7 +1,7 @@
 ---
 title: Test Failover
-weight: 99
 ---
+
 
 Failover MYSQL Pod to a different node
 
@@ -87,3 +87,8 @@ show databases;
 exit
 ```
 
+:
+:q!
+d
+d
+ad
