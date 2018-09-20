@@ -10,40 +10,29 @@ Uninstalling or deleting the portworx daemonset only removes the portworx contai
 You can uninstall Portworx from the cluster using the following steps:
 
 1. Remove the Portworx systemd service and terminate pods by labelling nodes as below. On each node, Portworx monitors this label and will start removing itself when the label is applied.
-
    ```text
    kubectl label nodes --all px/enabled=remove --overwrite
    ```
 
 2. Monitor the PX pods until all of them are terminated
-
    ```text
    kubectl get pods -o wide -n kube-system -l name=portworx
    ```
 
 3. Remove all PX Kubernetes Objects
-
-   a. If you have a copy of the spec file you used to install Portworx:
-
-   ```text
-    kubectl delete -f px-spec.yaml
-   ```
-
-   b. If you don’t, you can use the Web form:
-
    ```text
     VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
     kubectl delete -f "https://install.portworx.com?ctl=true&kbver=$VER"
    ```
 
 4. Remove the ‘px/enabled’ label from your nodes
-
    ```text
    kubectl label nodes --all px/enabled-
    ```
 
-> **Note:**  
-> During uninstall, the Portworx configuration files under `/etc/pwx/` directory are preserved, and will not be deleted.
+{{<info>}}
+During uninstall, the Portworx configuration files under `/etc/pwx/` directory are preserved, and will not be deleted.
+{{</info>}}
 
 ### Delete PX Cluster configuration {#delete-px-cluster-configuration}
 
@@ -82,6 +71,6 @@ You can remove PX cluster configuration by deleting the configuration files unde
 
 * otherwise, if the portworx pods are not running, you can remove PX cluster configuration by manually removing the contents of `/etc/pwx` directory on all the nodes.
 
-> **Note**  
-> If you are wiping off the cluster to re-use the nodes for installing a brand new PX cluster, make sure you use a different ClusterID in the DaemonSet spec file \(ie. `-c myUpdatedClusterID`\).
-
+{{<info>}}
+If you are wiping off the cluster to re-use the nodes for installing a brand new PX cluster, make sure you use a different ClusterID in the DaemonSet spec file \(ie. `-c myUpdatedClusterID`\).
+{{</info>}}

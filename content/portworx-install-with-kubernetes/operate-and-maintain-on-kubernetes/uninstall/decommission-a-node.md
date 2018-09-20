@@ -39,8 +39,10 @@ For example, below command will remove existing Portworx installation from _mini
 kubectl label nodes minion2 px/enabled=remove --overwrite
 ```
 
-> **Decommission from Kubernetes:**  
->  If the plan is to decommission this node altogether from the Kubernetes cluster, no further steps are needed.
+{{<info>}}
+**Decommission from Kubernetes:**  
+If the plan is to decommission this node altogether from the Kubernetes cluster, no further steps are needed.
+{{</info>}}
 
 #### 3. Ensure application pods using Portworx don’t run on this node {#3-ensure-application-pods-using-portworx-dont-run-on-this-node}
 

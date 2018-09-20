@@ -3,9 +3,6 @@ title: "Using Ark with Portworx"
 weight: 7
 ---
 
-* TOC
-{:toc}
-
 Heptio Ark is a utility for managing disaster recovery, specifically for your
 Kubernetes cluster resources and persistent volumes. To take snapshots of
 Portworx volumes through Ark you need to install and configure the Portworx

@@ -4,23 +4,18 @@ weight: 2
 hidesections: true
 ---
 
-**Note:**  
-We do not recommend upgrading Portworx using [Kubernetes instructions](https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/) \(e.g. via `kubectl set image ds/portworx portworx=portworx/XXXX:### -n kube-system`\).
-
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
-You are running Portworx as OCI if the Portworx daemonset image is _portworx/oci-monitor_. If not, you first need to [migrate to OCI](migrate-to-oci).
+To upgrade to the **1.5** release, run the curl command:
+
+```text
+curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.5.1
+```
 
 To upgrade to the **1.4** release, run the curl command:
 
 ```text
 curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.2
-```
-
-To upgrade to the **1.3** release, run the curl command:
-
-```text
-curl -fsL https://install.portworx.com/upgrade | bash -s
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
