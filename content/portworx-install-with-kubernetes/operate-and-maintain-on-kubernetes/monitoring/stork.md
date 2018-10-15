@@ -5,9 +5,6 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent 
 sidebar: home_sidebar
 ---
 
-* TOC
-{:toc}
-
 Stork is the Portworx's storage scheduler for Kubernetes that helps achieve even tighter integration of
 Portworx with Kubernetes. It allows users to co-locate pods with their data,
 provides seamaless migration of pods in case of storage errors and makes it
@@ -48,4 +45,3 @@ perform these operations can be found
 ## Contribute
 
 Portworx welcomes contributions to stork, which is open-source and repository is at https://github.com/libopenstorage/stork
-

@@ -1,6 +1,6 @@
 ---
-title: Creating a PVC from a Snapshot
-weight: 3
+title: Creating a PVC from a snapshot
+weight: 2
 ---
 
 This document will show you how to take a snapshot of a volume using Portworx and use that snapshot as the volume for a new pod.
