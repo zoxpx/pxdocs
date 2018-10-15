@@ -12,8 +12,8 @@ This document will show you how to create snapshots of Portworx volumes and how 
 ## Snapshot types
 Using STORK, you can take 2 types of snapshots:
 
-1. [Local](#): These are per volume snapshots where the snapshots are stored locally in the current Portworx cluster's storage pools.
-2. [Cloud](#): These snapshots are uploaded to the configured S3-compliant endpoint (e.g AWS S3).
+1. [Local](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-local): These are per volume snapshots where the snapshots are stored locally in the current Portworx cluster's storage pools.
+2. [Cloud](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-cloud): These snapshots are uploaded to the configured S3-compliant endpoint (e.g AWS S3).
 
 ## 3DSnaps
 {{<info>}}
