@@ -1,6 +1,6 @@
 ---
 title: Configuring 3DSnaps
-weight: 6
+weight: 3
 ---
 
 {{<info>}}

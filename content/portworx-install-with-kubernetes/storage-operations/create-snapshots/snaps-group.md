@@ -1,6 +1,6 @@
 ---
 title: Create group snapshots
-weight: 4
+hidden: true
 ---
 
 This document will show you how to create group snapshots of Portworx volumes and how you can clone those snapshots to use them in pods.

@@ -1,6 +1,6 @@
 ---
 title: Take snapshot of a Kubernetes PVC
-weight: 4
+hidden: true
 ---
 
 This document will show you how to create snapshot of a PVC backed by a Portworx volume.

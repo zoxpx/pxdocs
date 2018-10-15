@@ -1,6 +1,6 @@
 ---
 title: Creating a PVC from a snapshot
-weight: 2
+hidden: true
 ---
 
 This document will show you how to take a snapshot of a volume using Portworx and use that snapshot as the volume for a new pod.
@@ -8,7 +8,7 @@ This document will show you how to take a snapshot of a volume using Portworx an
 {{<info>}}
 **Note:** The suggested way to manage snapshots on Kuberenetes is now to use STORK. Instructions for
 using STORK to manage snapshots can be found
-[here](/portworx-install-with-kubernetes/storage-operations/create-snapshots/create-and-use-snapshots)
+[here](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
 {{</info>}}
 
 ## Managing snapshots through `kubectl`
