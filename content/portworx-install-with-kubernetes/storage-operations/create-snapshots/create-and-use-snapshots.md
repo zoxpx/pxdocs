@@ -1,13 +1,12 @@
 ---
-title: Snapshots
+title: Create and use Snapshots
 weight: 2
 ---
 
-# Create and use Snapshots
 This document will show you how to create snapshots of Portworx volumes and how you can clone those snapshots to use them in pods.
 
 {{<info>}}
-**Note:** The suggested way to manage snapshots on Kuberenetes is to use STORK. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](#).
+**Note:** The suggested way to manage snapshots on Kuberenetes is to use STORK. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-annotation).
 {{</info>}}
 
 ## Snapshot types
