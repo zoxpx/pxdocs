@@ -1,5 +1,5 @@
 ---
-title: Create Snapshots
+title: Create snapshots
 weight: 2
 ---
 
