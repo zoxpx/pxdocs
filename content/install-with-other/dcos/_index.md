@@ -1,6 +1,6 @@
 ---
 title: DCOS
-weight: 1
+weight: 2
 ---
 
 This DCOS service will deploy Portworx as well as all the dependencies and additional services to manage the Portworx cluster. This includes a highly available etcd cluster, influxdb to store statistics and the Lighthouse service, which is the Web UI for Portworx.
@@ -156,4 +156,3 @@ If you add more agents to your DCOS cluster and you want to install Portworx on 
 #### Install an application
 
 You are ready to install a application that uses Portworx. To do this, go to the next section, _Application Installs_.
-

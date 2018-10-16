@@ -3,9 +3,6 @@ title: "Etcd"
 hidden: true
 ---
 
-* TOC
-{:toc}
-
 Portworx requires a key-value database such as etcd for configuring storage. A highly available clustered etcd with persistent storage is preferred.
 
 ### Requirements
