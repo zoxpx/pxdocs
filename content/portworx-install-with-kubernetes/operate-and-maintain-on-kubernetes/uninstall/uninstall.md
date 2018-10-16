@@ -38,8 +38,6 @@ During uninstall, the Portworx configuration files under `/etc/pwx/` directory a
 
 The commands used in this section are DISRUPTIVE and will lead to loss of all your data volumes. Proceed with CAUTION.
 
-#### Portworx 1.3 and higher {#portworx-13-and-higher}
-
 You can use the following command to wipe your entire Portworx cluster.
 
 ```text
@@ -56,20 +54,6 @@ Above command will run a Kubernetes Job that will perform following operations:
 
 Before running the above wipe job, ensure that the Portworx spec is applied on your cluster.
 
-#### Portworx 1.2 {#portworx-12}
-
-You can remove PX cluster configuration by deleting the configuration files under `/etc/pwx` directory on all nodes:
-
-* If the portworx pods are running, you can run the following command:
-
-```text
-  PX_PODS=$(kubectl get pods -n kube-system -l name=portworx | awk '/^portworx/{print $1}')
-  for pod in $PX_PODS; do
-      kubectl -n kube-system exec -it $pod -- rm -rf /etc/pwx/
-  done
-```
-
-* otherwise, if the portworx pods are not running, you can remove PX cluster configuration by manually removing the contents of `/etc/pwx` directory on all the nodes.
 
 {{<info>}}
 If you are wiping off the cluster to re-use the nodes for installing a brand new PX cluster, make sure you use a different ClusterID in the DaemonSet spec file \(ie. `-c myUpdatedClusterID`\).
