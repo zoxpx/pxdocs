@@ -1,5 +1,5 @@
 ---
-title: "Dynamic Provisioning on Amazon Elastic Container Service for Kubernetes (Amazon EKS)"
+title: Dynamic Provisioning on Amazon Elastic Container Service for Kubernetes (Amazon EKS)
 weight: 3
 linkTitle: Amazon Elastic Kubernetes Service (EKS)
 ---

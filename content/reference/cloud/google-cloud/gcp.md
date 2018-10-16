@@ -1,5 +1,5 @@
 ---
-title: "Dynamic Provisioning on Google Cloud Platform (GCP)"
+title: Dynamic Provisioning on Google Cloud Platform (GCP)
 weight: 2
 linkTitle: Google Cloud Platform (GCP)
 ---

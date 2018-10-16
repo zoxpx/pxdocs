@@ -1,5 +1,5 @@
 ---
-title: "Run Portworx with Kubernetes Operations(KOPS)"
+title: Run Portworx with Kubernetes Operations(KOPS)
 weight: 4
 linkTitle: KOPS (Kubernetes Operations)
 ---
