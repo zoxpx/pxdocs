@@ -56,7 +56,7 @@ This section explains specific functionality that Portworx provides to easily in
 You can also reference an existing EBS volume as a template.  Create at least one EBS volume using the AWS console or AWS CLI. This volume (or a set of volumes) will serve as a template EBS volume(s). On every node where PX is brought up as a storage node, a new EBS volume(s) identical to the template volume(s) will be created.
 
 For example, create two volumes as:
-```
+```text
 vol-0743df7bf5657dad8: 1000 GiB provisioned IOPS
 vol-0055e5913b79fb49d: 1000 GiB GP2
 ```
@@ -73,7 +73,7 @@ PX allows you to create a heterogenous cluster where some of the nodes are stora
 
 You can specify the number of storage nodes in your cluster by setting the ```max_storage_nodes_per_zone``` input argument.
 This instructs PX to limit the number of storage nodes in one zone to the value specified in ```max_storage_nodes_per_zone``` argument. The total number of storage nodes in your cluster will be
-```
+```text
 Total Storage Nodes = (Num of Zones) * max_storage_nodes_per_zone.
 ```
 While planning capacity for your auto scaling cluster make sure the minimum size of your cluster is equal to the total number of storage nodes in PX. This ensures that when you scale up your cluster, only storage less nodes will be added. While when you scale down the cluster, it will scale to the minimum size which ensures that all PX storage nodes are online and available.
@@ -83,13 +83,13 @@ While planning capacity for your auto scaling cluster make sure the minimum size
 {{</info>}}
 
 Examples:
-```
+```text
 "-s", "type=gp2,size=200", "-max_storage_nodes_per_zone", "1"
 ```
 
 For a cluster of 6 nodes spanning 3 zones (us-east-1a,us-east-1b,us-east-1c), in the above example PX will have 3 storage nodes (one in each zone) and 3 storage less nodes. PX will create a total 3 EBS volumes of size 200 each and attach one EBS volume to each storage node.
 
-```
+```text
 "-s", "type=gp2,size=200", "-s", "type=io1,size=100,iops=1000", "-max_storage_nodes_per_zone", "2"
 ```
 
@@ -103,13 +103,13 @@ Modify the input arguments to PX as shown in the below examples.
 
 Examples:
 
-```
+```text
 "-s", "type=gp2,size=200", "-max_drive_set_count", "3"
 ```
 
 For a cluster of 5 nodes, in the above example PX will have 3 storage nodes and 2 storage less nodes. PX will create a total 3 EBS volumes of size 200 each and attach one EBS volume to each storage node.
 
-```
+```text
 "-s", "type=gp2,size=200", "-s", "type=io1,size=100,iops=1000", "-max_drive_set_count", "3"
 ```
 
@@ -175,7 +175,7 @@ Note that even though each instance is launched with the same `user-data` and he
 
 As Portworx needs to create and attach EBS volumes, it needs corresponding AWS permissions. Following is a sample policy describing those permissions:
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -256,7 +256,7 @@ and their attachment information.
 
 Run the following command to display all the cloud drives being used by Portworx.
 
-```
+```text
 
 # /opt/pwx/bin/pxctl clouddrive list
 
@@ -277,7 +277,7 @@ Drive Set List
 
 Run the following command to display more information about the drives attached on a node.
 
-```
+```text
 
 # /opt/pwx/bin/pxctl clouddrive inspect --nodeid ip-172-20-53-168.ec2.internal
 

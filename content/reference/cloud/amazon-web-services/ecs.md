@@ -23,7 +23,7 @@ On above, the Container Instance IAM role is used by the ECS container agent. Th
 
 Create a custom IAM role and Select Role Type "Amazon EC2 Role for Container Service". This is the minimal required permission to launch ECS cluster. And depends on your use case, you may need additional AWS policy for your ECS to access and use other AWS resources. The "AmazonEC2ContainerServiceRole" has the policy shown below:
 
-```
+```text
     {
         "Version": "2012-10-17",
         "Statement": [
@@ -141,79 +141,87 @@ From your linux workstation download and setup AWS ECS CLI utilities
 
   1. Download and install ECS CLI ([detail instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html))
 
-         $ sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
-         $ sudo chmod +x /usr/local/bin/ecs-cli
+    ```bash
+    $ sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+    $ sudo chmod +x /usr/local/bin/ecs-cli
+    ```
 
   2. Configure AWS ECS CLI on your workstation
 
-         $ export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXX
-         $ export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXX
-         $ ecs-cli configure --region us-east-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo1
+    ```bash
+    $ export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXX
+    $ export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXX
+    $ ecs-cli configure --region us-east-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo1
+    ```
 
   3. Create a 1GB PX volume using the Docker CLI.  ssh into one of the ECS instances and create this PX volumes.
 
+    ```bash
+     $ ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
+     $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
+     demovol
 
-         $ ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
-         $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
-         demovol
-
-         $ docker volume ls
-         DRIVER              VOLUME NAME
-         pxd                 demovol
-
+     $ docker volume ls
+     DRIVER              VOLUME NAME
+     pxd                 demovol
+     ```
 
 
   4. From your ECS CLI workstation which has ecs-cli command; setup and launch ECS task definition with previously created PX volume. Create a task definition file "redis.yml" which will launch two containers: redis based on redis image, and web based on binocarlos/moby-counter. Then use ecs-cli command to post this task definition and launch it.
 
-         $ cat redis.yml
-         web:
-         image: binocarlos/moby-counter
-         links:
-           -  redis:redis
-         redis:
-         image: redis
-         volumes:
-           -  demovol:/data
-           -
-         $ ecs-cli compose --file redis.yml up
-         INFO[0001] Using ECS task definition                     TaskDefinition="ecscompose-root:1"
-         INFO[0001] Starting container...                         container="59701c44-c267-4c85-a8c0-ff87910af535/web"
-         INFO[0001] Starting container...                         container="59701c44-c267-4c85-a8c0-ff87910af535/redis"
-         INFO[0001] Describe ECS container status                 container="59701c44-c267-4c85-a8c0-ff87910af535/redis" desiredStatus=RUNNING lastStatus=PENDING taskDefinition="ecscompose-root:1"
-         INFO[0001] Describe ECS container status                 container="59701c44-c267-4c85-a8c0-ff87910af535/web" desiredStatus=RUNNING lastStatus=PENDING taskDefinition="ecscompose-root:1"
-         INFO[0013] Started container...                          container="59701c44-c267-4c85-a8c0-ff87910af535/redis" desiredStatus=RUNNING lastStatus=RUNNING taskDefinition="ecscompose-root:1"
-         INFO[0013] Started container...                          container="59701c44-c267-4c85-a8c0-ff87910af535/web" desiredStatus=RUNNING lastStatus=RUNNING taskDefinition="ecscompose-root:1"
+     ```bash
+       $ cat redis.yml
+       web:
+       image: binocarlos/moby-counter
+       links:
+         -  redis:redis
+       redis:
+       image: redis
+       volumes:
+         -  demovol:/data
+         -
+       $ ecs-cli compose --file redis.yml up
+       INFO[0001] Using ECS task definition                     TaskDefinition="ecscompose-root:1"
+       INFO[0001] Starting container...                         container="59701c44-c267-4c85-a8c0-ff87910af535/web"
+       INFO[0001] Starting container...                         container="59701c44-c267-4c85-a8c0-ff87910af535/redis"
+       INFO[0001] Describe ECS container status                 container="59701c44-c267-4c85-a8c0-ff87910af535/redis" desiredStatus=RUNNING lastStatus=PENDING taskDefinition="ecscompose-root:1"
+       INFO[0001] Describe ECS container status                 container="59701c44-c267-4c85-a8c0-ff87910af535/web" desiredStatus=RUNNING lastStatus=PENDING taskDefinition="ecscompose-root:1"
+       INFO[0013] Started container...                          container="59701c44-c267-4c85-a8c0-ff87910af535/redis" desiredStatus=RUNNING lastStatus=RUNNING taskDefinition="ecscompose-root:1"
+       INFO[0013] Started container...                          container="59701c44-c267-4c85-a8c0-ff87910af535/web" desiredStatus=RUNNING lastStatus=RUNNING taskDefinition="ecscompose-root:1"
 
-         $ ecs-cli ps
-         Name                                               State    Ports                                                          TaskDefinition
-         59701c44-c267-4c85-a8c0-ff87910af535/redis         RUNNING                                                                 ecscompose-root:1
-         59701c44-c267-4c85-a8c0-ff87910af535/web           RUNNING                                                                 ecscompose-root:1
+       $ ecs-cli ps
+       Name                                               State    Ports                                                          TaskDefinition
+       59701c44-c267-4c85-a8c0-ff87910af535/redis         RUNNING                                                                 ecscompose-root:1
+       59701c44-c267-4c85-a8c0-ff87910af535/web           RUNNING                                                                 ecscompose-root:1
+     ```
   5. You can also view the task status in the ECS console.
   ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_003t.PNG "ecs3t")
 
   6. On the above ECS console, Clusters -> pick your cluster ```ecs-demo1``` and click on the ```Container Instance``` ID that corresponding to the running task. This will display the containers information including where are these containers deployed into which EC2 instance. Below, we find that the task defined containers are deployed on EC2 instance with public IP address ```52.91.191.220```.
   ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_003z.PNG "ecs3z")
   7. From above, ssh into the EC2 instance 52.91.191.220 and verify PX volume is attached to running container.
+    ```bash
+    [ec2-user@ip-172-31-31-61 ~]$ sudo docker ps -a
+    CONTAINER ID        IMAGE                            COMMAND                  CREATED             STATUS              PORTS                                             NAMES
+    7ba93d51918b        binocarlos/moby-counter          "node index.js"          12 hours ago        Up 12 hours         80/tcp                                            ecs-ecscompose-root-1-web-c2fbfff3bf92b1dad401
+    e25ba9131f9b        redis                            "docker-entrypoint.sh"   12 hours ago        Up 12 hours         6379/tcp                                          ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601
 
-         [ec2-user@ip-172-31-31-61 ~]$ sudo docker ps -a
-         CONTAINER ID        IMAGE                            COMMAND                  CREATED             STATUS              PORTS                                             NAMES
-         7ba93d51918b        binocarlos/moby-counter          "node index.js"          12 hours ago        Up 12 hours         80/tcp                                            ecs-ecscompose-root-1-web-c2fbfff3bf92b1dad401
-         e25ba9131f9b        redis                            "docker-entrypoint.sh"   12 hours ago        Up 12 hours         6379/tcp                                          ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601
-
-         [ec2-user@ip-172-31-31-61 ~]$ sudo /opt/pwx/bin/pxctl v l
-         ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
-         1061916907972944739     demovol                 1 GiB   3       yes     no              LOW             0       up - attached on 172.31.31.61
+    [ec2-user@ip-172-31-31-61 ~]$ sudo /opt/pwx/bin/pxctl v l
+    ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
+    1061916907972944739     demovol                 1 GiB   3       yes     no              LOW             0       up - attached on 172.31.31.61
+    ```
   8. Check the redis container ```ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601``` and verify a 1GB pxfs volume is mounted on /data
 
-          [ec2-user@ip-172-31-31-61 ~]$ sudo docker exec -it ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601 sh -c 'df -kh'
-          Filesystem                                                                                        Size  Used Avail Use% Mounted on
-          /dev/mapper/docker-202:1-263203-3f7e353e23d7ba722fc74d1fb7db60e34f98933355ac65f78e6b4f2bcde19778  9.8G  215M  9.0G   3% /
-          tmpfs                                                                                             3.9G     0  3.9G   0% /dev
-          tmpfs                                                                                             3.9G     0  3.9G   0% /sys/fs/cgroup
-          pxfs                                                                                              976M  2.5M  907M   1% /data
-          /dev/xvda1                                                                                        7.8G  1.3G  6.5G  16% /etc/hosts
-          shm                                                                                                64M     0   64M   0% /dev/shm
-
+    ```bash
+    [ec2-user@ip-172-31-31-61 ~]$ sudo docker exec -it ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601 sh -c 'df -kh'
+    Filesystem                                                                                        Size  Used Avail Use% Mounted on
+    /dev/mapper/docker-202:1-263203-3f7e353e23d7ba722fc74d1fb7db60e34f98933355ac65f78e6b4f2bcde19778  9.8G  215M  9.0G   3% /
+    tmpfs                                                                                             3.9G     0  3.9G   0% /dev
+    tmpfs                                                                                             3.9G     0  3.9G   0% /sys/fs/cgroup
+    pxfs                                                                                              976M  2.5M  907M   1% /data
+    /dev/xvda1                                                                                        7.8G  1.3G  6.5G  16% /etc/hosts
+    shm                                                                                                64M     0   64M   0% /dev/shm
+    ```
 
 
 ### Step 4: Setup ECS task with PX volume via AWS ECS console
@@ -223,8 +231,9 @@ Create a ECS tasks definition directly via the ECS console (GUI) and using PX vo
 
   1. ssh into one of the EC2 instance and create a new PX volume using Docker CLI.
 
-          $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
-
+    ```bash
+    $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
+    ```
 
   2. In AWS ECS console, choose the previously created cluster ```ecs-demo1```; then create a new task definition.
    ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_005y.PNG)
