@@ -68,7 +68,7 @@ For using annotations Portworx daemon set requires extra permissions to read ann
 
 You can run the following command to edit your existing Portworx ClusterRole
 
-```
+```bash
 $ kubectl edit clusterrole node-get-put-list-role
 ```
 
@@ -151,7 +151,7 @@ To restore a pod to use the created snapshot, use the pvc `name.snap001-source.p
 To demonstrate the capabilities of the SAN like functionality offered by portworx, try creating a snapshot of your mysql volume.
 
 First create a database and a demo table in your mysql container.
-````
+```text
 # mysql --user=root --password=password
 MySQL [(none)]> create database pxdemo;
 Query OK, 1 row affected (0.00 sec)
@@ -161,35 +161,35 @@ MySQL [pxdemo]> create table grapevine (counter int unsigned);
 Query OK, 0 rows affected (0.04 sec)
 MySQL [pxdemo]> quit;
 Bye
-````
+```
 ### Now create a snapshot of this database using pxctl.
 
 First use pxctl volume list to see what volume you want to snapshot
-````
+```text
 # /opt/pwx/bin/pxctl v l
 ID					NAME										SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 381983511213673988	pvc-e7e66f98-0915-11e7-94ca-7cd30ac1a138	20 GiB	2	no		no			LOW			0		up - attached on 147.75.105.241
-````
+```
 Then use pxctl to snapshot your volume
-````
+```text
 /opt/pwx/bin/pxctl snap create 381983511213673988 --name snap-01
 Volume successfully snapped: 835956864616765999
-````
+```
 
 You can use pxctl to see your snapshot
-````
+```text
 # /opt/pwx/bin/pxctl snap list
 ID					NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 835956864616765999	snap-01	20 GiB	2	no		no			LOW			0		up - detached
-````
+```
 
 Now you can create a mysql Pod to mount the snapshot
 
-````
+```text
 kubectl create -f portworx-mysql-snap-pod.yaml
-````
+```
 [Download example](https://docs.portworx.com/k8s-samples/portworx-mysql-snap-pod.yaml?raw=true)
-````
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -213,10 +213,10 @@ spec:
     # This Portworx volume must already exist.
     portworxVolume:
       volumeID: "vol1"
-````
+```
 Inspect that the database shows the cloned tables in the new mysql instance.
 
-````
+```text
 # mysql --user=root --password=password
 mysql> show databases;
 +--------------------+
@@ -242,4 +242,4 @@ mysql> show tables;
 +------------------+
 1 row in set (0.00 sec)
 
-````
+```

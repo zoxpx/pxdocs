@@ -36,7 +36,7 @@ name.
 Note that the storageClassName needs to be the Stork StorageClass `stork-snapshot-sc` as in the example below.
 
 For the above snapshot, the spec would like this:
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -54,7 +54,7 @@ spec:
 
 Once you apply the above spec you will see a PVC created by STORK. This PVC will be backed by a Portworx volume clone of the snapshot created above.
 
-```
+```bash
 $ kubectl get pvc  
 NAMESPACE   NAME                                   STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS                AGE
 default     mysql-data                             Bound     pvc-f782bf5c-20e7-11e8-931d-0214683e8447   2Gi        RWO            px-mysql-sc                 2d

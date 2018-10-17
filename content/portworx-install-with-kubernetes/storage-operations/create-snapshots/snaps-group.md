@@ -44,7 +44,7 @@ In below example, we are taking a group snapshot that will snap all PVCs in the 
 
 Portworx will quiesce I/O on all volumes before triggering their snapshots.
 
-```
+```yaml
 apiVersion: volumesnapshot.external-storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -62,7 +62,7 @@ spec:
 
 Once you apply the above object you can check the status of the snapshots using `kubectl`:
 
-```
+```bash
 $ kubectl get volumesnapshot
 NAME                                              AGE
 volumesnapshots/mysql-data-1-779368893912016693   14s
@@ -70,7 +70,7 @@ volumesnapshots/mysql-data-2-314922951056863611   14s
 volumesnapshots/mysql-snapshot                    16s
 ```
 
-```
+```bash
 $ kubectl get volumesnapshotdatas
 NAME                                                                                            AGE
 volumesnapshotdatas/k8s-snapshotdata-0b1c5b4a-4b43-11e8-b4d7-5a6317d9d914                    14s
@@ -82,7 +82,7 @@ Above we can see that creation of `mysql-snapshot` created 2 more volumesnapshot
 
 The creation of the volumesnapshotdatas object indicates that the snapshot has been created. If you describe the volumesnapshotdatas object you can see the Portworx Snapshot IDs and the PVCs for which the snapshot was created.
 
-```
+```bash
 $ kubectl describe volumesnapshotdatas
 Name:         k8s-snapshotdata-0b1c5b4a-4b43-11e8-b4d7-5a6317d9d914
 Namespace:
@@ -118,7 +118,7 @@ Status:
 Events:                    <none>
 ```
 
-```
+```text
 Name:         k8s-snapshotdata-0af5b7ad-4b43-11e8-b4d7-5a6317d9d914
 Namespace:
 Labels:       namespace=default
@@ -150,7 +150,7 @@ Status:
 Events:                    <none>
 ```
 
-```
+```text
 Name:         k8s-snapshotdata-0b15ab9f-4b43-11e8-b4d7-5a6317d9d914
 Namespace:
 Labels:       namespace=default
@@ -188,7 +188,7 @@ Below spec will take snapshots of all PVCs in the dev namespace.
 
 Portworx will quiesce I/O on all volumes before triggering their snapshots.
 
-```
+```yaml
 apiVersion: volumesnapshot.external-storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
