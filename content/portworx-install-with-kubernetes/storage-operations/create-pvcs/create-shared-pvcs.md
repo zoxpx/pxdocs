@@ -1,5 +1,5 @@
 ---
-title: Create Shared PVCs
+title: Create shared PVCs
 weight: 4
 ---
 
@@ -142,6 +142,6 @@ NAME      READY     STATUS    RESTARTS   AGE
 pod1      1/1       Running   0          2m
 pod2      1/1       Running   0          1m
 ```
-
-> **Note:** To access PV/PVCs with a non-root user refer [here](/storage-operations/create-pvcs/access-via-non-root-users)
-
+{{<info>}}
+**Note:** To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
+{{</info>}}
