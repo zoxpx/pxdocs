@@ -1,5 +1,5 @@
 ---
-title: Using Preprovisioned Volumes
+title: Using Pre-provisioned Volumes
 weight: 2
 ---
 
@@ -13,13 +13,9 @@ First create a volume using Portworx CLI. On one of the nodes with Portworx inst
 /opt/pwx/bin/pxctl volume create <vol-name> --size <size>
 ```
 
-For more details on creating volumes using pxctl, click the link below.
+For more details on creating volumes using pxctl, [click here](/reference/cli/data-volumes/).
 
-{% page-ref page="../../reference/volumes.md" %}
-
-Alternatively, you can also use snapshots that you created previously. To learn more, click the link below.
-
-{% page-ref page="../../reference/command-line/snapshots/" %}
+Alternatively, you can also use snapshots that you created previously. To learn more, [click here](/reference/cli/snapshots/).
 
 ### Using the Portworx volume {#using-the-portworx-volume}
 
@@ -97,8 +93,10 @@ spec:
 
 Notice how we use a label selector to select the right `PersistentVolume` using it’s label.
 
-> **Note:**  
->  If you are planning to use the `PersistentVolumeClaim` in a pod in a non-default namespace, the `PersistentVolumeClaim` needs to created in that namespace.
+{{<info>}}
+**Note:**  
+If you are planning to use the `PersistentVolumeClaim` in a pod in a non-default namespace, the `PersistentVolumeClaim` needs to created in that namespace.
+{{</info>}}
 
 **Creating a pod using the PersistentVolumeClaim**
 
@@ -122,5 +120,6 @@ spec:
       claimName: testvol-pvc
 ```
 
-> **Note:** To access PV/PVCs with a non-root user refer [here](/storage-operations/create-pvcs/access-via-non-root-users)
-
+{{<info>}}
+**Note:** To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
+{{</info>}}
