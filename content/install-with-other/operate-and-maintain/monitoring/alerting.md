@@ -6,8 +6,8 @@ This guide shows you how to configure prometheus to monitor your portworx node a
 
 ## Configure Prometheus
 
-Prometheus requires the following two files: config file, alert rules file. These files need to be bind mounted into Prometheus container. 
-```
+Prometheus requires the following two files: config file, alert rules file. These files need to be bind mounted into Prometheus container.
+```text
 # This can be any directory on the host.
 PROMETHEUS_CONF=/etc/prometheus
 ```
@@ -16,7 +16,7 @@ PROMETHEUS_CONF=/etc/prometheus
 
 Modify the below configuration to include your PX nodes' IP addresses, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
 
-```
+```yaml
 global:
   scrape_interval: 1m
   scrape_timeout: 10s
@@ -49,7 +49,7 @@ For Prometheus v2.0.0 and above, rules file is available [here](https://github.c
 
 In this example prometheus is running as docker container. Make sure to map the directory where your rules and config file is stored to '/etc/prometheus'.
 
-```
+```text
 docker run --restart=always --name prometheus -d -p 9090:9090 \
 -v ${PROMETHEUS_CONF}:/etc/prometheus \
 prom/prometheus
@@ -61,19 +61,19 @@ Prometheus UI is available at http://&lt;IP_ADDRESS&gt;:9090
 The Alertmanager handles alerts sent by Prometheus server. It can be configured to send them to the correct receiver integrations such as email, PagerDuty, Slack etc.
 This example shows how it can be configured to send email notifications using gmail as SMTP server.
 
-AlertManager requires a config file, which needs to be bind mounted into AlertManager container. 
+AlertManager requires a config file, which needs to be bind mounted into AlertManager container.
 
-```
+```text
 # This can be any directory on the host.
 ALERTMANAGER_CONF=/etc/alertmanager
 ```
 
 ### AlertManager config file
 
-Modify the below config file to use Google's SMTP server for your account. 
+Modify the below config file to use Google's SMTP server for your account.
 Save it as ${ALERTMANAGER_CONF}/config.yml.
 
-```
+```yaml
 global:
   # The smarthost and SMTP sender used for mail notifications.
   smtp_smarthost: 'smtp.gmail.com:587'
@@ -101,9 +101,8 @@ This file can be downloaded from [config.yml](https://github.com/portworx/px-doc
 
 In this example AlertManager is running as docker container. Make sure to map the directory where your config file is stored to '/etc/alertmanager'.
 
-```
+```text
 docker run -d -p 9093:9093 --restart=always --name alertmgr \
 -v ${ALERTMANAGER_CONF}:/etc/alertmanager \
 prom/alertmanager
 ```
-

@@ -28,7 +28,7 @@ Kubernetes supports many different types of PersistentVolumes, this step covers 
 
  `kubectl -f apply mysql-vol.yaml`
 
-```
+```yaml
 apiVersion: storage.k8s.io/v1beta1
 kind: StorageClass
 metadata:
@@ -56,7 +56,7 @@ spec:
 
 `kubectl -f apply wordpress-vol.yaml`
 
-```
+```yaml
 apiVersion: storage.k8s.io/v1beta1
 kind: StorageClass
 metadata:
@@ -106,7 +106,7 @@ The deployment uses stork as the scheduler to enable the pods to be placed close
 
 `kubectl create -f mysql.yaml`
 
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -172,7 +172,7 @@ This deployment also uses stork as the scheduler to enable the pods to be placed
 
 `kubectl create -f wordpress-deployment.yaml`
 
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:

@@ -6,8 +6,10 @@ Identify storage
 
 Portworx pools the storage devices on your server and creates a global capacity for containers.
 
-> **Important:**  
-> Back up any data on storage devices that will be pooled. Storage devices will be reformatted!
+{{<info>}}
+**Important:**  
+Back up any data on storage devices that will be pooled. Storage devices will be reformatted!
+{{</info>}}
 
 To view the storage devices on your server, use the `lsblk` command.
 
@@ -72,8 +74,10 @@ sudo docker run --entrypoint /runc-entry-point.sh \
     $latest_stable
 ```
 
-> **Note:**  
-> Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle. If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
+{{<info>}}
+**Note:**  
+Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle. If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
+{{</info>}}
 
 **Step 2: Configure PX under runC**
 
@@ -188,7 +192,9 @@ sudo systemctl enable portworx
 sudo systemctl start portworx
 ```
 
-> **Note:** If you have previously installed Portworx as a Docker container \(as “legacy plugin system”, or v1 plugin\), and already have PX-volumes allocated and in use by other Docker containers/applications, read [instructions here](https://docs.portworx.com/runc/#upgrading-from-px-containers-to-px-oci)
+{{<info>}}
+**Note:** If you have previously installed Portworx as a Docker container \(as “legacy plugin system”, or v1 plugin\), and already have PX-volumes allocated and in use by other Docker containers/applications, read [instructions here](https://docs.portworx.com/runc/#upgrading-from-px-containers-to-px-oci)
+{{</info>}}
 
 ### Adding Nodes {#adding-nodes}
 
@@ -230,4 +236,3 @@ Global Storage Pool
 	Total Used    	:  2.2 GiB
 	Total Capacity	:  192 GiB
 ```
-

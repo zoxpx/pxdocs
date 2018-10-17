@@ -62,9 +62,6 @@ A complete example for launching MySQL can be found [here](https://github.com/po
 
 Portworx provides an important feature that enables applications to have storage provisioned on demand, rather than requiring storage to be pre-provisioned.
 
-The feature, is also referred to as `inline volume creation` . For more information, click the link below and see the section _Inline volume spec_.
-
-{% page-ref page="../reference/command-line/data-volumes/create-and-manage-volumes.md" %}
+The feature, is also referred to as `inline volume creation` . For more information, [click here](/reference/CLI/data-volumes/create-and-manage-volumes) and see the section _Inline volume spec_.
 
 Using this feature can be seen in the above example in the `volumes` clause. Note than all relevent Portworx volume metadata can be specified through this mechanism.
-

@@ -49,13 +49,17 @@ Through the advanced install options you can change the configuration of the Por
 
 Specify your kvdb \(consul or etcd\) server if you don’t want to use the etcd cluster with this service. If the etcd cluster is enabled this config value will be ignored. If you have been given access to the Enterprise version of PX you can replace px-dev:latest with px-enterprise:latest. With PX Enterprise you can increase the number of nodes in the PX Cluster to a value greater than 3.
 
-> **Note:**  
-> If you are trying to use block devices that already have a filesystem on them, either add the “-f” option to “Portworx Options” to force Portworx to use these disks or wipe the filesystem using wipefs command before installing.
+{{<info>}}
+**Note:**  
+If you are trying to use block devices that already have a filesystem on them, either add the “-f” option to “Portworx Options” to force Portworx to use these disks or wipe the filesystem using wipefs command before installing.
+{{</info>}}
 
 ![Portworx Install options](https://docs.portworx.com/images/dcos-px-install-options.png)
 
-> **Note:**  
-> For a full list of installtion options, please look [here](https://docs.portworx.com/runc/options.html#opts).
+{{<info>}}
+**Note:**  
+For a full list of installtion options, please look [here](https://docs.portworx.com/runc/options.html#opts).
+{{</info>}}
 
 **Secrets Options**
 

@@ -5,11 +5,15 @@ weight: 9
 
 This guide shows how you can perform systemctl operations using _kubectl_ to control the Portworx systemd service. Portworx already manages the lifecycle of the systemd service and hence these operations should not be required in a properly functioning cluster.
 
-> **Warning:** These operations should be performed only for debugging/troubleshooting purposes.
+{{<info>}}
+**Warning:** These operations should be performed only for debugging/troubleshooting purposes.
+{{</info>}}
 
 #### Service control {#service-control}
 
-> **NOTE:** You should not stop the Portworx systemd service while applications are still using it. Doing so can cause docker and applications to hang on the system. Migrate all application pods using `kubectl drain` from the node before stopping the Portworx systemd service.
+{{<info>}}
+**NOTE:** You should not stop the Portworx systemd service while applications are still using it. Doing so can cause docker and applications to hang on the system. Migrate all application pods using `kubectl drain` from the node before stopping the Portworx systemd service.
+{{</info>}}
 
 **stop / start / restart the PX-OCI service**
 
@@ -28,4 +32,3 @@ kubectl label nodes --all px/service=restart
 ```text
 kubectl label nodes minion2 minion5 px/service=enable
 ```
-

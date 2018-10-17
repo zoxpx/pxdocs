@@ -11,7 +11,9 @@ Follow the instructions for installing [Rancher](http://docs.rancher.com/rancher
 
 ### Step 2: Create/Configure PX-Ready Rancher Hosts
 
-> **Note** : Portworx requires that Rancher hosts have at least one non-root disk or partition to contribute.
+{{<info>}}
+**Note** : Portworx requires that Rancher hosts have at least one non-root disk or partition to contribute.
+{{</info>}}
 
 For trial/demo purposes, Portworx has created “PX-ready” AMI images in AWS:
 
@@ -148,4 +150,3 @@ Please stop running below mentioned containers in the rancher env, Unless you ar
 
 1. Janitor - Unless you are sure about match [patterns](https://github.com/rancher/community-catalog/tree/master/templates/janitor) for Janitor container, Please don’t run this in Rancher env. Because by default it will delete any unused image, and any orphaned volume. It will also remove any stopped containers that are taking up space; note that this may not be what you want if you are using stopped containers to hold volumes. If you are using ‘run-once’ sidekick containers that mount a volume, then these containers may be removed by Janitor.
 2. cAdvisor \(container advisor\) is an open-source project. It is implemented as a daemon process that collects, aggregates, processes, and exports information about running containers. also, it provides users with resource usage information about running containers. This process holds the portworx volumes and causes the trouble.
-

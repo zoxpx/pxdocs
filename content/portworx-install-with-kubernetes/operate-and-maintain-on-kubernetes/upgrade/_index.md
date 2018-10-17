@@ -48,8 +48,10 @@ For example:
 curl -fsL https://install.portworx.com/upgrade | bash -s -- --scaledownsharedapps off
 ```
 
-> **Reboot requirement:**  
-> By default, the upgrade process scales down shared applications as that avoids a node reboot when upgrading between major Portworx versions. Disabling that flag would mean the node would need a reboot before Portworx comes up with the new major version.
+{{<info>}}
+**Reboot requirement:**  
+By default, the upgrade process scales down shared applications as that avoids a node reboot when upgrading between major Portworx versions. Disabling that flag would mean the node would need a reboot before Portworx comes up with the new major version.
+{{</info>}}
 
 ### Troubleshooting {#troubleshooting}
 
@@ -102,4 +104,3 @@ If the upgrade job crashes unexpectedly and fails to restore shared applications
 ```text
 curl -fsL https://install.portworx.com/upgrade | bash -s -- --scaledownsharedapps off
 ```
-

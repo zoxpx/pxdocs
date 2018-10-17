@@ -6,8 +6,10 @@ Since the stateful services in the DCOS universe do not support external volumes
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
-> **Note:**  
-> These frameworks are only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+{{<info>}}
+**Note:**  
+These frameworks are only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+</info>
 
 Please make sure you have installed [Portworx on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
@@ -50,4 +52,3 @@ dcos package repo add --index=0 cassandra-px-aws https://px-dcos.s3.amazonaws.co
 ```
 
 Please refer to the individual frameworks sections in the navigation bar for more details on a specific framework.
-

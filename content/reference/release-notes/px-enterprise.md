@@ -493,8 +493,10 @@ None
 
 ### 1.2.9 Release notes {#129-release-notes}
 
-> **Important:**  
->  If you are upgrading from an older version of PX \(1.2.8 or older\) and have PX volumes in attached state, you will need node reboot after upgrade in order for the new version to take effect properly.
+{{<info>}}
+**Important:**  
+If you are upgrading from an older version of PX \(1.2.8 or older\) and have PX volumes in attached state, you will need node reboot after upgrade in order for the new version to take effect properly.
+{{</info>}}
 
 #### Key Features {#key-features-3}
 
@@ -621,4 +623,3 @@ No new features in 1.2.1. This is a patch release.
 * Improve shared volume container attach when volume is in resync state
 * Allow pxctl to run as normal user
 * Improved pxctl help text for commands like pxctl service
-

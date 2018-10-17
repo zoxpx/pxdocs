@@ -55,8 +55,10 @@ NODE_2_IP=172.31.45.219
 NODE_3_IP=172.31.47.121
 ```
 
-> **Note:**  
-> Download [the `cassandra_conf.tar` file](https://s3.amazonaws.com/rlui-dcos-hadoop/cassandra_conf.tar) which includes cassandra.yaml file which is using TCP port 17000 instead of 7000. The reason to use custom cassandra.yaml file is because as of this writing, PX is occupying the port 7000, and the default Cassandra data and storage port is also on port 7000. Use this custom cassandra configuration to avoid this conflict. Download the cassandra\_conf.tar file and extract it on `/etc` folder. This step is not required if you are running with Kubernets or Mesosphere.
+{{<info>}}
+**Note:**  
+Download [the `cassandra_conf.tar` file](https://s3.amazonaws.com/rlui-dcos-hadoop/cassandra_conf.tar) which includes cassandra.yaml file which is using TCP port 17000 instead of 7000. The reason to use custom cassandra.yaml file is because as of this writing, PX is occupying the port 7000, and the default Cassandra data and storage port is also on port 7000. Use this custom cassandra configuration to avoid this conflict. Download the cassandra\_conf.tar file and extract it on `/etc` folder. This step is not required if you are running with Kubernets or Mesosphere.
+</info>
 
 For each AWS instance do a docker run and launch the Cassandra latest version Docker container.
 
@@ -76,7 +78,7 @@ On Node 2:
 docker run  --name cass-`hostname` -e CASSANDRA_BROADCAST_ADDRESS=`hostname -i`      \
               -e CASSANDRA_SEEDS=${NODE_1_IP}                                          \
               -p 17000:17000 -p 7001:7001 -p 9042:9042 -p 9160:9160 -p 7199:7199       \
-              -v /etc/cassandra:/etc/cassandra                                         \ 
+              -v /etc/cassandra:/etc/cassandra                                         \
               -v CVOL-`hostname`:/var/lib/cassandra                                    \
               -d cassandra:latest
 ```
@@ -124,7 +126,7 @@ On Node 2
 ```text
 docker exec -it cass-`hostname` cassandra-stress write n=10000                  \
   cl=quorum -mode native cql3 -rate threads=4 -schema keyspace="TestKEYSPACE01"   \
-  "replication(factor=2)" -pop seq=10001..20000 -log file=~/Test_10Kwrite_002.log \ 
+  "replication(factor=2)" -pop seq=10001..20000 -log file=~/Test_10Kwrite_002.log \
   -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
 ```
 
@@ -280,4 +282,3 @@ docker exec -it cass-`hostname` cassandra-stress mixed n=10000000               
 ```
 
 Generally Cassandra stress test should be run on every Cassandra containers about the same time to increase the load. And using the same keyspace on the same test run, requires to use different `sequence` to separate between each containers operation on the same keyspace `(e.g. 1..10000 and 10001..20000 and so on)`.
-

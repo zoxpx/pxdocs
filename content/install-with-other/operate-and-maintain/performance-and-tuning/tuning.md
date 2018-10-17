@@ -10,11 +10,17 @@ As of PX version 1.3, it is recommended to use a journal device to absorb PX met
 
 The journal device should be 2GB.  Using a larger device will not help, since PX will only use 2GB of the journal device.  The journal device can be specified via the `-j` option during installation, documented [here](/runc/options.html#opts).
 
->**Note 1:**<br/>You **must** ensure that the journal device is faster than your storage device allocated for PX.  If the journal device is slower than the actual storage drive, your overall performance will be lower and match the lower of two devices.
+{{<info>}}
+**Note 1:**<br/>You **must** ensure that the journal device is faster than your storage device allocated for PX.  If the journal device is slower than the actual storage drive, your overall performance will be lower and match the lower of two devices.
+{{</info>}}
 
->**Note 2:**<br/>Cloud providers match the drive's performance based on it's size.  So if you select a small sized journal device, your performance will be worse.  For a cloud drive, provide a partition from the larger storage drive as your journal device.
+{{<info>}}
+**Note 2:**<br/>Cloud providers match the drive's performance based on it's size.  So if you select a small sized journal device, your performance will be worse.  For a cloud drive, provide a partition from the larger storage drive as your journal device.
+{{</info>}}
 
->**Note 3:**<br/>As of PX 1.4, we recommend using the `-j auto` option.  This allows PX to create it's own journal partition on the best drive.
+{{<info>}}
+**Note 3:**<br/>As of PX 1.4, we recommend using the `-j auto` option.  This allows PX to create it's own journal partition on the best drive.
+{{</info>}}
 
 If you are upgrading to 1.3 and want to add a journal device to an existing node, follow [these instructions](/maintain/add-journal-dev.html).
 
@@ -23,7 +29,7 @@ By default, PX will try to auto tune the IO profile setting for a given volume b
 
 The IO profile can be selected while creating the volume via the `io_profile` flag.  For example:
 
-```
+```text
 pxctl volume create --size=10 --repl=3 --io_profile=sequential demovolume
 
 or
@@ -45,4 +51,6 @@ This is useful for content management systems, like WordPress.  This option appl
 ### DB
 This implements a write-back flush coalescing algorithm.  This algorithm attempts to coalesce multiple `syncs` that occur within a 50ms window into a single sync. Coalesced syncs are acknowledged only after copying to all replicas. In order to do this, the algorithm requires a minimum replication (HA factor) of 3. This mode assumes all replicas do not fail (kernel panic or power loss) simultaneously in a 50 ms window. Use `io_profile=db`.
 
->**Note:**<br/>If there are not enough nodes online, PX will automatically disable this algorithm.
+{{<info>}}
+**Note:**<br/>If there are not enough nodes online, PX will automatically disable this algorithm.
+{{</info>}}

@@ -6,8 +6,10 @@ This guide will help you to install the Elasticsearch service on your DCOS clust
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
-> **Note:**  
-> This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+{{<info>}}
+**Note:**  
+This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+{{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
@@ -93,13 +95,13 @@ The PX volumes for all elasticsearch task components are automatically created, 
 dcos node ssh --master-proxy --mesos-id=41474f9b-6b81-44ba-ad2c-184f71efbb26-S1 '/opt/pwx/bin/pxctl v l'
   Running `ssh -A -t core@34.203.197.47 ssh -A -t core@10.0.0.236 /opt/pwx/bin/pxctl v l`
   ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
-  471143287909897714      CoordinatorNodeVolume-0 1 GiB   1       no      no              LOW             0       up - attached on 10.0.0.236 
+  471143287909897714      CoordinatorNodeVolume-0 1 GiB   1       no      no              LOW             0       up - attached on 10.0.0.236
   473886186773881112      DataNodeVolume-0        10 GiB  1       no      no              LOW             0       up - attached on 10.0.2.96
-  94264136141713933       DataNodeVolume-1        10 GiB  1       no      no              LOW             0       up - attached on 10.0.0.236 
-  621227572710557179      IngestNodeVolume-0      2 GiB   1       no      no              LOW             0       up - attached on 10.0.1.194 
-  236802011708171217      KibanaVolume-0          1 GiB   1       no      no              LOW             0       up - attached on 10.0.2.56 
-  513496078941740225      MasterNodeVolume-0      2 GiB   1       no      no              LOW             0       up - attached on 10.0.1.194 
-  859913199692077675      MasterNodeVolume-1      2 GiB   1       no      no              LOW             0       up - attached on 10.0.2.56 
+  94264136141713933       DataNodeVolume-1        10 GiB  1       no      no              LOW             0       up - attached on 10.0.0.236
+  621227572710557179      IngestNodeVolume-0      2 GiB   1       no      no              LOW             0       up - attached on 10.0.1.194
+  236802011708171217      KibanaVolume-0          1 GiB   1       no      no              LOW             0       up - attached on 10.0.2.56
+  513496078941740225      MasterNodeVolume-0      2 GiB   1       no      no              LOW             0       up - attached on 10.0.1.194
+  859913199692077675      MasterNodeVolume-1      2 GiB   1       no      no              LOW             0       up - attached on 10.0.2.56
   1016863270687558253     MasterNodeVolume-2      2 GiB   1       no      no              LOW             0       up - attached on 10.0
 ```
 
@@ -218,4 +220,3 @@ And replace the `*` with `books` in the search field, that is the `books` index 
 Document insert and query can also be done in `Dev Tools` similar like Chrome Sense
 
 ![Elasticsearch input data from Chrome Sense](https://docs.portworx.com/images/elasticsearch-px-universe-015.PNG)
-

@@ -100,12 +100,14 @@ If you do not wish to set Vault environment variables, you can authenticate Port
 Successfully authenticated with Vault.
 ```
 
-> **Important:**  
-> You need to run this command on all Portworx nodes, so that you could create and mount encrypted volumes on all nodes.
+{{<info>}}
+**Important:**  
+You need to run this command on all Portworx nodes, so that you could create and mount encrypted volumes on all nodes.
+{{</info>}}
 
-> **Important:**  
-> Make sure that the secret key has been created in Vault.
+{{<info>}}
+**Important:**  
+Make sure that the secret key has been created in Vault.
+{{</info>}}
 
 If the CLI is used to authenticate with Vault, for every restart of Portworx container it needs to be re-authenticated with Vault by running the `login` command.  
-
-

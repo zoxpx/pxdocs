@@ -6,8 +6,10 @@ DC/OS provides a CouchDB service that makes it easy to deploy and manage CouchDB
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
-> **Note:**  
-> This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+{{<info>}}
+**Note:**  
+This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+{{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
@@ -161,4 +163,3 @@ You do not need to create additional PX volumes manually to scale up your cluste
 Click on “Review and Run” and then “Run Service”. The service scheduler should restart with the updated node count and create more CouchDB nodes with newly created PX volumes. Please make sure you have enough resources and nodes available to scale up the number of nodes. You also need to make sure Portworx is installed on all the agents in the DCOS cluster.
 
 You can also increase the capacity of your CouchDB data nodes by using the `pxctl volume update` command without taking the service offline.
-

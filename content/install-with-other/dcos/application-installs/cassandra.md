@@ -76,8 +76,10 @@ Click on “Review and Run” and then “Run Service”. The service scheduler 
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
-> **Note:**  
-> This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+{{<info>}}
+**Note:**  
+This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+{{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
@@ -90,4 +92,3 @@ For further reading on Cassandra:
 * [Cassandra stress test with Portworx](https://docs.portworx.com/applications/cassandra-px-perf-test.html)
 * [Run Cassandra on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/cassandra.html)
 * [Snapshotting Cassandra Container Volumes for CI/CD using Mesosphere DC/OS](https://portworx.com/snapshotting-cassandra-container-volumes-ci-using-mesosphere-dcos/)
-

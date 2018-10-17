@@ -25,7 +25,9 @@ OPTIONS:
    --help, -h  show help
 ```
 
-> **Note:** Following commands are only available for PX version &gt; 1.3
+{{<info>}}
+**Note:** Following commands are only available for PX version &gt; 1.3
+{{</info>}}
 
 **Listing all Cloud Drives**
 
@@ -77,4 +79,3 @@ Drive Set Configuration
                 Iops:  100
                 Path:  /dev/xvdg
 ```
-

@@ -5,9 +5,7 @@ weight: 4
 
 ## Update Portworx Geography Info in Kubernetes
 
-There are different ways in which you can provide this information to Portworx nodes based on your scheduler. If you want to set the rack, zone and region information using environment variables, click the link below.
-
-{% page-ref page="../reference/command-line/data-volumes/update-geography-info.md" %}
+There are different ways in which you can provide this information to Portworx nodes based on your scheduler. If you want to set the rack, zone and region information using environment variables, [click here](/reference/CLI/data-volumes/update-geography-info).
 
 ### Providing rack info to Portworx using node labels {#providing-rack-info-to-portworx-using-node-labels}
 
@@ -98,4 +96,3 @@ parameters:
 ```
 
 Any PVC created using the above storage class will have a replication factor of 2 and will have one copy of its data on `rack1` and the other copy on `rack2`
-

@@ -25,7 +25,9 @@ To update the rack information in Kubernetes using node labels, click the link b
 
 #### Updating rack information through environment variables {#updating-rack-information-through-environment-variables}
 
-> **Note:** This method requires a reboot of the Portworx container
+{{<info>}}
+**Note:** This method requires a reboot of the Portworx container
+{{</info>}}
 
 Portworx can be made aware of its rack information through `PWX_RACK` environment variable. This environment variable can be provided through the `/etc/pwx/px_env` file. A sample file looks like this:
 
@@ -42,7 +44,9 @@ Add the `PWX_RACK=<rack-id>` entry to the end of this file and restart Portworx.
 
 #### Updating zone information through environment variables {#updating-zone-information-through-environment-variables}
 
-> **Note:** This method requires a reboot of the Portworx container
+{{<info>}}
+**Note:** This method requires a reboot of the Portworx container
+{{</info>}}
 
 Portworx can be made aware of its zone information through `PWX_ZONE` environment variable. This environment variable can be provided through the `/etc/pwx/px_env` file. A sample file looks like this:
 
@@ -59,7 +63,9 @@ Add the `PWX_ZONE=<zone-id>` entry to the end of this file and restart Portworx.
 
 #### Updating region information through environment variables {#updating-region-information-through-environment-variables}
 
-> **Note:** This method requires a reboot of the Portworx container
+{{<info>}}
+**Note:** This method requires a reboot of the Portworx container
+{{</info>}}
 
 Portworx can be made aware of its region information through `PWX_REGION` environment variable. This environment variable can be provided through the `/etc/pwx/px_env` file. A sample file looks like this:
 
@@ -71,4 +77,3 @@ PWX_REGION=region2
 ```
 
 Add the `PWX_REGION=<region-id>` entry to the end of this file and restart the Portworx. On every Portworx restart, all the variables defined in `/etc/pwx/px_env` will be exported as environment variables in the Portworx container. Please make sure the label is a string not starting with a special character or a number.
-

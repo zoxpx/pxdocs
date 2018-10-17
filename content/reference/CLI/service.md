@@ -267,7 +267,9 @@ Node	Bytes Sent	Bytes Received
 
 pxctl service node-wipe deletes all data related to Portworx from the node. It will also wipe the storage device that was provided to Portworx. This command can be run only when Portworx is stopped on the node. Run this command if a node needs to be re-initialized.
 
-> **Note:** This is a disruptive command and could lead to data loss. Please use caution.
+{{<info>}}
+**Note:** This is a disruptive command and could lead to data loss. Please use caution.
+{{</info>}}
 
 ```text
 sudo /opt/pwx/bin/pxctl service node-wipe --help
@@ -298,4 +300,3 @@ Removed PX footprint from device /dev/sdb.
 Failed to find PX journal device. Please re-run the command with -j param if using a journal device.
 Wiped node successfully.
 ```
-

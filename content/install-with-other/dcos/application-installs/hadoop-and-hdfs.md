@@ -8,8 +8,10 @@ The number of Data and Yarn nodes can be set during install. They can also be up
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
-> **Note:**  
-> This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+{{<info>}}
+**Note:**  
+This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+{{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
@@ -70,7 +72,7 @@ metronome                 10.0.4.21                   True     0    0.0    0.0  
 ###  Running Hadoop with Portworx on DCOS {#running-hadoop-with-portworx-on-dcos}
 
 Here is a short video that shows how to install and run Hadoop on Portworx with DCOS  
- 
+
 
 ### Scaling the Data Nodes {#scaling-the-data-nodes}
 
@@ -79,4 +81,3 @@ You do not need to create additional volumes of perform to scale up your cluster
 Click on “Review and Run” and then “Run Service”. The service scheduler should restart with the updated node count and create more Data nodes. Please make sure you have enough resources and nodes available to scale up the number of nodes. You also need to make sure Portworx is installed on all the agents in the DCOS cluster.
 
 You can also increase the capacity of your HDFS Data nodes by using the `pxctl volume update` command without taking the service offline
-

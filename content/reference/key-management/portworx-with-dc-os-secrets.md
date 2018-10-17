@@ -5,11 +5,15 @@ weight: 2
 
 Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets and credentials. This guide will help you configure Portworx to connect to DC/OS Secrets. DC/OS Secrets can then be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
 
-> **Note:**  
-> Secrets is an DC/OS Enterprise only feature
+{{<info>}}
+**Note:**  
+Secrets is an DC/OS Enterprise only feature
+{{</info>}}
 
-> **Note:**  
-> Supported from PX Enterprise 1.4 onwards
+{{<info>}}
+**Note:**  
+Supported from PX Enterprise 1.4 onwards
+{{</info>}}
 
 #### Configuring DC/OS Secrets with Portworx {#configuring-dcos-secrets-with-portworx}
 
@@ -94,9 +98,9 @@ If you do not wish to pass the DC/OS credentials through the framework, you can 
 Successfully authenticated with DC/OS Secrets.
 ** WARNING, this is probably not what you want to do. This login will not be persisted across PX or node reboots and also expire in 5 days. Please provide your login information through package config or refer docs.portworx.com for more information.
 ```
-
-> **Important:**  
-> You need to run this command on all Portworx nodes, so that you could create and mount encrypted volumes on all nodes.
+{{<info>}}
+**Important:**  
+You need to run this command on all Portworx nodes, so that you could create and mount encrypted volumes on all nodes.
+{{</info>}}
 
 If the cli is used to authenticate with DC/OS Secrets, for every restart of Portworx container it needs to be re-authenticated with DC/OS Secrets by running the `login` command.
-

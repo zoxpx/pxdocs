@@ -5,8 +5,10 @@ weight: 1
 
 Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to an AWS KMS endpoint. The Data Keys created in KMS can be used to encrypt Portworx Volumes.
 
-> **NOTE:**  
-> Supported from PX Enterprise 1.4 onwards
+{{<info>}}
+**NOTE:**  
+Supported from PX Enterprise 1.4 onwards
+{{</info>}}
 
 ### Deploying Portworx {#deploying-portworx}
 
@@ -24,9 +26,8 @@ If you are installing Portworx on Kubernetes, when generating the Portworx Kuber
 2. Use `clusterSecretKey=<key>` to set the cluster-wide secret ID. This kms data key associated with the secretID will be used as a passphrase for encrypting volumes.
 3. Use `env=KEY1=VALUE1,KEY2=VALUE2` to set the Portworx AWS environment variables to identify AWS endpoint.
 
-For instructions on generating the Portworx spec for Kubernetes, click the link below.
+For instructions on generating the Portworx spec for Kubernetes, [click here](/portworx-install-with-kubernetes).
 
-{% page-ref page="../portworx-install-with-kubernetes/" %}
 
 If you already have a running Portworx installation, update `/etc/pwx/config.json` on each node.
 
@@ -49,8 +50,10 @@ If you already have a running Portworx installation, update `/etc/pwx/config.jso
 
 **Adding AWS KMS Credentials to config.json**
 
-> **Note:**  
-> This section is optional and is only needed if you intend to provide the PX configuration before installing PX.
+{{<info>}}
+**Note:**  
+This section is optional and is only needed if you intend to provide the PX configuration before installing PX.
+{{</info>}}
 
 If you are deploying PX with your PX configuration created before hand, then add the following `secrets`section to the `/etc/pwx/config.json`:
 
@@ -114,9 +117,7 @@ If the CLI is used to authenticate with AWS, for every restart of PX container i
 
 ### Key generation with AWS KMS {#key-generation-with-aws-kms}
 
-The following sections describe the key generation process with PX and AWS KMS. These keys can be used as passphrases for encrypted volumes. For more information on encrypted volumes, click the link below.
-
-{% page-ref page="../reference/command-line/data-volumes/encrypted-volumes.md" %}
+The following sections describe the key generation process with PX and AWS KMS. These keys can be used as passphrases for encrypted volumes. For more information on encrypted volumes, [click here](/reference/CLI/data-volumes/encrypted-volumes).
 
 Portworx provides the following CLI command to generate AWS KMS Data keys.
 
@@ -161,5 +162,3 @@ Successfully set cluster secret key!
 ```
 
 As an input to the above command you can provide any `secret_id` that was used in the `generate-kms-data-key` command. From our example we can set the cluster secret key to `portworx_secret`. This command needs to be run just once for the cluster. If you have added the cluster secret key through config.json, the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in _config.json_ will be ignored for the one set through the CLI.  
-
-

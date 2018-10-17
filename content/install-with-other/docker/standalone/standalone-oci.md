@@ -10,8 +10,10 @@ To install and configure PX to run directly with OCI/runC, please use the config
 
 If you are already running PX as a docker container and need to migrate to OCI, following the [migration steps](https://docs.portworx.com/runc#upgrading-from-px-containers-to-px-oci).
 
-> **Note:**  
-> It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host. An example unit file is shown below.
+{{<info>}}
+**Note:**  
+It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host. An example unit file is shown below.
+{{</info>}}
 
 ### Install {#install}
 
@@ -71,8 +73,10 @@ sudo docker run --entrypoint /runc-entry-point.sh \
     $latest_stable
 ```
 
-> **Note:**  
-> Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle. If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
+{{<info>}}
+**Note:**  
+Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle. If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
+{{</info>}}
 
 **Step 2: Configure PX under runC**
 
@@ -91,7 +95,7 @@ Installation example:
 
 sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
     -k etcd://myetc.company.com:2379 \
-    -s /dev/xvdb -s /dev/xvdc 
+    -s /dev/xvdb -s /dev/xvdc
 ```
 
 **Command-line arguments**
@@ -161,15 +165,15 @@ sudo /opt/pwx/bin/px-runc install -e PX_ENABLE_CACHE_FLUSH=yes \
 Using etcd:
 
 ```text
-px-runc install -k etcd://my.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2 
-px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8 
+px-runc install -k etcd://my.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
+px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
 ```
 
 Using consul:
 
 ```text
-px-runc install -k consul://my.company.com:8500 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2 
-px-runc install -k consul://70.0.2.65:8500 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8 
+px-runc install -k consul://my.company.com:8500 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
+px-runc install -k consul://70.0.2.65:8500 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
 ```
 
 **Modifying the PX configuration**
@@ -259,18 +263,20 @@ Step 2: Inspect your existing PX-Containers, record arguments and any custom mou
 
 Inspect the mounts so these can be provided to the runC installer.
 
-> **Note:**  
-> Mounts for `/dev`, `/proc`, `/sys`, `/etc/pwx`, `/opt/pwx`, `/run/docker/plugins`, `/usr/src`, `/var/cores`, `/var/lib/osd`, `/var/run/docker.sock` can be safely ignored \(omitted\).  
-> Custom mounts will need to be passed to PX-OCI in the next step, using the following notation:  
-> `px-runc install -v <Source1>:<Destination1>[:<Propagation1 if shared,ro>] ...`
+{{<info>}}
+**Note:**  
+Mounts for `/dev`, `/proc`, `/sys`, `/etc/pwx`, `/opt/pwx`, `/run/docker/plugins`, `/usr/src`, `/var/cores`, `/var/lib/osd`, `/var/run/docker.sock` can be safely ignored \(omitted\).  
+Custom mounts will need to be passed to PX-OCI in the next step, using the following notation:  
+`px-runc install -v <Source1>:<Destination1>[:<Propagation1 if shared,ro>] ...`
+{{</info>}}
 
 ```text
 # Inspect Arguments
-sudo docker inspect --format '{{.Args}}' px-enterprise 
+sudo docker inspect --format '{{.Args}}' px-enterprise
 [ -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb ]
 
 # Inspect Mounts
-sudo docker inspect --format '{{json .Mounts}}' px-enterprise | python -mjson.tool 
+sudo docker inspect --format '{{json .Mounts}}' px-enterprise | python -mjson.tool
 [...]
     {
         "Destination": "/var/lib/kubelet",
@@ -349,4 +355,3 @@ _EOF
 # Signal syslogd to reload the configurations:
 sudo pkill -HUP syslogd
 ```
-

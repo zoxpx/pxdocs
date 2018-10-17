@@ -219,8 +219,10 @@ spec:
 
 Note the format of the `name` field - `ns.<namespace_of_source_pvc>-name.<name_of_the_snapshot>`. The above example takes a snapshot with the name “px-snap-1” of the source PVC “px-vol-1” in the “prod” namespace.
 
-> **Note:**  
->  Annotations support is available from PX Version 1.2.11.6
+{{<info>}}
+**Note:**  
+Annotations support is available from PX Version 1.2.11.6
+{{</info>}}
 
 For using annotations Portworx daemon set requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
 
@@ -245,8 +247,10 @@ $ kubectl edit clusterrole node-get-put-list-role
 
 Portworx recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
 
-> **Note:**  
->  Please remember to setup cadvisor and nodexporter properly so they mount the ‘/’ partition as ro:slave. Refer to this [link](/install-with-other/operate-and-maintain/monitoring) for more information
+{{<info>}}
+**Note:**  
+Please remember to setup cadvisor and nodexporter properly so they mount the ‘/’ partition as ro:slave. Refer to this [link](/install-with-other/operate-and-maintain/monitoring) for more information
+{{</info>}}
 
 While Prometheus can be deployed as a container within the container orchestrator, many of Portworx’s production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
@@ -423,4 +427,3 @@ Pool ID: 1
   * Replace the bad drive\(s\) with new drive\(s\)
   * Add the node to the cluster as a new node \(refer to [adding cluster nodes](https://docs.portworx.com/maintain/scale-out.html)\)
   * Ensure the cluster is operational and the new node has been added to the cluster via `pxctl cluster status` and `pxctl cluster list`
-
