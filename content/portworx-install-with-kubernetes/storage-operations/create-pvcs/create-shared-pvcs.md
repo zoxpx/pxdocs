@@ -1,6 +1,6 @@
 ---
 title: Create shared PVCs
-weight: 4
+weight: 3
 ---
 
 This document describes how to use portworx shared volumes in your Kubernetes cluster.

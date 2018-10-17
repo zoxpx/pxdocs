@@ -161,7 +161,7 @@ Verifying pod is created:
 ```
 
 {{<info>}}
-**Note:** To access PV/PVCs with a non-root user refer [here](/scheduler/kubernetes/non-root.html)
+**Note:** To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
 {{</info>}}
 
 ### Delete volumes
