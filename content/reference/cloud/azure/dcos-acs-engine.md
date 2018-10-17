@@ -58,7 +58,7 @@ For the `masterProfile`, specify an appropriate value for `dnsPrefix` which will
 <br>Specify the number and size of disks that will be attached to each DCOS private agent
 as per the template default:
 
-```
+```text
 [...]
 "diskSizesGB": [128, 128, 128, 128]
 [...]
@@ -68,7 +68,7 @@ Specify the appropriate admin username as `adminUsername` and public key data as
 
 ### Generate the Azure Resource Management (ARM) templates
 
-```
+```text
 ./acs-engine generate examples/disks-managed/my-dcos-preAttachedDisks-vmss.json
 ```
 
@@ -78,7 +78,7 @@ to the name used for the `dnsPrefix`.   `acs-engine` will generate the appropria
 
 ### Deploy the generated ARM template
 
-```
+```text
 az group deployment create \
     --name "$NAME" \
     --resource-group "$RGNAME" \
@@ -97,7 +97,7 @@ an ssh tunnel that can be used to access the DCOS GUI.  Full instructions for re
 
 A simple example for access might look like this:
 
-```
+```bash
 sudo ssh -i your-private.key  -fNL 80:localhost:80 -p 2200  \
      adminUsername@dnsPrefix.LOCATION.cloudapp.azure.com
 ```

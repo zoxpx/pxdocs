@@ -43,7 +43,7 @@ among the following:
 
 ### Create a service principal in Azure AD
 
-```
+```text
 az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9"
 {
   "appId": "1311e5f6-xxxx-xxxx-xxxx-ede45a6b2bde",
@@ -68,7 +68,7 @@ For the `masterProfile`, specify an appropriate value for `dnsPrefix` which will
 <br>Specify the number and size of disks that will be attached to each DCOS private agent
 as per the template default:
 
-```
+```text
 [...]
 "diskSizesGB": [128, 128, 128, 128]
 [...]
@@ -81,7 +81,7 @@ from the above "Create a service principal in Azure AD" step.
 
 ### Generate the Azure Resource Management (ARM) templates
 
-```
+```text
 acs-engine generate my-k8s-preAttachedDisks-vmas.json
 ```
 
@@ -91,7 +91,7 @@ to the name used for the `dnsPrefix`.   `acs-engine` will generate the appropria
 
 ### Deploy the generated ARM template
 
-```
+```text
 az group deployment create \
     --name "$NAME" \
     --resource-group "$RGNAME" \

@@ -35,7 +35,7 @@ example locations:
 
 ### Create a service principal in Azure AD
 
-```
+```text
 az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9"
 {
   "appId": "1311e5f6-xxxx-xxxx-xxxx-ede45a6b2bde",
