@@ -11,5 +11,5 @@ Before you start using PVC encryption, you need to setup a secrets provider to s
 
 There are a couple of ways you can create an encrypted Portworx volume in Kubernetes:
 
-1. [Encryption using StorageClass](https://docs.portworx.com/scheduler/kubernetes/storage-class-encryption.html)
-2. [Encryption using PVC](https://docs.portworx.com/scheduler/kubernetes/pvc-encryption.html)
+1. [Encryption using StorageClass](/portworx-install-with-kubernetes/storage-operations/create-pvcs/storage-class-encryption)
+2. [Encryption using PVC](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pvc-encryption)
