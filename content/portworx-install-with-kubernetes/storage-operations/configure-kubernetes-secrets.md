@@ -7,22 +7,22 @@ weight: 5
 
 Portworx can integrate with Kubernetes Secrets to store your encryption keys/secrets and credentials. This guide will help configure Portworx with Kubernetes Secrets. Kubernetes Secrets can then be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
 
-> **Note:**  
-> Supported from PX Enterprise 1.4 onwards
+{{<info>}}
+**Note:**  
+Supported from PX Enterprise 1.4 onwards
+{{</info>}}
 
 #### Configuring Kubernetes Secrets with Portworx {#configuring-kubernetes-secrets-with-portworx}
 
 **New installation**
 
-When generating the [Portworx Kubernetes spec file](https://install.portworx.com/), select `Kubernetes` from the “Secrets type” list. For more details on how to generate Portworx spec for Kubernetes, click the link below.
-
-{% page-ref page="../portworx-install-with-kubernetes/" %}
+When generating the [Portworx Kubernetes spec file](https://install.portworx.com/), select `Kubernetes` from the “Secrets type” list. For more details on how to generate Portworx spec for Kubernetes, [click here](/portworx-install-with-kubernetes/).
 
 **Existing installation**
 
 **Permissions to access secrets**
 
-Portworx stores credentials/secrets in a Kubernetes namespace called `portworx`. It needs permissions to access secrets under this namespace. If you have upgraded Portworx using the [recommended method](https://docs.portworx.com/scheduler/kubernetes/upgrade.html), then you will not have to create the namespace and roles given below. If the following objects are missing, then create it using `kubectl`:
+Portworx stores credentials/secrets in a Kubernetes namespace called `portworx`. It needs permissions to access secrets under this namespace. If you have upgraded Portworx using the [recommended method](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/), then you will not have to create the namespace and roles given below. If the following objects are missing, then create it using `kubectl`:
 
 ```text
 cat <<EOF | kubectl apply -f -
@@ -103,7 +103,7 @@ Editing the daemonset will also restart all the Portworx pods, which will consum
 
 #### Creating secrets with Kubernetes {#creating-secrets-with-kubernetes}
 
-The following section describes the key generation process with Portworx and Kubernetes which can be used for encrypting volumes. More details about encryption can be found on [Encrypted Volumes](https://docs.portworx.com/manage/encrypted-volumes.html) and [Encryption using PVC](https://docs.portworx.com/scheduler/kubernetes/encrypted-volumes.html) page.
+The following section describes the key generation process with Portworx and Kubernetes which can be used for encrypting volumes. More details about encryption can be found on [Encrypted Volumes](/reference/cli/data-volumes/encrypted-volumes/) and [Encryption using PVC](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs) page.
 
 **Setting cluster wide secret key**
 
@@ -125,7 +125,7 @@ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl secrets set-cluster-ke
 Successfully set cluster secret key
 ```
 
-This command needs to be run just once for the cluster. If you have added the [cluster secret key through the _config.json_](https://docs.portworx.com/secrets/portworx-with-kubernetes-secrets.html#update-configjson), the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in _config.json_ will be ignored for the one set through the CLI.
+This command needs to be run just once for the cluster. If you have added the [cluster secret key through the _config.json_](#update-configjson), the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in _config.json_ will be ignored for the one set through the CLI.
 
 **\(Optional\) Authenticating with Kubernetes Secrets using Portworx CLI**
 
@@ -137,9 +137,9 @@ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl secrets k8s login
 Successfully authenticated with Kubernetes Secrets.
 ** WARNING, this is probably not what you want to do. This login will not be persisted across PX or node reboots. Please put your login information in /etc/pwx/config.json or refer docs.portworx.com for more information.
 ```
-
-> **Important:**  
->  You need to run this command on all Portworx nodes, so that you could create and mount encrypted volumes on all nodes.
+{{<info>}}
+**Important:**  
+You need to run this command on all Portworx nodes, so that you could create and mount encrypted volumes on all nodes.
+{{</info>}}
 
 If the CLI is used to authenticate with Kubernetes Secrets, for every restart of Portworx container it needs to be re-authenticated with Kubernetes Secrets by running the `login` command on that node.
-
