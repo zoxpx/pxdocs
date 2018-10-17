@@ -23,7 +23,7 @@ Following points are important when creating your GKE cluster.
 3. Portworx requires a ClusterRoleBinding for your user. Without this `kubectl apply ...` command fails with an error like ```clusterroles.rbac.authorization.k8s.io "portworx-pvc-controller-role" is forbidden```.
 
     Create a ClusterRoleBinding for your user using the following commands:
-    ```
+    ```bash
     # get current google identity
     $ gcloud info | grep Account
     Account: [myname@example.org]
