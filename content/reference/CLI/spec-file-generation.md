@@ -1,6 +1,6 @@
 ---
 title: Spec File Generation
-weight: 10
+hidden: true
 ---
 
 This section explains how to generate the DaemonSet Portworx spec file via the command line.
@@ -66,4 +66,3 @@ curl -L -o px-spec.yaml "https://install.portworx.com/1.3/?c=mycluster&k=etcd://
 # For the 1.2 stable release
 curl -L -o px-spec.yaml "https://install.portworx.com/1.2/?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
 ```
-
