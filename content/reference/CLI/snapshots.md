@@ -279,4 +279,4 @@ Volume	:  1125771388930868153
 
 ```
 
-If you are looking snapshot commands for Portworx version 1.2, [go here](/reference/cli/snapshots/version-1.2)
+If you are looking snapshot commands for Portworx version 1.2, [go here](/reference/cli/version-1.2)
