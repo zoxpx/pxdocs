@@ -1,7 +1,6 @@
 ---
 title: Nomad
-weight: 4
+weight: 5
 ---
 
 This section covers information on installing Portworx on Nomad.
-

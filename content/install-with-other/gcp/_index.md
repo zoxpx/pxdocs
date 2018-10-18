@@ -1,7 +1,7 @@
 ---
 title: Dynamic Provisioning on Google Cloud Platform (GCP)
-weight: 2
-linkTitle: Google Cloud Platform (GCP)
+weight: 4
+linkTitle: GCP
 ---
 
 The steps below will help you enable dynamic provisioning of Portworx volumes in your GCP cluster.

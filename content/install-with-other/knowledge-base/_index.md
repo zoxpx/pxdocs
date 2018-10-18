@@ -1,4 +1,4 @@
 ---
 title: Knowledge Base
-weight: 99
+weight: 9
 ---
