@@ -1,0 +1,38 @@
+---
+title: Run Portworx with Kubernetes on Mesosphere DC/OS
+linkTitle: Kubernetes
+---
+
+{{<info>}}
+**Note:**<br/> Kubernetes on DC/OS with Portworx is only supported from PX version 1.4 onwards
+{{</info>}}
+
+Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
+
+The latest framework starts Portworx with scheduler set to mesos (`-x mesos` option) to
+allow Portworx to mount volumes for Kubernetes pods. If you are using an older
+version of the framework please update `/etc/pwx/config.json` to set `scheduler`
+to `mesos`.
+
+## Install dependencies
+
+When using Kubernetes on DC/OS you will be able to use Portworx from your DC/OS
+cluster. You only need to create a Kubernetes Service and proxy pods for Portworx to allow the
+in-tree Kubernetes volume plugin to dynamically create and use Portworx volumes. This will also install [Stork](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/stork).
+
+You can create the Service by running the following command:
+```bash
+$ version=$(kubectl version --short | awk -Fv '/Server Version: / {print $3}')
+$ kubectl apply -f "https://install.portworx.com/?kbver=${version}&dcos=true&stork=true"
+```
+
+## Provisioning volumes
+
+After the above spec has been applied, you can create volumes and snapshots
+using Kuberenetes.
+Please use the following guides:
+
+* [Dynamic Provisioning](/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning)
+* [Using Pre-provisioned volumes](/portworx-install-with-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes)
+* [Creating and using snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
+* [Volume encryption](/reference/data-volumes/encrypted-volumes)
