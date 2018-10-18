@@ -3,20 +3,17 @@ title: "Scaling-out an existing PX Cluster"
 hidden: true
 ---
 
-* TOC
-{:toc}
-
 ## Scaling out an existing PX Cluster
 
-This document illustrates how to add a new node with attached storage to a PX cluster 
+This document illustrates how to add a new node with attached storage to a PX cluster
 
 ### Display current cluster status
 
-```
+```text
 sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: a56a4821-6f17-474d-b2c0-3e2b01cd0bc3
-	IP: 147.75.198.197 
+	IP: 147.75.198.197
  	Local Storage Pool: 2 pools
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
 	0	LOW		200 GiB	1.0 GiB	Online	default	default
@@ -43,7 +40,7 @@ Provision a server or a cloud instance from a provider of your choice with some 
 
 In this case, for e.g., this node comes with 100GiB of storage
 
-```
+```text
 # multipath -ll
 volume-a9e55549 (360014055671ce0d20184a619c27b31d0) dm-1   ,IBLOCK          
 size=100G features='0' hwhandler='1 alua' wp=rw
@@ -56,27 +53,27 @@ The storage is available at /dev/dm-1
 
 ### Add this node to the PX Cluster
 
-Below is an example of how to run PX in a new node so it joins an existing cluster. 
-* Follow the instructions in the Installing 
-  [PX as OCI](https://docs.portworx.com/scheduler/docker/install-standalone.html#install-px-via-oci-runc) 
+Below is an example of how to run PX in a new node so it joins an existing cluster.
+* Follow the instructions in the Installing
+  [PX as OCI](https://docs.portworx.com/scheduler/docker/install-standalone.html#install-px-via-oci-runc)
   page on starting PX in a new node
-* Provide cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID 
+* Provide cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID
   to which we want to add the new node
 * Use the same CLUSTER_ID as the ID of the cluster which you want the node to join for the -c parameter
 
-Note the -s /dev/dm-1 command which picks up the storage that comes with the new node and the same cluster token 
-ensures that the node is added to the same cluster. 
+Note the -s /dev/dm-1 command which picks up the storage that comes with the new node and the same cluster token
+ensures that the node is added to the same cluster.
 
 
 ### Check cluster status
 
 As seen below, the 100G of additional capacity is added to the cluster with total capacity of the cluster going to 620GB
 
-```
+```text
 sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
-	IP: 147.75.104.185 
+	IP: 147.75.104.185
  	Local Storage Pool: 1 pool
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
 	0	LOW		100 GiB	1.0 GiB	Online	default	default

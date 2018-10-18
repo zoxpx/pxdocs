@@ -3,9 +3,6 @@ title: "Production Readiness"
 hidden: true
 ---
 
-* TOC
-{:toc}
-
 ### Initial Software Setup for Production
 
 * Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
@@ -28,12 +25,12 @@ hidden: true
 ### Configuring and Provisioning Underlying Storage
 
 * Disks - If this is a on-prem installation, ensure there is enough storage available per node for PX storage pools.
-  If it is a cloud deployment, ensure you have enough cloud disks attached. 
-  
-  * For AWS ASG, Portworx supports automatic management of EBS volumes. 
+  If it is a cloud deployment, ensure you have enough cloud disks attached.
+
+  * For AWS ASG, Portworx supports automatic management of EBS volumes.
     It is recommended to use the ASG [feature](https://docs.portworx.com/cloud/aws/asg.html)
 
-* HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage. 
+* HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage.
 
 ### Volume Management Best Practices
 
@@ -62,10 +59,10 @@ hidden: true
 
 ### Software Upgrades
 
-* Portworx Software Upgrades - Work with Portworx Support before planning major upgrades. Ensure all volumes have the 
+* Portworx Software Upgrades - Work with Portworx Support before planning major upgrades. Ensure all volumes have the
   latest snapshot and cloudsnap before performing upgrades
 
 * Container Orchestrator upgrades - Ensure all volumes are cloud-snapped before performing scheduler upgrades
 
-* OS upgrades - Ensure all volumes have a snapshot before performing underlying OS upgrades. 
+* OS upgrades - Ensure all volumes have a snapshot before performing underlying OS upgrades.
   Ensure kernel-devel packages are installed after a OS migration

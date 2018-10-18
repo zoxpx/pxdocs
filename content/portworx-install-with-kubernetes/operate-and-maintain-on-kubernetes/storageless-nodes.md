@@ -3,20 +3,17 @@ title: "Storage-less Nodes with PX Enterprise"
 hidden: true
 ---
 
-* TOC
-{:toc}
-
 PX-Enterprise can be run in a client-only mode such that the storage available in a PX-Cluster can be consumed by apps that are running on nodes that have no storage. This enables deployments to leverage the powerful PX-Enterprise features from any node without having to rely on legacy protocols and adopt containerization faster.
 
 ## Add a new node PX Cluster with no storage
 
 ### Show current PX Cluster
 
-```
+```text
 sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
-	IP: 147.75.104.185 
+	IP: 147.75.104.185
  	Local Storage Pool: 1 pool
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
 	0	LOW		100 GiB	1.0 GiB	Online	default	default
@@ -36,16 +33,16 @@ Global Storage Pool
 
 ```
 
-### Add a new node to this cluster with no storage 
+### Add a new node to this cluster with no storage
 
-As shown in the command below, a new node is added to the cluster by using the same cluster token which is formed by 
+As shown in the command below, a new node is added to the cluster by using the same cluster token which is formed by
 the prefix token- and the cluster id of the existing cluster (which is bb4bcf13-d394-11e6-afae-0242ac110002 as shown above)
 
-```
+```text
 docker run --restart=always --name px-enterprise -d --net=host --privileged=true -v /run/docker/plugins:/run/docker/plugins \
 -v /var/lib/osd:/var/lib/osd:shared -v /dev:/dev -v /etc/pwx:/etc/pwx -v /opt/pwx/bin:/export_bin:shared \
 -v /var/run/docker.sock:/var/run/docker.sock -v /mnt:/mnt:shared -v /var/cores:/var/cores -v /usr/src:/usr/src \
--e API_SERVER=http://lighthouse-new.portworx.com portworx/px-enterprise 
+-e API_SERVER=http://lighthouse-new.portworx.com portworx/px-enterprise
 -t token-bb4bcf4b-d394-11e6-afae-0242ac110002 -m team0:0 -d team0 -z
 ```
 
@@ -53,9 +50,9 @@ NOTE: the -z option in the command above starts this node as a zero storage node
 
 NOTE: if you already have config.json in /etc/pwx/ then the config.json settings will take precedence over the -z option. If your deployment/automation scripts place the file on every node, please make sure to remove it, in order for -z option to take effect.
 
-### Display the cluster node list 
+### Display the cluster node list
 
-```
+```text
 [root@pxnostorage ~]# sudo /opt/pwx/bin/pxctl cluster list
 Cluster ID: bb4bcf13-d394-11e6-afae-0242ac110002
 Status: OK
@@ -74,11 +71,11 @@ a56a4821-6f17-474d-b2c0-3e2b01cd0bc3	147.75.198.197	0.375469	8.4 GB	7.9 GB		N/A	
 
 The status below shows that the new node (147.75.99.55) is the zero storage node that has been added to the cluster
 
-```
+```text
 sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: da758d06-aa9e-4bcb-8cc8-a74ee09030e3
-	IP: 147.75.99.55 
+	IP: 147.75.99.55
  	Local Storage Pool: 0 pool
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
 	No storage pool
@@ -96,5 +93,5 @@ Cluster Summary
 Global Storage Pool
 	Total Used    	:  5.3 GiB
 	Total Capacity	:  620 GiB
-	
+
 ```

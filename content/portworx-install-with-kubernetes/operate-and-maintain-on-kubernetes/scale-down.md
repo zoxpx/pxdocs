@@ -3,20 +3,17 @@ title: "Scale-Down Nodes"
 hidden: true
 ---
 
-* TOC
-{:toc}
-
-## Removing offline Nodes 
+## Removing offline Nodes
 
 How to remove an offline node from a cluster. For information on nodes with no storage that have been offline for an extended period, peruse the section titled "Automatic decommission of storage less nodes"
 
 ### Identify the cluster that needs to be managed
 
-```
+```text
 [root@pxdev1 ~]# sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: a56a4821-6f17-474d-b2c0-3e2b01cd0bc3
-	IP: 147.75.198.197 
+	IP: 147.75.198.197
  	Local Storage Pool: 2 pools
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
 	0	LOW		200 GiB	1.0 GiB	Online	default	default
@@ -38,7 +35,7 @@ Global Storage Pool
 
 ### List the nodes in the cluster
 
-```
+```text
 # sudo /opt/pwx/bin/pxctl cluster list
 Cluster ID: bb4bcf13-d394-11e6-afae-0242ac110002
 Status: OK
@@ -54,7 +51,7 @@ a56a4821-6f17-474d-b2c0-3e2b01cd0bc3	147.75.198.197	1.629073	8.4 GB		7.9 GB		N/A
 
 There is one volume in this cluster that is local to the Node 147.75.198.197
 
-```
+```text
 # sudo /opt/pwx/bin/pxctl volume list
 ID			NAME	SIZE	HA	SHARED	ENCRYPTED	PRIORITSTATUS
 845707146523643463	testvol	1 GiB	1	no	no		LOW	up - attached on 147.75.198.197
@@ -63,9 +60,9 @@ In this case, there is one volume in the cluster and it is attached to node with
 
 ### Identify the node to remove from the cluster
 
-In the example below, Node 147.75.198.197 has been marked offline. 
+In the example below, Node 147.75.198.197 has been marked offline.
 
-```
+```text
 # sudo /opt/pwx/bin/pxctl cluster list
 Cluster ID: bb4bcf13-d394-11e6-afae-0242ac110002
 Status: OK
@@ -79,7 +76,7 @@ a56a4821-6f17-474d-b2c0-3e2b01cd0bc3	147.75.198.197	-		-	N/A		1.1.2-c27cf42	Offl
 
 ### Attach and Detach the volume in one of the surviving nodes
 
-```
+```text
 # sudo /opt/pwx/bin/pxctl host attach 845707146523643463
 Volume successfully attached at: /dev/pxd/pxd845707146523643463
 # sudo /opt/pwx/bin/pxctl host detach 845707146523643463
@@ -88,7 +85,7 @@ Volume successfully detached
 
 ### Delete the local volume that belonged to the offline node
 
-```
+```text
 # sudo /opt/pwx/bin/pxctl volume delete 845707146523643463
 Volume 845707146523643463 successfully deleted.
 ```
@@ -96,14 +93,14 @@ Volume 845707146523643463 successfully deleted.
 ### Delete the node that is offline
 
 
-```
+```text
 # sudo /opt/pwx/bin/pxctl cluster delete a56a4821-6f17-474d-b2c0-3e2b01cd0bc3
 Node a56a4821-6f17-474d-b2c0-3e2b01cd0bc3 successfully deleted.
 ```
 
 ### List the nodes in the cluster to make sure the node is removed
 
-```
+```text
 [root@pxdev3 ~]# sudo /opt/pwx/bin/pxctl cluster list
 Cluster ID: bb4bcf13-d394-11e6-afae-0242ac110002
 Status: OK
@@ -116,11 +113,11 @@ ID					DATA IP		CPU		MEM TOTAL	MEM FREE	CONTAINERS	VERSION		STATUS
 
 ### Show the cluster status
 
-```
+```text
 # sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: 2c7d4e55-0c2a-4842-8594-dd5084dce208
-	IP: 147.75.198.199 
+	IP: 147.75.198.199
  	Local Storage Pool: 1 pool
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
 	0	LOW		100 GiB	1.2 GiB	Online	default	default
@@ -142,7 +139,7 @@ A functional PX node may need to be removed from the cluster. In this section, w
  1- the removal of a node by running commands on itself and
  2- the removal of a node from another node.
 The below output from a pxctl status command clarifies the state of the cluster and the different node IPs and node IDs.
-```
+```text
 [root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: 5f8b8417-af2b-4ea7-930e-0027f6bbcbd1
@@ -172,15 +169,15 @@ Global Storage Pool
 ```
 
 ### Placing the node in maintenance mode
-After identifying the node to be removed (see section "Identify the node to remove from the cluster" above), place the node in maintenance mode. 
-```
+After identifying the node to be removed (see section "Identify the node to remove from the cluster" above), place the node in maintenance mode.
+```text
 [root@ip-172-31-45-106 centos]# /opt/pwx/bin/pxctl service maintenance --enter
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 Entered maintenance mode.
 ```
 or
-```
+```text
 [root@ip-172-31-33-252 centos]# /opt/pwx/bin/pxctl service maintenance --enter -y
 Entered maintenance mode.
 ```
@@ -188,12 +185,12 @@ The 2nd command merely skips the confirmation prompt by specifying "-y".
 
 ### Run the cluster delete command
 Example 1 shows cluster delete command from a different node.
-```
+```text
 [root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl cluster delete 048cc2f8-022e-47d9-b600-2eeddcd64d51
 Node 048cc2f8-022e-47d9-b600-2eeddcd64d51 successfully deleted.
 ```
 Example 2 shows cluster delete command from itself.
-```
+```text
 [root@ip-172-31-33-252 centos]# /opt/pwx/bin/pxctl cluster delete 651ca0f4-c156-4a14-b2f3-428e727eb6b8
 Node 651ca0f4-c156-4a14-b2f3-428e727eb6b8 successfully deleted.
 ```

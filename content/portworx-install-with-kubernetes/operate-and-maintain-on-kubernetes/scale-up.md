@@ -3,16 +3,13 @@ title: "Adding storage to existing PX Cluster Nodes"
 hidden: true
 ---
 
-* TOC
-{:toc}
-
 ## Adding Storage to exising PX Cluster Nodes
 
 This section illustrates how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added
 
 ### Display current cluster status
 
-```
+```text
 sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: a56a4821-6f17-474d-b2c0-3e2b01cd0bc3
@@ -41,13 +38,13 @@ The above cluster has three nodes and 520GiB of total capacity.
 
 Below is an example of how to run PX in a new node so it joins an existing cluster. Note how docker run command is invoked with a cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID to which we want to add the new node
 
-```
+```text
 docker run --restart=always --name px-enterprise -d --net=host --privileged=true -v /run/docker/plugins:/run/docker/plugins -v /var/lib/osd:/var/lib/osd:shared -v /dev:/dev -v /etc/pwx:/etc/pwx -v /opt/pwx/bin:/export_bin:shared -v /var/run/docker.sock:/var/run/docker.sock -v /mnt:/mnt:shared -v /var/cores:/var/cores -v /usr/src:/usr/src -e API_SERVER=http://lighthouse-new.portworx.com portworx/px-enterprise -t token-bb4bcf4b-d394-11e6-afae-0242ac110002 -m team0:0 -d team0
 ```
 
 Here is how the cluster would look like after a new node is added without any storage
 
-```
+```text
 sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
@@ -75,7 +72,7 @@ Note how the capacity of the cluster has remained unchanged.
 
 Added another 100G of storage to this node and the device is seen as /dev/dm-1
 
-```
+```text
 # multipath -ll
 volume-a9e55549 (360014055671ce0d20184a619c27b31d0) dm-1   ,IBLOCK          
 size=100G features='0' hwhandler='1 alua' wp=rw
@@ -89,7 +86,7 @@ size=100G features='0' hwhandler='1 alua' wp=rw
 
 In order to add more storage to a node, that node must be put in maintenance mode
 
-```
+```text
 sudo /opt/pwx/bin/pxctl service maintenance --enter
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): Y
@@ -97,7 +94,7 @@ Are you sure you want to proceed ? (Y/N): Y
 
 Check if the node is in maintenance mode
 
-```
+```text
 sudo /opt/pwx/bin/pxctl status
 PX is in maintenance mode.  Use the service mode option to exit maintenance mode.
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
@@ -123,7 +120,7 @@ AlertID	Resource	ResourceID				Timestamp	Severity	AlertType		Description
 
 ### Add the new drive to cluster to increase the storage
 
-```
+```text
 sudo /opt/pwx/bin/pxctl service drive add --drive /dev/dm-1 --operation start
 Adding device  /dev/dm-1 ...
 "Drive add done: Storage rebalance is in progress"
@@ -135,7 +132,7 @@ Adding device  /dev/dm-1 ...
 
 Check the rebalance status and wait for completion.
 
-```
+```text
 /opt/pwx/bin/pxctl sv drive add --drive /dev/dm-1 --operation status
 "Drive add: Storage rebalance running: 1 out of about 9 chunks balanced (2 considered),  89% left"
 
@@ -146,20 +143,20 @@ Check the rebalance status and wait for completion.
 In case drive add operation did not start a rebalance, start it manually.
 For e.g., If the drive was added to pool 0
 
-```
+```text
 /opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation start
 Done: "Pool 0: Balance is running"
 ```
 
 Check the rebalance status and wait for completion.
 
-```
+```text
 /opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation status
 Done: "Pool 0: Balance is not running"
 ```
 ### Exit Maintenance Mode
 
-```
+```text
 sudo /opt/pwx/bin/pxctl service maintenance --exit
 PX is now operational.
 ```
@@ -168,7 +165,7 @@ PX is now operational.
 
 As seen below, the 100G of additional capacity is available with total capacity of the cluster going to 620GB
 
-```
+```text
 sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
