@@ -1,6 +1,6 @@
 ---
 title: Version 1.2
-weight: 1
+hidden: true
 ---
 
 Snapshots are efficient point-in-time copies of volumes that can be either read-write or read-only. Each snapshot is a volume in its own right and can be used freely by applications. They are implemented using a copy-on-write technique, so that they only use space in places where they differ from their parent volume. Snapshots can be created explicitly by `pxctl snap create` commands or through a schedule that is set on the volume.
@@ -161,4 +161,3 @@ Scheduled snapshots have names of the form `<parent-ID>_<freq>_<creation_time>`,
 ```
 
 There is an implementation limit of five scheduled snapshots per volume. When a new scheduled snapshot is created, the oldest existing one will be deleted if necessary to keep the total under five.
-
