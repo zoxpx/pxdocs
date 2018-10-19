@@ -1,5 +1,6 @@
 ---
 title: Portworx install on PKS
+weight: 4
 ---
 
 ## Step 1: PKS preparation
