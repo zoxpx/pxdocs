@@ -10,7 +10,7 @@ PX runs as a deamonset on the Kubernetes cluster which ensures that it runs on e
 Elastic Search, FluentD and Kibana allow us to setup a complete logging solution for accessing logs of the PX pods scheduled on the kubernetes cluster.
 
 Setup Elastic Search and Kibana on your kubernetes cluster by following the the steps mentioned in the document here
-[Elastic Search and Kibana on Kubernetes](https://docs.portworx.com/scheduler/kubernetes/elasticstack-kibana-k8s.html)
+[Elastic Search and Kibana on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and kibana)
 
 ## Log Collection
 Fluentd is a log collector which enables you to log everything in a unified manner. Fluentd uses JSON as the log collection format.
@@ -175,12 +175,12 @@ green  open   px-logs-2017.09.11  Rf5ZMV53RVOXqlwInbCUzw   5   1       7247     
 
 Login to the kibana dashboard and navigate to the `Management` submenu item. This allows you to create an index pattern which stores the collected logs. In our case the logs are stored in indexes with the name `px-logs-` followed by the date. This is configurable and can be changed in the `match` directive for the variable `logstash_prefix`
 
-![CreateKibanaIndexpatterns](https://docs.portworx.com/images/kibana-px-index-pattern.png){:width="655px" height="200px"}
+![CreateKibanaIndexpatterns](https://docs.portworx.com/images/kibana-px-index-pattern.png)
 
 Upon creation of the Index, the screen would show you all the fields which are part of the index. These fields can be used for searches and filtering while viewing the logs.
 
-![FieldsoftheIndex](https://docs.portworx.com/images/px-logs-fields.png){:width="655px" height="200px"}
+![FieldsoftheIndex](https://docs.portworx.com/images/px-logs-fields.png)
 
 Navigate to the `Discover` menu item. You can select the index pattern which was created earlier. It would list the available colums on the left hand side menu. In our setup, the columns with the pod name, hostname, log and the time are selected, but any columns could be selected for viewing the logs. You could also save the searches and search/view logs based on time.
 
-![ViewPXlogs](https://docs.portworx.com/images/view-px-logs.png){:width="655px" height="200px"}
+![ViewPXlogs](https://docs.portworx.com/images/view-px-logs.png)

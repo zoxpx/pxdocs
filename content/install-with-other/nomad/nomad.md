@@ -33,7 +33,7 @@ A Portworx cluster is uniquely defined by its `kvdb` and `clusterID` parameters.
 
 ### Upgrade {#upgrade}
 
-Currently for Nomad, Portworx needs to be upgraded through the CLI on a node-by-node basis. Please see the [upgrade instructions](https://docs.portworx.com/maintain/upgrade.html)
+Currently for Nomad, Portworx needs to be upgraded through the CLI on a node-by-node basis. Please see the [upgrade instructions](/install-with-other/operate-and-maintain)
 
 ### Using and Accessing Portworx {#using-and-accessing-portworx}
 

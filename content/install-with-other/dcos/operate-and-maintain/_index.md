@@ -11,7 +11,7 @@ NOTE: Please ensure that your mesos private agents have unmounted block devices 
 
 #### \(Optional\) Deploy an AWS Portworx-ready cluster {#optional-deploy-an-aws-portworx-ready-cluster}
 
-Using [this AWS CloudFormation template](https://docs.portworx.com/scheduler/mesosphere-dcos/px-ready-aws-cf.html), you can easily deploy a DCOS 1.10 cluster that is “Portworx-ready”.
+Using [this AWS CloudFormation template](/install-with-other/dcos/operate-and-maintain/px-ready-aws-cf), you can easily deploy a DCOS 1.10 cluster that is “Portworx-ready”.
 
 #### Pre-install \(only required if moving from a Portworx Docker installation\) {#pre-install-only-required-if-moving-from-a-portworx-docker-installation}
 
@@ -58,14 +58,12 @@ If you are trying to use block devices that already have a filesystem on them, e
 
 {{<info>}}
 **Note:**  
-For a full list of installtion options, please look [here](https://docs.portworx.com/runc/options.html#opts).
+For a full list of installtion options, please look [here](/install-with-other/docker/standalone/standalone-oci).
 {{</info>}}
 
 **Secrets Options**
 
-To use DC/OS secrets for Volume Encryption and storing Cloud Credentials, click the link below.
-
-{% page-ref page="../../key-management/portworx-with-dc-os-secrets.md" %}
+To use DC/OS secrets for Volume Encryption and storing Cloud Credentials, [click here](/install-with-other/dcos).
 
 **Etcd Options**
 

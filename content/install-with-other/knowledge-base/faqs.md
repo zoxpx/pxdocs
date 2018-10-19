@@ -54,7 +54,7 @@ No.  Currently only one instance of PX per server is allowed.
 
 ### Can Portworx work in a multi-cloud environment?
 Yes absolutely you can create a fabric, based on servers across multiple different cloud providers.
-However, we recommend that individual scale-out applications run within the context of a single cloud provider for the sake of performance and latency.    For a fabric that spans cloud providers, you can take a cloudsnap under one cloud, and then import and mount that snapshot in another cloud. Refer to [Multi-Cloud Backup operations](https://docs.portworx.com/cloud/backups.html) on how to create Cloudsnaps and import them to any cluster you want
+However, we recommend that individual scale-out applications run within the context of a single cloud provider for the sake of performance and latency.    For a fabric that spans cloud providers, you can take a cloudsnap under one cloud, and then import and mount that snapshot in another cloud. Refer to [Multi-Cloud Backup operations](/portworx-install-with-kubernetes/cloud/backups) on how to create Cloudsnaps and import them to any cluster you want
 
 ### Can I access my data outside of Portworx volume, or is it only for containers?
 With "Shared Volumes", a Portworx volume can be NFS mounted (read/write) outside of a container context.

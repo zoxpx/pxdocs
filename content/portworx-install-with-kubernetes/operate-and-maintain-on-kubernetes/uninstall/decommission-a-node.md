@@ -27,7 +27,7 @@ To decommission Portworx, perform the following steps:
 
 **a\) Remove Portworx from the cluster**
 
-Follow [this guide](https://docs.portworx.com/maintain/scale-down.html) to decommission the Portworx node from the cluster.
+Follow [this guide](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-down) to decommission the Portworx node from the cluster.
 
 **b\) Remove Portworx installation from the node**
 
@@ -98,5 +98,4 @@ One way to achieve is this to use [inter-pod affinity](https://kubernetes.io/doc
 
 You can now uncordon the node using: `kubectl uncordon <node>`
 
-If you want to have Portworx start on this node at a later point in time and join as a new node, follow the [node rejoin steps](https://docs.portworx.com/scheduler/kubernetes/k8s-node-rejoin.html).
-
+If you want to have Portworx start on this node at a later point in time and join as a new node, follow the [node rejoin steps](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/k8s-node-rejoin).

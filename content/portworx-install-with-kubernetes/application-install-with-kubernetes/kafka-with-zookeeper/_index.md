@@ -3,7 +3,7 @@ title: Kafka with Zookeeper
 weight: 2
 ---
 
-This page provides instructions for deploying Apache Kafka and Zookeeper with Portworx on Kubernetes. 
+This page provides instructions for deploying Apache Kafka and Zookeeper with Portworx on Kubernetes.
 
 #### Portworx StorageClass for Volume Provisioning {#portworx-storageclass-for-volume-provisioning}
 
@@ -32,7 +32,7 @@ parameters:
   group: "kafka_vg"
   fg: "true"
 ---
-	
+
 ```
 
 Then apply the configuration:
@@ -127,7 +127,7 @@ spec:
                 matchExpressions:
                   - key: "app"
                     operator: In
-                    values: 
+                    values:
                     - zk-headless
               topologyKey: "kubernetes.io/hostname"
       containers:
@@ -232,7 +232,7 @@ kubectl apply -f zookeeper-all.yaml
 Verify that the zookeeper pods are running with provisioned Portworx volumes.
 
 ```text
-kubectl get pods 
+kubectl get pods
 NAME      READY     STATUS    RESTARTS   AGE
 zk-0      1/1       Running   0          23h
 zk-1      1/1       Running   0          23h
@@ -637,7 +637,7 @@ kafka-2.broker.kafka.svc.cluster.local
 Create a topic with 3 partitions and which has a replication factor of 3
 
 ```text
-kubectl exec -n kafka -it kafka-0 -- bash 
+kubectl exec -n kafka -it kafka-0 -- bash
 
 bin/kafka-topics.sh --zookeeper zk-headless.default.svc.cluster.local:2181 --create --if-not-exists --topic px-kafka-topic --partitions 3 --replication-factor 3
 
@@ -662,7 +662,7 @@ bin/kafka-console-producer.sh --broker-list kafka-0.broker.kafka.svc.cluster.loc
 
 >Hello Kubernetes!
 >This is Portworx saying hello            
->Kafka says, I am just a messenger 
+>Kafka says, I am just a messenger
 
 ```
 
@@ -734,7 +734,7 @@ Cluster Summary
 Global Storage Pool
         Total Used      :  2.1 GiB
         Total Capacity  :  40 GiB
-	
+
 /opt/pwx/bin/pxctl c l
 Cluster ID: px-kafka-cluster
 Cluster UUID: 99c0fa42-03f5-4d05-a2fe-52d914ff39d2
@@ -872,7 +872,7 @@ data-kafka-1   Bound     pvc-cc70447a-7c4b-11e7-a940-42010a8c0002   3Gi        R
 733731201475618092      pvc-cc70447a-7c4b-11e7-a940-42010a8c0002        3 GiB   2       no      no              LOW             0       up - attached on 10.140.0.5
 
 
-kubectl exec -n kafka -it kafka-0 -- bash 
+kubectl exec -n kafka -it kafka-0 -- bash
 
 bin/kafka-topics.sh --describe --zookeeper zk-headless.default.svc.cluster.local:2181 --topic px-kafka-topic
 
@@ -928,4 +928,4 @@ There is no way for kubernetes to know which of the case is it. Hence Kubernetes
 
 For further information : [Statefulset Pod Deletion](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/)
 
-Decomissioning a kubernetes node deletes the node object form the APIServer. Before that you would want to decomission your Portworx node from the cluster. Follow the steps mentioned in [Decommision a Portworx node](https://docs.portworx.com/scheduler/kubernetes/k8s-node-decommission.html) Once done, delete the kubernetes node if it requires to be deleted permanently.
+Decomissioning a kubernetes node deletes the node object form the APIServer. Before that you would want to decomission your Portworx node from the cluster. Follow the steps mentioned in [Decommision a Portworx node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node) Once done, delete the kubernetes node if it requires to be deleted permanently.

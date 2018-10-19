@@ -8,7 +8,7 @@ Running Portworx as a runC container eliminates any cyclical dependencies betwee
 
 To install and configure PX to run directly with OCI/runC, please use the configuration steps described in this section.
 
-If you are already running PX as a docker container and need to migrate to OCI, following the [migration steps](https://docs.portworx.com/runc#upgrading-from-px-containers-to-px-oci).
+If you are already running PX as a docker container and need to migrate to OCI, following the [migration steps](/install-with-other/docker/standalone/standalone-oci).
 
 {{<info>}}
 **Note:**  
@@ -24,7 +24,7 @@ It is highly recommended to include the steps outlined in this document in a sys
 * _SCHEDULERS_: If you are installing PX into **Kubernetes** or **Mesosphere DC/OS** cluster, we recommend to install the scheduler-specific Portworx package, which provides tighter integration, and better overall user experience.
 * _FIREWALL_: Ensure ports 9001-9015 are open between the cluster nodes that will run Portworx.
 * _NTP_: Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.
-* _KVDB_: Please have a clustered key-value database \(etcd or consul\) installed and ready. For etcd installation instructions refer this [doc](https://docs.portworx.com/maintain/etcd.html).
+* _KVDB_: Please have a clustered key-value database \(etcd or consul\) installed and ready. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
 * _STORAGE_: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.  Also please note that storage devices explicitly given to Portworx \(ie. `px-runc ... -s /dev/sdb -s /dev/sdc3`\) will be automatically formatted by PX.
 
 The installation and setup of PX OCI bundle is a 3-step process:
@@ -152,7 +152,7 @@ PX_ENABLE_CACHE_FLUSH [OPTIONAL] Enable cache flush deamon. Set PX_ENABLE_CACHE_
 PX_ENABLE_NFS         [OPTIONAL] Enable the PX NFS daemon. Set PX_ENABLE_NFS=true.
 ```
 
-NOTE: Setting environment variables can be done using the `-e` option, during [PX-OCI](https://docs.portworx.com/runc/#step-2-configure-px-under-runc) or [PX Docker Container](https://docs.portworx.com/scheduler/docker/docker-container.html) command line install \(e.g. add `-e VAR=VALUE` option\).
+NOTE: Setting environment variables can be done using the `-e` option, during [PX-OCI](/install-with-other/docker/standalone/standalone-oci) or [PX Docker Container](/install-with-other/docker) command line install \(e.g. add `-e VAR=VALUE` option\).
 
 ```text
 # Example PX-OCI config with extra "PX_ENABLE_CACHE_FLUSH" environment variable
@@ -211,7 +211,7 @@ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
 
 ### Upgrading the PX OCI bundle {#upgrading-the-px-oci-bundle}
 
-To upgrade the OCI bundle, simply re-run the [installation Step 1](https://docs.portworx.com/runc/#install_step1) with the `--upgrade` option. After the upgrade, you will need to restart the Portworx service.
+To upgrade the OCI bundle, simply re-run the [installation Step 1](/install-with-other/docker/standalone/standalone-oci) with the `--upgrade` option. After the upgrade, you will need to restart the Portworx service.
 
 ```text
 latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')

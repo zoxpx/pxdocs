@@ -18,15 +18,15 @@ disableSearch: true
 
 #### Key Features {#key-features}
 
-3DSnaps - Ability to take [application-consistent](https://docs.portworx.com/scheduler/kubernetes/snaps.html) snapshots cluster wide \(Available in 05/14 GA version\)
+3DSnaps - Ability to take [application-consistent](/portworx-install-with-kubernetes/storage-operations/create-snapshots) snapshots cluster wide \(Available in 05/14 GA version\)
 
 * Volume Group snapshots - Ability to take crash-consistent snapshots on group of volumes based on a user-defined label
-* GCP/GKE automated disk management based on [disk templates](https://docs.portworx.com/cloud/gcp/gke.html#disk-template)
-* [Kubernetes per volume secret support](https://docs.portworx.com/scheduler/kubernetes/pvc-encryption.html) to enable volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
-* DC/OS vault integration - Use [Vault integrated with DC/OS](https://docs.portworx.com/secrets/portworx-with-dcos-secrets.html)
+* GCP/GKE automated disk management based on [disk templates](/portworx-install-with-kubernetes/cloud/google-kubernetes-engine)
+* [Kubernetes per volume secret support](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs) to enable volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
+* DC/OS vault integration - Use [Vault integrated with DC/OS](/install-with-other/dcos)
 * Container Storage Interface \(CSI\) [Tech Preview](https://docs.portworx.com/scheduler/kubernetes/csi.html)
-* Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting port number in [install arguments](https://docs.portworx.com/runc/options.html#installation-arguments-to-px)
-* Provide ability to do a [license tranfer](https://docs.portworx.com/getting-started/px-licensing.html#px-enterprise-license) from one cluster to another cluster
+* Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting port number in [install arguments](/install-with-other/docker/standalone/standalone-oci)
+* Provide ability to do a [license tranfer](/reference/CLI/license) from one cluster to another cluster
 
 #### Key Fixes: {#key-fixes}
 
@@ -67,7 +67,7 @@ This is a patch release with shared volume performance and stability fixes
 
 This is a patch update with the following fix
 
-* PWX-5115 - Fix `nodes` option in [docker inline volume create](https://docs.portworx.com/scheduler/docker/volume-plugin.html#replicaset) and supply nodes value as semicolon separated values
+* PWX-5115 - Fix `nodes` option in [docker inline volume create](/install-with-other/docker/how-to/volume-plugin) and supply nodes value as semicolon separated values
 
 ### 1.3.0 {#130}
 
@@ -101,7 +101,7 @@ _**Upgrade Note 3**_: Container information parsing code has been disabled and h
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
 * Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
 * Add schduler information in `pxctl status` display
-* Add info about cloudvolumes CLI [k8s](https://docs.portworx.com/cloud/aws/kops-asg.html#corelating-ebs-volumes-with-portworx-nodes) , [others](https://docs.portworx.com/cloud/aws/asg.html#corelating-ebs-volumes-with-portworx-nodes)
+* Add info about cloud volumes CLI [k8s](/install-with-other/cloud-references/gcp) , [others](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
 * `pxctl service add --journal -d <device>` to add journal device support
 
 #### Issues addressed {#issues-addressed}
@@ -317,13 +317,13 @@ Pass volume name as part of the metrics end point so Prometheus/Grafana can disp
 
 #### Key Features and Changes {#key-features-and-changes}
 
-* PWX-4178 Perform snapshots in kubernetes via [annotations](https://docs.portworx.com/scheduler/kubernetes/snaps.html#using-annotations)
+* PWX-4178 Perform snapshots in kubernetes via [annotations](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-annotations)
 
 ### 1.2.11.4 Release notes {#12114-release-notes}
 
 #### Key Features and Changes {#key-features-and-changes-1}
 
-* PX-Enterprise container is now available in [OCI Format](https://docs.portworx.com/runc/)
+* PX-Enterprise container is now available in [OCI Format](/install-with-other/docker/standalone/standalone-oci)
 * Enhancements for db workloads to handle slow media
 
 #### Fixed issues {#fixed-issues-8}
@@ -361,7 +361,7 @@ Pass volume name as part of the metrics end point so Prometheus/Grafana can disp
   The option “–labels x1=” results in the labels x2=v2 \(removes a label\).
 
 * Improvements to alerts:
-  * Additional alerts indicate the cluster status in much more finer detail. This document has more details on all the alerts posted by PX: [https://docs.portworx.com/maintain/monitoring/portworx-alerts.html](https://docs.portworx.com/maintain/monitoring/portworx-alerts.html)
+  * Additional alerts indicate the cluster status in much more finer detail. This document has more details on all the alerts posted by PX: [Here](/install-with-other/operate-and-maintain/monitoring/alerting)
   * Rate limiting for alerts so that an alert isn’t repeatedly posted within a short timeframe.
 * You can now update the io\_profile field by using the `pxctl volume update` command so the parameter can be enabled for existing volumes.
 
@@ -502,7 +502,7 @@ If you are upgrading from an older version of PX \(1.2.8 or older\) and have PX 
 
 * Provide ability to cancel a replication add or HA increase operation
 * Automatically decommision a storageless node in the cluster if it has been offline for longer than 48 hours
-* [Kubernetes snapshots driver for PX-Enterprise](https://docs.portworx.com/scheduler/kubernetes/snaps.html)
+* [Kubernetes snapshots driver for PX-Enterprise](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
 * Improve Kubernetes mount/unmount handling with POD failovers and moves
 
 #### Key Issues Addressed {#key-issues-addressed}
@@ -605,13 +605,13 @@ No new features in 1.2.1. This is a patch release.
 
 #### Key Features {#key-features-10}
 
-* [AWS Auto-scaling integration with Portworx](https://docs.portworx.com/cloud/aws/asg.html) managing EBS volumes for EC2 instances in AWS ASG
-* [Multi-cloud Backup and Restore](https://docs.portworx.com/cloud/backups.html) of Portworx Volumes
-* [Encrypted Volumes](https://docs.portworx.com/manage/encrypted-volumes.html) with Data-at-rest and Data-in-flight encryption
+* [AWS Auto-scaling integration with Portworx](/portworx-install-with-kubernetes/cloud/aws/aws-asg) managing EBS volumes for EC2 instances in AWS ASG
+* [Multi-cloud Backup and Restore](/reference/CLI/cloud-snaps) of Portworx Volumes
+* [Encrypted Volumes](/reference/data-volumes/encrypted-volumes) with Data-at-rest and Data-in-flight encryption
 * Docker V2 Plugin Support
-* [Prometheus Integeration](https://docs.portworx.com/maintain/monitoring/prometheus/index.html)
-* [Hashicorp Vault](https://docs.portworx.com/secrets/portworx-with-vault.html), [AWS KMS integration](https://docs.portworx.com/secrets/portworx-with-aws-kms.html) and Docker Secrets Integration
-* [Dynamically resize](https://docs.portworx.com/manage/volume-update.html#increase-volume-size) PX Volumes with no application downtime
+* [Prometheus Integeration](/install-with-other/operate-and-maintain/monitoring/prometheus)
+* [Hashicorp Vault](/reference/key-management/portworx-with-vault), [AWS KMS integration](/portworx-install-with-kubernetes/cloud/aws) and Docker Secrets Integration
+* [Dynamically resize](/reference/data-volumes/updating-volumes) PX Volumes with no application downtime
 * Security updates improve PX container security
 
 #### Key Issues Addressed {#key-issues-addressed-7}

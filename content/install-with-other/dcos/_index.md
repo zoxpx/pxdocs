@@ -11,7 +11,7 @@ NOTE: Please ensure that your mesos private agents have unmounted block devices 
 
 #### \(Optional\) Deploy an AWS Portworx-ready cluster {#optional-deploy-an-aws-portworx-ready-cluster}
 
-Using [this AWS CloudFormation template](https://docs.portworx.com/scheduler/mesosphere-dcos/px-ready-aws-cf.html), you can easily deploy a DCOS 1.10 cluster that is “Portworx-ready”.
+Using [this AWS CloudFormation template](/install-with-other/dcos/operate-and-maintain/px-ready-aws-cf), you can easily deploy a DCOS 1.10 cluster that is “Portworx-ready”.
 
 #### Pre-install \(only required if moving from a Portworx Docker installation\) {#pre-install-only-required-if-moving-from-a-portworx-docker-installation}
 
@@ -25,7 +25,7 @@ sudo systemctl stop portworx
 
 The Portworx service is available in the DCOS universe, you can find it by typing the name in the search bar.
 
-![Portworx in DCOS Universe](https://docs.portworx.com/images/dcos-px-universe.png)
+![Portworx in DCOS Universe](/install-with-other/dcos/install-universe)
 
 **Default Install**
 
@@ -43,7 +43,7 @@ This will install all the prerequisites and start the Portworx service on 3 priv
 
 If you want to modify the defaults, click on the “Install” button next to the package on the DCOS UI and then click on “Advanced Installation”
 
-Through the advanced install options you can change the configuration of the Portworx deployment. Here you can choose to disable etcd \(if you have an external etcd service\) If you wish to to have a custom etcd installation please refer this [doc](https://docs.portworx.com/maintain/etcd.html). You can also disable the Lighthouse service in case you do not want to use the WebUI.
+Through the advanced install options you can change the configuration of the Portworx deployment. Here you can choose to disable etcd \(if you have an external etcd service\) If you wish to to have a custom etcd installation please refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd). You can also disable the Lighthouse service in case you do not want to use the WebUI.
 
 **Portworx Options**
 
@@ -58,7 +58,7 @@ If you are trying to use block devices that already have a filesystem on them, e
 
 {{<info>}}
 **Note:**  
-For a full list of installtion options, please look [here](https://docs.portworx.com/runc/options.html#opts).
+For a full list of installtion options, please look [here](/install-with-other/docker/standalone/standalone-oci).
 {{</info>}}
 
 **Secrets Options**

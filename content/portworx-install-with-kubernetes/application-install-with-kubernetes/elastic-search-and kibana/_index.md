@@ -32,7 +32,7 @@ parameters:
 ---
 
 kubectl apply -f portworx-sc.yaml
-	
+
 ```
 
 #### Install Elasticsearch cluster {#install-elasticsearch-cluster}
@@ -142,10 +142,10 @@ spec:
 Apply the specification for the Elastic search Master nodes and the service for the same.
 
 ```text
-kubectl apply -f es-master-svc.yaml 
+kubectl apply -f es-master-svc.yaml
 service "elasticsearch-discovery" created
 
-kubectl apply -f es-master-deployment.yaml 
+kubectl apply -f es-master-deployment.yaml
 deployment "es-master" created
 
 kubectl get pods
@@ -154,7 +154,7 @@ es-master-2996564765-4c56v   0/1       PodInitializing   0          22s
 es-master-2996564765-rql6m   0/1       PodInitializing   0          22s
 es-master-2996564765-zj0gc   0/1       PodInitializing   0          22s
 
-Verify that the master nodes have create and joined the cluster. 
+Verify that the master nodes have create and joined the cluster.
 
 kubectl logs po/es-master-2996564765-4c56v
 
@@ -257,7 +257,7 @@ Apply the specification for the client `Deployment` and its service.
 kubectl apply -f es-client-deployment.yaml
 deployment "es-client" created
 
-kubectl apply -f es-client-svc.yaml 
+kubectl apply -f es-client-svc.yaml
 service "elasticsearch" created
 
 kubectl get pods -w
@@ -268,7 +268,7 @@ po/es-master-2996564765-4c56v   1/1       Running   0          4m
 po/es-master-2996564765-rql6m   1/1       Running   0          4m
 po/es-master-2996564765-zj0gc   1/1       Running   0          4m
 
-Verify that the client nodes have joined the cluster. 
+Verify that the client nodes have joined the cluster.
 
 kubectl logs po/es-client-2155074821-nxdkt
 
@@ -375,7 +375,7 @@ Apply the Statefulset spec for the Elastic search data nodes along with the head
 kubectl apply -f es-data-svc.yaml
 service "es-data-srv" created
 
-kubectl apply -f es-data-sts.yaml 
+kubectl apply -f es-data-sts.yaml
 statefulset "elasticsearch-data" created
 
 kubectl get pods -l "component=elasticsearch, role=data" -w
@@ -649,7 +649,7 @@ spec:
 Deploy the Kibana spec for the `Deployment` as well as the service.
 
 ```text
-kubectl apply -f kibana-svc.yaml 
+kubectl apply -f kibana-svc.yaml
 service "kibana" created
 
 kubectl describe svc/kibana
@@ -666,7 +666,7 @@ Endpoints:		<none>
 Session Affinity:	None
 Events:			<none>
 
-kubectl apply -f kibana-deployment.yaml 
+kubectl apply -f kibana-deployment.yaml
 deployment "kibana" created
 
 kubectl get pods -l "component=kibana" -w
@@ -793,7 +793,7 @@ pdc3-sm18                      Ready                      21d       v1.7.2
 pdc3-sm19                      Ready                      21d       v1.7.2
 
 
-Find the docs count on this data node. 
+Find the docs count on this data node.
 
 curl 'http://10.105.105.41:9200/_nodes/elasticsearch-data-3/stats/indices'
 
@@ -837,5 +837,4 @@ There is no way for kubernetes to know which of the case is it. Hence Kubernetes
 
 For further information : [Statefulset Pod Deletion](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/)
 
-Decomissioning a kubernetes node deletes the node object form the APIServer. Before that you would want to decomission your Portworx node from the cluster. Follow the steps mentioned in [Decommision a Portworx node](https://docs.portworx.com/scheduler/kubernetes/k8s-node-decommission.html) Once done, delete the kubernetes node if it requires to be deleted permanently.
-
+Decomissioning a kubernetes node deletes the node object form the APIServer. Before that you would want to decomission your Portworx node from the cluster. Follow the steps mentioned in [Decommision a Portworx node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node) Once done, delete the kubernetes node if it requires to be deleted permanently.

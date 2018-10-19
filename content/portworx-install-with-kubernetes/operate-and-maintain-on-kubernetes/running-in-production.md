@@ -49,7 +49,7 @@ This can be specificed in the args section of the px-spec.yaml used for installi
 
 **Working with drives with AWS Auto scaling group**
 
-Portworx supports automatic management of EBS volumes. If you are using AWS ASG to manage PX nodes,then you should to use the ASG [feature](https://docs.portworx.com/cloud/aws/asg.html)
+Portworx supports automatic management of EBS volumes. If you are using AWS ASG to manage PX nodes,then you should to use the ASG [feature](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
 
 #### PX Node Topology {#px-node-topology}
 
@@ -284,15 +284,15 @@ While Prometheus can be deployed as a container within the container orchestrato
 **Scaling out a cluster in cloud**
 
 * The best way to scale a cluster is via ASG integration on AWS
-* This feature is called Stateful Autoscaling and is described [here](https://docs.portworx.com/cloud/aws/asg.html#stateful-autoscaling)
+* This feature is called Stateful Autoscaling and is described [here](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
   * Perform sizing of your data needs and determine the amount and type of storage \(EBS volumes\) needed per ecs instance.
-  * Create EBS volume [templates](https://docs.portworx.com/cloud/aws/asg.html#create-ebs-volume-templates) to match the number of EBS volumes needed per EC2 instance
-  * Create a [Stateful AMI](https://docs.portworx.com/cloud/aws/asg.html#create-a-stateful-ami) to associate with your auto-scaling group
-  * Once everything is setup as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This [page](https://docs.portworx.com/cloud/aws/asg.html#scaling-the-cluster-up) desribes how PX handles the volume management in a auto-scaling cluster.
+  * Create EBS volume [templates](/portworx-install-with-kubernetes/cloud/aws/aws-asg) to match the number of EBS volumes needed per EC2 instance
+  * Create a [Stateful AMI](/portworx-install-with-kubernetes/cloud/aws/aws-asg) to associate with your auto-scaling group
+  * Once everything is setup as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This [page](/portworx-install-with-kubernetes/cloud/aws/aws-asg) desribes how PX handles the volume management in a auto-scaling cluster.
 
 **Scaling out a cluster on-prem**
 
-* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](https://docs.portworx.com/maintain/scale-out.html) shows how to scale up a existing cluster by adding more nodes TODO: _Update the above page to show runc_
+* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-out) shows how to scale up a existing cluster by adding more nodes TODO: _Update the above page to show runc_
 * In Kubernetes, PX is deployed as a Daemonset. This enables PX to automatically scale as the cluster scales. So there is no specific action needed from the user to scale PX along with the cluster scaling
 
 #### Cluster Capacity Expansion {#cluster-capacity-expansion}
@@ -302,17 +302,17 @@ While Prometheus can be deployed as a container within the container orchestrato
 * Drives can be added per node and PX will add that to the closest pool size by drive size.
 * Before adding drives to the node, the node will need to be taken into maintenance mode
 * Ensure the volumes in the node have replicas in other nodes
-  * If the volumes have replication factor of 1, increase the [replication factor](https://docs.portworx.com/manage/volume-update.html#update-the-volume-replication-level)
+  * If the volumes have replication factor of 1, increase the [replication factor](/reference/data-volumes/updating-volumes)
   * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
-* Follow the instructions in this [page](https://docs.portworx.com/maintain/scale-up.html) to add storage each node.
+* Follow the instructions in this [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-up) to add storage each node.
 
 #### Server and Networking Replacements and Upgrades {#server-and-networking-replacements-and-upgrades}
 
 * Servers running PX can be replaced by performing decommissioning of the server to safely remove them from the cluster
 * Ensure that all the volumes in the cluster are replicated before decommissioning the node so that the data is still available for the containers mounting the volumes after the node is decommisioned
-* Delete PX from the node by setting the PX/Enabled=remove [label](https://docs.portworx.com/scheduler/kubernetes/install.html#uninstall)
+* Delete PX from the node by setting the PX/Enabled=remove [label](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes)
 * Use `pxctl cluster delete` command to manually remove the node from the cluster
-* Follow the instructions in this page to [delete](https://docs.portworx.com/maintain/scale-down.html#prevention-of-data-loss) nodes in the cluster
+* Follow the instructions in this page to [delete](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-down) nodes in the cluster
 * Once the node is decommissioned, components like network adapters, storage adapters that need to be replaced can be replaced
 * The server can be replaced as well
 * Once the replacement is done, the node can be joined back to the cluster by going through the steps described in the scaling-out the cluster section
@@ -322,14 +322,14 @@ While Prometheus can be deployed as a container within the container orchestrato
 **Portworx Upgrades**
 
 * Work with Portworx Support before planning major upgrades
-* Ensure all volumes have up-to-date [snapshots](https://docs.portworx.com/scheduler/kubernetes/snaps-annotations.html#managing-snapshots-through-kubectl)
-* Ensure all volumes have up-to-date [cloudsnaps](https://docs.portworx.com/cloud/backups.html)
-* Refer to [Upgrade Portworx on Kubernetes](https://docs.portworx.com/scheduler/kubernetes/upgrade.html)
+* Ensure all volumes have up-to-date [snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
+* Ensure all volumes have up-to-date [cloudsnaps](/reference/CLI/cloud-snaps)
+* Refer to [Upgrade Portworx on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade)
 
 **Kubernetes Upgrades**
 
 * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
-* Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken.
+* Ensure there are [cloudsnaps](/reference/CLI/cloud-snaps) that are taken.
 * After the migration, relaunch PX and ensure that the entire cluster is online by running `pxctl status`
 
 **OS upgrades and Docker Upgrades .**
@@ -357,7 +357,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 * It is recommended to take atleast one cloudsnap a day for each volume in production in the cluster
 * Cloudsnaps can be scheduled via the Portworx CLI for hourly, daily, weekly or monthly snaps.
 * Cloudsnaps can also be scheduled to happen at a particular time. It is recommended to schedule cloudsnaps at a time when the application data traffic is light to ensure faster back ups.
-* Follow [DR best practices](https://docs.portworx.com/maintain/dr-best-practices.html) and setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
+* Follow [DR best practices](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/dr-best-practices) and setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
 
 #### Drive Replacements {#drive-replacements}
 
@@ -425,5 +425,5 @@ Pool ID: 1
   * Decommission the PX node \(Refer to `pxctl cluster delete`\)
   * Ensure all volumes have replicas in other nodes if you still need to access the data
   * Replace the bad drive\(s\) with new drive\(s\)
-  * Add the node to the cluster as a new node \(refer to [adding cluster nodes](https://docs.portworx.com/maintain/scale-out.html)\)
+  * Add the node to the cluster as a new node \(refer to [adding cluster nodes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-out)\)
   * Ensure the cluster is operational and the new node has been added to the cluster via `pxctl cluster status` and `pxctl cluster list`

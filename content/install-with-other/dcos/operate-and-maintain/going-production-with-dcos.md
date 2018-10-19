@@ -13,7 +13,7 @@ linkTitle: Running Portworx in Production with DC/OS
 
  (OR)
 
-  * Deploy PX directly as [OCI container](https://docs.portworx.com/runc/)
+  * Deploy PX directly as [OCI container](/install-with-other/docker/standalone/standalone-oci)
   * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will
     form the Portworx cluster
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
@@ -35,7 +35,7 @@ linkTitle: Running Portworx in Production with DC/OS
 
 * Configure separate networks for Data and Management networks to isolate the traffic
 
-  * Data network is specified giving the '-d' switch and Management networks with the '-m' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics to enable it in your scheduler.
+  * Data network is specified giving the '-d' switch and Management networks with the '-m' switch. Refer to [scheduler guides](./) for specifics to enable it in your scheduler.
 
   * With multiple NICs, create a bonded ethernet port for data interface for improved availability and performance.
 
@@ -44,7 +44,7 @@ linkTitle: Running Portworx in Production with DC/OS
 
 ####  Selecting drives for an installation
 
-* Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics for your scheduler.
+* Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. Refer to [scheduler guides](./) for specifics for your scheduler.
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server,
   enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage.

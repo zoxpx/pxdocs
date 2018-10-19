@@ -12,7 +12,7 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 These frameworks are only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
 </info>
 
-Please make sure you have installed [Portworx on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html) before proceeding further.
+Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
 
 ### What are stateful frameworks? {#what-are-stateful-frameworks}
 

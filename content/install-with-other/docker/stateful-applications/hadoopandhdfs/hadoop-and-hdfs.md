@@ -304,9 +304,9 @@ There are two types of worker nodes used:
 
 Installation Step 1 Install DC/OS such that the management and head nodes are used as the DC/OS master nodes and the the Apollo 4200 worker nodes are the Mesos agent nodes. The Hadoop clusters will be scheduled on these nodes.
 
-Installation Step 2 Once DC/OS has been installed, deploy Portworx. First deploy the Portworx framework using the instructions detailed here: https://docs.portworx.com/scheduler/mesosphere-dcos/install.html
+Installation Step 2 Once DC/OS has been installed, deploy Portworx. First deploy the Portworx framework using the instructions [detailed here](content/install-with-other/dcos).
 
-Next, install the Portworx framework for Big Data by following the instructions detailed here: https://docs.portworx.com/scheduler/mesosphere-dcos/hadoop-hdfs.html
+Next, install the Portworx framework for Big Data by following the instructions [detailed here](/install-with-other/dcos/application-installs/hadoop-and-hdfs).
 
 Two-Rack Deployment Overview The picture below depicts this architecture deployed in a two-rack environment:
 
@@ -317,4 +317,3 @@ Two-Rack Deployment Overview The picture below depicts this architecture deploye
 There are two main goals achieved by this reference architecture Leveraging homogeneous server architectures for the physical data center scale-out strategy. As compute and capacity demands increase, the data center is scaled in terms of modular DAS based Apollo 4200 worker nodes. Leveraging cloud native compute and storage software such as DC/OS and Portworx to administer a common denominator, self provisioned programmable and composable application environment.
 
 Using these two components, you can deploy a Hadoop-as-a-Service platform in a way that end users can deploy any big-data job in a self provisioned, self-assisted manner. This architecture will work on any on-prem data center while maintaining portability to public cloud.
-

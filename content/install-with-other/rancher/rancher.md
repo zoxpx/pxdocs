@@ -48,7 +48,7 @@ From the Library Catalog, select the Portworx volume plugin driver. Configure wi
 * Volume Driver Name: pxd
 * Cluster ID: user-defined/arbitrary
 * Key-Value Database: of the form: “etcd://10.42.207.178:2379”, where the URL come from the above etcdserver
-* Use Disks: -s /dev/xvdb, for the referenced AMI images; otherwise see storage options from [here](https://docs.portworx.com/install/docker.html#run-px)
+* Use Disks: -s /dev/xvdb, for the referenced AMI images; otherwise see storage options from [here](/install-with-other/docker)
 * Headers Directory : /usr/src, for the referenced AMI images; /lib/modules if using with CoreOS
 
 ### Step 5: Launch jobs with docker-compose / rancher-compose {#step-5-launch-jobs-with-docker-compose--rancher-compose}

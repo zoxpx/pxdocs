@@ -81,7 +81,7 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
 {{</info>}}
 
-Please make sure you have installed [Portworx on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html) before proceeding further.
+Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
 
 ### See Also {#see-also}
 
@@ -89,6 +89,6 @@ For further reading on Cassandra:
 
 * [Cassandra Docker](https://portworx.com/use-case/cassandra-docker-container/) How to run Cassandra in Docker containers
 * [Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)
-* [Cassandra stress test with Portworx](https://docs.portworx.com/applications/cassandra-px-perf-test.html)
-* [Run Cassandra on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/cassandra.html)
+* [Cassandra stress test with Portworx](/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra)
+* [Run Cassandra on DCOS](/install-with-other/dcos/application-installs/cassandra)
 * [Snapshotting Cassandra Container Volumes for CI/CD using Mesosphere DC/OS](https://portworx.com/snapshotting-cassandra-container-volumes-ci-using-mesosphere-dcos/)

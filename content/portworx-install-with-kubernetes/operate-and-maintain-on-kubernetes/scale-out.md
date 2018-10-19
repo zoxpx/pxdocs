@@ -55,7 +55,7 @@ The storage is available at /dev/dm-1
 
 Below is an example of how to run PX in a new node so it joins an existing cluster.
 * Follow the instructions in the Installing
-  [PX as OCI](https://docs.portworx.com/scheduler/docker/install-standalone.html#install-px-via-oci-runc)
+  [PX as OCI](/install-with-other/docker/standalone)
   page on starting PX in a new node
 * Provide cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID
   to which we want to add the new node

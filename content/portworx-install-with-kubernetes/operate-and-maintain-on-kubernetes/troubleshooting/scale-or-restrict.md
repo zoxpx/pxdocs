@@ -23,5 +23,4 @@ kubectl label nodes minion2 minion5 px/enabled=false --overwrite
 
 **Portworx has already been deployed in your cluster**
 
-If Portworx is already deployed in your cluster, follow [Decommission a Portworx node in Kubernetes](https://docs.portworx.com/scheduler/kubernetes/k8s-node-decommission.html) to decommision Portworx from your cluster.
-
+If Portworx is already deployed in your cluster, follow [Decommission a Portworx node in Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node) to decommision Portworx from your cluster.

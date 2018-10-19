@@ -18,8 +18,7 @@ componenets run in HA mode with 3 replicas by default.
 When installing Portworx through [install.portworx.com](https://install.portworx.com)
 you can select Stork to be installed along with Portworx.
 
-If you are using [curl to fetch the Portworx
-spec](https://docs.portworx.com/scheduler/kubernetes/px-k8s-spec-curl.html), you can add
+If you are using [curl to fetch the Portworx spec](/portworx-install-with-kubernetes/px-k8s-spec-curl), you can add
 `stork=true` to the parameter list to include Stork specs in the generated file.
 
 ### Manual install

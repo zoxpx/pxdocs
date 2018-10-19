@@ -612,5 +612,4 @@ For further reading on Cassandra:
 
 * [Cassandra Docker](https://portworx.com/use-case/cassandra-docker-container/) How to run Cassandra in Docker containers
 * [Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)
-* [Cassandra stress test with Portworx](https://docs.portworx.com/applications/cassandra-px-perf-test.html)
-
+* [Cassandra stress test with Portworx](/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra)

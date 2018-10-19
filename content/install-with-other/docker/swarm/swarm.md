@@ -154,7 +154,7 @@ PX_ENABLE_CACHE_FLUSH [OPTIONAL] Enable cache flush deamon. Set PX_ENABLE_CACHE_
 PX_ENABLE_NFS         [OPTIONAL] Enable the PX NFS daemon. Set PX_ENABLE_NFS=true.
 ```
 
-NOTE: Setting environment variables can be done using the `-e` option, during [PX-OCI](https://docs.portworx.com/runc/#step-2-configure-px-under-runc) or [PX Docker Container](https://docs.portworx.com/scheduler/docker/docker-container.html) command line install \(e.g. add `-e VAR=VALUE` option\).
+NOTE: Setting environment variables can be done using the `-e` option, during [PX-OCI](/install-with-other/docker/standalone/standalone-oci) or [PX Docker Container](/install-with-other/docker) command line install \(e.g. add `-e VAR=VALUE` option\).
 
 ```text
 # Example PX-OCI config with extra "PX_ENABLE_CACHE_FLUSH" environment variable
@@ -194,7 +194,7 @@ sudo systemctl start portworx
 ```
 
 {{<info>}}
-**Note:** If you have previously installed Portworx as a Docker container \(as “legacy plugin system”, or v1 plugin\), and already have PX-volumes allocated and in use by other Docker containers/applications, read [instructions here](https://docs.portworx.com/runc/#upgrading-from-px-containers-to-px-oci)
+**Note:** If you have previously installed Portworx as a Docker container \(as “legacy plugin system”, or v1 plugin\), and already have PX-volumes allocated and in use by other Docker containers/applications, read [instructions here](/install-with-other/docker/standalone/standalone-oci)
 {{</info>}}
 
 ### Adding Nodes {#adding-nodes}
@@ -205,7 +205,7 @@ To add nodes to increase capacity and enable high availability, simply repeat th
 
 After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool.
 
-With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes. For more on using **pxctl**, see the [CLI Reference](https://docs.portworx.com/control/status.html).
+With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes. For more on using **pxctl**, see the [CLI Reference](/reference/CLI).
 
 To view the global storage capacity, run:
 

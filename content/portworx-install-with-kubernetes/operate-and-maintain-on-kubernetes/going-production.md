@@ -5,10 +5,10 @@ hidden: true
 
 ### Initial Software Setup for Production
 
-* Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
-  * Ensure PX container is deployed as [OCI container](https://docs.portworx.com/runc/)
+* Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - Refer to the install instructions [page](./)
+  * Ensure PX container is deployed as [OCI container](/install-with-other/docker/standalone/standalone-oci)
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
-  * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
+  * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the container orchestrator to ensure maximum stability. Refer to the following [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) on how to install etcd and also configure it for maximum stability.
 
 ### Configuring the Server or the Compute Infrastructure
 
@@ -28,7 +28,7 @@ hidden: true
   If it is a cloud deployment, ensure you have enough cloud disks attached.
 
   * For AWS ASG, Portworx supports automatic management of EBS volumes.
-    It is recommended to use the ASG [feature](https://docs.portworx.com/cloud/aws/asg.html)
+    It is recommended to use the ASG [feature](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage.
 
@@ -38,16 +38,16 @@ hidden: true
 
 ### Data Protection for Containers
 
-* Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures. Visit the [DR best practices](dr-best-practices.html) page for more information.
+* Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures. Visit the [DR best practices](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/dr-best-practices) page for more information.
 
 * Cloudsnaps - Follow DR best practices and setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
 
 ### Alerts and Monitoring for Production
 
   * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (monitoring/prometheus/index.html)
-  * Configure Grafana via this [template](monitoring/grafana/index.html)
-  * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](monitoring/alerting.html)
-  * List of Portworx Alerts are documented [here](monitoring/portworx-alerts.html)
+  * Configure Grafana via this [template](/install-with-other/operate-and-maintain/monitoring/grafana)
+  * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/install-with-other/operate-and-maintain/monitoring/alerting)
+  * List of Portworx Alerts are documented [here](/install-with-other/operate-and-maintain/monitoring/alerting)
 
 ### Hardware Replacements and Upgrades
 

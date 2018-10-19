@@ -5,14 +5,14 @@ weight: 3
 
 #### Etcd {#etcd}
 
-* Px container will fail to come up if it cannot reach etcd. For etcd installation instructions refer this [doc](https://docs.portworx.com/maintain/etcd.html).
+* Px container will fail to come up if it cannot reach etcd. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
   * The etcd location specified when creating the Portworx cluster needs to be reachable from all nodes.
   * Run `curl <etcd_location>/version` from each node to ensure reachability. For e.g `curl http://192.168.33.10:2379/version`
 * If you deployed etcd as a Kubernetes service, use the ClusterIP instead of the kube-dns name. Portworx nodes cannot resolve kube-dns entries since px containers are in the host network.
 
 #### Portworx cluster {#portworx-cluster}
 
-* If the px container is failing to start on each node, ensure you have shared mounts enable. Please follow [these](https://docs.portworx.com/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation. This is needed because PX runs as a container and it will be provisioning storage to other containers.
+* If the px container is failing to start on each node, ensure you have shared mounts enable. Please follow [these](/install-with-other/knowledge-base/shared-mount-propagation) instructions to enable shared mount propogation. This is needed because PX runs as a container and it will be provisioning storage to other containers.
 * Ports 9001 - 9004 must be open for internal network traffic between nodes running PX. Without this, px cluster nodes will not be able to communicate and cluster will be down.
 * If one of your nodes has a custom taint, the Portworx pod will not get scheduled on that node unless you add a toleration in the Portworx DaemonSet spec. Read [here](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature) for more information about taints and tolerations.
 * When the px container boots on a node for the first time, it attempts to download kernel headers to compile it’s kernel module. This can fail if the host sits behind a proxy. To workaround this, install the kernel headers on the host. For example on centos, this will be ```yum install kernel-headers-`uname -r``` and ``yum install kernel-devel-`uname -r```
@@ -48,7 +48,7 @@ If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/servic
   # Apply change to DNS-Policy, wait for change to propagate (rollout) to all the nodes
   kubectl apply -f px_oci-updatedDnsPolicy.yaml
   kubectl rollout status -n kube-system ds/portworx
-  
+
   # Request restart of PX-OCI services
   kubectl label nodes --all px/service=restart --overwrite
   # [OPTIONAL] Clean up the node-label after services restarted
@@ -123,4 +123,3 @@ We are always available on Slack. Join us! [![Slack](https://docs.portworx.com/i
 * [Tectonic](https://coreos.com/tectonic/) is deploying the Kubernetes controller manager in the docker `none` network. As a result, when the controller manager invokes a call on http://localhost:9001 to portworx to create a new volume, this results in the connection refused error since controller manager is not in the host network. This issue is observed when using dynamically provisioned Portworx volumes using a StorageClass. If you are using pre-provisioned volumes, you can ignore this issue.
 * To workaround this, you need to set `hostNetwork: true` in the spec file `modules/bootkube/resources/manifests/kube-controller-manager.yaml` and then run the tectonic installer to deploy kubernetes.
 * Here is a sample [kube-controller-manager.yaml](https://gist.github.com/harsh-px/106a23b702da5c86ac07d2d08fd44e8d) after the workaround.
-

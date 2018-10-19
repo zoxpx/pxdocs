@@ -26,7 +26,7 @@ $ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl secrets set-cluster-
 ```
 
 ##### Option 2: Other secrets provider
-Similar to Kubernetes secrets, you can set the cluster wide secret key in the secrets provider that you have configured. Refer to the 'Setting cluster wide secret key' section under the respective [secrets provider integration](https://docs.portworx.com/secrets).
+Similar to Kubernetes secrets, you can set the cluster wide secret key in the secrets provider that you have configured. Refer to the 'Setting cluster wide secret key' section under the respective [secrets provider integration](/reference/key-management).
 
 #### Step 2: Create a StorageClass
 Create a storage class with `secure` parameter set to `true`.
