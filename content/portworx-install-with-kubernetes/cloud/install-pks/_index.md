@@ -1,5 +1,5 @@
 ---
-title: Portworx install on PKS
+title: PKS
 ---
 
 ## Step 1: PKS preparation
