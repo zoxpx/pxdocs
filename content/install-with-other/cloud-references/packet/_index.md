@@ -1,6 +1,6 @@
 ---
 title: Portworx on the Packet.net Hosted Platform
-weight: 5
+weight: 3
 linkTitle: Packet.net
 ---
 

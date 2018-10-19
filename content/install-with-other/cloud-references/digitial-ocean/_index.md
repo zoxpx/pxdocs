@@ -1,6 +1,6 @@
 ---
 title: Portworx on the DigitalOcean Cloud Platform
-weight: 6
+weight: 4
 linkTitle: DigitalOcean
 ---
 

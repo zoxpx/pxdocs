@@ -1,6 +1,6 @@
 ---
 title: Portworx on Rackspace
-weight: 7
+weight: 5
 linkTitle: Rackspace
 ---
 
