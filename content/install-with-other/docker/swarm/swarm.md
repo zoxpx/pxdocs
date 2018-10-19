@@ -1,5 +1,6 @@
 ---
 title: Swarm
+weight: 2
 ---
 
 Identify storage
