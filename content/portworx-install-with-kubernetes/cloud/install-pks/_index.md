@@ -1,5 +1,6 @@
 ---
 title: PKS
+weight: 4
 ---
 
 ## Step 1: PKS preparation
