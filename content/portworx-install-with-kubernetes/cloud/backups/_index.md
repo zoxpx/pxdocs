@@ -328,7 +328,7 @@ SOURCEVOLUME 	CLOUD-SNAP-ID					CREATED-TIME			STATUS
 dvol		pqr9-cl1/520877607140844016-50466873928636534	Fri, 07 Apr 2017 20:22:43 UTC	Done
 ```
 
-### Cloud operations
+## Cloud operations
 
 Help for specific cloudsnap commands can be found by running the following command
 
