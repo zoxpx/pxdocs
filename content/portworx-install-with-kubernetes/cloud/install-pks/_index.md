@@ -1,5 +1,6 @@
 ---
 title: PKS
+logo: /logos/pks.png
 weight: 4
 ---
 
