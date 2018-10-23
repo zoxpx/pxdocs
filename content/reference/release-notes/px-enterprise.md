@@ -4,33 +4,160 @@ description: "This is a desc"
 disableSearch: true
 ---
 
-### 1.4.0-rc1 {#140-rc1}
+## 1.6.1.1
 
-**Preview Release Only - NOT FOR PRODUCTION**
+This is a minor patch release with fixes issues around volume unmounts as well as pending commands to docker
 
-**Expected GA date: 05/14**
+* PWX-6494 - Fix rare spurious volume unmounts of attached volumes in case of Portworx service restart under heavy load
+* PWX-6559 - Add a timeout for all commands to docker so they timeout if docker hangs or crashes.
 
-#### Notes {#notes}
+### Key Fixes
 
-* The kubernetes spec generator for 1.4-rc1 can be accessed [here](http://install.portworx.com/1.4/)
-* DC/OS PX Framework for 1.4 will be updated shortly. Watch this space!
-* Rancher Catalog for 1.4 will be updated shortly. Watch this space!
+* PWX-6494
 
-#### Key Features {#key-features}
+## 1.6.1
 
-3DSnaps - Ability to take [application-consistent](/portworx-install-with-kubernetes/storage-operations/create-snapshots) snapshots cluster wide \(Available in 05/14 GA version\)
 
-* Volume Group snapshots - Ability to take crash-consistent snapshots on group of volumes based on a user-defined label
+### Key Features
+
+* Per volume queue depth to ensure volume level quality of service
+* Large discard sizes up to 10MB support faster file deletes. NOTE: You will need a px-fuse driver update to use
+  this setting.  PX 1.6.1 will continue to work with old discard size of 1MB if no driver update was done. This is a
+  backwards compatible change
+* Enable option to always perform a full clone back up for Cloudsnap
+* Reduce scheduled snapshot intervals to support snapping every 15 mins from the current limit of 1 hour
+
+
+### Key Fixes
+
+* Fix replica provisioning across availability zones for clusters running on DC/OS in a public cloud
+
+## 1.6.0
+
+### Key Features:
+
+* OpenStorage SDK support. Link to [SDK](https://libopenstorage.github.io/w/)
+* Dynamic VM datastore provisioning support Kubernetes in vSphere/ESX environment
+* Pivotal Kubernetes Service (PKS) support with automated storage management for [PKS](/portworx-install-with-kubernetes/cloud/install-pks)
+
+### Errata
+
+* PWX-6198 - SDK Cloud backup and credentials services is still undergoing tests
+* PWX-6159 - Intermittent detach volume error seen by when calling the SDK Detach call
+* PWX-6056 - Expected error not found when using Stats on a non-existent volume.
+
+
+## 1.5.1
+
+### Key Fixes:
+
+* PWX-6115 - Consul integration fixes to reduce CPU utilization
+* PWX-6049 - Improved detection and handling cloud instance store drives in AWS
+* PWX-6197 - Fix issues with max drive per zone in GCP
+* When a storagless node loses connectivity to the remaining nodes, it should bring itself down.
+* PWX-6208 - Fix GCP provider issues for dynamic disk provisioning in GCP/GKE
+* PWX-5815 - Enable running `pxctl` from oci-monitor PODs in k8s
+* PWX-6295 - Fix LocalNode provisioning pattern when provisioning volumes with greater than 1 replication factor
+* PWX-6277 - PX fails to run sharedv4 volume support for Fedora
+* PWX-6268 - PX does not come up in Amazon Linux V2 AMIs
+* PWX-6229 - PX does not initialize fully in a GKE multi-zone cluster during a fresh install
+
+
+## 1.5.0
+
+### Important note: Consul integration with 1.5.0 has a bug which results in PX querying a Consul Cluster too often for a non-existent key. We will be pushing out a 1.5.1 release with a fix by 08/31/2018
+
+### Key Features:
+
+* Eliminate private.json for stateless installs
+* Handle consul leader failures when running with consul as the preferred k/v store
+* When a node is offline for longer than user configured timeout, move the replicas in that node out to
+  other nodes with free space
+* Improvements to AWS Auto-scaling Group handling with KOPS
+* Lighthouse Volume Analyzer View Support.
+* Enable volume resize for volumes that are not attached
+* Periodic, light-weight pool rebalance for proactive capacity management
+
+### Key Fixes
+
+ * PWX-5800 - In AWS Autoscaling mode, PX nodes with no storage should always try to attach available drives on restart
+ * PWX-5827 - Allow adding cloud drives using pxctl service drive add commands
+ * PWX-5915 - Add PX-DO-NOT-DELETE prefix to all cloud drive names
+ * PWX-6117 - Fix `pxctl cloudsnap s --local` command failing to execute
+ * PWX-5919 - Improve node decommission handling for volumes that are not in quorum
+ * PWX-5824 - Improve geo variable handling for kubernetes and DC/OS
+ * PWX-5902 - Support SuSE CaaS platform
+ * PWX-5815 - Enable diags collection via oci-monitor when shell access to the minions not allowed
+ * PWX-5816 - Incorrect bucket names will force a full backup instead of incremental backup
+ * PWX-5904 - Remove db_remote and random profiles from io_profile help
+ * PWX-5821 - Fix panics seen zone and rack labels are supplied on volume create
+
+
+
+## 1.4.2.2
+
+This is a patch release that adds capability to switch from shared to sharedv4 one volume at a time. Please contact portworx support before switching the volume types.
+
+
+## 1.4.2
+
+Use http://install.portworx.com/1.4/ for K8S spec generation.
+
+* PWX-5681 - PX service to handle journald restarts.
+* PWX-5814 - Fix automatic diag uploads
+* PWX-5818 - Fix diag uploads via `pxctl service diags` when running under k8s environments
+
+## 1.4.0
+
+If you are on any of the 1.4 RC builds, you will need to do a fresh install. Please reach out to us at support@portworx.com or on the slack to help assess upgrade options from 1.4 RC builds.
+
+All customers on 1.3.x release will be able to upgrade to 1.4
+
+All customers on 1.2.x release will be able to upgrade to 1.4 but in a few specific cases might need a node reboot after the upgrade. Please reach out to support for help with an upgrade or if there are any questions if you are running 1.2.x in production.
+
+### Notes
+
+* The kubernetes spec generator for 1.4 can be accessed [here](http://install.portworx.com/1.4/)
+
+
+### Key Features
+
+* 3DSnaps - Ability to take [application-consistent](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
+  snapshots cluster wide (Available in 05/14 GA version)
+  * Volume Group snapshots - Ability to take crash-consistent snapshots on group of volumes based on a user-defined label
 * GCP/GKE automated disk management based on [disk templates](/portworx-install-with-kubernetes/cloud/google-kubernetes-engine)
-* [Kubernetes per volume secret support](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs) to enable volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
+* [Kubernetes per volume secret support](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pvc-encryption) to enable
+  volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
 * DC/OS vault integration - Use [Vault integrated with DC/OS](/install-with-other/dcos)
-* Container Storage Interface \(CSI\) [Tech Preview](https://docs.portworx.com/scheduler/kubernetes/csi.html)
-* Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting port number in [install arguments](/install-with-other/docker/standalone/standalone-oci)
-* Provide ability to do a [license tranfer](/reference/CLI/license) from one cluster to another cluster
+* Support Pool Resize - Available in Maintenance Mode only
+* Container Storage Interface (CSI) [Tech Preview](/portworx-install-with-kubernetes/storage-operations/csi)
+* Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting
+  port number in [install arguments](/install-with-other/docker/standalone/standalone-oci)
+* Provide ability to do a [license tranfer](/reference/release-notes/px-licensing) from one cluster to another cluster
+* Add support for [cloudsnap deletes](/reference/CLI/cloud-snaps#pxctl-cloudsnap-delete)
 
-#### Key Fixes: {#key-fixes}
+### Key Fixes:
 
-To be updated soon
+* PWX-5360 - Handle disk partitions in node wipe command
+* PWX-5351 - Reduce the `pxctl volume list` time taken when a large number of volumes are present
+* PWX-5365 - Fix cases where cloudsnap progress appears stopped because of time sychronization
+* PWX-5271 - Set default journal device size to 2GB
+* PWX-5341 - Prune out trailing `/` in storage device name before using it
+* PWX-5214 - Use device uuid when checking for valid mounts when using device mapper devices instead of the device names
+* PWX-5242 - Provide facility to add metadata journal devices to an existing cluster
+* PWX-5287 - Clean up px_env variables as well when using node wipe command
+* PWX-5322 - Unmount shared volume on shared volume source mount only on PX restarts
+* PWX-5319 - Use excl open for open device checks
+* PWX-4897 - Allow more time for resync to complete before changing the replication status
+* PWX-5295 - Fix a nil pointer access during cloudsnap credential delete
+* PWX-5006 - Tune data written between successive syncs depending on ingress write speed
+* PWX-5203 - Cancel any in-progress ha increase operations that are pending on the node if the node is decommission
+* PWX-5138 - Add startup options for air-gapped deployments
+* PWX-4816 - Check for and add lvm devices when handling -a option for device list
+* PWX-4609 - Allow canceling of replcition increase operations for attached volumes
+* PWX-4765 - Fix resource contention issues when running heavy load on multiple shared volumes on many nodes
+* PWX-5039 - Fix PX OCI uninstall when shared volumes are in use
+* PWX-5153 - In Rancher, automatically manage container volume mounts if one of the cluster node restarts
 
 ### 1.3.1.4 {#1314}
 

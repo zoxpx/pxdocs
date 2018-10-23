@@ -7,7 +7,7 @@ Portworx can integrate with Vault to store your encryption keys/secrets, credent
 
 #### Setting up Vault {#setting-up-vault}
 
-Peruse [this section](https://www.vaultproject.io/intro/getting-started/install.html) for help on setting up Vault in your setup. This includes installation, configuring secrets, etc
+Peruse [this section](https://www.vaultproject.io/docs/install) for help on setting up Vault in your setup. This includes installation, configuring secrets, etc
 
 #### Kubernetes users {#kubernetes-users}
 
