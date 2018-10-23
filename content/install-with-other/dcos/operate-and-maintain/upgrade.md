@@ -11,7 +11,7 @@ The Portworx image to be used on each node is specified by the framework variabl
 To upgrade to a newer version of Portworx you need to point this to the desired version.
 For example, if you want to upgrade to v1.2.11 you would set this to "portworx/px-enterprise:1.2.11"
 
-![Portworx image option](https://docs.portworx.com/images/dcos-px-image-option.png)
+![Portworx image option](/img/dcos-px-image-option.png)
 
 ### Restart the Portworx update task
 

@@ -34,7 +34,7 @@ Follow the instuctions on Packet's knowledge base for [installing and attaching 
 Your deployment will look something like following:
 
 
-![Attach Block Storage Volume](https://docs.portworx.com/images/block-storage-on-packet.png "Attach Block Storage Volume")
+![Attach Block Storage Volume](/img/block-storage-on-packet.png "Attach Block Storage Volume")
 
 ### Step 4: Install and Run the Packet host utilities for block storage
 On each host, download and install the [Packet block-storage utilities](https://github.com/packethost/packet-block-storage)
@@ -65,8 +65,8 @@ Use the docker run command to launch PX-Enterprise, substituting the appropriate
 Alternatively, you can either run the 'px_bootstrap' script from curl, or construct your own [config.json](https://docs.portworx.com/control/config-json.html) file.
 
 From the server node running px-enterprise container, you should see the following status:
-![PX-Cluster on Packet](https://docs.portworx.com/images/px-cluster-on-packet.png "PX-Cluster on Packet")
+![PX-Cluster on Packet](/img/px-cluster-on-packet.png "PX-Cluster on Packet")
 
 
 You should also be able to monitor cluster from PX-Enterprise console:
-![Packet-Cluster on Lighthouse](https://docs.portworx.com/images/packet-cluster-on-lighthouse.png "Packet-Cluster on Lighthouse")
+![Packet-Cluster on Lighthouse](/img/packet-cluster-on-lighthouse.png "Packet-Cluster on Lighthouse")

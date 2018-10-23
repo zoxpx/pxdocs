@@ -701,7 +701,7 @@ Once you have run the above command you should see `bank` and `customer` indices
 
 Bank Index with its documents
 
-![bankIndex](https://docs.portworx.com/images/kibanaBank.png)
+![bankIndex](/img/kibanaBank.png)
 
 ### Scaling {#scaling}
 

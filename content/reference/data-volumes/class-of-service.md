@@ -29,11 +29,11 @@ The graph below shows the sequential and random read and write performance on hi
 
 #### Random Read and Writes {#random-read-and-writes}
 
-![CoS Random](https://docs.portworx.com/images/cos-random.png)
+![CoS Random](/img/cos-random.png)
 
 #### Sequential Read and Writes {#sequential-read-and-writes}
 
-![CoS Sequential](https://docs.portworx.com/images/cos-seq.png)
+![CoS Sequential](/img/cos-seq.png)
 
 ### Try it out on Amazon {#try-it-out-on-amazon}
 
@@ -45,7 +45,7 @@ Here, we create volumes of 3 different volume types in AWS. Refer to [AWS EBS vo
 * Create one 100GB standard volume
 * Create one 1000GB IO optimized volume
 
-![EBS Volumes](https://docs.portworx.com/images/cos.png)
+![EBS Volumes](/img/cos.png)
 
 Here is what you should see when you list your block devices:
 

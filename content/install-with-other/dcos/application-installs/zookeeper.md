@@ -27,7 +27,7 @@ dcos package repo add --index=0 portworx-zookeeper-aws https://universe-converte
 
 Once you have run the above command you should see the `portworx-zookeeper` service available in your universe
 
-![portworx-zookeeper in DCOS Universe](https://docs.portworx.com/images/dcos-portworx-zookeeper-universe.png)
+![portworx-zookeeper in DCOS Universe](/img/dcos-portworx-zookeeper-universe.png)
 
 #### Default Install {#default-install}
 
@@ -45,7 +45,7 @@ If you want to modify the default, click on the “Install” button next to the
 
 Here you have the option to change the service name, volume name, volume size, and provide any additional options for the Portworx volume. You can also configure other Zookeeper related parameters on this page including the number of Zookeeper nodes.
 
-![portworx-zookeeper install options](https://docs.portworx.com/images/dcos-portworx-zookeeper-install-options.png)
+![portworx-zookeeper install options](/img/dcos-portworx-zookeeper-install-options.png)
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
@@ -53,19 +53,19 @@ Click on “Review and Install” and then “Install” to start the installati
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-![portworx-zookeeper on services page](https://docs.portworx.com/images/dcos-portworx-zookeeper-service.png)
+![portworx-zookeeper on services page](/img/dcos-portworx-zookeeper-service.png)
 
 If you click on the `portworx-zookeeper` service you should be able to look at the status of the nodes being created. There will be one service for the scheduler and one service each for the Zookeeper nodes.
 
-![portworx-zookeeper install started](https://docs.portworx.com/images/dcos-portworx-zookeeper-started-install.png)
+![portworx-zookeeper install started](/img/dcos-portworx-zookeeper-started-install.png)
 
 When the Scheduler service as well as the Zookeeper nodes are in Running \(green\) status, you should be ready to start using the Zookeeper cluster.
 
-![portworx-zookeeper install finished](https://docs.portworx.com/images/dcos-portworx-zookeeper-finished-install.png)
+![portworx-zookeeper install finished](/img/dcos-portworx-zookeeper-finished-install.png)
 
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options provided during install, one for each node of the Zookeeper cluster.
 
-![portworx-zookeeper volumes](https://docs.portworx.com/images/dcos-portworx-zookeeper-volume-list.png)
+![portworx-zookeeper volumes](/img/dcos-portworx-zookeeper-volume-list.png)
 
 If you run the “dcos service” command you should see the `portworx-zookeeper` service in ACTIVE state with 3 running tasks, one for each Zookeeper node.
 

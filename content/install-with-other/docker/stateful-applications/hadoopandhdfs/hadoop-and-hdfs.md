@@ -69,7 +69,7 @@ The benefits of running Hadoop with Portworx are:
 * Dynamic resizing of HDFS volumes with no downtime
 * Simplified installation and configuration of Hadoop via Portworx frameworks Let’s look at each in turn.
 
-![Running Hadoop in containers with Portworx](https://docs.portworx.com/images/px-hadoop-docker-containers-architecture.png)
+![Running Hadoop in containers with Portworx](/img/px-hadoop-docker-containers-architecture.png)
 
 #### Enable Hadoop to run on a cloud-native storage infrastructure that is managed the same way, whether you run on-premise or in any public cloud {#enable-hadoop-to-run-on-a-cloud-native-storage-infrastructure-that-is-managed-the-same-way-whether-you-run-on-premise-or-in-any-public-cloud}
 
@@ -223,7 +223,7 @@ Run the following command to add the repository to your DCOS cluster: $ dcos pac
 
 Once you have run the above command you should see the Hadoop-PX service available in your universe
 
-![Hadoop-PX in DCOS Universe](https://docs.portworx.com/images/dcos-hadoop-px-universe.png)
+![Hadoop-PX in DCOS Universe](/img/dcos-hadoop-px-universe.png)
 
 **Installation**
 
@@ -243,7 +243,7 @@ If you want to modify the default, click on the “Install” button next to the
 
 Here you have the option to change the service name, volume name, volume size, and provide any additional options that you want to pass to the docker volume driver. You can also configure other Hadoop related parameters on this page including the number of Data and Yarn nodes for the Hadoop cluster.
 
-![Hadoop-PX install options](https://docs.portworx.com/images/dcos-hadoop-px-install-options.png)
+![Hadoop-PX install options](/img/dcos-hadoop-px-install-options.png)
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
@@ -251,19 +251,19 @@ Click on “Review and Install” and then “Install” to start the installati
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-![Hadoop-PX on services page](https://docs.portworx.com/images/dcos-hadoop-px-service.png)
+![Hadoop-PX on services page](/img/dcos-hadoop-px-service.png)
 
 If you click on the Hadoop-PX service you should be able to look at the status of the nodes being created. There will be one service for the scheduler, 3 for Journal Nodes, 2 for the Name Nodes, 2 for the Zookeeper Failover Controllers, 3 for the Data Nodes and 3 for the Yarn Nodes.
 
-![Hadoop-PX install started](https://docs.portworx.com/images/dcos-hadoop-px-started-install.png)
+![Hadoop-PX install started](/img/dcos-hadoop-px-started-install.png)
 
 When the Scheduler service as well as all the Hadoop containers nodes are in Running \(green\) status, you should be ready to start using the Hadoop cluster.
 
-![Hadoop-PX install finished](https://docs.portworx.com/images/dcos-hadoop-px-finished-install.png)
+![Hadoop-PX install finished](/img/dcos-hadoop-px-finished-install.png)
 
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options provided during install, one for each of the Journal, Name and Data nodes.
 
-![Hadoop-PX volumes](https://docs.portworx.com/images/dcos-hadoop-px-volume-list.png)
+![Hadoop-PX volumes](/img/dcos-hadoop-px-volume-list.png)
 
 If you run the “dcos service” command you should see the hadoop-px service in ACTIVE state with 13 running tasks
 
@@ -290,7 +290,7 @@ In this section, we cover a reference architecture for creating a PaaS like Hado
 * Portworx version 1.2.9
 * RHEL Atomic as the base Linux distribution
 
-![Hadoop Reference Architecture rack diagram](https://docs.portworx.com/images/hadoop-ra-1.png)
+![Hadoop Reference Architecture rack diagram](/img/hadoop-ra-1.png)
 
 There are 2 types of server modules used in this RA:
 
@@ -310,7 +310,7 @@ Next, install the Portworx framework for Big Data by following the instructions 
 
 Two-Rack Deployment Overview The picture below depicts this architecture deployed in a two-rack environment:
 
-![Hadoop Reference Architecture two rack diagram](https://docs.portworx.com/images/hadoop-ra-2.png)
+![Hadoop Reference Architecture two rack diagram](/img/hadoop-ra-2.png)
 
 #### Conclusions {#conclusions}
 

@@ -113,7 +113,7 @@ Include above logs when contacting us.
 
 If you have an enterprise license, please contact us at support@portworx.com with your license key and logs.
 
-We are always available on Slack. Join us! [![Slack](https://docs.portworx.com/images/slack.png)](http://slack.portworx.com)
+We are always available on Slack. Join us! [![Slack](/img/slack.png)](http://slack.portworx.com)
 
 #### Known issues {#known-issues}
 

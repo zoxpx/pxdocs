@@ -4,7 +4,7 @@ title: Cassandra
 
 The Portworx-Cassandra service can be found in the DC/OS catalog:
 
-![Cassandra-PX in DCOS Universe](https://docs.portworx.com/images/dcos-cassandra-px-universe.png)
+![Cassandra-PX in DCOS Universe](/img/dcos-cassandra-px-universe.png)
 
 #### Default Install {#default-install}
 
@@ -22,7 +22,7 @@ If you want to modify the default, click on the “Install” button next to the
 
 Here you have the option to change the service name, volume name, volume size, and provide any additional options for the Portworx volume. You can also configure other Cassandra related parameters on this page including the number of Cassandra nodes.
 
-![Cassandra-PX install options](https://docs.portworx.com/images/dcos-cassandra-px-install-options.png)
+![Cassandra-PX install options](/img/dcos-cassandra-px-install-options.png)
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
@@ -30,19 +30,19 @@ Click on “Review and Install” and then “Install” to start the installati
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-![Cassandra-PX on services page](https://docs.portworx.com/images/dcos-cassandra-px-service.png)
+![Cassandra-PX on services page](/img/dcos-cassandra-px-service.png)
 
 If you click on the Cassandra-PX service you should be able to look at the status of the nodes being created. There will be one service for the scheduler and one service each for the Cassandra nodes.
 
-![Cassandra-PX install started](https://docs.portworx.com/images/dcos-cassandra-px-started-install.png)
+![Cassandra-PX install started](/img/dcos-cassandra-px-started-install.png)
 
 When the Scheduler service as well as the Cassandra nodes are in Running \(green\) status, you should be ready to start using the Cassandra cluster.
 
-![Cassandra-PX install finished](https://docs.portworx.com/images/dcos-cassandra-px-finished-install.png)
+![Cassandra-PX install finished](/img/dcos-cassandra-px-finished-install.png)
 
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options provided during install, one for each node of the Cassandra cluster.
 
-![Cassandra-PX volumes](https://docs.portworx.com/images/dcos-cassandra-px-volume-list.png)
+![Cassandra-PX volumes](/img/dcos-cassandra-px-volume-list.png)
 
 If you run the “dcos service” command you should see the portworx-cassandra service in ACTIVE state with 3 running tasks, one for each cassandra node.
 

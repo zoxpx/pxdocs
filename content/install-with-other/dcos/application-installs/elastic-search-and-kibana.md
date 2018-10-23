@@ -17,7 +17,7 @@ Running this framework requires a priveleged user that can run sudo without tty 
 
 The Portworx-ElasticSearch service can be found in the DC/OS catalog:
 
-![Elasticsearch-PX in DCOS Universe](https://docs.portworx.com/images/elasticsearch-px-universe-001.PNG)
+![Elasticsearch-PX in DCOS Universe](/img/elasticsearch-px-universe-001.PNG)
 
 ### Installation {#installation}
 
@@ -37,9 +37,9 @@ If you want to modify the default, click on the “Install” button next to the
 
 Here you have the option to change the service name, secret name, and principal..etc. Then you can change individual components setting of elastic search, such as `master_nodes` volume name and volume size, and provide any additional options that you want to pass to the docker volume driver on `PORTWORX_VOLUME_OPTIONS`. The default number of master\_node count is 3 and this is not changeable. The default number of `data_nodes` count is 2; and default count for `ingest_nodes`, `coordinator_nodes`, `kibana` is 1 and can be changed.
 
-![Elasticsearch install options](https://docs.portworx.com/images/elasticsearch-px-universe-002.PNG)
+![Elasticsearch install options](/img/elasticsearch-px-universe-002.PNG)
 
-![Elasticsearch install options](https://docs.portworx.com/images/elasticsearch-px-universe-003.PNG)
+![Elasticsearch install options](/img/elasticsearch-px-universe-003.PNG)
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
@@ -47,9 +47,9 @@ Click on “Review and Install” and then “Install” to start the installati
 
 Monitor the DCOS service screen untill all `9 + 1` tasks are completed.
 
-![Elasticsearch install status](https://docs.portworx.com/images/elasticsearch-px-universe-004.PNG)
+![Elasticsearch install status](/img/elasticsearch-px-universe-004.PNG)
 
-![Elasticsearch install status](https://docs.portworx.com/images/elasticsearch-px-universe-005.PNG)
+![Elasticsearch install status](/img/elasticsearch-px-universe-005.PNG)
 
 From the DCOS workstation, verify the service, look for `portworx-elastic`
 
@@ -81,11 +81,11 @@ From the DCOS workstation, verify the task; it will show `9` tasks.
 
 In the above example, the DCOS Mesos cluster is running with 1 master, 1 public slave and 5 private slave agents. Elasticsearch components will be distributed evenly on every slave agents. See below diagram of the example setup.
 
-![Elasticsearch example setup](https://docs.portworx.com/images/elasticsearch-px-universe-006.PNG)
+![Elasticsearch example setup](/img/elasticsearch-px-universe-006.PNG)
 
 When the last elasticsearch component with ID `portworx-elastic.XXXX` that is the scheduler service shows green, and all elasticsearch tasks are in Running \(green\) status, you should be ready to start using the elasticsearch in DCOS.
 
-![Elasticsearch service running](https://docs.portworx.com/images/elasticsearch-px-universe-007.PNG)
+![Elasticsearch service running](/img/elasticsearch-px-universe-007.PNG)
 
 #### Check PX volumes {#check-px-volumes}
 
@@ -203,20 +203,20 @@ The kibana URL is `http://<dcos_url>/service/portworx-elastic/kibana/login` ; an
 
 Login to the Kibana
 
-![Elasticsearch input data from Chrome Sense](https://docs.portworx.com/images/elasticsearch-px-universe-011.PNG)
+![Elasticsearch input data from Chrome Sense](/img/elasticsearch-px-universe-011.PNG)
 
 Create the default Index pattern
 
-![Elasticsearch input data from Chrome Sense](https://docs.portworx.com/images/elasticsearch-px-universe-012.PNG)
+![Elasticsearch input data from Chrome Sense](/img/elasticsearch-px-universe-012.PNG)
 
 On the Kibana console click “Discover” on the left menu, and observe number of hits with search `*`
 
-![Elasticsearch input data from Chrome Sense](https://docs.portworx.com/images/elasticsearch-px-universe-013.PNG)
+![Elasticsearch input data from Chrome Sense](/img/elasticsearch-px-universe-013.PNG)
 
 And replace the `*` with `books` in the search field, that is the `books` index documents hits
 
-![Elasticsearch input data from Chrome Sense](https://docs.portworx.com/images/elasticsearch-px-universe-014.PNG)
+![Elasticsearch input data from Chrome Sense](/img/elasticsearch-px-universe-014.PNG)
 
 Document insert and query can also be done in `Dev Tools` similar like Chrome Sense
 
-![Elasticsearch input data from Chrome Sense](https://docs.portworx.com/images/elasticsearch-px-universe-015.PNG)
+![Elasticsearch input data from Chrome Sense](/img/elasticsearch-px-universe-015.PNG)

@@ -29,7 +29,7 @@ dcos security org users grant <username> dcos:secrets:default:pwx/secrets/* full
 
 During installation or when updating an existing Portworx framework, enable the feature from Secrets section.
 
-![portworx-dcos-secret](https://docs.portworx.com/images/dcos-portworx-secrets-setup.png)
+![portworx-dcos-secret](/img/dcos-portworx-secrets-setup.png)
 
 The `base path` is the secrets path under which Portworx will read/write secrets. If not specified, Portworx will look for secrets at the top level.
 

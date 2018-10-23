@@ -14,7 +14,7 @@ The Portworx image to be used on each node is specified by the config variable `
 To upgrade to a newer version, you just need to update this field to the desired version. For example, if you want
 to upgrade to v1.3.1.4 you would set this to `portworx/px-enterprise:1.3.1.4`.
 
-![Portworx image option](https://docs.portworx.com/images/dcos-px-image-option2.png)
+![Portworx image option](/img/dcos-px-image-option2.png)
 
 ### Update the Portworx image using DCOS CLI
 

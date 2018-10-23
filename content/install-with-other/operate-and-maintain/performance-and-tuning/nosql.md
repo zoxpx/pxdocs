@@ -16,18 +16,18 @@ The Read OPS/sec and Write OPS/sec improvements graphs show how running with PX-
 
 ### Cassandra with PX-Enterprise - Read OPS/sec improvements
 
-![Cassandra Reads Ops](https://docs.portworx.com/images/Cassandra-PX Read OPS.png)
+![Cassandra Reads Ops](/img/Cassandra-PX Read OPS.png)
 
 ### Cassandra with PX-Enterprise - Write OPS/sec improvements
 
-![Cassandra Writes Ops](https://docs.portworx.com/images/Cassandra-PX Write Ops.png)
+![Cassandra Writes Ops](/img/Cassandra-PX Write Ops.png)
 
 The latency graphs below demonstrate the network-optimized replication performance of PX-Enterprise as it accelerates cassandra performance by delivering IO at very low latencies to the Cassandra Container
 
 ### Cassandra with PX-Enterprise - Read Latency improvements
 
-![Cassandra Read Lats](https://docs.portworx.com/images/Cassandra-PX Read Latencies.png)
+![Cassandra Read Lats](/img/Cassandra-PX Read Latencies.png)
 
 ### Cassandra with PX-Enterprise - Write Latency improvements
 
-![Cassandra Write Lats](https://docs.portworx.com/images/Cassandra-PX Write latencies.png)
+![Cassandra Write Lats](/img/Cassandra-PX Write latencies.png)

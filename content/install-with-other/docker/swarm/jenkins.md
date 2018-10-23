@@ -24,7 +24,7 @@ docker run -d -p 49001:8080 -v jenkins_vol1:/var/jenkins_home:z -t jenkins
 Bring up a browser to the host where you launched Jenkins on port 49001.
 You should see
 
-![jenkins1](https://docs.portworx.com/images/jenkins1.png)
+![jenkins1](/img/jenkins1.png)
 
 Run "docker ps" to find the CONTAINER ID of the Jenkins container:
 
@@ -44,15 +44,15 @@ docker exec -it 9dfa72c4328c cat /var/jenkins_home/secrets/initialAdminPassword
 
 Install the Suggested Plugins
 
-![Install Suggested Plugins](https://docs.portworx.com/images/jenkins2.png)
+![Install Suggested Plugins](/img/jenkins2.png)
 
 Configure the Admin User
 
-![Configure Admin User](https://docs.portworx.com/images/jenkins3.png)
+![Configure Admin User](/img/jenkins3.png)
 
 Start Using Jenkins
 
-![Start Using Jenkins](https://docs.portworx.com/images/jenkins4.png)
+![Start Using Jenkins](/img/jenkins4.png)
 
 ## How to speed up Jenkins
 

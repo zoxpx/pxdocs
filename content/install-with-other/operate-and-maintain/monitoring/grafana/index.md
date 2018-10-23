@@ -21,7 +21,7 @@ In the screen below:
 
 Click on 'Save & Test'
 
-![Grafana data store File](https://docs.portworx.com/images/grafana_datastore.png "Grafana data store File")
+![Grafana data store File](/img/grafana_datastore.png "Grafana data store File")
 
 Next step would be to import Portworx provided [Cluster](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/grafana/Cluster_Template.json) and [Volume](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/grafana/Volume_Template.json) grafana templates.
 If using PX 1.2.11, use [Volume 1.2.11](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/Portworx%20Volume%20Status_V2_Nov_2.json) grafana template.
@@ -30,10 +30,10 @@ From the dropdown on left in your grafana dashboard, go to Dashboards -&gt; Impo
 
 Your dashboard should look like the following.
 
-![Grafana Cluster Status File](https://docs.portworx.com/images/grafana_cluster_status.png "Grafana Cluster Status File")
+![Grafana Cluster Status File](/img/grafana_cluster_status.png "Grafana Cluster Status File")
 
 
-![Grafana Volume Status File](https://docs.portworx.com/images/grafana_volume_status.png "Grafana Volume Status File")
+![Grafana Volume Status File](/img/grafana_volume_status.png "Grafana Volume Status File")
 
 ## Cluster Template for Grafana
 Use [this template](Cluster_Template.json) to display Portworx cluster details in Grafana

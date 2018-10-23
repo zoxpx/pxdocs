@@ -58,4 +58,4 @@ Follow these instructions: [How to attach a data disk to a AKS nodes in the Azur
 
 Below is an example of how your deployment may look:
 
-![Azure Add Disk](https://docs.portworx.com/images/azure-add-disk.png)
+![Azure Add Disk](/img/azure-add-disk.png)

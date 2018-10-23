@@ -17,7 +17,7 @@ Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos)
 
 You should see the Kafka service available in your universe as Portworx-Kafka
 
-![Kafka-PX in DCOS Universe](https://docs.portworx.com/images/dcos-kafka-px-universe.png)
+![Kafka-PX in DCOS Universe](/img/dcos-kafka-px-universe.png)
 
 ### Installation {#installation}
 
@@ -37,7 +37,7 @@ If you want to modify the default, click on the “Install” button next to the
 
 Here you have the option to change the service name, volume name, volume size, and provide any additional options that you want to pass to the docker volume driver. You can also configure other Kafka related parameters on this page including the number of broker nodes.
 
-![Kafka-PX install options](https://docs.portworx.com/images/dcos-kafka-px-install-options.png)
+![Kafka-PX install options](/img/dcos-kafka-px-install-options.png)
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
@@ -45,19 +45,19 @@ Click on “Review and Install” and then “Install” to start the installati
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-![Kafka-PX on services page](https://docs.portworx.com/images/dcos-kafka-px-service.png)
+![Kafka-PX on services page](/img/dcos-kafka-px-service.png)
 
 If you click on the Kafka service you should be able to look at the status of the nodes being created.
 
-![Kafka-PX install started](https://docs.portworx.com/images/dcos-kafka-px-started-install.png)
+![Kafka-PX install started](/img/dcos-kafka-px-started-install.png)
 
 When the Scheduler service as well as all the Kafka services are in Running \(green\) status, you should be ready to start using the Kafka service.
 
-![Kafka-PX install finished](https://docs.portworx.com/images/dcos-kafka-px-finished-install.png)
+![Kafka-PX install finished](/img/dcos-kafka-px-finished-install.png)
 
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options provided during install, one for each of the Brokers.
 
-![Kafka-PX volumes](https://docs.portworx.com/images/dcos-kafka-px-volume-list.png)
+![Kafka-PX volumes](/img/dcos-kafka-px-volume-list.png)
 
 If you run the “dcos service” command you should see the portworx-kafka service in ACTIVE state with 3 running tasks
 

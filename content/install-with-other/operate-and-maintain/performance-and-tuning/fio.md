@@ -41,10 +41,10 @@ from PCSD - Product Collaboration Systems Division
   * PX-Enterprise v1.0.8
 
 ### Random read performance overhead
-![Perf Read](https://docs.portworx.com/images/perf-read.png)
+![Perf Read](/img/perf-read.png)
 
 ### Random write performance overhead
-![Perf Write](https://docs.portworx.com/images/perf-write.png)
+![Perf Write](/img/perf-write.png)
 
 ### Benchmarking HowTo
 

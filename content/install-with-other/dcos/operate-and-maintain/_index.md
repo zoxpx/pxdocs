@@ -25,7 +25,7 @@ sudo systemctl stop portworx
 
 The Portworx service is available in the DCOS universe, you can find it by typing the name in the search bar.
 
-![Portworx in DCOS Universe](https://docs.portworx.com/images/dcos-px-universe.png)
+![Portworx in DCOS Universe](/img/dcos-px-universe.png)
 
 **Default Install**
 
@@ -54,7 +54,7 @@ Specify your kvdb \(consul or etcd\) server if you don’t want to use the etcd 
 If you are trying to use block devices that already have a filesystem on them, either add the “-f” option to “Portworx Options” to force Portworx to use these disks or wipe the filesystem using wipefs command before installing.
 {{</info>}}
 
-![Portworx Install options](https://docs.portworx.com/images/dcos-px-install-options.png)
+![Portworx Install options](/img/dcos-px-install-options.png)
 
 {{<info>}}
 **Note:**  
@@ -67,7 +67,7 @@ To use DC/OS secrets for Volume Encryption and storing Cloud Credentials, [click
 
 **Etcd Options**
 
-By default a 3 node etcd cluster will be created with 5GB of local persistent storage. The size of the persistent disks can be changed during install. This can not be updated once the service has been started so please make sure you have enough storage resources available in your DCOS cluster before starting the install. ![Portworx ETCD Install options](https://docs.portworx.com/images/dcos-px-etcd-options.png)
+By default a 3 node etcd cluster will be created with 5GB of local persistent storage. The size of the persistent disks can be changed during install. This can not be updated once the service has been started so please make sure you have enough storage resources available in your DCOS cluster before starting the install. ![Portworx ETCD Install options](/img/dcos-px-etcd-options.png)
 
 **Lighthouse options**
 
@@ -75,7 +75,7 @@ By default the Lighthouse service will be installed. If this is disabled the inf
 
 You can enter the admin email to be used for creating the Lighthouse account. This can be used to login to Lighthouse after install is complete. The default password is `admin` which can be changed after login.
 
-![Portworx Lighthouse Install options](https://docs.portworx.com/images/dcos-px-lighthouse-options.png)
+![Portworx Lighthouse Install options](/img/dcos-px-lighthouse-options.png)
 
 Once you have configured the service, click on “Review and Install” and then “Install” to start the installation of the service.
 
@@ -87,11 +87,11 @@ If you click on the Portworx service you should be able to look at the status of
 
 In a default install there will be one service for the framework scheduler, 4 services for etcd \( 3 etcd nodes and one etcd proxy\), one service for influxdb and one service for lighthouse.
 
-![Portworx Install finished](https://docs.portworx.com/images/dcos-px-install-finished.png)
+![Portworx Install finished](/img/dcos-px-install-finished.png)
 
 The install for Portworx on the agent nodes will also run as a service but they will “Finish” once the installation is done.
 
-You can check the nodes where Portworx is installed and the status of the Portworx service by clicking on the Components link on the DCOS UI. ![Portworx in DCOS Compenents](https://docs.portworx.com/images/dcos-px-components.png)
+You can check the nodes where Portworx is installed and the status of the Portworx service by clicking on the Components link on the DCOS UI. ![Portworx in DCOS Compenents](/img/dcos-px-components.png)
 
 #### Accessing Lighthouse {#accessing-lighthouse}
 
@@ -143,17 +143,17 @@ You can then access the Lighthouse WebUI on http://&lt;public\_agent\_IP&gt;:999
 
 **Login Page**
 
-The default username/password is portworx@yourcompany.com/admin ![Lighthouse Login Page](https://docs.portworx.com/images/dcos-px-lighthouse-login.png)
+The default username/password is portworx@yourcompany.com/admin ![Lighthouse Login Page](/img/dcos-px-lighthouse-login.png)
 
 #### Dashboard {#dashboard}
 
-![Lighthouse Dashboard](https://docs.portworx.com/images/dcos-px-lighthouse-dashboard.png)
+![Lighthouse Dashboard](/img/dcos-px-lighthouse-dashboard.png)
 
 #### Scaling Up Portworx Nodes {#scaling-up-portworx-nodes}
 
 If you add more agents to your DCOS cluster and you want to install Portworx on those new nodes, you can increase the NODE\_COUNT to start install on the new nodes. This will relaunch the service scheduler and install Portworx on the nodes which didn’t have it previously.
 
-![Scale up PX Nodes](https://docs.portworx.com/images/dcos-px-scale-up.png)
+![Scale up PX Nodes](/img/dcos-px-scale-up.png)
 
 #### Install an application
 

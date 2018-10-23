@@ -30,15 +30,15 @@ After your first login, go to 'click here to add a Cluster to Light House' -> Ad
 
 **NOTE:** For the cluster endpoint, please provide the loadbalancer IP or the IP address of one of the nodes in the PX Cluster.
 
-![Lighthouse add new cluster](https://docs.portworx.com/images/lh-new-add-cluster.png)
+![Lighthouse add new cluster](/img/lh-new-add-cluster.png)
 
 ### Deleting a PX cluster
 Under the settings icon, click on Manage Clusters.
 
-![Lighthouse menu](https://docs.portworx.com/images/lh-new-menu.png)
+![Lighthouse menu](/img/lh-new-menu.png)
 
 Click on the trashcan link next to the cluster name in the cluster list.  This will remove this cluster card from lighthouse cluster landing page
 
-![Lighthouse add new cluster](https://docs.portworx.com/images/lh-new-delete-cluster.png)
+![Lighthouse add new cluster](/img/lh-new-delete-cluster.png)
 
 **NOTE:** This will not remove your cluster from your KVDB.  This action just de-registers this cluster from Lighthouse.

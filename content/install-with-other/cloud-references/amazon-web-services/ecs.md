@@ -16,7 +16,7 @@ Note that Portworx recommends a minimum cluster size of 3 nodes.
 #### Create the cluster in the console
 Log into the ECS console and create an ecs cluster called "ecs-demo1".
 
-![ecs-clust-create](https://docs.portworx.com/images/aws-ecs-setup_withPX_001y.PNG "ecs-1")
+![ecs-clust-create](/img/aws-ecs-setup_withPX_001y.PNG "ecs-1")
 
 
 On above, the Container Instance IAM role is used by the ECS container agent. These ECS container agent is deployed by default with the EC2 instances from the ECS wizard. And these agent makes call to AWS ECS API actions on your behalf, thus these EC2 instances that running the ECS container agent require an IAM role that has permission to join ECS cluster and launch containers within the cluster.
@@ -50,14 +50,14 @@ Your EC2 instances must have the correct IAM role set.  Follow these [IAM instru
 
 After the ECS cluster "ecs-demo1" successfully launched, the corresponding EC2 instances that belong to this ECS cluster can be found under the "ECS instance" tab of ECS console or from AWS EC2 console. Each of this EC2 instance is running with an amazon-ecs-agent in docker container.
 
-![ecs-clust-create](https://docs.portworx.com/images/aws-ecs-setup_withPX_003xx.PNG "ecs-3")
+![ecs-clust-create](/img/aws-ecs-setup_withPX_003xx.PNG "ecs-3")
 
 #### Add storage capacity to each EC2 instance
 Provisioning storage to these EC2 instances by creating new EBS volumes and attaching them to these EC2 instances.  Portworx will be using these EBS volumes to provision storage to your containers. Below we are creating a 20GB EBS volume on the same region "us-east-1b" of the launched EC2 instances. Ensure all ECS instances are attached with the EBS volumes.
 
-![ecs-clust-create](https://docs.portworx.com/images/aws-ecs-setup_withPX_002y.PNG "ecs-2" )
+![ecs-clust-create](/img/aws-ecs-setup_withPX_002y.PNG "ecs-2" )
 
-![ecs-clust-create](https://docs.portworx.com/images/aws-ecs-setup_withPX_004yy.PNG "ecs-4")
+![ecs-clust-create](/img/aws-ecs-setup_withPX_004yy.PNG "ecs-4")
 
 Note that there is no need to format the EBS volumes once they are created and attached to the ec2 instance. Portworx will pick up the available unformatted drives (if you use the -a option as show below in the next step) or you can point to the appropriate block device for the Portworx to pick up by using the -s option when you launch Portworx with the docker run command.
 
@@ -195,10 +195,10 @@ From your linux workstation download and setup AWS ECS CLI utilities
        59701c44-c267-4c85-a8c0-ff87910af535/web           RUNNING                                                                 ecscompose-root:1
      ```
   5. You can also view the task status in the ECS console.
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_003t.PNG "ecs3t")
+  ![task](/img/aws-ecs-setup_withPX_003t.PNG "ecs3t")
 
   6. On the above ECS console, Clusters -> pick your cluster ```ecs-demo1``` and click on the ```Container Instance``` ID that corresponding to the running task. This will display the containers information including where are these containers deployed into which EC2 instance. Below, we find that the task defined containers are deployed on EC2 instance with public IP address ```52.91.191.220```.
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_003z.PNG "ecs3z")
+  ![task](/img/aws-ecs-setup_withPX_003z.PNG "ecs3z")
   7. From above, ssh into the EC2 instance 52.91.191.220 and verify PX volume is attached to running container.
     ```bash
     [ec2-user@ip-172-31-31-61 ~]$ sudo docker ps -a
@@ -236,23 +236,23 @@ Create a ECS tasks definition directly via the ECS console (GUI) and using PX vo
     ```
 
   2. In AWS ECS console, choose the previously created cluster ```ecs-demo1```; then create a new task definition.
-   ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_005y.PNG)
+   ![task](/img/aws-ecs-setup_withPX_005y.PNG)
   3. From the new task definition screen, enter the task definition name ```redis-demo``` and click ```Add volume``` near the bottom of the page.
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_005yy.PNG)
+  ![task](/img/aws-ecs-setup_withPX_005yy.PNG)
   4. Enter the ```Name``` in the Add volume screen, that is just the name for your volume defined in this task definition and no need to be the same as the PX volume name. Then enter the ```Source path```, and this is the PX volume name ```demovol```.
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_005yyx.PNG)
+  ![task](/img/aws-ecs-setup_withPX_005yyx.PNG)
   5. After added the volume, click ```Add container``` button to define your containers specification.
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_006y.PNG)
+  ![task](/img/aws-ecs-setup_withPX_006y.PNG)
   6. From the ```Add container ``` screen, enter the ```Container name``` "redis"  and ```Image*``` "redis" ; then click the ```Add``` button.
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_006z.PNG)
+  ![task](/img/aws-ecs-setup_withPX_006z.PNG)
   7. Adding another container, on the same  Create a Task Definition screen, click ```Add container``` button. On the Add container screen, enter the ```Container name``` "web" and ```Image*``` ["binocarlos/moby-counter"](https://hub.docker.com/r/binocarlos/moby-counter/) and On ```NETWORK SETTINGS``` ```Links``` enter "redis:redis" ; then on ```STORAEE AND LOGGING``` ```Mount Points``` select from drop down "volume0" and enter the ```Container path``` "/data" ; and then click ```Add``` button.
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_007y.PNG)
+  ![task](/img/aws-ecs-setup_withPX_007y.PNG)
   8. On the same task definition screen, click ```create``` button at the of the screen.
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_008y.PNG)
+  ![task](/img/aws-ecs-setup_withPX_008y.PNG)
   9. From the AWS ECS console, Task Definitions, select the definition "redis-demo" and click ```Actions``` and select ```run```
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_009y.PNG)
+  ![task](/img/aws-ecs-setup_withPX_009y.PNG)
   10. Click ```Run Task```
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_010y.PNG)
+  ![task](/img/aws-ecs-setup_withPX_010y.PNG)
   11. You will see the task is submitted and change status from ```PENDING``` to ```RUNNING```.
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_011y.PNG)
-  ![task](https://docs.portworx.com/images/aws-ecs-setup_withPX_012y.PNG)
+  ![task](/img/aws-ecs-setup_withPX_011y.PNG)
+  ![task](/img/aws-ecs-setup_withPX_012y.PNG)

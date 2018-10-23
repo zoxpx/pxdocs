@@ -28,7 +28,7 @@ dcos package repo add --index=0 portworx-couchdb-aws https://universe-converter.
 
 Once you have run the above command you should see the `portworx-couchdb` service available in your universe
 
-![Couchdb-PX in DCOS Universe](https://docs.portworx.com/images/dcos-portworx-couchdb-universe.png)
+![Couchdb-PX in DCOS Universe](/img/dcos-portworx-couchdb-universe.png)
 
 #### Default Install {#default-install}
 
@@ -46,7 +46,7 @@ If you want to modify the default, click on the “Install” button next to the
 
 Here you have the option to change the service name, volume name, volume size, and provide any additional options for the Portworx volume. You can also configure other CouchDB related parameters on this page including the number of CouchDB nodes.
 
-![portworx-couchdb install options](https://docs.portworx.com/images/dcos-portworx-couchdb-install-options.png)
+![portworx-couchdb install options](/img/dcos-portworx-couchdb-install-options.png)
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
@@ -54,19 +54,19 @@ Click on “Review and Install” and then “Install” to start the installati
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-![portworx-couchdb on services page](https://docs.portworx.com/images/dcos-portworx-couchdb-service.png)
+![portworx-couchdb on services page](/img/dcos-portworx-couchdb-service.png)
 
 If you click on the `portworx-couchdb` service you should be able to look at the status of the nodes being created. There will be one service for the scheduler and one service each for the CouchDB nodes.
 
-![portworx-couchdb install started](https://docs.portworx.com/images/dcos-portworx-couchdb-started-install.png)
+![portworx-couchdb install started](/img/dcos-portworx-couchdb-started-install.png)
 
 When the Scheduler service as well as the CouchDB nodes are in Running \(green\) status, you should be ready to start using the CouchDB cluster.
 
-![portworx-couchdb install finished](https://docs.portworx.com/images/dcos-portworx-couchdb-finished-install.png)
+![portworx-couchdb install finished](/img/dcos-portworx-couchdb-finished-install.png)
 
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options provided during install, one for each node of the CouchDB cluster.
 
-![portworx-couchdb volumes](https://docs.portworx.com/images/dcos-portworx-couchdb-volume-list.png)
+![portworx-couchdb volumes](/img/dcos-portworx-couchdb-volume-list.png)
 
 If you run the “dcos service” command you should see the `portworx-couchdb` service in ACTIVE state with 3 running tasks, one for each CouchDB node.
 
