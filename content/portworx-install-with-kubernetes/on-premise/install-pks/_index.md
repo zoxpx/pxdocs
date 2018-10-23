@@ -1,5 +1,7 @@
 ---
 title: PKS
+logo: /logos/pks.png
+weight: 2
 ---
 
 ## Step 1: PKS preparation
