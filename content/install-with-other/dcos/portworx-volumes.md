@@ -44,7 +44,7 @@ following lines in your marathon spec:
   }
 }
 ```
-An example spec file for mysql can be found [here](https://docs.portworx.com/scheduler/mesosphere-dcos/mysql_marathon.json)
+An example spec file for mysql can be found [here](/samples/dcos/mysql_marathon.json)
 
 #### Mesos/UCR containers
 
@@ -78,7 +78,7 @@ following lines in your marathon spec:
   }
 }
 ```
-An example spec file for mysql can be found [here](https://docs.portworx.com/scheduler/mesosphere-dcos/mysql_marathon_ucr.json)
+An example spec file for mysql can be found [here](/samples/dcos/mysql_marathon_ucr.json)
 
 #### Provisioning Volumes
 

@@ -25,7 +25,7 @@ When installing Portworx through [install.portworx.com/1.4](https://install.port
 you can select CSI as the model to use for deployment.
 
 If you are using [curl to fetch the Portworx
-spec](https://docs.portworx.com/scheduler/kubernetes/px-k8s-spec-curl.html), you can add
+spec](/portworx-install-with-kubernetes/px-k8s-spec-curl), you can add
 `csi=true` to the parameter list to include CSI specs in the generated file.
 
 ## Impact on applications

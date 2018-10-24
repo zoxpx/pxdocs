@@ -48,7 +48,7 @@ Example:
  parameters:
    repl: "1"
 ```
-[Download example](https://docs.portworx.com/k8s-samples/portworx-volume-sc.yaml?raw=true)
+[Download example](/samples/k8s/portworx-volume-sc.yaml?raw=true)
 
 Verifying storage class is created:
 
@@ -86,7 +86,7 @@ Example:
      requests:
        storage: 2Gi
 ```
-[Download example](https://docs.portworx.com/k8s-samples/portworx-volume-pvcsc.yaml?raw=true)
+[Download example](/samples/k8s/portworx-volume-pvcsc.yaml?raw=true)
 
 Verifying persistent volume claim is created:
 
@@ -150,7 +150,7 @@ Example:
          persistentVolumeClaim:
            claimName: pvcsc001
 ```
-[Download example](https://docs.portworx.com/k8s-samples/portworx-volume-pvcscpod.yaml?raw=true)
+[Download example](/samples/k8s/portworx-volume-pvcscpod.yaml?raw=true)
 
 Verifying pod is created:
 

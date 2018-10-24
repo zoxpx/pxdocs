@@ -104,4 +104,4 @@ The following example shows how to use constraints for running `mysql` only on n
       "maximumOverCapacity" : 0.0
 }
 ```
-[Download example](https://docs.portworx.com/scheduler/mesosphere-dcos/px-marathon-mysql-constraints.json?raw=true)
+[Download example](/samples/dcos/px-marathon-mysql-constraints.json?raw=true)

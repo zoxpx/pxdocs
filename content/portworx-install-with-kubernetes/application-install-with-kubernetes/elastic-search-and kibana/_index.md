@@ -684,7 +684,7 @@ kubectl logs po/kibana-2713637544-4wxsk
 
 Insert data into Elasticsearch and verify that Kibana is able to search for the data in Elastic Search. This will help create dashboards and visualizations.
 
-Save the data from the following location [Download accounts.json](https://docs.portworx.com/k8s-samples/efk/accounts.json?raw=true)
+Save the data from the following location [Download accounts.json](/samples/k8s/efk/accounts.json?raw=true)
 
 ```text
 curl -H "Content-Type: application/json" -XPOST 'http://10.105.105.41:9200/bank/account/_bulk?pretty&refresh' --data-binary "@accounts.json"

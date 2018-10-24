@@ -188,7 +188,7 @@ Now you can create a mysql Pod to mount the snapshot
 ```text
 kubectl create -f portworx-mysql-snap-pod.yaml
 ```
-[Download example](https://docs.portworx.com/k8s-samples/portworx-mysql-snap-pod.yaml?raw=true)
+[Download example](/samples/k8s/portworx-mysql-snap-pod.yaml?raw=true)
 ```yaml
 apiVersion: v1
 kind: Pod

@@ -180,7 +180,7 @@ px-runc install -k consul://70.0.2.65:8500 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s
 
 **Modifying the PX configuration**
 
-After the initial installation, you can modify the PX configuration file at `/etc/pwx/config.json` \(see [details](https://docs.portworx.com/control/config-json.html)\) and restart Portworx using `systemctl restart portworx`.
+After the initial installation, you can modify the PX configuration file at `/etc/pwx/config.json` \(see [details](/samples/control/config-json.md)\) and restart Portworx using `systemctl restart portworx`.
 
 **Step 3: Starting PX runC**
 
