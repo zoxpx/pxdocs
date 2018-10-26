@@ -2,7 +2,8 @@
 title: Portworx on Kubernetes
 weight: 2
 hidesections: true
-description: Portworx on Kubernetes
+description: Running Portworx on Kubernetes.
+series: top
 ---
 
 ## Installation
