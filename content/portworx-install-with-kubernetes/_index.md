@@ -4,6 +4,7 @@ weight: 2
 hidesections: true
 description: Running Portworx on Kubernetes.
 series: top
+icon: /img/banner__kubernetes.png
 ---
 
 ## Installation
