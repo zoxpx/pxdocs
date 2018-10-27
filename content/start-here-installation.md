@@ -3,9 +3,7 @@ title: "Prerequisites"
 weight: 1
 disableprevnext: true
 equalizeTableWidths: "50%"
-series: top
 description: Start your installation.
-icon: /img/banner__prerequisites.png
 ---
 
 ## Installation Prerequisites
