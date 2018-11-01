@@ -4,9 +4,37 @@ description: "This is a desc"
 disableSearch: true
 ---
 
+### 1.7.0 (Staging)
+
+* IKS (IBM Kubernetes Service Support)
+* IBM Key Protect Support for Encrypted Volumes
+* Containerd runtime Interface (CRI) support
+* Automatic VM Datastore provisioning for CentOS ESXi VMs
+* Tiered Snapshots for managing volume snapshots on only lower cost media
+* Encryption support for shared volumes
+
+## 1.6.1.4
+This is a minor patch release with the following fixex/enhancements.
+
+* PWX-6655 - Fix to allow storageless nodes to reuse their node ids in k8s
+* PWX-6410 - Fix a bug where PX may detach unused loopback devices that are not owned by PX on restarts.
+* PWX-6713 - Allow update of per volume queue depth
+
+## 1.6.1.3
+ This is a minor patch release with the following fixex/enhancements.
+
+ * PWX-6697: Add support for automatic provisioning of disks on VMware virtual machines on non-Kubernetes clusters and Kubernetes clusters without vSphere Cloud Provider
+
+## 1.6.1.2
+
+This is a minor patch release with This is a minor patch release with the following fixes/enhancements.
+
+* PWX-6567 - Provide a parameter to disable discards during volume create
+* PWX-6559 - Provide ability to map services listening on port 9001 to another port
+
 ## 1.6.1.1
 
-This is a minor patch release with fixes issues around volume unmounts as well as pending commands to docker
+This is a minor patch release with fixes issues around volume unmounts as well as pending commands to docker.
 
 * PWX-6494 - Fix rare spurious volume unmounts of attached volumes in case of Portworx service restart under heavy load
 * PWX-6559 - Add a timeout for all commands to docker so they timeout if docker hangs or crashes.
@@ -44,7 +72,7 @@ This is a minor patch release with fixes issues around volume unmounts as well a
 
 * PWX-6198 - SDK Cloud backup and credentials services is still undergoing tests
 * PWX-6159 - Intermittent detach volume error seen by when calling the SDK Detach call
-* PWX-6056 - Expected error not found when using Stats on a non-existent volume.
+* PWX-6056 - Expected error not found when using Stats on a non-existent volume
 
 
 ## 1.5.1
@@ -74,7 +102,7 @@ This is a minor patch release with fixes issues around volume unmounts as well a
 * When a node is offline for longer than user configured timeout, move the replicas in that node out to
   other nodes with free space
 * Improvements to AWS Auto-scaling Group handling with KOPS
-* Lighthouse Volume Analyzer View Support.
+* Lighthouse Volume Analyzer View Support
 * Enable volume resize for volumes that are not attached
 * Periodic, light-weight pool rebalance for proactive capacity management
 
@@ -103,7 +131,7 @@ This is a patch release that adds capability to switch from shared to sharedv4 o
 
 Use http://install.portworx.com/1.4/ for K8S spec generation.
 
-* PWX-5681 - PX service to handle journald restarts.
+* PWX-5681 - PX service to handle journald restarts
 * PWX-5814 - Fix automatic diag uploads
 * PWX-5818 - Fix diag uploads via `pxctl service diags` when running under k8s environments
 
