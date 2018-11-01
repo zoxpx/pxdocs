@@ -1,7 +1,7 @@
 ---
-title: Installation
+title: Installing Portworx on Mesosphere/DCOS
 weight: 1
-linkTitle: Install
+linkTitle: Installing PX on Mesosphere/DCOS
 ---
 
 ## Install an application

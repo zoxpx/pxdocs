@@ -27,6 +27,8 @@ Read on for how to use Portworx to provide [persistent storage for Mesosphere DC
 For documentation for installing with Mesosphere/DCOS with Portworx, continue below
 {{< widelink url="/install-with-other/dcos/install" >}}Install Mesosphere/DCOS{{</widelink>}}
 
+## Post-installation
+
 For documentation for installing with Azure on DCOS with Portworx, continue below
 {{< widelink url="/install-with-other/dcos/application-installs/azure" >}}Install Azure on DCOS{{</widelink>}}
 
@@ -45,12 +47,8 @@ For documentation for installing with Hadoop on DCOS with Portworx, continue bel
 For documentation for installing with Kafka on DCOS with Portworx, continue below
 {{< widelink url="/install-with-other/dcos/application-installs/kafka" >}}Install Kafka on DCOS{{</widelink>}}
 
-
-
 For documentation for installing with Zookeeper on DCOS with Portworx, continue below
 {{< widelink url="/install-with-other/dcos/application-installs/zookeeper" >}}Install Zookeeper on DCOS{{</widelink>}}
-
-## Post-installation
 
 For documentation on operating and maintaining your Mesoshere/DCOS installation, continue below
 {{< widelink url="/install-with-other/dcos/operate-and-maintain" >}}Operate and Maintain{{</widelink>}}
