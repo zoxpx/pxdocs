@@ -1,6 +1,6 @@
 ---
 title: Create and Manage Volumes
-weight: 2
+weight: 12
 ---
 
 To create and manage volumes, use `pxctl volume`. You can use the created volumes directly with Docker with the `-v` option.

@@ -1,6 +1,6 @@
 ---
 title: Updating Volumes
-weight: 7
+weight: 13
 ---
 
 #### pxctl volume update {#pxctl-volume-update}

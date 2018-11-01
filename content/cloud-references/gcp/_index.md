@@ -4,6 +4,10 @@ weight: 2
 linkTitle: GCP
 ---
 
+{{<info>}}
+**Note:** If you are running on GKE, visit [Portworx on GKE](/portworx-install-with-kubernetes/cloud/google-kubernetes-engine).
+{{</info>}}
+
 The steps below will help you enable dynamic provisioning of Portworx volumes in your GCP cluster.
 
 ## Prerequisites
