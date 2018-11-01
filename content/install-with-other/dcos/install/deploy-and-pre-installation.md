@@ -28,7 +28,7 @@ sudo systemctl stop portworx
 
 The Portworx service is available in the DCOS universe, you can find it by typing the name in the search bar.
 
-[Portworx in DCOS Universe](/install-with-other/dcos/install/install-universe)
+![Portworx in DCOS Universe](/img/dcos-px-universe.png)
 
 To modify the defaults, click on the `Review & Run` button next to the package on the DCOS UI.
 
