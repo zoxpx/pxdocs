@@ -1,6 +1,6 @@
 ---
 title: Operate and Maintain
-weight: 2
+weight: 3
 ---
 
 This DCOS service will deploy Portworx as well as all the dependencies and additional services to manage the Portworx cluster. This includes a highly available etcd cluster, influxdb to store statistics and the Lighthouse service, which is the Web UI for Portworx.
