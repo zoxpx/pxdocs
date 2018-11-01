@@ -1,6 +1,6 @@
 ---
 title: Install the Portworx Universe on DCOS for air-gapped clusters
-weight: 3
+weight: 99
 linkTitle: Universe for Air-gapped clusters
 ---
 
