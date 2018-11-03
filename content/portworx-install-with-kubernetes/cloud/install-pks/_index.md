@@ -104,4 +104,4 @@ If running on **VMware vSphere**, continue at [Portworx install on PKS on vSpher
 
 If running on **AWS**, continue at [Portworx install with AWS Auto Scaling Groups](/portworx-install-with-kubernetes/cloud/aws/aws-asg).
 
-If running on **GCP**, continue at [Portworx install on Google Cloud Platform](/install-with-other/gcp).
+If running on **GCP**, continue at [Portworx install on Google Cloud Platform](/cloud-references/gcp).

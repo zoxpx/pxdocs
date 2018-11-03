@@ -89,4 +89,4 @@ Yes, Portworx PX-Enterprise supports data encryption-at-rest and also encryption
 Portworx PX-Enterprise supports cloudsnaps which enable the DevOps engineers to periodically back the data volumes in incremental snaps and restore the volume anywhere they want.
 
 ## Did we miss your question?
-If so, please let us know here: <a class="email" title="Submit feedback" href="mailto:{{site.feedback_email}}?subject={{site.feedback_subject_line}} feedback&body=I have some feedback about the {{page.title}} page"><i class="fa fa-envelope-o"></i> Feedback</a>
+If so, please let us know here: <a class="email" title="Submit feedback" href="mailto:support@portworx.com?subject={{site.feedback_subject_line}} feedback&body=I have some feedback about the {{page.title}} page"><i class="fa fa-envelope-o"></i> Feedback</a>

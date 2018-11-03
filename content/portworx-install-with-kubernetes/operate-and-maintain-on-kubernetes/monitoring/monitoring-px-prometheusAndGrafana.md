@@ -532,9 +532,9 @@ Access the Grafana dashboard by navigating at the `Nodeport 30950`. You would ne
 Navigate to Configurations --> Datasources.
 Create a datasource named `prometheus`. Enter the Prometheus endpoint as obtained in the install verification step for Prometheus from the above section.
 
-![grafanadatasource](/images/datasource-creation-grafana.png){:width="655px" height="200px"}
+![grafanadatasource](/img/datasource-creation-grafana.png)
 
 ### Post install verification
 
 Select the Portworx volume metrics dashboard on Grafana to view the Portworx metrics.
-![grafanadashboard](/images/grafana-portworx-dashboard.png){:width="655px" height="200px"}
+![grafanadashboard](/img/grafana-portworx-dashboard.png)
