@@ -205,7 +205,7 @@ To add nodes to increase capacity and enable high availability, simply repeat th
 
 After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool.
 
-With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes. For more on using **pxctl**, see the [CLI Reference](/reference/CLI).
+With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes. For more on using **pxctl**, see the [CLI Reference](/reference/cli).
 
 To view the global storage capacity, run:
 

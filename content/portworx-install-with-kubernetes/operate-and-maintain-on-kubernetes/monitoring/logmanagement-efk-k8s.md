@@ -10,7 +10,7 @@ PX runs as a deamonset on the Kubernetes cluster which ensures that it runs on e
 Elastic Search, FluentD and Kibana allow us to setup a complete logging solution for accessing logs of the PX pods scheduled on the kubernetes cluster.
 
 Setup Elastic Search and Kibana on your kubernetes cluster by following the the steps mentioned in the document here
-[Elastic Search and Kibana on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and kibana)
+[Elastic Search and Kibana on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana)
 
 ## Log Collection
 Fluentd is a log collector which enables you to log everything in a unified manner. Fluentd uses JSON as the log collection format.

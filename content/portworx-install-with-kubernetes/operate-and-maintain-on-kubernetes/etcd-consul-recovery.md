@@ -48,7 +48,7 @@ command with the `--force` argument.
 
 ### Etcd disaster recovery best practices
 
-* Ensure your etcd cluster that is used for storing Portworx configuration data is snapshotted and backed up periodically. Make sure you follow all the etcd recommendations mentioned [here](/maintain/etcd.html)
+* Ensure your etcd cluster that is used for storing Portworx configuration data is snapshotted and backed up periodically. Make sure you follow all the etcd recommendations mentioned [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd)
 * Ensure the snaps are stored in a different location or cloud storage like S3, so they can be retrieved from other sites if one of your site is down.
 * Follow this [link](https://coreos.com/etcd/docs/latest/op-guide/recovery.html) to learn more on how to restore etcd cluster from its snapshots.
 

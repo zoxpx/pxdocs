@@ -15,12 +15,8 @@ Portworx exports mounts to other containers and these in turn also get exported 
 
 ## Monitoring Portworx
 
-Portworx exports metrics to Prometheus as are described [here](/install-with-other/operate-and-maintain/prometheus)
+Portworx exports metrics to Prometheus as are described [here](/install-with-other/operate-and-maintain/monitoring/prometheus)
 
-Alert manager integration is described [here](/install-with-other/operate-and-maintain/alerting)
+Alert manager integration is described [here](/install-with-other/operate-and-maintain/monitoring/alerting)
 
-Grafana templates are provided [here](/install-with-other/operate-and-maintain/grafana/)
-
-
-
-
+Grafana templates are provided [here](/install-with-other/operate-and-maintain/monitoring/grafana/)

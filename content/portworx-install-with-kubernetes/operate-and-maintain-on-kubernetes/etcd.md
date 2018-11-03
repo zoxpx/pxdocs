@@ -21,7 +21,7 @@ You can use one of the following methods to setup an etcd cluster
 
 #### Setup ETCD cluster with static set of nodes
 
-If you have 3 static nodes where you want to run etcd follow [this](/maintain/etcd-quick-setup.html) guide to setup systemd services for an etcd cluster.
+If you have 3 static nodes where you want to run etcd follow [this](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd-quick-setup) guide to setup systemd services for an etcd cluster.
 
 #### Setup ETCD cluster using CoreOS documentation
 

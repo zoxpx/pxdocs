@@ -53,7 +53,7 @@ linkTitle: Running Portworx in Production with DC/OS
 
 * The `io_priority` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
 
-* This [page](/reference/data-volumes/class-of-service) offers more information on different io_prioirty levels
+* This [page](/data-volumes/class-of-service) offers more information on different io_prioirty levels
 
 
 ####  Working with drives with AWS Auto scaling group
@@ -87,7 +87,7 @@ PX  auto-detects availabilty zones and regions and provisions replicas across
   is created, it will have the replicas automatically created in other nodes in other zones.
 
 ### Toppology in on-premise deployments:
-Failure domains in terms of RACK information can be passed in as described [here](/reference/data-volumes/update-geography-info)
+Failure domains in terms of RACK information can be passed in as described [here](/data-volumes/update-geography-info)
 
 
 ### Volume Management Best Practices
@@ -143,7 +143,7 @@ Failure domains in terms of RACK information can be passed in as described [here
   ```text
   pxctl volume create wordpressvol --shared --size=100 --repl=3
   ```
-  This [page](/reference/data-volumes) gives more details on different volume types,
+  This [page](/data-volumes) gives more details on different volume types,
   how to create them and update the configuration for the volumes
 
 ### Data Protection for Containers
@@ -175,7 +175,7 @@ Portworx recommends setting up monitoring with Prometheus and AlertsManager to e
 
 While Prometheus can be deployed as a container within the container orchestrator, many of Portworx's production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
-  * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (/maintain/monitoring/prometheus/index.html)
+  * Here is how Prometheus can be setup to monitor Portworx [Prometheus](/install-with-other/operate-and-maintain/monitoring/prometheus)
   * Configure Grafana via this [template](/install-with-other/operate-and-maintain/monitoring/grafana)
   * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/install-with-other/operate-and-maintain/monitoring/alerting)
   * List of Portworx Alerts are documented [here](/install-with-other/operate-and-maintain/monitoring/portworx-alerts)
@@ -238,7 +238,7 @@ TODO: *Update the above page to show runc*
 * Drives can be added per node and PX will add that to the closest pool size by drive size.
 * Before adding drives to the node, the node will need to be taken into maintenance mode
 * Ensure the volumes in the node have replicas in other nodes
-  * If the volumes have replication factor of 1, increase the [replication factor](/reference/data-volumes/updating-volumes)
+  * If the volumes have replication factor of 1, increase the [replication factor](/reference/cli/updating-volumes)
   * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
 * Follow the instructions in this [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-up) to add storage each node.
 
@@ -258,7 +258,7 @@ TODO: *Update the above page to show runc*
 #### Portworx Software Upgrades
 
   * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrades
-  * Ensure there are [cloudsnaps](/portworx-install-with-kubernetes/cloud/backups) that are taken for all the volumes
+  * Ensure there are [cloudsnaps](/reference/cli/cloud-snaps) that are taken for all the volumes
   * If you are using the Portworx DC/OS framework for deploying PX and running PX as OCI format container, follow this [link](/install-with-other/dcos/operate-and-maintain/upgrade-oci) to perform the upgrades
   * If you are running PX as a systemd service, follow this [link](/install-with-other/dcos/operate-and-maintain/upgrade)
 

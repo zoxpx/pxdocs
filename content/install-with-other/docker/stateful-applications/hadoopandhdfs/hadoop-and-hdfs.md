@@ -304,7 +304,7 @@ There are two types of worker nodes used:
 
 Installation Step 1 Install DC/OS such that the management and head nodes are used as the DC/OS master nodes and the the Apollo 4200 worker nodes are the Mesos agent nodes. The Hadoop clusters will be scheduled on these nodes.
 
-Installation Step 2 Once DC/OS has been installed, deploy Portworx. First deploy the Portworx framework using the instructions [detailed here](content/install-with-other/dcos).
+Installation Step 2 Once DC/OS has been installed, deploy Portworx. First deploy the Portworx framework using the instructions [detailed here](/install-with-other/dcos).
 
 Next, install the Portworx framework for Big Data by following the instructions [detailed here](/install-with-other/dcos/application-installs/hadoop-and-hdfs).
 

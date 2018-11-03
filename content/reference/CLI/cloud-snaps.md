@@ -52,7 +52,7 @@ OPTIONS:
 
 #### Set the required cloud credentials ####
 
-For this, we will use `pxctl credentials create` command. These cloud credentials are stored in an external secret store. Before you use the command to create credentials, ensure that you have [configured a secret provider of your choice](/reference/key-management).
+For this, we will use `pxctl credentials create` command. These cloud credentials are stored in an external secret store. Before you use the command to create credentials, ensure that you have [configured a secret provider of your choice](/key-management).
 
 ```text
 # pxctl credentials create
@@ -338,7 +338,7 @@ Note: All cloudsnap operations requires secrets login to configured endpoint wit
 
 Also, to see how to configure cloud provider credentials, click the link below.
 
-[Credentials](/cli/reference/credentials)
+[Credentials](/reference/cli/credentials)
 
 **pxctl cloudsnap –help**
 

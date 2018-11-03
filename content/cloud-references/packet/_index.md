@@ -26,7 +26,7 @@ Portworx recommends a minimum cluster size of 3 nodes.
 Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
 
 Note: Portworx requires Docker to allow shared mounts.  This is standard as of Docker 1.12.  
-If you are running Docker without shared mounts, please follow the steps listed [here](/install-with-other/knowledge-base/shared-mount-propagation)
+If you are running Docker without shared mounts, please follow the steps listed [here](/reference/knowledge-base/shared-mount-propagation)
 
 ### Step 3: Deploy and Attach Block Storage Volume to Packet Server
 Follow the instuctions on Packet's knowledge base for [installing and attaching to block storage](https://help.packet.net/article/63-elastic-block-storage).

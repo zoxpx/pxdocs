@@ -8,7 +8,7 @@ Portworx has best practices for both global container level optimization, as wel
 ## Global performance tuning
 As of PX version 1.3, it is recommended to use a journal device to absorb PX metadata writes.  Journal writes are small with frequent syncs and therefore only SSD/NVME should be configured as a journal device.
 
-The journal device should be 2GB.  Using a larger device will not help, since PX will only use 2GB of the journal device.  The journal device can be specified via the `-j` option during installation, documented [here](/runc/options.html#opts).
+The journal device should be 2GB.  Using a larger device will not help, since PX will only use 2GB of the journal device.  The journal device can be specified via the `-j` option during installation, documented [here](/install-with-other/docker/standalone).
 
 {{<info>}}
 **Note 1:**<br/>You **must** ensure that the journal device is faster than your storage device allocated for PX.  If the journal device is slower than the actual storage drive, your overall performance will be lower and match the lower of two devices.
@@ -22,7 +22,7 @@ The journal device should be 2GB.  Using a larger device will not help, since PX
 **Note 3:**<br/>As of PX 1.4, we recommend using the `-j auto` option.  This allows PX to create it's own journal partition on the best drive.
 {{</info>}}
 
-If you are upgrading to 1.3 and want to add a journal device to an existing node, follow [these instructions](/maintain/add-journal-dev.html).
+If you are upgrading to 1.3 and want to add a journal device to an existing node, follow [these instructions](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/add-journal-dev).
 
 ## Volume granular performance tuning
 By default, PX will try to auto tune the IO profile setting for a given volume by learning from the access patterns.  However, this algorithm can be overridden and a specific profile can be chosen.

@@ -140,7 +140,7 @@ If the CLI is used to authenticate with AWS, for every restart of PX container i
 
 ### Key generation with AWS KMS {#key-generation-with-aws-kms}
 
-The following sections describe the key generation process with PX and AWS KMS. These keys can be used as passphrases for encrypted volumes. For more information on encrypted volumes, [click here](/reference/CLI/data-volumes/encrypted-volumes).
+The following sections describe the key generation process with PX and AWS KMS. These keys can be used as passphrases for encrypted volumes. For more information on encrypted volumes, [click here](/reference/cli/encrypted-volumes).
 
 Portworx provides CLI commands to generate AWS KMS Data keys. Portworx associates each KMS Data Key with a unique name provided through the ```--secret_id``` argument.
 

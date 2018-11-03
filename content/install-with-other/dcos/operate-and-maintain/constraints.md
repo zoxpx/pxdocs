@@ -6,7 +6,7 @@ linkTitle: Constraining Applications to PX nodes
 
 Whenever possible, Portworx should be deployed on all nodes within a Mesos/Mesosphere/DCOS cluster.
 Portworx clusters can scale up to 1000 nodes. Portworx clusters can also include nodes that contribute no storage,
-but operate as "head-only" nodes to facilitate [auto-scaling groups](/cloud/aws/asg.html).
+but operate as "head-only" nodes to facilitate [auto-scaling groups](/portworx-install-with-kubernetes/cloud/aws/aws-asg).
 
 However, when Portworx cannot be installed on all nodes, Mesos 'constraints' should be used
 to ensure that services depending on Portworx will only get scheduled on nodes

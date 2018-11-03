@@ -7,7 +7,7 @@ weight: 5
 
 The cloud provider credentials are stored in an external secret store. Before you use these commands, you should configure a secret provider of your choice with Portworx. For more information, click the link below.
 
-[Key Management](/reference/key-management)
+[Key Management](/key-management)
 
 **pxctl credentials**
 
@@ -80,4 +80,3 @@ Credential deleted successfully
 /opt/pwx/bin/pxctl cred validate --uuid ffffffff-ffff-ffff-1111-ffffffffffff
 Credential validated successfully
 ```
-

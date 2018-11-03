@@ -31,7 +31,7 @@ Below are all parameters that can be given in the query string.
 |:-------|:--------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------|
 |        | <center>REQUIRED PARAMETERS</center>                                                                                                  |                                                            |
 | c      | Specifies the unique name for the Portworx cluster.                                                                                   | <var>c=test_cluster</var>                                  |
-| k      | Your key value database, such as an etcd cluster or a consul cluster.                                                                 | <var>k=etcd:http://etcd.fake.net:2379</var>                |
+| k      | Your key value database, such as an etcd cluster or a consul cluster.                                                                 | <var>k=etcd:`http://etcd.fake.net:2379`</var>                |
 |        | <center>OPTIONAL PARAMETERS</center>                                                                                                  |                                                            |
 | s      | Specify comma-separated list of drives.                                                                                               | <var>s=/dev/sdb,/dev/sdc</var>                             |
 | d      | Specify data network interface. This is useful if your instances have non-standard network interfaces.                                | <var>d=eth1</var>                                          |
@@ -51,7 +51,7 @@ Below are all parameters that can be given in the query string.
 | cert   | Location of certificate for ETCD authentication.                                                                                      | <var>cert=/path/to/server.crt</var>                        |
 | key    | Location of certificate key for ETCD authentication.                                                                                  | <var>key=/path/to/server.key</var>                         |
 | acl    | ACL token value used for Consul authentication.                                                                                       | <var>acl=398073a8-5091-4d9c-871a-bbbeb030d1f6</var>        |
-| e      | Comma-separated list of environment variables that will be exported to portworx. To view a list of all Portworx environment variables, go to [passing environment variables](/runc/options.html#env-variables).
+| e      | Comma-separated list of environment variables that will be exported to portworx. To view a list of all Portworx environment variables, go to [passing environment variables](/install-with-other/docker/standalone).
                                                       | <var>e=MYENV1=myvalue1,MYENV2=myvalue2</var> |
 
 {{<info>}}

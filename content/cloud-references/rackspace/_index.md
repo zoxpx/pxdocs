@@ -4,7 +4,7 @@ weight: 5
 linkTitle: Rackspace
 ---
 
-This guide show you how you can easily deploy Portworx on [**Rackspace**](http://https://www.rackspace.com/login)
+This guide show you how you can easily deploy Portworx on [**Rackspace**](https://www.rackspace.com/login)
 
 
 ### Step 1: Provision Cloud Server
@@ -30,7 +30,7 @@ Note: Volume cannot not be attached until the server is available
 Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
 
 Note: Portworx requires Docker to allow shared mounts.  This is standard as of Docker 1.12.  
-If you are running Docker without shared mounts, please follow the steps listed [here](/install-with-other/knowledge-base/shared-mount-propagation)
+If you are running Docker without shared mounts, please follow the steps listed [here](/reference/knowledge-base/shared-mount-propagation)
 
 
 ### Step 4: Launch PX-Enterprise

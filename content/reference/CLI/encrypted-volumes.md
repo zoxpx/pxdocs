@@ -7,7 +7,7 @@ This guide will give you an overview of how to use Encryption feature for Portwo
 
 All the encrypted volumes are protected by a key. Portworx uses a passphrase as a key to encrypt volumes. It is recommended to store these passphrases in a secure secret store. To know more about the supported secret providers and how to configure them with Portworx, click the link below.
 
-[Key Management] (/reference/key-management)
+[Key Management](/key-management)
 
 ### Creating and using encrypted volumes {#creating-and-using-encrypted-volumes}
 
@@ -53,4 +53,3 @@ Volume successfully attached at: /dev/mapper/pxd-enc374663852714325215
 ```
 
 **Important: Make sure secret `key1` exists in the secret endpoint**
-

@@ -75,7 +75,7 @@ cat /etc/pwx/config.json
 
 #### Key generation with Vault {#key-generation-with-vault}
 
-The following sections describe the key generation process with Portworx and Vault which can be used for encrypting volumes. More info about encrypted volumes [here](/reference/data-volumes/encrypted-volumes)
+The following sections describe the key generation process with Portworx and Vault which can be used for encrypting volumes. More info about encrypted volumes [here](/reference/cli/encrypted-volumes)
 
 **Setting cluster wide secret key**
 

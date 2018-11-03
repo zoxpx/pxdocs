@@ -14,7 +14,7 @@ Below are the parameters you can specify when generating the spec file.
 | Parameter | **Description** | **Example** |
 | --- | --- | --- |
 | c | Specifies the unique name for the Portworx cluster. | c=test\_cluster |
-| k | Your key value database, such as an etcd cluster or a consul cluster.  If using secure `etcd`, specify `https` in the URL and ensure all certificates are in the `/etc/pwx/` directory on each host pointed to by the Portworx container. | k=etcd:[http://etcd.fake.net:2379](http://etcd.fake.net:2379) |
+| k | Your key value database, such as an etcd cluster or a consul cluster.  If using secure `etcd`, specify `https` in the URL and ensure all certificates are in the `/etc/pwx/` directory on each host pointed to by the Portworx container. | k=etcd:`http://etcd.fake.net:2379`|
 
 **Optional Parameters**
 

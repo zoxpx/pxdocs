@@ -6,7 +6,7 @@ linkTitle: Upgrade
 
 This guide walks through upgrading Portworx deployed on DCOS through the framework available in the DCOS
 catalog. If you are using a Portworx framework version older than 1.2*, refer [this guide to perform the
-Portworx upgrade](/scheduler/mesosphere-dcos/upgrade-1.1.html).
+Portworx [upgrade](/install-with-other/dcos/operate-and-maintain/upgrade).
 
 ### Update the Portworx image from UI
 

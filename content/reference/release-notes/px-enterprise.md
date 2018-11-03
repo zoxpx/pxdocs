@@ -162,7 +162,7 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 * Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting
   port number in [install arguments](/install-with-other/docker/standalone/standalone-oci)
 * Provide ability to do a [license tranfer](/reference/release-notes/px-licensing) from one cluster to another cluster
-* Add support for [cloudsnap deletes](/reference/CLI/cloud-snaps#pxctl-cloudsnap-delete)
+* Add support for [cloudsnap deletes](/reference/cli/cloud-snaps#pxctl-cloudsnap-delete)
 
 ### Key Fixes:
 
@@ -256,7 +256,7 @@ _**Upgrade Note 3**_: Container information parsing code has been disabled and h
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
 * Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
 * Add schduler information in `pxctl status` display
-* Add info about cloud volumes CLI [k8s](/install-with-other/cloud-references/gcp) , [others](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
+* Add info about cloud volumes CLI [k8s](/cloud-references/gcp) , [others](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
 * `pxctl service add --journal -d <device>` to add journal device support
 
 #### Issues addressed {#issues-addressed}
@@ -761,12 +761,12 @@ No new features in 1.2.1. This is a patch release.
 #### Key Features {#key-features-10}
 
 * [AWS Auto-scaling integration with Portworx](/portworx-install-with-kubernetes/cloud/aws/aws-asg) managing EBS volumes for EC2 instances in AWS ASG
-* [Multi-cloud Backup and Restore](/reference/CLI/cloud-snaps) of Portworx Volumes
-* [Encrypted Volumes](/reference/data-volumes/encrypted-volumes) with Data-at-rest and Data-in-flight encryption
+* [Multi-cloud Backup and Restore](/reference/cli/cloud-snaps) of Portworx Volumes
+* [Encrypted Volumes](/reference/cli/encrypted-volumes) with Data-at-rest and Data-in-flight encryption
 * Docker V2 Plugin Support
 * [Prometheus Integeration](/install-with-other/operate-and-maintain/monitoring/prometheus)
-* [Hashicorp Vault](/reference/key-management/portworx-with-vault), [AWS KMS integration](/portworx-install-with-kubernetes/cloud/aws) and Docker Secrets Integration
-* [Dynamically resize](/reference/data-volumes/updating-volumes) PX Volumes with no application downtime
+* [Hashicorp Vault](/key-management/portworx-with-vault), [AWS KMS integration](/portworx-install-with-kubernetes/cloud/aws) and Docker Secrets Integration
+* [Dynamically resize](/reference/cli/updating-volumes) PX Volumes with no application downtime
 * Security updates improve PX container security
 
 #### Key Issues Addressed {#key-issues-addressed-7}

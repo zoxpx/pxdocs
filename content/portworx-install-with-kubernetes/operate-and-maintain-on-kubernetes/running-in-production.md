@@ -10,7 +10,7 @@ weight: 4
 * Follow the instructions in the [k8s install](/portworx-install-with-kubernetes) page in the docs.
 * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will form the Portworx cluster
 * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
-* etcd - Setup etcd as a 3-node etcd cluster _outside_ the container orchestrator to ensure maximum stability. Refer to the following [page](https://etcd) on how to install etcd and also configure it for maximum stability.
+* etcd - Setup etcd as a 3-node etcd cluster _outside_ the container orchestrator to ensure maximum stability. Refer to the following [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) on how to install etcd and also configure it for maximum stability.
 
 #### Configuring the Server or the Compute Infrastructure {#configuring-the-server-or-the-compute-infrastructure}
 
@@ -45,7 +45,7 @@ This can be specificed in the args section of the px-spec.yaml used for installi
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID \(if available\) and give the block device from a HW RAID volume for Portworx to manage.
 * PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` \(or `priority_io` in kubernetes px spec\) and they offer the levels `high`, `medium` and `low`
-* The `priority_io` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/operate-and-maintain-on-kubernetes/maintenance-mode)
+* The `priority_io` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
 
 **Working with drives with AWS Auto scaling group**
 
@@ -77,7 +77,7 @@ This node is in us-east-1. If PX is started in other zones, then when a volume w
 
 #### Topology in on-premise deployments: {#topology-in-on-premise-deployments}
 
-Failure domains in terms of RACK information can be passed in as described [here](operate-and-maintain-on-kubernetes/update-portworx-geography-info)
+Failure domains in terms of RACK information can be passed in as described [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/update-portworx-geography-info)
 
 #### Volume Management Best Practices {#volume-management-best-practices}
 
@@ -174,7 +174,7 @@ For e.g., for PX cluster running on AWS,
    shared: "true"
 ```
 
-This [page](/reference/CLI/data-volumes) gives more details on different volume types, how to create them and update the configuration for the volumes
+This [page](/data-volumes) gives more details on different volume types, how to create them and update the configuration for the volumes
 
 * In order to ensure hyper-convergence, ensure you have Stork installed and running in the cluster. See the install instructions in the previous section
 
@@ -182,7 +182,7 @@ This [page](/reference/CLI/data-volumes) gives more details on different volume 
 
 * Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures.
 * Portworx support 64 snapshots per volume.
-* Refer to this [document](/reference/CLI/snapshots) for a brief overview on how to manage snapshots via `pxctl`. In Kubernetes, most snapshot functionality can be handled via kubernetes command line.
+* Refer to this [document](/reference/cli/snapshots) for a brief overview on how to manage snapshots via `pxctl`. In Kubernetes, most snapshot functionality can be handled via kubernetes command line.
 * Periodic scheduled snapshots can be setup by defining the `snap_interval` in the Portworx StorageClass. An example is shown below.
 
 ```text
@@ -238,7 +238,7 @@ You can run the following command to edit your existing Portworx ClusterRole
 $ kubectl edit clusterrole node-get-put-list-role
 ```
 
-* Refer to the [Snapshots document](/reference/CLI/snapshots) in the Kubernetes section of the docs for more up to date information on snapshots.
+* Refer to the [Snapshots document](/reference/cli/snapshots) in the Kubernetes section of the docs for more up to date information on snapshots.
 * If you have installed Stork, the snapshot operations can be executed via Stork. Follow the [link](https://github.com/libopenstorage/stork/tree/master#creating-snapshots) to see how snapshots can be done with Stork.
 * For DR, It is recommended to setup cloudsnaps as well which is covered in detail in the Day 3 - Cloudsnaps section
 
@@ -302,7 +302,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 * Drives can be added per node and PX will add that to the closest pool size by drive size.
 * Before adding drives to the node, the node will need to be taken into maintenance mode
 * Ensure the volumes in the node have replicas in other nodes
-  * If the volumes have replication factor of 1, increase the [replication factor](/reference/data-volumes/updating-volumes)
+  * If the volumes have replication factor of 1, increase the [replication factor](/reference/cli/updating-volumes)
   * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
 * Follow the instructions in this [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-up) to add storage each node.
 
@@ -323,13 +323,13 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 * Work with Portworx Support before planning major upgrades
 * Ensure all volumes have up-to-date [snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
-* Ensure all volumes have up-to-date [cloudsnaps](/reference/CLI/cloud-snaps)
+* Ensure all volumes have up-to-date [cloudsnaps](/reference/cli/cloud-snaps)
 * Refer to [Upgrade Portworx on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade)
 
 **Kubernetes Upgrades**
 
 * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
-* Ensure there are [cloudsnaps](/reference/CLI/cloud-snaps) that are taken.
+* Ensure there are [cloudsnaps](/reference/cli/cloud-snaps) that are taken.
 * After the migration, relaunch PX and ensure that the entire cluster is online by running `pxctl status`
 
 **OS upgrades and Docker Upgrades .**

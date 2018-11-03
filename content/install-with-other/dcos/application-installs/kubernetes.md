@@ -35,4 +35,4 @@ Please use the following guides:
 * [Dynamic Provisioning](/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning)
 * [Using Pre-provisioned volumes](/portworx-install-with-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes)
 * [Creating and using snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
-* [Volume encryption](/reference/data-volumes/encrypted-volumes)
+* [Volume encryption](/reference/cli/encrypted-volumes)

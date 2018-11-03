@@ -44,7 +44,7 @@ hidden: true
 
 ### Alerts and Monitoring for Production
 
-  * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (monitoring/prometheus/index.html)
+  * Here is how Prometheus can be setup to monitor Portworx [Prometheus](/install-with-other/operate-and-maintain/monitoring/prometheus)
   * Configure Grafana via this [template](/install-with-other/operate-and-maintain/monitoring/grafana)
   * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/install-with-other/operate-and-maintain/monitoring/alerting)
   * List of Portworx Alerts are documented [here](/install-with-other/operate-and-maintain/monitoring/alerting)

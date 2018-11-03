@@ -21,7 +21,7 @@ At least some of the The EC2 instances in your AWS cluster need to have storage 
 Since PX is a replicated storage solution, we recommend using multiple availability zones when creating your EC2 based cluster.  Follow this site for more information on geographical availability of your instances: [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
 
 ## Dynamic Provisioning
-You can have your PX cluster dynamically manage the allocation and detachment of your EBS volumes.  This is known as ASG (Auto Scale Group) mode.  Follow this guide to enable [ASG](/reference/cloud/amazon-web-services/asg)
+You can have your PX cluster dynamically manage the allocation and detachment of your EBS volumes.  This is known as ASG (Auto Scale Group) mode.  Follow this guide to enable [ASG](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
 
 ## Install Portworx
 Once you have your AWS EC2 infrastructure configured, follow one of these guides to install [Portworx](./)
