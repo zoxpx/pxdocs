@@ -1,6 +1,6 @@
 ---
 title: Application Installs
-weight: 2
+weight: 4
 ---
 
 Since the stateful services in the DCOS universe do not support external volumes, you will need to add additional packages available here in order to use Portworx with these services.

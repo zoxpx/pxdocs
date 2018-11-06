@@ -1,6 +1,7 @@
 ---
 title: Run Portworx with Kubernetes on Mesosphere DC/OS
-linkTitle: Kubernetes
+linkTitle: Install on Kubernetes on DCOS
+weight: 2
 ---
 
 {{<info>}}

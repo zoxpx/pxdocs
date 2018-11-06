@@ -28,6 +28,9 @@ For documentation for installing Portworx on DCOS, continue below
 {{< widelink url="/install-with-other/dcos/install" >}}Installing Portworx on DCOS
 {{</widelink>}}
 
+For documentation for installing Portworx on Kubernetes on DCOS, continue below
+{{< widelink url="/install-with-other/dcos/install-dcos-k8s" >}}Install Portworx on Kubernetes on DCOS {{</widelink>}}
+
 For documentation for installing Portworx on DCOS on Azure (ACS), continue below
 {{< widelink url="/install-with-other/dcos/install-azure" >}}Install Portworx on DCOS on Azure {{</widelink>}}
 
