@@ -8,9 +8,8 @@ Since the stateful services in the DCOS universe do not support external volumes
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 {{<info>}}
-**Note:**  
 These frameworks are only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
-</info>
+{{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
 

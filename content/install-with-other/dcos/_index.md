@@ -24,31 +24,17 @@ Read on for how to use Portworx to provide [persistent storage for Mesosphere DC
 
 ## Installation
 
-For documentation for installing with Mesosphere/DCOS with Portworx, continue below
-{{< widelink url="/install-with-other/dcos/install" >}}Install Mesosphere/DCOS{{</widelink>}}
+For documentation for installing Portworx on DCOS, continue below
+{{< widelink url="/install-with-other/dcos/install" >}}Installing Portworx on DCOS
+{{</widelink>}}
+
+For documentation for installing Portworx on DCOS on Azure (ACS), continue below
+{{< widelink url="/install-with-other/dcos/application-installs/azure" >}}Install Portworx on DCOS on Azure {{</widelink>}}
 
 ## Post-installation
 
-For documentation for installing with Azure on DCOS with Portworx, continue below
-{{< widelink url="/install-with-other/dcos/application-installs/azure" >}}Install Azure on DCOS{{</widelink>}}
-
-For documentation for installing with Cassandra on DCOS with Portworx, continue below
-{{< widelink url="/install-with-other/dcos/application-installs/cassandra" >}}Install Cassandra on DCOS{{</widelink>}}
-
-For documentation for installing with Couchdb on DCOS with Portworx, continue below
-{{< widelink url="/install-with-other/dcos/application-installs/couchdb" >}}Install with Couchdb on DCOS {{</widelink>}}
-
-For documentation for installing with Elasticsearch on DCOS with Portworx, continue below
-{{< widelink url="/install-with-other/dcos/application-installs/elastic-search-and-kibana" >}}Install Elasticsearch on DCOS{{</widelink>}}
-
-For documentation for installing with Hadoop on DCOS with Portworx, continue below
-{{< widelink url="/install-with-other/dcos/application-installs/hadoop-and-hdfs" >}}Install Hadoop on DCOS{{</widelink>}}
-
-For documentation for installing with Kafka on DCOS with Portworx, continue below
-{{< widelink url="/install-with-other/dcos/application-installs/kafka" >}}Install Kafka on DCOS{{</widelink>}}
-
-For documentation for installing with Zookeeper on DCOS with Portworx, continue below
-{{< widelink url="/install-with-other/dcos/application-installs/zookeeper" >}}Install Zookeeper on DCOS{{</widelink>}}
+For documentation for installing various stateful applications on DCOS with Portworx, continue below
+{{< widelink url="/install-with-other/dcos/application-installs" >}}Install Stateful applications on DCOS{{</widelink>}}
 
 For documentation on operating and maintaining your Mesoshere/DCOS installation, continue below
 {{< widelink url="/install-with-other/dcos/operate-and-maintain" >}}Operate and Maintain{{</widelink>}}
