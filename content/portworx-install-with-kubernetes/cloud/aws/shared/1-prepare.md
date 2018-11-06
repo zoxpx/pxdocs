@@ -36,48 +36,7 @@ Portworx creates and attaches EBS volumes. As such, it needs the AWS permissions
 }
 ```
 
-You can provide these permissions to Portworx in multiple ways, [click here](/key-management/portworx-with-aws-kms)
+You can provide these permissions to Portworx in one of following ways:
 
-### Specify a disk template {#ebs-volume-template}
-
-An EBS volume template defines the EBS volume properties that Portworx will use as a reference. There are two methods you can use to provide this template to Portworx. These are discussed below.
-
-#### Method 1: Create your own template spec
-
-In Portworx 1.3 and higher, you can specify a template spec which will be used by Portworx to create new EBS volumes.
-
-The spec follows this format:
-
-```text
-"type=<EBS volume type>,size=<size of EBS volume>,iops=<IOPS value>"
-```
-
-* **type**: Following two types are supported
-  * _gp2_
-  * _io1_ \(For io1 volumes specifying the iops value is mandatory.\)
-* **size**: This is the size of the EBS volume in GB
-* **iops**: This is the required IOs per second from the EBS volume.
-
-See [EBS details](https://aws.amazon.com/ebs/details/) for more details on above parameters.
-
-Examples:
-
-* `"type=gp2,size=200"`
-* `"type=gp2,size=100","type=io1,size=200,iops=1000"`
-
-You will use the template spec later in the installation.
-
-#### Method 2: Use existing EBS volumes as templates
-
-You can also reference an existing EBS volume as a template. Create at least one EBS volume using the AWS console or AWS CLI. This volume \(or a set of volumes\) will serve as a template EBS volume\(s\). On every node where Portworx is active, a new EBS volume\(s\) identical to the template volume\(s\) will be created.
-
-For example, create two volumes as:
-
-```text
-vol-0743df7bf5657dad8: 1000 GiB provisioned IOPS
-vol-0055e5913b79fb49d: 1000 GiB GP2
-```
-
-Ensure that these EBS volumes are created in the same region as the auto scaling group.
-
-You will use the EBS volume Id \(e.g. _vol-04e2283f1925ec9ee_\) later in the installation.
+1. Instance Privileges: Provide above permissions for all the instances in the autoscaling cluster by applying the corresponding IAM role. More info about IAM roles and policies can be found [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
+2. Environment Variables: Create a User with the above policy and provide the security credentials (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY) to Portworx.
