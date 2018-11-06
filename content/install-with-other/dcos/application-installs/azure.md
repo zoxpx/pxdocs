@@ -1,91 +1,83 @@
 ---
-title: Azure
+title: ACS-Engine with DCOS and Portworx
+linkTitle: Azure
 ---
 
-To set up the Azure Container Service Engine with DCOS to use Portworx, follow the steps below.
+### Overview
+The [Azure Container Service Engine](https://github.com/Azure/acs-engine) (acs-engine) generates ARM (Azure Resource Manager) templates for Docker enabled clusters on Microsoft Azure with your choice of DC/OS, Kubernetes, Swarm Mode, or Swarm orchestrators. The input to the tool is a cluster definition. The cluster definition is very similar to (in many cases the same as) the ARM template syntax used to deploy a Microsoft Azure Container Service cluster.
 
-### Install the Azure Container Service \(ACS\) Engine
+The cluster definition file enables the following customizations to your Docker enabled cluster:
 
-The ACS Engine binary files are located [here](https://github.com/Azure/acs-engine/releases). To install the ACS Engine on Linux, run this command:
+* choice of DC/OS, Kubernetes, Swarm Mode, or Swarm orchestrators
+* multiple agent pools where each agent pool can specify:
+* standard or premium VM Sizes,
+* node count,
+* Virtual Machine ScaleSets or Availability Sets,
+* Storage Account Disks or Managed Disks (under private preview),
+* Docker cluster sizes of 1200
 
-```text
-curl -L https://aka.ms/InstallAzureCli | bash
+The instructions below are presented only as a *template* for how to deploy Portworx on ACS-Engine using DCOS.
+
+### Install `acs-engine` and `azure CLI`
+Install and build the [`acs-engine` binary](https://github.com/Azure/acs-engine/blob/master/docs/acsengine.md)
+
+From a Linux host:
+* git clone https://github.com/Azure/acs-engine.git
+* cd acs-engine
+* ./scripts/devenv.sh
+* make prereqs && make build
+* ```curl -L https://aka.ms/InstallAzureCli | bash```
+
+### Login to Azure and Set Subscription
+
+* az login
+* az account set --subscription "Your-Azure-Subscription-UUID"
+
+### Create Azure Resource Group and Location
+
+Pick a name for the Azure Resource Group and choose a LOCATION value
+among the following:  
+`centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus`
+<br>`southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest`
+<br>`brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia`
+<br>`canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth`
+
+* az group create --name "$RGNAME" --location "$LOCATION"
+
+### Select and customize the deployment configuration
+
+The example deployment here uses DCOS with pre-attached disks and VM scale sets.
+The sample json file can be found in the acs-engine repository under [examples/disks-managed/dcos-preAttachedDisks-vmss.json](https://github.com/Azure/acs-engine/blob/master/examples/disks-managed/dcos-preAttachedDisks-vmss.json)
+
+The most important consideration for Portworx is to ensure that the target nodes have at least one "local" attached disk
+that can be used to contribute storage to the global storage pool.
+
+For the `masterProfile`, specify an appropriate value for `dnsPrefix` which will be used for fully qualified domain name (FQDN).
+<br>Use the default `vmSize` or select an appropriate value for the machine type and size.
+<br>Specify the number and size of disks that will be attached to each DCOS private agent
+as per the template default:
+
+```bash
+[...]
+"diskSizesGB": [128, 128, 128, 128]
+[...]
 ```
 
-### Install the Azure CLI
+Specify the appropriate admin username as `adminUsername` and public key data as `keyData`
 
-Follow the steps [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) to install the Azure CLI.
+### Generate the Azure Resource Management (ARM) templates
 
-### Login to Azure and set the subscription
-
-```text
-az login
-az account set –subscription <Your-Azure-Subscription-UUID>
+```bash
+./acs-engine generate examples/disks-managed/my-dcos-preAttachedDisks-vmss.json
 ```
 
-### Create the Azure Resource Group and Location
+The template will get generated under the acs-engine `_output/$NAME` where *$NAME* correspods
+to the name used for the `dnsPrefix`.   `acs-engine` will generate the appropriate files for
+`apimodel.json`, `azuredeploy.json`, and `azuredeploy.parameters.json`
 
-Get the Azure locations using the Azure CLI command:
+### Deploy the generated ARM template
 
-```text
-az account list-locations
-```
-
-Example locations: 
-
-`centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus`   
-`southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest`   
-`brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia`   
-`canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth`
-
-### Create an Azure resource group by specifying a name and a location
-
-```text
-az group create –name <region-name> –location <location>
-```
-
-### Create a service principal in Azure AD
-
-```text
-az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9"
-{
-  "appId": "1311e5f6-xxxx-xxxx-xxxx-ede45a6b2bde",
-  "displayName": "azure-cli-2017-10-27-07-37-41",
-  "name": "http://azure-cli-2017-10-27-07-37-41",
-  "password": "ac49a307-xxxx-xxxx-xxxx-fa551e221170",
-  "tenant": "ca9700ce-xxxx-xxxx-xxxx-09c48f71d0ce"
-}
-```
-
-
-
-### Select and customize the deployment configuration {#select-and-customize-the-deployment-configuration}
-
-The example deployment here uses Kubernetes with pre-attached disks and VM scale sets. Find a sample JSON file in the acs-engine repository here: [examples/disks-managed/kubernetes-preAttachedDisks-vmas.json](https://github.com/Azure/acs-engine/blob/master/examples/disks-managed/kubernetes-preAttachedDisks-vmas.json)​
-
-Ensure that the Portworx target nodes have at least one “local” attached disk which can be used to contribute storage to the global storage pool.
-
-For the `masterProfile`, specify an appropriate value for `dnsPrefix` which will be used for fully qualified domain name \(FQDN\) \[ Ex: “myacsk8scluster”\]. Use the default `vmSize` or select an appropriate value for the machine type and size. Specify the number and size of disks that will be attached to each DCOS private agent as per the template default:
-
-```text
-[...]"diskSizesGB": [128, 128, 128, 128][...]
-```
-
-Specify the `adminUsername` and public key data in `keyData`
-
-Specify the `clientId` and `secret` which are located under the `servicePrincipalProfile`
-
-### Generate the Azure Resource Management \(ARM\) templates {#generate-the-azure-resource-management-arm-templates}
-
-```text
-acs-engine generate my-k8s-preAttachedDisks-vmas.json
-```
-
-The output files are generated in the `_output/$NAME` directory where `$NAME` corresponds to the name used for the `dnsPrefix`. For more information on the specific files that are generated, see this [article](https://github.com/Azure/acs-engine/blob/master/docs/acsengine.md).
-
-### Deploy the generated ARM template {#deploy-the-generated-arm-template}
-
-```text
+```bash
 az group deployment create \
     --name "$NAME" \
     --resource-group "$RGNAME" \
@@ -93,30 +85,31 @@ az group deployment create \
     --parameters "./_output/$NAME/azuredeploy.parameters.json"
 ```
 
-where `$RGNAME` corresponds to the resource group name created above, and `$NAME` corresponds to the above value used for `dnsPrefix`
+where $RGNAME corresponds to the resource group name created above, and $NAME corresonds to the above value used for `dnsPrefix`
 
-#### Create an `ssh` tunnel to the DCOS GUI {#create-an-ssh-tunnel-to-the-dcos-gui}
+### Create an `ssh` tunnel to the DCOS GUI
 
-Currently, ARM templates deployed through the ACS Engine require that an `ssh` tunnel be established to connect to the instance specified as the FQDN. As such for DCOS, the easiest way to manage the cluster is to establish an ssh tunnel that can be used to access the DCOS GUI. See the full instructions [here](https://docs.microsoft.com/en-us/azure/container-service/container-service-connect)
+Currently, ARM templates deployed through ACS-engine require that an 'ssh' tunnel be established
+to connect to the instance specified as the FQDN.  As such for DCOS, the easiest way to manage the cluster is to establish
+an ssh tunnel that can be used to access the DCOS GUI.  Full instructions for recommended approaches can be found [here](https://docs.microsoft.com/en-us/azure/container-service/container-service-connect)
+)
 
 A simple example for access might look like this:
 
-```text
+```bash
 sudo ssh -i your-private.key  -fNL 80:localhost:80 -p 2200  \
      adminUsername@dnsPrefix.LOCATION.cloudapp.azure.com
 ```
 
-where `your-private.key` is the private key that corresponds to `keyData` in the template.   
-`adminUsername` and `dnsPrefix` refer to the corresponding values in the template.   
-`LOCATION` corresponds to the location used for the resource group created.
+where `your-private.key` is the private key that corresponds to `keyData` in the template
+<br> `adminUsername` and `dnsPrefix` refer to the corresponding values in the template
+<br> `LOCATION` corresponds to the location used for the resource group created.
 
-After the DCOS GUI is accessible, install the DCOS CLI on your local machine.
+Once the DCOS GUI is accessible, then install the DCOS CLI on your local machine
 
-#### Install an application
+### Install Portworx
 
-You are ready to install a application that uses Portworx. To do this, click the link below and find the application you want to install.
+Use the [standard Portworx doc guide](/install-with-other/dcos/install) for
+installing the Portworx Frameworks on DCOS.
 
-{% page-ref page="dc-os/application-installs/" %}
-
-
-
+Once Portworx is installed, then the [Portworx Stateful Service Frameworks](/install-with-other/dcos/application-installs) can be easily deployed as per the reference documentation.
