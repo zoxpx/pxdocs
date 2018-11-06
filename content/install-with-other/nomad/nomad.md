@@ -12,10 +12,6 @@ Portworx can install easily through either Terraform or Ansible.
 * To install with **Terraform**, please use the [Terraform Portworx Module](https://registry.terraform.io/modules/portworx/portworx-instance/)
 * To install with **Ansible**, please use the [Ansible Galaxy Role](https://galaxy.ansible.com/portworx/portworx-defaults/)
 
-For more details, click the link below.
-
-{% page-ref page="../reference/installation-arguments.md" %}
-
 Nomad has a very natural alignment with `consul`. Therefore having Portworx use `consul` as the clustered `kvdb` when deployed through Nomad makes common sense.  
  When doing so, `consul` can be referenced locally on all nodes, as with `127.0.0.1:8500`
 

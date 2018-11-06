@@ -164,9 +164,7 @@ These inline specs can be passed in through the scheduler application template. 
 
 ### Global Namespace \(Shared Volumes\) {#global-namespace-shared-volumes}
 
-To use Portworx volumes across nodes and multiple containers, click the link below.
-
-{% page-ref page="shared-volumes.md" %}
+To use Portworx volumes across nodes and multiple containers, [click here](/data-volumes/shared-volumes).
 
 ### Inspect volumes {#inspect-volumes}
 
@@ -384,4 +382,3 @@ In the below example parent volume `myvol` is restored from its snapshot `mysnap
 pxctl volume restore --snapshot mysnap myvol
 Successfully started restoring volume myvol from mysnap.
 ```
-

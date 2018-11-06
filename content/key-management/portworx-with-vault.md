@@ -16,9 +16,7 @@ If you are installing Portworx on Kubernetes, when generating the [Portworx Kube
 1. Select `vault` from the “Secrets type” list
 2. In the environment variables section set _Portworx Vault Environment variables_ \(see section below\) to identify Vault endpoint.
 
-To generate Portworx spec for Kubernetes, refer instructions, click on the link below.
-
-{% page-ref page="../portworx-install-with-kubernetes/" %}
+To generate Portworx spec for Kubernetes, refer instructions, [click here](/portworx-install-with-kubernetes).
 
 If you already have a running Portworx installation, see the section on each node.
 

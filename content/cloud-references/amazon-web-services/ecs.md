@@ -100,10 +100,6 @@ sudo /opt/pwx/bin/px-runc install -sysd /dev/null -c MY_CLUSTER_ID \
   -s /dev/xvdb -s /dev/xvdc {{ include.sched-flags }}
 ```
 
-##### Command-line arguments
-
-  {% include cmdargs.md %}
-
 #### Step 2.3: Download and Activate the Portworx service
 
 Since the Amazon ECS systems do not have the `systemd` service available, we will need to start Portworx service via the custom init-script:

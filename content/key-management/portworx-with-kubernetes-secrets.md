@@ -103,9 +103,9 @@ Editing the daemonset will also restart all the Portworx pods, which will consum
 
 The following section describes the key generation process with Portworx and Kubernetes which can be used for encrypting volumes. For more information about encrypted volumes, click on the links below.
 
-{% page-ref page="../reference/command-line/data-volumes/encrypted-volumes.md" %}
+* [Encrypted Volumes](/reference/CLI/encrypted-volumes)
 
-{% page-ref page="../kubernetes-operations/create-pvcs/create-encrypted-pvcs.md" %}
+* [Create Encrypted PVCS](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs)
 
 **Setting cluster wide secret key**
 

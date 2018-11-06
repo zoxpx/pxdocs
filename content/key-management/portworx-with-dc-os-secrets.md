@@ -62,9 +62,7 @@ sudo systemctl restart portworx
 
 #### Key generation with DC/OS {#key-generation-with-dcos}
 
-The following sections describe the key generation process with Portworx and DC/OS which can be used for encrypting volumes. For more information about encrypted volumes, click here:
-
-{% page-ref page="../reference/command-line/data-volumes/encrypted-volumes.md" %}
+The following sections describe the key generation process with Portworx and DC/OS which can be used for encrypting volumes. For more information about encrypted volumes, [click here](/reference/CLI/encrypted-volumes).
 
 **Setting cluster wide secret key**
 

@@ -36,9 +36,7 @@ Portworx creates and attaches EBS volumes. As such, it needs the AWS permissions
 }
 ```
 
-You can provide these permissions to Portworx in multiple ways. Click on the link below for more information.
-
-{% page-ref page="key-management/portworx-with-aws-kms.md" %}
+You can provide these permissions to Portworx in multiple ways, [click here](/key-management/portworx-with-aws-kms)
 
 ### Specify a disk template {#ebs-volume-template}
 
