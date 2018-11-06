@@ -29,7 +29,7 @@ For documentation for installing Portworx on DCOS, continue below
 {{</widelink>}}
 
 For documentation for installing Portworx on DCOS on Azure (ACS), continue below
-{{< widelink url="/install-with-other/dcos/application-installs/azure" >}}Install Portworx on DCOS on Azure {{</widelink>}}
+{{< widelink url="/install-with-other/dcos/install-azure" >}}Install Portworx on DCOS on Azure {{</widelink>}}
 
 ## Post-installation
 

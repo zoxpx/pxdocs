@@ -1,5 +1,5 @@
 ---
-title: Specifying Portworx Constraints in your Application
+title: Constraining Applications to PX nodes
 weight: 3
 linkTitle: Constraining Applications to PX nodes
 ---

@@ -1,7 +1,7 @@
 ---
 title: Run Portworx with Mesosphere DC/OS
 weight: 1
-linkTitle: Installing PX on Mesosphere/DCOS
+linkTitle: Install on DCOS
 ---
 
 This DCOS service will deploy Portworx as well as all the dependencies and additional services to manage the Portworx

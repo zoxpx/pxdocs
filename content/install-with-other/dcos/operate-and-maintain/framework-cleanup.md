@@ -1,7 +1,7 @@
 ---
 title: Cleaning up frameworks on DCOS
 weight: 6
-linkTitle: Cleanup Frameworks
+linkTitle: Cleaning up frameworks
 ---
 
 You will have to run the following steps after destroying a service to clean up all the resources in DCOS.  We are going to clean up the cassandra-px
