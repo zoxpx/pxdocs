@@ -1,5 +1,7 @@
 ---
 title: Upgrade Portworx on DCOS
+meta-description: This guide will help upgrading Portworx in DC/OS using the Portworx framework
+keywords: portworx, container, dcos, storage, Docker, mesos, upgrade
 weight: 2
 linkTitle: Upgrade
 ---

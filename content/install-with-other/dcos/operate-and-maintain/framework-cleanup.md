@@ -1,5 +1,7 @@
 ---
 title: Cleaning up frameworks on DCOS
+description: Follow these two steps to clean up the resources in DCOS after destroying a service. We're cleaning a cassandra-px service in this example.
+keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
 weight: 6
 linkTitle: Cleaning up frameworks
 ---

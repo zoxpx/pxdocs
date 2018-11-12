@@ -1,5 +1,7 @@
 ---
 title: Application Installs
+description: Application installation with Mesosphere DC/OS.
+keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storage, DCOS
 weight: 4
 ---
 

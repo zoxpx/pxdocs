@@ -1,5 +1,7 @@
 ---
 title: Constraining Applications to PX nodes
+description: Learn how to use constraints on your DCOS cluster to control where Mesos schedules your stateful applications. Read our guide today!
+keywords: portworx, PX-Developer, container, Mesos, Mesosphere, constraints
 weight: 3
 linkTitle: Constraining Applications to PX nodes
 ---

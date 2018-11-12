@@ -1,5 +1,7 @@
 ---
 title: Zookeeper
+description: For help installing and running Zookeeper on DCOS, use the guide from Portworx! Achieve more with Portworx backing your cluster.
+keywords: portworx, container, Mesos, Mesosphere, DCOS, Zookeeper
 ---
 
 DC/OS provides a Zookeeper service that makes it easy to deploy and manage Zookeeper on Mesosphere DC/OS. This guide will help you to install and run the containerized Zookeeper service backed by Portworx volumes for [persistent DCOS storage](https://portworx.com/use-case/persistent-storage-dcos/).

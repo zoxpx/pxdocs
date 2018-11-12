@@ -1,5 +1,7 @@
 ---
 title: NoSQL Performance
+keywords: portworx, cos, class of service, production, performance, overhead
+description: Find out how Portworx outperforms Cassandra's three way replication when running on a 3-node cluster. See the demonstration for yourself!
 weight: 4
 ---
 

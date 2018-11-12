@@ -1,5 +1,7 @@
 ---
 title: Docker interaction with Portworx
+description: How to interact with Docker using Porworx
+keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
 weight: 1
 linkTitle: How Portworx Volumes work with Docker
 ---

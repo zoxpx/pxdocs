@@ -1,5 +1,7 @@
 ---
 title: Upgrade Portworx on DCOS (Deprecated)
+keywords: portworx, container, dcos, storage, Docker, mesos
+description: Updating Portworx version on your DCOS cluster is simple. Follow this guide to find out how.
 hidden: true
 ---
 

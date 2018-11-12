@@ -1,5 +1,7 @@
 ---
 title: Operations Guide to deploy Portworx in Production in DC/OS Clusters
+description: Are you ready for production?
+keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
 weight: 1
 linkTitle: Running Portworx in Production with DC/OS
 ---

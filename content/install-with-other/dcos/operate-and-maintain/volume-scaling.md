@@ -1,5 +1,7 @@
 ---
 title: Volume Scaling with DCOS
+description: Learn how to implement and use volume scaling with DCOS. Try it today!
+keywords: portworx, jenkins
 weight: 5
 linkTitle: Scaling Stateful Applications
 ---

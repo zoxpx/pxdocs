@@ -1,5 +1,7 @@
 ---
 title: Install
+keywords: portworx, PX-Developer, container, Rancher, storage
+description: Learn how to install Portworx on Rancher today!
 weight: 1
 ---
 

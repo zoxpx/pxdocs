@@ -1,5 +1,7 @@
 ---
 title: Class of Service
+description: Portworx provides the ability to specify a class of service for IOPS, throughput and more at the container granularity. Learn about Portworx COS today!
+keywords: portworx, cos, class of service, production
 weight: 1
 ---
 
@@ -268,4 +270,3 @@ Disk stats (read/write):
 | High | 10346 | 0.58ms |
 | Medium | 5783 | 0.54ms |
 | Low | 89 | 23.61ms |
-

@@ -1,5 +1,7 @@
 ---
 title: Hadoop and HDFS
+description: Find out how to install and run Hadoop on Portworx with DCOS. Use Portworx as the HDFS layer for Hadoop, deployed through the Mesosphere DCOS.
+keywords: portworx, PX-Developer, Hadoop, HDFS, container, Mesos, Mesosphere, Marathon, storage, DCOS
 ---
 
 This guide will help you to install the Hadoop service on your DCOS cluster backed by PX volumes for persistent storage. It will create 3 Journal Nodes, 2 Name Nodes, 2 Nodes for the Zookeeper Failover Controller, 3 Data Nodes and 3 Yarn Nodes. The Data and Yarn nodes will be co-located on the same physical host.

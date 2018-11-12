@@ -1,5 +1,7 @@
 ---
 title: CouchDB
+description: Installing DC/OS with CouchDB service.
+keywords: Portworx, Mesosphere, DCOS, CouchDB
 ---
 
 DC/OS provides a CouchDB service that makes it easy to deploy and manage CouchDB on Mesosphere DC/OS. This guide will help you to install and run the containerized CouchDB service backed by Portworx volumes for [persistent DCOSstorage](https://portworx.com/use-case/persistent-storage-dcos/).

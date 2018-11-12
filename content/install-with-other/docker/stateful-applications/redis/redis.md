@@ -1,5 +1,7 @@
 ---
 title: Redis
+keywords: portworx, px-developer, redis, database, cluster, storage
+description: Follow this guide to learn how to use Redis with Portworx.
 ---
 
  This page provides instructions for deploying Redis with Portworx on Kubernetes.
@@ -110,4 +112,3 @@ redis:6379> get foo
 "101abcxxx"
 redis:6379>
 ```
-

@@ -1,5 +1,7 @@
 ---
 title: Update Geography Info
+description: Learn how to inform your Portworx nodes where they are placed in order to influence replication decisions and performance.
+keywords: portworx, pxctl, command-line tool, cli, reference, geography, locality, rack, zone, region
 weight: 6
 ---
 

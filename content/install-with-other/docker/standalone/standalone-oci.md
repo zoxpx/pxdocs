@@ -1,5 +1,7 @@
 ---
 title: Install
+description: Learn how to run Porworx as a runC container.
+keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
 ---
 
 Why OCI

@@ -1,5 +1,7 @@
 ---
 title: Run Portworx with Mesosphere DC/OS
+description: Find out how to deploy Portworx and manage the Portworx cluster using DCOS.
+keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage
 weight: 1
 linkTitle: Install on DCOS
 ---

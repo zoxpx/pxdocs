@@ -1,5 +1,7 @@
 ---
 title: Elastic Search and Kibana
+description: Find out how to install the ElasticSearch service on your DCOS cluster. Follow our step-by-step guide to running stateful services on DCOS today!
+keywords: portworx, container, Mesos, Mesosphere, DCOS, Elasticsearch
 ---
 
 This guide will help you to install the Elasticsearch service on your DCOS cluster backed by PX volumes for persistent storage.

@@ -1,5 +1,7 @@
 ---
 title: Using Portworx volumes with DCOS
+description: Learn how Portworx volumes are created, instantiated, and managed by DCOS.  Try Portworx on DC/OS today!
+keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
 weight: 4
 linkTitle: FAQ
 ---

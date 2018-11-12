@@ -1,5 +1,7 @@
 ---
 title: "Portworx Alerts"
+keywords: portworx, container, storage, alerts, alarms, warnings, notifications
+description: How to monitor alerts with Portworx.
 ---
 
 ## Portworx Alerts
@@ -24,11 +26,11 @@ Each alert has a severity from one of the following levels:
 0|DriveOperationFailure|ALARM|DRIVE|Triggered when a driver operations such as add or replace fails.
 1|DriveOperationSuccess|NOTIFY|DRIVE|Triggered when a driver operations such as add or replace fails.
 2|DriveStateChange|WARN|DRIVE|Triggered when there is a change in the driver state viz. Free Disk space goes below the recommended level of 10%.
-3|VolumeOperationFailureAlarm|ALARM|VOLUME|Triggered when a volume operation fails. Volume operations could be resize, cloudsnap etc. The alert message will give more info about the specific error case. 
-4|VolumeOperationSuccess|NOTIFY|VOLUME|Triggered when a volume operation such as resize succeeds. 
+3|VolumeOperationFailureAlarm|ALARM|VOLUME|Triggered when a volume operation fails. Volume operations could be resize, cloudsnap etc. The alert message will give more info about the specific error case.
+4|VolumeOperationSuccess|NOTIFY|VOLUME|Triggered when a volume operation such as resize succeeds.
 5|VolumeStateChange|WARN|VOLUME|Triggered when there is a change in the state of the volume.
-6|VolGroupOperationFailure|ALARM|CLUSTER|Triggered when a volume group operation fails. 
-7|VolGroupOperationSuccess|NOTIFY|CLUSTER|Triggered when a volume group operation succeeds. 
+6|VolGroupOperationFailure|ALARM|CLUSTER|Triggered when a volume group operation fails.
+7|VolGroupOperationSuccess|NOTIFY|CLUSTER|Triggered when a volume group operation succeeds.
 8|VolGroupStateChange|WARN|CLUSTER|Triggered when a volume group's state changes.
 9|NodeStartFailure|ALARM|CLUSTER|Triggered when a node in the PX cluster fails to start.
 10|NodeStartSuccess|NOTIFY|CLUSTER|Triggered when a node in the PX cluster successfully initializes.
@@ -39,7 +41,7 @@ Each alert has a severity from one of the following levels:
 17|PXInitFailure|ALARM|NODE|Triggered when PX fails to initialize on a node.
 18|PXInitSuccess|NOTIFY|NODE|Triggered when PX successfully initializes on a node.
 19|PXStateChange|WARN|NODE|Triggered when the PX daemon shuts down in error.
-20|VolumeOperationFailureWarn|WARN|VOLUME|Triggered when a volume operation fails. Volume operations could be resize, cloudsnap etc. The alert message will give more info about the specific error case. 
+20|VolumeOperationFailureWarn|WARN|VOLUME|Triggered when a volume operation fails. Volume operations could be resize, cloudsnap etc. The alert message will give more info about the specific error case.
 21|StorageVolumeMountDegraded|ALARM|NODE|Triggered when PX storage enters degraded mode on a node.
 22|ClusterManagerFailure|ALARM|NODE|Triggered when Cluster manager on a PX node fails to start. The alert message will give more info about the specific error case.
 23|KernelDriverFailure|ALARM|NODE|Triggered when an incorrect PX kernel module is detected. Indicates that PX is started with an incorrect version of kernel module.

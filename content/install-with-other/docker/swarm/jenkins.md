@@ -1,5 +1,7 @@
 ---
 title: Deploy Jenkins on Portworx
+keywords: portworx, jenkins
+description: Use Portworx to simplify the deployment of Jenkins running as a container. Check out our example to see for yourself!
 weight: 3
 linkTitle: Jenkins
 ---

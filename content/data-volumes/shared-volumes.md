@@ -1,5 +1,7 @@
 ---
 title: Shared Volumes
+description: Portworx Shared Volumes work with NFS and give the ability for multiple containers to access the same volumes.  Watch the video to see how!
+keywords: portworx, PX-Developer, container, Shared Volume, storage
 weight: 4
 ---
 

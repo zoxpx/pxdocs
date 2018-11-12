@@ -1,5 +1,7 @@
 ---
 title: "Grafana with Portworx"
+keywords: portworx, prometheus, grafana, alertmanager, cluster, storage
+meta-description: Find templates for displaying Portworx cluster information within Grafana.
 ---
 
 ## Configure Grafana

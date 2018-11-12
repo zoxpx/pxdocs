@@ -1,5 +1,7 @@
 ---
 title: ACS-Engine with DCOS and Portworx
+description: Working with ACS-Engine with Mesophere DC/OS and Portworx.
+keywords: portworx, acs-engine, azure, DCOS, Mesosphere, microsoft, azure
 linkTitle: Install on   DCOS on Azure
 weight: 3
 ---
