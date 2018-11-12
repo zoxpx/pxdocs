@@ -1,8 +1,7 @@
 ---
 title: Stateful applications
-title: "REST API Reference"
 keywords: portworx, stateful applications, kubernetes
-description: Learn how to install various application with Portworx. 
+description: Learn how to install various application with Portworx.
 weight: 5
 ---
 
