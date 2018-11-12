@@ -4,6 +4,7 @@ logo: /logos/pks.png
 keywords: portworx, kubernetes, PKS
 description: How to install and manage PKS.
 weight: 4
+noicon: true
 ---
 
 ## Step 1: PKS preparation
