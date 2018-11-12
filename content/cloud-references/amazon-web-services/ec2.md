@@ -1,5 +1,7 @@
 ---
 title: Amazon EC2 with Portworx
+description: Portworx on Amazon EC2
+keywords: portworx, amazon, docker, aws, ecs, cloud
 weight: 1
 ---
 

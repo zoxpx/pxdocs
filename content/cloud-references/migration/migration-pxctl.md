@@ -1,10 +1,12 @@
 ---
 title: Cloud Migration using pxctl
+description: Learn how to migrate volumes between two Portworx clusters.
+keywords: cloud, backup, restore, snapshot, DR, migration
 weight: 3
 ---
 
 ## Overview
-This method can be used to migrate volumes between two Portworx cluster. It will
+This method can be used to migrate volumes between two Portworx clusters. It will
 not migrate any scheduler specific resources.
 
 ## Pre-requisites
@@ -47,7 +49,7 @@ Once you have created cluster pairs you can migrate volumes to it
   1. Migrate all volumes from the cluster: `/opt/pwx/bin/pxctl cloudmigrate start -a [ -c <cluster_id> ]`
 
   2. Migrate a particular volume from the cluster:`/opt/pwx/bin/pxctl cloudmigrate start -v <volumeId> [ -c <cluster_id> ]`
-  
+
 2. If no ClusterID is specified it'll pick up the default cluster pair
 3. The status for the migration can be checked by running the following command:
 ```bash

@@ -1,5 +1,7 @@
 ---
 title: DIY Demo
+description: This tutorial shows you how you can quickly and easily deploy Portworx on AWS CloudFormation in under 10 minutes.  Try it today!
+keywords: portworx, AWS, CloudFormation
 weight: 6
 linkTitle: Cloud Formation, DIY Demo
 ---

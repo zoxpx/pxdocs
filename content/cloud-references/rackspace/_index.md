@@ -1,5 +1,7 @@
 ---
 title: Portworx on Rackspace
+description: Follow these steps to easily install Portworx on Rackspace.  Try it today!
+keywords: portworx, rackspace, PaaS, IaaS, docker, converged, cloud
 weight: 5
 linkTitle: Rackspace
 ---

@@ -1,5 +1,7 @@
 ---
 title: Cloud Migration
+description: How to migrate Portworx volumes between clusters.
+keywords: cloud, backup, restore, snapshot, DR, migration
 weight: 6
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: Cloud Migration using stork
+description: Learn how to migrate volumes between Kubernetes clusters.
+keywords: cloud, backup, restore, snapshot, DR, migration
 weight: 2
 ---
 

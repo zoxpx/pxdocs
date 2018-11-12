@@ -1,5 +1,7 @@
 ---
 title: Dynamic Provisioning on Google Cloud Platform (GCP)
+description: This page describes how to setup a production ready Portworx cluster in a Google Cloud Platform (GCP).
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
 weight: 2
 linkTitle: GCP
 ---

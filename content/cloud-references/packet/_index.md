@@ -1,5 +1,7 @@
 ---
 title: Portworx on the Packet.net Hosted Platform
+keywords: portworx, packet.net, PaaS, IaaS, docker, converged, bare metal
+description: Portworx can help you run stateful workloads with Docker. Find out how to deploy upon Packet.net servers!
 weight: 3
 linkTitle: Packet.net
 ---
