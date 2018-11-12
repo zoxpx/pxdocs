@@ -1,5 +1,7 @@
 ---
 title: Portworx with DC/OS Secrets
+keywords: Portworx, containers, storage, dcos
+description: Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets. This guide will get a Portworx cluster connected to DC/OS Secrets.
 weight: 2
 ---
 

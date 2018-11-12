@@ -1,6 +1,7 @@
 ---
 title: PX Enterprise
-description: "This is a desc"
+keywords: portworx, px-enterprise, release notes
+description: Stay up to date with the new releases and updates from Portworx. See our latest key features and an explanation of them all!
 disableSearch: true
 ---
 

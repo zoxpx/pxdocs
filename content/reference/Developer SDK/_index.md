@@ -1,5 +1,7 @@
 ---
 title: OpenStorage SDK for Portworx Enterprise
+keywords: portworx, REST, SDK, OpenStorage SDK, API
+description: Portworx data services can be managed and monitored through the OpenStorage SDK
 weight: 3
 linkTitle: Developer SDK
 ---

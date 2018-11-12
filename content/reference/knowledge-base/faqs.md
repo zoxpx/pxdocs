@@ -1,5 +1,7 @@
 ---
 title: Frequently Asked Questions Portworx
+keywords: portworx, faqs
+description: Find answers to all the most frequently asked questions about Portworx.  Explore our FAQ today!
 weight: 5
 linkTitle: FAQs
 ---

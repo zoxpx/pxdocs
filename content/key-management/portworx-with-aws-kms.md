@@ -1,5 +1,7 @@
 ---
 title: Portworx with AWS KMS
+keywords: Portworx, aws, kms, containers, storage, encryption
+description: Learn how to utilize AWS KMS to manage your Portworx volume encryption.
 weight: 1
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: Create and Manage Volumes
+keywords: portworx, pxctl, command-line tool, cli, reference
+description: This guide shows you how to use the PXCL CLI to create and manage volumes.
 weight: 12
 ---
 

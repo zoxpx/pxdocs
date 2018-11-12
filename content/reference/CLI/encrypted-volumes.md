@@ -1,5 +1,7 @@
 ---
 title: Encrypted Volumes
+keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, encryption
+description: This guide will give you an overview of how to use the Encryption feature for Portworx volumes. Read the full overview here!
 weight: 14
 ---
 

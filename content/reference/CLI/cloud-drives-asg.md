@@ -1,5 +1,7 @@
 ---
 title: Cloud Drives (ASG)
+description: General reference for CLI Cloud Drives on ASG.
+keywords: portworx, containers, storage, volumes, CLI, ASG
 weight: 2
 ---
 

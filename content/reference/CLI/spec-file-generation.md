@@ -1,5 +1,6 @@
 ---
 title: Spec File Generation
+description: Learn how to generate the DaemonSet Portworx spec file with the CLI.
 hidden: true
 ---
 

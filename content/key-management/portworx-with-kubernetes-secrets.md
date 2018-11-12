@@ -1,5 +1,7 @@
 ---
 title: Portworx with Kubernetes Secrets
+keywords: portworx, containers, storage, kubernetes
+description: Portworx can integrate with Kubernetes Secrets to store your encryption keys/secrets. This guide will get a Portworx cluster connected to Kubernetes Secrets
 weight: 3
 ---
 

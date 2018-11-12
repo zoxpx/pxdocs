@@ -1,5 +1,7 @@
 ---
 title: Lighthouse Create Credentials
+keywords: lighthouse
+description: Create Credentials lighthouse.
 weight: 2
 linkTitle: Create Cloud Credentials
 ---

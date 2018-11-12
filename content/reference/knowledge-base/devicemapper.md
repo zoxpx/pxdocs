@@ -1,5 +1,7 @@
 ---
 title: "Pre-requisites : Devicemapper setup"
+keywords: portworx, px-developer, devicemapper
+description: Portworx recommends using devicemapper as the default graph driver for container images. Follow these instructions to setup Device Mapper for your distribution.
 weight: 3
 linkTitle: Devicemapper Thinpool setup
 ---

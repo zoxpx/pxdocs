@@ -1,5 +1,7 @@
 ---
 title: REST API
+keywords: portworx, REST, API
+description: Portworx data services can be managed and monitored through RESTful APIs. View REST API Reference and documentation from Portworx today!
 weight: 3
 ---
 

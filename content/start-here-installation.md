@@ -4,6 +4,7 @@ weight: 1
 disableprevnext: true
 equalizeTableWidths: "50%"
 description: Start your installation.
+keywords: Portworx, containers, storage
 ---
 
 ## Installation Prerequisites

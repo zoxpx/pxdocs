@@ -1,5 +1,7 @@
 ---
 title: Portworx Licensing
+keywords: portworx, px-enterprise, px-developer, requirements
+description: Find out more information about the Portworx licensing model.
 hidden: true
 ---
 

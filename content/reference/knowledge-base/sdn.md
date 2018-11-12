@@ -1,5 +1,7 @@
 ---
 title: Portworx with Flannel SDN and User Namespaces
+keywords: portworx, flannel, docker, sdn, userns
+description: This guide shows how to configure and run Portworx with User Namespaces under a Flannel SDN. Start using Portworx today!
 weight: 1
 linkTitle: Running with an SDN
 ---

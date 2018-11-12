@@ -1,5 +1,7 @@
 ---
 title: Cluster
+keywords: portworx, pxctl, command-line tool, cli, reference
+description: This guide shows you how to use the PXCL CLI to perform cluster operations.  Try today!
 weight: 4
 ---
 
@@ -184,4 +186,3 @@ OPTIONS:
    --end value, -e value    Time end : Jan 2 15:04:05 UTC 2006
    --all                    Specify --all to show cleared alerts in the output
 ```
-

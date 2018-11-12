@@ -1,5 +1,7 @@
 ---
 title: Group Snaps
+keywords: portworx, pxctl, command-line tool, cli, reference
+description: Explore the CLI reference guide for taking group snapshots of container data volumes using Portworx. Try it today!
 weight: 7
 ---
 
@@ -28,5 +30,3 @@ Volume 273677465608441312 : Snapshot 609476927441905746
 ```
 
 [Edit this page on Github](https://github.com/portworx/px-docs/blob/gh-pages/control/groupsnap.md)  
-
-

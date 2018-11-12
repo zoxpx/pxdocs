@@ -1,5 +1,7 @@
 ---
 title: Run PX with Docker User Namespaces
+keywords: portworx, install, configure, container, user, namespaces, namespace, security
+description: To install and configure PX with Docker user namespaces enabled, use the steps in this section. Find out more!
 weight: 4
 linkTitle: Docker User Namespaces
 ---

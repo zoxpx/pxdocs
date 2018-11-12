@@ -1,5 +1,7 @@
 ---
 title: OS Configurations for Shared Mounts
+keywords: portworx, px-developer, shared mounts
+description: Here is the step-by-step tutorial to share mounts using Portworx. We can help with CoreOS, RedHat/Centos and Ubuntu. See for yourself today!
 weight: 2
 linkTitle: Shared Mount Propagation
 ---

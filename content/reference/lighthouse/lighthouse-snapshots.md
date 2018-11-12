@@ -1,5 +1,7 @@
 ---
 title: Lighthouse volume snapshots
+keywords: lighthouse
+description: Volume snaphots from lighthouse.
 weight: 3
 linkTitle: Create Volume Snapshots
 ---
