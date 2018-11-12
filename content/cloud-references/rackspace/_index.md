@@ -4,6 +4,7 @@ description: Follow these steps to easily install Portworx on Rackspace.  Try it
 keywords: portworx, rackspace, PaaS, IaaS, docker, converged, cloud
 weight: 5
 linkTitle: Rackspace
+noicon: true
 ---
 
 This guide show you how you can easily deploy Portworx on [**Rackspace**](https://www.rackspace.com/login)

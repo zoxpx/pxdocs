@@ -4,6 +4,7 @@ description: This page describes how to setup a production ready Portworx cluste
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
 weight: 2
 linkTitle: GCP
+noicon: true
 ---
 
 {{<info>}}

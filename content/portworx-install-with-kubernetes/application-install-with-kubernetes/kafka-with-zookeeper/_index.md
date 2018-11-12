@@ -3,6 +3,7 @@ title: Kafka with Zookeeper
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, kafka, zookeeper
 description: See how you can deploy Apache Kafka with Zookeeper on Kubernetes with state using Portworx.
 weight: 2
+noicon: true
 ---
 
 This page provides instructions for deploying Apache Kafka and Zookeeper with Portworx on Kubernetes.

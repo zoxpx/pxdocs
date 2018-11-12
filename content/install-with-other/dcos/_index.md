@@ -4,6 +4,7 @@ description: Working with Mesosphere DC/OS
 keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storage, DCOS
 weight: 1
 hideSections: true
+noicon: true
 ---
 
 [Mesosphere DC/OS](https://mesosphere.com/product/) makes it easy to build and run modern distributed applications in production at scale, by pooling resources across an entire datacenter or

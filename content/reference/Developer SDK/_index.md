@@ -4,6 +4,7 @@ keywords: portworx, REST, SDK, OpenStorage SDK, API
 description: Portworx data services can be managed and monitored through the OpenStorage SDK
 weight: 3
 linkTitle: Developer SDK
+noicon: true
 ---
 
 Portworx data services can be managed and monitored through the [OpenStorage SDK](https://libopenstorage.github.io).
