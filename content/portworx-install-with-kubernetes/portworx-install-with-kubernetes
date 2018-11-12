@@ -1,6 +1,8 @@
 ---
 title: Using Stork with Portworx
 hidden: true
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, hci, hyperconvergence, snapshot
+description: How to use Portworx storage scheduler for Kubernetes. 
 ---
 
 Stork is the Portworx's storage scheduler for Kubernetes that helps achieve even tighter integration of

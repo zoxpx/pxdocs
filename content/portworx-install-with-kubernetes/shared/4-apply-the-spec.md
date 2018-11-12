@@ -1,6 +1,8 @@
 ---
 title: Shared
 hidden: true
+description: Learn how to install Portworx with Kubenetes
+keywords: portworx, kubernetes
 ---
 
 After you have generated the spec file, deploy Portworx:

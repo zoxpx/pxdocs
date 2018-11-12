@@ -1,6 +1,7 @@
 ---
 title: 2. Generate the Spec
-description: ""
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, KOPS, pv, persistent disk, aws, EBS
+description: This page describes how to generate the spec for your Portworx cluster with Kubernetes KOPS.
 weight: 2
 ---
 

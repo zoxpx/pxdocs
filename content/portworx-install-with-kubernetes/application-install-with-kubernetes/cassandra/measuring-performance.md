@@ -1,5 +1,7 @@
 ---
 title: Measuring Performance
+description: Learn how to measure the performance of Cassandra with Portworx.
+keywords: portworx, containers, cassandra, storage
 ---
 
 ### About this Guide {#about-this-guide}

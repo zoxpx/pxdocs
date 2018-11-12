@@ -1,5 +1,7 @@
 ---
 title: 3. Apply the Spec
+keywords: portworx, container, kubernetes
+description: How to apply the spec for Portworx on Kubernetes.
 weight: 3
 ---
 

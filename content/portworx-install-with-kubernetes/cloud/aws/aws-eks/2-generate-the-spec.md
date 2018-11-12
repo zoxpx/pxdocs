@@ -1,6 +1,7 @@
 ---
 title: 2. Generate the Spec
-description: ""
+keywords: Amazon, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, eks
+description: How to generate the spec AWS (Elastic Kubernetes Service).
 weight: 2
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: "Etcd"
 hidden: true
+keywords: etcd, portworx, maintenance, kvdb
+description: ETCD configuration for Portworx.
 ---
 
 Portworx requires a key-value database such as etcd for configuring storage. A highly available clustered etcd with persistent storage is preferred.

@@ -1,6 +1,7 @@
 ---
 title: 2. Generate the Spec
-description: ""
+keywords: portworx, acs-engine, azure, Kubernetes, microsoft, azure
+description: Learn about generating the spec for Portworx on Kubernetes with ACS.
 weight: 2
 ---
 

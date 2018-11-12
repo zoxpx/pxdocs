@@ -1,6 +1,8 @@
 ---
 title: Shared
 hidden: true
+description: Learn how to install Portworx with Kubenetes
+keywords: portworx, kubernetes
 ---
 
 **Note:** This section only applies if you are using secure etcd.
@@ -53,4 +55,3 @@ Now that the certificates are mounted at `/etc/pwx/etcdcerts`, change the Portwo
       "-key", "/etc/pwx/etcdcerts/pwx-etcd-key.key",
       "-x", "kubernetes"]
 ```
-

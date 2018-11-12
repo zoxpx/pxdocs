@@ -1,6 +1,7 @@
 ---
 title: 1. Generate the Spec
-description: ""
+keywords: portworx, container, kubernetes
+description: How to generate the spec for Portworx on Kubernetes.
 weight: 1
 ---
 

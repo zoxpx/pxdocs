@@ -2,6 +2,8 @@
 title: Upgrade
 weight: 2
 hidesections: true
+keywords: portworx, container, Kubernetes, upgrade, update, storage, Docker, k8s, flexvol, pv, persistent disk
+description: How to upgrade Portworx running as OCI container. 
 ---
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).

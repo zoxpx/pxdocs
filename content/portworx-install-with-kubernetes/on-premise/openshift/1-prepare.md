@@ -1,6 +1,8 @@
 ---
 title: 1. Prepare your platform
 weight: 1
+keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
+description: Find out how to prepare PX within a OpenShift cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 ---
 
 Portworx supports Openshift 3.7 and above.

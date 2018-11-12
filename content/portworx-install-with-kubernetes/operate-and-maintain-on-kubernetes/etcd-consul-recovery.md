@@ -1,6 +1,8 @@
 ---
 title: "Etcd/Consul Recovery"
 hidden: true
+keywords: disaster recovery, disaster proof, site failure, node failure, power failure, etcd failure
+description: Etcd Disaster Recovery
 ---
 
 Portworx PX-Enterprise requires a key-value database like etcd or consul to store its metadata and configuration. This key-value database is a critical component for smooth functioning of PX. This page describes how to configure a resilient and highly available etcd cluster and recovery procedures in an event of an etcd disaster.

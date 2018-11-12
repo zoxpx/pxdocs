@@ -1,5 +1,7 @@
 ---
 title: Running in Production
+keywords: portworx, Kubernetes
+description: How to run in production.
 weight: 4
 ---
 

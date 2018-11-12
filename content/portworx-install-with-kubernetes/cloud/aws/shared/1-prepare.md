@@ -1,5 +1,7 @@
 ---
 title: Shared
+keywords: portworx, kubernetes, AWS
+description: Learn about preparing AWS Kubernetes.
 hidden: true
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: Shared
 hidden: true
+keywords: portworx, kubernetes
+description: Learn how to install Portworx with Kubenetes
 ---
 
 To install Portworx with Kubernetes, you will first generate Kubernetes manifests that you will deploy in your cluster.

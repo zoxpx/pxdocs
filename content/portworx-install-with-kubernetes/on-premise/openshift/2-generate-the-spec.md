@@ -1,6 +1,7 @@
 ---
 title: 2. Generate the Spec
-description: ""
+keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
+description: Find out how to generate the spec for PX within a OpenShift cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 weight: 2
 ---
 

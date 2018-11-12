@@ -1,5 +1,7 @@
 ---
 title: PX Log Storage and Management with Elastic Search, Kibana and, Fluentd on K8s
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, elastic, fluentd, elastic search, kibana, cluster logging, log management
+description: PX Logs management on Kubernetes using Elastic Search, Kibana, and Fluentd.
 ---
 
 PX Logs management on Kubernetes using Elastic search, Kibana and Fluentd.

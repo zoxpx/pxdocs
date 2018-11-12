@@ -1,6 +1,8 @@
 ---
 title: Etcd certificates using Kubernetes Secrets
 hidden: true
+keywords: portworx, container, kubernetes, storage, k8s, etcd, secrets, certificates
+description: This guide is a step-by-step tutorial on how to use Kubernetes secrets to give etcd certificates to Portworx.
 ---
 
 This page will guide you on how to give your etcd certificates to Portworx using Kubernetes Secrets. This is the recommended way of providing etcd certificates, as the certificates will be automatically available to the new nodes joining the cluster.

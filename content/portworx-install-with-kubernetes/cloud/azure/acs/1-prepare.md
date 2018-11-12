@@ -1,5 +1,7 @@
 ---
 title: 1. Prepare Your Platform
+keywords: portworx, acs-engine, azure, Kubernetes, microsoft, azure
+description: Learn about preparing Portworx on Kubernetes with ACS.
 weight: 1
 ---
 
@@ -28,7 +30,7 @@ Get the Azure locations using the Azure CLI command:
 az account list-locations
 ```
 
-Example locations: 
+Example locations:
 
 `centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus`   
 `southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest`   

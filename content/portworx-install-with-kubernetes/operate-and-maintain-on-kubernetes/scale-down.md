@@ -1,6 +1,8 @@
 ---
 title: "Scale-Down Nodes"
 hidden: true
+keywords: scale-down
+description: Find out how to remove an offline node from a cluster with this document from Portworx. Discover how to scale-down nodes today!
 ---
 
 ## Removing offline Nodes

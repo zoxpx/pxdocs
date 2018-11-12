@@ -1,10 +1,9 @@
 ---
 title: PX Disaster Recovery
 hidden: true
+keywords: disaster recovery, disaster proof, site failure, node failure, power failure
+description: Disaster Recovery Best Practices for Production Deployments of PX.  Try today!
 ---
-
-* TOC
-{:toc}
 
 Portworx PX-Enterprise comes with many data services features that enable production customers to deploy containerized workloads through many container orchestrators.
 

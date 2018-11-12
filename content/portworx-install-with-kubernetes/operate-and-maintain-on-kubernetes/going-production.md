@@ -1,6 +1,8 @@
 ---
 title: "Production Readiness"
 hidden: true
+keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
+description: Are you ready for production?
 ---
 
 ### Initial Software Setup for Production

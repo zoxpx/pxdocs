@@ -1,6 +1,7 @@
 ---
 title: "Prometheus and Grafana"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, monitoring, prometheus, alertmanager, servicemonitor, grafana
+description: How to use Prometheus and Grafana for monitoring.
 ---
 
 ## About Prometheus

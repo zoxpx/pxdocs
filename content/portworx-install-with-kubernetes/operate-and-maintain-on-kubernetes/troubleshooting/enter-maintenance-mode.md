@@ -1,6 +1,8 @@
 ---
 title: Enter Maintenance Mode
 weight: 7
+keywords: service, maintenance, drive removal, drive replacement, pool list, pool priority
+description: Explore commands needed for maintenance operations using Portworx.  Try today!
 ---
 
 This guide describes a recommended workflow for putting a Portworx node in maintenance mode in your Kubernetes cluster.
@@ -32,4 +34,3 @@ Once you are done with maintenance tasks, run **“pxctl service maintenance –
 #### 4. Uncordon the node {#4-uncordon-the-node}
 
 You can now uncordon the node using: `kubectl uncordon <node>`
-

@@ -5,6 +5,7 @@ hidesections: true
 description: Running Portworx on Kubernetes.
 series: top
 icon: /img/banner__kubernetes.png
+keywords: portworx, kubernetes, container, storage
 ---
 
 ## Installation

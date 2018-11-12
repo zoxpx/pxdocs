@@ -1,6 +1,8 @@
 ---
 title: How to run WordPress and MySQL on Kubernetes using Portworx
 linkTitle: Wordpress
+keywords: portworx, Wordpress, container, Kubernetes, storage
+description: Learn how to deploy a Wordpress site with MySQL using Kubernetes
 ---
 
 ## Summary

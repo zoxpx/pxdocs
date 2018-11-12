@@ -3,6 +3,8 @@ title: IKS
 logo: /logos/ibm.png
 linkTitle: IKS
 weight: 5
+keywords: portworx, IBM, kubernetes, PaaS, IaaS, docker, converged, cloud
+description: Deploy Portworx on IBM IKS. See for yourself how easy it is!
 ---
 
 ![IBM CLoud Logo](/img/ibm-cloud.png)

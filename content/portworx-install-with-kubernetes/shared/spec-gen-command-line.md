@@ -1,6 +1,8 @@
 ---
 title: Generating the Portworx spec using curl
 hidden: true
+keywords: portworx, kubernetes
+description: Learn how to generate the Portworx spec using curl. 
 ---
 
 Below is an example of using curl to generate the Portworx spec file. Review the [query parameters table](/portworx-install-with-kubernetes/px-k8s-spec-curl) below and add parameters as needed.

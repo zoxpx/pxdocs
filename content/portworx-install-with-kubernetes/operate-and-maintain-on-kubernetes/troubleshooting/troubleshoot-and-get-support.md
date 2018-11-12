@@ -1,6 +1,8 @@
 ---
 title: Troubleshoot and Get Support
 weight: 3
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, debug, troubleshoot
+description: For troubleshooting PX on Kubernetes, Portworx can help. Read this article for details about how to resolve your issue today.
 ---
 
 #### Etcd {#etcd}

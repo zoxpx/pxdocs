@@ -1,5 +1,7 @@
 ---
 title: "Using Ark with Portworx"
+keywords: portworx, container, Kubernetes, storage, k8s, pv, persistent disk, snapshot
+description: How the Heptio Ark untility can help with managing Kubernetes clusters. 
 weight: 7
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: Uninstall
 weight: 2
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+meta-description: Find out how to uninstall Portworx within a Kubernetes cluster.
 ---
 
 Uninstalling or deleting the portworx daemonset only removes the portworx containers from the nodes. As the configurations files which PX use are persisted on the nodes the storage devices and the data volumes are still intact. These portworx volumes can be used again if the PX containers are started with the same configuration files.

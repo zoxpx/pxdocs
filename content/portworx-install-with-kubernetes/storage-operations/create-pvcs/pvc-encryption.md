@@ -1,6 +1,8 @@
 ---
 title: Encryption using PVC
 hidden: true
+keywords: portworx, container, kubernetes, storage, k8s, flexvol, pv, persistent disk, encryption, pvc
+description: This guide is a step-by-step tutorial on how to provision encrypted volumes using PVC annotations.
 ---
 
 {{<info>}}

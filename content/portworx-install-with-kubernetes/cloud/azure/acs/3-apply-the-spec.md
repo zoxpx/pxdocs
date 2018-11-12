@@ -1,5 +1,7 @@
 ---
 title: 3. Apply the Spec
+keywords: portworx, acs-engine, azure, Kubernetes, microsoft, azure
+description: Learn about applying the spec with Portworx on Kubernetes with ACS.
 weight: 3
 ---
 

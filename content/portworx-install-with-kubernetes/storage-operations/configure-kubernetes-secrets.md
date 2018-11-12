@@ -1,6 +1,8 @@
 ---
 title: Configure Kubernetes Secrets
 weight: 5
+keywords: portworx, kubernetes
+description: Learn how to configure Kubernetes secrets. 
 ---
 
 # Configure Kubernetes Secrets

@@ -2,6 +2,8 @@
 title: PKS
 logo: /logos/pks.png
 weight: 2
+description: Install PKS environment correctly.
+keywords: portworx, PKS, kubernetes
 ---
 
 ## Step 1: PKS preparation

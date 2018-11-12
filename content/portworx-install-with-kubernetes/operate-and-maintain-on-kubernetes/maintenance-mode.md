@@ -1,6 +1,8 @@
 ---
 title: "Maintenance Commands"
 hidden: true
+keywords: service, maintenance, drive removal, drive replacement, pool list, pool priority
+description: Explore commands needed for maintenance operations using Portworx.  Try today!
 ---
 
 Service level commands are related to maintenance of drives and drive pools.

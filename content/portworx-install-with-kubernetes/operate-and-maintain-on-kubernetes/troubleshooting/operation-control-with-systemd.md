@@ -1,5 +1,7 @@
 ---
 title: Operation control with systemd
+keywords: portworx, kubernetes, systemd
+description: How to perform systemctl operations using Portworx systemd service. 
 weight: 9
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: 1. Prepare Your Platform
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, aks, Azure
+description: Learn about preparing Portwork on Azure Kubernetes Service.
 weight: 1
 ---
 

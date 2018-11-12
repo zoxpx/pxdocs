@@ -1,6 +1,8 @@
 ---
 title: Generating Portworx Kubernetes spec using curl
 hidden: true
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+description: Find out how to generate the Portworx Kubernetes spec using curl.
 ---
 
 ## Generating the Portworx spec using curl

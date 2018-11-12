@@ -1,5 +1,7 @@
 ---
 title: Snapshots
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+description: Learn to take a snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod. Try today!
 ---
 
 ### Managing Snapshots {#managing-snapshots}
@@ -11,4 +13,3 @@ PX snaps create a real usable volume which is distinct and separate from the vol
 #### Best Practice {#best-practice}
 
 nodetool flush and then px snapshot
-

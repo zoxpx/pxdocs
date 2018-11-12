@@ -1,6 +1,8 @@
 ---
 title: Rejoin a decommissioned Portworx node back to the cluster in Kubernetes
 hidden: true
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+description: This guide shows the recommended workflow for decommissioned node to rejoin the same cluster.
 ---
 
 This guide describes a recommended workflow for a previously decommissioned node to rejoin the same cluster.

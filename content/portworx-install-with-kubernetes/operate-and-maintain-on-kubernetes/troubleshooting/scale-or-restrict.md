@@ -1,6 +1,8 @@
 ---
 title: Scale or Restrict
 weight: 6
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+description: Find out how to scale or restrict Portworx nodes in your Kubernetes cluster
 ---
 
 #### Scaling {#scaling}

@@ -1,5 +1,7 @@
 ---
 title: 1. Prepare Your Platform
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, KOPS, pv, persistent disk, aws, EBS
+description: This page describes how to prepare your Portworx cluster with Kubernetes KOPS.
 weight: 1
 ---
 

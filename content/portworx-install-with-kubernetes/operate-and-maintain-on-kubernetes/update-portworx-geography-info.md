@@ -1,6 +1,8 @@
 ---
 title: Update Portworx Geography Info
 weight: 4
+keywords: portworx, pxctl, command-line tool, cli, reference, kubernetes, geography, locality, rack, zone, region
+description: Learn how to inform your Portworx nodes where they are placed in order to influence replication decisions and performance.
 ---
 
 ## Update Portworx Geography Info in Kubernetes

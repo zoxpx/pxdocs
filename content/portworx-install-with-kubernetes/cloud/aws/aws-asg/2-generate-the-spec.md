@@ -1,6 +1,7 @@
 ---
 title: 2. Generate the Spec
-description: ""
+keywords: portworx, AWS, CloudFormation, ASG, Auto Scaling, Kubernetes
+description: Learn how to generate your spec.
 weight: 2
 ---
 

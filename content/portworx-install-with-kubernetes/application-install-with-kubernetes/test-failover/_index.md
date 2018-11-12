@@ -1,5 +1,7 @@
 ---
 title: Test Failover of a mysql pod
+keywords: portworx, failover, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+description: Learn how to failover a stateful application using Kubernetes and Portworx.  Try it for yourself today.
 ---
 
 

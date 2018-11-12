@@ -1,10 +1,9 @@
 ---
 title: Deploying Portworx with CSI support
 hidden: true
+keywords: csi, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk
+description: How to deploy Portworx with CSI.
 ---
-
-* TOC
-{:toc}
 
 [CSI](https://kubernetes-csi.github.io/), or _Container Storage Interface_, is
 the new model for integrating storage system service with Kubernetes and other

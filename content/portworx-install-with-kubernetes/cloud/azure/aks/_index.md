@@ -1,5 +1,7 @@
 ---
 title: Azure Kubernetes Service (AKS)
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, aks, Azure
+description: Learn about installing Portwork on Azure Kubernetes Service.
 weight: 2
 ---
 

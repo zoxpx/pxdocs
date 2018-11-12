@@ -1,5 +1,7 @@
 ---
 title: Postgresql
+keywords: portworx, postgres, postgresql
+description: Use this guide to install and run PostgreSQL using Kubernetes
 weight: 2
 ---
 

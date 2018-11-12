@@ -1,6 +1,8 @@
 ---
 title: Creating a PVC from a snapshot
 hidden: true
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones, pvc
+description: Learn to take a snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod. Try today!
 ---
 
 This document will show you how to take a snapshot of a volume using Portworx and use that snapshot as the volume for a new pod.

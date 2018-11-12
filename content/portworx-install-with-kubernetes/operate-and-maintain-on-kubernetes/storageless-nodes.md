@@ -1,6 +1,8 @@
 ---
 title: "Storage-less Nodes with PX Enterprise"
 hidden: true
+keywords: zero storage
+description: Run PX-Enterprise so the storage in a PX-Cluster is consumed by apps running on nodes without storage. Learn how to add a new node with no storage today!
 ---
 
 PX-Enterprise can be run in a client-only mode such that the storage available in a PX-Cluster can be consumed by apps that are running on nodes that have no storage. This enables deployments to leverage the powerful PX-Enterprise features from any node without having to rely on legacy protocols and adopt containerization faster.
