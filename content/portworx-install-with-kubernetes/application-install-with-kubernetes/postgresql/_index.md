@@ -57,7 +57,7 @@ Then run this command:
 
 ### Deploy PostgreSQL using Kubernetes Deployment
 
-We are recommending to use [“Stork”](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/stork) for Postgres deployment as a scheduler. Stork is an opensource project that helps achieve even tighter integration of Portworx with Kubernetes. It allows users to co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes. Stork consists of 2 components, the stork scheduler, and an extender. Both of these components run in HA mode with three replicas by default.
+We are recommending to use [“Stork”](/portworx-install-with-kubernetes/storage-operations/stork) for Postgres deployment as a scheduler. Stork is an opensource project that helps achieve even tighter integration of Portworx with Kubernetes. It allows users to co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes. Stork consists of 2 components, the stork scheduler, and an extender. Both of these components run in HA mode with three replicas by default.
 
 Note: You need to install the stork before deploying below Postgres spec file. It `px-postgres-app.yaml` uses `schedulerName: stork` instead of `schedulerName: default-scheduler`.
 

@@ -16,7 +16,7 @@ This document will show you how to create snapshots of Portworx volumes and how 
 
 **Installing STORK**
 
-This requires that you already have [STORK](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/stork/) installed and running on your
+This requires that you already have [STORK](/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
 Kubernetes cluster. If you fetched the Portworx specs from [https://install.portworx.com](https://install.portworx.com) and used the default options, STORK is already installed.
 
 ## Creating snapshots
