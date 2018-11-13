@@ -1,8 +1,7 @@
 ---
-layout: page
 title: "Using Stork with Portworx"
+hidden: true
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, hci, hyperconvergence, snapshot
-sidebar: home_sidebar
 description: How to use Portwork's Stork for storage scheduling in Kubernetes. 
 ---
 

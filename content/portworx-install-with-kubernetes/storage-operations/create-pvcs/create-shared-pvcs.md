@@ -5,7 +5,7 @@ keywords: portworx, container, kubernetes, storage, k8s, pv, persistent disk, pv
 description: Learn how to use portworx shared volumes in your Kubernetes cluster.
 ---
 
-This document describes how to use portworx shared volumes in your Kubernetes cluster.
+This document describes how to use portworx shared (ReadWriteMany) volumes in your Kubernetes cluster.
 
 #### Provision a Shared Volume {#provision-a-shared-volume}
 
@@ -44,9 +44,9 @@ Parameters:	   repl=1,shared=true
 Events:			<none>
 ```
 
-**Step2: Create Persistent Volume Claim.**
+**Step2: Create Persistent Volume Claim**
 
-Creating the persistent volume claim:
+Creating a ReadWriteMany persistent volume claim:
 
 ```text
 kubectl create -f examples/volumes/portworx/portworx-volume-shared-pvc.yaml
@@ -69,7 +69,7 @@ spec:
        storage: 10Gi
 ```
 
-Note the accessMode for this PVC is set to `ReadWriteMany` so the kubernetes allows mounting this PVC on multiple pods.
+Note the accessMode for this PVC is set to `ReadWriteMany` so the Kubernetes allows mounting this PVC on multiple pods.
 
 Verifying persistent volume claim is created:
 
@@ -80,7 +80,7 @@ px-shared-pvc   Bound     pvc-a38996b3-76e9-11e7-9d47-080027b25cdf 10Gi       RW
 
 ```
 
-**Step3: Create Pods which uses Persistent Volume Claim.**
+**Step3: Create Pods which uses Persistent Volume Claim**
 
 We will start two pods which use the same shared volume.
 

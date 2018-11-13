@@ -1,6 +1,6 @@
 ---
 title: Operate and Maintain
-weight: 6
+weight: 5
 keywords: portworx, container, kubernetes
 description: Documentation for ongoing maintenance operations.
 series: top

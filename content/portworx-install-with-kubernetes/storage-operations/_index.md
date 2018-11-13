@@ -1,6 +1,6 @@
 ---
 title: Storage operations
-weight: 5
+weight: 3
 keywords: portworx, kubernetes, storage, containers
 description: Learn about storage operations. 
 ---

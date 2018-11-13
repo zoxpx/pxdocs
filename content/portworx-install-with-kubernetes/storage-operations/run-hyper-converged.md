@@ -11,7 +11,7 @@ When a pod runs on the same host as its volume, it is known as convergence or hy
 
 ### Using scheduler convergence {#using-scheduler-convergence}
 
-The recommended method to run your pods hyperconverged is to use [STORK](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/stork).
+The recommended method to run your pods hyperconverged is to use [STORK](/portworx-install-with-kubernetes/storage-operations/stork).
 
 Once you have installed STORK, all you need to do is add `schedulerName: stork` in your application specs. STORK will then ensure that the nodes with data for a volume get prioritized when pods are being scheduled.
 
