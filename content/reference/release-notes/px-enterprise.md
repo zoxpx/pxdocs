@@ -257,7 +257,7 @@ _**Upgrade Note 3**_: Container information parsing code has been disabled and h
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
 * Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
 * Add schduler information in `pxctl status` display
-* Add info about cloud volumes CLI [k8s](/cloud-references/gcp) , [others](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
+* Add info about cloud volumes CLI [k8s](/cloud-references/auto-disk-provisioning/gcp) , [others](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
 * `pxctl service add --journal -d <device>` to add journal device support
 
 #### Issues addressed {#issues-addressed}
