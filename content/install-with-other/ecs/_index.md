@@ -1,9 +1,9 @@
 ---
 title: Amazon ECS with Portworx
-description: Portworx on Amazon EC2
+description: Find out how to deploy Portworx on Amazon Elastic Container Service (ECS). Follow our step-by-step guide to running stateful services on ECS today!
 keywords: portworx, amazon, docker, aws, ecs, cloud
-weight: 2
-linkTitle: Find out how to deploy Portworx on Amazon Elastic Container Service (ECS). Follow our step-by-step guide to running stateful services on ECS today!
+weight: 3
+linkTitle: Amazon ECS
 ---
 
 This guide shows you how you can easily deploy Portworx on Amazon Elastic Container Service [**ECS**](https://aws.amazon.com/ecs/)

@@ -1,5 +1,5 @@
 ---
-title: Dynamic Provisioning on Google Cloud Platform (GCP)
+title: Disk Provisioning on Google Cloud Platform (GCP)
 description: This page describes how to setup a production ready Portworx cluster in a Google Cloud Platform (GCP).
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
 weight: 2
@@ -7,9 +7,7 @@ linkTitle: GCP
 noicon: true
 ---
 
-{{<info>}}
-**Note:** If you are running on GKE, visit [Portworx on GKE](/portworx-install-with-kubernetes/cloud/google-kubernetes-engine).
-{{</info>}}
+{{<info>}}If you are running on GKE, visit [Portworx on GKE](/portworx-install-with-kubernetes/cloud/google-kubernetes-engine).{{</info>}}
 
 The steps below will help you enable dynamic provisioning of Portworx volumes in your GCP cluster.
 
@@ -22,15 +20,6 @@ Portworx uses a key-value store for it's clustering metadata. Please have a clus
 **Firewall**
 
 Ensure ports 9001-9015 are open between the nodes that will run Portworx. Your nodes should also be able to reach the port KVDB is running on (for example etcd usually runs on port 2379).
-
-**NTP**
-
-Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.
-
-{{<info>}}
-**Note:**
-This deployment model where Portworx provisions storage drives is not supported with internal kvdb.
-{{</info>}}
 
 ## Create a GCP cluster
 
@@ -95,15 +84,4 @@ Ensure that these disks are created in the same zone as the GCP node group.
 
 ### Limiting storage nodes
 
-PX allows you to create a heterogenous cluster where some of the nodes are storage nodes and rest of them are storageless. You can specify the number of storage nodes in your cluster by setting the ```max_drive_set_count``` input argument.
-Modify the input arguments to PX as shown in the below examples.
-
-Examples:
-
-* `"-s", "type=pd-ssd,size=200", "-max_drive_set_count", "3"`
-
-For a cluster of 5 nodes, in the above example PX will have 3 storage nodes and 2 storage less nodes. PX will create a total 3 PDs of size 200 each and attach one PD to each storage node.
-
-* `"-s", "type=pd-standard,size=200", "-s", "type=pd-ssd,size=100", "-max_drive_set_count", "3"`
-
-For a cluster of 5 nodes, in the above example PX will have 3 storage nodes and 2 storage less nodes. PX will create a total of 6 PDs (3 PDs of size 200 and 3PDs of size 100). PX will attach a set of 2PDs (one of size 200 and one of size 100) to each of the 3 storage nodes..
+{{% content "cloud-references/auto-disk-provisioning/shared/asg-limit-storage-nodes.md" %}}
