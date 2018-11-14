@@ -1,6 +1,6 @@
 ---
-title: Create Encrypted PVCs
-weight: 5
+title: Create encrypted PVCs
+weight: 4
 keywords: portworx, container, kubernetes, storage, k8s, pv, persistent disk, encryption, pvc
 description: This guide is a step-by-step tutorial on how to provision encrypted PVCs with Portworx.
 ---

@@ -14,8 +14,8 @@ Following these simple instructions you can have a 3-node Portworx cluster up an
 
 Other supported bare metal cloud providers are
 
-* [Packet.net](/cloud-references/packet)
-* [Rackspace](/cloud-references/rackspace)
+* [Packet.net](/cloud-references/other-clouds/packet)
+* [Rackspace](/cloud-references/other-clouds/rackspace)
 
 Pre-requisites:   You will need to have a valid Digital Ocean account
 
