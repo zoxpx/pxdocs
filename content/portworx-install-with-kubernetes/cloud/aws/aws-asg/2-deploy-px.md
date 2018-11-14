@@ -1,7 +1,7 @@
 ---
-title: 2. Generate the Spec
-keywords: Amazon, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, eks
-description: How to generate the spec AWS (Elastic Kubernetes Service).
+title: 2. Deploy Portworx
+keywords: portworx, AWS, CloudFormation, ASG, Auto Scaling, Kubernetes
+description: Learn how to apply the spec.
 weight: 2
 ---
 
@@ -14,3 +14,6 @@ If generating the DaemonSet spec via the GUI wizard, specify the AWS environment
 {{</info>}}
 
 {{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
+
+{{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
+

@@ -1,8 +1,8 @@
 ---
-title: 2. Generate the Spec
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, KOPS, pv, persistent disk, aws, EBS
-description: This page describes how to generate the spec for your Portworx cluster with Kubernetes KOPS.
-weight: 2
+title: 2. Deploy Portworx
+keywords: Amazon, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, eks
+description: How to apply the spec for AWS (Elastic Kubernetes Service).
+weight: 3
 ---
 
 {{<info>}}
@@ -14,3 +14,5 @@ If generating the DaemonSet spec via the GUI wizard, specify the AWS environment
 {{</info>}}
 
 {{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
+
+{{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
