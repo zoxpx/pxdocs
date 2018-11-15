@@ -4,6 +4,7 @@ description: Find out how to deploy Portworx with Kubernetes on DC/OS.
 keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage, kubernetes, DCOS, DC/OS
 linkTitle: Install on Kubernetes on DCOS
 weight: 2
+noicon: true
 ---
 
 {{<info>}}

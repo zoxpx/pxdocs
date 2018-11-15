@@ -4,6 +4,7 @@ description: Find out how to deploy Portworx and manage the Portworx cluster usi
 keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage
 weight: 1
 linkTitle: Install on DCOS
+noicon: true
 ---
 
 This DCOS service will deploy Portworx as well as all the dependencies and additional services to manage the Portworx
