@@ -9,7 +9,7 @@ description: Learn to take a snapshot of a volume from a Kubernetes persistent v
 This document will show you how to create snapshots of Portworx volumes and how you can clone those snapshots to use them in pods.
 
 {{<info>}}
-**Note:** The suggested way to manage snapshots on Kuberenetes is to use STORK. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-annotations).
+The suggested way to manage snapshots on Kuberenetes is to use STORK. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-annotations).
 {{</info>}}
 
 ## Pre-requisites

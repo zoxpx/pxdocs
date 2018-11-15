@@ -3,6 +3,7 @@ title: Running in Production
 keywords: portworx, Kubernetes
 description: How to run in production.
 weight: 4
+noicon: true
 ---
 
 ### DAY 1 Operations {#day-1-operations}
@@ -79,7 +80,7 @@ This node is in us-east-1. If PX is started in other zones, then when a volume w
 
 #### Topology in on-premise deployments: {#topology-in-on-premise-deployments}
 
-Failure domains in terms of RACK information can be passed in as described [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/update-portworx-geography-info)
+Failure domains in terms of RACK information can be passed in as described [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology)
 
 #### Volume Management Best Practices {#volume-management-best-practices}
 

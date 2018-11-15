@@ -23,7 +23,7 @@ If Portworx nodes are provided with the information about their region then they
 
 To update the rack information in Kubernetes using node labels, click the link below.
 
-There are different ways in which you can provide this information to Portworx nodes based on your scheduler. If you want to set the rack, zone and region information using environment variables, follow the steps on [Update Geography Info page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/update-portworx-geography-info)
+There are different ways in which you can provide this information to Portworx nodes based on your scheduler. If you want to set the rack, zone and region information using environment variables, follow the steps on [Update Geography Info page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology)
 
 ## Providing rack info to Portworx using node labels
 
@@ -113,7 +113,7 @@ Any PVC created using the above storage class will have a replication factor of 
 
 ## Providing zone and region info to Portworx
 
-Zone and region can only be set using environment variables. Refer to [Update Geography Info page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/update-portworx-geography-info)
+Zone and region can only be set using environment variables. Refer to [Update Geography Info page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology)
 
 #### Updating region information through environment variables {#updating-region-information-through-environment-variables}
 

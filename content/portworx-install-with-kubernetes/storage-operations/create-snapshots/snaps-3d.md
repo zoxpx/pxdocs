@@ -6,7 +6,7 @@ description: Learn to take a 3DSnaps of a volume.
 ---
 
 {{<info>}}
-**Note:** 3DSnaps are supported in Portworx version 1.4 and above and Stork version 1.2 and above. Contact Portworx for early access to Stork 1.2.
+3DSnaps are supported in Portworx version 1.4 and above and Stork version 1.2 and above.
 
 {{</info>}}
 

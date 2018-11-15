@@ -3,6 +3,7 @@ title: Portworx with Kubernetes Secrets
 keywords: portworx, containers, storage, kubernetes
 description: Portworx can integrate with Kubernetes Secrets to store your encryption keys/secrets. This guide will get a Portworx cluster connected to Kubernetes Secrets
 weight: 1
+disableprevnext: true
 ---
 
 Portworx can integrate with Kubernetes Secrets to store your encryption keys/secrets and credentials. This guide will help configure Portworx with Kubernetes Secrets. Kubernetes Secrets can then be used to store Portworx secrets for Volume Encryption and Cloud Credentials.

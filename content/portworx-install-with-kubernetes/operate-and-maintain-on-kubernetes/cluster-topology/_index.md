@@ -3,6 +3,7 @@ title: Cluster Topology awareness
 weight: 4
 keywords: portworx, pxctl, command-line tool, cli, reference, kubernetes, geography, locality, rack, zone, region
 description: Learn how to inform your Portworx nodes where they are placed in order to influence replication decisions and performance.
+noicon: true
 ---
 
 There are different ways in which you can provide this information to Portworx nodes based on your scheduler. If you want to set the rack, zone and region information using environment variables, [click here](/data-volumes/update-geography-info).
