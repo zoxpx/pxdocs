@@ -31,7 +31,7 @@ A `volume-set` can be created using the pxctl CLI, docker CLI, or inline volume 
 ## pxctl CLI
 The `--scale` parameter automatically creates a volume set:
 
-```bash
+```text
 # pxctl volume create elk_vol --scale 10
 Volume successfully created: 232783593254518125
 
@@ -42,7 +42,7 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 
 ## Docker CLI
 
-```bash
+```text
 # docker volume create --driver pxd --name elk_vol --opt scale=10
 # pxctl volume list
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
@@ -52,7 +52,7 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 ## Inline `volume-set` creation through DCOS
 This is useful when creating volumes through DCOS.
 
-```bash
+```text
 # docker volume create -d pxd --name scale=10,size=1G,repl=1,name=elk_vol
 
 # pxctl volume list
@@ -64,7 +64,7 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 
 A `volume-set`'s scale factor can be modified after the volume is created:
 
-```bash
+```text
 # pxctl volume update scale_vol --scale 12
 # pxctl volume list
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
