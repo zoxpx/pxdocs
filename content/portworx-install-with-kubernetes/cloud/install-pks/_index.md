@@ -71,9 +71,7 @@ If you are planing to install Etcd your own way, you can skip this section and p
 
 ### 2b: Install using bosh CFCR etcd release
 
-[CFCR](https://docs-cfcr.cfapps.io/) provides an etcd release which can be deployed in PKS environments.
-
-Follow [Installing Etcd using CFCR etcd release](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) and return here once done.
+Follow [Installing Etcd using CFCR etcd release](/portworx-install-with-kubernetes/on-premise/install-pks/install-cfcr-etcd-release) and return here once done.
 
 After the above steps, you should have all the etcd certs in the *etcd-certs* directory. These need to put in a Kubernetes secret so that Portworx can consume it.
 
@@ -103,8 +101,8 @@ etcd.key:  414  bytes
 
 Portworx supports [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) on various platforms.
 
-If running on **VMware vSphere**, continue at [Portworx install on PKS on vSphere](/portworx-install-with-kubernetes/cloud/install-pks).
-
 If running on **AWS**, continue at [Portworx install with AWS Auto Scaling Groups](/portworx-install-with-kubernetes/cloud/aws/aws-asg).
 
 If running on **GCP**, continue at [Portworx install on Google Cloud Platform](/cloud-references/auto-disk-provisioning/gcp).
+
+If running on **VMware vSphere**, continue at [Portworx install on PKS on vSphere](/portworx-install-with-kubernetes/cloud/install-pks).

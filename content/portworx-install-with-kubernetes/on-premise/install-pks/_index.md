@@ -70,9 +70,7 @@ If you are planing to install Etcd your own way, you can skip this section and p
 
 ### 2b: Install using bosh CFCR etcd release
 
-[CFCR](https://docs-cfcr.cfapps.io/) provides an etcd release which can be deployed in PKS environments.
-
-Follow [Installing Etcd using CFCR etcd release](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) and return here once done.
+Follow [Installing Etcd using CFCR etcd release](/portworx-install-with-kubernetes/on-premise/install-pks/install-cfcr-etcd-release) and return here once done.
 
 After the above steps, you should have all the etcd certs in the *etcd-certs* directory. These need to put in a Kubernetes secret so that Portworx can consume it.
 
