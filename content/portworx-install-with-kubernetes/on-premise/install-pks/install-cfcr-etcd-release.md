@@ -1,7 +1,8 @@
 ---
 layout: page
 title: "Installing Etcd using CFCR etcd release"
-keywords: portworx, etcd, Kubernetes, bosh, cfcr, storage, pkss
+keywords: portworx, etcd, Kubernetes, bosh, cfcr, storage, pks
+hidden: true
 ---
 
 [CFCR](https://docs-cfcr.cfapps.io/) provides an etcd release which can be deployed in PKS environments.
