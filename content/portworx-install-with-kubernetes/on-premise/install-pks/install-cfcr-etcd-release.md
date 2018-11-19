@@ -17,7 +17,7 @@ git checkout tags/v1.5.0-px
 
 ### 2. Deploy etcd
 
-Download the [etcd deployment manifest](/k8s-samples/bosh-etcd-deployment.yaml) and change availibility zones and networks to match your environment. These are fields in the manifest that have a *CHANGEME* comment.
+Download the [etcd deployment manifest](/portworx-install-with-kubernetes/shared/bosh-etcd-deployment.yaml) and change availibility zones and networks to match your environment. These are fields in the manifest that have a *CHANGEME* comment.
 
 Now use bosh to deploy it.
 
