@@ -21,7 +21,7 @@ Download the [etcd deployment manifest](/portworx-install-with-kubernetes/shared
 
 Now use bosh to deploy it.
 
-```
+```bash
 export BOSH_ENVIRONMENT=pks # CHANGE this to your bosh director environment name
 export BOSH_DEPLOYMENT=etcd
 bosh deploy bosh-etcd-deployment.yaml
@@ -29,12 +29,12 @@ bosh deploy bosh-etcd-deployment.yaml
 
 If all goes well, you should have 3 etcd instances.
 
-```
+```bash
  $ bosh vms
 ```
 
 This should output something like below.
-```
+```bash
 Deployment 'etcd'
 
 Instance                                   Process State  AZ    IPs           VM CID                                   VM Type  Active
@@ -47,7 +47,7 @@ etcd/77e56a14-02f7-4f49-80f4-8ccb6ceb769a  running        az-2  70.0.255.243  vm
 
 Let's list the etcd cluster members now.
 
-```
+```bash
  $ bosh ssh etcd/087aca88-83ab-4d6a-9889-631f861c1032 ETCDCTL_API=3  /var/vcap/jobs/etcd/bin/etcdctl member list
 
 21ce9f1eea115b88, started, 087aca88-83ab-4d6a-9889-631f861c1032, https://087aca88-83ab-4d6a-9889-631f861c1032.etcd.pks-services.etcd.bosh:2380, https://087aca88-83ab-4d6a-9889-631f861c1032.etcd.pks-services.etcd.bosh:2379
@@ -59,7 +59,7 @@ Let's list the etcd cluster members now.
 
 To allow external clients to access the etcd cluster, we will copy out the certs.
 
-```
+```bash
 bosh scp etcd/087aca88-83ab-4d6a-9889-631f861c1032:/var/vcap/jobs/etcd/config/etcd* etcd-certs/
 ls etcd-certs/
 ```

@@ -10,7 +10,7 @@ Portworx can integrate with Vault to store your encryption keys/secrets, credent
 
 #### Setting up Vault {#setting-up-vault}
 
-Peruse [this section](https://www.vaultproject.io/docs/install) for help on setting up Vault in your setup. This includes installation, configuring secrets, etc
+Peruse [this section](https://www.vaultproject.io/docs/install) for help on setting up Vault in your setup. This includes installation, setting up policies and configuring secrets.
 
 #### Kubernetes users {#kubernetes-users}
 
@@ -34,13 +34,64 @@ If you already have a running Portworx installation, see the section _Adding Vau
 
 #### Portworx vault environment variables {#portworx-vault-environment-variables}
 
+Based on your vault configuration provide the following environment variables to Portworx.
+
 * `VAULT_ADDR=<vault-address>` **Required:** It would be used to connect to the Vault endpoint
 * `VAULT_TOKEN=<vault-token>` **Required:** This token will be used for authenticating Portworx with Vault
+* `VAULT_BASE_PATH=<portworx-base-path>` The base path under which portworx has access to secrets
+* `VAULT_BACKEND_PATH=<custom-backend-path>` The custom backend path if different than the default `secret`
 * `VAULT_CACERT=</etc/pwx/path>`
 * `VAULT_CAPATH=/etc/pwx/path>`
 * `VAULT_CLIENT_CERT=</etc/pwx/path>`
 * `VAULT_CLIENT_KEY=/etc/pwx/path>`
 * `VAULT_TLS_SERVER_NAME=<server-name>`
+
+If Vault is configured strictly with policies then the Vault Token provided to Portworx should follow one of the following policies:
+
+ ```text
+ # Read and List capabilities on mount to determine which version of kv backend is supported
+ path "sys/mounts/*"
+ {
+ capabilities = ["read", "list"]
+ }
+
+ # V1 backends (Using default backend)
+ # Provide full access to the portworx subkey
+ # Provide -> VAULT_BASE_PATH=portworx to PX (optional)
+ path "secret/portworx/*"
+ {
+ capabilities = ["create", "read", "update", "delete", "list"]
+ }
+
+ # V1 backends (Using custom backend)
+ # Provide full access to the portworx subkey
+ # Provide -> VAULT_BASE_PATH=portworx to PX (optional)
+ # Provide -> VAULT_BACKEND_PATH=custom-backend (required)
+ path "custom-backend/portworx/*"
+ {
+ capabilities = ["create", "read", "update", "delete", "list"]
+ }
+
+
+ # V2 backends (Using default backend )
+ # Provide full access to the data/portworx subkey
+ # Provide -> VAULT_BASE_PATH=portworx to PX (optional)
+ path "secret/data/portworx/*"
+ {
+ capabilities = ["create", "read", "update", "delete", "list"]
+ }
+
+ # V2 backends (Using custom backend )
+ # Provide full access to the data/portworx subkey
+ # Provide -> VAULT_BASE_PATH=portworx to PX (optional)
+ # Provide -> VAULT_BACKEND_PATH=custom-backend (required)
+ path "custom-backend/data/portworx/*"
+ {
+ capabilities = ["create", "read", "update", "delete", "list"]
+ }
+ ```
+
+*Note: Portworx supports only the kv backend of Vault*
 
 All the above Vault related fields as well as the cluster secret key can be set using Portworx CLI which is explained in the next section.
 

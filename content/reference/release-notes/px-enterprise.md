@@ -5,14 +5,33 @@ description: Stay up to date with the new releases and updates from Portworx. Se
 disableSearch: true
 ---
 
-### 1.7.0 (Staging)
+## 1.7.1.1
+* Fix to add/remove node labels in Kubernetes to indicate where volume replicas are placed
 
-* IKS (IBM Kubernetes Service Support)
+## 1.7.1
+* Restart docker containers using shared volumes for DC/OS to enable automatic re-attach of the containers on PX upgrades
+* Preserve Kubernetes agent node ids across agent restarts when kubernetes agents are running statelessly in
+  auto-scaling based environments
+
+## 1.7.0
+
+### Key Features and Enhancements
+* IBM Kubernetes Service (IKS) Support
 * IBM Key Protect Support for Encrypted Volumes
 * Containerd runtime Interface (CRI) support
 * Automatic VM Datastore provisioning for CentOS ESXi VMs
-* Tiered Snapshots for managing volume snapshots on only lower cost media
+* Tiered Snapshots for storing volume snapshots on only lower cost media
 * Encryption support for shared volumes
+
+### Key Fixes
+* PWX-6616 - Fix shared volume mounts going readonly kubernetes in few corner cases
+* PWX-6551 - px_volume_read_bytes and px_volume_written_bytes are not available in 1.6.2
+* PWX-6479 - Debian 8: PX fails to come up if sharedv4 is enabled
+* PWX-6560 - PVC creation fails with "Already exists" perpetually
+* PWX-6527 - Clean up orphaned volume paths as PVC are attached and detached over a period of time
+* PWX-6425 - Cloudnsap schedule option to do full backup always.
+* PWX-6408 - Node alerts: Include hostname/IP in addition to node id
+* PWX-5963 - Report volumes with no snapshots
 
 ## 1.6.1.4
 This is a minor patch release with the following fixex/enhancements.
