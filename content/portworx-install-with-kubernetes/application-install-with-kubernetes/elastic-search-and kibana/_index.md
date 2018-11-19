@@ -706,9 +706,9 @@ Insert data into Elasticsearch and verify that Kibana is able to search for the 
 This will help create dashboards and visualizations.
 
 Save the data from the following location:
-[Download accounts.json](/k8s-samples/efk/accounts.json?raw=true)
+[Download accounts.json](samples/k8s/efk/accounts.json?raw=true)
 ```bash
-$ kubectl exec -it elasticsearch-master-0 curl -- -XGET 'https://docs.portworx.com/k8s-samples/efk/accounts.json?raw=true' -o accounts.json
+$ kubectl exec -it elasticsearch-master-0 curl -- -XGET 'samples/k8s/efk/accounts.json?raw=true' -o accounts.json
 ```
 ```bash
 $ kubectl exec -it elasticsearch-master-0 curl -- -H "Content-Type:application/json" -XPOST 'http://elasticsearch.default.svc:9200/bank/account/_bulk?pretty&refresh' --data-binary "@accounts.json"
@@ -864,5 +864,5 @@ For further information : [StatefulSet Pod Deletion](https://kubernetes.io/docs/
 
 Decomissioning a kubernetes node deletes the node object form the APIServer.
 Before that you would want to decomission your Portworx node from the cluster.
-Follow the steps mentioned in [Decommision a Portworx node](/scheduler/kubernetes/k8s-node-decommission.html)
+Follow the steps mentioned in [Decommision a Portworx node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node)
 Once done, delete the kubernetes node if it requires to be deleted permanently.
