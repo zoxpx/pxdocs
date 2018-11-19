@@ -706,7 +706,7 @@ Insert data into Elasticsearch and verify that Kibana is able to search for the 
 This will help create dashboards and visualizations.
 
 Save the data from the following location:
-[Download accounts.json](samples/k8s/efk/accounts.json?raw=true)
+[Download accounts.json](/samples/k8s/efk/accounts.json?raw=true)
 ```bash
 $ kubectl exec -it elasticsearch-master-0 curl -- -XGET 'samples/k8s/efk/accounts.json?raw=true' -o accounts.json
 ```
