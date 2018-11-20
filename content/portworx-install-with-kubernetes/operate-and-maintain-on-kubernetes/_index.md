@@ -5,4 +5,5 @@ keywords: portworx, container, kubernetes
 description: Documentation on operating and maintaining Portworx in Kubernetes environments
 series: top
 icon: /img/banner__operate.png
+series: k8s-postinstall
 ---

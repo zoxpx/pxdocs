@@ -1,9 +1,10 @@
 ---
 title: Kubernetes Operations (KOPS)
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, KOPS, pv, persistent disk, aws, EBS
-description: This page describes how to setup a production ready Portworx cluster with Kubernetes KOPS.
+description: Install Portworx on a Kubernetes KOPS cluster running on AWS.
 weight: 3
 noicon: true
+series: px-k8s
 ---
 
 This topic explains how to install Portworx with Kubernetes on AWS (KOPS). Follow the steps in this topic in order.

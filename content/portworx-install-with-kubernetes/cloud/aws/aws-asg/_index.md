@@ -2,8 +2,9 @@
 title: Auto-Scaling Groups (ASG)
 weight: 1
 keywords: portworx, AWS, CloudFormation, ASG, Auto Scaling, Kubernetes
-description: Learn to scale a P
+description: Install Portworx on an AWS cluster which uses autoscaling groups (ASG).
 noicon: true
+series: px-k8s
 ---
 
 This topic explains how to install Portworx with Kubernetes on AWS (Auto-Scaling Groups). Follow the steps in this topic in order.

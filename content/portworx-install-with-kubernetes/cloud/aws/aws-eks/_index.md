@@ -1,9 +1,10 @@
 ---
 title: Elastic Kubernetes Service (EKS)
 keywords: Amazon, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, eks
-description: How to install Porworx with AWS (Elastic Kubernetes Service).
+description: Install Portworx on an AWS EKS (Elastic Kubernetes Service) cluster.
 weight: 2
 noicon: true
+series: px-k8s
 ---
 
 This topic explains how to install Portworx with AWS (Elastic Kubernetes Service). Follow the steps in this topic in order.

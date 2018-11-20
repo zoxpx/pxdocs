@@ -26,10 +26,10 @@ For installing Portworx on Kubernetes in a on-prem environment, continue below
 ## Post-installation
 
 For examples on running stateful applications with Portworx, continue below
-{{< widelink url="/portworx-install-with-kubernetes/on-premise" >}}Stateful application examples{{</widelink>}}
+{{< widelink url="/portworx-install-with-kubernetes/application-install-with-kubernetes" >}}Stateful application examples{{</widelink>}}
 
 For documentation on creating and managing volumes and snapshots with Portworx, continue below
-{{< widelink url="/portworx-install-with-kubernetes/on-premise" >}}Storage operations{{</widelink>}}
+{{< widelink url="/portworx-install-with-kubernetes/storage-operations" >}}Storage operations{{</widelink>}}
 
 For documentation on operating and maintaining your Portworx installation, continue below
-{{< widelink url="/portworx-install-with-kubernetes/on-premise" >}}Operation and Maintain{{</widelink>}}
+{{< widelink url="/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes" >}}Operation and Maintain{{</widelink>}}
