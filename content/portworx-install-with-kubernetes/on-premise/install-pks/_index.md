@@ -4,6 +4,7 @@ logo: /logos/pks.png
 weight: 2
 description: Install PKS environment correctly.
 keywords: portworx, PKS, kubernetes
+noicon: true
 ---
 
 ## Step 1: PKS preparation
@@ -98,6 +99,10 @@ etcd.key:  414  bytes
 <a name="install-px-pks"></a>
 ## Step 3: Installing Portworx
 
-Portworx supports [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) on various platforms.
+For on-premise clusters, [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) supports VMware vSphere.
 
-If running on **VMware vSphere**, continue at [Portworx install on PKS on vSphere](/portworx-install-with-kubernetes/cloud/install-pks).
+Based on your ESXi datastore type, proceed to one of the following pages.
+
+If you have **shared** datastores, proceed to [Portworx install on PKS on vSphere using shared datastores](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-shared).
+
+If you have **local** datastores, proceed to [Portworx install on PKS on vSphere using local datastores](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-local).
