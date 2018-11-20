@@ -5,21 +5,21 @@ description: Learn how to install Portworx with Kubenetes
 keywords: portworx, kubernetes
 ---
 
-### Deploy Portworx
+### Apply the specs
 
 Apply the generated spec in your cluster.
 ```text
 kubectl apply -f px-spec.yaml
 ```
 
-####  Monitor the portworx pods
+#####  Monitor the portworx pods
 
 Wait till all portworx pods show as ready in the below output.
 ```text
 kubectl get pods -o wide -n kube-system -l name=portworx
 ```
 
-####  Monitor Portworx cluster status
+#####  Monitor Portworx cluster status
 
 ```text
 PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')

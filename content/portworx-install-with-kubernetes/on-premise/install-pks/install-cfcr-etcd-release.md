@@ -9,7 +9,7 @@ hidden: true
 
 ### 1. Clone the CFCR etcd release repo.
 
-```bash
+```text
 git clone https://github.com/portworx/cfcr-etcd-release.git
 cd cfcr-etcd-release
 git checkout tags/v1.5.0-px
@@ -21,7 +21,7 @@ Download the [etcd deployment manifest](/samples/k8s/bosh-etcd-deployment.yaml) 
 
 Now use bosh to deploy it.
 
-```bash
+```text
 export BOSH_ENVIRONMENT=pks # CHANGE this to your bosh director environment name
 export BOSH_DEPLOYMENT=etcd
 bosh deploy bosh-etcd-deployment.yaml
@@ -29,12 +29,12 @@ bosh deploy bosh-etcd-deployment.yaml
 
 If all goes well, you should have 3 etcd instances.
 
-```bash
- $ bosh vms
+```text
+bosh vms
 ```
 
 This should output something like below.
-```bash
+```text
 Deployment 'etcd'
 
 Instance                                   Process State  AZ    IPs           VM CID                                   VM Type  Active
@@ -47,9 +47,12 @@ etcd/77e56a14-02f7-4f49-80f4-8ccb6ceb769a  running        az-2  70.0.255.243  vm
 
 Let's list the etcd cluster members now.
 
-```bash
- $ bosh ssh etcd/087aca88-83ab-4d6a-9889-631f861c1032 ETCDCTL_API=3  /var/vcap/jobs/etcd/bin/etcdctl member list
+```text
+bosh ssh etcd/087aca88-83ab-4d6a-9889-631f861c1032 ETCDCTL_API=3  /var/vcap/jobs/etcd/bin/etcdctl member list
+```
 
+This should output:
+```text
 21ce9f1eea115b88, started, 087aca88-83ab-4d6a-9889-631f861c1032, https://087aca88-83ab-4d6a-9889-631f861c1032.etcd.pks-services.etcd.bosh:2380, https://087aca88-83ab-4d6a-9889-631f861c1032.etcd.pks-services.etcd.bosh:2379
 3563446b241ac972, started, 2da63ebd-cd62-49df-910e-3790b6ebaa86, https://2da63ebd-cd62-49df-910e-3790b6ebaa86.etcd.pks-services.etcd.bosh:2380, https://2da63ebd-cd62-49df-910e-3790b6ebaa86.etcd.pks-services.etcd.bosh:2379
 46829f944246eaa8, started, 77e56a14-02f7-4f49-80f4-8ccb6ceb769a, https://77e56a14-02f7-4f49-80f4-8ccb6ceb769a.etcd.pks-services.etcd.bosh:2380, https://77e56a14-02f7-4f49-80f4-8ccb6ceb769a.etcd.pks-services.etcd.bosh:2379
@@ -59,7 +62,7 @@ Let's list the etcd cluster members now.
 
 To allow external clients to access the etcd cluster, we will copy out the certs.
 
-```bash
+```text
 bosh scp etcd/087aca88-83ab-4d6a-9889-631f861c1032:/var/vcap/jobs/etcd/config/etcd* etcd-certs/
 ls etcd-certs/
 ```
