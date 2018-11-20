@@ -1,9 +1,10 @@
 ---
 title: Portworx with DC/OS Secrets
 keywords: Portworx, containers, storage, dcos
-description: Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets. This guide will get a Portworx cluster connected to DC/OS Secrets.
+description: Instructions on using DCOS secrets key management with Portworx
 weight: 4
 disableprevnext: true
+series: key-management
 ---
 
 Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets and credentials. This guide will help you configure Portworx to connect to DC/OS Secrets. DC/OS Secrets can then be used to store Portworx secrets for Volume Encryption and Cloud Credentials.

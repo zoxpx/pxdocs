@@ -3,6 +3,7 @@ title: Automatic disk provisioning
 description: Understand how Portworx provisions disks automatically on various cloud platforms
 keywords: cloud,asg,aws,gcp,vsphere,disks
 weight: 1
+series: cloud-references
 ---
 
 In cloud environments, Portworx can dynamically create disks based on an input disk template whenever a new instance spins up and use those disks for the Portworx cluster. 

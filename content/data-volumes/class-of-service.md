@@ -1,11 +1,12 @@
 ---
 title: Class of Service
-description: Portworx provides the ability to specify a class of service for IOPS, throughput and more at the container granularity. Learn about Portworx COS today!
+description: Explanation on class of service for Portworx volumes
 keywords: portworx, cos, class of service, production
 weight: 1
+series: concepts
 ---
 
-Through class of service \(also known as a `CoS`\), a single volume’s class of service can be controlled and mapped to specific underlying storage infrastructure capabilities.
+Portworx provides the ability to specify a class of service for IOPS, throughput and more at the container granularity. Through class of service \(also known as a `CoS`\), a single volume’s class of service can be controlled and mapped to specific underlying storage infrastructure capabilities.
 
 ### Explanation of Class of Service {#explanation-of-class-of-service}
 

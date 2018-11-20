@@ -1,8 +1,9 @@
 ---
-title: Update Geography Info
+title: Topology awareness
 description: Learn how to inform your Portworx nodes where they are placed in order to influence replication decisions and performance.
 keywords: portworx, pxctl, command-line tool, cli, reference, geography, locality, rack, zone, region
 weight: 6
+series: concepts
 ---
 
 Portworx nodes can be made aware of the rack on which they are a placed as well as the zone and region in which they are present. Portworx can use this information to influence the volume replica placement decisions. The way Portworx reacts to rack, zone and region information is different and is explained below.

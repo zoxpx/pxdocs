@@ -1,8 +1,9 @@
 ---
 title: Cloud Migration
-description: How to migrate Portworx volumes between clusters.
+description: Documentation on how to migrate Portworx workloads between clusters
 keywords: cloud, backup, restore, snapshot, DR, migration
-weight: 6
+weight: 2
+series: cloud-references
 ---
 
 ## Overview

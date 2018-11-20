@@ -2,7 +2,7 @@
 title: Portworx on other orchestrators
 weight: 3
 series: top
-description: Running Portworx outside of Kubernetes.
+description: Documentation on using Portworx in non-Kubernetes environments
 keywords: Protworx, containers, storage
 icon: /img/banner__other.png
 ---

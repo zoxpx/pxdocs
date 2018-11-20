@@ -1,9 +1,10 @@
 ---
 title: Install Lighthouse
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse
-description: Lighthouse monitors and manages your PX cluster and storage and can be run on-prem. Find out how today.
+description: Documentation on using Lighthouse to manage Portworx clusters
 weight: 8
 linkTitle: Lighthouse
+series: reference
 ---
 
 Lighthouse is a GUI dashboard that can be used to monitor multiple Portworx clusters.

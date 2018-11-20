@@ -2,7 +2,7 @@
 title: Portworx on Kubernetes
 weight: 2
 hidesections: true
-description: Running Portworx on Kubernetes.
+description: Documentation on using Portworx in Kubernetes environments
 series: top
 icon: /img/banner__kubernetes.png
 keywords: portworx, kubernetes, container, storage

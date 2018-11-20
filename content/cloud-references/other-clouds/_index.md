@@ -1,5 +1,6 @@
 ---
 title: Other cloud providers
-description: Learn to scale a Portworx cluster on other cloud providers
+description: Learn how to install Portworx on cloud providers like Packet, DigitalOcean etc
 weight: 7
+series: cloud-references
 ---
