@@ -3,22 +3,26 @@ title: Upgrade
 weight: 2
 hidesections: true
 keywords: portworx, container, Kubernetes, upgrade, update, storage, Docker, k8s, flexvol, pv, persistent disk
-description: How to upgrade Portworx running as OCI container.
+description: Steps on how to upgrade Portworx on Kubernetes
 noicon: true
+series: k8s-op-maintain
 ---
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
-To upgrade to the **1.5** release, run the curl command:
-
+To upgrade to the **1.7** release, run the curl command: 
 ```text
-curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.5.1
+curl -fsL https://install.portworx.com/1.7/upgrade | bash -s
 ```
 
-To upgrade to the **1.4** release, run the curl command:
+To upgrade to the **1.6** release, run the curl command: 
+```
+curl -fsL https://install.portworx.com/1.6/upgrade | bash -s
+```
 
-```text
-curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.2
+To upgrade to the **1.5** release, run the curl command: 
+```
+curl -fsL https://install.portworx.com/1.5/upgrade | bash -s
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
@@ -35,10 +39,10 @@ This script will also monitor the above operations.
 
 #### Specify a different Portworx upgrade image {#specify-a-different-portworx-upgrade-image}
 
-You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:1.4.2_ image.
+You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:1.5.1_ image.
 
 ```text
-curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.2
+curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.5.1
 ```
 
 #### Disable scaling down of shared Portworx applications during the upgrade {#disable-scaling-down-of-shared-portworx-applications-during-the-upgrade}

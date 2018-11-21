@@ -1,9 +1,10 @@
 ---
 title: Running in Production
 keywords: portworx, Kubernetes
-description: How to run in production.
+description: Production operations guide for Portworx on Kubernetes
 weight: 4
 noicon: true
+series: k8s-op-maintain
 ---
 
 ### DAY 1 Operations {#day-1-operations}

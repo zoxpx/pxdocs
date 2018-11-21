@@ -1,8 +1,9 @@
 ---
 title: Monitoring
 keywords: monitoring, kubernetes, portworx
-description: How to install monitor Portworx on Kubernetes. 
+description: Learn how to monitor your Portworx cluster on Kubernetes
 weight: 4
+series: k8s-op-maintain
 ---
 
 This topic explains how to install monitor Portworx on Kubernetes.
