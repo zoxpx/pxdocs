@@ -3,7 +3,8 @@ title: Install on-premise
 weight: 2
 logoList: true
 keywords: portworx, kubernetes
-description: How to install on-premise.
+description: Learn how to install Portworx with on-premise Kubernetes clusters
+series: k8s-install
 ---
 
 Select one of the below sections for your on-premise Portworx installation.

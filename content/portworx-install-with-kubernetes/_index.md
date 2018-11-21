@@ -17,19 +17,12 @@ To view the available playgrounds, continue below.
 
 ## Installation
 
-For installing Portworx on Kubernetes in a cloud environment, continue below
-{{< widelink url="/portworx-install-with-kubernetes/cloud" >}}Install on Cloud{{</widelink>}}
+Portworx can be install on cloud or on-premise. Proceed to one of the below sections for install instructions.
 
-For installing Portworx on Kubernetes in a on-prem environment, continue below
-{{< widelink url="/portworx-install-with-kubernetes/on-premise" >}}Install On-premise{{</widelink>}}
+{{<homelist series="k8s-install">}}
 
 ## Post-installation
 
-For examples on running stateful applications with Portworx, continue below
-{{< widelink url="/portworx-install-with-kubernetes/application-install-with-kubernetes" >}}Stateful application examples{{</widelink>}}
+If you have an exiting Portworx cluster, continue to below sections for using and managing Portworx.
 
-For documentation on creating and managing volumes and snapshots with Portworx, continue below
-{{< widelink url="/portworx-install-with-kubernetes/storage-operations" >}}Storage operations{{</widelink>}}
-
-For documentation on operating and maintaining your Portworx installation, continue below
-{{< widelink url="/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes" >}}Operation and Maintain{{</widelink>}}
+{{<homelist series="k8s-postinstall">}}
