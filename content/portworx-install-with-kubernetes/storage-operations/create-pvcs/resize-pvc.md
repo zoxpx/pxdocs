@@ -3,7 +3,8 @@ title: Resize a Portworx PVC
 weight: 4
 linkTitle: Resize PVCs
 keywords: portworx, storage class, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk,StatefulSets
-description: Looking to use a dynamically resize a provisioned volume with Kubernetes?  Follow this step-by-step tutorial on how to do it with Portworx.
+description: Step-by-step tutorial on how to resize a Portworx volume with Kubernetes
+series: k8s-vol
 ---
 
 This document describes how to dynamically resize a volume (PVC) using Kubernetes and Portworx.

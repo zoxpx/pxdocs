@@ -2,7 +2,8 @@
 title: Create shared PVCs
 weight: 3
 keywords: portworx, container, kubernetes, storage, k8s, pv, persistent disk, pvc
-description: Learn how to use portworx shared volumes in your Kubernetes cluster.
+description: Learn how to use portworx shared volumes (ReadWriteMany) in your Kubernetes cluster.
+series: k8s-vol
 ---
 
 This document describes how to use portworx shared (ReadWriteMany) volumes in your Kubernetes cluster.

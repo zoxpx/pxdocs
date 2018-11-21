@@ -2,7 +2,8 @@
 title: Using Pre-provisioned Volumes
 weight: 10
 keywords: portworx, pre-provisioned volumes, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
-description: Looking to use a pre-provisioned volume in your Kubernetes cluster? Follow this step-by-step tutorial on how to use pre-provisioned volumes with k8s.
+description: Learn how to use a pre-provisioned Portworx volume in Kubernetes
+series: k8s-vol
 ---
 
 This document describes how to use a pre-provisioned volume in your Kubernetes cluster.
