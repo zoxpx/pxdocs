@@ -17,7 +17,7 @@ To view the available playgrounds, continue below.
 
 ## Installation
 
-Portworx can be install on cloud or on-premise. Proceed to one of the below sections for install instructions.
+Portworx can be installed on cloud or on-premise. Proceed to one of the below sections for install instructions.
 
 {{<homelist series="k8s-install">}}
 
