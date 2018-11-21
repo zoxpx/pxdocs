@@ -3,6 +3,7 @@ layout: page
 title: "Release notes 1.0.7 - Oct 14th, 2016"
 keywords: portworx, px-enterprise, release notes
 description: Realase notes 1.0.7
+hidden: true
 ---
 
 ## Key enhancements to the previous release
