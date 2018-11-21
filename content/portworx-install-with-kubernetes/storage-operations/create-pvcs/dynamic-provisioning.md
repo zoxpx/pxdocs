@@ -14,7 +14,7 @@ Using Storage Classes objects an admin can define the different classes of Portw
 
 | Name              	| Description                                                                                                                                                                                                                                                            	| Example                	|
 |-------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|------------------------	|
-| fs                	| Filesystem to be laid out: none\|xfs\|ext4                                                                                                                                                                                                                               	| fs: "ext4"               	|
+| fs                	| Filesystem to be laid out: xfs\|ext4                                                                                                                                                                                                                               	| fs: "ext4"               	|
 | block_size        	| Block size                                                                                                                                                                                                                                                             	| block_size: "32k"        	|
 | repl              	| Replication factor for the volume: 1\|2\|3                                                                                                                                                                                                                                	| repl: "3"                	|
 | shared            	| Flag to create a globally shared namespace volume which can be used by multiple pods                                                                                                                                                                                   	| shared: "true"         	|
@@ -162,8 +162,7 @@ Verifying pod is created:
    pvpod       1/1     Running   0          48m
 ```
 
-{{<info>}}
-**Note:** To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
+{{<info>}}To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
 {{</info>}}
 
 ### Delete volumes

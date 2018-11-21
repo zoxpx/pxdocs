@@ -1,10 +1,10 @@
 ---
 title: DCOS
-description: Working with Mesosphere DC/OS
+description: Documentation on using Portworx in Mesosphere DC/OS environments
 keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storage, DCOS
 weight: 1
 hideSections: true
-noicon: true
+series: px-other
 ---
 
 [Mesosphere DC/OS](https://mesosphere.com/product/) makes it easy to build and run modern distributed applications in production at scale, by pooling resources across an entire datacenter or

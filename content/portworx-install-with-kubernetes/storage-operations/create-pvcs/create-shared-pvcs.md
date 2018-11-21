@@ -144,6 +144,5 @@ NAME      READY     STATUS    RESTARTS   AGE
 pod1      1/1       Running   0          2m
 pod2      1/1       Running   0          1m
 ```
-{{<info>}}
-**Note:** To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
+{{<info>}}To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
 {{</info>}}

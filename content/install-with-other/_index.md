@@ -5,6 +5,9 @@ series: top
 description: Documentation on using Portworx in non-Kubernetes environments
 keywords: Protworx, containers, storage
 icon: /img/banner__other.png
+hidesections: true
 ---
 
-Click on your platform below for instructions on Portworx installation.
+Click on your orchestrator below for instructions on Portworx installation.
+
+{{<homelist series="px-other">}}

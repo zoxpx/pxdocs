@@ -22,3 +22,5 @@ Portworx exports metrics to Prometheus as are described [here](/install-with-oth
 Alert manager integration is described [here](/install-with-other/operate-and-maintain/monitoring/alerting)
 
 Grafana templates are provided [here](/install-with-other/operate-and-maintain/monitoring/grafana/)
+
+Datadog integration with Portworx is described [here](https://docs.datadoghq.com/integrations/portworx/)

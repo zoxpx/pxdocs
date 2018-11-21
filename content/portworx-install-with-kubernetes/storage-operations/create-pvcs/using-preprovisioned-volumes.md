@@ -95,9 +95,7 @@ spec:
 
 Notice how we use a label selector to select the right `PersistentVolume` using it’s label.
 
-{{<info>}}
-**Note:**  
-If you are planning to use the `PersistentVolumeClaim` in a pod in a non-default namespace, the `PersistentVolumeClaim` needs to created in that namespace.
+{{<info>}}If you are planning to use the `PersistentVolumeClaim` in a pod in a non-default namespace, the `PersistentVolumeClaim` needs to created in that namespace.
 {{</info>}}
 
 **Creating a pod using the PersistentVolumeClaim**
@@ -122,6 +120,4 @@ spec:
       claimName: testvol-pvc
 ```
 
-{{<info>}}
-**Note:** To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
-{{</info>}}
+{{<info>}}To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users){{</info>}}

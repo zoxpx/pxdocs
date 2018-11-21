@@ -5,10 +5,6 @@ keywords: portworx, container, kubernetes, storage, k8s, flexvol, pv, persistent
 description: This guide is a step-by-step tutorial on how to provision encrypted volumes using PVC annotations.
 ---
 
-{{<info>}}
-**Note:**<br/>Supported from PX Enterprise 1.4 onwards
-{{</info>}}
-
 [Encryption at Storage Class level](/portworx-install-with-kubernetes/storage-operations/create-pvcs/storage-class-encryption) does not allow using different secret keys for different PVCs. It also does not provide a way to disable encryption for certain PVCs that are using the same secure storage class. Encryption at PVC level will override the encryption options from Storage Class.
 
 PVC level encryption is achieved using following PVC annotations:
