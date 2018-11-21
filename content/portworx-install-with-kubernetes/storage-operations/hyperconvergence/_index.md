@@ -2,8 +2,9 @@
 title: Run Hyper Converged
 weight: 2
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk
-description: How to run hyper converged
+description: Learn how to run your applications hyperconverged with their data
 noicon: true
+series: k8s-storage
 ---
 
 ### Hyper-convergence {#hyper-convergence}
