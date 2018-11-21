@@ -8,21 +8,13 @@ A [hugo](https://gohugo.io/) implementation of the Portworx documentation.
 
 To develop the docs site locally - first ensure you have [docker](https://docs.docker.com/install/) installed.
 
-Then clone the repo:
-
-```bash
-git clone https://github.com/portworx/pxdocs
-cd pxdocs
-```
-
-Then we pull in the theme from the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo:
+Pull in the theme from the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo:
 
 ```bash
 make update-theme
 ```
 
-Finally - launch the website:
-
+Finally - launch the website locally:
 
 ```bash
 make develop
@@ -37,8 +29,8 @@ Each version of the docs is kept on a different branch.  For example do `git che
 To activate the version dropdown that appears in production - the following variables need to be exported before you run `make develop`:
 
 ```bash
-export VERSIONS_ALL="1.3,1.4"
-export VERSIONS_CURRENT="1.3"
+export VERSIONS_ALL="2.0"
+export VERSIONS_CURRENT="2.0"
 export VERSIONS_BASE_URL="docs.portworx.wk1.co"
 ```
 
