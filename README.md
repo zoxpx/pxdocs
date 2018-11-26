@@ -14,8 +14,8 @@ Below are useful pages that will be useful if you are contributing to the docs.
 
 * [Tip and tricks for editing content](TIPS_AND_TRICKS.md)
 * [Documentation on search functionality](SEARCH.md)
-* [Documentation on version dropdown][VERSIONS.md]
-* [Recommended git workflow][GIT_WORKFLOW.md]
+* [Documentation on version dropdown](VERSIONS.md)
+* [Recommended git workflow](GIT_WORKFLOW.md)
 
 ## Running the site locally
 
