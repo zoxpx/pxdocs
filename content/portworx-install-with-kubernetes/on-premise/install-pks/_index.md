@@ -30,7 +30,7 @@ Perform these steps on any machine where you have the bosh CLI.
 1. Create and upload the release.
 
     Replace _director-environment_ below with the environment which points to the Bosh Director.
-    ```bash
+    ```text
     git clone https://github.com/portworx/portworx-stop-bosh-release.git
     cd portworx-stop-bosh-release
     bosh create-release --final --version=1.0.0
@@ -40,7 +40,7 @@ Perform these steps on any machine where you have the bosh CLI.
 2. Add the addon to the Bosh Director.
 
     First let's fetch your current Bosh Director runtime config.
-    ```bash
+    ```text
     bosh -e director-environment runtime-config
     ```
 
@@ -50,7 +50,7 @@ Perform these steps on any machine where you have the bosh CLI.
 
 
     Once we have the runtime config file prepared, let's update it in the Director.
-    ```bash
+    ```text
     bosh -e director-environment update-runtime-config runtime-configs/director-runtime-config.yaml
     ```
 
