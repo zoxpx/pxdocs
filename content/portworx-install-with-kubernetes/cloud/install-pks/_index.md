@@ -14,6 +14,7 @@ Before installing Portworx, let's ensure the PKS environment is prepared correct
 ### Enable privileged containers and kubectl exec
 
 Ensure that following options are enabled on all plans on the PKS tile.
+
   * Enable Privileged Containers
   * Disable DenyEscalatingExec (This is useful to run kubectl exec to run pxctl commands)
 
