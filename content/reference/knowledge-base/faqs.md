@@ -81,7 +81,7 @@ We do not support Object native.   But minio provides an S3 Object interface tha
 ### Any way to segregate frontend/backend/management traffic?
 Yes.  Management traffic (for configuration) and statistics traffic will travel over "mgtiface" .
 Traffic associated with replication and resynchronization will travel over "dataiface".
-Please see the [config-json file definition](/samples/control/config-json.md).  
+Please see the [config-json file definition](/install-with-other/docker/shared/config-json).  
 Regardless, all data requests between the container and the PX volume driver will be handled locally on that host.
 
 ### Does Portworx support volume encryption?

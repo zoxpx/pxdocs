@@ -1,5 +1,5 @@
 ---
-title: 1. Prepare Your Platform
+title: 1. Prepare Your ACS Platform
 keywords: portworx, acs-engine, azure, Kubernetes, microsoft, azure
 description: Learn about preparing Portworx on Kubernetes with ACS.
 weight: 1

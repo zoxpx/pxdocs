@@ -8,7 +8,7 @@ description: Are you ready for production?
 ### Initial Software Setup for Production
 
 * Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - Refer to the install instructions [page](./)
-  * Ensure PX container is deployed as [OCI container](/install-with-other/docker/standalone/standalone-oci)
+  * Ensure PX container is deployed as [OCI container](/install-with-other/docker/standalone)
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
   * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the container orchestrator to ensure maximum stability. Refer to the following [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) on how to install etcd and also configure it for maximum stability.
 

@@ -15,7 +15,7 @@ linkTitle: Running Portworx in Production with DC/OS
 
  (OR)
 
-  * Deploy PX directly as [OCI container](/install-with-other/docker/standalone/standalone-oci)
+  * Deploy PX directly as [OCI container](/install-with-other/docker/standalone)
   * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will
     form the Portworx cluster
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`

@@ -182,7 +182,7 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 * Support Pool Resize - Available in Maintenance Mode only
 * Container Storage Interface (CSI) [Tech Preview](/portworx-install-with-kubernetes/storage-operations/csi)
 * Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting
-  port number in [install arguments](/install-with-other/docker/standalone/standalone-oci)
+  port number in [install arguments](/install-with-other/docker/standalone)
 * Provide ability to do a [license tranfer](/reference/release-notes/px-licensing) from one cluster to another cluster
 * Add support for [cloudsnap deletes](/reference/cli/cloud-snaps#pxctl-cloudsnap-delete)
 
@@ -500,7 +500,7 @@ Pass volume name as part of the metrics end point so Prometheus/Grafana can disp
 
 #### Key Features and Changes {#key-features-and-changes-1}
 
-* PX-Enterprise container is now available in [OCI Format](/install-with-other/docker/standalone/standalone-oci)
+* PX-Enterprise container is now available in [OCI Format](/install-with-other/docker/standalone)
 * Enhancements for db workloads to handle slow media
 
 #### Fixed issues {#fixed-issues-8}

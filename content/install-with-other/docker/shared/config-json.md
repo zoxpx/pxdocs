@@ -1,11 +1,12 @@
 ---
-title: config.json reference
+title: Reference for the Portworx config.json configuration file
+description: Reference for the Portworx config.json configuration file
 hidden: true
 ---
 
 This is the schema definition for a valid PX configuration file.  This file is expected to be available at `/etc/pwx/config.json`
 
-```
+```text
 {
   "description": "Validate PWX config json",
   "type": "object",
@@ -163,9 +164,9 @@ This is the schema definition for a valid PX configuration file.  This file is e
 
 **dataiface**:  Host ethernet interface used for backend activity, such as replication and resync.  Ex: "enp5s0f1"
 
-**loggingurl**: Endpoint used communicating to PX-Enterpise control (aka "Lighthouse").  Primary use is system statistics.   Ex:  "http://lighthouse.portworx.com/api/stats/listen"
+**loggingurl**: Endpoint used communicating to PX-Enterpise control (aka "Lighthouse").  Primary use is system statistics.
 
-**kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.   
+**kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.
 For 'etcd', an example would be:
 
 ```
