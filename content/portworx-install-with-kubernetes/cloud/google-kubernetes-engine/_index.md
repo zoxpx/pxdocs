@@ -11,7 +11,7 @@ This topic explains how to install Portworx with Google Kubernetes Engine (GKE).
 
 ## Prepare
 
-#### Create a GKE cluster {#create-a-gke-cluster}
+### Create a GKE cluster {#create-a-gke-cluster}
 
 Following points are important when creating your GKE cluster.
 

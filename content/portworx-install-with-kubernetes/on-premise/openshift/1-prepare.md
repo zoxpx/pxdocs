@@ -7,6 +7,25 @@ description: Find out how to prepare PX within a OpenShift cluster and have PX p
 
 {{<info>}}Portworx supports Openshift 3.7 and above.{{</info>}}
 
+
+### Select nodes where Portworx will installed
+
+OpenShift Container Platform 3.9 started restricting where Daemonsets can install (see [reference](https://docs.openshift.com/container-platform/3.9/dev_guide/daemonsets.html)),
+Portworx Daemonset will get installed only on nodes that have the label `node-role.kubernetes.io/compute=true`.
+
+If you want to install Portworx on additional nodes, you have 2 options.
+
+1. To enable Daemonsets on all nodes in kube-system namespace run:
+
+    ```text
+    oc patch namespace kube-system -p '{"metadata": {"annotations": {"openshift.io/node-selector": ""}}}'
+    ```
+2. Alternatively, add the following label to the individual nodes where you want Portworx to run:
+
+    ```text
+    oc label nodes mynode1 node-role.kubernetes.io/compute=true
+    ```
+
 ### Add Portworx service accounts to the privileged security context
 
 Portworx runs as a privileged container. Hence you need to add the Portworx service accounts to the privileged security context.

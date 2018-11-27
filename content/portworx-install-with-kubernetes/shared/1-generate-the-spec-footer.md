@@ -8,4 +8,4 @@ description: Learn how to install Portworx with Kubenetes
 
 To install Portworx with Kubernetes, you will first generate Kubernetes manifests that you will deploy in your cluster.
 
-Click on the [GUI wizard](https://install.portworx.com) to generate the Kubernetes manifests.
+Click on the [GUI wizard](https://install.portworx.com/2.0) to generate the Kubernetes manifests.

@@ -7,7 +7,7 @@ description: Explore commands needed for maintenance operations using Portworx. 
 
 This guide describes a recommended workflow for putting a Portworx node in maintenance mode in your Kubernetes cluster.
 
-#### 1. Migrate application pods using portworx volumes that are running on this node {#1-migrate-application-pods-using-portworx-volumes-that-are-running-on-this-node}
+### Step 1. Migrate application pods using portworx volumes that are running on this node {#1-migrate-application-pods-using-portworx-volumes-that-are-running-on-this-node}
 
 Before putting Portworx in maintenance mode on a node, applications running on that node using Portworx need to be migrated. If Portworx is in maintenance mode, existing application pods will end up with read-only volumes and new pods will fail to start.
 
@@ -23,14 +23,27 @@ You have 2 options for migrating applications.
 2. Delete the application pods using portworx volumes using: `kubectl delete pod <pod-name>`
    * Since application pods are expected to be managed by a controller like `Deployement` or `StatefulSet`, Kubernetes will spin up a new replacement pod on another node.
 
-#### 2. Enter Portworx maintenance mode {#2-enter-portworx-maintenance-mode}
+### Step 2. Enter Portworx maintenance mode {#2-enter-portworx-maintenance-mode}
 
-Run **“pxctl service maintenance –enter”**. This takes Portworx out of an “Operational” state for a given node. Perform whatever maintenance tasks are needed.
+```text
+pxctl service maintenance –enter
+```
 
-#### 3. Exit Portworx maintenance mode {#3-exit-portworx-maintenance-mode}
+This takes Portworx out of an “Operational” state for a given node. Perform whatever maintenance tasks are needed.
 
-Once you are done with maintenance tasks, run **“pxctl service maintenance –exit”**. This puts Portworx back in to “Operational” state for a given node.
+### Step 3. Exit Portworx maintenance mode {#3-exit-portworx-maintenance-mode}
 
-#### 4. Uncordon the node {#4-uncordon-the-node}
+Once you are done with maintenance tasks, run
 
-You can now uncordon the node using: `kubectl uncordon <node>`
+```text
+pxctl service maintenance –exit
+```
+
+This puts Portworx back in to “Operational” state for a given node.
+
+###  Step 4. Uncordon the node {#4-uncordon-the-node}
+
+You can now uncordon the node using:
+```text
+kubectl uncordon <node>
+```

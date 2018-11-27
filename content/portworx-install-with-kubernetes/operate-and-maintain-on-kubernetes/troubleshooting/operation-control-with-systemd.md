@@ -13,8 +13,7 @@ This guide shows how you can perform systemctl operations using _kubectl_ to con
 
 #### Service control {#service-control}
 
-{{<info>}}
-**NOTE:** You should not stop the Portworx systemd service while applications are still using it. Doing so can cause docker and applications to hang on the system. Migrate all application pods using `kubectl drain` from the node before stopping the Portworx systemd service.
+{{<info>}}You should not stop the Portworx systemd service while applications are still using it. Doing so can cause docker and applications to hang on the system. Migrate all application pods using `kubectl drain` from the node before stopping the Portworx systemd service.
 {{</info>}}
 
 **stop / start / restart the PX-OCI service**

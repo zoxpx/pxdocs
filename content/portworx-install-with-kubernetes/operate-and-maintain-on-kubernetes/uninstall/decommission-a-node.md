@@ -7,7 +7,7 @@ description: How to decommission a Portworx node in your Kubernetes clusters.
 
 This guide describes a recommended workflow for decommissioning a Portworx node in your Kubernetes cluster.
 
-#### 1. Migrate application pods using portworx volumes that are running on this node {#1-migrate-application-pods-using-portworx-volumes-that-are-running-on-this-node}
+## Step 1. Migrate application pods using portworx volumes that are running on this node {#1-migrate-application-pods-using-portworx-volumes-that-are-running-on-this-node}
 
 If you plan to remove Portworx from a node, applications running on that node using Portworx need to be migrated. If Portworx is not running, existing application containers will end up with read-only volumes and new ones will fail to start.
 
@@ -23,15 +23,15 @@ You have 2 options for migrating applications.
 2. Delete the application pods using portworx volumes using: `kubectl delete pod <pod-name>`
    * Since application pods are expected to be managed by a controller like `Deployement` or `StatefulSet`, Kubernetes will spin up a new replacement pod on another node.
 
-#### 2. Decommission Portworx {#2-decommission-portworx}
+## Step 2. Decommission Portworx {#2-decommission-portworx}
 
 To decommission Portworx, perform the following steps:
 
-**a\) Remove Portworx from the cluster**
+### a) Remove Portworx from the cluster
 
 Follow [this guide](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-down) to decommission the Portworx node from the cluster.
 
-**b\) Remove Portworx installation from the node**
+### b) Remove Portworx installation from the node
 
 Apply the _px/enabled=remove_ label and it will remove the existing Portworx systemd service. It will also apply the _px/enabled=false_ label to stop Portworx from running in future.
 
@@ -46,7 +46,7 @@ kubectl label nodes minion2 px/enabled=remove --overwrite
 If the plan is to decommission this node altogether from the Kubernetes cluster, no further steps are needed.
 {{</info>}}
 
-#### 3. Ensure application pods using Portworx don’t run on this node {#3-ensure-application-pods-using-portworx-dont-run-on-this-node}
+## Step 3. Ensure application pods using Portworx don’t run on this node {#3-ensure-application-pods-using-portworx-dont-run-on-this-node}
 
 If you need to continue using the Kubernetes node without Portworx, you will need to ensure your application pods using Porworx volumes don’t get scheduled here.
 
@@ -96,7 +96,7 @@ One way to achieve is this to use [inter-pod affinity](https://kubernetes.io/doc
           claimName: px-nginx-pvc
   ```
 
-#### 4. Uncordon the node {#4-uncordon-the-node}
+## Step 4. Uncordon the node {#4-uncordon-the-node}
 
 You can now uncordon the node using: `kubectl uncordon <node>`
 
