@@ -13,7 +13,7 @@ This topic explains how to install Portworx with AWS (Elastic Kubernetes Service
 
 {{% content "portworx-install-with-kubernetes/cloud/aws/shared/1-prepare.md" %}}
 
-## Deploy
+## Install
 
 {{<info>}}
 If you are not using instance privileges, you must also specify AWS environment variables in the DaemonSet spec file. The environment variables to specify \(for the KOPS IAM user\) are:

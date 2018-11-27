@@ -10,13 +10,13 @@ keywords: Portworx, AWS, Kubernetes
 
 This page describes using Portworx with Kubernetes on AWS.
 
-## Installation
+## Install
 
 Based on how you deployed Kubernetes, select one of the below to Install Portworx.
 
 {{<homelist series="px-k8s">}}
 
-## Post-installation
+## Post-Install
 
 Once you have a running Portworx installation, below sections are useful.
 

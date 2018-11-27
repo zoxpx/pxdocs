@@ -36,27 +36,27 @@ Using Storage Classes objects an admin can define the different classes of Portw
 
 Create the storageclass:
 
-```
-# kubectl create -f examples/volumes/portworx/portworx-sc.yaml
+```text
+kubectl create -f examples/volumes/portworx/portworx-sc.yaml
 ```
 
 Example:
 
 ```yaml
- kind: StorageClass
- apiVersion: storage.k8s.io/v1beta1
- metadata:
-   name: portworx-sc
- provisioner: kubernetes.io/portworx-volume
- parameters:
-   repl: "1"
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+metadata:
+  name: portworx-sc
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "1"
 ```
 [Download example](/samples/k8s/portworx-volume-sc.yaml?raw=true)
 
 Verifying storage class is created:
 
 ```
-# kubectl describe storageclass portworx-sc
+kubectl describe storageclass portworx-sc
      Name: 	        	portworx-sc
      IsDefaultClass:	        No
      Annotations:		<none>
@@ -70,31 +70,31 @@ Verifying storage class is created:
 Creating the persistent volume claim:
 
 ```
-# kubectl create -f examples/volumes/portworx/portworx-volume-pvcsc.yaml
+kubectl create -f examples/volumes/portworx/portworx-volume-pvcsc.yaml
 ```
 
 Example:
 
 ```yaml
- kind: PersistentVolumeClaim
- apiVersion: v1
- metadata:
-   name: pvcsc001
-   annotations:
-     volume.beta.kubernetes.io/storage-class: portworx-sc
- spec:
-   accessModes:
-     - ReadWriteOnce
-   resources:
-     requests:
-       storage: 2Gi
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvcsc001
+  annotations:
+    volume.beta.kubernetes.io/storage-class: portworx-sc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
 ```
 [Download example](/samples/k8s/portworx-volume-pvcsc.yaml?raw=true)
 
 Verifying persistent volume claim is created:
 
 ```
-# kubectl describe pvc pvcsc001
+kubectl describe pvc pvcsc001
     Name:	      	pvcsc001
     Namespace:      default
     StorageClass:   portworx-sc
@@ -110,7 +110,7 @@ Persistent Volume is automatically created and is bounded to this pvc.
 Verifying persistent volume claim is created:
 
 ```
-# kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
+kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
     Name: 	      	pvc-e5578707-c626-11e6-baf6-08002729a32b
     Labels:        	<none>
     StorageClass:  	portworx-sc
@@ -131,34 +131,34 @@ Verifying persistent volume claim is created:
 Create the pod:
 
 ```
-# kubectl create -f examples/volumes/portworx/portworx-volume-pvcscpod.yaml
+kubectl create -f examples/volumes/portworx/portworx-volume-pvcscpod.yaml
 ```
 
 Example:
 
 ```yaml
-     apiVersion: v1
-     kind: Pod
-     metadata:
-       name: pvpod
-     spec:
-       containers:
-       - name: test-container
-         image: gcr.io/google_containers/test-webserver
-         volumeMounts:
-         - name: test-volume
-           mountPath: /test-portworx-volume
-       volumes:
-       - name: test-volume
-         persistentVolumeClaim:
-           claimName: pvcsc001
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvpod
+spec:
+  containers:
+  - name: test-container
+    image: gcr.io/google_containers/test-webserver
+    volumeMounts:
+    - name: test-volume
+      mountPath: /test-portworx-volume
+  volumes:
+  - name: test-volume
+    persistentVolumeClaim:
+      claimName: pvcsc001
 ```
 [Download example](/samples/k8s/portworx-volume-pvcscpod.yaml?raw=true)
 
 Verifying pod is created:
 
 ```
-# kubectl get pod pvpod
+kubectl get pod pvpod
    NAME      READY     STATUS    RESTARTS   AGE
    pvpod       1/1     Running   0          48m
 ```

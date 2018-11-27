@@ -5,10 +5,11 @@ keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent 
 description: Find out how to prepare PX within a OpenShift cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 ---
 
-Portworx supports Openshift 3.7 and above.
+{{<info>}}Portworx supports Openshift 3.7 and above.{{</info>}}
 
 ### Add Portworx service accounts to the privileged security context
 
+Portworx runs as a privileged container. Hence you need to add the Portworx service accounts to the privileged security context.
 ```text
 oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:px-account
 oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:portworx-pvc-controller-account
@@ -17,17 +18,16 @@ oc adm policy add-scc-to-user anyuid system:serviceaccount:default:default
 
 ### Prepare a docker-registry credentials secret
 
-Create a Red Hat account if you don't already have one \([register here](https://www.redhat.com/wapps/ugc/register.html)\).
+* Create a Red Hat account if you don't already have one \([register here](https://www.redhat.com/wapps/ugc/register.html)\).
 
-Configure a [Kubernetes secret](https://kubernetes.io/docs/concepts/containers/images/#creating-a-secret-with-a-docker-config) with username/password credentials:
+* Confirm the username/password works (e.g. user:john-rhel, passwd:s3cret)
+  ```text
+  docker login -u john-rhel -p s3cret registry.connect.redhat.com
+  ```
 
-```text
-# confirm the username/password works  (e.g. user:john-rhel, passwd:s3cret)
-docker login -u john-rhel -p s3cret registry.connect.redhat.com
-> Login Succeeded
-
-# configure username/password as a kubernetes "docker-registry" secret  (e.g. "regcred")
-oc create secret docker-registry regcred --docker-server=registry.connect.redhat.com \
-  --docker-username=john-rhel --docker-password=s3cret --docker-email=test@acme.org \
-  -n kube-system
-```
+* Configure username/password as a [Kubernetes "docker-registry" secret](https://kubernetes.io/docs/concepts/containers/images/#creating-a-secret-with-a-docker-config)  (e.g. "regcred")
+  ```text
+  oc create secret docker-registry regcred --docker-server=registry.connect.redhat.com \
+    --docker-username=john-rhel --docker-password=s3cret --docker-email=test@acme.org \
+    -n kube-system
+  ```

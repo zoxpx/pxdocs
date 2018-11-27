@@ -32,7 +32,7 @@ Following points are important when creating your GKE cluster.
         --clusterrole=cluster-admin --user=`gcloud info --format='value(config.account)'`
     ```
 
-## Deploy
+## Install
 
 {{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
 

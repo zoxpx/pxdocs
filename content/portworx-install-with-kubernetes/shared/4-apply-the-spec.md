@@ -7,7 +7,7 @@ keywords: portworx, kubernetes
 
 ### Apply the specs
 
-Apply the generated spec in your cluster.
+Apply the generated specs in your cluster.
 ```text
 kubectl apply -f px-spec.yaml
 ```
@@ -26,7 +26,8 @@ PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0
 kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl status
 ```
 
-Once the Portworx cluster is online, you are ready to install an application that uses Portworx.
+## Post-Install
 
-This is discussed in the next topic.
-{{< widelink url="/portworx-install-with-kubernetes/application-install-with-kubernetes" >}}Stateful applications on Kubernetes{{</widelink>}}
+Once you have a running Portworx installation, below sections are useful.
+
+{{<homelist series="k8s-postinstall">}}
