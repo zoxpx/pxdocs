@@ -1,5 +1,6 @@
 ---
-title: Stateful applications
+title: Stateful applications on Kubernetes
+linkTitle: Stateful applications
 keywords: portworx, stateful applications, kubernetes
 description: Learn how to install various applications with Portworx on Kubernetes
 weight: 4

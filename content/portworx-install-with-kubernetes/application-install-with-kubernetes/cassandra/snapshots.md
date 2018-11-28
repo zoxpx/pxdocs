@@ -1,7 +1,8 @@
 ---
-title: Snapshots
+title: Cassandra Snapshots
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
-description: Learn to take a snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod. Try today!
+description: Learn to take a snapshot of Cassandra volumes on Kubernetes
+linkTitle: Snapshots
 ---
 
 ### Managing Snapshots {#managing-snapshots}
@@ -12,4 +13,7 @@ PX snaps create a real usable volume which is distinct and separate from the vol
 
 #### Best Practice {#best-practice}
 
-nodetool flush and then px snapshot
+It is recommended to use 3DSnaps for cassandra as they are application-consistent.
+
+* [3DSnaps overview](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d)
+* [Cassandra example for 3DSnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d/#cassandra)

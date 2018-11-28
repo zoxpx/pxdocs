@@ -1,5 +1,6 @@
 ---
-title: REST API
+title: Using the Portworx REST API
+linkTitle: REST API
 keywords: portworx, REST, API
 description: Details on using the Portworx REST API
 weight: 3

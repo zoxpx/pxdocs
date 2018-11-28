@@ -1,5 +1,6 @@
 ---
-title: Rancher
+title: Portworx on Rancher
+linkTitle: Rancher
 keywords: portworx, PX-Developer, container, Rancher, storage
 description: Instructions on installing Portworx on Rancher
 weight: 6
@@ -7,19 +8,15 @@ series: px-other
 noicon: true
 ---
 
-This section covers information on installing Portworx on Rancher.
-
-You can use PX-Developer to implement storage for Rancher. Portworx pools your servers’ capacity and is deployed as a container. This section, qualified using Rancher v1.5.5, Cattle v0.178.3, describes how to use Portworx within Rancher.
+This section covers information on installing Portworx on Rancher. Portworx pools your servers’ capacity and is deployed as a container. This section, qualified using Rancher v1.5.5, Cattle v0.178.3, describes how to use Portworx within Rancher.
 
 ## Step 1: Install Rancher
 
 Follow the instructions for installing [Rancher](http://docs.rancher.com/rancher/latest/en/quick-start-guide/).
 
-### Step 2: Create/Configure PX-Ready Rancher Hosts
+## Step 2: Create/Configure PX-Ready Rancher Hosts
 
-{{<info>}}
-**Note** : Portworx requires that Rancher hosts have at least one non-root disk or partition to contribute.
-{{</info>}}
+{{<info>}}Portworx requires that Rancher hosts have at least one non-root disk or partition to contribute.{{</info>}}
 
 For trial/demo purposes, Portworx has created “PX-ready” AMI images in AWS:
 
@@ -39,7 +36,7 @@ When configuring the Rancher hosts using the provided AMI:
 * The root size should be min\(128\)
 * The ‘ssh’ user should be “ubuntu”
 
-### Step 3: Launch an ‘etcd’ stack {#step-3-launch-an-etcd-stack}
+## Step 3: Launch an ‘etcd’ stack {#step-3-launch-an-etcd-stack}
 
 Launch an instance of the ‘etcd’ stack. Set “Enable Backups” and “Debug” to False. Look through the logs to note the published client URL, and make note of that. The client URL will have the following form:
 
@@ -47,7 +44,7 @@ Launch an instance of the ‘etcd’ stack. Set “Enable Backups” and “Debu
 etcdserver: published {Name:10-42-207-178 ClientURLs:[http://10.42.207.178:2379]} ...
 ```
 
-### Step 4: Launch Portworx {#step-4-launch-portworx}
+## Step 4: Launch Portworx {#step-4-launch-portworx}
 
 From the Library Catalog, select the Portworx volume plugin driver. Configure with the following parameters:
 
@@ -57,7 +54,7 @@ From the Library Catalog, select the Portworx volume plugin driver. Configure wi
 * Use Disks: -s /dev/xvdb, for the referenced AMI images; otherwise see storage options from [here](/install-with-other/docker)
 * Headers Directory : /usr/src, for the referenced AMI images; /lib/modules if using with CoreOS
 
-### Step 5: Launch jobs with docker-compose / rancher-compose {#step-5-launch-jobs-with-docker-compose--rancher-compose}
+## Step 5: Launch jobs with docker-compose / rancher-compose {#step-5-launch-jobs-with-docker-compose--rancher-compose}
 
 Here are some sample compose scripts that bring up wordpress stacks, referencing Portworx volumes:
 
@@ -154,5 +151,5 @@ Warning:
 
 Please stop running below mentioned containers in the rancher env, Unless you are sure about those functionalities. Because it caused more trouble in the environment and portworx volumes.
 
-1. Janitor - Unless you are sure about match [patterns](https://github.com/rancher/community-catalog/tree/master/templates/janitor) for Janitor container, Please don’t run this in Rancher env. Because by default it will delete any unused image, and any orphaned volume. It will also remove any stopped containers that are taking up space; note that this may not be what you want if you are using stopped containers to hold volumes. If you are using ‘run-once’ sidekick containers that mount a volume, then these containers may be removed by Janitor.
-2. cAdvisor \(container advisor\) is an open-source project. It is implemented as a daemon process that collects, aggregates, processes, and exports information about running containers. also, it provides users with resource usage information about running containers. This process holds the portworx volumes and causes the trouble.
+1. *Janitor* - Unless you are sure about match [patterns](https://github.com/rancher/community-catalog/tree/master/templates/janitor) for Janitor container, Please don’t run this in Rancher env. Because by default it will delete any unused image, and any orphaned volume. It will also remove any stopped containers that are taking up space; note that this may not be what you want if you are using stopped containers to hold volumes. If you are using ‘run-once’ sidekick containers that mount a volume, then these containers may be removed by Janitor.
+2. *cAdvisor* \(container advisor\) is an open-source project. It is implemented as a daemon process that collects, aggregates, processes, and exports information about running containers. also, it provides users with resource usage information about running containers. This process holds the portworx volumes and causes the trouble.

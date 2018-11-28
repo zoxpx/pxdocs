@@ -1,8 +1,9 @@
 ---
-title: PKS
+title: PKS (cloud)
+linkTitle: PKS
 logo: /logos/pks.png
 keywords: portworx, kubernetes, PKS
-description: How to install and manage PKS.
+description: How to install and manage PKS
 weight: 4
 noicon: true
 ---

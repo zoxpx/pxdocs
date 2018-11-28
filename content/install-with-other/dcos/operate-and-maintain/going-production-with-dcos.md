@@ -1,6 +1,6 @@
 ---
 title: Running Portworx in Production with DC/OS
-description: Are you ready for production?
+description: Operations guide for running Portworx in Production with DC/OS
 keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
 weight: 1
 linkTitle: Running Portworx in Production with DC/OS

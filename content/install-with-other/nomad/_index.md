@@ -1,5 +1,6 @@
 ---
-title: Nomad
+title: Portworx on Nomad
+linkTitle: Nomad
 keywords: portworx, container, Nomad, storage
 description: Instructions on installing Portworx on Nomad
 weight: 4

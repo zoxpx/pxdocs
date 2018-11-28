@@ -1,5 +1,6 @@
 ---
-title: CouchDB
+title: CouchDB using Portworx on DCOS
+linkTitle: CouchDB
 description: Installing DC/OS with CouchDB service.
 keywords: Portworx, Mesosphere, DCOS, CouchDB
 ---

@@ -1,5 +1,6 @@
 ---
-title: Cluster
+title: Cluster operations using pxctl
+linkTitle: Cluster
 keywords: portworx, pxctl, command-line tool, cli, reference
 description: This guide shows you how to use the PXCL CLI to perform cluster operations.  Try today!
 weight: 4

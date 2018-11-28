@@ -1,5 +1,6 @@
 ---
 title: All other
+linkTitle: All other
 weight: 99
 logo: /logos/other.png
 keywords: portworx, container, kubernetes
