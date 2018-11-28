@@ -6,16 +6,19 @@ A [hugo](https://gohugo.io/) implementation of the Portworx documentation.
 
 ## Contributing to the docs
 
-You can click the Fork button in the upper-right area of the screen to create a copy of this repository in your GitHub account. This copy is called a fork. Make any changes you want in your fork, and when you are ready to send those changes to us, go to your fork and create a new pull request to let us know about it.
-
-Once your pull request is created, assign the PR to a reviewer who is the SME (subject matter expert). As the owner of the pull request, it is your responsibility to modify your pull request to address the feedback that has been provided to you by the reviewer.
+* Click the Fork button in the upper-right area of the screen to create a copy of this repository in your GitHub account. This copy is called a fork. 
+* Make any changes you want in your fork, and when you are ready to send those changes, go to your fork and create a new pull request.
+* Once your pull request is created, assign the PR to a reviewer who is the SME (subject matter expert). As the owner of the pull request, it is your responsibility to modify your pull request to address the feedback that has been provided to you by the reviewer.
 
 Below are useful pages that will be useful if you are contributing to the docs.
 
+* [Recommended git workflow for contributing](GIT_WORKFLOW.md)
 * [Tip and tricks for editing content](TIPS_AND_TRICKS.md)
 * [Documentation on search functionality](SEARCH.md)
 * [Documentation on version dropdown](VERSIONS.md)
-* [Recommended git workflow](GIT_WORKFLOW.md)
+* Recommended editors
+    * [Visual Code](https://code.visualstudio.com/)
+    * [Atom](https://atom.io/)
 
 ## Running the site locally
 
