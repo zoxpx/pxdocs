@@ -20,13 +20,13 @@ If Portworx nodes are provided with the information about their zones then they 
 
 If Portworx nodes are provided with the information about their region then they can influence the `default`replica placement. In case of replicated volumes Portworx will always try to keep the replicas of a volume in the same region. This placement is not `strictly` user driven and if regions are provided, Portworx will automatically default to placing replicas in same region for a volume.
 
-### Providing rack info to Portworx {#providing-rack-info-to-portworx}
+## Providing rack info to Portworx {#providing-rack-info-to-portworx}
 
 To update the rack information in Kubernetes using node labels, click the link below.
 
 There are different ways in which you can provide this information to Portworx nodes based on your scheduler. If you want to set the rack, zone and region information using environment variables, follow the steps on [Update Geography Info page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology)
 
-## Providing rack info to Portworx using node labels
+### Providing rack info to Portworx using node labels
 
 Using kubernetes node labels Portworx nodes can be informed about the rack on which they are running. The specific node label to use is ``px/rack=rack1``, where ``px/rack`` is the key, while ``rack1`` is the value identifying the rack of which the node is a part of.
 Please make sure the label is a string not starting with a special character or a number.
