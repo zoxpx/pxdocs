@@ -9,30 +9,96 @@ noicon: true
 
 This topic explains how to install Portworx with Google Kubernetes Engine (GKE). Follow the steps in this topic in order.
 
-## Prepare
+## Create a GKE cluster {#create-a-gke-cluster}
 
-### Create a GKE cluster {#create-a-gke-cluster}
+### Configure gcloud
 
-Following points are important when creating your GKE cluster.
+If this is your first time running with Google Cloud, please follow this quickstart to install gcloud shell and configure your project and compute zone. If you already have gcloud setup, you can skip this.
 
-1. Portworx is supported on GKE cluster provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images). So it is important to specify the node image as **Ubuntu** when creating clusters.
+```text
+export PROJECT_NAME=<PUT-YOUR-PROJECT-NAME-HERE>
+```
 
-2. To manage and auto provision GCP disks, Portworx needs access to the GCP Compute Engine API. This can be enabled in the "Project Access" section when creating the GKE cluster. You can either allow full access to all Cloud APIs or set access for each API. When settting access for each API, make sure to select **Read Write** for the **Compute Engine** dropdown.
 
-    You can do this using:
-    ```text
-    gcloud services enable compute.googleapis.com
-    ```
+```text
+gcloud config set project $PROJECT_NAME
+gcloud config set compute/region us-east1
+gcloud config set compute/zone us-east1-a
+gcloud components update
+```
 
-3. Portworx requires a ClusterRoleBinding for your user to deploy the specs.
+### Create your GKE cluster using gcloud
 
-    You can do this using:
-    ```text
-    kubectl create clusterrolebinding myname-cluster-admin-binding \
-        --clusterrole=cluster-admin --user=`gcloud info --format='value(config.account)'`
-    ```
+{{<info>}} Portworx is supported on GKE cluster provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images). So it is important to specify the node image as **Ubuntu** when creating clusters. {{</info>}}
+
+You have 2 options in the type of cluster you create: Regional or Zonal. Read [Regional Clusters](https://cloud.google.com/kubernetes-engine/docs/concepts/regional-clusters) to help you make this decision
+
+#### Create a zonal cluster
+
+Below command creates a 3-node zonal cluster in us-east1-a with auto-scaling enabled.
+
+```text
+gcloud container clusters create px-demo \
+    --zone us-east1-a \
+    --disk-type=pd-ssd \
+    --disk-size=50GB \
+    --labels=portworx=gke \
+    --machine-type=n1-standard-4 \
+    --num-nodes=3 \
+    --image-type ubuntu \
+    --scopes compute-rw \
+    --enable-autoscaling --max-nodes=6 --min-nodes=3
+```
+
+#### Create a regional cluster
+
+Below command creates a 3-node regional in us-east1 cluster with auto-scaling enabled.
+
+```text
+gcloud container clusters create px-demo \
+     --region us-east1 \
+     --node-locations us-east1-b,us-east1-c,us-east1-d \
+     --disk-type=pd-ssd \
+     --disk-size=50GB \
+     --labels=portworx=gke \
+     --machine-type=n1-standard-4 \
+     --num-nodes=3 \
+     --image-type ubuntu \
+     --scopes compute-rw \
+     --enable-autoscaling --max-nodes=6 --min-nodes=3
+```
+
+### Set your default cluster
+
+After the above GKE cluster completes, let’s make sure and set it up as our default cluster while using the gcloud.
+
+```text
+gcloud config set container/cluster px-demo
+gcloud container clusters get-credentials px-demo
+```
+
+To make sure we open access to the Compute API, run the following command.
+
+```text
+gcloud services enable compute.googleapis.com
+```
+
+### Provide permissions to Portworx
+
+Portworx requires a ClusterRoleBinding for your user to deploy the specs. You can do this using:
+
+```text
+kubectl create clusterrolebinding myname-cluster-admin-binding \
+    --clusterrole=cluster-admin --user=`gcloud info --format='value(config.account)'`
+```
 
 ## Install
+
+{{<info>}} **Who provisions the storage?**
+
+Portworx gets its storage capacity from block storage mounted in the nodes and aggregates capacity across all the nodes to create a global storage pool. In this tutorial, Portworx uses Persistent Disks (PD) as that block storage, where Portworx adds PD automatically as the Kubernetes scales-out and moves PD attachment as nodes exit the cluster or get replaced.{{</info>}}
+
+Continue below to generate the Portworx specs.
 
 {{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
 
