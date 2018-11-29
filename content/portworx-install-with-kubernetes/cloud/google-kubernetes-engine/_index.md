@@ -70,7 +70,7 @@ gcloud container clusters create px-demo \
 
 ### Set your default cluster
 
-After the above GKE cluster completes, let’s make sure and set it up as our default cluster while using the gcloud. TYPO for docs training. TO BE REMOVED.
+After the above GKE cluster completes, let’s make sure and set it up as our default cluster while using the gcloud.
 
 ```text
 gcloud config set container/cluster px-demo
