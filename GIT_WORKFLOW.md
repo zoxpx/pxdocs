@@ -1,7 +1,7 @@
 ## Day 1 setup
 
-* Fork https://github.com/portworx/pxdocs into your github account.
-* Clone your fork using `git clone`
+* Fork https://github.com/portworx/pxdocs into your github account (Click the fork button on top right).
+* Clone your fork using `git clone git@github.com:<YOUR-GITUSERNAME>/pxdocs.git`
 * Add the official repo as upstream using `git remote add upstream git@github.com:portworx/pxdocs.git`
 * Fetch upstream `git fetch upstream`
 
