@@ -42,7 +42,7 @@ clusters.
 
 1. Install portworx and stork on 2 clusters using the above images
 
-2. On the destination cluster, run the following commands from one of the Portworx nodes (steps (a) and (b) will not be
+2. On the destination cluster, run the following commands from one of the Portworx nodes (steps (1) and (2) will not be
 required in the future)
 
   1. Create a volume for the objectstore: ```/opt/pwx/bin/pxctl volume create --size 100 objectstore```
