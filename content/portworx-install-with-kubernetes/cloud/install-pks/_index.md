@@ -32,7 +32,7 @@ Perform these steps on any machine where you have the bosh CLI.
 1. Create and upload the release.
 
     Replace _director-environment_ below with the environment which points to the Bosh Director.
-    ```bash
+    ```text
     git clone https://github.com/portworx/portworx-stop-bosh-release.git
     cd portworx-stop-bosh-release
     bosh create-release --final --version=1.0.0

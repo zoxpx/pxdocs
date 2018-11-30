@@ -10,6 +10,7 @@
 * Fetch the latest upstream: `git fetch upstream`
 * Checkout out a new dev branch: `git checkout -b change-name upstream/master`
 * Make your changes. Always ensure `git status` shows no untracked and uncommitted changes. So if you add new files, use `git add <file-path>` so git starts tracking them.
+* Use `make update-theme` to pick new theme changes other's might have made (if any).
 * Use `make develop` to deploy the docs site locally and preview your changes.
 * If changes look good, submit a pull request and assign the Subject Matter Expert for review.
 
