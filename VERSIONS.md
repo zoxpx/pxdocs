@@ -7,7 +7,7 @@ To activate the version dropdown that appears in production - the following vari
 ```bash
 export VERSIONS_ALL="2.0"
 export VERSIONS_CURRENT="2.0"
-export VERSIONS_BASE_URL="docs.portworx.wk1.co"
+export VERSIONS_BASE_URL="docs.portworx.com"
 ```
 
 **note** if you use the version dropdown - it will redirect to the live site.  If you want to edit a different version locally - use `git checkout <VERSION>`
