@@ -9,6 +9,7 @@ series: reference
 ## 2.0.0
 
 ### Key Features
+
 * PX-Motion - Migration of applications and data between clusters. Application migration is Kubernetes only.
 * PX-Central - Single pane of glass for management, monitoring and metadata services across multiple 
    PX clusters on Kubernetes
@@ -20,6 +21,7 @@ series: reference
 * PX-kvdb (etcd) supported internally with PX cluster deployment 
    
 ### Key Fixes
+
 * PWX-6458: When decreasing HA of a volume, recover snapshot space unused.
 * PWX-5686: Implement accounting and display of space utilized by snapshots and clones.
 * PWX-6949: Decommissioned node getting listed from one node in the cluster and not from the other 
