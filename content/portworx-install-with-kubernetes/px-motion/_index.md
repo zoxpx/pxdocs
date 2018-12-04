@@ -4,6 +4,8 @@ linkTitle: "PX-Motion with stork"
 keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
 description: How to migrate stateful applications on Kubernetes
 series: px-motion
+aliases:
+  - /cloud-references/migration/migration-stork.html
 ---
 
 ## Pre-requisites

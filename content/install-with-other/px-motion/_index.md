@@ -1,9 +1,11 @@
 ---
-title: "PX-Motion on non-kubernetes clusters"
-linkTitle: "PX-Motion"
+title: "PX-Motion to migrate volumes"
+linkTitle: "PX-Motion to migrate volumes"
 keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
-description: How to migrate volumes across clusters (non-Kubernetes)
+description: How to migrate volumes across clusters
 series: px-motion
+aliases:
+  - /cloud-references/migration/migration-pxctl.html
 ---
 
 ## Overview
