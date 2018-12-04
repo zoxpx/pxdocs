@@ -55,7 +55,7 @@ linkTitle: Running Portworx in Production with DC/OS
 
 * The `io_priority` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
 
-* This [page](/data-volumes/class-of-service) offers more information on different io_prioirty levels
+* This [page](/concepts/class-of-service) offers more information on different io_prioirty levels
 
 
 ####  Working with drives with AWS Auto scaling group
@@ -89,7 +89,7 @@ PX  auto-detects availabilty zones and regions and provisions replicas across
   is created, it will have the replicas automatically created in other nodes in other zones.
 
 ### Toppology in on-premise deployments:
-Failure domains in terms of RACK information can be passed in as described [here](/data-volumes/update-geography-info)
+Failure domains in terms of RACK information can be passed in as described [here](/concepts/update-geography-info)
 
 
 ### Volume Management Best Practices
@@ -145,7 +145,7 @@ Failure domains in terms of RACK information can be passed in as described [here
   ```text
   pxctl volume create wordpressvol --shared --size=100 --repl=3
   ```
-  This [page](/data-volumes) gives more details on different volume types,
+  This [page](/concepts) gives more details on different volume types,
   how to create them and update the configuration for the volumes
 
 ### Data Protection for Containers

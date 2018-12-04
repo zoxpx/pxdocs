@@ -63,7 +63,7 @@ With "Shared Volumes", a Portworx volume can be NFS mounted (read/write) outside
 Among the possible use cases:
 * Easily sharing results of containerized workloads with non-containerized apps/reports
 * Providing a "data bridge" for moving from non-containerized workloads towards containerized workloads
-Please see the documentation [here](/data-volumes/shared-volumes), or view our [YouTube Demo](https://www.youtube.com/watch?v=AIVABlClYAU)
+Please see the documentation [here](/concepts/shared-volumes), or view our [YouTube Demo](https://www.youtube.com/watch?v=AIVABlClYAU)
 
 ### How are snapshots implemented?    Thick clones or Thin clones?
 Portworx snapshots are redirect-on-write snapshots and are thin clones.
