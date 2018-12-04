@@ -3,7 +3,7 @@ title: Cloud Migration
 description: Documentation on how to migrate Portworx workloads between clusters
 keywords: cloud, backup, restore, snapshot, DR, migration
 weight: 2
-series: cloud-references
+hidden: true
 ---
 
 ## Overview
