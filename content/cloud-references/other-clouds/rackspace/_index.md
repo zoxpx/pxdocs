@@ -32,10 +32,6 @@ Note: Volume cannot not be attached until the server is available
 ### Step 3: Install Docker for the appropriate OS Version
 Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
 
-Note: Portworx requires Docker to allow shared mounts.  This is standard as of Docker 1.12.  
-If you are running Docker without shared mounts, please follow the steps listed [here](/reference/knowledge-base/shared-mount-propagation)
-
-
 ### Step 4: Launch PX-Enterprise
 Note: Before installing Portworx you will need to open ports as per [minimum requirements](/#minimum-requirements) on the local firewall.  You can view Rackspaces [firewall documentation](https://support.rackspace.com/how-to/open-ports-in-the-linux-firewall-to-access-pop-and-imap-mail-servers/)
 
