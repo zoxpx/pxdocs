@@ -8,7 +8,11 @@ weight: 1
 
 This page provides instructions for deploying Cassandra with Portworx on Kubernetes.
 
-A statefulset in Kubernetes requires a headless service to provide network identity to the pods it creates. A headless service is also needed when Kafka is deployed  A headless service does not use a cluster IP. For information on headless services, read this [article](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
+### Installation
+
+This page installs Cassandra as a [Statefulset](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/).
+
+A statefulset in Kubernetes requires a headless service to provide network identity to the pods it creates. A headless service does not use a cluster IP. For information on headless services, read this [article](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
 
 Create a `cassandra-headless-service.yml` with the following content:
 
@@ -259,7 +263,7 @@ Volume  :  651254593135168442
 
 ```
 
-#### Scaling {#scaling}
+### Scaling {#scaling}
 
 Portworx runs as a Daemonset in Kubernetes. Hence when you add a node or a worker to your kuberentes cluster you do not need to explicitly run Portworx on it.
 
@@ -364,9 +368,9 @@ UN  10.0.160.2  125.1 KiB   32           45.3%             a56a6f70-d2e3-449a-8a
 UN  10.0.64.3   159.94 KiB  32           26.9%             ae7e3624-175b-4676-9ac3-6e3ad4edd461  Rack1-K8Demo
 ```
 
-#### Failover {#failover}
+### Failover {#failover}
 
-**Pod Failover**
+#### Pod Failover
 
 Verify that there is a 5 node Cassandra cluster running on your kubernetes cluster.
 
@@ -508,7 +512,7 @@ kubectl exec cassandra-1 -- cqlsh -e 'select * from demodb.emp'
 (1 rows)
 ```
 
-**Node Failover**
+#### Node Failover
 
 Decomissioning a kubernetes node deletes the node object form the APIServer. Before that you would want to decomission your Portworx node from the cluster. Click on the link below and follow the steps:
 
