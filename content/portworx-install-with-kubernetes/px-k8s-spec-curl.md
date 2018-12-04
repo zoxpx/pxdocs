@@ -17,7 +17,7 @@ First, let's pick the Portworx release you want.
 
 ```text
 REL=""          # DEFAULT portworx release
-#REL="/1.4"     # 2.0 portworx release
+#REL="/2.0"     # 2.0 portworx release
 #REL="/1.7"     # 1.7 portworx release
 #REL="/1.6"     # 1.6 portworx release
 #REL="/1.5"     # 1.5 portworx release
