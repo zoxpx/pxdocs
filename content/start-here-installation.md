@@ -29,11 +29,22 @@ Docker | Version 1.13.1 or greater.
 Key-value store | See Note 2 below.
 Portworx nodes | See Note 3 below.
 
-**Note 1**: Open ports 9001-9016 on all Protworx nodes. Also open the KVDB port. \(As an example, `etcd` typically runs on port 2379\).
 
-**Note 2**:  Portworx needs a key-value store to perform its operations. As such, install a clustered key-value database \(`etcd` or `consul`\) with a three node cluster. Refer to this [article](https://coreos.com/etcd/docs/latest/op-guide/clustering.html) about `etcd` clustering and this [article](https://www.consul.io/intro/getting-started/join.html) about `consul` clustering.
+### Network ports
 
-**Note 3**: Portworx installations require a minimum of 3 nodes to be used on a cluster. The Portworx Enterprise edition supports up to 1000 nodes per cluster. The Portworx Developer edition does not allow more than 3 nodes per cluster.  All nodes running a Portworx container must be synchronized and NTP must be set up.
+Open ports 9001-9016 on all Protworx nodes. Also open the KVDB port. \(As an example, `etcd` typically runs on port 2379\).
+
+### Key value store (KVDB)
+
+Portworx needs a key-value store to perform its operations. As such, install a clustered key-value database \(`etcd` or `consul`\) with a three node cluster.
+
+With Portworx 2.0, you can use Internal KVDB during installation. In this mode,Portworx will create and manage an internal key-value store (kvdb) cluster.
+
+If you plan of using your own etcd, refer to [Etcd for Portworx](/reference/knowledge-base/etcd) for details on recommendations for installing and tuning etcd.
+
+### Cluster size
+
+Portworx installations require a minimum of 3 nodes to be used on a cluster. The Portworx Enterprise edition supports up to 1000 nodes per cluster. The Portworx Developer edition does not allow more than 3 nodes per cluster.  All nodes running a Portworx container must be synchronized and NTP must be set up.
 
 ## Installation
 
