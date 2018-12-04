@@ -14,7 +14,6 @@ description: For troubleshooting PX on Kubernetes, Portworx can help. Read this 
 
 #### Portworx cluster {#portworx-cluster}
 
-* If the px container is failing to start on each node, ensure you have shared mounts enable. Please follow [these](/reference/knowledge-base/shared-mount-propagation) instructions to enable shared mount propogation. This is needed because PX runs as a container and it will be provisioning storage to other containers.
 * Ports 9001 - 9022 must be open for internal network traffic between nodes running PX. Without this, px cluster nodes will not be able to communicate and cluster will be down.
 * If one of your nodes has a custom taint, the Portworx pod will not get scheduled on that node unless you add a toleration in the Portworx DaemonSet spec. Read [here](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature) for more information about taints and tolerations.
 * When the px container boots on a node for the first time, it attempts to download kernel headers to compile it’s kernel module. This can fail if the host sits behind a proxy. To workaround this, install the kernel headers on the host. For example on centos, this will be ```yum install kernel-headers-`uname -r``` and ``yum install kernel-devel-`uname -r```
