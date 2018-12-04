@@ -6,6 +6,32 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.0
+
+ ### Key Features
+ * PX-Motion - Migration of applications and data between clusters. Application migration is Kubernetes only.
+ * PX-Central - Single pane of glass for management, monitoring and metadata services across multiple PX clusters on Kubernetes
+ * Lighthouse 2.0 - Supports PX-motion with connection to Kubernetes cluster for application and namespace migration. 
+ * Shared volumes (v4) for Kubernetes
+ * Support Cloudsnaps for Aggregated volumes
+ * ‘Extent’ based cloudsnaps - Restartable Cloudsnaps if a large volume cloudsnap gets interrupted 
+ * Support Journal device for Repl=1 volumes 
+ * PX-kvdb (etcd) supported internally with PX cluster deployment 
+   
+ ### Key Fixes
+ * PWX-6458: When decreasing HA of a volume, recover snapshot space unused.
+ * PWX-5686: Implement accounting and display of space utilized by snapshots and clones.
+ * PWX-6949: Decommissioned node getting listed from one node in the cluster and not from the other 
+ * PWX-6617: PDM: Dump the cloud drive keys when PX loses kvdb connectivity.
+ * PWX-5876:  Volume should get detached when out of quorum or pool down.
+
+ ### Errata 
+ * PWX-7011: Cluster pair creation failing, because of destination PX node is marked down
+	 
+   Workaround: Restart the PX node and attempt the cluster pairing again
+ * PWX-7041: CloudSnap Backup Failed for Pause/Resume by PX Restart - All replicas are down
+ 
+   Workaround: This is a variant of the previous errata. For volume with replication factor set to 1, Cloudsnap backup does             not resume after the node with replica goes down.
 
 ## 1.7.1.1
 * Fix to add/remove node labels in Kubernetes to indicate where volume replicas are placed
