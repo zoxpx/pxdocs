@@ -16,7 +16,7 @@ First create a volume using Portworx CLI. On one of the nodes with Portworx inst
 /opt/pwx/bin/pxctl volume create <vol-name> --size <size>
 ```
 
-For more details on creating volumes using pxctl, [click here](/data-volumes).
+For more details on creating volumes using pxctl, [click here](/concepts).
 
 Alternatively, you can also use snapshots that you created previously. To learn more, [click here](/reference/cli/snapshots/).
 

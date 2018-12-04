@@ -178,7 +178,7 @@ For e.g., for PX cluster running on AWS,
    shared: "true"
 ```
 
-This [page](/data-volumes) gives more details on different volume types, how to create them and update the configuration for the volumes
+This [page](/concepts) gives more details on different volume types, how to create them and update the configuration for the volumes
 
 * In order to ensure hyper-convergence, ensure you have Stork installed and running in the cluster. See the install instructions in the previous section
 

@@ -11,7 +11,7 @@ This document describes how to dynamically resize a volume (PVC) using Kubernete
 
 ## Pre-requisites
 
-* Resize support for PVC is in Kubernetes 1.11 and above. If you have an older version, use [pxctl volume update](/data-volumes/) to update the volume size.
+* Resize support for PVC is in Kubernetes 1.11 and above. If you have an older version, use [pxctl volume update](/concepts/) to update the volume size.
 * The StorageClass must have `allowVolumeExpansion: true`.
 * The PVC must be in use by a Pod.
 

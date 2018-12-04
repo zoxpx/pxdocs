@@ -166,7 +166,7 @@ These inline specs can be passed in through the scheduler application template. 
 
 ### Global Namespace \(Shared Volumes\) {#global-namespace-shared-volumes}
 
-To use Portworx volumes across nodes and multiple containers, [click here](/data-volumes/shared-volumes).
+To use Portworx volumes across nodes and multiple containers, [click here](/concepts/shared-volumes).
 
 ### Inspect volumes {#inspect-volumes}
 
