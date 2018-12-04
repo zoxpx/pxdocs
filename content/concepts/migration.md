@@ -67,6 +67,6 @@ external to the cluster, or imprudent:
 
 ## Getting started  
 
-Steps to set up a cluster pair and perform migration on Kubernetes can be found [here](/portworx-install-with-kubernetes/px-motion). <br>
-For other orchestrators, steps can be found [here](/install-with-other/px-motion).
+For instructions to setup cluster pair and perform migrations, proceed to one of the below sections.
 
+{{<homelist series="px-motion">}}
