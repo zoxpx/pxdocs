@@ -88,7 +88,7 @@ If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/servic
   ```
 
 * Portworx logs
-  * If you have deployed PX as OCI, for each node running Portworx: `journalctl -lu portworx`
+  * If you have deployed PX as OCI, for each node running Portworx: `journalctl -lu portworx*`
   * If you have deployed PX as docker containers: `kubectl logs -n kube-system -l name=portworx --tail=99999`
 * Monitor kubelet logs on a particular Kubernetes node: `journalctl -lfu kubelet`
   * This can be useful to understand why a particular pod is stuck in creating or terminating state on a node.
