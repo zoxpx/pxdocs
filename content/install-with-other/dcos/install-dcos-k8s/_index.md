@@ -27,7 +27,7 @@ in-tree Kubernetes volume plugin to dynamically create and use Portworx volumes.
 You can create the Service by running the following command:
 ```bash
 $ version=$(kubectl version --short | awk -Fv '/Server Version: / {print $3}')
-$ kubectl apply -f "https://install.portworx.com/?kbver=${version}&dcos=true&stork=true"
+$ kubectl apply -f "https://install.portworx.com?kbver=${version}&dcos=true&stork=true"
 ```
 
 ## Provisioning volumes
