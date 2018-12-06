@@ -51,7 +51,7 @@ to `portworx options` to force Portworx to use these disks or wipe the filesyste
 ![Portworx Install options](/img/dcos-px-install-options.png)
 
 {{<info>}}
-**Note:**<br/>For a full list of installtion options, please look [here](/install-with-other/docker/standalone).
+**Note:**<br/>For a full list of installation options, please look [here](/install-with-other/docker/standalone).
 {{</info>}}
 
 ### Secrets Options
