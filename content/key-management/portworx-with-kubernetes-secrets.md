@@ -58,24 +58,9 @@ roleRef:
 EOF
 ```
 
-**Update config.json**
-
-After ensuring the `portworx` namespace and the required permissions are present, you will have to update the `/etc/pwx/config.json` to start using Kubernetes secrets by default. Add the `secret_type` and `cluster_secret_key` fields in the `secret` section to the `/etc/pwx/config.json` on each node in the cluster:
-
-```text
-{
-    "clusterid": "",
-    "secret": {
-        "secret_type": "k8s",
-        "cluster_secret_key": "cluster-wide-secret-key"
-    },
-    ...
-}
-```
-
 **Edit the Portworx Daemonset**
 
-You will have to edit the Portworx daemonset to use Kubernetes secrets, so that all the new Portworx nodes will start using Kubernetes secrets. You will not have to change the _config.json_ for the new nodes if you edit the daemonset.
+You will have to edit the Portworx daemonset to use Kubernetes secrets, so that all the new Portworx nodes will start using Kubernetes secrets.
 
 ```text
 kubectl edit daemonset portworx -n kube-system
@@ -97,7 +82,7 @@ Add the `"-secret_type", "k8s"` arguments to the `portworx` container in the dae
     name: portworx
 ```
 
-Editing the daemonset will also restart all the Portworx pods, which will consume the modified _config.json_.
+Editing the daemonset will also restart all the Portworx pods.
 
 ### Creating secrets with Kubernetes {#creating-secrets-with-kubernetes}
 
