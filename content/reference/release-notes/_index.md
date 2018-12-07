@@ -6,6 +6,14 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.0.1
+
+### Key Fixes
+
+* PWX-7131 - Fix an issue with some of the alerts IDs mismatching with the description as part of the upgrade 
+  from 1.x versio to 2.0.
+* PWX-71212 - Volume restores would occasionally fail when restoring from backups that were done with PX 1.x versions.
+
 ## 2.0.0
 
 ### Key Features
@@ -34,6 +42,7 @@ series: reference
   Workaround: Restart the PX node and attempt the cluster pairing again
 
 * PWX-7041: CloudSnap Backup Failed for Pause/Resume by PX Restart - All replicas are down
+
   Workaround: This is a variant of the previous errata. 
   For volume with replication factor set to 1, Cloudsnap backup does not resume after the node with replica goes down.
 
