@@ -11,40 +11,22 @@ keywords: Portworx, containers, storage
 
 Prior to installing Portworx, your system needs to meet the hardware, software and network requirements listed below.
 
-**Hardware Requirement** | **Details**
--------------------------|------------
-     Number of CPU cores | 4
-     Number of GB of RAM | 4
-Hard drive space \(recommended\) | 128 GB
-Ethernet NIC card \(recommended\) | 10 GB
+|**Hardware** ||
+|-------------------------|------------|
+|     CPU | 4 cores|
+|     RAM | 4GB|
+|Backing drive size | 8GB (minimum required)<br><br>128 GB (minimum recommended)|
+|Ethernet NIC card | 10 GB (recommended)|
 
-**Network Requirement** | **Details**
---- | ---
-Open needed ports | See Note 1 below.
+|**Network** ||
+|--- | ---|
+|Open needed ports | Open ports 9001-9016 on all Portworx nodes. Also open the KVDB port. \(As an example, `etcd` typically runs on port 2379\)|
 
-**Software Requirement** | **Details**
---- | ---
-Linux kernel | Version 3.10 or greater.
-Docker | Version 1.13.1 or greater.
-Key-value store | See Note 2 below.
-Portworx nodes | See Note 3 below.
-
-
-### Network ports
-
-Open ports 9001-9016 on all Protworx nodes. Also open the KVDB port. \(As an example, `etcd` typically runs on port 2379\).
-
-### Key value store (KVDB)
-
-Portworx needs a key-value store to perform its operations. As such, install a clustered key-value database \(`etcd` or `consul`\) with a three node cluster.
-
-With Portworx 2.0, you can use Internal KVDB during installation. In this mode,Portworx will create and manage an internal key-value store (kvdb) cluster.
-
-If you plan of using your own etcd, refer to [Etcd for Portworx](/reference/knowledge-base/etcd) for details on recommendations for installing and tuning etcd.
-
-### Cluster size
-
-Portworx installations require a minimum of 3 nodes to be used on a cluster. The Portworx Enterprise edition supports up to 1000 nodes per cluster. The Portworx Developer edition does not allow more than 3 nodes per cluster.  All nodes running a Portworx container must be synchronized and NTP must be set up.
+|**Software** ||
+|--- | ---|
+|Linux kernel | Version 3.10 or greater.|
+|Docker | Version 1.13.1 or greater.|
+|Key-value store | Portworx needs a key-value store to perform its operations. As such, install a clustered key-value database \(`etcd` or `consul`\) with a three node cluster.<br><br>With Portworx 2.0, you can use Internal KVDB during installation. In this mode, Portworx will create and manage an internal key-value store (kvdb) cluster.<br><br>If you plan of using your own etcd, refer to [Etcd for Portworx](/reference/knowledge-base/etcd) for details on recommendations for installing and tuning etcd.|
 
 ## Installation
 
