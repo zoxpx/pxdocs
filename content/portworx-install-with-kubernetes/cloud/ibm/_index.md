@@ -13,7 +13,6 @@ noicon: true
 This guide shows how you can deploy Portworx on an [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service) cluster.
 
 ## Prerequisites
-{: #prerequisites}
 
 Before you begin:
 
@@ -21,7 +20,6 @@ Before you begin:
 - Learn about [IBM Cloud Kubernetes Service and the service benefits](https://cloud.ibm.com/docs/containers/cs_why.html#cs_ov).
 
 ## Step 1: Choosing the right worker node flavor for your IBM Cloud Kubernetes Service cluster to support Portworx
-{: #worker-flavor}
 
 Portworx is a highly available software-defined storage solution that you can use to manage persistent storage for your containerized databases or other stateful apps in your IBM Cloud Kubernetes Service cluster across multiple zones. To make sure that your cluster is set up with the compute resources that are required for Portworx, review the FAQs in this step.
 
@@ -37,7 +35,6 @@ To add non-SDS worker nodes to the Portworx storage layer, each worker node must
 You need at least 3 worker nodes in your Portworx cluster so that Portworx can replicate your data across nodes. By replicating your data across worker nodes, Portworx can ensure that your stateful app can be rescheduled to a different worker node in case of a failure without losing data. For even higher availability, use a [multizone cluster](https://cloud.ibm.com/docs/containers/cs_clusters_planning.html#multizone) and replicate your volumes on SDS worker nodes across 3 zones.
 
 ## Step 2: Creating or preparing your cluster for Portworx
-{: #cluster-create}
 
 To install Portworx, you must have an IBM Cloud Kubernetes Service cluster that runs Kubernetes version 1.10 or higher. To make sure that your cluster is set up with worker nodes that offer best performance for you Portworx cluster, review [Step 1](#worker-flavor).
 
@@ -52,7 +49,6 @@ To create or prepare your cluster for Portworx:
 4. If you created or want to use a cluster with non-SDS worker nodes, [add raw, unformatted, and unmounted block storage](https://cloud.ibm.com/docs/containers/cs_storage_portworx.html#create_block_storage) to your worker nodes. The block storage devices are attached to your worker node and can be included in the Portworx storage layer.
 
 ## Step 3: Setting up a key-value store for the Portworx metadata
-{: #key-value-store}
 
 Every Portworx cluster must be connected to a key-value store to store Portworx metadata. The Portworx key-value store serves as the single source of truth for your Portworx storage layer. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable.
 
@@ -61,7 +57,6 @@ In order for your Portworx cluster to be highly available, you must ensure that 
 Follow the [IBM Cloud Kubernetes Service documentation](https://cloud.ibm.com/docs/containers/cs_storage_portworx.html#portworx_database) to set up your IBM Compose for etcd key-value store for Portworx.
 
 ## Step 4: Setting up encryption for your Portworx volumes
-{: #volume-encryption}
 
 By default, data that you store on a Portworx volume is not encrypted at rest or during transit. To protect your data from being accessed by unauthorized users, you can choose to protect your volumes with [IBM Key Protect](https://console.bluemix.net/docs/services/key-protect/about.html#about). IBM Key Protect helps you to provision encrypted keys that are secured by FIPS 140-2 Level 2 certified cloud-based hardware security modules (HSMs).
 
@@ -72,7 +67,6 @@ Review the following information in the IBM Cloud Kubernetes Service documentati
 - [Setting up IBM Key Protect encryption for your volumes](https://cloud.ibm.com/docs/containers/cs_storage_portworx.html#setup_encryption)
 
 ## Step 5: Installing Portworx on IBM Cloud Kubernetes Service
-{: #install-portworx}
 
 Install Portworx version 1.7 with a Helm chart. The Helm chart deploys a trial version of the Portworx enterprise edition `px-enterprise` that you can use for 30 days. After the trial version expires, you must [purchase a Portworx license](https://docs.portworx.com/reference/release-notes/px-licensing/) to continue to use your Portworx cluster. In addition, [Stork](https://docs.portworx.com/portworx-install-with-kubernetes/) is installed on your Kubernetes cluster. Stork is the Portworx storage scheduler and allows you to co-locate pods with their data, and create and restore snapshots of Portworx volumes.
 
@@ -85,7 +79,6 @@ Before you begin:
 For more information about how to install the Portworx Helm chart, see the [IBM Cloud Kubernetes Service documentation](https://cloud.ibm.com/docs/containers/cs_storage_portworx.html#install_portworx).
 
 ## Step 6: Adding Portworx storage to your apps
-{: #add-portworx-storage}
 
 Now that your Portworx cluster is all set, you can start creating Portworx volumes by using [Kubernetes dynamic provisioning](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/). The Portworx Helm chart already set up a few default storage classes in your cluster that you can see by running the `kubectl get storageclasses | grep portworx` command. You can also create your own storage class to define settings, such as:
 
