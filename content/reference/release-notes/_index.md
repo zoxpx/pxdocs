@@ -233,7 +233,7 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 * Container Storage Interface (CSI) [Tech Preview](/portworx-install-with-kubernetes/storage-operations/csi)
 * Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting
   port number in [install arguments](/install-with-other/docker/standalone)
-* Provide ability to do a [license tranfer](/reference/release-notes/px-licensing) from one cluster to another cluster
+* Provide ability to do a [license transfer](/reference/knowledge-base/px-licensing) from one cluster to another cluster
 * Add support for [cloudsnap deletes](/reference/cli/cloud-snaps#pxctl-cloudsnap-delete)
 
 ### Key Fixes:

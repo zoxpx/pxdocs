@@ -2,8 +2,11 @@
 title: Cassandra on Kubernetes
 linkTitle: Cassandra
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, cassandra
-description: See how Portworx can be used to deploy stateful Cassandra on top of Kubernetes. Try it today!
+description: See how Portworx can be used to deploy stateful Cassandra on top of Kubernetes.
 weight: 1
+aliases:
+  - /scheduler/kubernetes/cassandra-k8s
+  - /scheduler/kubernetes/cassandra-k8s.html
 ---
 
 This page provides instructions for deploying Cassandra with Portworx on Kubernetes.
