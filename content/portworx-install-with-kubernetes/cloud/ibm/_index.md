@@ -74,7 +74,7 @@ Review the following information in the IBM Cloud Kubernetes Service documentati
 ## Step 5: Installing Portworx on IBM Cloud Kubernetes Service
 {: #install-portworx}
 
-Install Portworx version 1.7 with a Helm chart. The Helm chart deploys a trial version of the Portworx enterprise edition `px-enterprise` that you can use for 30 days. After the trial version expires, you must [purchase a Portworx license](https://docs.portworx.com/reference/release-notes/px-licensing/) to continue to use your Portworx cluster. In addition, [Stork](https://docs.portworx.com/portworx-install-with-kubernetes/) is installed on your Kubernetes cluster. Stork is the Portworx storage scheduler and allows you to co-locate pods with their data, and create and restore snapshots of Portworx volumes.
+Install Portworx version 1.7 with a Helm chart. The Helm chart deploys a trial version of the Portworx enterprise edition `px-enterprise` that you can use for 30 days. After the trial version expires, you must [purchase a Portworx license](/reference/knowledge-base/px-licensing/) to continue to use your Portworx cluster. In addition, [Stork](https://docs.portworx.com/portworx-install-with-kubernetes/) is installed on your Kubernetes cluster. Stork is the Portworx storage scheduler and allows you to co-locate pods with their data, and create and restore snapshots of Portworx volumes.
 
 Before you begin:
 
