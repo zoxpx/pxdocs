@@ -55,7 +55,7 @@ to `portworx options` to force Portworx to use these disks or wipe the filesyste
 {{</info>}}
 
 ### Secrets Options
-To use DC/OS secrets for Volume Encryption and storing Cloud Credentials, refer [Portworx with DC/OS Secrets](/key-management/portworx-with-dc-os-secrets).
+To use DC/OS secrets for Volume Encryption and storing Cloud Credentials, refer [Portworx with DC/OS Secrets](/key-management/dc-os-secrets).
 
 ### Etcd Options
 By default a 3 node etcd cluster will be created with 5GB of local persistent storage. The size of the persistent disks can

@@ -837,7 +837,7 @@ No new features in 1.2.1. This is a patch release.
 * [Encrypted Volumes](/reference/cli/encrypted-volumes) with Data-at-rest and Data-in-flight encryption
 * Docker V2 Plugin Support
 * [Prometheus Integeration](/install-with-other/operate-and-maintain/monitoring/prometheus)
-* [Hashicorp Vault](/key-management/portworx-with-vault), [AWS KMS integration](/portworx-install-with-kubernetes/cloud/aws) and Docker Secrets Integration
+* [Hashicorp Vault](/key-management/vault), [AWS KMS integration](/portworx-install-with-kubernetes/cloud/aws) and Docker Secrets Integration
 * [Dynamically resize](/reference/cli/updating-volumes) PX Volumes with no application downtime
 * Security updates improve PX container security
 

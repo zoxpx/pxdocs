@@ -1,10 +1,12 @@
 ---
-title: Portworx with Kubernetes Secrets
+title: Kubernetes Secrets
+logo: /logos/other.png
 keywords: portworx, containers, storage, kubernetes
 description: Instructions on using Kubernetes secrets with Portworx
-weight: 1
+weight: 4
 disableprevnext: true
 series: key-management
+noicon: true
 ---
 
 
