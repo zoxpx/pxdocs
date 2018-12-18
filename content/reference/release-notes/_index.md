@@ -46,6 +46,11 @@ series: reference
   Workaround: This is a variant of the previous errata. 
   For volume with replication factor set to 1, Cloudsnap backup does not resume after the node with replica goes down.
 
+## 1.7.3
+
+* Provide a runtime option to enable more compact data out of flash media to avoid disk fragementation
+* Fix an issue with NVMe/SSD disks being shown as Magnetic disks 
+
 ## 1.7.2
 
 ### Key Features and Enhancements
