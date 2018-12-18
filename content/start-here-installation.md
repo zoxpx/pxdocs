@@ -15,6 +15,7 @@ Prior to installing Portworx, your system needs to meet the hardware, software a
 |-------------------------|------------|
 |     CPU | 4 cores|
 |     RAM | 4GB|
+| Disk (/var) | 2GB free |
 |Backing drive size | 8GB (minimum required)<br><br>128 GB (minimum recommended)|
 |Ethernet NIC card | 10 GB (recommended)|
 
