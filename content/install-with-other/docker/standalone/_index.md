@@ -67,7 +67,7 @@ To uninstall the PX OCI bundle, please run the following:
 # 1: Remove systemd service (if any)
 sudo systemctl stop portworx
 sudo systemctl disable portworx
-sudo rm -f /etc/systemd/system/portworx*.service
+sudo rm -f /etc/systemd/system/portworx*
 
 # NOTE: if the steps below fail, please reboot the node, and repeat the steps 2..5
 
