@@ -85,12 +85,10 @@ spec:
              # CHANGEME to the user friendly cluster name you would like to give
             ["-c", "px-pks-demo-1",
              # CHANGEME change to match your secured etcd endpoints.
-             # e.g etcd:https://087aca88-83ab-4d6a-9889-631f861c1032.etcd.pks-services.etcd.bosh:2379,etcd:https://2da63ebd-cd62-49df-910e-3790b6ebaa86.etcd.pks-services.etcd.bosh:2379,etcd:https://77e56a14-02f7-4f49-80f4-8ccb6ceb769a.etcd.pks-services.etcd.bosh:2379
-             "-k", "etcd:https://PUT-YOUR-ETCD-HOST-2:PUT-YOUR-ETCD-PORT,etcd:https://PUT-YOUR-ETCD-HOST-2:PUT-YOUR-ETCD-PORT,etcd:https://PUT-YOUR-ETCD-HOST-3:PUT-YOUR-ETCD-PORT",
+             "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT",
              "-x", "kubernetes",
              # CHANGEME size from 100 to size in GB of the drive you want on each node
-             "-s", "size=100,type=zeroedthick",
-             "-ca", "/etc/pwx/etcdcerts/etcd-ca.crt", "-cert", "/etc/pwx/etcdcerts/etcd.crt", "-key", "/etc/pwx/etcdcerts/etcd.key" ]
+             "-s", "size=100,type=zeroedthick"]
           env:
             - name: "PX_TEMPLATE_VERSION"
               value: "v2"
@@ -145,8 +143,6 @@ spec:
               mountPath: /host_proc/1/ns
             - name: sysdmount
               mountPath: /etc/systemd/system
-            - name: etcdcerts
-              mountPath: /etc/pwx/etcdcerts
       restartPolicy: Always
       serviceAccountName: px-account
       volumes:
@@ -165,16 +161,6 @@ spec:
         - name: sysdmount
           hostPath:
             path: /etc/systemd/system
-        - name: etcdcerts
-          secret:
-            secretName: px-etcd-certs
-            items:
-            - key: etcd-ca.crt
-              path: etcd-ca.crt
-            - key: etcd.crt
-              path: etcd.crt
-            - key: etcd.key
-              path: etcd.key
 ---
 
 apiVersion: v1

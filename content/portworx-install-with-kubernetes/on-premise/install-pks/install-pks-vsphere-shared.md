@@ -64,6 +64,8 @@ data:
   VSPHERE_PASSWORD: cHgxLjMuMEZUVw==
 ```
 
+`kubectl apply` the above spec after you update the above template with your user and password.
+
 <a name="pks-px-spec"></a>
 ### Portworx spec
 
@@ -78,3 +80,6 @@ You need to change below things in the spec to match your environment. These are
 4. **VSPHERE_DATASTORE_PREFIX**: Prefix of the ESXi datastore(s) that Portworx will use for storage.
 5. **Size of disks**: In the Portworx Daemonset arguments below, change `size=100` to the size of the disks you want each Portworx node in the cluster to create. 
   * For e.g if you have 10 nodes in your cluster and you give size=100, each Portworx node will create a 100GB disk in the shared datastore and the cluster storage capacity will be 1TB.
+
+
+`kubectl apply` the above spec after you update the above template with your environment details.
