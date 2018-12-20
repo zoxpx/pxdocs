@@ -26,7 +26,7 @@ Supported from PX Enterprise 1.4 onwards
 To access secrets, Portworx needs credentials of a user. This user should have permissions to access the secrets under a base secrets path. For instance, you can grant permissions to a user to access secrets under `pwx/secrets` base path, using DC/OS enterprise cli:
 
 ```text
-dcos security org users grant <username> dcos:secrets:default:pwx/secrets/* full
+dcos security org users grant <username> dcos:secrets:default:/pwx/secrets/* full
 ```
 
 **Enabling Secrets in Portworx**
