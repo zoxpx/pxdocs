@@ -35,7 +35,7 @@ Grafana is a dashboarding and visualization tool with integrations to several ti
 ### Install the Prometheus Operator
 Create a file named `prometheus-operator.yaml` with the below contents and apply the spec.
 
-```yaml
+```text
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
@@ -151,7 +151,7 @@ spec:
 ### Install the Service Monitor
 
 Create a file named `service-monitor.yaml` with the below contents and apply the spec.
-```yaml
+```text
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -175,7 +175,7 @@ spec:
 ### Install the Alertmanager
 Create a file named `alertmanager.yaml` with the following contents and create a secret from it.
 Make sure you add the relevant email addresses in the below config.
-```yaml
+```text
 global:
   # The smarthost and SMTP sender used for mail notifications.
   smtp_smarthost: 'smtp.gmail.com:587'
@@ -201,7 +201,7 @@ receivers:
 
 
 Create a file named `alertmanager-cluster.yaml` with the below contents and apply the spec on your cluster.
-```yaml
+```text
 apiVersion: monitoring.coreos.com/v1
 kind: Alertmanager
 metadata:
@@ -212,12 +212,13 @@ metadata:
 spec:
   replicas: 3
 ```
+
 `kubectl apply -f alertmanager-cluster.yaml`
 
 
 Create a file named `alertmanager-service.yaml` with the following contents and apply the spec.
 
-```yaml
+```text
 apiVersion: v1
 kind: Service
 metadata:
@@ -234,12 +235,14 @@ spec:
   selector:
     alertmanager: portworx
 ```
+
 `kubectl apply -f alertmanager-service.yaml`
 
 ### Install Prometheus
 
 Create a file named `prometheus-rules.yaml` with the following contents and apply the spec.
-```yaml
+
+```text
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -352,7 +355,8 @@ data:
 `kubectl apply -f prometheus-rules.yaml`
 
 Create a file named `prometheus-cluster.yaml` with the following contents and apply the spec.
-```yaml
+
+```text
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -459,7 +463,7 @@ Create a configmap from the above files with the below command
 
 Create a file named `grafana-deployment.yaml` with the below contents and apply the spec.
 
-```yaml
+```text
 apiVersion: v1
 kind: Service
 metadata:
