@@ -11,22 +11,22 @@ noicon: true
 
 Portworx can integrate with Vault to store your encryption keys/secrets, credentials or passwords. This guide will get a Portworx cluster connected to a Vault endpoint. The vault endpoint could be used to store secrets that will be used for encrypting volumes.
 
-### Setting up Vault {#setting-up-vault}
+## Setting up Vault {#setting-up-vault}
 
 Peruse [this section](https://www.vaultproject.io/docs/install) for help on setting up Vault in your setup. This includes installation, setting up policies and configuring secrets.
 
-#### Kubernetes users {#kubernetes-users}
+### Kubernetes users {#kubernetes-users}
 
 If you are installing Portworx on Kubernetes, when generating the [Portworx Kubernetes spec file](https://install.portworx.com/):
 
-1. Select `vault` from the “Secrets type” list
-2. In the environment variables section set _Portworx Vault Environment variables_ \(see section below\) to identify Vault endpoint.
+1. Select `Vault` from the `Secrets Store Type` list under `Advanced Settings`
+2. In the environment variables section set [Portworx Vault Environment variables](#portworx-vault-environment-variables) to identify Vault endpoint.
 
 To generate Portworx spec for Kubernetes, refer instructions, [click here](/portworx-install-with-kubernetes).
 
-If you already have a running Portworx installation, see the section on each node.
+If you already have a running Portworx installation, [udpate config.json](#adding-vault-credentials-to-config) on each node.
 
-#### Other users {#other-users}
+### Other users {#other-users}
 
 During installation,
 
@@ -49,6 +49,7 @@ Based on your vault configuration provide the following environment variables to
 * `VAULT_CLIENT_KEY=/etc/pwx/path>`
 * `VAULT_TLS_SERVER_NAME=<server-name>`
 
+### Vault security policies
 If Vault is configured strictly with policies then the Vault Token provided to Portworx should follow one of the following policies:
 
  ```text
@@ -94,11 +95,13 @@ If Vault is configured strictly with policies then the Vault Token provided to P
  }
  ```
 
-*Note: Portworx supports only the kv backend of Vault*
+{{<info>}}
+**Note**: Portworx supports only the kv backend of Vault
+{{</info>}}
 
 All the above Vault related fields as well as the cluster secret key can be set using Portworx CLI which is explained in the next section.
 
-### Adding Vault Credentials to config.json {#adding-vault-credentials-to-configjson}
+## Adding Vault Credentials to config {#adding-vault-credentials-to-config}
 
 This section is relevant for either of the below 2 scenarios
 
@@ -128,23 +131,21 @@ cat /etc/pwx/config.json
 }
 ```
 
-### Key generation with Vault {#key-generation-with-vault}
+## Key generation with Vault {#key-generation-with-vault}
 
 The following sections describe the key generation process with Portworx and Vault which can be used for encrypting volumes. More info about encrypted volumes [here](/reference/cli/encrypted-volumes)
 
-**Setting cluster wide secret key**
+### Setting cluster wide secret key
 
 A cluster wide secret key is a common key that can be used to encrypt all your volumes. You can set the cluster secret key using the following command.
 
 ```text
-/opt/pwx/bin/pxctl secrets set-cluster-key
-Enter cluster wide secret key: *****
-Successfully set cluster secret key!
+/opt/pwx/bin/pxctl secrets set-cluster-key --secret <cluster-wide-secret-key>
 ```
 
 This command needs to be run just once for the cluster. If you have added the cluster secret key through the config.json, the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in config.json will be ignored for the one set through the CLI.
 
-**\(Optional\) Authenticating with Vault using Portworx CLI**
+## \(Optional\) Authenticating with Vault using Portworx CLI
 
 If you do not wish to set Vault environment variables, you can authenticate Portworx with Vault using Portworx CLI. Run the following command:
 
@@ -152,17 +153,16 @@ If you do not wish to set Vault environment variables, you can authenticate Port
 /opt/pwx/bin/pxctl secrets vault login \
   --vault-address <vault-endpoint-address> \
   --vault-token <vault-token>
-Successfully authenticated with Vault.
 ```
 
 {{<info>}}
-**Important:**  
+**Important:**
 You need to run this command on all Portworx nodes, so that you could create and mount encrypted volumes on all nodes.
 {{</info>}}
 
 {{<info>}}
-**Important:**  
+**Important:**
 Make sure that the secret key has been created in Vault.
 {{</info>}}
 
-If the CLI is used to authenticate with Vault, for every restart of Portworx container it needs to be re-authenticated with Vault by running the `login` command.  
+If the CLI is used to authenticate with Vault, for every restart of Portworx container it needs to be re-authenticated with Vault by running the `vault login` command.

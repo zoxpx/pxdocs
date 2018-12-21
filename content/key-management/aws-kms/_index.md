@@ -12,11 +12,10 @@ noicon: true
 Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to an AWS KMS endpoint. The Data Keys created in KMS can be used to encrypt Portworx Volumes.
 
 {{<info>}}
-**NOTE:**  
-Supported from PX Enterprise 1.4 onwards
+**NOTE:** Supported from PX Enterprise 1.4 onwards
 {{</info>}}
 
-### Deploying Portworx {#deploying-portworx}
+## Configuring AWS KMS with Portworx {#deploying-portworx}
 
 There are multiple ways in which you can setup Portworx so that it gets authenticated with AWS
 
@@ -31,13 +30,13 @@ Following are the authentication details required by Portworx to use the AWS KMS
    through the `AWS_CMK` field.
 - `AWS_REGION` : [required] The AWS region to which the CMK is associated to. CMKs are region specific and cannot be used across regions.
 
-### Using AWS environment variables
+## Using AWS environment variables
 
 Portworx can authenticate with AWS using AWS SDK’s EnvProvider.
 
 Each of the above fields can be provided as is to Portworx through environment variables.
 
-**Kubernetes users**
+### Kubernetes users
 
 If you are installing Portworx on Kubernetes, when generating the Portworx Kubernetes spec file on https://install.portworx.com/ :
 
@@ -49,7 +48,7 @@ If you are installing Portworx on Kubernetes, when generating the Portworx Kuber
 
 If you already have a running Portworx installation, update `/etc/pwx/config.json` on each node.
 
-**Other users**
+### Other users
 
 During installation,
 
@@ -58,14 +57,13 @@ During installation,
 
 If you already have a running Portworx installation, update `/etc/pwx/config.json` on each node.
 
-**Adding AWS KMS Credentials to config.json**
+## Adding AWS KMS Credentials to config
 
 {{<info>}}
-**Note:**  
-This section is optional and is only needed if you intend to provide the PX configuration before installing PX.
+**Note:** This section is optional and is only needed if you intend to provide the Portworx configuration before installing Portworx.
 {{</info>}}
 
-If you are deploying PX with your PX configuration created before hand, then add the following `secrets`section to the `/etc/pwx/config.json`:
+If you are deploying PX with your PX configuration created before hand, then add the following `secrets` section to the `/etc/pwx/config.json`:
 
 ```text
 cat /etc/pwx/config.json
@@ -84,12 +82,11 @@ cat /etc/pwx/config.json
 }
 ```
 
-### Using AWS EC2 Role Credentials {#using-aws-ec2-role-credentials}
+## Using AWS EC2 Role Credentials {#using-aws-ec2-role-credentials}
 
 Portworx can authenticate with AWS using AWS SDK’s EC2RoleCredentials Provider. Follow [these](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) instructions to create an EC2 role. Make sure you provide the following access to KMS in your policy associated with EC2 role.
 
 Here is a sample AWS Policy that gives access to KMS
-
 ```text
 {
     "Version": "2012-10-17",
@@ -111,8 +108,8 @@ Here is a sample AWS Policy that gives access to KMS
 Apply EC2 role to all the AWS instances where Portworx will be running.
 
 Along with the EC2 role you will still need to provide `AWS_CMK` and `AWS_REGION` through config.json
-```bash
-# cat /etc/pwx/config.json
+```text
+cat /etc/pwx/config.json
 {
     "clusterid": "<cluster-id>",
     "secret": {
@@ -126,25 +123,25 @@ Along with the EC2 role you will still need to provide `AWS_CMK` and `AWS_REGION
 }
 ```
 
-### Using PX CLI to authenticate with AWS {#using-px-cli-to-authenticate-with-aws}
+## Using PX CLI to authenticate with AWS {#using-px-cli-to-authenticate-with-aws}
 
 If you do not wish to set AWS environment variables, you can authenticate PX with AWS using PX CLI. Run the following commands:
 
 ```text
-pxctl secrets aws login
-Enter AWS_ACCESS_KEY_ID [Hit Enter to ignore]: ********************
-Enter AWS_SECRET_ACCESS_KEY [Hit Enter to ignore]: ****************************************
-Enter AWS_SECRET_TOKEN_KEY [Hit Enter to ignore]:
-Enter AWS_CMK [Hit Enter to ignore]: ***********************
-Enter AWS_REGION [Hit Enter to ignore]: us-east-1
-Successfully authenticated with AWS.
+pxctl secrets aws login \
+      --aws_access_key <aws-access-key>
+      --aws_secret_key <aws-secret-key>
+      --aws_cmk <aws-cmk>
+      --aws_region <aws-region>
 ```
 
-**Important: You need to run this command on all PX nodes, so that you could create and mount encrypted volumes on all nodes**
+{{<info>}}
+**Important**: You need to run this command on all PX nodes, so that you could create and mount encrypted volumes on all nodes
+{{</info>}}
 
-If the CLI is used to authenticate with AWS, for every restart of PX container it needs to be re-authenticated by running the `login` command.
+If the CLI is used to authenticate with AWS, for every restart of PX container it needs to be re-authenticated by running the `aws login` command.
 
-### Key generation with AWS KMS {#key-generation-with-aws-kms}
+## Key generation with AWS KMS {#key-generation-with-aws-kms}
 
 The following sections describe the key generation process with PX and AWS KMS. These keys can be used as passphrases for encrypted volumes. For more information on encrypted volumes, [click here](/reference/cli/encrypted-volumes).
 
