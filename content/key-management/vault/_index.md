@@ -112,6 +112,8 @@ Add the following `secret_type`, `cluster_secret_key` and `vault` section to the
 
 ```text
 cat /etc/pwx/config.json
+```
+```
 {
     "clusterid": "<cluster-id>",
     "secret": {

@@ -67,6 +67,8 @@ If you are deploying PX with your PX configuration created before hand, then add
 
 ```text
 cat /etc/pwx/config.json
+```
+```
 {
     "clusterid": "<cluster-id>",
     "secret": {
@@ -110,6 +112,8 @@ Apply EC2 role to all the AWS instances where Portworx will be running.
 Along with the EC2 role you will still need to provide `AWS_CMK` and `AWS_REGION` through config.json
 ```text
 cat /etc/pwx/config.json
+```
+```
 {
     "clusterid": "<cluster-id>",
     "secret": {
@@ -151,7 +155,6 @@ To generate a new KMS Data Key run the following command:
 
 ```text
 /opt/pwx/bin/pxctl secrets aws generate-kms-data-key --secret_id portworx_secret
-KMS Data Key successfully created.
 ```
 
 The above command generates a KMS Data Key and associates it with the name ```portworx_secret```. For any subsequent operations that require a secret you can use this name ```portworx_secret```
