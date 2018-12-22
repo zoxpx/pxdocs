@@ -10,20 +10,20 @@ series: reference
 
 ### Key Fixes
 
-PWX-7159 - Persist kvdb backups outside of the host filesystem
-PWX-7225 - AMI based ASG install does not pick up user config
-PWX-7097 - `pxctl service kvdb` should display correct cluster status after nodes are decommissioned
-PWX-7124 - Volume migration fails when the volume has an attached snapshot policy
-PWX-7101 - Enable task ID based sorting for `pxctl cm` commands
-PWX-7121 - Creating a paired cluster results in core files in the destination cluster
-PWX-7110 - Delete paired cluster credentials when the cluster pair is deleted
-PWX-7031 - Cluster migration restore status does not reflect the cloudsnap status when cloudsnap has failed
-PWX-7090 - Core files generated when a node is decommisionned with replicas on the node
-PWX-7211 - Fix daemonset affinity in openshift specs
-PWX-6836 - Don't allow deletion of the PX configuration data when the PX services are still running in the system
-PWX-7134 - SSD/NVME drives are displayed as STORAGE_MEDIUM_MAGNETIC
-PWX-7089 - Intermittent failures in `pxctl cloudsnap list`
-PWX-6852 - If PX starts before Docker is started, the `SchedulerName` field in pxctl CLI shows as N/
+* PWX-7159 - Persist kvdb backups outside of the host filesystem
+* PWX-7225 - AMI based ASG install does not pick up user config
+* PWX-7097 - `pxctl service kvdb` should display correct cluster status after nodes are decommissioned
+* PWX-7124 - Volume migration fails when the volume has an attached snapshot policy
+* PWX-7101 - Enable task ID based sorting for `pxctl cm` commands
+* PWX-7121 - Creating a paired cluster results in core files in the destination cluster
+* PWX-7110 - Delete paired cluster credentials when the cluster pair is deleted
+* PWX-7031 - Cluster migration restore status does not reflect the cloudsnap status when cloudsnap has failed
+* PWX-7090 - Core files generated when a node is decommisionned with replicas on the node
+* PWX-7211 - Fix daemonset affinity in openshift specs
+* PWX-6836 - Don't allow deletion of the PX configuration data when the PX services are still running in the system
+* PWX-7134 - SSD/NVME drives are displayed as STORAGE_MEDIUM_MAGNETIC
+* PWX-7089 - Intermittent failures in `pxctl cloudsnap list`
+* PWX-6852 - If PX starts before Docker is started, the `SchedulerName` field in pxctl CLI shows as N/
 
 ## 2.0.0.1
 
