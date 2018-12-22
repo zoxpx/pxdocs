@@ -23,7 +23,10 @@ series: reference
 * PWX-6836 - Don't allow deletion of the PX configuration data when the PX services are still running in the system
 * PWX-7134 - SSD/NVME drives are displayed as STORAGE_MEDIUM_MAGNETIC
 * PWX-7089 - Intermittent failures in `pxctl cloudsnap list`
-* PWX-6852 - If PX starts before Docker is started, the `SchedulerName` field in pxctl CLI shows as N/
+* PWX-6852 - If PX starts before Docker is started, the `SchedulerName` field in pxctl CLI shows as N/A
+* PWX-7129 - Add an option to improve filesystem space utilization in case of SSD/NVMe drives
+* PWX-7011 - Cluster pairing for cluster migratino fails when one of the nodes in the destination cluster is down 
+* PWX-7120 - Cloudsnap restore failures cannot be viewed through `pxctl cloudsnap status`
 
 ## 2.0.0.1
 
