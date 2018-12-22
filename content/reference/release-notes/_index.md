@@ -23,9 +23,7 @@ PWX-7211 - Fix daemonset affinity in openshift specs
 PWX-6836 - Don't allow deletion of the PX configuration data when the PX services are still running in the system
 PWX-7134 - SSD/NVME drives are displayed as STORAGE_MEDIUM_MAGNETIC
 PWX-7089 - Intermittent failures in `pxctl cloudsnap list`
-PWX-6852 - If PX starts before Docker is started, the `SchedulerName` field in pxctl CLI shows as N/A
-
-
+PWX-6852 - If PX starts before Docker is started, the `SchedulerName` field in pxctl CLI shows as N/
 
 ## 2.0.0.1
 
