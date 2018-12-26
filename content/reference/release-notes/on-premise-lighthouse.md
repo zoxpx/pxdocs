@@ -4,6 +4,23 @@ keywords: portworx, px-enterprise, px-lighthouse, release notes
 meta-description: "Release notes for Lighthouse, the Portworx UI."
 ---
 
+## Lighthouse 2.0.1 Release notes
+
+* Adds Cluster Migration to Kubernetes clusters for PX Clusters with version 2.0.1+
+Note: Requires kubeconfig upload and cannot migrate to non Kubernetes clusters
+
+Fixes:
+* Reverse Proxied lighthouses had issues logging in
+
+## Lighthouse 2.0 Release notes
+
+* Adds Cluster Migration to non Kubernetes clusters for PX Clusters with version 2.0+ 
+Note: Cannot migrate to Kubernetes Clusters
+
+Fixes:
+* Now outputs logs to the container logs.
+* Minor UI Fixes
+
 ## Lighthouse 1.5 Release notes
 
 * Adds a volume analyzer feature for Portworx 1.5.0 and above. 
