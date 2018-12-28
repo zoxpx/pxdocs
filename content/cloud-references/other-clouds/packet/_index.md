@@ -21,7 +21,7 @@ Other supported bare metal cloud providers are
 {{</info>}}
 
 ### Step 1: Provision Server
-When chosing an instance, verify that you meet the [minimum requirements](/#minimum-requirements)
+When chosing an instance, verify that you meet the [minimum requirements](/start-here-installation/#installation-prerequisites)
 
 Portworx recommends a minimum cluster size of 3 nodes.
 

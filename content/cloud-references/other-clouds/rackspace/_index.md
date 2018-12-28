@@ -11,7 +11,7 @@ This guide show you how you can easily deploy Portworx on [**Rackspace**](https:
 
 
 ### Step 1: Provision Cloud Server
-When chosing an instance, verify that you meet the [minimum requirements](/#minimum-requirements)
+When chosing an instance, verify that you meet the [minimum requirements](/start-here-installation/#installation-prerequisites)
 
 Detailed Rackspace steps to build a [cloud server](https://support.rackspace.com/how-to/create-a-cloud-server/)
 Portworx recommends a minimum cluster of 3 nodes
@@ -33,7 +33,7 @@ Note: Volume cannot not be attached until the server is available
 Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
 
 ### Step 4: Launch PX-Enterprise
-Note: Before installing Portworx you will need to open ports as per [minimum requirements](/#minimum-requirements) on the local firewall.  You can view Rackspaces [firewall documentation](https://support.rackspace.com/how-to/open-ports-in-the-linux-firewall-to-access-pop-and-imap-mail-servers/)
+Note: Before installing Portworx you will need to open ports as per [minimum requirements](/start-here-installation/#installation-prerequisites) on the local firewall.  You can view Rackspaces [firewall documentation](https://support.rackspace.com/how-to/open-ports-in-the-linux-firewall-to-access-pop-and-imap-mail-servers/)
 
 [Follow the instructions to launch PX-Enterprise](/#install-with-a-container-orchestrator)
 
