@@ -29,6 +29,7 @@ Follow instructions on the [pxctl credentials](/reference/cli/credentials) page 
 ## Creating cloud snapshots
 
 The cloud snapshot method supports the following annotations:
+
 * __portworx/snapshot-type__: Indicates the type of snapshot. For cloud snapshots, the value should be **cloud**.
 * __portworx/cloud-cred-id__: (Optional) This specifies the credentials UUID if you have configured credentials for multiple cloud providers. In a situation where a single cloud provider is configured, this is not required.
 
