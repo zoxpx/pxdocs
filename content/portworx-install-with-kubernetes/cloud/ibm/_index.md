@@ -23,7 +23,7 @@ Before you begin:
 
 Portworx is a highly available software-defined storage solution that you can use to manage persistent storage for your containerized databases or other stateful apps in your IBM Cloud Kubernetes Service cluster across multiple zones. To make sure that your cluster is set up with the compute resources that are required for Portworx, review the FAQs in this step.
 
-**What worker node flavor in IBM Cloud Kubernetes Service is the right one for Portworx?** </br> 
+**What worker node flavor in IBM Cloud Kubernetes Service is the right one for Portworx?** </br>
 IBM Cloud Kubernetes Service provides [bare metal worker node flavors that are optimized for software-defined storage (SDS) usage](https://cloud.ibm.com/docs/containers/cs_clusters_planning.html#sds) and that come with one or more raw, unformatted, and unmounted local disks that you can use for your Portworx storage layer. Portworx offers best performance when you use SDS worker node machines that come with 10Gbps network speed.
 
 **What if I want to run Portworx on non-SDS worker nodes?** </br>
@@ -42,7 +42,7 @@ To create or prepare your cluster for Portworx:
 
 1. [Install the IBM Cloud CLI](https://cloud.ibm.com/docs/cli/index.html#overview) to create and manage your Kubernetes clusters in IBM Cloud Kubernetes Service. The IBM Cloud CLI includes the latest version of Docker, Helm, Git, and the `kubectl` CLI so that you do not need to install these packages separately.
 
-2. If you want to create a [multizone cluster](https://cloud.ibm.com/docs/containers/cs_clusters_planning.html#multizone) for high availability, enable [VLAN spanning](https://cloud.ibm.com/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud account.
+2. If you want to create a [multizone cluster](https://cloud.ibm.com/docs/containers/cs_clusters_planning.html#multizone) for high availability, enable [VLAN spanning](https://cloud.ibm.com/docs/infrastructure/vlans/vlan-spanning.html) for your IBM Cloud account.
 
 3. [Create or use an existing cluster](https://cloud.ibm.com/docs/containers/cs_clusters.html#clusters_ui) in IBM Cloud Kubernetes Service with a Kubernetes version of 1.10 or higher. To ensure high availability for your data, set up a [multizone cluster](https://cloud.ibm.com/docs/containers/cs_clusters_planning.html#multizone) with at least 3 worker nodes and spread the worker nodes across zones.
 
@@ -96,4 +96,3 @@ Now that you set up Portworx on your IBM Cloud Kubernetes Service cluster, you c
 - **Running stateful sets on Portworx:** If you have a stateful app that you want to deploy as a stateful set into your cluster, you can set up your stateful set to use storage from your Portworx cluster. For more information, see [Create a mysql StatefulSet](https://docs.portworx.com/portworx-install-with-kubernetes/#create-a-mysql-statefulset).
 - **Running your pods hyperconverged:** You can configure your Portworx cluster to schedule pods on the same worker node where the pod's volume resides. This setup is also referred to as hyperconverged and can improve the data storage performance. For more information, see [Run pods on same host as a volume](https://docs.portworx.com/portworx-install-with-kubernetes/).
 - **Creating snapshots of your Portworx volumes:** You can save the current state of a volume and its data by creating a Portworx snapshot. Snapshots can be stored on your local Portworx cluster or in the Cloud. For more information, see [Create and use local snapshots](https://docs.portworx.com/portworx-install-with-kubernetes/).
-
