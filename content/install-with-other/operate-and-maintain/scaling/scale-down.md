@@ -1,6 +1,5 @@
 ---
-title: "Scale-Down Nodes"
-hidden: true
+title: "Scale Down Nodes"
 keywords: scale-down
 description: Find out how to remove an offline node from a cluster with this document from Portworx. Discover how to scale-down nodes today!
 ---
@@ -12,7 +11,10 @@ How to remove an offline node from a cluster. For information on nodes with no s
 ### Identify the cluster that needs to be managed
 
 ```text
-[root@pxdev1 ~]# sudo /opt/pwx/bin/pxctl status
+sudo /opt/pwx/bin/pxctl status
+```
+
+```
 Status: PX is operational
 Node ID: a56a4821-6f17-474d-b2c0-3e2b01cd0bc3
 	IP: 147.75.198.197
@@ -38,7 +40,10 @@ Global Storage Pool
 ### List the nodes in the cluster
 
 ```text
-# sudo /opt/pwx/bin/pxctl cluster list
+sudo /opt/pwx/bin/pxctl cluster list
+```
+
+```
 Cluster ID: bb4bcf13-d394-11e6-afae-0242ac110002
 Status: OK
 
@@ -204,6 +209,7 @@ One possible workaround to go through with the decommission of such a node is to
 Once completely replicated onto another node, then re-attempt the node decommission. This time, the volume already has another replica on another node and so decommissioning the node will reduce the replication factor of the volume and remove the node.
 
 ## Automatic decommission of storage less nodes
+
  * Storage less nodes that are initialized and added to the cluster may not be needed once they complete their tasks (for ex in a scheduler workflow). If they are taken offline/destroyed, the cluster will still retain the nodes and mark them as offline.
  * If eventually a majority of such nodes exist, the cluster won't have quorum nodes that are online. The solution is to run cluster delete commands and remove such nodes. This gets more laborious with more such nodes or frequency of such nodes added and taken down.
  * To help with this, PX waits until a grace period of 48 hours. After this period offline nodes with no storage will be removed from the cluster. There is no CLI command needed to turn on or trigger this feature.

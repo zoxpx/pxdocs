@@ -30,7 +30,7 @@ To decommission Portworx, perform the following steps:
 
 ### a) Remove Portworx from the cluster
 
-Follow [this guide](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-down) to decommission the Portworx node from the cluster.
+Follow [this guide](/install-with-other/operate-and-maintain/scaling/scale-down) to decommission the Portworx node from the cluster.
 
 ### b) Remove Portworx installation from the node
 

@@ -296,7 +296,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 **Scaling out a cluster on-prem**
 
-* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-out) shows how to scale up a existing cluster by adding more nodes TODO: _Update the above page to show runc_
+* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/install-with-other/operate-and-maintain/scaling/scale-out) shows how to scale up a existing cluster by adding more nodes TODO: _Update the above page to show runc_
 * In Kubernetes, PX is deployed as a Daemonset. This enables PX to automatically scale as the cluster scales. So there is no specific action needed from the user to scale PX along with the cluster scaling
 
 #### Cluster Capacity Expansion {#cluster-capacity-expansion}
@@ -308,7 +308,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 * Ensure the volumes in the node have replicas in other nodes
   * If the volumes have replication factor of 1, increase the [replication factor](/reference/cli/updating-volumes)
   * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
-* Follow the instructions in this [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-up) to add storage each node.
+* Follow the instructions in this [page](/install-with-other/operate-and-maintain/scaling/scale-up) to add storage each node.
 
 #### Server and Networking Replacements and Upgrades {#server-and-networking-replacements-and-upgrades}
 
@@ -316,7 +316,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 * Ensure that all the volumes in the cluster are replicated before decommissioning the node so that the data is still available for the containers mounting the volumes after the node is decommisioned
 * Delete PX from the node by setting the PX/Enabled=remove [label](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes)
 * Use `pxctl cluster delete` command to manually remove the node from the cluster
-* Follow the instructions in this page to [delete](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-down) nodes in the cluster
+* Follow the instructions in this page to [delete](/install-with-other/operate-and-maintain/scaling/scale-down) nodes in the cluster
 * Once the node is decommissioned, components like network adapters, storage adapters that need to be replaced can be replaced
 * The server can be replaced as well
 * Once the replacement is done, the node can be joined back to the cluster by going through the steps described in the scaling-out the cluster section
@@ -429,5 +429,5 @@ Pool ID: 1
   * Decommission the PX node \(Refer to `pxctl cluster delete`\)
   * Ensure all volumes have replicas in other nodes if you still need to access the data
   * Replace the bad drive\(s\) with new drive\(s\)
-  * Add the node to the cluster as a new node \(refer to [adding cluster nodes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/scale-out)\)
+  * Add the node to the cluster as a new node \(refer to [adding cluster nodes](/install-with-other/operate-and-maintain/scaling/scale-out)\)
   * Ensure the cluster is operational and the new node has been added to the cluster via `pxctl cluster status` and `pxctl cluster list`

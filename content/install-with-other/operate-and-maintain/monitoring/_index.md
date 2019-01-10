@@ -2,6 +2,7 @@
 title: "Monitoring your cluster"
 keywords: portworx, node_exporter, cadvisor prometheus, grafana, alertmanager, cluster, storage
 description: How to monitor various custers on Portworx.
+weight: 2
 ---
 
 ## Using node_exporter and cadvisor alongside Portworx

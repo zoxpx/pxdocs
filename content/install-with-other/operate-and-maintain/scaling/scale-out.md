@@ -1,6 +1,5 @@
 ---
-title: "Scaling-out an existing PX Cluster"
-hidden: true
+title: "Scaling out an existing PX Cluster"
 keywords: scale-up, storage, add new nodes
 description: This document illustrates how to add a new node with attached storage to a PX cluster.  Scale out your cluster today!
 ---
