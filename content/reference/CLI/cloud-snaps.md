@@ -11,7 +11,8 @@ This document outlines how PX volumes can be backed up to different cloud provid
 
 ### Supported Cloud Providers
 
-Portworx PX-Enterprise supports the following cloud providerss
+Portworx PX-Enterprise supports the following cloud providers
+
 1. Amazon S3 and any S3-compatible Object Storage
 2. Azure Blob Storage
 3. Google Cloud Storage
@@ -63,7 +64,7 @@ NAME:
    pxctl credentials create - Create a credential for cloud-snap
 
 USAGE:
-   pxctl credentials create [command options] [arguments...]
+   pxctl credentials create [command options] <name>
 
 OPTIONS:
    --provider value                            Object store provider type [s3, azure, google]
@@ -83,7 +84,7 @@ OPTIONS:
 For Azure:
 
 ```text
-# pxctl credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV
+# pxctl credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV my-azure-cred
 ```
 
 For AWS:
@@ -92,7 +93,7 @@ By default, Portworx creates a bucket (ID same as cluster UUID) to upload clouds
 
 With user specified bucket (applicable only from 1.5.0 onwards):
 ```text
-# pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com --bucket bucket-id
+# pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com --bucket bucket-id my-s3-cred
 ```
 User created/specified bucket at minimum must have following permissions: Replace `<bucket-name>` with name of your user-provided bucket.
 ```json
@@ -123,13 +124,13 @@ User created/specified bucket at minimum must have following permissions: Replac
 
 Without user specified bucket:
 ```text
-# pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
+# pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com my-s3-cred
 ```
 
 For Google Cloud:
 
 ```text
-# pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json
+# pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json my-google-cred
 ```
 `pxctl credentials create` enables the user to configure the credentials for each supported cloud provider.
 
