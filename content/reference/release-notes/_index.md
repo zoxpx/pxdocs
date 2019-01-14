@@ -68,6 +68,14 @@ series: reference
   Workaround: This is a variant of the previous errata. 
   For volume with replication factor set to 1, Cloudsnap backup does not resume after the node with replica goes down.
 
+
+## 1.7.4
+* PWX-7292 For all storage errors retry 3 times before making pool offline
+* PWX-7291 Detect ssd based pools and mount with nossd if kernel version is less than 4.15
+* PWX-7214 LIC: Goroutine leak at license watch re-supscription
+* PWX-7143 LIC: Should hard-code "absolute maximums" into License evaluations
+* PWX-7142 LIC: SuperMicro misinterpreted as VM [roblox]
+
 ## 1.7.3
 
 * Provide a runtime option to enable more compact data out of flash media to avoid disk fragementation
