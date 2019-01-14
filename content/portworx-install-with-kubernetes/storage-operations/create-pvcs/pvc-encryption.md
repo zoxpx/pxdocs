@@ -8,6 +8,7 @@ description: This guide is a step-by-step tutorial on how to provision encrypted
 [Encryption at Storage Class level](/portworx-install-with-kubernetes/storage-operations/create-pvcs/storage-class-encryption) does not allow using different secret keys for different PVCs. It also does not provide a way to disable encryption for certain PVCs that are using the same secure storage class. Encryption at PVC level will override the encryption options from Storage Class.
 
 PVC level encryption is achieved using following PVC annotations:
+
 - `px/secure` - Boolean which tells to secure the PVC or not
 - `px/secret-name` - Name of the secret used to encrypt
 - `px/secret-namespace` - Namespace of the secret (Kubernetes Secrets only)
