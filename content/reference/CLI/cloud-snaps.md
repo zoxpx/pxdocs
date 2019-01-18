@@ -31,7 +31,7 @@ Any PX Volume backup can be restored to a PX Volume in the cluster. The restored
 Performing cloud backups of a PX Volume is available via `pxctl cloudsnap` command. This command has the following operations available for the full lifecycle management of cloud backups.
 
 ```text
-# opt/pwx/bin/pxctl cloudsnap --help
+# /opt/pwx/bin/pxctl cloudsnap --help
 NAME:
    pxctl cloudsnap - Backup and restore snapshots to/from cloud
 
@@ -146,17 +146,16 @@ Use `pxctl credentials list` to verify the credentials supplied.
 # pxctl credentials list
 
 S3 Credentials
-UUID                                         REGION            ENDPOINT                ACCESS KEY            SSL ENABLED        ENCRYPTION
-5c69ca53-6d21-4086-85f0-fb423327b024        us-east-1        s3.amazonaws.com        AKIAJ7CDD7XGRWVZ7A        true           false
-
-Azure Credentials
-UUID                                        ACCOUNT NAME        ENCRYPTION
-c0e559a7-8d96-4f28-9556-7d01b2e4df33        portworxtest        false
+UUID						NAME		REGION			ENDPOINT						ACCESS KEY			SSL ENABLED		ENCRYPTION		BUCKET		WRITE THROUGHPUT (KBPS)
+af563a4d-afd7-48df-90f7-8e8f9414ff77		my-s3-cred	us-east-1		70.0.99.121:9010,70.0.99.122:9010,70.0.99.123:9010	AB6R80F3SY0VW9NS6HYQ		false			false			<nil>		1979
 
 Google Credentials
-UUID						PROJECT ID     ENCRYPTION
-8bd266b5-da9f-4114-84a2-309bbb3838c6		px-test        false
+UUID						NAME			PROJECT ID		ENCRYPTION		BUCKET		WRITE THROUGHPUT (KBPS)
+6585cf56-4ccf-42cc-a235-76aaf6fb10f4		my-google-cred		235475231246		false			<nil>		1502
 
+Azure Credentials
+UUID						NAME			ACCOUNT NAME		ENCRYPTION		BUCKET		WRITE THROUGHPUT (KBPS)
+1672e1c9-c513-44db-b8b5-b59e3d35a3a2		my-azure-cred		pwx-test		false			<nil>		724
 ```
 
 `pxctl credentials list`  only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed.  These credentials will be stored as part of the secret endpoint given for PX for persisting authentication across reboots. Please refer to `pxctl secrets` help for more information.
@@ -177,7 +176,7 @@ USAGE:
 OPTIONS:
    --volume value, -v value       source volume
    --full, -f                     force a full backup
-   --cred-uuid value, --cr value  Cloud credentials ID to be used for the backup
+   --cred-id value, --cr value    Cloud credentials ID to be used for the backup
 
 ```
 
@@ -186,11 +185,11 @@ This command decides whether to take a full or incremental backup depending on t
 If it is the first backup for the volume it takes a full backup of the volume. If its not the first backup, it takes an incremental backup from the previous full/incremental backup.
 
 ```text
-# pxctl cloudsnap backup volume1 --cred-uuid 82998914-5245-4739-a218-3b0b06160332
+# pxctl cloudsnap backup volume1 --cred-id 82998914-5245-4739-a218-3b0b06160332
 ```
 
 Users can force the full backup any time by giving the --full option.
-If only one credential is configured on the cluster, then the cred-uuid option may be skipped on the command line.
+If only one credential is configured on the cluster, then the cred-id option may be skipped on the command line.
 
 Here are a few steps to perform cloud backups successfully
 
@@ -199,7 +198,7 @@ Here are a few steps to perform cloud backups successfully
 ```text
 # pxctl volume list
 ID			NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
-538316104266867971	NewVol	4 GiB	1	no	no		LOW		1	up - attached on 70.0.9.73
+56706279008755778	NewVol	4 GiB	1	no	no		LOW		1	up - attached on 70.0.9.73
 980081626967128253	evol	2 GiB	1	no	no		LOW		1	up - detached
 ```
 
@@ -228,16 +227,24 @@ Note that in this particular example,  since only one credential is configured, 
 
 ```text
 # pxctl cloudsnap backup NewVol
-Cloudsnap backup started successfully
+Cloudsnap backup started successfully with id: 3f4f0a67-e12a-4d35-81ad-985657757352
 ```
 
 * Watch the status of the backup
 
 ```text
 # pxctl cloudsnap status
-SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
-538316104266867971	Backup-Active	62914560	20.620429615s
-980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
+NAME					SOURCEVOLUME									STATE		NODE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED
+39f66859-14b1-4ce0-a4c0-c858e714689e	2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr	Backup-Done	70.0.73.246	420044800	17.460186585s	Wed, 16 Jan 2019 22:27:30 UTC
+3f4f0a67-e12a-4d35-81ad-985657757352	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463	Backup-Active	70.0.73.246	1247805440	10.525438874s
+```
+
+* You could also watch the status of single cloudsnap command through task-id that was returned on successful execution of the cloudsnap command.
+
+```text
+# pxctl cloudsnap status -n 3f4f0a67-e12a-4d35-81ad-985657757352
+NAME					SOURCEVOLUME									STATE		NODE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED
+3f4f0a67-e12a-4d35-81ad-985657757352	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463	Backup-Active	70.0.73.246	1840250880	16.57831394s
 ```
 
 Once the volume is backed up to the cloud successfully, listing the remote cloudsnaps will display the backup that just completed.
@@ -246,9 +253,10 @@ Once the volume is backed up to the cloud successfully, listing the remote cloud
 
 ```text
 # pxctl cloudsnap list
-SOURCEVOLUME	CLOUD-SNAP-ID					CREATED-TIME			STATUS
-evol		pqr9-cl1/980081626967128253-941778877687318172	Sat, 08 Apr 2017 05:09:49 UTC	Done
-NewVol		pqr9-cl1/538316104266867971-807625803401928868	Sat, 08 Apr 2017 05:17:21 UTC	Done
+SOURCEVOLUME					SOURCEVOLUMEID			CLOUD-SNAP-ID										CREATED-TIME				TYPE		STATUS
+volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719		Wed, 16 Jan 2019 21:51:53 UTC		Manual		Done
+volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr		Wed, 16 Jan 2019 22:27:13 UTC		Manual		Done
+NewVol						56706279008755778		2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463		Thu, 17 Jan 2019 00:03:59 UTC		Manual		Done
 ```
 
 #### Restore from a Cloud Backup ####
@@ -269,7 +277,7 @@ USAGE:
 OPTIONS:
    --snap value, -s value         Cloud-snap id
    --node value, -n value         Optional node ID for provisioning restore volume storage
-   --cred-uuid value, --cr value  Cloud credentials ID to be used for the restore
+   --cred-id value, --cr value    Cloud credentials ID to be used for the restore
 
 ```
 
@@ -277,10 +285,11 @@ This command is used to restore a successful backup from cloud. It requires the 
 
 The command usage is as follows.
 ```text
-# pxctl cloudsnap restore --snap cs30/669945798649540757-864783518531595119 --cr 82998914-5245-4739-a218-3b0b06160332
+# pxctl cloudsnap restore --snap cs30/669945798649540757-864783518531595119 --cred-id 82998914-5245-4739-a218-3b0b06160332
+Cloudsnap restore started successfully on volume: 104172750626071399 with task name:59c4cfd5-4160-45db-b326-f37b327d9225
 ```
 
-Upon successful start of the command it returns the volume id created to restore the cloud snap
+Upon successful start of the command it returns the volume id created to restore the cloud snap and the task-id which can used to get status.
 If the command fails to succeed, it shows the failure reason.
 
 The restored volume will not be attached or mounted automatically.
@@ -292,25 +301,26 @@ The restored volume will not be attached or mounted automatically.
 
 ```text
 # pxctl cloudsnap list
-SOURCEVOLUME 	CLOUD-SNAP-ID					CREATED-TIME			STATUS
-dvol		pqr9-cl1/520877607140844016-50466873928636534	Fri, 07 Apr 2017 20:22:43 UTC	Done
-NewVol		pqr9-cl1/538316104266867971-807625803401928868	Sat, 08 Apr 2017 05:17:21 UTC	Done
+SOURCEVOLUME					SOURCEVOLUMEID			CLOUD-SNAP-ID										CREATED-TIME				TYPE		STATUS
+volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719		Wed, 16 Jan 2019 21:51:53 UTC		Manual		Done
+volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr		Wed, 16 Jan 2019 22:27:13 UTC		Manual		Done
+NewVol						56706279008755778		2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463		Thu, 17 Jan 2019 00:03:59 UTC		Manual		Done
 ```
 
 * Choose one of them to restore
 
 ```text
-# pxctl cloudsnap restore -s pqr9-cl1/538316104266867971-807625803401928868
-Cloudsnap restore started successfully: 622390253290820715
+# pxctl cloudsnap restore -s 2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463
+Cloudsnap restore started successfully on volume: 104172750626071399 with task name:59c4cfd5-4160-45db-b326-f37b327d9225
 ```
 `pxctl cloudsnap status` gives the status of the restore processes as well.
 
 ```text
 # pxctl cloudsnap status
-SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
-622390253290820715	Restore-Active	99614720	10.144539084s
-980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
-538316104266867971	Backup-Done	1979809411	2m39.761333366s	Sat, 08 Apr 2017 05:20:01 UTC
+NAME					SOURCEVOLUME									STATE		NODE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED
+3f4f0a67-e12a-4d35-81ad-985657757352	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463	Backup-Done	70.0.73.246	11988570112	3m29.825766964s	Thu, 17 Jan 2019 00:07:29 UTC
+39f66859-14b1-4ce0-a4c0-c858e714689e	2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr	Backup-Done	70.0.73.246	420044800	17.460186585s	Wed, 16 Jan 2019 22:27:30 UTC
+59c4cfd5-4160-45db-b326-f37b327d9225	2e4d4b67-95d7-481e-aec5-14223ac55170/212160250617983239-283838486341798860	Restore-Done	70.0.73.246	1079287808	3.174541219s	Thu, 17 Jan 2019 00:15:19 UTC
 ```
 
 #### Deleting a Cloud Backup ###
@@ -380,7 +390,7 @@ Cloudsnap backup started successfully
 If multiple cloud providers credentials are created then need to specify the credential to use for backup on command line
 
 ```text
-/opt/pwx/bin/pxctl cloudsnap backup vol1 --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff
+/opt/pwx/bin/pxctl cloudsnap backup vol1 --cred-id ffffffff-ffff-ffff-1111-ffffffffffff
 Cloudsnap backup started successfully
 ```
 
@@ -392,7 +402,7 @@ Note: All cloudsnap backups and restores can be monitored through CloudSnap stat
 
 ```text
 sudo /opt/pwx/bin/pxctl cloudsnap restore --snap gossip12/181112018587037740-545317760526242886
-Cloudsnap restore started successfully: 315244422215869148
+Cloudsnap restore started successfully on volume: 315244422215869148 with task name:598892d5-2130-76ab-b312-f3d234891287
 ```
 
 Note: All cloudsnap backups and restores can be monitored through CloudSnap status command which is described in following sections
@@ -403,20 +413,21 @@ Note: All cloudsnap backups and restores can be monitored through CloudSnap stat
 
 ```text
 /opt/pwx/bin/pxctl cloudsnap status
-SOURCEVOLUME		   STATE		      BYTES-PROCESSED	TIME-ELAPSED		COMPLETED			            ERROR
-1040525385624900824	Restore-Done	11753581193	      8m32.231744596s	Wed, 05 Apr 2017 06:57:08 UTC
-1137394071301823388	Backup-Done	   11753581193	      1m46.023734966s	Wed, 05 Apr 2017 05:03:42 UTC
-13292162184271348	   Backup-Done	   27206221391	      4m25.740022954s	Wed, 05 Apr 2017 22:39:41 UTC
-454969905909227504	Backup-Active	91944386560	      4h8m19.283242837s
-827276927130532677	Restore-Failed	0									                                       Failed to authenticate creds ID
+pxctl cs status
+NAME					SOURCEVOLUME									STATE		NODE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED
+3f4f0a67-e12a-4d35-81ad-985657757352	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463	Backup-Done	70.0.73.246	11988570112	3m29.825766964s	Thu, 17 Jan 2019 00:07:29 UTC
+44de918e-1305-4f6c-8c80-6d899177678a	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-144412948613644984	Backup-Done	70.0.73.246	8599048192	1m14.852605207s	Wed, 16 Jan 2019 21:41:24 UTC
+59c4cfd5-4160-45db-b326-f37b327d9225	2e4d4b67-95d7-481e-aec5-14223ac55170/212160250617983239-283838486341798860	Restore-Done	70.0.73.246	1079287808	3.174541219s	Thu, 17 Jan 2019 00:15:19 UTC
 ```
 
 **pxctl cloudsnap list**
 
-`pxctl cloudsnap list` is used to list all the cloud snapshots
+`pxctl cloudsnap list` is used to list all the cloud snapshots from all clusters available to this credential
+
+Note that specifying --all could take a while to complete if there are many clusters
 
 ```text
-/opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --all
+/opt/pwx/bin/pxctl cloudsnap list --cred-id ffffffff-ffff-ffff-1111-ffffffffffff --all
 SOURCEVOLUME 			CLOUD-SNAP-ID									CREATED-TIME				STATUS
 vol1			gossip12/181112018587037740-545317760526242886		Sun, 09 Apr 2017 14:35:28 UTC		Done
 ```
@@ -424,16 +435,20 @@ vol1			gossip12/181112018587037740-545317760526242886		Sun, 09 Apr 2017 14:35:28
 Filtering on cluster ID or volume ID is available and can be done as follows:
 
 ```text
-/opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --src vol1
-SOURCEVOLUME 		CLOUD-SNAP-ID					CREATED-TIME				STATUS
-vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Done
-vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
+/opt/pwx/bin/pxctl cloudsnap list --cred-id ffffffff-ffff-ffff-1111-ffffffffffff --src volume20190117233039
+SOURCEVOLUME			SOURCEVOLUMEID			CLOUD-SNAP-ID										CREATED-TIME				TYPE		STATUS
+volume20190117233039		290373969701024085		3ac0da32-5489-4019-9d40-484e87c141c1/290373969701024085-77076017562510819		Thu, 17 Jan 2019 23:37:09 UTC		Manual		Done
+volume20190117233039		290373969701024085		3ac0da32-5489-4019-9d40-484e87c141c1/290373969701024085-639824017812971975		Fri, 18 Jan 2019 01:25:59 UTC		Manual		Done
 
-/opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --cluster cs25
-SOURCEVOLUME 		CLOUD-SNAP-ID					CREATED-TIME				STATUS
-vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Done
-vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
-volshared1	13292162184271348-457364119636591866		Wed, 05 Apr 2017 22:35:16 UTC		Done
+/opt/pwx/bin/pxctl cloudsnap list --cred-id ffffffff-ffff-ffff-1111-ffffffffffff --cluster 2e4d4b67-95d7-481e-aec5-14223ac55170
+SOURCEVOLUME					SOURCEVOLUMEID			CLOUD-SNAP-ID										CREATED-TIME				TYPE		STATUS
+bkpvolume20190116213324				56706279008755778		2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-144412948613644984		Wed, 16 Jan 2019 21:40:09 UTC		Manual		Done
+bkpvolume20190116214126				276135282393365814		2e4d4b67-95d7-481e-aec5-14223ac55170/276135282393365814-497387553494372115		Wed, 16 Jan 2019 21:45:28 UTC		Manual		Done
+bkpvolume20190116214622				212497362333615128		2e4d4b67-95d7-481e-aec5-14223ac55170/212497362333615128-869823822356552213		Wed, 16 Jan 2019 21:48:58 UTC		Manual		Done
+bkpvolume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719		Wed, 16 Jan 2019 21:51:53 UTC		Manual		Done
+bkpvolume20190116215212				50730816040093554		2e4d4b67-95d7-481e-aec5-14223ac55170/50730816040093554-286811789063715985		Wed, 16 Jan 2019 21:53:59 UTC		Manual		Done
+bkpvolume20190116215510				60941762085605033		2e4d4b67-95d7-481e-aec5-14223ac55170/60941762085605033-197637759684319014		Wed, 16 Jan 2019 21:56:19 UTC		Manual		Done
+bkpvolume20190116215745				124642336323598924		2e4d4b67-95d7-481e-aec5-14223ac55170/124642336323598924-789922313031870846		Wed, 16 Jan 2019 22:02:15 UTC		Manual		Done
 ```
 
 **pxctl cloudsnap delete**
