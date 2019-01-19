@@ -6,6 +6,13 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.1.1
+
+### Key Fixes
+
+* PWX-7431 - Strip the labels on a config map to fit 63 characters.
+* PWX-7411 - PX does not come up after upgrade to 2.0.1, when auto-detecting network intf
+
 ## 2.0.1
 
 ### Key Fixes
