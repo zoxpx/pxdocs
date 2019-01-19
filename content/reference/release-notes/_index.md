@@ -70,8 +70,8 @@ series: reference
 
 ## 1.7.5
 
-* PWX-7364 iqvia: Namespace stuck volume issue 
-* PWX-7299 [iqvia]: export pool_status as a stat for prometheus
+* PWX-7364 Namespace stuck volume issue 
+* PWX-7299 export pool_status as a stat for prometheus
 * PWX-7267 LIC: Hide unknown/non-handled licenses
 * PWX-7212 Cloudsnap-Restore: Increase restore verbose level for error cases
 * PWX-7179 io1 volume added to KOPS cluster gets displayed as STORAGE_MEDIUM_MAGNETIC
