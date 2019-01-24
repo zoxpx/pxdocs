@@ -72,6 +72,18 @@ Alert PortworxStorageWillFill
     description = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 70% full and has been predicted to fill within 2 weeks for more than 10 minutes.",
   }
 
+Alert PortworxStoragePoolDown
+  IF min(px_pool_stats_pool_status) < 1
+  FOR 5m
+  LABELS {
+    severity = "critical",
+    issue="One or more Portworx Storage Pool(s) Offline.",
+    }
+  ANNOTATIONS {
+    summary = "Portworx Storage Pool is Full/ Offline.",
+    description = "One or more Portworx Storage Pool(s) Full/Offline for more than 5 minutes.",
+  }
+
 #Portworx Cluster Alerts
 Alert PortworxStorageNodeDown
   IF max(px_cluster_status_nodes_storage_down) > 0
