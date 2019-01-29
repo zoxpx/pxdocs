@@ -6,6 +6,31 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.2
+
+### Key Features and Enhancements
+
+* PWX-7207 - Allow docker with selinux for newer Kubernetes versions
+* PWX-7208 - Google Cloud KMS integration
+
+### Key Fixes
+
+* PWX-6770 - Restart docker apps using shared volumes on DCOS
+* PWX-7006 - Cloud migration cancel didn't cancel all the volume migrations
+* PWX-7007 - Add an alert when Cloud migration task is cancelled
+* PWX-7179 - Pool io priority for KOPS io1 volume should be correctly displayed
+* PWX-7199 - Enable capacity usage command for centos kernel >= 3.10.0-862
+* PWX-7226 - DCOS Portworx: Manually updated values in /etc/pwx/config.json does not persists
+* PWX-7267 - Hide unknown/non-handled licenses
+* PWX-7271 - 'pxctl secrets gcloud list-secrets' shows unnessassary line in console output
+* PWX-7280 - Logs getting flooded with "18 is not 14len(values)" after upgrading the kernel to 4.20.0-1
+* PWX-7304 - Handle journal device "read-only" cases
+* PWX-7348 - Handle journal device "offline" cases
+* PWX-7364 - Px boot stuck at ns mount
+* PWX-7366 - Portworx service restart issues including "missing mountpoint", or "cannot open file/directory"
+* PWX-7407 - OCI Monitor: Initiates cordoning even when px.ko was not loaded
+* PWX-7466 - K8S/Upgrade: Talisman does not support CRI/Containerd
+
 ## 2.0.1.1
 
 ### Key Fixes
