@@ -25,16 +25,13 @@ Ensure ports 9001-9015 are open between the nodes that will run Portworx. Your n
 
 To manage and auto provision GCP disks, Portworx needs access to the GCP Compute Engine API.   There are two ways to do this.
 
-### Using instance priviledges
+### Using instance privileges
 
-Give your instances priviledges to access the GCP API server.  This is the preferred method since it requires the least amount of setup on each instance.
+{{% content "shared/gce/instance-role.md" %}}
 
 ### Using an account file
 
-Alternatively, you can give Portworx access to the GCP API server via an account file and environment variables. First, you will need to create a service account in GCP and download the account file.
-
-1. Create a service account in the "Service Account" section that has the Compute Engine admin role.
-2. Go to IAM & admin  -> Service Accounts -> (Instance Service Account) -> Select "Create Key" and download the `.json` file
+{{% content "shared/gce/service-account.md" %}}
 
 This json file needs to be made available on any GCP instance that will run Portworx.  Place this file under a `/etc/pwx/` directory on each GCP instance.  For example, `/etc/pwx/gcp.json`.
 
