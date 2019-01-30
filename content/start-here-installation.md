@@ -29,6 +29,7 @@ Prior to installing Portworx, your system needs to meet the hardware, software a
 |Linux kernel | Version 3.10 or greater.|
 |Docker | Version 1.13.1 or greater.|
 |Key-value store | Portworx needs a key-value store to perform its operations. As such, install a clustered key-value database \(`etcd` or `consul`\) with a three node cluster.<br><br>With Portworx 2.0, you can use Internal KVDB during installation. In this mode, Portworx will create and manage an internal key-value store (kvdb) cluster.<br><br>If you plan of using your own etcd, refer to [Etcd for Portworx](/reference/knowledge-base/etcd) for details on recommendations for installing and tuning etcd.|
+|Disable swap|Please disable swap on all nodes that will run the Portworx software.  Ensure that the swap device is not automatically mounted on server reboot.|
 
 ## Installation
 
