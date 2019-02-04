@@ -16,7 +16,8 @@ Kubernetes cluster. If you fetched the Portworx specs from [https://install.port
 
 **Kubernetes Version**
 
-Group snapshots are supported in following Kubernetes versions
+Group snapshots are supported in following Kubernetes versions:
+
 * 1.10 and above
 * 1.9.4 and above
 * 1.8.9 and above
@@ -30,6 +31,7 @@ Group snapshots are supported in Portworx version 1.4 and above.
 To take group snapshots, one either specifies annotations that will match PVCs for the group or a Portworx volume group ID.
 
 The group snapshot method supports the following annotations:
+
 * __portworx/snapshot-type__: Indicates the type of snapshot. For group snapshots, the value should be **local**.
 * __portworx.selector/\<key\>: \<value\>__: When this annotation is provided, Portworx will select all PVCs with labels `<key>:<value>` and create a group snapshot. Example: `portworx.selector/stack: wordpress`.
 * __portworx.selector/group-id__: Group ID of the Portworx volumes if they were created using the `--group` parameter. Portworx will select all volumes that match this group ID and create a group snapshot.
