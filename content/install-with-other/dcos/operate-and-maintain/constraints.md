@@ -15,7 +15,7 @@ to ensure that services depending on Portworx will only get scheduled on nodes
 that are part of a Portworx cluster.
 
 ## Install DCOS CLI or Apache Mesos
-For Mesosphere, follow the instructions for installing [Mesosphere DCOS](https://dcos.io/install) and the [DCOS CLI](https://docs.mesosphere.com/1.7/usage/cli/install).
+For Mesosphere, follow the instructions for installing [Mesosphere DCOS](https://dcos.io/install) and the [DCOS CLI](https://docs.mesosphere.com/1.9/usage/cli/install).
 Use the DCOS CLI command `dcos node` to identify which nodes in the Mesos cluster are the Agent nodes.
 
 If not using Mesosphere, then follow the instructions appropriate for your OS distribution and environment to install both Apache Mesos and Marathon.
