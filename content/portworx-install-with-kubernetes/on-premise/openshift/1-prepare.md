@@ -7,6 +7,9 @@ description: Find out how to prepare PX within a OpenShift cluster and have PX p
 
 {{<info>}}Portworx supports Openshift 3.7 and above.{{</info>}}
 
+### Airgapped clusters
+
+If your nodes are airgapped and don't have access to common internet registries, first follow [Airgapped clusters](/portworx-install-with-kubernetes/on-premise/airgapped) to fetch Portworx images.
 
 ### Select nodes where Portworx will installed
 
@@ -37,16 +40,16 @@ oc adm policy add-scc-to-user anyuid system:serviceaccount:default:default
 
 ### Prepare a docker-registry credentials secret
 
-* Create a Red Hat account if you don't already have one \([register here](https://www.redhat.com/wapps/ugc/register.html)\).
+{{<info>}}This is required only if you have a secured custom registy i.e if you require `docker login` before you can do `docker pull`.{{</info>}}
 
-* Confirm the username/password works (e.g. user:john-rhel, passwd:s3cret)
+* Confirm the username/password works (e.g. user:john, passwd:s3cret)
   ```text
-  docker login -u john-rhel -p s3cret registry.connect.redhat.com
+  docker login -u john -p s3cret mysecure.registry.com
   ```
 
 * Configure username/password as a [Kubernetes "docker-registry" secret](https://kubernetes.io/docs/concepts/containers/images/#creating-a-secret-with-a-docker-config)  (e.g. "regcred")
   ```text
-  oc create secret docker-registry regcred --docker-server=registry.connect.redhat.com \
-    --docker-username=john-rhel --docker-password=s3cret --docker-email=test@acme.org \
+  oc create secret docker-registry regcred --docker-server=mysecure.registry.com \
+    --docker-username=john --docker-password=s3cret --docker-email=test@acme.org \
     -n kube-system
   ```
