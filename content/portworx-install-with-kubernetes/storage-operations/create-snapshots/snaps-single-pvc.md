@@ -11,7 +11,7 @@ This document will show you how to create snapshot of a PVC backed by a Portworx
 
 If you have a PVC called mysql-data, you can create a snapshot for that PVC by using the following spec:
 
-```
+```text
 apiVersion: volumesnapshot.external-storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -23,14 +23,20 @@ spec:
 
 Once you apply the above object you can check the status of the snapshots using `kubectl`:
 
+```text
+kubectl get volumesnapshot
 ```
-$ kubectl get volumesnapshot
+
+```
 NAME                             AGE
 volumesnapshots/mysql-snapshot   2s
 ```
 
+```text
+kubectl get volumesnapshotdatas
 ```
-$ kubectl get volumesnapshotdatas
+
+```
 NAME                                                                            AGE
 volumesnapshotdatas/k8s-volume-snapshot-2bc36c2d-227f-11e8-a3d4-5a34ec89e61c    1s
 ```
@@ -39,8 +45,11 @@ The creation of the volumesnapshotdatas object indicates that the snapshot has
 been created. If you describe the volumesnapshotdatas object you can see the
 Portworx Volume Snapshot ID and the PVC for which the snapshot was created.
 
+```text
+kubectl describe volumesnapshotdatas
 ```
-$ kubectl describe volumesnapshotdatas
+
+```
 Name:         k8s-volume-snapshot-2bc36c2d-227f-11e8-a3d4-5a34ec89e61c
 Namespace:    
 Labels:       <none>
@@ -86,7 +95,7 @@ Let's take an example where we have 2 namespaces _dev_ and _prod_. We will creat
 
 Create the namespaces
 
-```
+```text
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -104,7 +113,7 @@ metadata:
 
 Create the PVC
 
-```
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -130,7 +139,7 @@ parameters:
 
 Create the snapshot
 
-```
+```text
 apiVersion: volumesnapshot.external-storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -145,7 +154,7 @@ spec:
 
 Create a PVC in a different namespace from the snapshot
 
-```
+```text
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
