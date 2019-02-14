@@ -6,6 +6,13 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.2.1
+
+### Key Fixes
+
+* PWX-7510 - Hide Secrets info from Diags / logs 
+* PWX-7214 - Having two watches to Etcd sometimes blocks watch updates
+
 ## 2.0.2
 
 ### Key Features and Enhancements
@@ -88,7 +95,7 @@ series: reference
 * PWX-5686: Implement accounting and display of space utilized by snapshots and clones.
 * PWX-6949: Decommissioned node getting listed from one node in the cluster and not from the other 
 * PWX-6617: PDM: Dump the cloud drive keys when PX loses kvdb connectivity.
-* PWX-5876:  Volume should get detached when out of quorum or pool down.
+* PWX-5876: Volume should get detached when out of quorum or pool down.
 
 ### Errata 
 
@@ -100,6 +107,31 @@ series: reference
   Workaround: This is a variant of the previous errata. 
   For volume with replication factor set to 1, Cloudsnap backup does not resume after the node with replica goes down.
 
+## 1.7.6
+
+* PWX-7304 - PX keeps restarting, if journal device made read-only
+* PWX-7348 - PX keeps restarting, VM reboot after journal device made “offline”
+* PWX-7453 - cloudsnap cleanup didn't complete properly in cases where errors were encountered when tranmitting the diffs
+* PWX-7481 - Shared volume mounts fail when clients connections abruptly lost and not cleaned up properly
+* PWX-7600 - Volume mount status might be incorrectly displayed when the node where the volume is attached hits a storage full condition and replicas on that node are moved to a new node
+
+## 1.7.5
+
+* PWX-7033 - Objectstore endpoint failover not happening
+* PWX-7179 - io1 volume added to KOPS cluster gets displayed as STORAGE_MEDIUM_MAGNETIC
+* PWX-7212 - Cloudsnap-Restore: Increase restore verbose level for error cases
+* PWX-7267 - LIC: Hide unknown/non-handled licenses
+* PWX-7299 - export pool_status as a stat for prometheus
+* PWX-7364 - Namespace stuck volume issue 
+
+## 1.7.4
+
+* PWX-7142 - LIC: SuperMicro misinterpreted as VM
+* PWX-7143 - LIC: Should hard-code "absolute maximums" into License evaluations
+* PWX-7214 - LIC: Goroutine leak at license watch re-supscription
+* PWX-7291 - Detect ssd based pools and mount with nossd if kernel version is less than 4.15
+* PWX-7292 - For all storage errors retry 3 times before making pool offline
+
 ## 1.7.5
 
 * PWX-7364 Namespace stuck volume issue 
@@ -107,7 +139,7 @@ series: reference
 * PWX-7267 LIC: Hide unknown/non-handled licenses
 * PWX-7212 Cloudsnap-Restore: Increase restore verbose level for error cases
 * PWX-7179 io1 volume added to KOPS cluster gets displayed as STORAGE_MEDIUM_MAGNETIC
-* PWX-7033 Objectostore endpoint failover not happening
+* PWX-7033 Objectstore endpoint failover not happening
 
 ## 1.7.4
 
