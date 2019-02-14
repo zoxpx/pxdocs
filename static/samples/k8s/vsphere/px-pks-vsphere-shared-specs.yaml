@@ -88,7 +88,8 @@ spec:
              "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT",
              "-x", "kubernetes",
              # CHANGEME size from 100 to size in GB of the drive you want on each node
-             "-s", "size=100,type=zeroedthick"]
+             "-s", "size=100,type=zeroedthick",
+             "--keep-px-up"]
           env:
             - name: "PX_TEMPLATE_VERSION"
               value: "v2"

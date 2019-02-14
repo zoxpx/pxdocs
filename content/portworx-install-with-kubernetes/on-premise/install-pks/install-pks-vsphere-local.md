@@ -160,7 +160,7 @@ spec:
           image: portworx/oci-monitor:1.7.1.1
           imagePullPolicy: Always
           args:
-            ["-c", "px-pks-demo-1", "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT", "-x", "kubernetes", "-s", "type=zeroedthick"]
+            ["-c", "px-pks-demo-1", "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT", "-x", "kubernetes", "-s", "type=zeroedthick", "--keep-px-up"]
           env:
             - name: "PX_TEMPLATE_VERSION"
               value: "v2"
