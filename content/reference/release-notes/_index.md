@@ -10,8 +10,8 @@ series: reference
 
 ### Key Fixes
 
-* PWX-7510 - Hide Secrets info from Diags / logs 
-* PWX-7214 - Having two watches to Etcd sometimes blocks watch updates
+* PWX-7510 - Remove any secretes info from the diags
+* PWX-7214 - licensing engine config update improvements
 
 ## 2.0.2
 
@@ -115,22 +115,6 @@ series: reference
 * PWX-7481 - Shared volume mounts fail when clients connections abruptly lost and not cleaned up properly
 * PWX-7600 - Volume mount status might be incorrectly displayed when the node where the volume is attached hits a storage full condition and replicas on that node are moved to a new node
 
-## 1.7.5
-
-* PWX-7033 - Objectstore endpoint failover not happening
-* PWX-7179 - io1 volume added to KOPS cluster gets displayed as STORAGE_MEDIUM_MAGNETIC
-* PWX-7212 - Cloudsnap-Restore: Increase restore verbose level for error cases
-* PWX-7267 - LIC: Hide unknown/non-handled licenses
-* PWX-7299 - export pool_status as a stat for prometheus
-* PWX-7364 - Namespace stuck volume issue 
-
-## 1.7.4
-
-* PWX-7142 - LIC: SuperMicro misinterpreted as VM
-* PWX-7143 - LIC: Should hard-code "absolute maximums" into License evaluations
-* PWX-7214 - LIC: Goroutine leak at license watch re-supscription
-* PWX-7291 - Detect ssd based pools and mount with nossd if kernel version is less than 4.15
-* PWX-7292 - For all storage errors retry 3 times before making pool offline
 
 ## 1.7.5
 
