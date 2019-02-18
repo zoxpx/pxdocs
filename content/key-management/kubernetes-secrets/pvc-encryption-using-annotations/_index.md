@@ -1,11 +1,20 @@
 ---
-title: Encryption using PVC
+title: Encrypting PVCs using annotations
+weight: 1
+keywords: Portworx, Kubernetes, Kubernetes Secrets, containers, storage, encryption
+description: Instructions on using Kubernetes Secrets with Portworx for encrypting PVCs using annotations
+noicon: true
+series: kubernetes-secret-uses
 hidden: true
-keywords: portworx, container, kubernetes, storage, k8s, flexvol, pv, persistent disk, encryption, pvc
-description: This guide is a step-by-step tutorial on how to provision encrypted volumes using PVC annotations.
 ---
 
-[Encryption at Storage Class level](/portworx-install-with-kubernetes/storage-operations/create-pvcs/storage-class-encryption) does not allow using different secret keys for different PVCs. It also does not provide a way to disable encryption for certain PVCs that are using the same secure storage class. Encryption at PVC level will override the encryption options from Storage Class.
+{{% content "key-management/shared/intro.md" %}}
+
+{{<info>}}
+**NOTE:** Supported from PX Enterprise 1.4 onwards
+{{</info>}}
+
+[Encryption at Storage Class level](/key-management/kubernetes-secrets/pvc-encryption-using-storageclass) does not allow using different secret keys for different PVCs. It also does not provide a way to disable encryption for certain PVCs that are using the same secure storage class. Encryption at PVC level will override the encryption options from Storage Class.
 
 PVC level encryption is achieved using following PVC annotations:
 
@@ -15,12 +24,10 @@ PVC level encryption is achieved using following PVC annotations:
 - `px/secret-key` - Key to be used in the secret (Kubernetes Secrets only)
 
 ### Encryption using cluster wide secret
+
 #### Step 1: Create cluster wide secret key
 A cluster wide secret key is a common key that points to a secret value/passphrase which can be used to encrypt all your volumes.
 
-Below are the 2 options for creating the cluster wide secret key:
-
-##### Option 1: Kubernetes Secrets
 Create a cluster wide secret in Kubernetes, if not already created:
 ```text
 $ kubectl -n portworx create secret generic px-vol-encryption \
@@ -34,10 +41,6 @@ $ PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items
 $ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl secrets set-cluster-key \
   --secret cluster-wide-secret-key
 ```
-
-##### Option 2: Other secrets provider
-Similar to Kubernetes secrets, you can set the cluster wide secret key in the secrets provider that you have configured. Refer to the 'Setting cluster wide secret key' section under the respective [secrets provider integration](/key-management).
-
 
 #### Step 2: Create the secure PVC
 If your Storage Class does not have the `secure` flag set, but you want to encrypt the PVC using the same Storage Class, then create the PVC as below:
@@ -62,8 +65,9 @@ As there is no `px/secret-name` annotation specified, Portworx will default to t
 Similar to the above example, if you want to use a Storage Class with `secure` parameter set, but do not want to encrypt a certain PVC, then set the `px/secure` annotation to `false`.
 
 {{<info>}}
-**Note:** If you are running Kubernetes version older than 1.9.4 (or < 1.8.9 in Kubernetes 1.8), then the PVC name has to be in `ns.<namespace_of_pvc>-name.<identifier_for_pvc>` format to use the PVC-level encryption feature.
+**NOTE** If you are running Kubernetes version older than 1.9.4 (or < 1.8.9 in Kubernetes 1.8), then the PVC name has to be in `ns.<namespace_of_pvc>-name.<identifier_for_pvc>` format to use the PVC-level encryption feature.
 {{</info>}}
+
 
 ### Encryption using custom secret key
 
@@ -126,22 +130,3 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 ```
-
-#### Other secrets provider
-Other secrets providers like Vault, AWS KMS, DC/OS, etc do not have namespaces. Hence, you need only `px/secret-name` annotation to specify the key to be used for encryption.
-```yaml
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: secure-mysql-pvc
-  annotations:
-    px/secret-name: your-secret-key
-spec:
-  storageClassName: portworx-sc
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
-```
-Portworx will look for `your-secret-key` in the secret store and use it's value to encrypt the above PVC.

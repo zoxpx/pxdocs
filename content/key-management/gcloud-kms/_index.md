@@ -9,6 +9,11 @@ noicon: true
 series: key-management
 ---
 
+
+{{<info>}}
+**NOTE:** Supported from PX Enterprise 2.0.2 onwards
+{{</info>}}
+
 Portworx integrates with Google Cloud KMS to store  Portworx secrets for Volume Encryption and Cloud Credentials. This guide will help configure Portworx with Google Cloud KMS. 
 
 Portworx requires the following Google Cloud credentials to use its APIs
@@ -178,3 +183,7 @@ To list all the named secrets use the following command
 ```
 
 More information on how to use named secrets is provided in the next section.
+
+## Using Google Cloud KMS with Portworx
+
+{{<homelist series="gcloud-secret-uses">}}

@@ -318,7 +318,7 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
   snapshots cluster wide (Available in 05/14 GA version)
   * Volume Group snapshots - Ability to take crash-consistent snapshots on group of volumes based on a user-defined label
 * GCP/GKE automated disk management based on [disk templates](/portworx-install-with-kubernetes/cloud/gke)
-* [Kubernetes per volume secret support](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pvc-encryption) to enable
+* [Kubernetes per volume secret support](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs) to enable
   volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
 * DC/OS vault integration - Use [Vault integrated with DC/OS](/install-with-other/dcos)
 * Support Pool Resize - Available in Maintenance Mode only

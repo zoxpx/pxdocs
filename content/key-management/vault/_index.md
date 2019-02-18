@@ -168,3 +168,8 @@ Make sure that the secret key has been created in Vault.
 {{</info>}}
 
 If the CLI is used to authenticate with Vault, for every restart of Portworx container it needs to be re-authenticated with Vault by running the `vault login` command.
+
+
+## Using Vault with Portworx
+
+{{<homelist series="vault-secret-uses">}}

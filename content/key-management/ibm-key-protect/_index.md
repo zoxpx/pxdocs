@@ -9,6 +9,11 @@ noicon: true
 series: key-management
 ---
 
+
+{{<info>}}
+**NOTE:** Supported from Portworx Enterprise 1.7 onwards
+{{</info>}}
+
 Portworx integrates with IBM Key Protect to store your encryption keys/secrets and credentials. This guide will help configure Portworx with IBM Key Protect. IBM Key Protect can be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
 
 Portworx requires the following IBM Key Protect credentials to use its APIs
@@ -166,4 +171,9 @@ While installing Portworx set the input argument `-secret_type` to `ibm-kp`.
 
 #### Existing installation
 
-Based on your installation method provide the `-secret_type ibm-kp` input argument and restart PX on all the nodes.
+Based on your installation method provide the `-secret_type ibm-kp` input argument and restart Portworx on all the nodes.
+
+
+## Using IBM Key Protect with Portworx
+
+{{<homelist series="ibm-key-protect-uses">}}
