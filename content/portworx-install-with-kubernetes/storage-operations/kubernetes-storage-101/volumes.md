@@ -8,9 +8,9 @@ series: k8s-101
 
 When dealing with persistent storage in Kubernetes, 3 key objects are important:
 
-1. [StorageClass](/portworx-install-with-kubernetes/storage-operations/storage-101/volumes/#storageclass)
-2. [PersistentVolumeClaim](/portworx-install-with-kubernetes/storage-operations/storage-101/volumes/#persistentvolumeclaim-pvc)
-3. [PersistentVolume](/portworx-install-with-kubernetes/storage-operations/storage-101/volumes/#persistentvolume-pv)
+1. [StorageClass](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/volumes/#storageclass)
+2. [PersistentVolumeClaim](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/volumes/#persistentvolumeclaim-pvc)
+3. [PersistentVolume](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/volumes/#persistentvolume-pv)
 
 ## StorageClass
 
