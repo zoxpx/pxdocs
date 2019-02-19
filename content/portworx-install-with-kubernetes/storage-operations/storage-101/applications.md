@@ -6,7 +6,7 @@ description: Learn essential concepts about running stateful applications using 
 series: k8s-101
 ---
 
-When working on stateful applications on Kubernetes, users typically deal with Deployments and Statefulsets.
+When working on stateful applications on Kubernetes, users typically deal with Deployments and Statefulsets. In theory, any [Kubernetes workload type](https://kubernetes.io/docs/concepts/workloads/) that can mount a volume can use a PersistentVolumeClaim.
 
 ## Deployments
 
@@ -189,3 +189,10 @@ In the above spec,
 
 {{<info>}}[The Cassandra on Kubernetes
 page](/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra) has a detailed end-to-end example.{{</info>}}
+
+## Useful References
+
+* [Interactive tutorial - Cassandra Stateful Set on Portworx](https://www.katacoda.com/portworx/scenarios/px-cassandra)
+* [Interactive tutorial - HA PostgreSQL on Kubernetes with Portworx](https://www.katacoda.com/portworx/scenarios/px-k8s-postgres-all-in-one)
+* [Interactive tutorial - Deploy Kafka and Zookeeper on Kubernetes using Portworx volumes] (https://www.katacoda.com/portworx/scenarios/px-kafka)
+* [Interactive tutorial - Deploy Mongo on Portworx volumes using Helm](https://www.katacoda.com/portworx/scenarios/px-helm-mongo)

@@ -49,11 +49,17 @@ In above spec,
 
 * **pvcSelector** specifies a label selector which will match all PVCs that have the label *app=mysql*.
 
-The [Create snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page has details on taking snapshots of Portworx volumes.
+{{<info>}}For single or group snapshots, it is possible to backup the volumes to a cloud S3 endpoint instead of disks on the local cluster. The [Create snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page has details on taking snapshots of Portworx volumes.{{</info>}}
+
+### Application consistency when taking snapshots
+
+For each of the snapshot types, Portworx supports specifying pre and post rules that are run on the application pods using the volumes. This allows users to quiesce the applications before the snapshot is taken and resume I/O after the snapshot is taken. The commands will be run in pods which are using the PVC being snapshotted.
+
+Read [Configuring 3DSnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d) for further details on 3DSnaps.
 
 ## Migration
 
-Portworx uses [STORK](https://github.com/libopenstorage/stork) to migrate application workloads and their volumes across Kubernetes clusters.
+Migration is reffered to the operation of transferring application workloads (e.g Deployments, Statefulsets, Jobs, ConfigMaps etc) and their data (PVCs) across Kubernetes clusters.
 
 Common use cases for this would be:
 
@@ -63,4 +69,4 @@ Common use cases for this would be:
 * Lift/Shift: Move applications and data from an on-prem cluster to a hosted AWS EKS or Google GKE. The reverse is also supported to repatriate, move applications on-prem.
 * Maintenance: Decommission a cluster in order to perform hardware-level upgrades.
 
-The [Migration](/concepts/migration) page detailed documentation on this.
+Portworx uses [STORK](https://github.com/libopenstorage/stork) for migration. The [Migration](/concepts/migration) page detailed documentation on this.

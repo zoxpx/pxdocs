@@ -79,4 +79,23 @@ To find the PV that is being used by a PVC, you can do
 kubectl get pvc <pvc-name>
 ```
 
-An end user needs to interact with a PV only when using [pre-provisioned volumes](). For dynamically provisioned volumes, end users only create PVCs and the backing storage provider creates the PV.
+An end user needs to interact with a PV only when using [pre-provisioned volumes](/portworx-install-with-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes). For dynamically provisioned volumes, end users only create PVCs and the backing storage provider creates the PV.
+
+## ReadWriteMany and ReadWriteOnce
+
+A PVC can be
+
+* ReadWriteMany: In the mode, multiple pods can mount and volume and access it at the same time.
+  * This should be used by applications like web servers (nginx, wordpress etc) that can handle multiple instances writing to the same volume. It is not recommended to use for databases.
+* ReadWriteOnce: In the mode, only a single pod can access the volume at a given time
+
+{{<info>}}For ReadWriteMany Portworx volumes, specify `shared: true` in the StorageClass for the PVC.{{</info>}}
+
+
+## Useful References
+
+* [Interactive tutorial - Resize Kubernetes volumes using kubectl](https://www.katacoda.com/portworx/scenarios/px-k8s-kubectl-resize-volume)
+* [Interactive tutorial - Persistent volumes on Kubernetes using Portworx](https://www.katacoda.com/portworx/scenarios/px-k8s-vol-basic)
+* [Interactive tutorial - Using Portworx Shared Volumes](https://www.katacoda.com/portworx/scenarios/px-k8s-vol-shared)
+* [Interactive tutorial - Encrypting volumes on Kubernetes](https://www.katacoda.com/portworx/scenarios/px-k8s-encryption)
+* [Kubernetes Storage documentation](https://kubernetes.io/docs/concepts/storage/volumes/)
