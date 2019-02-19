@@ -4,6 +4,12 @@ keywords: portworx, px-enterprise, px-lighthouse, release notes
 meta-description: "Release notes for Lighthouse, the Portworx UI."
 ---
 
+## Lighthouse 2.0.2 Release notes
+
+### Key Fixes
+
+* LD-393: Lighthouse Failed to load UI if any of the nodes were in maintenance mode.
+
 ## Lighthouse 2.0.1 Release notes
 
 * Adds Cluster Migration to Kubernetes clusters for PX Clusters with version 2.0.1+
