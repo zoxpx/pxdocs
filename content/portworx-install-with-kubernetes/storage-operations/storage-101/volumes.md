@@ -3,6 +3,7 @@ title: Persistent volumes
 weight: 2
 keywords: portworx, kubernetes, PVCs
 description: Learn essential concepts about creating persistent volumes on Kubernetes
+series: k8s-101
 ---
 
 When dealing with persistent storage in Kubernetes, 3 key objects are important:

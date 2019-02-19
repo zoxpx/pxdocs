@@ -3,6 +3,7 @@ title: Hyperconvergence
 weight: 4
 keywords: portworx, kubernetes, PVCs
 description: Learn essential concepts about keeping your applications hyperconverged with their data
+series: k8s-101
 ---
 
 When a pod runs on the same host as its volume, it is known as convergence or hyper-convergence. Because this configuration reduces the network overhead of an application, performance is typically better.
