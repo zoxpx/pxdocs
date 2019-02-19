@@ -83,3 +83,109 @@ StatefulSets favor consistency over availability. This results in certain behavi
 * Each pod in a statefulset has a storage identity. So each replica pod in a statefulset will remember the PVC it's using. This mapping is done using the [ordinal index](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#pod-identity) of the pod.
 * When a worker node goes down and a statefulset pod was running on that worker, Kubernetes scheduler will not spin up a new replacement pod if the node stays down. A new pod is spun up only if the worker node goes in NodeLost state and then comes up online later on.
 * Scaling up and down in statefulsets is [ordered](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#deployment-and-scaling-guarantees). When scaling up, pods are created sequentially, in order from {0..N-1}. When Pods are being deleted, they are terminated in reverse order, from {N-1..0}.
+
+### Example
+
+Let's take an example.
+
+```text
+apiVersion: "apps/v1"
+kind: StatefulSet
+metadata:
+  name: cassandra
+spec:
+  serviceName: cassandra
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: cassandra
+    spec:
+      schedulerName: stork
+      containers:
+      - name: cassandra
+        image: gcr.io/google-samples/cassandra:v12
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 7000
+          name: intra-node
+        - containerPort: 7001
+          name: tls-intra-node
+        - containerPort: 7199
+          name: jmx
+        - containerPort: 9042
+          name: cql
+        resources:
+          limits:
+            cpu: "500m"
+            memory: 1Gi
+          requests:
+           cpu: "500m"
+           memory: 1Gi
+        securityContext:
+          capabilities:
+            add:
+              - IPC_LOCK
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh", "-c", "PID=$(pidof java) && kill $PID && while ps -p $PID > /dev/null; do sleep 1; done"]
+        env:
+          - name: MAX_HEAP_SIZE
+            value: 512M
+          - name: HEAP_NEWSIZE
+            value: 100M
+          - name: CASSANDRA_SEEDS
+            value: "cassandra-0.cassandra.default.svc.cluster.local"
+          - name: CASSANDRA_CLUSTER_NAME
+            value: "K8Demo"
+          - name: CASSANDRA_DC
+            value: "DC1-K8Demo"
+          - name: CASSANDRA_RACK
+            value: "Rack1-K8Demo"
+          - name: CASSANDRA_AUTO_BOOTSTRAP
+            value: "false"
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+        readinessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - -c
+            - /ready-probe.sh
+          initialDelaySeconds: 15
+          timeoutSeconds: 5
+        # These volume mounts are persistent. They are like inline claims,
+        # but not exactly because the names need to match exactly one of
+        # the stateful pod volumes.
+        volumeMounts:
+        - name: cassandra-data
+          mountPath: /var/lib/cassandra
+  # These are converted to volume claims by the controller
+  # and mounted at the paths mentioned above.
+  volumeClaimTemplates:
+  - metadata:
+      name: cassandra-data
+      annotations:
+        volume.beta.kubernetes.io/storage-class: px-storageclass
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+```
+
+In the above spec,
+
+* **replicas: 3** declares that you want 3 replicas for your cassandra cluster.
+* **schedulerName: stork** enables to use [STORK](https://github.com/libopenstorage/stork) scheduler to enable more efficient placement of the pods and faster recovery for failed nodes.
+* **volumeClaimTemplates** declares the template to use for the PVC that will be created for each replica pod. The names of the dynamically created PVCs will be cassandra-data-cassandra-0, cassandra-data-cassandra-1 and cassandra-data-cassandra-2.
+
+{{<info>}}[The Cassandra on Kubernetes
+page](/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra) has a detailed end-to-end example.{{</info>}}
