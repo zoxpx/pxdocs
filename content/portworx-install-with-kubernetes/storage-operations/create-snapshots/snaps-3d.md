@@ -5,10 +5,7 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, pe
 description: Learn to take a 3DSnaps of a volume.
 ---
 
-{{<info>}}
-3DSnaps are supported in Portworx version 1.4 and above and Stork version 1.2 and above.
-
-{{</info>}}
+{{<info>}}3DSnaps are supported in Portworx version 1.4 and above and Stork version 1.2 and above.{{</info>}}
 
 For each of the snapshot types, Portworx supports specifying pre and post rules that are run on the application pods using the volumes being snapshotted. This allows users to quiesce the applications before the snapshot is taken and resume I/O after the snapshot is taken.
 
@@ -26,12 +23,23 @@ A Stork `Rule` is a Custom Resource Definition (CRD) that allows to define actio
     * **value**: This is the actual action content. For example, the command to run.
     * **runInSinglePod**: If _true_, the action will be run on a single pod that matches the selectors.
 
-## Step 2: Create VolumeSnapshots that reference the rules
+## Step 2: Create snapshots that reference the rules
 
-Once you have the rules applied in your cluster, you can reference them in the `VolumeSnapshot` using the following annotations.
+Once you have the rules applied in your cluster, you can reference them in the `VolumeSnapshot` or `GroupVolumeSnapshot` for individual and group snapshots respectively.
+
+### VolumeSnapshots
+
+Use following annotations on the VolumeSnapshot to specify pre and post rules.
 
 * __stork.rule/pre-snapshot__: Stork will execute the rule which is given in the value of this annotation _before_ taking the snapshot.
 * __stork.rule/post-snapshot__: Stork will execute the rule which is given in the value of this annotation _after_ taking the snapshot.
+
+### GroupVolumeSnapshots
+
+Use following fields in the GroupVolumeSnapshot spec to specify pre and post rules.
+
+* __preExecRule__: Stork will execute the rule which is given in the value of this annotation _before_ taking the group snapshot.
+* __postExecRule__: Stork will execute the rule which is given in the value of this annotation _after_ taking the snapshot.
 
 ## Examples
 
@@ -156,7 +164,7 @@ Below rule flushes the tables from the memtable on all cassandra pods.
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: Rule
 metadata:
-  name: px-cassandra-rule
+  name: cassandra-presnap-rule
 spec:
   - podSelector:
       app: cassandra
@@ -167,18 +175,21 @@ spec:
 
 **Snapshot**
 
-With this snapshot, Stork will run the _px-cassandra-rule_ rule on all pods that are using PVCs that match labels _app=cassandra_. Hence this will be a [group snapshot](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group).
+With this snapshot, Stork will run the _cassandra-presnap-rule_ rule on all pods that are using PVCs that match labels _app=cassandra_. Hence this will be a [group snapshot](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group).
 
 ```yaml
-apiVersion: volumesnapshot.external-storage.k8s.io/v1
-kind: VolumeSnapshot
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: GroupVolumeSnapshot
 metadata:
-  name: cassandra-3d-snapshot
-  annotations:
-    portworx.selector/app: cassandra
-    stork.rule/pre-snapshot: px-cassandra-rule
+  name: cassandra-group-snapshot
 spec:
-  persistentVolumeClaimName: cassandra-data-1
+  preExecRule: cassandra-presnap-rule
+  pvcSelector:
+    matchLabels:
+      app: cassandra
 ```
 
-To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-local#pvc-from-snap).
+## References
+
+* To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-local#pvc-from-snap).
+* To create PVCs from group snapshots, read [Creating PVCs from group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group#restoring-from-group-snapshots).

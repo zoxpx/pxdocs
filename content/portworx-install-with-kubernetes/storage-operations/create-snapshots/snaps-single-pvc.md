@@ -1,8 +1,10 @@
 ---
-title: Take snapshot of a Kubernetes PVC
+title: Snapshot single PVCs
 hidden: true
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
-description: Learn to take a snapshot of a Kubernetes persistent volume claim (PVC)
+description: Instructions on taking snapshots of single PVCs and restoring PVCs from the snapshots
+series: k8s-local-snap
+weight: 8
 ---
 
 This document will show you how to create snapshot of a PVC backed by a Portworx volume.
@@ -93,7 +95,7 @@ To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/por
 
 Let's take an example where we have 2 namespaces _dev_ and _prod_. We will create a PVC and snapshot in the _dev_ namespace and then create a PVC in the _prod_ namespace from the snapshot.
 
-Create the namespaces
+Step 1: Create the namespaces
 
 ```text
 apiVersion: v1
@@ -111,7 +113,7 @@ metadata:
     name: prod
 ```
 
-Create the PVC
+Step 2: Create the PVC
 
 ```text
 kind: PersistentVolumeClaim
@@ -137,7 +139,7 @@ parameters:
   repl: "2"
 ```
 
-Create the snapshot
+Step 3: Create the snapshot
 
 ```text
 apiVersion: volumesnapshot.external-storage.k8s.io/v1
@@ -152,7 +154,7 @@ spec:
 
 ```
 
-Create a PVC in a different namespace from the snapshot
+Step 4: Create a PVC in a different namespace from the snapshot
 
 ```text
 apiVersion: v1

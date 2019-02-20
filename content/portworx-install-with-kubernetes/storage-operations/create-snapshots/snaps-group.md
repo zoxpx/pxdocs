@@ -1,20 +1,25 @@
 ---
-title: Create group snapshots
+title: Snapshot group of PVCs
 hidden: true
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
-description: Learn to take a group snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod. Try today!
+description: Instructions on taking snapshots of a group of PVCs and restoring PVCs from the snapshots
+series: k8s-local-snap
+weight: 9
 ---
 
-This document will show you how to create group snapshots of Portworx volumes and how you can clone those snapshots to use them in pods.
+This document will show you how to create group snapshots of Portworx volumes and how you can restore those snapshots to use them in pods.
 
 ## Pre-requisites
 
-**Installing STORK**
+{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-v2-prereqs.md" %}}
 
-This requires that you already have [STORK](/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
-Kubernetes cluster. If you fetched the Portworx specs from [https://install.portworx.com](https://install.portworx.com) and used the default options, STORK is already installed.
+### Portworx and Stork Version
 
-**Kubernetes Version**
+This page describes the steps for group snapshots for Portworx version 2.0.2 or above. The Stork version also needs to be above 2.0.2.
+
+If you have a lower Stork and Portworx version, refer to legacy method [Create group snapshots using VolumeSnapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group-legacy).
+
+### Kubernetes Version
 
 Group snapshots are supported in following Kubernetes versions:
 
@@ -22,189 +27,257 @@ Group snapshots are supported in following Kubernetes versions:
 * 1.9.4 and above
 * 1.8.9 and above
 
-**PX Version**
-
-Group snapshots are supported in Portworx version 1.4 and above.
-
 ## Creating group snapshots
 
-To take group snapshots, one either specifies annotations that will match PVCs for the group or a Portworx volume group ID.
+To take group snapshots, you need use the GroupVolumeSnapshot CRD object. Here is a simple example:
 
-The group snapshot method supports the following annotations:
+```text
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: GroupVolumeSnapshot
+metadata:
+  name: cassandra-groupsnapshot
+spec:
+  pvcSelector:
+    matchLabels:
+      app: cassandra
+```
 
-* __portworx/snapshot-type__: Indicates the type of snapshot. For group snapshots, the value should be **local**.
-* __portworx.selector/\<key\>: \<value\>__: When this annotation is provided, Portworx will select all PVCs with labels `<key>:<value>` and create a group snapshot. Example: `portworx.selector/stack: wordpress`.
-* __portworx.selector/group-id__: Group ID of the Portworx volumes if they were created using the `--group` parameter. Portworx will select all volumes that match this group ID and create a group snapshot.
+Above spec will take a group snapshot of all PVCs that match labels `app=cassandra`.
 
-If both annotations and group ID are specified above, all PVCs that match annotations *and* group ID will be snapshotted.
+The [Examples](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group#examples) section has a more detailed end-to-end example.
 
-To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-local#pvc-from-snap).
+{{<info>}}Above spec will keep all the snapshots local to the Portworx cluster. If you intend on backing up the group snapshots to cloud (S3 endpoint), refer to [Create group cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group-cloud).{{</info>}}
+
+The `GroupVolumeSnapshot` object also supports specifying pre and post rules that are run on the application pods using the volumes being snapshotted. This allows users to quiesce the applications before the snapshot is taken and resume I/O after the snapshot is taken. Refer to [3D Snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d) for more detailed documentation on that.
+
+### Checking status of group snapshots
+
+A new VolumeSnapshot object will get created for each PVC that matches the given `pvcSelector`. For example, if the label selector `app: cassandra` matches 3 PVCs, you will have 3 volumesnapshot objects.
+
+You can track the status of the group volume snapshots using:
+
+```bash
+kubectl describe groupvolumesnapshot <group-snapshot-name>
+```
+
+This will show the latest status and will also list the VolumeSnapshot objects once it's complete. Below is an example of the status section of the cassandra group snapshot.
+
+```
+Status:
+  Stage:   Final
+  Status:  Successful
+  Volume Snapshots:
+    Conditions:
+      Last Transition Time:  2019-01-14T18:02:47Z
+      Message:               Snapshot created successfully and it is ready
+      Reason:
+      Status:                True
+      Type:                  Ready
+    Data Source:
+      Portworx Volume:
+        Snapshot Id:       1015874155818710382
+    Parent Volume ID:      763613271174793816
+    Task ID:
+    Volume Snapshot Name:  cassandra-group-snapshot-cassandra-data-cassandra-2-86ce35eb-1826-11e9-a9a4-080027ee1df7
+    Conditions:
+      Last Transition Time:  2019-01-14T18:02:47Z
+      Message:               Snapshot created successfully and it is ready
+      Reason:
+      Status:                True
+      Type:                  Ready
+    Data Source:
+      Portworx Volume:
+        Snapshot Id:       1130064992705573378
+    Parent Volume ID:      1081147806034223862
+    Task ID:
+    Volume Snapshot Name:  cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
+    Conditions:
+      Last Transition Time:  2019-01-14T18:02:47Z
+      Message:               Snapshot created successfully and it is ready
+      Reason:
+      Status:                True
+      Type:                  Ready
+    Data Source:
+      Portworx Volume:
+        Snapshot Id:       175241555565145805
+    Parent Volume ID:      237262101530372284
+    Task ID:
+    Volume Snapshot Name:  cassandra-group-snapshot-cassandra-data-cassandra-1-86ce35eb-1826-11e9-a9a4-080027ee1df7
+  ```
+
+You can see 3 VolumeSnapshots which are part of the group snapshot. The name of the VolumeSnapshot is in the _Volume Snapshot Name_ field. For more details on the VolumeSnapshot, you can do:
+
+```text
+kubectl get volumesnapshot <volume-snapshot-name> -o yaml
+```
+
+### Snapshots across namespaces
+
+When creating a group snapshot, you can specify a list of namespaces to which the group snapshot can be restored. Below is an example of a group snapshot which can be restored into prod-01 and prod-02 namespaces.
+
+```text
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: GroupVolumeSnapshot
+metadata:
+  name: cassandra-groupsnapshot
+spec:
+  pvcSelector:
+    matchLabels:
+      app: cassandra
+  restoreNamespaces:
+   - prod-01
+   - prod-02
+```
+
+## Restoring from group snapshots
+
+{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-restore.md" %}}
 
 ## Examples
 
-#### Creating snapshots of all PVCs that match certain annotations
+### Group snapshot for all cassandra PVCs
 
-In below example, we are taking a group snapshot that will snap all PVCs in the *default* namespace and that have labels *tier: prod* and *type: db*. The prefix *portworx.selector/* before the annotation keys indiciate these are annotations that STORK will process to select PVCs.
+In below example, we will take a group snapshot for all PVCs in the *default* namespace and that have labels *app: cassandra*.
 
-Portworx will quiesce I/O on all volumes before triggering their snapshots.
+{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-cassandra-step-1-2.md" %}}
+
+#### Step 3: Take the group snapshot
+
+Apply the following spec to take the cassandra group snapshot. Portworx will quiesce I/O on all volumes before triggering their snapshots.
 
 ```yaml
-apiVersion: volumesnapshot.external-storage.k8s.io/v1
-kind: VolumeSnapshot
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: GroupVolumeSnapshot
 metadata:
-  name: mysql-snapshot
-  namespace: default
-  annotations:
-    portworx/snapshot-type: local
-    portworx.selector/tier: prod
-    portworx.selector/type: db
+  name: cassandra-group-snapshot
 spec:
-  persistentVolumeClaimName: mysql-data
+  pvcSelector:
+    matchLabels:
+      app: cassandra
 ```
-
-*persistentVolumeClaimName* in the above spec can be name of any single PVC that will get matched using the selector or the group ID.
 
 Once you apply the above object you can check the status of the snapshots using `kubectl`:
 
 ```bash
-$ kubectl get volumesnapshot
-NAME                                              AGE
-volumesnapshots/mysql-data-1-779368893912016693   14s
-volumesnapshots/mysql-data-2-314922951056863611   14s
-volumesnapshots/mysql-snapshot                    16s
+kubectl describe groupvolumesnapshot cassandra-group-snapshot
 ```
 
-```bash
-$ kubectl get volumesnapshotdatas
-NAME                                                                                            AGE
-volumesnapshotdatas/k8s-snapshotdata-0b1c5b4a-4b43-11e8-b4d7-5a6317d9d914                    14s
-volumesnapshotdatas/k8s-snapshotdata-0af5b7ad-4b43-11e8-b4d7-5a6317d9d914                    14s
-volumesnapshotdatas/k8s-snapshotdata-0b15ab9f-4b43-11e8-b4d7-5a6317d9d914                    14s
+While the group snapshot is in progress, the status will reflect as _InProgress_. Once complete, you should see a status stage as _Final_ and status as _Successful_.
+
+```
+Name:         cassandra-group-snapshot
+Namespace:    default
+Labels:       <none>
+Annotations:  kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"stork.libopenstorage.org/v1alpha1","kind":"GroupVolumeSnapshot","metadata":{"annotations":{},"name":"cassandra-group-snapshot"
+,"namespac...
+API Version:  stork.libopenstorage.org/v1alpha1
+Kind:         GroupVolumeSnapshot
+Metadata:
+  Cluster Name:
+  Creation Timestamp:  2019-01-14T18:02:16Z
+  Generation:          0
+  Resource Version:    18184467
+  Self Link:           /apis/stork.libopenstorage.org/v1alpha1/namespaces/default/groupvolumesnapshots/cassandra-group-snapshot
+  UID:                 86ce35eb-1826-11e9-a9a4-080027ee1df7
+Spec:
+  Options:             <nil>
+  Post Snapshot Rule:
+  Pre Snapshot Rule:
+  Pvc Selector:
+    Match Labels:
+      App:  cassandra
+Status:
+  Stage:   Final
+  Status:  Successful
+  Volume Snapshots:
+    Conditions:
+      Last Transition Time:  2019-01-14T18:02:47Z
+      Message:               Snapshot created successfully and it is ready
+      Reason:
+      Status:                True
+      Type:                  Ready
+    Data Source:
+      Portworx Volume:
+        Snapshot Id:       1015874155818710382
+    Parent Volume ID:      763613271174793816
+    Task ID:
+    Volume Snapshot Name:  cassandra-group-snapshot-cassandra-data-cassandra-2-86ce35eb-1826-11e9-a9a4-080027ee1df7
+    Conditions:
+      Last Transition Time:  2019-01-14T18:02:47Z
+      Message:               Snapshot created successfully and it is ready
+      Reason:
+      Status:                True
+      Type:                  Ready
+    Data Source:
+      Portworx Volume:
+        Snapshot Id:       1130064992705573378
+    Parent Volume ID:      1081147806034223862
+    Task ID:
+    Volume Snapshot Name:  cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
+    Conditions:
+      Last Transition Time:  2019-01-14T18:02:47Z
+      Message:               Snapshot created successfully and it is ready
+      Reason:
+      Status:                True
+      Type:                  Ready
+    Data Source:
+      Portworx Volume:
+        Snapshot Id:       175241555565145805
+    Parent Volume ID:      237262101530372284
+    Task ID:
+    Volume Snapshot Name:  cassandra-group-snapshot-cassandra-data-cassandra-1-86ce35eb-1826-11e9-a9a4-080027ee1df7                  16s
 ```
 
-Above we can see that creation of `mysql-snapshot` created 2 more volumesnapshots `mysql-data-1-779368893912016693` and `mysql-data-2-314922951056863611`. Each of these would correspond to the PVCs that matched the annotations/group-id specified in the `mysql-snapshot` volumesnapshot.
+Above we can see that creation of _cassandra-group-snapshot_ created 3 volumesnapshots:
 
-The creation of the volumesnapshotdatas object indicates that the snapshot has been created. If you describe the volumesnapshotdatas object you can see the Portworx Snapshot IDs and the PVCs for which the snapshot was created.
+1. cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
+2. cassandra-group-snapshot-cassandra-data-cassandra-1-86ce35eb-1826-11e9-a9a4-080027ee1df7
+3. cassandra-group-snapshot-cassandra-data-cassandra-2-86ce35eb-1826-11e9-a9a4-080027ee1df7
+
+These correspond to the PVCs _cassandra-data-cassandra-0_, _cassandra-data-cassandra-1_ and _cassandra-data-cassandra-2_ respectively.
+
+You can also describe these individual volume snapshots using
 
 ```bash
-$ kubectl describe volumesnapshotdatas
-Name:         k8s-snapshotdata-0b1c5b4a-4b43-11e8-b4d7-5a6317d9d914
-Namespace:
+ kubectl describe volumesnapshot cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
+```
+ 
+```
+Name:         cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
+Namespace:    default
 Labels:       <none>
 Annotations:  <none>
 API Version:  volumesnapshot.external-storage.k8s.io/v1
-Kind:         VolumeSnapshotData
+Kind:         VolumeSnapshot
 Metadata:
   Cluster Name:
-  Creation Timestamp:  2018-04-29T00:19:55Z
-  Resource Version:    1501612
-  Self Link:           /apis/volumesnapshot.external-storage.k8s.io/v1/k8s-snapshotdata-0b1c5b4a-4b43-11e8-b4d7-5a6317d9d914
-  UID:                 0b1c3729-4b43-11e8-8c81-080027ee1df7
+  Creation Timestamp:  2019-01-14T18:02:47Z
+  Owner References:
+    API Version:     stork.libopenstorage.org/v1alpha1
+    Kind:            GroupVolumeSnapshot
+    Name:            cassandra-group-snapshot
+    UID:             86ce35eb-1826-11e9-a9a4-080027ee1df7
+  Resource Version:  18184459
+  Self Link:         /apis/volumesnapshot.external-storage.k8s.io/v1/namespaces/default/volumesnapshots/cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
+  UID:               99748065-1826-11e9-a9a4-080027ee1df7
 Spec:
-  Persistent Volume Ref:
-    Kind:  PersistentVolume
-    Name:  pvc-12a5926f-4a54-11e8-8c81-080027ee1df7
-  Portworx Volume:
-    Snapshot Data:  k8s-snapshotdata-0af5b7ad-4b43-11e8-b4d7-5a6317d9d914,k8s-snapshotdata-0b15ab9f-4b43-11e8-b4d7-5a6317d9d914
-    Snapshot Id:    779368893912016693,314922951056863611
-    Snapshot Type:  local
-  Volume Snapshot Ref:
-    Kind:  VolumeSnapshot
-    Name:  default/mysql-snapshot
+  Persistent Volume Claim Name:  cassandra-data-cassandra-0
+  Snapshot Data Name:            cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
 Status:
   Conditions:
-    Last Transition Time:  <nil>
+    Last Transition Time:  2019-01-14T18:02:47Z
     Message:               Snapshot created successfully and it is ready
     Reason:
     Status:                True
     Type:                  Ready
   Creation Timestamp:      <nil>
 Events:                    <none>
-```
-
-```text
-Name:         k8s-snapshotdata-0af5b7ad-4b43-11e8-b4d7-5a6317d9d914
-Namespace:
-Labels:       namespace=default
-Annotations:  <none>
-API Version:  volumesnapshot.external-storage.k8s.io/v1
-Kind:         VolumeSnapshotData
-Metadata:
-  Cluster Name:
-  Creation Timestamp:  2018-04-29T00:19:55Z
-  Resource Version:    1501608
-  Self Link:           /apis/volumesnapshot.external-storage.k8s.io/v1/k8s-snapshotdata-0af5b7ad-4b43-11e8-b4d7-5a6317d9d914
-  UID:                 0af5b72d-4b43-11e8-8c81-080027ee1df7
-Spec:
-  Persistent Volume Ref:  <nil>
-  Portworx Volume:
-    Snapshot Id:    779368893912016693
-    Snapshot Type:  local
-  Volume Snapshot Ref:
-    Kind:  VolumeSnapshot
-    Name:  default/mysql-data-1-779368893912016693
-Status:
-  Conditions:
-    Last Transition Time:  <nil>
-    Message:               Snapshot created successfully and it is ready
-    Reason:
-    Status:                True
-    Type:                  Ready
-  Creation Timestamp:      <nil>
-Events:                    <none>
-```
-
-```text
-Name:         k8s-snapshotdata-0b15ab9f-4b43-11e8-b4d7-5a6317d9d914
-Namespace:
-Labels:       namespace=default
-Annotations:  <none>
-API Version:  volumesnapshot.external-storage.k8s.io/v1
-Kind:         VolumeSnapshotData
-Metadata:
-  Cluster Name:
-  Creation Timestamp:  2018-04-29T00:19:55Z
-  Resource Version:    1501610
-  Self Link:           /apis/volumesnapshot.external-storage.k8s.io/v1/k8s-snapshotdata-0b15ab9f-4b43-11e8-b4d7-5a6317d9d914
-  UID:                 0b1596ca-4b43-11e8-8c81-080027ee1df7
-Spec:
-  Persistent Volume Ref:  <nil>
-  Portworx Volume:
-    Snapshot Id:    314922951056863611
-    Snapshot Type:  local
-  Volume Snapshot Ref:
-    Kind:  VolumeSnapshot
-    Name:  default/mysql-data-2-314922951056863611
-Status:
-  Conditions:
-    Last Transition Time:  <nil>
-    Message:               Snapshot created successfully and it is ready
-    Reason:
-    Status:                True
-    Type:                  Ready
-  Creation Timestamp:      <nil>
-Events:                    <none>
-```
-
-#### Creating snapshots of all PVCs in a namespace
-
-Below spec will take snapshots of all PVCs in the dev namespace.
-
-Portworx will quiesce I/O on all volumes before triggering their snapshots.
-
-```yaml
-apiVersion: volumesnapshot.external-storage.k8s.io/v1
-kind: VolumeSnapshot
-metadata:
-  name: mysql-snapshot-all-dev
-  namespace: dev
-  annotations:
-    portworx/snapshot-type: local
-    portworx.selector/namespace: dev
-spec:
-  persistentVolumeClaimName: mysql-data
 ```
 
 ## Deleting group snapshots
 
-To delete group snapshots, you need to delete the `VolumeSnapshot` that was used to create the group snapshots. STORK will delete all other volumesnapshots that were created for this group snapshot.
+To delete group snapshots, you need to delete the `GroupVolumeSnapshot` that was used to create the group snapshots. STORK will delete all other volumesnapshots that were created for this group snapshot.
+
+```text
+kubectl delete groupvolumesnapshot cassandra-group-snapshot
+```
