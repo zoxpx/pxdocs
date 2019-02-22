@@ -15,10 +15,21 @@ Below are useful pages that will be useful if you are contributing to the docs.
 * [Recommended git workflow for contributing](GIT_WORKFLOW.md)
 * [Tip and tricks for editing content](TIPS_AND_TRICKS.md)
 * [Documentation on search functionality](SEARCH.md)
-* [Documentation on version dropdown](VERSIONS.md)
 * Recommended editors
     * [Visual Code](https://code.visualstudio.com/)
     * [Atom](https://atom.io/)
+
+## Versioning and Branching
+
+Following is a table that maps each version in the dropdown to the git branch in the repository.
+
+| Git branch | Portworx version                    |
+|------------|-------------------------------------|
+| master     | 2.0.3 and above                     |
+| 2.0        | 2.0.1, 2.0.2                        |
+| 1.7        | 1.7.x                               |
+
+[Documentation on version dropdown](VERSIONS.md) has details on making changes to version branches.
 
 ## Running the site locally
 
