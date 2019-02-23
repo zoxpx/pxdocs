@@ -63,6 +63,8 @@ Record the EBS volume ID (e.g. _vol-04e2283f1925ec9ee_), this will be passed in 
 
 {{% content "cloud-references/auto-disk-provisioning/shared/asg-limit-storage-nodes.md" %}}
 
+{{% content "cloud-references/auto-disk-provisioning/shared/asg-examples-aws.md" %}}
+
 ## EC2 Instance types
 A PX cluster can be deployed with a heterogeneous makeup of EC2 instance types.  Some of your nodes can be used for converged compute and storage, some for compute only and some for storage only.
 

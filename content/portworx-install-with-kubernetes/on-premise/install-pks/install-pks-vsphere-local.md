@@ -48,22 +48,7 @@ Below are the steps to wipe your entire Portworx installation on PKS.
 <a name="pks-px-vsphere-secret"></a>
 ### Secret for vSphere credentials
 
-Things to replace in the below spec to match your environment:
-
-1. **VSPHERE_USER**: Use output of `echo -n <vcenter-server-user> | base64`
-2. **VSPHERE_PASSWORD**: Use output of `echo -n <vcenter-server-password> | base64`
-
-```
-apiVersion: v1
-kind: Secret
-metadata:
-  name: px-vsphere-secret
-  namespace: kube-system
-type: Opaque
-data:
-  VSPHERE_USER: YWRtaW5pc3RyYXRvckB2c3BoZXJlLmxvY2Fs
-  VSPHERE_PASSWORD: cHgxLjMuMEZUVw==
-```
+{{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-secret.md" %}}
 
 <a name="pks-px-spec"></a>
 ### Portworx spec

@@ -13,14 +13,7 @@ disableprevnext: true
 
 ## Architecture
 
-Below diagram gives an overview of the Portworx architecture for PKS on vSphere using shared datastores.
-
-* Portworx runs as a Daemonset hence each Kubernetes minion/worker will have the Portworx daemon running.
-* Based on the given spec by the end user, Portworx on each node will create it's disk on the configured shared datastore(s) or datastore cluster(s).
-* Portworx will aggregate all of the disks and form a single storage cluster. End users can carve PVCs (Persistent Volume Claims), PVs (Persistent Volumes) and Snapshots from this storage cluster.
-* Portworx tracks and manages the disks that it creates. So in a failure event, if a new VM spins up, Portworx on the new VM will be able to attach to the same disk that was previously created by the node on the failed VM.
-
-![Portworx architecture for PKS on vSphere using shared datastores or datastore clusters](/img/pks-vsphere-shared.png)
+{{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-shared-arch.md" %}}
 
 ## ESXi datastore preparation
 
@@ -47,24 +40,7 @@ Below are the steps to wipe your entire Portworx installation on PKS.
 <a name="pks-px-vsphere-secret"></a>
 ### Secret for vSphere credentials
 
-Things to replace in the below spec to match your environment:
-
-1. **VSPHERE_USER**: Use output of `echo -n <vcenter-server-user> | base64`
-2. **VSPHERE_PASSWORD**: Use output of `echo -n <vcenter-server-password> | base64`
-
-```
-apiVersion: v1
-kind: Secret
-metadata:
-  name: px-vsphere-secret
-  namespace: kube-system
-type: Opaque
-data:
-  VSPHERE_USER: YWRtaW5pc3RyYXRvckB2c3BoZXJlLmxvY2Fs
-  VSPHERE_PASSWORD: cHgxLjMuMEZUVw==
-```
-
-`kubectl apply` the above spec after you update the above template with your user and password.
+{{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-secret.md" %}}
 
 <a name="pks-px-spec"></a>
 ### Portworx spec
