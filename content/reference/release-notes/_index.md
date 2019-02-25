@@ -6,6 +6,12 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.2.2
+
+### Key Fixes
+
+* PWX-7664 - When a node running 1.7 with empty journal log gets upgraded to 2.0 and the upgraded node is restarted, the node doesn't fully restart on next boot
+
 ## 2.0.2.1
 
 ### Key Fixes
