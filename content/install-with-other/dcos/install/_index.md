@@ -63,6 +63,7 @@ be changed during install. This can not be updated once the service has been sta
 storage resources available in your DCOS cluster before starting the install.
 ![Portworx ETCD Install options](/img/dcos-px-etcd-options.png)
 
+
 ### Lighthouse options
 Lighthouse will not be installed by default. If you want to access the Lighthouse UI, you will have to enable it.
 

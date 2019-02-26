@@ -45,13 +45,18 @@ keywords: portworx, px-developer, px-enterprise, plugin, install, configure, con
 -cluster_secret_key <id>        [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
 ```
 
+#### Sharedv4 options
+To enable sharedv4 type of volumes provide the following portworx input argument
+```
+   -enable-shared-and-shared-v4  Enables both regular and NFSv4 volume sharing
+```
+
 <a name="env-variables"></a>
 ##### Environment variables
 ```
 PX_HTTP_PROXY         [OPTIONAL] If running behind an HTTP proxy, set the PX_HTTP_PROXY variables to your HTTP proxy.
 PX_HTTPS_PROXY        [OPTIONAL] If running behind an HTTPS proxy, set the PX_HTTPS_PROXY variables to your HTTPS proxy.
 PX_ENABLE_CACHE_FLUSH [OPTIONAL] Enable cache flush deamon. Set PX_ENABLE_CACHE_FLUSH=true.
-PX_ENABLE_NFS         [OPTIONAL] Enable the PX NFS daemon. Set PX_ENABLE_NFS=true.
 ```
 
 {{<info>}} Setting environment variables can be done using the `-e` option{{</info>}}
