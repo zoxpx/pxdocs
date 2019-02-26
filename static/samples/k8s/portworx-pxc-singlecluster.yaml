@@ -305,17 +305,14 @@ spec:
       protocol: TCP
       port: 9001
       targetPort: 9001
-      nodePort: 30901
     - name: px-kvdb
       protocol: TCP
       port: 9019
       targetPort: 9019
-      nodePort: 30919
     - name: px-sdk
       protocol: TCP
       port: 9021
       targetPort: 9021
-      nodePort: 30921
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -840,7 +837,6 @@ spec:
       port: 9090
       protocol: TCP
       targetPort: web
-      nodePort: 30900
   selector:
     prometheus: prometheus
 ---
@@ -6889,7 +6885,6 @@ spec:
   type: NodePort
   ports:
     - port: 3000
-      nodePort: 30950
   selector:
     app: grafana
 ---
@@ -6991,10 +6986,8 @@ spec:
   ports:
     - name: http
       port: 80
-      nodePort: 32678
     - name: https
       port: 443
-      nodePort: 32679
   selector:
     tier: px-web-console
 ---

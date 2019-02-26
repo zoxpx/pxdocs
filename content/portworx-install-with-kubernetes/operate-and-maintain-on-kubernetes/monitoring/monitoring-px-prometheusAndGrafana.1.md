@@ -228,7 +228,6 @@ spec:
   type: NodePort
   ports:
   - name: web
-    nodePort: 30903
     port: 9093
     protocol: TCP
     targetPort: web
@@ -436,7 +435,6 @@ spec:
   type: NodePort
   ports:
   - name: web
-    nodePort: 30900
     port: 9090
     protocol: TCP
     targetPort: web
@@ -448,7 +446,18 @@ spec:
 
 ### Post Install verification
 
-Navigate to the Prometheus web UI by accessing the service over the `NodePort 30900` . You should be able to navigate to the `Targets` and `Rules` section of the Prometheus dashboard which lists the Portworx cluster endpoints as well as the Alerting rules as specified earlier.
+
+#### Prometheus access details
+
+Prometheus can be be accessed using a NodePort service.
+
+First get the node port that prometheus is using
+
+  ```text
+  kubectl get svc -n kube-system prometheus
+  ```
+
+Navigate to the Prometheus web UI by going to `http://<master_ip>:<service_nodeport>`. You should be able to navigate to the `Targets` and `Rules` section of the Prometheus dashboard which lists the Portworx cluster endpoints as well as the Alerting rules as specified earlier.
 
 ### Installing Grafana
 
@@ -475,7 +484,6 @@ spec:
   type: NodePort
   ports:
   - port: 3000
-    nodePort: 30950
   selector:
     app: grafana
 ---
@@ -533,7 +541,17 @@ spec:
 
 `kubectl apply -f grafana-deployment.yaml`
 
-Access the Grafana dashboard by navigating at the `Nodeport 30950`. You would need to create a datasource for the Portworx grafana dashboard metrics to be populated.
+#### Grafana access details
+
+Grafana can be be accessed using a NodePort service.
+
+First get the node port that grafana is using
+
+  ```text
+  kubectl get svc -n kube-system grafana
+  ```
+
+Access the Grafana dashboard by navigating to `http://<master_ip>:<service_nodeport>`. You would need to create a datasource for the Portworx grafana dashboard metrics to be populated.
 Navigate to Configurations --> Datasources.
 Create a datasource named `prometheus`. Enter the Prometheus endpoint as obtained in the install verification step for Prometheus from the above section.
 
