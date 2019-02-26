@@ -13,8 +13,6 @@ To know more about the supported secret providers and how to configure them with
 
 ## Creating and using encrypted volumes
 
-There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to PX.
-
 ### Using cluster wide secret key
 Cluster wide secret key is basically a key value pair where the value part is the secret that is used as a passphrase for encrypting volumes. A cluster wide secret key is a common key that can be used to encrypt all your volumes.
 
