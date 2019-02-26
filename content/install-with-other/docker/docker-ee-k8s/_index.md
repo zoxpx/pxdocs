@@ -13,6 +13,8 @@ This document explains how to install Portworx with Kubernetes on Docker EE 2.x.
 
 You must have Docker EE 2.x running with configured Kubernetes cluster.
 
+{{<info>}}**Non-Kubernetes users:** To install stand-alone Portworx on Docker EE 2.x follow this [doc](/install-with-other/docker/standalone/).{{</info>}}
+
 ## Install Docker EE 2.x
 
 Follow Docker documentation to install Docker EE 2.x https://docs.docker.com/install/linux/docker-ee/centos.
