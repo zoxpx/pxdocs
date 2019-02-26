@@ -6,6 +6,12 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.2.2
+
+### Key Fixes
+
+* PWX-7664 - When a node running 1.7 with empty journal log gets upgraded to 2.0 and the upgraded node is restarted, the node doesn't fully restart on next boot.
+
 ## 2.0.2.1
 
 ### Key Fixes
@@ -106,6 +112,10 @@ series: reference
 
   Workaround: This is a variant of the previous errata. 
   For volume with replication factor set to 1, Cloudsnap backup does not resume after the node with replica goes down.
+
+## 1.7.7
+
+* PWX-7315 - Fix a corner case where increasing the replication factor of a volume can take much longer when there are multiple levels of volume clones
 
 ## 1.7.6
 
