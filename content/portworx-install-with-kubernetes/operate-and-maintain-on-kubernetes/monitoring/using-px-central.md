@@ -69,19 +69,46 @@ Once the prerequisites are fulfilled, please follow the instructions below.
 
 This should setup the following:
 
-* a Portworx Cluster (including px-kvdb cluster)
+* A Portworx Cluster (including px-kvdb cluster)
 * 1 Grafana Instance
 * 1 Prometheus Instance
 * 1 Lighthouse Instance
 * 1 AlertManager instance
 
-Visit Lighthouse on `http://<master_ip>:32678`, login with admin/Password1 and the cluster should be visible.
+#### Lighthouse access details
 
-You can also view Prometheus on `http://<master_ip>:30900`, Grafana on `http://<master_ip>:30950`.
+* If you are running **on cloud**, Lighthouse can be be accessed using a LoadBalancer service.
+    * First get the external IP address that the lighthouse service is using
 
-{{<info>}}The port values above are true if using NodePort and will be different for LoadBalancer.{{</info>}}
+        ```text
+        kubectl get svc -n kube-system  px-lighthouse
+        ```
+    * Now go to `http://<external_ip>`
+* If you are running **on premise**, Lighthouse can be accessed using a NodePort service
+    * First get the node port that lighthouse is using
 
-* Lighthouse GUI can now be used to manage the Portworx cluster. 
+        ```text
+        kubectl get svc -n kube-system  px-lighthouse
+        ```
+    * Now go to `http://<master_ip>:<service_nodeport>`
+* The default login is admin/Password1
+
+#### Prometheus and Grafana access details
+
+Prometheus & Grafana can be be accessed using a NodePort service.
+
+* First get the node ports that prometheus and grafana are using
+
+    ```text
+    kubectl get svc -n kube-system prometheus
+    kubectl get svc -n kube-system grafana
+    ```
+* For Prometheus, go to `http://<master_ip>:<service_nodeport>`
+* For Grafana `http://<master_ip>:<service_nodeport>`.
+
+### Key features
+
+* Lighthouse GUI can be used to manage one or more Portworx clusters
 * Grafana and Prometheus have shortcuts from Lighthouse for easy access.
 * Prometheus will scrape the nodes for metrics.
 * AlertManager will notify using a set of default rules 
@@ -120,9 +147,24 @@ You will now have the following:
 * 1 Lighthouse Instance
 * 1 AlertManager instance
 
-Visit Lighthouse on `http://<master_ip>:<32768>`, login with admin/Password1 and the cluster should be visible. Note that the port values above are true if using NodePort and will be different for LoadBalancer.
+#### Lighthouse access details
 
-{{<info>}}The port values above are true if using NodePort and will be different for LoadBalancer.{{</info>}}
+* If you are running **on cloud**, Lighthouse can be be accessed using a LoadBalancer service.
+    * First get the external IP address that the lighthouse service is using
+
+        ```text
+        kubectl get svc -n kube-system  px-lighthouse
+        ```
+    * Now go to `http://<external_ip>`
+* If you are running **on premise**, Lighthouse can be accessed using a NodePort service
+    * First get the node port that lighthouse is using
+
+        ```text
+        kubectl get svc -n kube-system  px-lighthouse
+        ```
+    * Now go to `http://<master_ip>:<service_nodeport>`
+* The default login is admin/Password1
+
 
 * Prometheus will scrape the nodes
 * AlertManager will report issues based on our given rules
@@ -214,7 +256,7 @@ For customers with existing Portworx deployment, it will require the following s
     kubectl describe pod <lighthouse pod id> -n kube-system
     ```
 
-* Check IP and Port (port is 32678 if using NodePort and port is 80 if using Loadbalancer)
+* See "Lighthouse access details" on this page for details on how to access Lighthouse
 
 ### Unable to see metrics in Grafana?
 
