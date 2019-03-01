@@ -31,7 +31,7 @@ OPTIONS:
    --help, -h  show help
 ```
 
-**pxctl service audit**
+### pxctl service audit
 
 Audit the PX node
 
@@ -43,7 +43,7 @@ kvdb-limits	none	KV limits audit not yet available
 kvdb-response	none	KV response audit not yet available
 ```
 
-**pxctl service call-home**
+### pxctl service call-home
 
 You can use this command to enable and disable the call home feature
 
@@ -61,7 +61,7 @@ sudo /opt/pwx/bin/pxctl service call-home enable
 Call home feature successfully enabled
 ```
 
-**pxctl service diags**
+### pxctl service diags
 
 When there is an operational failure, you can use pxctl service diags &lt;name-of-px-container&gt; to generate a complete diagnostics package. This package will be automatically uploaded to Portworx. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /tmp/diags.tgz inside the PX container. You can use docker cp to extract the diagnostics package.
 
@@ -94,7 +94,7 @@ Getting diags files...
 Generated diags: /tmp/diags.tar.gz
 ```
 
-**pxctl service info**
+### pxctl service info
 
 Displays all Version info
 
@@ -105,7 +105,7 @@ PX (OCI) Build Version:  1d83ac2baeb27451222edcd543249dd2c2f941e4
 PX Kernel Module Version:  72D3C244593F45167A6B49D
 ```
 
-**pxctl service logs**
+### pxctl service logs
 
 Displays the pxctl logs on the system
 
@@ -118,7 +118,7 @@ USAGE:
    pxctl service logs [arguments...]
 ```
 
-**pxctl service kvdb**
+### pxctl service kvdb
 
 kvdb command is used for confguring kvdb
 
@@ -136,7 +136,7 @@ OPTIONS:
    restore      Restore keys and values into kvdb from a kvdb.dump file
 ```
 
-**pxctl service maintenance**
+### pxctl service maintenance
 
 Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc…
 
@@ -160,7 +160,7 @@ This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 ```
 
-**pxctl service drive**
+### pxctl service drive
 
 You can manage the physical storage drives on a node using the pxctl service drive sub menu.
 
@@ -202,7 +202,7 @@ Drive add  successful. Requires restart (Exit maintenance mode).
 
 To rebalance the storage across the drives, use pxctl service drive rebalance. This is useful after prolonged operation of a node.
 
-**pxctl service drive show**
+### pxctl service drive show
 
 You can use pxctl service drive show to display drive information on the server
 
@@ -218,7 +218,7 @@ Pool ID: 0
 	1: /dev/mapper/volume-e85a42ca, 1.0 GiB allocated of 100 GiB, Online
 ```
 
-**pxctl service email**
+### pxctl service email
 
 Email setting commands
 
@@ -235,7 +235,7 @@ COMMANDS:
      set       Configure email settings for alerts.
 ```
 
-**pxctl service scan**
+### pxctl service scan
 
 You can use pxctl service scan to scan for bad blocks on a drive
 
@@ -257,7 +257,7 @@ COMMANDS:
 
 ```
 
-**pxctl service node-wipe**
+### pxctl service node-wipe
 
 pxctl service node-wipe deletes all data related to Portworx from the node. It will also wipe the storage device that was provided to Portworx. This command can be run only when Portworx is stopped on the node. Run this command if a node needs to be re-initialized.
 
@@ -294,7 +294,7 @@ Removed PX footprint from device /dev/sdb.
 Wiped node successfully.
 ```
 
-**pxctl service pool**
+### pxctl service pool
 
 Pool maintenance
 
@@ -309,4 +309,25 @@ USAGE:
 COMMANDS:
    show      Show pools
    update    Update pool properties
+```
+
+### pxctl service pool update
+
+Updates the pool properties
+
+```text
+sudo pxctl service pool update --help
+```
+
+```
+Update pool properties
+
+Usage:
+  pxctl service pool update [flags]
+
+Flags:
+      --resize               extend pool to maximum available physical storage
+      --io_priority string   IO Priority (Valid Values: [high medium low]) (default "low")
+      --labels string        comma separated name=value pairs (default "NoLabel")
+  -h, --help                 help for update
 ```
