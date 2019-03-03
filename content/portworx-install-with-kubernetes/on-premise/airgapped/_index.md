@@ -33,7 +33,7 @@ This topic explains how to load these images onto your nodes when they don't hav
     ```
 3. (Optional) Copy images to airgapped node
 
-    If none of your cluster nodes have internet access, you will first need to copy over the images to one of the nodes using a tarball. Below command uses ssh to load the images on a node called _intranet-host_. Change the hostname as per your environment.
+    If none of your cluster nodes have internet access, you will first need to copy over the images to one of the nodes of your 'air-gapped' (intranet) cluster. Below command uses ssh to stream the images directly to the node called _intranet-host_. Please change the hostname as per your environment.
 
     ```text
     docker save $PX_IMGS $PX_ENT | ssh intranet-host docker load
