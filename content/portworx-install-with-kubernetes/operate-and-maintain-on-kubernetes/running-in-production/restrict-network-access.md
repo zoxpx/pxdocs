@@ -81,6 +81,8 @@ spec:
           port: 8099
 ```
 
+{{<info>}} The `ports` section above is a whitelist of ports you want to give access to pods that are not selected by the `podSelector`. Users are expected to add additional ports they wish to grant accesss.{{</info>}}
+
 Apply the following NetworkPolicy in each namespace you have user pods. This will block traffic to Portworx ports 9001 to 9022 on the host network from all pods in the namespace the policy is applied in.
 
 Replace `70.0.0.0/16` with the subnet of your Kubernetes worker nodes.
@@ -101,51 +103,4 @@ spec:
             cidr: 0.0.0.0/0
             except:
             - 70.0.0.0/16
-      ports:
-        - protocol: TCP
-          port: 9001
-        - protocol: TCP
-          port: 9002
-        - protocol: TCP
-          port: 9003
-        - protocol: TCP
-          port: 9004
-        - protocol: TCP
-          port: 9005
-        - protocol: TCP
-          port: 9006
-        - protocol: TCP
-          port: 9007
-        - protocol: TCP
-          port: 9008
-        - protocol: TCP
-          port: 9009
-        - protocol: TCP
-          port: 9010
-        - protocol: TCP
-          port: 9011
-        - protocol: TCP
-          port: 9012
-        - protocol: TCP
-          port: 9013
-        - protocol: TCP
-          port: 9014
-        - protocol: TCP
-          port: 9015
-        - protocol: TCP
-          port: 9015
-        - protocol: TCP
-          port: 9016
-        - protocol: TCP
-          port: 9017
-        - protocol: TCP
-          port: 9018
-        - protocol: TCP
-          port: 9019
-        - protocol: TCP
-          port: 9020
-        - protocol: TCP
-          port: 9021
-        - protocol: TCP
-          port: 9022
 ```
