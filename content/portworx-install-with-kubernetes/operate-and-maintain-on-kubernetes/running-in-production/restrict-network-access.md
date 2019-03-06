@@ -1,7 +1,7 @@
 ---
 title: Restrict network access
 keywords: portworx, Kubernetes, network policy
-description: Instructions on how to restrict network access to the Portworx API in Kubernetes
+description: Securing Portworx API endpoints with Kubernetes Network Policies
 weight: 5
 noicon: true
 hidden: true
