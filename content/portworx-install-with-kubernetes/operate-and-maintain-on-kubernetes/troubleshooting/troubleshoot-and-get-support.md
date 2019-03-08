@@ -78,6 +78,9 @@ We are always available on Slack. Join us! [![Slack](/img/slack.png)](http://sla
   * Run `curl <etcd_location>/version` from each node to ensure reachability. For e.g `curl http://192.168.33.10:2379/version`
 * If you deployed etcd as a Kubernetes service, use the ClusterIP instead of the kube-dns name. Portworx nodes cannot resolve kube-dns entries since px containers are in the host network.
 
+### Internal Kvdb
+* In an event of a disaster where, internal kvdb is in an unrecoverable error state follow this [doc](/concepts/internal-kvdb#backup) to recover your Portworx cluster
+
 ### Portworx cluster {#portworx-cluster}
 
 * Ports 9001 - 9022 must be open for internal network traffic between nodes running PX. Without this, px cluster nodes will not be able to communicate and cluster will be down.
