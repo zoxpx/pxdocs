@@ -108,6 +108,28 @@ Status:
     kubectl get volumesnapshot <volume-snapshot-name> -o yaml
     ```
 
+### Retries of group cloud snapshots
+
+If a cloud groupvolumesnapshot fails to trigger, it will be retried. However, by default, if a cloud groupvolumesnapshot fails after it has been triggered/started **successfully**, it will be marked as Failed and will not be retried
+
+If you want to change this behavior, you can set the `maxRetries` field in the spec. In below example, we will perform 3 retries on failures.
+
+```yaml
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: GroupVolumeSnapshot
+metadata:
+  name: cassandra-group-cloudsnapshot
+spec:
+  pvcSelector:
+    matchLabels:
+      app: cassandra
+  maxRetries: 3
+  options:
+    portworx/snapshot-type: cloud
+```
+
+When maxRetries are enabled, `NumRetries` in the status of the groupvolumesnapshot will indicate the number of retries performed.
+
 ### Snapshots across namespaces
 
 When creating a group snapshot, you can specify a list of namespaces to which the group snapshot can be restored. Below is an example of a group cloud snapshot which can be restored into prod-01 and prod-02 namespaces.
