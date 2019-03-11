@@ -109,7 +109,7 @@ sudo /opt/pwx/bin/px-runc install -sysd /dev/null -c MY_CLUSTER_ID \
 Since the Amazon ECS systems do not have the `systemd` service available, we will need to start Portworx service via the custom init-script:
 
 ```bash
-sudo curl https://docs.portworx.com/cloud/aws/portworx-sysvinit.sh -o /etc/rc.d/init.d/portworx
+sudo curl https://docs.portworx.com/install-with-other/ecs/portworx-sysvinit.sh -o /etc/rc.d/init.d/portworx
 sudo chmod 755 /etc/rc.d/init.d/portworx
 sudo chkconfig --add portworx
 sudo service portworx start
