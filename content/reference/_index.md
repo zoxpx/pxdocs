@@ -1,6 +1,6 @@
 ---
 title: Portworx Reference
-weight: 98
+weight: 8
 series: top
 icon: /img/banner__prerequisites.png
 description: General reference for CLI, API, SDK and other resources
