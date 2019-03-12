@@ -437,12 +437,124 @@ You can delete backups from the cloud using the `/opt/pwx/bin/pxctl cloudsnap de
 
 Only cloudsnaps which do not have any dependant cloudsnaps (ie incrementals) can be deleted. If there are dependant cloudsnaps then the command will throw an error with the list of cloudsnaps that need to be deleted first.
 
-For example to delete the backup `pqr9-cl1/538316104266867971-807625803401928868`:
+{{<info>}} Starting with PX version 1.7.8 and 2.1, Delete requests are queued and processed in the background. Since querying cloud to figure out dependent backups can take a while, user requests to delete the backups are added to a queue and immediate response is returned to the user. If a cloud backup could not be deleted because of other dependent backups, an alert is logged and this will be deleted when all other dependent backups are deleted by the user.{{</info>}}
+
+An example to delete the backup `pqr9-cl1/538316104266867971-807625803401928868` is below:
 
 ```text
-# pxctl cloudsnap delete --snap pqr9-cl1/538316104266867971-807625803401928868
+pxctl cloudsnap delete --snap pqr9-cl1/538316104266867971-807625803401928868
+```
+```
 Cloudsnap deleted successfully
-# pxctl cloudsnap list
+pxctl cloudsnap list
 SOURCEVOLUME 	CLOUD-SNAP-ID					CREATED-TIME			STATUS
 dvol		pqr9-cl1/520877607140844016-50466873928636534	Fri, 07 Apr 2017 20:22:43 UTC	Done
+```
+
+### Cloud Backup schedules
+
+Cloud Backup schedules allow backups to be uploaded to cloud at periodic intervals of time. These schedules can be managed through `pxctl`
+
+```text
+pxctl cloudsnap schedules --help
+```
+```
+Manage schedules for cloud-snaps
+
+Usage:
+  pxctl cloudsnap schedules [flags]
+  pxctl cloudsnap schedules [command]
+
+Aliases:
+  schedules, sched
+
+Available Commands:
+  create       Create a cloud-snap schedule
+  delete       Delete a cloud-snap schedule
+  list         List the configured cloud-snap schedules
+
+Flags:
+  -h, --help   help for schedules
+
+Global Flags:
+  --ca string        path to root certificate for ssl usage
+  --cert string      path to client certificate for ssl usage
+  --color            output with color coding
+  --config string    config file (default is $HOME/.pxctl.yaml)
+  --context string   context name that overrides the current auth context
+  -j, --json             output in json
+  --key string       path to client key for ssl usage
+  --raw              raw CLI output for instrumentation
+  --ssl              ssl enabled for portworx
+
+  Use "pxctl cloudsnap schedules [command] --help" for more information about a command.
+```
+
+### Creating a Cloud Backup Schedule
+
+```text
+pxctl cloudsnap schedules create  --help
+```
+```
+Create a cloud-snap schedule
+
+Usage:
+  pxctl cloudsnap schedules create [flags]
+
+  Aliases:
+    create, c
+
+Flags:
+  -f, --full              Force scheduled backups to be full always
+  -v, --volume string     Volume ID to set the cloud-snap schedule
+  -p, --periodic string   Cloudsnap interval in minutes (default "0")
+  --cred-id string    Cloud credentials ID to be used for the backup
+  -x, --max uint          Maximum number of cloud snaps to maintain, default 7 (default 7)
+  -d, --daily strings     Daily snapshot at specified hh:mm (UTC)
+  -w, --weekly strings    Weekly snapshot at specified weekday@hh:mm (UTC)
+  -m, --monthly strings   Monthly snapshot at specified day@hh:mm (UTC)
+  -h, --help              help for create
+
+Global Flags:
+  --ca string        path to root certificate for ssl usage
+  --cert string      path to client certificate for ssl usage
+  --color            output with color coding
+  --config string    config file (default is $HOME/.pxctl.yaml)
+  --context string   context name that overrides the current auth context
+  -j, --json             output in json
+  --key string       path to client key for ssl usage
+  --raw              raw CLI output for instrumentation
+  --ssl              ssl enabled for portworx
+```
+
+The following example creates a daily schedule that retains maximum of 15 backups in the cloud. `--max` parameter indicates number of backups to retain in cloud. Most recent `--max` number of backups are retained and older backups are deleted periodically. Note that sometime while listing cloud backups you may see more than `--max` number of backups and this is due to incremental nature of backups. We may need to retain more than `--max` backups in order to allow `--max` backups to be restored at any given time.
+
+```text
+ pxctl cloudsnap schedules create testVol --daily 21:00 --max 15 --cred-id cc84ef11-6d94-4c20-b4b9-01615119a442
+ ```
+ ```
+ Cloudsnap schedule created successfully
+```
+
+### Listing Cloud Backup Schedules
+Currently configured backup schedules can be listed using following pxctl command.
+
+```text
+pxctl cloudsnap schedules list
+```
+```
+UUID						VOLUMEID			MAX-BACKUPS		FULL		SCHEDULE(UTC)
+078557a3-26c7-49b1-9822-34e6f816c2d1		648038464574631167		15			false		daily @21:00
+```
+
+
+### Deleting a Cloud Backup Schedule
+Backup schedules can be deleted using following pxctl command.
+
+```text
+pxctl cloudsnap schedules  delete --uuid 078557a3-26c7-49b1-9822-34e6f816c2d1
+```
+
+```
+Cloudsnap schedule deleted successfully
 ```
