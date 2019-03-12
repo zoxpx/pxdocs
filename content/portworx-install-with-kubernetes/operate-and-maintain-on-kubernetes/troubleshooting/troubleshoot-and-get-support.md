@@ -1,8 +1,10 @@
 ---
-title: Troubleshoot and Get Support
+title: Troubleshoot Portworx on Kubernetes
+linkTitle: Troubleshoot and Get Support
 weight: 3
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, debug, troubleshoot
-description: For troubleshooting PX on Kubernetes, Portworx can help. Read this article for details about how to resolve your issue today.
+description: Useful information for troubleshooting Portworx on Kubernetes
+series: support
 ---
 
 ### Useful commands {#useful-commands}
@@ -145,45 +147,3 @@ If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/servic
 * This issue is fixed in Tectonic 1.6.7. So if are using a version equal or higher, this does not apply to you.
 * [Tectonic](https://coreos.com/tectonic/) is deploying the Kubernetes controller manager in the docker `none` network. As a result, when the controller manager invokes a call on `http://localhost:9001` to portworx to create a new volume, this results in the connection refused error since controller manager is not in the host network. This issue is observed when using dynamically provisioned Portworx volumes using a StorageClass. If you are using pre-provisioned volumes, you can ignore this issue.
 * To workaround this, you need to set `hostNetwork: true` in the spec file `modules/bootkube/resources/manifests/kube-controller-manager.yaml` and then run the tectonic installer to deploy kubernetes.
-* Here is a sample [kube-controller-manager.yaml](https://gist.github.com/harsh-px/106a23b702da5c86ac07d2d08fd44e8d) after the workaround.
-
-
-### Support Welcome
-
-Thank you for being a valued Portworx customer.   
-At Portworx we are committed to your success and to offering you the best possible customer experience.
-
-At Portworx, customer responsiveness is our highest priority.
-We offer a number of ways for you to connect directly with our Engineers, Architects and Support Team.
-
-## Slack
-We offer private slack channels, per company/site.   Slack channels offer the most immediate way to
-interact with the Portworx Team.    All interaction on the private slack channels are strictly between
-Portworx and the customer company/site.
-
-To obtain a private slack channel, please send the name of your company/site and the
-email addresses of your team to "support@portworx.com".   You will be notified by email on how to activate.
-
-## Portworx Support Portal (PSP)
-We have a Portworx Support Portal (PSP) that is maintained through Atlassian/Jira.
-Using the PSP offers a way to open support cases to report product defects
-or product feature requests.
-
-For customers that do not enable Slack access through their corporate firewall, please use PSP
-as the primary support mechanism.
-
-To obtain access to the PSP, please send the name of your company/site and the
-email addresses of your team to "support@portworx.com".   You will be notified by email on how to activate.
-
-## Support Email Alias
-We can also maintain support through a general purpose support email alias : "support@portworx.com".
-Access to the support email alias is open, unfiltered and unmoderated.
-
-## Phone Support
-We also offer Phone Support by calling our Support Hotline at +1 (650) 397-8535
-Phone Support is available on a 24x7 basis
-
-Please do not hesitate to engage with us for any problems, issues, questions or requests you may have.
-Again, your customer experience is our highest priority.   
-
-Thank you for choosing Portworx.
