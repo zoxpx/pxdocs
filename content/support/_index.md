@@ -16,7 +16,7 @@ At Portworx, customer responsiveness is our highest priority. We offer a number 
 
 ## Discussion forum
 
-forums.portworx.com is a great community resource where you can share your experience on running and managing Kubernetes and other orchestrators with Portworx, learn about common challenges other users are facing and help other community members with your experience. 
+<https://forums.portworx.com> is a great community resource where you can share your experience on running and managing Kubernetes and other orchestrators with Portworx, learn about common challenges other users are facing and help other community members with your experience. 
 
 Portworx also uses this forum to get direct customer feedback on how we can make our product work to meet your needs and broadcast product updates and new features.
 
