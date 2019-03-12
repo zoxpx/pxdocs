@@ -39,12 +39,11 @@ We are always available on Slack. Join us! [![Slack](/img/slack.png)](http://sla
 
 We also offer private slack channels, per company/site. Slack channels offer the most immediate way to interact with the Portworx Team. All interaction on the private slack channels are strictly between Portworx and the customer company/site.
 
-To obtain a private slack channel, please send the name of your company/site and the email addresses of your team to "support@portworx.com".   You will be notified by email on how to activate.
+To obtain a private slack channel, please send the name of your company/site and the email addresses of your team to "support@portworx.com". You will be notified by email on how to activate.
 
 ## Support Email Alias
 
 We can also maintain support through a general purpose support email alias : "support@portworx.com".
-Access to the support email alias is open, unfiltered and unmoderated.
 
 ## Other support pages
 
