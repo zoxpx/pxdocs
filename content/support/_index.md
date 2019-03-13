@@ -43,7 +43,7 @@ To obtain a private slack channel, please send the name of your company/site and
 
 ## Support Email Alias
 
-We can also maintain support through a general purpose support email alias : "support@portworx.com".
+We also offer email support through  our support mailing list - support@portworx.com.
 
 ## Other support pages
 
