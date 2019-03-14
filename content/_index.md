@@ -17,3 +17,11 @@ Portworx is a software defined storage overlay that allows you to
 
 Based on your environment, proceed to one of the below sections.
 {{<homelist series="top">}}
+
+---
+
+## Stateful Applications
+
+Portworx can be used to provide container storage for a huge range of stateful applications, dev tools, and content management systems. The following application reference architectures provide deployment guidance for common stateful applications.
+
+[![PostgreSQL Logo](/apps/postgresql.png)]({{< relref "applications/postgres.md" >}}) ![MongoDB Logo](/apps/mongo.png)
