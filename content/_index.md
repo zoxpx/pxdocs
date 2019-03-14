@@ -24,4 +24,4 @@ Based on your environment, proceed to one of the below sections.
 
 Portworx can be used to provide container storage for a huge range of stateful applications, dev tools, and content management systems. The following application reference architectures provide deployment guidance for common stateful applications.
 
-[![PostgreSQL Logo](/apps/postgresql.png)]({{< relref "applications/postgres.md" >}}) ![MongoDB Logo](/apps/mongo.png)
+[![PostgreSQL Logo](/apps/postgresql.png)]({{< relref "applications/postgres.md" >}}) [![MongoDB Logo](/apps/mongo.png)]({{< relref "applications/mongo.md" >}})
