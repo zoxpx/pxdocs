@@ -74,6 +74,74 @@ parameters:
 
 
 ### Manifest deployment
-When deploying Postgres with a mainfest
+When deploying Postgres with a manifest the most common options are as a deployment type or a stateful set. We have covered the different deployment architectures above. Here follows an example deployment manifest for PostgreSQL making use of Portworx volumes. Note that this manifest requires that the storage-class above exists.
 
-### Helkm chart deployment
+```yaml
+##### Portworx persistent volume claim
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+   name: postgres-data
+   annotations:
+     volume.beta.kubernetes.io/storage-class: px-ha-sc
+spec:
+   accessModes:
+     - ReadWriteOnce
+   resources:
+     requests:
+       storage: 1Gi
+---
+##### Postgres deployment
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      schedulerName: stork    
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: px/enabled
+                operator: NotIn
+                values:
+                - "false"
+      containers:
+      - name: postgres
+        image: postgres:9.5
+        imagePullPolicy: "IfNotPresent"
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: pgbench
+        - name: POSTGRES_PASSWORD
+          value: superpostgres
+        - name: PGBENCH_PASSWORD
+          value: superpostgres
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgredb
+      volumes:
+      - name: postgredb
+        persistentVolumeClaim:
+          claimName: postgres-data
+```
+Note: please use serets instead of plain text passwords. The above is an example only.
+
+### Helm chart deployment
+An alternative to manifest based deployment is to use a Helm chart. Again, this method assumes the storage class already exists.
