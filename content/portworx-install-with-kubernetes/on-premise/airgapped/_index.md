@@ -47,31 +47,7 @@ Otherwise, follow [Step 2b: Push directly to nodes using tarball](#step-2b-push-
 
 ### Step 2a: Push to local registry server, accessible by air-gapped nodes
 
-1. Export your registry location:
-
-    ```text
-    export REGISTRY=myregistry.net:5443
-    ```
-{{<info>}} The registry location above can be a registry and it's port (e.g _myregistry.net:5443_) or it could include your own repository in the registry (e.g _myregistry.net:5443/px-images_).
-{{</info>}}
-
-2. Push it to the above registry.
-
-    ```text
-    # Trim trailing slashes:
-    REGISTRY=${$(echo $REGISTRY | tr -s /)%/}
-    # re-tag and push into custom/local registry defined previously
-    # Check if using custom registry+repository (e.g. `REGISTRY=myregistry.net:5443/px-images`)
-    # or just the registry (e.g. `REGISTRY=myregistry.net:5443`)
-    echo $REGISTRY | grep -q /
-    if [ $? -eq 0 ]; then
-        # registry + repo are used -- we'll strip original image repositories
-        for i in $PX_IMGS $PX_ENT; do tg="$REGISTRY/$(basename $i)" ; docker pull $i; docker tag $i $tg ; docker push $tg ; done
-    else
-        # only registry used -- we'll keep original image repositories
-        for i in $PX_IMGS $PX_ENT; do tg="$REGISTRY/$i" ; docker pull $i; docker tag $i $tg ; docker push $tg ; done
-    fi
-    ```
+{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-local-reg.md" %}}
 
 Now that you have the images in your registry, continue with [Step 3: Installing Portworx](#step-3-installing-portworx).
 
@@ -79,25 +55,9 @@ Since you are using your own custom registry, ensure that you specify it in the 
 
 ### Step 2b: Push directly to nodes using tarball
 
-Below steps save all Portworx images into a tarball after which they can be loaded onto nodes individually.
+{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-nodes-tarball.md" %}}
 
-1. Save all Portworx images into a tarball called _px-offline.tar_.
-
-    ```text
-    docker save -o px-offline.tar $PX_IMGS $PX_ENT
-    ```
-
-2. Load images from tarball
-
-    You can load all images from the tarball on a node using `docker load` command. Below command uses ssh on nodes _node1_, _node2_ and _node3_ to copy the tarball and load it. Change the node names as per your environment.
-
-    ```text
-    for no in node1 node2 node3; do
-        cat px-offline.tar | ssh $no docker load
-    done
-    ```
-
-    {{<info>}}When using this method, specifiy Image Pull Policy as **IfNotPresent** on the "Registry and Image Settings" page when generating the Portworx spec.{{</info>}}
+{{<info>}}When using this method, specify Image Pull Policy as **IfNotPresent** on the "Registry and Image Settings" page when generating the Portworx spec.{{</info>}}
 
 ## Step 3: Installing Portworx
 
