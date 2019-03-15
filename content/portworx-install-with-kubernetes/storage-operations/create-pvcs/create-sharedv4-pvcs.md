@@ -22,7 +22,7 @@ To edit an existing Portworx installation run the following commands:
 
 Create a patch file
 
-```yaml
+```text
 cat <<EOF> patch.yaml
 spec:
   template:
@@ -31,7 +31,7 @@ spec:
       - name: portworx
         env:
           - name: ENABLE_SHARED_AND_SHARED_v4
-            value: true
+            value: "true"
 EOF
 ```
 
@@ -39,7 +39,6 @@ Patch the daemon set
 
 ```
 kubectl -n kube-system patch ds portworx --patch "$(cat patch.yaml)" --type=strategic
-
 ```
 
 After updating the daemon set, all the Portworx pods will restart. Once all the Portworx pods are restarted then you can start using sharedv4 volumes.
