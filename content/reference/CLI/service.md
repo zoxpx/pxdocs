@@ -7,7 +7,10 @@ weight: 9
 ---
 
 ```text
-sudo /opt/pwx/bin/pxctl service --help
+/opt/pwx/bin/pxctl service --help
+```
+
+```
 NAME:
    pxctl service - Service mode utilities
 
@@ -36,7 +39,10 @@ OPTIONS:
 Audit the PX node
 
 ```text
-sudo /opt/pwx/bin/pxctl service audit
+/opt/pwx/bin/pxctl service audit
+```
+
+```
 AuditID		Error	Message
 kvdb-limits	none	KV limits audit not yet available
 
@@ -48,7 +54,10 @@ kvdb-response	none	KV response audit not yet available
 You can use this command to enable and disable the call home feature
 
 ```text
-sudo /opt/pwx/bin/pxctl service call-home --help
+/opt/pwx/bin/pxctl service call-home --help
+```
+
+```
 NAME:
    pxctl service call-home - Enable or disable the call home feature
 
@@ -57,16 +66,22 @@ USAGE:
 ```
 
 ```text
-sudo /opt/pwx/bin/pxctl service call-home enable
+/opt/pwx/bin/pxctl service call-home enable
+```
+
+```
 Call home feature successfully enabled
 ```
 
 ### pxctl service diags
 
-When there is an operational failure, you can use pxctl service diags &lt;name-of-px-container&gt; to generate a complete diagnostics package. This package will be automatically uploaded to Portworx. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /tmp/diags.tgz inside the PX container. You can use docker cp to extract the diagnostics package.
+When there is an operational failure, you can use pxctl service diags &lt;name-of-px-container&gt; to generate a complete diagnostics package. This package will be automatically uploaded to Portworx if `--upload` is specified. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /var/cores/diags.tgz inside the PX container.
 
 ```text
-sudo /opt/pwx/bin/pxctl service diags --help
+/opt/pwx/bin/pxctl service diags --help
+```
+
+```
 NAME:
    pxctl service diags - creates a new tgz package with minimal essential diagnostic information.
 
@@ -87,7 +102,10 @@ OPTIONS:
 ```
 
 ```text
-sudo /opt/pwx/bin/pxctl service diags --container px-enterprise
+/opt/pwx/bin/pxctl service diags --container px-enterprise
+```
+
+```
 PX container name provided:  px-enterprise
 INFO[0000] Connected to Docker daemon.  unix:///var/run/docker.sock
 Getting diags files...
@@ -99,23 +117,13 @@ Generated diags: /tmp/diags.tar.gz
 Displays all Version info
 
 ```text
-sudo /opt/pwx/bin/pxctl service info
+/opt/pwx/bin/pxctl service info
+```
+
+```
 PX (OCI) Version:  2.0.2.1-1d83ac2
 PX (OCI) Build Version:  1d83ac2baeb27451222edcd543249dd2c2f941e4
 PX Kernel Module Version:  72D3C244593F45167A6B49D
-```
-
-### pxctl service logs
-
-Displays the pxctl logs on the system
-
-```text
-sudo /opt/pwx/bin/pxctl service logs --help
-NAME:
-   pxctl service logs - Display PX logs
-
-USAGE:
-   pxctl service logs [arguments...]
 ```
 
 ### pxctl service kvdb
@@ -123,7 +131,10 @@ USAGE:
 kvdb command is used for confguring kvdb
 
 ```text
-sudo /opt/pwx/bin/pxctl service kvdb --help
+/opt/pwx/bin/pxctl service kvdb --help
+```
+
+```
 NAME:
    pxctl service kvdb - PX Kvdb operations
 
@@ -141,7 +152,10 @@ OPTIONS:
 Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc…
 
 ```text
-sudo /opt/pwx/bin/pxctl service maintenance --help
+/opt/pwx/bin/pxctl service maintenance --help
+```
+
+```
 NAME:
    pxctl service maintenance - Maintenance mode operations
 
@@ -155,7 +169,10 @@ OPTIONS:
 ```
 
 ```text
-sudo /opt/pwx/bin/pxctl service maintenance --enter
+/opt/pwx/bin/pxctl service maintenance --enter
+```
+
+```
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 ```
@@ -165,7 +182,10 @@ Are you sure you want to proceed ? (Y/N): y
 You can manage the physical storage drives on a node using the pxctl service drive sub menu.
 
 ```text
-sudo /opt/pwx/bin/pxctl service drive
+/opt/pwx/bin/pxctl service drive
+```
+
+```
 NAME:
    pxctl service drive - Storage drive maintenance
 
@@ -186,7 +206,10 @@ OPTIONS:
 You can add drives to a server using the /opt/pwx/bin/pxctl service drive add command. To do so the server must be in maintenance mode.
 
 ```text
-sudo /opt/pwx/bin/pxctl service drive add --help
+/opt/pwx/bin/pxctl service drive add --help
+```
+
+```
 NAME:
    pxctl service drive add - Add storage
 
@@ -195,7 +218,10 @@ USAGE:
 ```
 
 ```text
-sudo /opt/pwx/bin/pxctl service drive add /dev/mapper/volume-3bfa72dd
+/opt/pwx/bin/pxctl service drive add /dev/mapper/volume-3bfa72dd
+```
+
+```
 Adding device  /dev/mapper/volume-3bfa72dd ...
 Drive add  successful. Requires restart (Exit maintenance mode).
 ```
@@ -207,7 +233,10 @@ To rebalance the storage across the drives, use pxctl service drive rebalance. T
 You can use pxctl service drive show to display drive information on the server
 
 ```text
-sudo /opt/pwx/bin/pxctl service drive show
+/opt/pwx/bin/pxctl service drive show
+```
+
+```
 PX drive configuration:
 Pool ID: 0
 	IO_Priority: LOW
@@ -223,7 +252,10 @@ Pool ID: 0
 Email setting commands
 
 ```text
-sudo /opt/pwx/bin/pxctl service email
+/opt/pwx/bin/pxctl service email
+```
+
+```
 NAME:
    pxctl service email
 
@@ -240,7 +272,10 @@ COMMANDS:
 You can use pxctl service scan to scan for bad blocks on a drive
 
 ```text
-sudo /opt/pwx/bin/pxctl service scan
+/opt/pwx/bin/pxctl service scan
+```
+
+```
 NAME:
    pxctl service scan - scan for bad blocks
 
@@ -266,7 +301,10 @@ pxctl service node-wipe deletes all data related to Portworx from the node. It w
 {{</info>}}
 
 ```text
-sudo /opt/pwx/bin/pxctl service node-wipe --help
+/opt/pwx/bin/pxctl service node-wipe --help
+```
+
+```
 NAME:
    pxctl service node-wipe - Wipes PX configuration data on this node
 
@@ -281,7 +319,10 @@ OPTIONS:
 Here is an example:
 
 ```text
-sudo /opt/pwx/bin/pxctl service node-wipe
+/opt/pwx/bin/pxctl service node-wipe
+```
+
+```
 This is a distruptive operation.
 It will delete all PX configuration files from this node. Data on the storage disks attached on this node will be irrevocably deleted.
 Are you sure you want to proceed ? (Y/N): y
@@ -299,7 +340,10 @@ Wiped node successfully.
 Pool maintenance
 
 ```text
-sudo /opt/pwx/bin/pxctl service pool
+/opt/pwx/bin/pxctl service pool
+```
+
+```
 NAME:
    pxctl service pool - Storage pool maintenance
 
@@ -316,7 +360,7 @@ COMMANDS:
 Updates the pool properties
 
 ```text
-sudo pxctl service pool update --help
+/opt/pwx/bin/pxctl service pool update --help
 ```
 
 ```
