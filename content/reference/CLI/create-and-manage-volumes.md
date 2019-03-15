@@ -8,31 +8,52 @@ weight: 12
 To create and manage volumes, use `pxctl volume`. You can use the created volumes directly with Docker with the `-v` option.
 
 ```text
-/opt/pwx/bin/pxctl volume help
-NAME:
-   pxctl volume - Manage volumes
+/opt/pwx/bin/pxctl volume -h
+```
 
-USAGE:
-   pxctl volume [global options] command [command options] [arguments...]
+```
+Manage volumes
 
-COMMANDS:
-     create, c                   Create a volume
-     list, l                     List volumes in the cluster
-     update                      Update volume settings
-     ha-update, u                Update volume HA level
-     snap-interval-update, snap  Update volume configuration
-     inspect, i                  Inspect a volume
-     requests                    Show all pending requests
-     delete, d                   Delete a volume
-     stats, st                   Volume Statistics
-     alerts, a                   Show volume related alerts
-     import                      Import data into a volume
-     clone, cl                   Create a clone volume
-     restore, r                  Restore volume from snapshot
-     snapshot, s                 Manage volume snapshots
+Usage:
+  pxctl volume [flags]
+  pxctl volume [command]
 
-GLOBAL OPTIONS:
-   --help, -h  show help
+Aliases:
+  volume, v
+
+Examples:
+pxctl volume create -s 100 myVolName
+
+Available Commands:
+  clone                Create a clone volume
+  create               Create a volume
+  delete               Delete a volume
+  ha-update            Update volume HA level
+  import               Import data into a volume
+  inspect              Inspect a volume
+  list                 List volumes in the cluster
+  locate               Locate volume
+  requests             Show all pending requests
+  restore              Restore volume from snapshot
+  snap-interval-update Update volume configuration
+  snapshot             Manage volume snapshots
+  stats                Volume Statistics
+  update               Update volume settings
+  usage                Show volume usage information
+
+Flags:
+  -h, --help   help for volume
+
+Global Flags:
+      --ca string       path to root certificate for ssl usage
+      --cert string     path to client certificate for ssl usage
+      --color           output with color coding
+      --config string   config file (default is $HOME/.pxctl.yaml)
+  -j, --json            output in json
+      --key string      path to client key for ssl usage
+      --port string     Portworx Management port (default: 9001)
+      --raw             raw CLI output for instrumentation
+      --ssl             ssl enabled for portworx
 ```
 
 ### Create volumes {#create-volumes}
@@ -51,7 +72,10 @@ A volume can be created before use by its container or by the container directly
 Example of creating a volume through `pxctl`, where the volume ID is returned:
 
 ```text
-pxctl volume create foobar
+/opt/pwx/bin/pxctl volume create myVol
+```
+
+```
 3903386035533561360
 ```
 
@@ -71,6 +95,9 @@ Show the available options through the –help command, as shown below:
 
 ```text
 /opt/pwx/bin/pxctl volume create -h
+```
+
+```
 NAME:
    pxctl volume create - Create a volume
 USAGE:
@@ -139,7 +166,7 @@ The above command will create a volume called demovolume with an initial size of
 
 Each spec key must be comma separated. The following are supported key value pairs:
 
-```text
+```
 IO priority      - io_priority=[high|medium|low]
 Volume size      - size=[1..9][G|M|T]
 HA factor        - repl=[1,2,3]
@@ -152,7 +179,7 @@ snap_schedule    - "periodic=mins#k;daily=hh:mm#k;weekly=weekday@hh:mm#k;monthly
 
 These inline specs can be passed in through the scheduler application template. For example, below is a snippet from a marathon configuration file:
 
-```text
+```
 "parameters": [
 	{
 		"key": "volume-driver",
@@ -168,18 +195,51 @@ These inline specs can be passed in through the scheduler application template. 
 
 To use Portworx volumes across nodes and multiple containers, [click here](/concepts/shared-volumes).
 
+### Delete volumes {#delete-volumes}
+
+Volumes can be deleted with:
+
+```text
+/opt/pwx/bin/pxctl volume delete myOldVol
+```
+
+```
+Delete volume 'myOldVol', proceed ? (Y/N): y
+Volume myOldVol successfully deleted.
+```
+
+### Import volumes {#import-volumes}
+
+Files can be imported from a directory into an existing volume. Files already existing on the volume will be retained or overwritten.
+
+```text
+/opt/pwx/bin/pxctl volume import --src /path/to/files myVol
+```
+
+```
+Starting import of  data from /path/to/files into volume myVol...Beginning data transfer from /path/to/files myVol
+Imported Bytes :   0% [>---------------------------------------------------------------------------------------------------------------------------------------] 14ms
+Imported Files :   0% [>---------------------------------------------------------------------------------------------------------------------------------------] 16ms
+
+Volume imported successfully
+```
+
 ### Inspect volumes {#inspect-volumes}
 
 Volumes can be inspected for their settings and usage using the `pxctl volume inspect` sub menu.
 
 ```text
 /opt/pwx/bin/pxctl volume inspect clitest
+```
+
+```
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
 	Format          	 :  ext4
 	HA              	 :  1
 	IO Priority     	 :  LOW
+	Creation time   	 :  Feb 26 16:29:53 UTC 2019
 	Shared          	 :  no
 	Status          	 :  up
 	State           	 :  detached
@@ -194,6 +254,7 @@ Volume	:  970758537931791410
 	Replica sets on nodes:
 		Set  0
 			Node 	 :  10.99.117.133
+	Replication Status	 :  Detached
 ```
 
 You can also inspect multiple volumes in one command.
@@ -204,6 +265,9 @@ Following is a sample output of the json volume inspect.
 
 ```text
 /opt/pwx/bin/pxctl -j v i 486256711004992211
+```
+
+```
 [{
  "id": "486256711004992211",
  "source": {
@@ -292,14 +356,47 @@ Following is a sample output of the json volume inspect.
 }]
 ```
 
+### Volume list {#volume-list}
+
+This will list all of the volumes on the cluster.
+
+```text
+/opt/pwx/bin/pxctl volume list
+```
+
+```
+ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS				SNAP-ENABLED
+951679824907051932	objectstorevol	10 GiB	1	no	no		LOW		up - attached on 192.168.99.101	no
+810987143668394709	testvol		1 GiB	1	no	no		LOW		up - detached			no
+1047941676033657203	testvol2	1 GiB	1	no	no		LOW		up - detached			no
+800735594334174869	testvol3	1 GiB	1	no	no		LOW		up - detached			no
+```
+
+### Volume locate {#volume-locate}
+
+This will show where a given volume is mounted on containers running on the node.
+
+```text
+/opt/pwx/bin/pxctl volume locate 794896567744466024
+```
+
+```
+host mounted:
+  /directory1
+  /directory2
+```
+
+In the example above, the volume represented by ID 794896567744466024 is mounted in two containers on the mountpoints shown.
+
 ### Volume snapshots {#volume-snapshots}
 
 You can take snapshots of PX volumes. Snapshots are thin and do not take additional space. PX snapshots use branch-on-write so that there is no additional copy when a snapshot is written to. This is done through B+ Trees.
 
-**PX version 1.3 and higher**
-
 ```text
-pxctl volume snapshot
+/opt/pwx/bin/pxctl volume snapshot
+```
+
+```
 NAME:
    pxctl volume snapshot - Manage volume snapshots
 
@@ -315,34 +412,15 @@ OPTIONS:
 
 Snapshots are read-only. To restore a volume from a snapshot, use the `pxctl volume restore` command.
 
-**PX version 1.2**
-
-```text
-pxctl snap --help
-NAME:
-   pxctl snap - Manage volume snapshots
-
-USAGE:
-   pxctl snap command [command options] [arguments...]
-
-COMMANDS:
-     create, c  Create a volume snapshot
-     list, l    List volume snapshots in the cluster
-     delete, d  Delete a volume snapshot
-
-OPTIONS:
-   --help, -h  show help
-```
-
-Snapshot volumes can be used as any other regular volume. For example, they can be passed into `docker run -v snapshot:/mount_path`
-
 ### Volume Clone {#volume-clone}
-
-**PX version 1.3 and higher**
 
 In order to create a volume clone from volume/snapshot, Use `pxctl volume clone` command.
 
 ```text
+/opt/pwx/bin/pxctl voliume clone -h
+```
+
+```
 NAME:
    pxctl volume clone - Create a clone volume
 
@@ -357,17 +435,22 @@ OPTIONS:
 In the below example, `myvol_clone` is the clone from the parent volume `myvol`
 
 ```text
-pxctl volume clone -name myvol_clone myvol
+/opt/pwx/bin/pxctl volume clone -name myvol_clone myvol
+```
+
+```
 Volume clone successful: 55898055774694370
 ```
 
 ### Volume Restore {#volume-restore}
 
-**PX version 1.3 and higher**
-
 In order to restore a volume from snapshot, Use `pxctl volume restore` command.
 
 ```text
+/opt/pwx/bin/pxctl volume restore -h
+```
+
+```
 NAME:
    pxctl volume restore - Restore volume from snapshot
 
@@ -382,5 +465,34 @@ In the below example parent volume `myvol` is restored from its snapshot `mysnap
 
 ```text
 pxctl volume restore --snapshot mysnap myvol
+```
+
+```
 Successfully started restoring volume myvol from mysnap.
+```
+
+### Update the snap interval of a volume {#volume-siu}
+
+```
+Flags:
+  -p, --periodic string   periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
+      --policy string     policy names separated by comma
+  -d, --daily strings     daily snapshot at specified hh:mm,k (keeps 7 by default)
+  -w, --weekly strings    weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
+  -m, --monthly strings   monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+```
+
+Please see the documentation for (snapshots)[https://docs.portworx.com/reference/cli/snapshots/] for more details.
+
+### Volume stats {#volume-stats}
+
+Shows realtime read/write IO throughput.
+
+```text
+/opt/pwx/bin/pxctl volume stats mvVol
+```
+
+```
+TS			Bytes Read	Num Reads	Bytes Written	Num Writes	IOPS		IODepth		Read Tput	Write Tput	Read Lat(usec)	Write Lat(usec)
+2019-3-4:11 Hrs		0 B		0		0 B		0		0		0		0 B/s		0 B/s		0		0
 ```
