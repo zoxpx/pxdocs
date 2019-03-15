@@ -11,52 +11,99 @@ series: k8s-op-maintain
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
-To upgrade to the **2.0** release, run the curl command:
+To upgrade to the latest stable **2.0** release, run the curl command:
 ```text
 curl -fsL https://install.portworx.com/2.0/upgrade | bash -s
-```
-
-To upgrade to the **1.7** release, run the curl command:
-```
-curl -fsL https://install.portworx.com/1.7/upgrade | bash -s
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
 
 1. Runs a DaemonSet on the cluster which fetches the new Portworx image. This reduces the time Portworx is down between the old and new versions as the image is already pulled.
-2. If the upgrade is from version 1.2 to 1.3 or 1.4, it will scale down all Deployments and StatefulSets that use shared Portworx PersistentVolumeClaims. If you are already at version 1.4 and upgrading to subsequent versions, this is not required.
+2. If the upgrade is from version 1.2, it will scale down all Deployments and StatefulSets that use shared Portworx PersistentVolumeClaims. If you are already at version 1.4 and upgrading to subsequent versions, this is not required.
 3. Triggers RollingUpdate of the Portworx DaemonSet to the default stable image.
-   * If the upgrade is from version 1.2 to 1.3 or 1.4, all application pods using Portworx PersistentVolumeClaims will be rescheduled to other nodes in the cluster before the new Portworx version starts on that node. If you are already at version 1.4 and upgrading to subsequent versions, this is not required.
+   * If the upgrade is from version 1.2, all application pods using Portworx PersistentVolumeClaims will be rescheduled to other nodes in the cluster before the new Portworx version starts on that node. If you are already at version 1.4 and upgrading to subsequent versions, this is not required.
 4. Restore any Deployments or StatefulSets that were scaled down in step 2 back to their original replicas.
 
 This script will also monitor the above operations.
 
-### Customizing the upgrade process {#customizing-the-upgrade-process}
+## Customizing the upgrade process {#customizing-the-upgrade-process}
 
 #### Specify a different Portworx upgrade image {#specify-a-different-portworx-upgrade-image}
 
-You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:1.7.2_ image.
+You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.0.2.2_ image.
 
 ```text
-curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.7.2
+curl -fsL https://install.portworx.com/2.0/upgrade | bash -s -- -t 2.0.2.2
 ```
 
-#### Disable scaling down of shared Portworx applications during the upgrade {#disable-scaling-down-of-shared-portworx-applications-during-the-upgrade}
+## Airgapped clusters
 
-You can invoke the upgrade script with _–scaledownsharedapps off_ to skip scaling down Deployments and StatefulSets that use shared Portworx PersistentVolumeClaim.
+When upgrading Portworx in Kubernetes using the curl command in examples above, a number of docker images are fetched from container registries on the Internet (e.g. docker.io, gcr.io). If your nodes don't have access to these registries, you need to first pull the required images in your cluster and then provide the precise image names to the upgrade process.
 
-For example:
+The below sections outline the exact steps for this.
+
+### Step 1: Pull the required images
+
+If you want to upgrade to the latest 2.0 stable release, skip the below export. If you wish to upgrade to a specific 2.0 release, set the `PX_VER` variable as below to the desired version.
 
 ```text
-curl -fsL https://install.portworx.com/upgrade | bash -s -- --scaledownsharedapps off
+# To determine the latest minor 2.0 release currently available, please use the curl-expression below
+# Alternatively, you can specify the version yourself, e.g.: PX_VER=2.0.2.3
+export PX_VER=$(curl -fs https://install.portworx.com/2.0/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
 ```
 
-{{<info>}}
-**Reboot requirement:**  
-By default, the upgrade process scales down shared applications as that avoids a node reboot when upgrading between major Portworx versions. Disabling that flag would mean the node would need a reboot before Portworx comes up with the new major version.
-{{</info>}}
+Now pull the required Portworx images.
 
-### Troubleshooting {#troubleshooting}
+```text
+export PX_IMGS="portworx/oci-monitor:$PX_VER portworx/px-enterprise:$PX_VER portworx/talisman:latest"
+
+echo $PX_IMGS | xargs -n1 docker pull
+```
+
+### Step 2: Loading Portworx images on your nodes
+
+If you have nodes which have access to a private registry, follow [Step 2a: Push to local registry server, accessible by air-gapped nodes](#step-2a-push-to-local-registry-server-accessible-by-air-gapped-nodes).
+
+Otherwise, follow [Step 2b: Push directly to nodes using tarball](#step-2b-push-directly-to-nodes-using-tarball).
+
+#### Step 2a: Push to local registry server, accessible by air-gapped nodes
+
+{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-local-reg.md" %}}
+
+Now that you have the images in your registry, continue with [Step 3: Start the upgrade](#step-3-start-the-upgrade).
+
+#### Step 2b: Push directly to nodes using tarball
+
+{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-nodes-tarball.md" %}}
+
+### Step 3: Start the upgrade
+
+Run the below script to start the upgrade on your airgapped cluster.
+
+```text
+
+# Default image names
+TALISMAN_IMAGE=portworx/talisman
+OCIMON_IMAGE=portworx/oci-monitor
+
+# Do we have container registry override?
+if [ "x$REGISTRY" != x ]; then
+   echo $REGISTRY | grep -q /
+   if [ $? -eq 0 ]; then  # REGISTRY defines both registry and repository
+      TALISMAN_IMAGE=$REGISTRY/talisman
+      OCIMON_IMAGE=$REGISTRY/oci-monitor
+   else                   # $REGISTRY contains only registry, we'll assume default repositories
+      TALISMAN_IMAGE=$REGISTRY/portworx/talisman
+      OCIMON_IMAGE=$REGISTRY/portworx/oci-monitor
+   fi
+fi
+
+[[ -z "$PX_VER" ]] || ARG_PX_VER="-t $PX_VER"
+
+curl -fsL https://install.portworx.com/2.0/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
+```
+
+## Troubleshooting {#troubleshooting}
 
 #### Find out status of Portworx pods {#find-out-status-of-portworx-pods}
 
@@ -107,3 +154,18 @@ If the upgrade job crashes unexpectedly and fails to restore shared applications
 ```text
 curl -fsL https://install.portworx.com/upgrade | bash -s -- --scaledownsharedapps off
 ```
+
+#### Disable scaling down of shared Portworx applications during the upgrade {#disable-scaling-down-of-shared-portworx-applications-during-the-upgrade}
+
+You can invoke the upgrade script with _–scaledownsharedapps off_ to skip scaling down Deployments and StatefulSets that use shared Portworx PersistentVolumeClaim.
+
+For example:
+
+```text
+curl -fsL https://install.portworx.com/2.0/upgrade | bash -s -- --scaledownsharedapps off
+```
+
+{{<info>}}
+**Reboot requirement:**
+ When upgrading between specific major Portworx versions (1.2 to 1.3 or higher), the upgrade process scales down shared applications as that avoids a node reboot. Disabling that flag would mean the node would need a reboot before Portworx comes up with the new major version.
+{{</info>}}
