@@ -1,8 +1,7 @@
 ---
-title: Deploying Portworx with CSI support
-hidden: true
+title: Portworx with CSI
 keywords: csi, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk
-description: How to deploy Portworx with CSI.
+description: This page describes how to deploy Portworx with CSI
 ---
 
 [CSI](https://kubernetes-csi.github.io/), or _Container Storage Interface_, is
@@ -20,8 +19,9 @@ Note, that currently this deployment mode is available only as a _Tech Preview_ 
 ## Install
 
 ### Install using the Portworx spec generator
-When installing Portworx through [install.portworx.com/1.4](https://install.portworx.com/1.4)
-you can select CSI as the model to use for deployment.
+
+When [Generating the Portworx specs](https://install.portworx.com/2.0)
+select CSI under Customize->Advanced Settings. This will add the CSI components to the Portworx DaemonSet.
 
 If you are using [curl to fetch the Portworx
 spec](/portworx-install-with-kubernetes/px-k8s-spec-curl), you can add
@@ -29,11 +29,9 @@ spec](/portworx-install-with-kubernetes/px-k8s-spec-curl), you can add
 
 ## Impact on applications
 
-The only affected object is the StorageClass.
-For any StorageClasses created, you will need to setup the value of `provisioner`
-to `com.openstorage.pxd`. Here is an example:
+The only affected object is the StorageClass. For any StorageClasses created, you will need to setup the value of `provisioner` to `com.openstorage.pxd`. Here is an example:
 
-```yaml
+```text
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
