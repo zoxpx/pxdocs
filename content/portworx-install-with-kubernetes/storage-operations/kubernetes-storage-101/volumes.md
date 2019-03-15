@@ -1,5 +1,6 @@
 ---
-title: Persistent volumes
+title: Kubernetes Persistent volumes
+linkTitle: Persistent volumes
 weight: 2
 keywords: portworx, kubernetes, PVCs
 description: Learn essential concepts about creating persistent volumes on Kubernetes
