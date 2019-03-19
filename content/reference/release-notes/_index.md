@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.3.1
+
+### Key Fixes
+
+* PWX-8063 - Startup issue with 4.19.0-0.bpo.2-cloud-amd64                                                                      
+* PWX-8060 - Cloud backup restore fails with json unmarshall error                                                  
+* PWX-7989 - Fix licensing issue which was leading to reducing the number of nodes allowed in the cluster. Differentiate between NEW and PRE-EXISTING node failing to join the cluster, and do not cleanup if PRE-EXISTING nodes were the ones causing the failures.                       
+* PWX-7980 - Do not cleanup CloudDrives when the drives are initialized and have labels
+* PWX-7968 - Cloudsnaps cleanup fails because of missing start timestamp in metadata                                                         
+* PWX-7963 - Cloudsnap restore for xfs volumes has wrong fs type                                        
+* PWX-7794 - LIC: Aggressive node-decomissions and "Cluster max capacity" error handling
+
 ## 2.0.3
 
 ### Key Features and Enhancements
@@ -159,6 +171,10 @@ series: reference
   Workaround: This is a variant of the previous errata. 
   For volume with replication factor set to 1, Cloudsnap backup does not resume after the node with replica goes down.
 
+## 1.7.7
+
+* PWX-7315 - Fix a corner case where increasing the replication factor of a volume can take much longer when there are multiple levels of volume clones
+
 ## 1.7.6
 
 * PWX-7304 - PX keeps restarting, if journal device made read-only
@@ -166,7 +182,6 @@ series: reference
 * PWX-7453 - cloudsnap cleanup didn't complete properly in cases where errors were encountered when tranmitting the diffs
 * PWX-7481 - Shared volume mounts fail when clients connections abruptly lost and not cleaned up properly
 * PWX-7600 - Volume mount status might be incorrectly displayed when the node where the volume is attached hits a storage full condition and replicas on that node are moved to a new node
-
 
 ## 1.7.5
 
