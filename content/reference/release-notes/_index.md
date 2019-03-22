@@ -15,8 +15,9 @@ PWX-8136 - Disable kvproxy audit as it causes the etcd client to trigger unneces
 
 ### Errata
 
-PWX-8161 - If a user created lvm volume partition is given to PX to be used as journal device (using pxctl drive add cli). A system reboot will require that the lvm partition be made visible before starting PX. This can done by running "partprobe <device_name>".
-
+PWX-8161 - If a user created lvm volume partition is given to PX to be used as journal device (using pxctl drive add cli). 
+           A system reboot will require that the lvm partition be made visible before starting PX. 
+           This can done by running `partprobe <device_name>`.  
 ## 2.0.3.1
 
 ### Key Fixes
