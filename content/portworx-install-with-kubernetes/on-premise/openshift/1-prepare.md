@@ -44,7 +44,7 @@ oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:px-cs
 
 ### Prepare a docker-registry credentials secret
 
-{{<info>}}This is required only if you have a secured custom registy i.e if you require `docker login` before you can do `docker pull`.{{</info>}}
+{{<info>}}This is required in order to retrieve the images from the Red Hat Container Registry. Set these credentials using access information from your RHN account.{{</info>}}
 
 * Confirm the username/password works (e.g. user:john, passwd:s3cret)
   ```text
