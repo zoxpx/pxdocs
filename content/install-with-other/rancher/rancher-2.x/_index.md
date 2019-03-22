@@ -75,4 +75,4 @@ Once completed with the form select Launch.  Depending on your Internet speed an
 
 Once you have a running Portworx installation, below sections are useful.
 
-{{<homelist series="k8s-postinstall">}}
+{{<homelist series2="k8s-postinstall">}}
