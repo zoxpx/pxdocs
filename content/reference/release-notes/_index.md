@@ -5,6 +5,16 @@ description: Notes on Portworx enterprise releases
 keywords: portworx, release notes
 series: reference
 ---
+## 2.0.3.2
+
+### Key Fixes
+
+PWX-8062 - PX cluster running on k8s does not report volumes metrics
+PWX-8136 - Disable kvproxy audit as it causes the etcd client to trigger unnecessary API requests
+
+### Errata
+
+PWX-8161 - If a user created lvm volume partition is given to PX to be used as journal device (using pxctl drive add cli). A system reboot will require that the lvm partition be made visible before starting PX. This can done by running "partprobe <device_name>".
 
 ## 2.0.3.1
 
