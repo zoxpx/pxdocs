@@ -13,7 +13,7 @@ This document describes how to use a pre-provisioned volume in your Kubernetes c
 First create a volume using Portworx CLI. On one of the nodes with Portworx installed run the following command:
 
 ```text
-/opt/pwx/bin/pxctl volume create <vol-name> --size <size>
+/opt/pwx/bin/pxctl volume create testvol --size 2
 ```
 
 For more details on creating volumes using pxctl, [click here](/concepts).
@@ -47,7 +47,7 @@ spec:
        volumeID: testvol
 ```
 
-Above `testvol` is the existing Portworx volume created using pxctl.
+{{<info>}}The _name_ and _volumeID_ above must be the same and should be the name of the Portworx volume created using pxctl.{{</info>}}
 
 #### 2. Using the Portworx volume by creating a PersistentVolume & PersistentVolumeClaim {#2-using-the-portworx-volume-by-creating-a-persistentvolume--persistentvolumeclaim}
 
