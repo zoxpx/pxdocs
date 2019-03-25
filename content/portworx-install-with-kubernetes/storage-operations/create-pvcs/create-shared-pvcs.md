@@ -8,11 +8,18 @@ series: k8s-vol
 
 This document describes how to use portworx **shared** (ReadWriteMany) volumes in your Kubernetes cluster. If you wish to create **sharedv4** volumes refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs) 
 
-#### Provision a Shared Volume {#provision-a-shared-volume}
+## Provision a Shared Volume
 
 Shared volumes are useful when you want multiple PODs to access the same PVC \(volume\) at the same time. They can use the same volume even if they are running on different hosts. They provide a global namespace and the semantics are POSIX compliant.
 
-**Step1: Create Storage Class**
+{{<info>}}**Openshift users**:
+
+Below procedure describes creating shared PVCs using the native in-tree Portworx driver in Kubernetes. There is a known issue in Openshift 3.9, 3.10 and 3.11 preventing mounts of shared PVCs.
+
+Use instructions at [Shared PVCs using CSI](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-shared-pvcs-csi) to create shared Portworx PVCs.
+{{</info>}}
+
+### Step 1: Create Storage Class
 
 Create the storageclass:
 
@@ -45,7 +52,7 @@ Parameters:	   repl=1,shared=true
 Events:			<none>
 ```
 
-**Step2: Create Persistent Volume Claim**
+### Step 2: Create Persistent Volume Claim
 
 Creating a ReadWriteMany persistent volume claim:
 
@@ -81,7 +88,7 @@ px-shared-pvc   Bound     pvc-a38996b3-76e9-11e7-9d47-080027b25cdf 10Gi       RW
 
 ```
 
-**Step3: Create Pods which uses Persistent Volume Claim**
+### Step 3: Create Pods which uses Persistent Volume Claim
 
 We will start two pods which use the same shared volume.
 
@@ -147,3 +154,4 @@ pod2      1/1       Running   0          1m
 ```
 {{<info>}}To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
 {{</info>}}
+
