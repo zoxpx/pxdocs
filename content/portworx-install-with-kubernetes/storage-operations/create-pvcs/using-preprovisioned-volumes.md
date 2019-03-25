@@ -64,7 +64,7 @@ metadata:
     name: testvol
 spec:
   capacity:
-    storage: 1Gi
+    storage: 2Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -91,7 +91,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
 ```
 
 Notice how we use a label selector to select the right `PersistentVolume` using it’s label.
