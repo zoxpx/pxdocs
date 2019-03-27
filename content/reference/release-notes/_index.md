@@ -17,6 +17,7 @@ series: reference
 ### Errata
 
 * PWX-8161 - If a LVM partition is added as journal device after node initialization, any subsequent system reboot will need the LVM partition to be made visible before starting PX. This can be done by running "partprobe"
+* PWX-8127 - We do not allow fresh install of PX on Linux version 4.9.0-7-amd64 and 4.9.0-8-amd64 due to known kernel issues
 
 ## 2.0.3.1
 
