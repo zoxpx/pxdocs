@@ -28,7 +28,7 @@ export PROJECT_NAME=<PUT-YOUR-PROJECT-NAME-HERE>
 gcloud config set project $PROJECT_NAME
 gcloud config set compute/region us-east1
 gcloud config set compute/zone us-east1-b
-gcloud components update
+sudo gcloud components update
 ```
 
 ### Create your GKE cluster using gcloud
