@@ -48,7 +48,7 @@ gcloud container clusters create px-demo \
     --machine-type=n1-highcpu-8 \
     --num-nodes=3 \
     --image-type ubuntu \
-    --scopes compute-rw \
+    --scopes compute-rw,storage-ro \
     --enable-autoscaling --max-nodes=6 --min-nodes=3
 ```
 
@@ -66,7 +66,7 @@ gcloud container clusters create px-demo \
      --machine-type=n1-highcpu-8 \
      --num-nodes=3 \
      --image-type ubuntu \
-     --scopes compute-rw \
+     --scopes compute-rw,storage-ro \
      --enable-autoscaling --max-nodes=6 --min-nodes=3
 ```
 
