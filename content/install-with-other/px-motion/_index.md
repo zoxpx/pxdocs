@@ -4,6 +4,7 @@ linkTitle: "PX-Motion to migrate volumes"
 keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
 description: How to migrate volumes across clusters
 series: px-motion
+weight: 12
 aliases:
   - /cloud-references/migration/migration-pxctl.html
   - /cloud-references/migration/migration-pxctl
