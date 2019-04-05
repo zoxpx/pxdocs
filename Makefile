@@ -1,6 +1,8 @@
 BUILDER_IMAGE?=pxdocs:developer
 SEARCH_INDEX_IMAGE?=pxdocs-search-index:developer
 DEPLOYMENT_IMAGE?=pxdocs-deployment:developer
+PORT=1313
+CONTAINER_NAME=pxdocs-develop
 
 .PHONY: image
 image:
@@ -28,7 +30,7 @@ update-theme:
 .PHONY: develop
 develop: image
 	docker run -ti --rm \
-		--name pxdocs-develop \
+		--name $(CONTAINER_NAME) \
 		-e VERSIONS_ALL \
 		-e VERSIONS_CURRENT \
 		-e VERSIONS_BASE_URL \
@@ -36,7 +38,7 @@ develop: image
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
-		-p 1313:1313 \
+		-p $(PORT):1313 \
 		-v "$(PWD):/pxdocs" \
 		$(BUILDER_IMAGE) server --bind=0.0.0.0 --disableFastRender
 

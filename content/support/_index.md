@@ -35,7 +35,7 @@ email addresses of your team to "support@portworx.com".   You will be notified b
 
 ## Slack
 
-We are always available on Slack. Join us! [![Slack](/img/slack.png)](http://slack.portworx.com)
+We are always available on Slack. Join us! [![Slack](/img/slack.png)](https://portworx.slack.com)
 
 We also offer private slack channels, per company/site. Slack channels offer the most immediate way to interact with the Portworx Team. All interaction on the private slack channels are strictly between Portworx and the customer company/site.
 
