@@ -7,7 +7,7 @@ weight: 1
 series: arch-references
 ---
 
-There are 2 primary approaches you can take when architecting your Portworx deployment on cloud.
+There are 2 primary approaches you can take when architecting your Portworx deployment.
 
 * A) **Disaggregated** where the storage nodes are separate from the compute nodes
 
