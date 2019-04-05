@@ -23,8 +23,8 @@ Each alert has a severity from one of the following levels:
 
 **Alert Codes**|**Alert Type**|**Severity**|**Resource Type**|**Description**
 :-----|:-----|:-----:|:-----:|:-----|
-0|DriveOperationFailure|ALARM|DRIVE|Triggered when a driver operations such as add or replace fails.
-1|DriveOperationSuccess|NOTIFY|DRIVE|Triggered when a driver operations such as add or replace fails.
+0|DriveOperationFailure|ALARM|DRIVE|Triggered when a driver operation such as add or replace fails.
+1|DriveOperationSuccess|NOTIFY|DRIVE|Triggered when a driver operation such as add or replace succeeds.
 2|DriveStateChange|WARN|DRIVE|Triggered when there is a change in the driver state viz. Free Disk space goes below the recommended level of 10%.
 3|VolumeOperationFailureAlarm|ALARM|VOLUME|Triggered when a volume operation fails. Volume operations could be resize, cloudsnap etc. The alert message will give more info about the specific error case.
 4|VolumeOperationSuccess|NOTIFY|VOLUME|Triggered when a volume operation such as resize succeeds.
