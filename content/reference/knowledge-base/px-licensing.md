@@ -14,9 +14,10 @@ Starting with the v1.2.8 release, the Portworx products support the following li
 |:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------
 | PX-Developer           | Embedded into [px-developer](/install-with-other/docker/standalone/px-developer), free license that supports limited functionality.
 | Trial                  | Automatically installed w/ [px-enterprise](/), enables full functionality for 30 days.
-| PX-Enterprise VM Basic | Commercial license, suitable for medium-sized VM/cloud based installs (see [Features](https://portworx.com/products/features/))
-| PX-Enterprise VM Plus  | Enterprise license, suitable for large VM/cloud -based installs (see [Features](https://portworx.com/products/features/))
-| PX-Enterprise Metal    | Enterprise license, suitable for large installs on any hardware (see [Features](https://portworx.com/products/features/))
+| PX-Enterprise VM Limited | Enterprise license, suitable for small VM/cloud -based installs
+| PX-Enterprise Metal Limited | Enterprise license, suitable for small installs on any hardware 
+| PX-Enterprise VM       | Enterprise license, suitable for large VM/cloud -based installs
+| PX-Enterprise Metal    | Enterprise license, suitable for large installs on any hardware 
 
 
 Depending on the type of the container you are installing, a different license will be automatically activated:
@@ -64,7 +65,10 @@ In the table below, we can see the overview of features that are controlled via 
 | Shared volumes               | yes/no | Defines if volumes may be shared w/ other nodes
 | Volume sets                  | yes/no | Defines if volumes may be scaled
 | BYOK data encryption         | yes/no | Defines if volumes may be encrypted
+| Resize volumes on demand     | yes/no | Defines if volumes can be resized
 | Snapshot to object store     | yes/no | Defines if volumes may be snapshotted to Amazon S3, MS Azure and Google storage
+| Cluster level migration      | yes/no | Defines if applications and data (using K8s namespace) can be migrated between paired clusters
+| Disaster Recovery (PX-DR)    | yes/no | Enables synchronous and asynchronous DR features (added in 2.1, needs additional license)
 | Virtual machine hosts        | yes/no | Software may be deployed on VMs (including Amazon EC2, OpenStack Nova, etc...)
 | Bare-metal hosts             | yes/no | Software may be deployed on commodity hardware
 
@@ -135,8 +139,7 @@ license file (see [PX-Enterprise](#px-enterprise-license) below for details)
 ### PX-Enterprise License
 
 The "PX-Enterprise" license is our most flexible license, which comes with a number of options.
-Please refer to [Features page](https://portworx.com/products/features/) to
-determine which type of "PX-Enterprise" license will work best for your needs.
+Please reach out to support@portworx.com  to determine which type of "PX-Enterprise" license will work best for your needs.
 
 #### License sharing
 
