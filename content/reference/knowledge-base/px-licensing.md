@@ -14,10 +14,10 @@ Starting with the v1.2.8 release, the Portworx products support the following li
 |:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------
 | PX-Developer           | Embedded into [px-developer](/install-with-other/docker/standalone/px-developer), free license that supports limited functionality.
 | Trial                  | Automatically installed w/ [px-enterprise](/), enables full functionality for 30 days.
-| PX-Enterprise VM Limited | Enterprise license, suitable for small VM/cloud -based installs
-| PX-Enterprise Metal Limited | Enterprise license, suitable for small installs on any hardware 
-| PX-Enterprise VM       | Enterprise license, suitable for large VM/cloud -based installs
-| PX-Enterprise Metal    | Enterprise license, suitable for large installs on any hardware 
+| Portworx Enterprise VM Limited | Enterprise license, suitable for small VM/cloud -based installs
+| Portworx Enterprise Metal Limited | Enterprise license, suitable for small installs on any hardware 
+| Portworx Enterprise VM       | Enterprise license, suitable for large VM/cloud -based installs
+| Portworx Enterprise Metal    | Enterprise license, suitable for large installs on any hardware 
 
 
 Depending on the type of the container you are installing, a different license will be automatically activated:
