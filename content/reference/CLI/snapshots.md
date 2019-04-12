@@ -6,30 +6,11 @@ description: Learn how to manage snapshots using pxctl
 weight: 10
 ---
 
-Snapshots are efficient point-in-time read-only copies of volumes. Once created, you can use a snapshot to read data, restore data, and to make clones from a given snapshot.
-
-Under the hood, snapshots are using a **copy-on-write** technique, so that they store only the modified data. This way, snapshots significantly reduce the consumption of resources.
-
-Snapshots can be created **explicitly** by running the `pxctl volume snapshot create` command (called henceforth _user created snapshots_) or through a **schedule** that is set on the volume.
+{{% content "reference/CLI/shared/intro-snapshots.md" %}}
 
 ## Creating snapshots
 
-Here's an example of how to create a snapshot:
-
-```text
-pxctl volume snapshot create --name mysnap --label color=blue,fabric=wool myvol
-```
-
-```
-Volume snap successful: 234835613696329810
-```
-
-The string of digits in the output is the volume ID of the new snapshot. You can use this ID\(`234835613696329810`\) or the name\(`mysnap`\), to refer to the snapshot in subsequent `pxctl` commands.
-
-The label values allow you to tag the snapshot with descriptive information of your choosing. You can use them to filter the output of the `pxctl volume list` command.
-
-There is an implementation limit of 64 snapshots per volume.
-
+{{% content "reference/CLI/shared/creating-snapshots.md" %}}
 
 ## Listing Snapshots
 

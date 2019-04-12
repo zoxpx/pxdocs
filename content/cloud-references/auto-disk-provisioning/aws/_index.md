@@ -34,7 +34,7 @@ The spec follows the following format:
 * __size__: This is the size of the EBS volume in GB
 * __iops__: This is the required IOs per second from the EBS volume.
 * __enc__:  This needs to be set to true if EBS volumes need to be encrypted. Default: false
-* __kms__:  This is the Customer Master Key to encrypt the EBS volume.
+* __kms__:  This is the Customer Master Key to encrypt the EBS volume. i.e.`<key>` in `arn:aws:kms:us-east-1:<account-id>:key/<key>`
 
 See [EBS details](https://aws.amazon.com/ebs/details/) for more details on above parameters.
 

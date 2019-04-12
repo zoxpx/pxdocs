@@ -6,6 +6,17 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.3.3
+
+### Key Fixes
+
+* Portworx available on GOOGLE CLOUD PLATFORM MARKETPLACE https://cloud.google.com/marketplace/
+* PWX-8451 - Block adding metadata device when running with internal kvdb
+* PWX-8345 - Node wipe and upgrade doesn't work if portworx is installed in a namespace other than kube-system
+* PWX-8045 - Cloudmigrate fails if credentials use custom bucket name
+* PWX-7891 - pxctl svc nw --all failed to delete multi-path devices
+* PWX-8261 - Allow fresh install of PX on Linux Kernel version 4.9.0-7-amd64 and 4.9.0-8-amd64  
+
 ## 2.0.3.2
 
 ### Key Fixes
