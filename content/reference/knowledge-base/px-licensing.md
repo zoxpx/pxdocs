@@ -12,18 +12,17 @@ Starting with the v1.2.8 release, the Portworx products support the following li
 
 |      License type      |  Description
 |:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------
-| PX-Developer           | Embedded into [px-developer](/install-with-other/docker/standalone/px-developer), free license that supports limited functionality.
-| Trial                  | Automatically installed w/ [px-enterprise](/), enables full functionality for 30 days.
-| PX-Enterprise VM Basic | Commercial license, suitable for medium-sized VM/cloud based installs (see [Features](https://portworx.com/products/features/))
-| PX-Enterprise VM Plus  | Enterprise license, suitable for large VM/cloud -based installs (see [Features](https://portworx.com/products/features/))
-| PX-Enterprise Metal    | Enterprise license, suitable for large installs on any hardware (see [Features](https://portworx.com/products/features/))
+| Portworx Developer           | Embedded into [px-developer](/install-with-other/docker/standalone/px-developer), free license that supports select functionality.
+| Trial                  | Automatically installed with [px-enterprise](/), enables functionality for 30 days.
+| Portworx Enterprise VM       | Enterprise license, suitable for Virtual Machine (VM) installs on-prem and in cloud
+| Portworx Enterprise Metal    | Enterprise license, suitable for installs on any bare metal hardware 
 
 
 Depending on the type of the container you are installing, a different license will be automatically activated:
 
 * [px-developer](/install-with-other/docker/standalone/px-developer) container activates free "PX-Developer" license, and
 * [px-enterprise](/) automatically
-activates the "Trial" license (limited to 30 days), which can be upgraded to one of the "PX-Enterprise" licenses at any time.
+activates the "Trial" license (limited to 30 days), which can be upgraded to a "PX-Enterprise" license at any time.
 
 ## Checking your License
 
@@ -64,7 +63,10 @@ In the table below, we can see the overview of features that are controlled via 
 | Shared volumes               | yes/no | Defines if volumes may be shared w/ other nodes
 | Volume sets                  | yes/no | Defines if volumes may be scaled
 | BYOK data encryption         | yes/no | Defines if volumes may be encrypted
+| Resize volumes on demand     | yes/no | Defines if volumes can be resized
 | Snapshot to object store     | yes/no | Defines if volumes may be snapshotted to Amazon S3, MS Azure and Google storage
+| Cluster level migration      | yes/no | Defines if applications and data (using K8s namespace) can be migrated between paired clusters
+| Disaster Recovery (PX-DR)[Add-on]    | yes/no | Enables synchronous and asynchronous DR features (requires 2.1 or later, needs additional license)
 | Virtual machine hosts        | yes/no | Software may be deployed on VMs (including Amazon EC2, OpenStack Nova, etc...)
 | Bare-metal hosts             | yes/no | Software may be deployed on commodity hardware
 
@@ -74,7 +76,7 @@ In the table below, we can see the overview of features that are controlled via 
 ### PX-Developer License
 
 The "PX-Developer" license is a default license for [px-developer](/install-with-other/docker/standalone/px-developer) containers.
-The "PX-Developer" license is permanent and free, and provides a limited set of functionality, with unrestricted use.
+The "PX-Developer" license is permanent and free, and provides a select set of functionality.
 It supports the following features:
 
 ```text
@@ -135,8 +137,7 @@ license file (see [PX-Enterprise](#px-enterprise-license) below for details)
 ### PX-Enterprise License
 
 The "PX-Enterprise" license is our most flexible license, which comes with a number of options.
-Please refer to [Features page](https://portworx.com/products/features/) to
-determine which type of "PX-Enterprise" license will work best for your needs.
+Please reach out to support@portworx.com  to determine which type of "PX-Enterprise" license will work best for your needs.
 
 #### License sharing
 
