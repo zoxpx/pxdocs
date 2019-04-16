@@ -9,7 +9,7 @@ series: key-management
 noicon: true
 ---
 
-Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets and credentials. This guide will help you configure Portworx to connect to DC/OS Secrets. DC/OS Secrets can then be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
+Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets, credentials, and auth tokens. This guide will help you configure Portworx to connect to DC/OS Secrets. DC/OS Secrets can then be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
 
 {{<info>}}
 **Note:**  Secrets is an DC/OS Enterprise only feature
