@@ -2,9 +2,9 @@
 title: Storage policy using pxctl
 description: Manage Portworx storage policies
 keywords: portworx, storage policy, volume
-weight: 1
 series: concepts
 linkTitle: Storage Policy
+weight: 12
 ---
 
 ## Overview

@@ -3,7 +3,7 @@ title: License operations using pxctl
 linkTitle: License
 keywords: portworx, pxctl, command-line tool, cli, reference, license
 description: Learn how to manage licenses using the Portworx CLI.
-weight: 8
+weight: 14
 ---
 
 This document explains how to manage your _Portworx_ licenses with

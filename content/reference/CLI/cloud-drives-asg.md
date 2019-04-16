@@ -2,7 +2,7 @@
 title: Cloud Drives (ASG) using pxctl
 description: General reference for CLI Cloud Drives on ASG.
 keywords: portworx, containers, storage, volumes, CLI, ASG
-weight: 2
+weight: 10
 linkTitle: Cloud Drives (ASG)
 ---
 

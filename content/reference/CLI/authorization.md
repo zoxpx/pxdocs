@@ -3,7 +3,7 @@ title: Authorization using pxctl
 linkTitle: Authorization
 keywords: portworx, container, Kubernetes, storage, auth, authz, authorization, authentication, login, token, oidc, context, generate, self-signed, jwt, shared-secret, security
 description: Learn to enable auth in your px cluster
-weight: 3
+weight: 18
 ---
 
 ## Overview

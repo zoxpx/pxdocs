@@ -2,7 +2,7 @@
 title: Group Snaps
 keywords: portworx, pxctl, command-line tool, cli, reference
 description: Explore the CLI reference guide for taking group snapshots of container data volumes using Portworx. Try it today!
-weight: 7
+weight: 5
 ---
 
 ```text

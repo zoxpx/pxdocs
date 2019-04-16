@@ -3,7 +3,7 @@ title: Volume access using pxctl
 linkTitle: Volume Access
 keywords: portworx, container, Kubernetes, storage, role, roles, authorization, authentication, volume, access
 description: Learn to update volume access in your px cluster
-weight: 3
+weight: 16
 ---
 
 ## Overview

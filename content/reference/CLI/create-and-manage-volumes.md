@@ -3,7 +3,7 @@ title: Create and manage volumes using pxctl
 keywords: portworx, pxctl, command-line tool, cli, reference
 description: This guide shows you how to create and manage volumes with pxctl.
 linkTitle: Create and Manage Volumes
-weight: 12
+weight: 2
 ---
 
 In this section, we are going to focus on creating and managing volumes with `pxctl`. You can use the created volumes directly in Docker with the `-v` option.

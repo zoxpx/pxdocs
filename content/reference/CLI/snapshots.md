@@ -3,7 +3,7 @@ title: Snapshots operations using pxctl
 linkTitle: Snapshots
 keywords: portworx, pxctl, snapshot, reference
 description: Learn how to manage snapshots using pxctl
-weight: 10
+weight: 4
 ---
 
 {{% content "reference/CLI/shared/intro-snapshots.md" %}}

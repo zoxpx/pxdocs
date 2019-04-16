@@ -3,7 +3,7 @@ title: Service operations using pxctl
 linkTitle: Service
 keywords: portworx, pxctl, command-line tool, cli, reference
 description: How to use PX CLI service.
-weight: 9
+weight: 16
 ---
 
 ```text
