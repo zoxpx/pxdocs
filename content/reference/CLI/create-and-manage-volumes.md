@@ -1,11 +1,14 @@
 ---
-title: Create and Manage Volumes
+title: Create and manage volumes using pxctl
 keywords: portworx, pxctl, command-line tool, cli, reference
-description: This guide shows you how to use the PXCL CLI to create and manage volumes.
+description: This guide shows you how to create and manage volumes with pxctl.
+linkTitle: Create and Manage Volumes
 weight: 12
 ---
 
-To create and manage volumes, use `pxctl volume`. You can use the created volumes directly with Docker with the `-v` option.
+In this section, we are going to focus on creating and managing volumes with `pxctl`. You can use the created volumes directly in Docker with the `-v` option.
+
+To view a list of the available commands, run the following:
 
 ```text
 /opt/pwx/bin/pxctl volume -h
@@ -25,6 +28,7 @@ Examples:
 pxctl volume create -s 100 myVolName
 
 Available Commands:
+  access               Manage volume access by users or groups
   clone                Create a clone volume
   create               Create a volume
   delete               Delete a volume
@@ -45,35 +49,44 @@ Flags:
   -h, --help   help for volume
 
 Global Flags:
-      --ca string       path to root certificate for ssl usage
-      --cert string     path to client certificate for ssl usage
-      --color           output with color coding
-      --config string   config file (default is $HOME/.pxctl.yaml)
-  -j, --json            output in json
-      --key string      path to client key for ssl usage
-      --port string     Portworx Management port (default: 9001)
-      --raw             raw CLI output for instrumentation
-      --ssl             ssl enabled for portworx
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+
+Use "pxctl volume [command] --help" for more information about a command.
 ```
 
-### Create volumes {#create-volumes}
+In the next sections, we will take a look at these commands individually.
 
-Portworx creates volumes from the global capacity of a cluster. You can expand capacity and throughput by adding a node to the cluster. Portworx protects storage volumes from hardware and node failures through automatic replication.
+## Creating volumes with pxctl
 
-* Durability: Set replication through policy, using the High Availability setting.
+_Portworx_ creates volumes from the global capacity of a cluster. You can expand the capacity and throughput by adding new nodes to the cluster. _Portworx_ protects storage volumes from hardware and node failures through automatic replication.
+
+Things to consider when creating a new volume with `pxctl`:
+
+* Durability: Set the replication level through policy, using the High Availability setting.
 * Each write is synchronously replicated to a quorum set of nodes.
 * Any hardware failure means that the replicated volume has the latest acknowledged writes.
 * Elastic: Add capacity and throughput at each layer, at any time.
 * Volumes are thinly provisioned, only using capacity as needed by the container.
 * You can expand and contract the volume’s maximum size, even after data has been written to the volume.
 
-A volume can be created before use by its container or by the container directly at runtime. Creating a volume returns the volume’s ID. This same volume ID is returned in Docker commands \(such as `Docker volume ls`\) as is shown in `pxctl` commands.
+A volume can be created before being used by its container or by the container directly at runtime. Creating a volume returns the volume’s ID. The same volume ID shown by `pxctl` is returned by Docker commands \(such as `Docker volume ls`\).
 
-Example of creating a volume through `pxctl`, where the volume ID is returned:
+
+To create a volume named `myVol`, type:
 
 ```text
-/opt/pwx/bin/pxctl volume create myVol
+pxctl volume create myVol
 ```
+
+`pxctl` will create the volume and will print its `id`:
 
 ```
 3903386035533561360
@@ -81,62 +94,93 @@ Example of creating a volume through `pxctl`, where the volume ID is returned:
 
 Throughput is controlled per container and can be shared. Volumes have fine-grained control, set through policy.
 
+Before you move on, take a bit of time to make sure you understand the following points:
+
 * Throughput is set by the IO Priority setting. Throughput capacity is pooled.
 * Adding a node to the cluster expands the available throughput for reads and writes.
-* The best node is selected to service reads, whether that read is from a local storage devices or another node’s storage devices.
+* The best node is selected to service reads, whether that read is from local storage devices or another node’s storage devices.
 * Read throughput is aggregated, where multiple nodes can service one read request in parallel streams.
 * Fine-grained controls: Policies are specified per volume and give full control to storage.
 * Policies enforce how the volume is replicated across the cluster, IOPs priority, filesystem, blocksize, and additional parameters described below.
 * Policies are specified at create time and can be applied to existing volumes.
 
-Set policies on a volume through the options parameter. These options can also be passed in through the scheduler or using the inline volume spec. See the section _Inline volume spec_ below for more details.
 
-Show the available options through the –help command, as shown below:
+`pxctl` provides a multitude of options for setting the policies on a volume. Let’s get a feel for the available options by running:
 
 ```text
-/opt/pwx/bin/pxctl volume create -h
+pxctl volume create -h
 ```
 
+You should see something like:
+
 ```
-NAME:
-   pxctl volume create - Create a volume
-USAGE:
-   pxctl volume create [command options] volume-name
-OPTIONS:
-   --shared                                      make this a globally shared namespace volume
-   --secure                                      encrypt this volume using AES-256
-   --secret_key value                            secret_key to use to fetch secret_data for the PBKDF2 function
-   --use_cluster_secret                          Use cluster wide secret key to fetch secret_data
-   --label pairs, -l pairs                       list of comma-separated name=value pairs
-   --size value, -s value                        volume size in GB (default: 1)
-   --fs value                                    filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-   --block_size size, -b size                    block size in Kbytes (default: 32)
-   --repl factor, -r factor                      replication factor [1..3] (default: 1)
-   --scale value, --sc value                     auto scale to max number [1..1024] (default: 1)
-   --io_priority value, --iop value              IO Priority: [high|medium|low] (default: "low")
-   --journal                                     Journal data for this volume
-   --io_profile value, --prof value              IO Profile: [sequential|random|db|db_remote] (default: "sequential")
-   --sticky                                      sticky volumes cannot be deleted until the flag is disabled [on | off]
-   --aggregation_level level, -a level           aggregation level: [1..3 or auto] (default: "1")
-   --nodes value                                 comma-separated Node Ids
-   --zones value                                 comma-separated Zone names
-   --racks value                                 comma-separated Rack names
-   --group value, -g value                       group
-   --enforce_cg, --fg                            enforce group during provision
-   --periodic mins,k, -p mins,k                  periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
-   --daily hh:mm,k, -d hh:mm,k                   daily snapshot at specified hh:mm,k (keeps 7 by default)
-   --weekly weekday@hh:mm,k, -w weekday@hh:mm,k  weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-   --monthly day@hh:mm,k, -m day@hh:mm,k         monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
-   --policy value, --sp value                    policy names separated by comma
+Create a volume
+
+Usage:
+  pxctl volume create [flags]
+
+Aliases:
+  create, c
+
+Examples:
+pxctl volume create [flags] volume-name
+
+Flags:
+      --shared                              make this a globally shared namespace volume
+      --secure                              encrypt this volume using AES-256
+      --use_cluster_secret                  Use cluster wide secret key to fetch secret_data
+      --journal                             Journal data for this volume
+      --early_ack                           Reply to async write requests after it is copied to shared memory
+      --async_io                            Enable async IO to backing storage
+      --nodiscard                           Disable discard support for this volume
+      --sticky                              sticky volumes cannot be deleted until the flag is disabled
+      --sharedv4                            export this volume via Sharedv4 at /var/lib/osd/exports
+      --enforce_cg                          enforce group during provision
+      --best_effort_location_provisioning   requested nodes, zones, racks are optional
+      --secret_key string                   secret_key to use to fetch secret_data for the PBKDF2 function
+  -l, --label pairs                         list of comma-separated name=value pairs
+      --io_priority string                  IO Priority (Valid Values: [high medium low]) (default "low")
+      --io_profile string                   IO Profile (Valid Values: [sequential cms db db_remote]) (default "sequential")
+  -a, --aggregation_level string            aggregation level (Valid Values: [1 2 3 auto]) (default "1")
+      --nodes string                        comma-separated Node Ids
+      --zones string                        comma-separated Zone names
+      --racks string                        comma-separated Rack names
+  -g, --group string                        group
+  -p, --periodic mins,k                     periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
+      --policy string                       policy names separated by comma
+      --storagepolicy string                storage policy name
+  -s, --size uint                           volume size in GB (default 1)
+  -b, --block_size uint                     block size in Bytes (default 32768)
+  -q, --queue_depth uint                    block device queue depth (Valid Range: [1 256]) (default 128)
+  -r, --repl uint                           replication factor (Valid Range: [1 3]) (default 1)
+      --scale uint                          auto scale to max number (Valid Range: [1 1024]) (default 1)
+  -d, --daily hh:mm,k                       daily snapshot at specified hh:mm,k (keeps 7 by default)
+  -w, --weekly weekday@hh:mm,k              weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
+  -m, --monthly day@hh:mm,k                 monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+  -h, --help                                help for create
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
 ```
 
-#### Using the --nodes Argument
+{{<info>}}These options can also be passed in through the scheduler or using the inline volume spec. See the section [Inline volume spec] (#inline-volume-spec) below for more details.
+{{</info>}}
 
-Adding `--nodes=LocalNode` argument while creating a volume using `pxctl` will place at least one replica of the volume on the node where the command is run.
+### Using the --nodes Argument
+
+Adding the `--nodes=LocalNode` argument while creating a volume with `pxctl` will place at least one replica of the volume on the node where the command is run.
 
 This is useful when using a script to create a volume locally on a node.
 
-**Command**
+Let's look at a simple example. Say you want to create a volume named `localVolume` and place a replica of the volume on the local node. If so, you should run something like the following:
 
 ```text
 pxctl volume create --nodes=LocalNode localVolume
@@ -146,7 +190,7 @@ pxctl volume create --nodes=LocalNode localVolume
 Volume successfully created: 756818650657204847
 ```
 
-Now inspect the volume and check that the volume's replica is on the node where the command was run. The replicas are visible in the _"Replica sets on nodes"_ section.
+Now, let's quickly check that the volume's replica is on the node where the command was run:
 
 ```text
 pxctl volume inspect localVolume
@@ -177,41 +221,87 @@ Volume  :  756818650657204847
         Replication Status       :  Detached
 ```
 
-#### Create with Docker {#create-with-docker}
+{{<info>}}
+The replicas are visible in the _"Replica sets on nodes"_ section.
+{{</info>}}
 
-All `docker volume` commands are reflected into Portworx storage. For example, a `docker volume create`command provisions a storage volume in a Portworx storage cluster.
+### Creating volumes with Docker
 
-```text
-docker volume create -d pxd --name <volume_name>
-```
+All `docker volume` commands are reflected in _Portworx_. For example, a `docker volume create` command provisions a storage volume in a _Portworx_ storage cluster.
 
-As part of the `docker volume` command, you can add optional parameters through the `--opt` flag. The option parameters are the same, whether you use Portworx storage through the Docker volume or the `pxctl`commands.
-
-Example of options for selecting the container’s filesystem and volume size:
+The following `docker volume` command creates a volume named `testVol`:
 
 ```text
-docker volume create -d pxd --name <volume_name> --opt fs=ext4 --opt size=10G
+docker volume create -d pxd --name testVol
 ```
 
-### Inline volume spec {#inline-volume-spec}
+```
+testVol
+```
 
-PX supports passing the volume spec inline along with the volume name. This is useful when creating a volume with your scheduler application template inline and you do not want to create volumes before hand.
+Just to make sure the command is reflected into _Portworx_, try running this command:
 
-For example, a PX inline spec can be specified as the following:
+
+```text
+pxctl volume list --name testVol
+```
+
+You should see something like:
+
+```
+ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS		SNAP-ENABLED
+426544812542612832	testVol	1 GiB	1	no	no		LOW		up - detached	no
+```
+
+### The --opt flag
+
+As part of the `docker volume` command, you can add optional parameters through the `--opt` flag. The parameters are the same, whether you use _Portworx_ storage through the Docker volume or the `pxctl` command.
+
+The command below uses the `--opt` flag to set the container's filesystem and volume size:
+
+```text
+docker volume create -d pxd --name opt_example --opt fs=ext4 --opt size=1G
+```
+
+```
+opt_example
+```
+
+Now, let's check by running this command:
+
+```
+pxctl volume list --name opt_example
+```
+
+```
+ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS		SNAP-ENABLED
+282820401509248281	opt_example	1 GiB	1	no	no		LOW		up - detached	no
+```
+
+We're all set.
+
+## Inline volume spec
+
+_PX_ supports passing the volume spec inline along with the volume name. This is useful if you want to create a volume with your scheduler application template inline and do not want to create volumes beforehand.
+
+For example, a _PX_ inline spec looks like this:
 
 ```text
 docker volume create -d pxd io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume
 ```
 
-This is useful when you need to create a volume dynamically while using docker run. For example, the following command will create a volume and launch the container dynamically:
+Let's look at another example that uses `docker run` to create a volume dynamically:
 
 ```text
 docker run --volume-driver pxd -it -v io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume:/data busybox sh
 ```
+The above command will create a volume called `demovolume` with an initial size of 10G, HA factor of 3, snap schedule with periodic and daily snapshot creation, and a high IO priority level. Next, it will start the busybox container dynamically.
 
-The above command will create a volume called demovolume with an initial size of 10G, HA factor of 3, snap scheudle with periodic and daily snapshot creation and a IO priority level of high and start the busybox container.
+{{<info>}}
+The spec keys must be comma separated.
+{{</info>}}
 
-Each spec key must be comma separated. The following are supported key value pairs:
+`pxctl` provides support for the following key value pairs:
 
 ```
 IO priority      - io_priority=[high|medium|low]
@@ -224,7 +314,7 @@ Encryption       - passphrase=secret
 snap_schedule    - "periodic=mins#k;daily=hh:mm#k;weekly=weekday@hh:mm#k;monthly=day@hh:mm#k" where k is the number of snapshots to retain.
 ```
 
-These inline specs can be passed in through the scheduler application template. For example, below is a snippet from a marathon configuration file:
+The inline specs can be passed in through the scheduler application template. For example, below is a snippet from a marathon configuration file:
 
 ```
 "parameters": [
@@ -238,16 +328,16 @@ These inline specs can be passed in through the scheduler application template. 
 	}],
 ```
 
-### Global Namespace \(Shared Volumes\) {#global-namespace-shared-volumes}
+## Global Namespace \(Shared Volumes\)
 
-To use Portworx volumes across nodes and multiple containers, [click here](/concepts/shared-volumes).
+{{% content "concepts/shared/shared-volumes.md" %}}
 
-### Delete volumes {#delete-volumes}
+## Deleting volumes
 
-Volumes can be deleted with:
+Volumes can be deleted like so:
 
 ```text
-/opt/pwx/bin/pxctl volume delete myOldVol
+pxctl volume delete myOldVol
 ```
 
 ```
@@ -255,12 +345,15 @@ Delete volume 'myOldVol', proceed ? (Y/N): y
 Volume myOldVol successfully deleted.
 ```
 
-### Import volumes {#import-volumes}
+## Importing volumes
 
 Files can be imported from a directory into an existing volume. Files already existing on the volume will be retained or overwritten.
 
+As an example, you can import files from `/path/to/files` into `myVol` with the following:
+
+
 ```text
-/opt/pwx/bin/pxctl volume import --src /path/to/files myVol
+pxctl volume import --src /path/to/files myVol
 ```
 
 ```
@@ -271,12 +364,12 @@ Imported Files :   0% [>--------------------------------------------------------
 Volume imported successfully
 ```
 
-### Inspect volumes {#inspect-volumes}
+## Inspecting volumes
 
-Volumes can be inspected for their settings and usage using the `pxctl volume inspect` sub menu.
+To find out more information about a volume's settings and its usage, run:
 
 ```text
-/opt/pwx/bin/pxctl volume inspect clitest
+pxctl volume inspect clitest
 ```
 
 ```
@@ -304,14 +397,14 @@ Volume	:  970758537931791410
 	Replication Status	 :  Detached
 ```
 
+{{<info>}}
 You can also inspect multiple volumes in one command.
+{{</info>}}
 
-To inspect the volume in `json` format, use the `-j` flag. Following is a sample output of:
-
-Following is a sample output of the json volume inspect.
+To inspect the volume in `json` format, run `pxctl volume inspect` with the `-j` flag:
 
 ```text
-/opt/pwx/bin/pxctl -j v i 486256711004992211
+pxctl -j volume inspect 486256711004992211
 ```
 
 ```
@@ -403,12 +496,16 @@ Following is a sample output of the json volume inspect.
 }]
 ```
 
-### Volume list {#volume-list}
+{{<info>}}
+The above command can be abbreviated as `pxctl -j volume inspect 486256711004992211`
+{{</info>}}
 
-This will list all of the volumes on the cluster.
+## Listing volumes
+
+To list all volumes within a cluster, use this command:
 
 ```text
-/opt/pwx/bin/pxctl volume list
+pxctl volume list
 ```
 
 ```
@@ -419,12 +516,12 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS				SNAP-ENABLED
 800735594334174869	testvol3	1 GiB	1	no	no		LOW		up - detached			no
 ```
 
-### Volume locate {#volume-locate}
+## Locating volumes
 
-This will show where a given volume is mounted on containers running on the node.
+`pxctl` shows where a given volume is mounted in the containers running on the node:
 
 ```text
-/opt/pwx/bin/pxctl volume locate 794896567744466024
+pxctl volume locate 794896567744466024
 ```
 
 ```
@@ -433,85 +530,82 @@ host mounted:
   /directory2
 ```
 
-In the example above, the volume represented by ID 794896567744466024 is mounted in two containers on the mountpoints shown.
+In this example, the volume is mounted in two containers via the `/directory1` and `/directory2` mount points.
 
-### Volume snapshots {#volume-snapshots}
+## Volume snapshots
 
-You can take snapshots of PX volumes. Snapshots are thin and do not take additional space. PX snapshots use branch-on-write so that there is no additional copy when a snapshot is written to. This is done through B+ Trees.
+{{% content "reference/CLI/shared/intro-snapshots.md" %}}
 
-```text
-/opt/pwx/bin/pxctl volume snapshot
-```
-
-```
-NAME:
-   pxctl volume snapshot - Manage volume snapshots
-
-USAGE:
-   pxctl volume snapshot command [command options] [arguments...]
-
-COMMANDS:
-     create, c  Create a volume snapshot
-
-OPTIONS:
-   --help, -h  show help
-```
+{{% content "reference/CLI/shared/creating-snapshots.md" %}}
 
 Snapshots are read-only. To restore a volume from a snapshot, use the `pxctl volume restore` command.
 
-### Volume Clone {#volume-clone}
+## Volume Clone
 
-In order to create a volume clone from volume/snapshot, Use `pxctl volume clone` command.
+In order to create a volume clone from a volume or snapshot, use the `pxctl volume clone` command.
 
-```text
-/opt/pwx/bin/pxctl voliume clone -h
-```
+Let's first refer to the in-built help, which can be accessed by giving the `--help` argument:
 
-```
-NAME:
-   pxctl volume clone - Create a clone volume
-
-USAGE:
-   pxctl volume clone [command options] volume-name-or-ID
-
-OPTIONS:
-   --name value             user friendly name
-   --label pairs, -l pairs  list of comma-separated name=value pairs
-```
-
-In the below example, `myvol_clone` is the clone from the parent volume `myvol`
 
 ```text
-/opt/pwx/bin/pxctl volume clone -name myvol_clone myvol
+pxctl volume clone --help
+```
+
+```
+Create a clone volume
+
+Usage:
+  pxctl volume clone [flags]
+
+Aliases:
+  clone, cl
+
+Examples:
+pxctl volume clone [flags] volName
+
+Flags:
+      --name string    clone name
+  -l, --label string   list of comma-separated name=value pairs
+  -h, --help           help for clone
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+```
+
+
+As an example, if we want to make a clone named `myvol_clone` from the parent volume `myvol`, we can run:
+
+
+```text
+pxctl volume clone -name myvol_clone myvol
 ```
 
 ```
 Volume clone successful: 55898055774694370
 ```
 
-### Volume Restore {#volume-restore}
+## Volume Restore
 
 {{% content "reference/CLI/shared/restore-volume-from-snapshot.md" %}}
 
-### Update the snap interval of a volume {#volume-siu}
+## Update the snap interval of a volume
 
-```
-Flags:
-  -p, --periodic string   periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
-      --policy string     policy names separated by comma
-  -d, --daily strings     daily snapshot at specified hh:mm,k (keeps 7 by default)
-  -w, --weekly strings    weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-  -m, --monthly strings   monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
-```
+Please see the documentation for [snapshots] (/reference/cli/snapshots) for more details.
 
-Please see the documentation for (snapshots)[https://docs.portworx.com/reference/cli/snapshots/] for more details.
+## Volume stats
 
-### Volume stats {#volume-stats}
-
-Shows realtime read/write IO throughput.
+`pxctl` shows the realtime read/write IO throughput:
 
 ```text
-/opt/pwx/bin/pxctl volume stats mvVol
+pxctl volume stats mvVol
 ```
 
 ```

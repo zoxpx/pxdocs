@@ -117,7 +117,7 @@ A timestamp is associated with each internal kvdb backup that is taken. Choose o
 On the node where the latest backup exists, rename the backup file to `pwx_kvdb_disaster_recovery_golden.dump`.
 
 ```text
-cp pwx_kvdb_schedule_153664_2019-02-06T22:30:39-08:00.dump pwx_kvdb_disaster_recovery_golden.dump
+cp /var/cores/kvdb_backup/pwx_kvdb_schedule_153664_2019-02-06T22:30:39-08:00.dump /var/cores/kvdb_backup/pwx_kvdb_disaster_recovery_golden.dump
 ```
 
 ### Step 3: Restart Portworx

@@ -7,6 +7,8 @@ hidden: true
 disableprevnext: true
 ---
 
+{{<info>}}The deployment model on this page is still in alpha stage. If possible, users are recommendeded to use [Portworx install on PKS on vSphere using shared datastores](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-shared){{</info>}}
+
 ## Pre-requisites
 
 * This page assumes you have a running etcd cluster. If not, return to [Installing etcd on PKS](/portworx-install-with-kubernetes/on-premise/install-pks#install-etcd-pks).
@@ -80,6 +82,16 @@ rules:
   verbs: ["delete", "get", "list"]
 - apiGroups: [""]
   resources: ["persistentvolumeclaims", "persistentvolumes"]
+  verbs: ["get", "list"]
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["get", "list", "update", "create"]
+- apiGroups: ["extensions"]
+  resources: ["podsecuritypolicies"]
+  resourceNames: ["privileged"]
+  verbs: ["use"]
+- apiGroups: ["portworx.io"]
+  resources: ["volumeplacementstrategies"]
   verbs: ["get", "list"]
 ---
 kind: ClusterRoleBinding
@@ -376,8 +388,8 @@ metadata:
    name: stork-role
 rules:
   - apiGroups: [""]
-    resources: ["pods"]
-    verbs: ["get", "list", "delete"]
+    resources: ["pods", "pods/exec"]
+    verbs: ["get", "list", "delete", "create"]
   - apiGroups: [""]
     resources: ["persistentvolumes"]
     verbs: ["get", "list", "watch", "create", "delete"]
@@ -390,9 +402,15 @@ rules:
   - apiGroups: [""]
     resources: ["events"]
     verbs: ["list", "watch", "create", "update", "patch"]
+  - apiGroups: ["stork.libopenstorage.org"]
+    resources: ["rules"]
+    verbs: ["get", "list"]
+  - apiGroups: ["stork.libopenstorage.org"]
+    resources: ["migrations", "clusterpairs", "groupvolumesnapshots"]
+    verbs: ["get", "list", "watch", "update", "patch"]
   - apiGroups: ["apiextensions.k8s.io"]
     resources: ["customresourcedefinitions"]
-    verbs: ["create", "list", "watch", "delete"]
+    verbs: ["create", "get"]
   - apiGroups: ["volumesnapshot.external-storage.k8s.io"]
     resources: ["volumesnapshots"]
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
@@ -414,6 +432,9 @@ rules:
   - apiGroups: ["*"]
     resources: ["statefulsets", "statefulsets/extensions"]
     verbs: ["list", "get", "watch", "patch", "update", "initialize"]
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["list", "get"]
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -472,7 +493,7 @@ spec:
         - --verbose
         - --leader-elect=true
         imagePullPolicy: Always
-        image: openstorage/stork:1.1.3
+        image: openstorage/stork:2.1.1
         resources:
           requests:
             cpu: '0.1'
