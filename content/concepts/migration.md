@@ -2,7 +2,7 @@
 title: Migration
 description: Move stateful applications between clusters using PX-Motion
 keywords: portworx, cloud, migration, px-motion
-weight: 1
+weight: 100
 series: concepts
 aliases:
   - /cloud-references/migration/
