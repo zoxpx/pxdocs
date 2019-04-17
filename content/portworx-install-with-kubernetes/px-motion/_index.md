@@ -9,50 +9,79 @@ aliases:
   - /cloud-references/migration/migration-stork
 ---
 
-## Pre-requisites
-* **Version**: The source AND destination clusters need the v2.0 or later
-release of PX-Enterprise on both clusters. As future releases are made, the two
-clusters can have different PX-Enterprise versions (e.g. v2.1 and v2.3). Also requires stork v2.0+ on the source cluster.
-* **Secret Store** : Make sure you have configured a [secret store](/key-management) on both your clusters.
-This will be used to store the credentials for the objectstore.
-* **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be
-reachable by the source cluster.
+This document will walk you through how to migrate your _PX_ volumes between clusters with Stork on Kubernetes.
+
+
+## Prerequisites
+
+Before we begin, please make sure the following prerequisites are met:
+
+* **Version**: The source AND destination clusters need _PX-Enterprise_ v2.0 or later
+release. As future releases are made, the two clusters can have different _PX-Enterprise_ versions (e.g. v2.1 and v2.3).
+
+* **Stork v2.0+** is required on the source cluster.
+
 * **Stork helper** : `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
-The following steps can be used to download `storkctl`:
+Depending on your operating system, here are the steps you should follow in order to download and install `storkctl`:
   * Linux:
 
          ```bash
-curl http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/2.0.0/linux/storkctl -o storkctl &&
+curl http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/linux/storkctl -o storkctl &&
 sudo mv storkctl /usr/local/bin &&
 sudo chmod +x /usr/local/bin/storkctl
          ```
   * OS X:
 
          ```bash
-curl http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/2.0.0/darwin/storkctl -o storkctl &&
+curl http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/darwin/storkctl -o storkctl &&
 sudo mv storkctl /usr/local/bin &&
 sudo chmod +x /usr/local/bin/storkctl
          ```
   * Windows:
-      * Download [storkctl.exe](http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/2.0.0/windows/storkctl.exe)
+      * Download [storkctl.exe](http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/windows/storkctl.exe)
       * Move `storkctl.exe` to a directory in your PATH
 
+* **Secret Store** : Make sure you have configured a [secret store](/key-management) on both clusters. This will be used to store the credentials for the objectstore.
+
+* **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be
+reachable by the source cluster.
+
 ## Pairing clusters
-On Kubernetes you will define a trust object required to communicate with the destination cluster called a ClusterPair. This creates a pairing 
-with the storage driver (Portworx) as well as the scheduler (Kubernetes) so that the volumes and resources, can be migrated between
-clusters.
 
-### Get cluster token from destination cluster
-On the destination cluster, run the following command from one of the Portworx nodes to get the cluster token:
-   `/opt/pwx/bin/pxctl cluster token show`
+On Kubernetes you will define a trust object called **ClusterPair**. This object is required to communicate with the destination cluster. In a nutshell, it creates a pairing with the storage driver (_Portworx_) as well as the scheduler (Kubernetes) so that the volumes and resources can be migrated between clusters.
 
-### Generate ClusterPair spec
-Get the **ClusterPair** spec from the destination cluster. This is required to migrate Kubernetes resources to the destination cluster.
-You can generate the template for the spec using `storkctl generate clusterpair -n migrationnamespace remotecluster` on the destination cluster.
-Here, the name (remotecluster) is the Kubernetes object that will be created on the source cluster representing the pair relationship.
-During the actual migration, you will reference this name to identify the destination of your migration
+### Getting the cluster token from the destination cluster
+
+First, let's get the cluster token of the destination cluster. Run the following command from one of the _Portworx_ nodes in the **destination cluster**:
+
+
+```text
+pxctl cluster token show
 ```
-$ storkctl generate clusterpair -n migrationnamespace remotecluster
+
+You should see something like:
+
+```
+Token is 0795a0bcd46c9a04dc24e15e7886f2f957bfee4146442774cb16ec582a502fdc6aebd5c30e95ff40a6c00e4e8d30e31d4dbd16b6c9b93dfd56774274ee8798cd
+```
+
+### Generating the ClusterPair spec
+
+Now that we have the cluster token, the next thing we would want to do is to get the ClusterPair spec from the destination cluster. This is required to migrate _Kubernetes_ resources to the destination cluster.
+
+**On the destination cluster**, you can generate the template for the spec with this command:
+
+```text
+storkctl generate clusterpair -n <migrationnamespace> <remotecluster>
+```
+
+{{<info>}}
+The name ``<remotecluster>`` is the _Kubernetes_ object that will be created on the source cluster representing the pair relationship. During the actual migration, you will reference this name to identify the destination of your migration.
+{{</info>}}
+
+Running the above command should print something like this:
+
+```
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterPair
 metadata:
@@ -88,14 +117,15 @@ status:
 
 ### Update ClusterPair with storage options
 
-In the generated **ClusterPair** spec, you will need to add Portworx clusterpair information under spec.options. The required options are:
+Next, let's edit the  **ClusterPair** spec. Under `spec.options`, add  the following _Portworx_ clusterpair information:
 
-   1. **ip**: IP of one of the Portworx nodes on the destination cluster
-   2. **port**: Port on which the Portworx API server is listening for requests.
+   1. **ip**: the IP address of one of the _Portworx_ nodes on the destination cluster
+   2. **port**: the port on which the _Portworx_ API server is listening for requests.
       Default is 9001 if not specified
-   3. **token**: Cluster token generated in the [previous step](#get-cluster-token-from-destination-cluster)
+   3. **token**: the cluster token generated in the [previous step](#get-cluster-token-from-destination-cluster)
 
 The updated **ClusterPair** should look like this:
+
 ```
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterPair
@@ -131,45 +161,64 @@ status:
   schedulerStatus: ""
   storageStatus: ""
 ```
-Copy and save this to a file called clusterpair.yaml on the source cluster.
+Copy and save this to a file called `clusterpair.yaml` on the source cluster.
 
-### Create the ClusterPair
-On the source cluster create the clusterpair by applying the generated spec.
+### Creating the ClusterPair
+
+On the source cluster, create the clusterpair by applying `clusterpair.yaml`:
+
+```text
+kubectl apply -f clusterpair.yaml
 ```
-$ kubectl apply -f clusterpair.yaml
+
+```
 clusterpair.stork.libopenstorage.org/remotecluster created
 ```
 
-### Verify the Pair status
-Once you apply the above spec on the source cluster you should be able to check the status of the pairing. On a successful pairing, you should
-see the "Storage Status" and "Scheduler Status" as "Ready" using storkctl on the
-source cluster:
+### Verifying the Pair status
+
+Once you apply the above spec on the source cluster, you should be able to check the status of the pairing:
+
+```text
+storkctl get clusterpair
 ```
-$ storkctl get clusterpair
+
+On a successful pairing, you should see the "Storage Status" and "Scheduler Status" as "Ready":
+
+```
 NAME               STORAGE-STATUS   SCHEDULER-STATUS   CREATED
 remotecluster      Ready            Ready              26 Oct 18 03:11 UTC
 ```
 
+If so, you’re all set and ready to [migrate] (#migrating-volumes-and-resoruces).
+
 ### Troubleshooting
-If the status is in error state you can describe the clusterpair to get more information
-```
+
+If instead, you see an error, you should get more information by running:
+
+```text
 kubectl describe clusterpair remotecluster
 ```
 
-{{<info>}} *Note*: You might need to perform additional steps for [GKE](gke) and [EKS](eks) {{</info>}}
+{{<info>}}
+You might need to perform additional steps for [GKE](gke) and [EKS](eks)
+{{</info>}}
 
 ## Migrating Volumes and Resources
+
 Once the pairing is configured, applications can be migrated repeatedly to the destination cluster.
 
-### Starting Migration
+### Starting a migration
 
 #### Using a spec file
-In order to make the process schedulable and repeatable, you can write a YAML
-specification. In that YAML, you will specify an object called a Migration.
-In the specification, you will define the scope of the 
-applications to move and decide whether to automatically start the applications.
-Here, create a migration and save as migration.yaml.
-```
+
+In order to make the process schedulable and repeatable, you can write a YAML specification.
+
+In that file, you will specify an object called `Migration`. This object will define the scope of the applications to move and decide whether to automatically start the applications.
+
+Paste this to a file named `migration.yaml`.
+
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: Migration
 metadata:
@@ -188,47 +237,59 @@ spec:
   - migrationnamespace
 ```
 
-You can now invoke or schedule the now defined migration. This step is automateable or can
-be user invoked. In order to invoke from the command-line, run the following
-steps:
+Next, you can invoke this migration manually from the command line:
 
-```
+
+```text
 kubectl apply -f migration.yaml
 ```
 
-#### Using storkctl
-You can also start a migration using storkctl:
+or automate it through `storkctl`:
+
+```text
+storkctl create migration mysqlmigration --clusterPair remotecluster --namespaces migrationnamespace --includeResources --startApplications -n migrationnamespace
 ```
-$ storkctl create migration mysqlmigration --clusterPair remotecluster --namespaces migrationnamespace --includeResources --startApplications -n migrationnamespace
+
+```
 Migration mysqlmigration created successfully
 ```
 
 #### Migration scope
-Currently you can only migrate namespaces in which the object is created. You
-can also designate one namespace as an admin namepace. This will allow an admin
-who has access to that namespace to migrate any namespace from the source
-cluster. Instructions for setting this admin namespace to stork can be found
-[here](cluster-admin-namespace)
 
-### Monitoring Migration
-Once the migration has been started using the above step, you can check the status of the migration using storkctl
+Currently, you can only migrate namespaces in which the object is created. You can also designate one namespace as an admin namespace. This will allow an admin who has access to that namespace to migrate any namespace from the source cluster. Instructions for setting this admin namespace to stork can be found [here](cluster-admin-namespace)
+
+### Monitoring a migration
+
+Once the migration has been started using the above commands, you can check the status using `storkctl`:
+
+```text
+storkctl get migration -n migrationnamespace
 ```
-$ storkctl get migration -n migrationnamespace
+
+First, you should see something like this:
+```
 NAME            CLUSTERPAIR     STAGE     STATUS       VOLUMES   RESOURCES   CREATED
 mysqlmigration  remotecluster   Volumes   InProgress   0/1       0/0         26 Oct 18 20:04 UTC
 ```
 
-The Stages of migration will go from Volumes→ Application→Final if successful.
+If the migration is successful, the `Stage` will go from Volumes→ Application→Final.
+
+Here is how the output of a successful migration would look like:
+
 ```
-$ storkctl get migration -n migrationnamespace
 NAME            CLUSTERPAIR     STAGE     STATUS       VOLUMES   RESOURCES   CREATED
 mysqlmigration  remotecluster   Final     Successful   1/1       3/3         26 Oct 18 20:04 UTC
 ```
 
 ### Troubleshooting
-If there is a failure or you want more information about what resources were migrated you can describe the migration object using kubectl:
-```
+
+If there is a failure or you want more information about what resources were migrated you can `describe` the migration object using `kubectl`:
+
+```text
 $ kubectl describe migration mysqlmigration
+```
+
+```
 Name:         mysqlmigration
 Namespace:    migrationnamespace
 Labels:       <none>
@@ -286,6 +347,32 @@ Events:
   Normal  Successful  2m39s  stork  /v1, Kind=PersistentVolume /pvc-34bacd62-d7ee-11e8-ba98-0214683e8447: Resource migrated successfully
   Normal  Successful  2m39s  stork  /v1, Kind=PersistentVolumeClaim mysql/mysql-data: Resource migrated successfully
   Normal  Successful  2m39s  stork  apps/v1, Kind=Deployment mysql/mysql: Resource migrated successfully
+```
+
+## Pre and Post Exec rules
+
+Similar to snapshots, a PreExec and PostExec rule can be specified when creating a Migration object. This will result in the PreExec rule being run before the migration is triggered and the PostExec rule to be run after the Migration has been triggered. If the rules do not exist, the Migration will log an event and will stop.
+
+If the **PreExec rule fails** for any reason, it will log an event against the object and retry. **The Migration will not be marked as failed.**
+
+If the **PostExec rule fails** for any reason, it will log an event and **mark the Migration as failed**. It will also try to cancel the migration that was started from the underlying storage driver.
+
+As an example, to add pre and post rules to our migration, we could edit our `migration.yaml` file like this:
+
+```text
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: Migration
+metadata:
+  name: mysqlmigration
+  namespace: mysql
+spec:
+  clusterPair: remotecluster
+  includeResources: true
+  startApplications: true
+  preExecRule: mysql-pre-rule
+  postExecRule: mysql-post-rule
+  namespaces:
+  - mysql
 ```
 
 ## Advanced Operations
