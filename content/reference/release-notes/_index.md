@@ -33,12 +33,12 @@ series: reference
 
 ### Key Fixes
 
-* PWX-8063 - Startup issue with 4.19.0-0.bpo.2-cloud-amd64                                                                      
-* PWX-8060 - Cloud backup restore fails with json unmarshall error                                                  
-* PWX-7989 - Fix licensing issue which was leading to reducing the number of nodes allowed in the cluster. Differentiate between NEW and PRE-EXISTING node failing to join the cluster, and do not cleanup if PRE-EXISTING nodes were the ones causing the failures.                       
+* PWX-8063 - Startup issue with 4.19.0-0.bpo.2-cloud-amd64
+* PWX-8060 - Cloud backup restore fails with json unmarshall error
+* PWX-7989 - Fix licensing issue which was leading to reducing the number of nodes allowed in the cluster. Differentiate between NEW and PRE-EXISTING node failing to join the cluster, and do not cleanup if PRE-EXISTING nodes were the ones causing the failures.
 * PWX-7980 - Do not cleanup CloudDrives when the drives are initialized and have labels
-* PWX-7968 - Cloudsnaps cleanup fails because of missing start timestamp in metadata                                                         
-* PWX-7963 - Cloudsnap restore for xfs volumes has wrong fs type                                        
+* PWX-7968 - Cloudsnaps cleanup fails because of missing start timestamp in metadata
+* PWX-7963 - Cloudsnap restore for xfs volumes has wrong fs type
 * PWX-7794 - LIC: Aggressive node-decomissions and "Cluster max capacity" error handling
 
 ## 2.0.3
@@ -59,7 +59,7 @@ series: reference
 * PWX-6868 - Prometheus framework update  to add Portworx support
 * PWX-7448 - Show proper error for incorrect pxctl commands
 * PWX-7468 - node-wiper script to wipe the namespace created by k8s secrets
-* PWX-7481 - Shared volume failed to detach with an error that the Volume is mounted while Volume was not mounted 
+* PWX-7481 - Shared volume failed to detach with an error that the Volume is mounted while Volume was not mounted
 * PWX-7485 - Display appropriate message when cluster wide diags can not be collected
 * PWX-7491 - Drive provisioning fixes for issues where extra drives were created than what was specified in the spec.
 * PWX-7512 - Speed up portworx install in DC/OS clusters by installing in each node in parallel.
@@ -68,7 +68,7 @@ series: reference
 * PWX-7571 - CloudSnap : Restore fails sometimes with "failed to get metadata of the backup from cloud"
 * PWX-7595 - Handle spurious storage pool Full/offline condition
 * PWX-7596 - PX creates node labels for every PVs, causing prometheus federation scraping issues
-* PWX-7604 - Anonymize the secrets for Key Management Systems 
+* PWX-7604 - Anonymize the secrets for Key Management Systems
 * PWX-7605 - DCOS Portworx-prometheus pod replace does not work as expected
 * PWX-7619 - Make KVDB urls optional
 * PWX-7628 - Alertmanager does not run after installing PX 2.0.2
@@ -151,14 +151,14 @@ series: reference
 * PWX-7089 - Intermittent failures in `pxctl cloudsnap list`
 * PWX-6852 - If PX starts before Docker is started, the `SchedulerName` field in pxctl CLI shows as N/A
 * PWX-7129 - Add an option to improve filesystem space utilization in case of SSD/NVMe drives
-* PWX-7011 - Cluster pairing for cluster migratino fails when one of the nodes in the destination cluster is down 
+* PWX-7011 - Cluster pairing for cluster migratino fails when one of the nodes in the destination cluster is down
 * PWX-7120 - Cloudsnap restore failures cannot be viewed through `pxctl cloudsnap status`
 
 ## 2.0.0.1
 
 ### Key Fixes
 
-* PWX-7131 - Fix an issue with some of the alerts IDs mismatching with the description as part of the upgrade 
+* PWX-7131 - Fix an issue with some of the alerts IDs mismatching with the description as part of the upgrade
   from 1.x versio to 2.0.
 * PWX-7122 - Volume restores would occasionally fail when restoring from backups that were done with PX 1.x versions.
 
@@ -167,31 +167,31 @@ series: reference
 ### Key Features
 
 * PX-Motion - Migration of applications and data between clusters. Application migration is Kubernetes only.
-* PX-Central - Single pane of glass for management, monitoring and metadata services across multiple 
+* PX-Central - Single pane of glass for management, monitoring and metadata services across multiple
    PX clusters on Kubernetes
-* Lighthouse 2.0 - Supports PX-motion with connection to Kubernetes cluster for application and namespace migration. 
+* Lighthouse 2.0 - Supports PX-motion with connection to Kubernetes cluster for application and namespace migration.
 * Shared volumes (v4) for Kubernetes
 * Support Cloudsnaps for Aggregated volumes
-* ‘Extent’ based cloudsnaps - Restartable Cloudsnaps if a large volume cloudsnap gets interrupted 
-* Support Journal device for Repl=1 volumes 
-* PX-kvdb (etcd) supported internally with PX cluster deployment 
-   
+* ‘Extent’ based cloudsnaps - Restartable Cloudsnaps if a large volume cloudsnap gets interrupted
+* Support Journal device for Repl=1 volumes
+* PX-kvdb (etcd) supported internally with PX cluster deployment
+
 ### Key Fixes
 
 * PWX-6458: When decreasing HA of a volume, recover snapshot space unused.
 * PWX-5686: Implement accounting and display of space utilized by snapshots and clones.
-* PWX-6949: Decommissioned node getting listed from one node in the cluster and not from the other 
+* PWX-6949: Decommissioned node getting listed from one node in the cluster and not from the other
 * PWX-6617: PDM: Dump the cloud drive keys when PX loses kvdb connectivity.
 * PWX-5876: Volume should get detached when out of quorum or pool down.
 
-### Errata 
+### Errata
 
 * PWX-7011: Cluster pair creation failing, because of destination PX node is marked down
   Workaround: Restart the PX node and attempt the cluster pairing again
 
 * PWX-7041: CloudSnap Backup Failed for Pause/Resume by PX Restart - All replicas are down
 
-  Workaround: This is a variant of the previous errata. 
+  Workaround: This is a variant of the previous errata.
   For volume with replication factor set to 1, Cloudsnap backup does not resume after the node with replica goes down.
 
 ## 1.7.6
@@ -205,7 +205,7 @@ series: reference
 
 ## 1.7.5
 
-* PWX-7364 Namespace stuck volume issue 
+* PWX-7364 Namespace stuck volume issue
 * PWX-7299 export pool_status as a stat for prometheus
 * PWX-7267 LIC: Hide unknown/non-handled licenses
 * PWX-7212 Cloudsnap-Restore: Increase restore verbose level for error cases
@@ -223,7 +223,7 @@ series: reference
 ## 1.7.3
 
 * Provide a runtime option to enable more compact data out of flash media to avoid disk fragementation
-* Fix an issue with NVMe/SSD disks being shown as Magnetic disks 
+* Fix an issue with NVMe/SSD disks being shown as Magnetic disks
 
 ## 1.7.2
 
@@ -404,7 +404,7 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 * 3DSnaps - Ability to take [application-consistent](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
   snapshots cluster wide (Available in 05/14 GA version)
   * Volume Group snapshots - Ability to take crash-consistent snapshots on group of volumes based on a user-defined label
-* GCP/GKE automated disk management based on [disk templates](/portworx-install-with-kubernetes/cloud/gke)
+* GCP/GKE automated disk management based on [disk templates](/portworx-install-with-kubernetes/cloud/gcp/gke/)
 * [Kubernetes per volume secret support](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs) to enable
   volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
 * DC/OS vault integration - Use [Vault integrated with DC/OS](/install-with-other/dcos)
@@ -900,7 +900,7 @@ None
 ### 1.2.9 Release notes {#129-release-notes}
 
 {{<info>}}
-**Important:**  
+**Important:**
 If you are upgrading from an older version of PX \(1.2.8 or older\) and have PX volumes in attached state, you will need node reboot after upgrade in order for the new version to take effect properly.
 {{</info>}}
 

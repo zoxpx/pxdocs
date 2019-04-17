@@ -38,6 +38,8 @@ Once you have the spec, proceed below.
 
 {{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
 
+{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+
 ## Wipe Portworx installation
 
 Below are the steps to wipe your entire Portworx installation on PKS.

@@ -7,7 +7,7 @@ linkTitle: GCP
 noicon: true
 ---
 
-{{<info>}}If you are running on GKE, visit [Portworx on GKE](/portworx-install-with-kubernetes/cloud/gke).{{</info>}}
+{{<info>}}If you are running on GKE, visit [Portworx on GKE](/portworx-install-with-kubernetes/cloud/gcp/gke/).{{</info>}}
 
 The steps below will help you enable dynamic provisioning of Portworx volumes in your GCP cluster.
 

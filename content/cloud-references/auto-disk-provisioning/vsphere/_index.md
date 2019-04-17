@@ -58,3 +58,4 @@ You will need to change the following sections in the downloaded spec to match y
 2. **VSPHERE_DATASTORE_PREFIX**: Prefix of the ESXi datastore(s) that Portworx will use for storage.
 
 {{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
+{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}

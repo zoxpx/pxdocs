@@ -12,3 +12,5 @@ If you are generating the DaemonSet spec via the GUI wizard, select **OpenShift*
 {{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
 
 {{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
+
+{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}

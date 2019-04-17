@@ -28,6 +28,8 @@ Once you have the spec, proceed below.
 
 {{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
 
+{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+
 ## Wipe Portworx installation
 
 Below are the steps to wipe your entire Portworx installation on PKS.
@@ -54,7 +56,7 @@ You need to change below things in the spec to match your environment. These are
 2. **Cluster ID** in the -c argument. Choose a unique cluster ID.
 3. **VSPHERE_VCENTER**: Hostname of the vCenter server.
 4. **VSPHERE_DATASTORE_PREFIX**: Prefix of the ESXi datastore(s) that Portworx will use for storage.
-5. **Size of disks**: In the Portworx Daemonset arguments below, change `size=100` to the size of the disks you want each Portworx node in the cluster to create. 
+5. **Size of disks**: In the Portworx Daemonset arguments below, change `size=100` to the size of the disks you want each Portworx node in the cluster to create.
   * For e.g if you have 10 nodes in your cluster and you give size=100, each Portworx node will create a 100GB disk in the shared datastore and the cluster storage capacity will be 1TB.
 
 
