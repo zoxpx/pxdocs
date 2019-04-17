@@ -1,30 +1,14 @@
 ---
-title: Security
+title: Overview
 description: Explanation on the security model used in Portworx
 keywords: portworx, security, ownership, tls, rbac, claims, jwt, oidc
-weight: 3
-series: concepts
+weight: 10
+series: authorization
 ---
 
 From version 2.1, Portworx has support for security. This document provides a
 high level overview of the different components used to secure Portworx.
 
-## Terminology
-
-| Term | Definition |
-| ---- | ---------- |
-| ACL | Access Control List identifying those accounts which can access a resource|
-| claims | Information contained in the payload of the JWT identifying the owner of the request |
-| CO | Container Orchestration System like Kubernetes, Mesosphere, or Nomad |
-| JWT | JSON Web Token |
-| OIDC | OpenID Connect |
-| RBAC | Role Based Access Control defined by the rules of a role |
-| role | A named set of rules |
-| rules | A description of the permissions for a role |
-| token | A JSON Web Token which is signed by a token authority identifying the owner of the request |
-| token authority | Application used to generate and sign an identification token |
-
-## Overview
 Portworx security centers around the obiquitous JWT based authentication and
 authorization model. This technology is currently used by most major internet
 systems, providing a proven secure model for user and account identification.
@@ -44,6 +28,22 @@ the RBAC information to determine if the user is authorized to make the request.
 Once Portworx has authenticated and authorized the user, it can then use
 the username of the user and group information available in the claims to
 determine if they have access to a resource requested.
+
+## Terminology
+
+| Term | Definition |
+| ---- | ---------- |
+| ACL | Access Control List identifying those accounts which can access a resource|
+| claims | Information contained in the payload of the JWT identifying the owner of the request |
+| CO | Container Orchestration System like Kubernetes, Mesosphere, or Nomad |
+| JWT | JSON Web Token |
+| OIDC | OpenID Connect |
+| RBAC | Role Based Access Control defined by the rules of a role |
+| role | A named set of rules |
+| rules | A description of the permissions for a role |
+| token | A JSON Web Token which is signed by a token authority identifying the owner of the request |
+| token authority | Application used to generate and sign an identification token |
+
 
 ## Security Models
 Portworx security is composed of three models:
@@ -160,5 +160,4 @@ For more inforamtion, see also:
 * [OpenStorge SDK](https://libopenstorage.github.io/w/)
 * [Authorization with pxctl](/reference/cli/authorization)
 * [Role management with pxctl](/reference/cli/role)
-
 

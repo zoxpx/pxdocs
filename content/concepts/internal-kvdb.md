@@ -2,7 +2,7 @@
 title: Internal Kvdb
 description: Explanation on internal kvdb used by Portworx
 keywords: portworx, kvdb
-weight: 3
+weight: 300
 series: concepts
 ---
 
