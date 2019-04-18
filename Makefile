@@ -1,7 +1,7 @@
 BUILDER_IMAGE?=pxdocs:developer
 SEARCH_INDEX_IMAGE?=pxdocs-search-index:developer
 DEPLOYMENT_IMAGE?=pxdocs-deployment:developer
-PORT=1313
+PORT?=1313
 CONTAINER_NAME=pxdocs-develop
 
 .PHONY: image
