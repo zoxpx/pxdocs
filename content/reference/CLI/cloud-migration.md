@@ -17,7 +17,7 @@ With _Portworx_, there are two ways of migrating volumes between clusters:
 * using `pxctl` or
 * using `Stork` on `Kubernetes`
 
-This document will cover the steps required to migrate _PX_ volumes between clusters using `pxctl`. If you want to migrate your volumes using `Stork` on `Kubernetes`, head over to the [PX-Motion] (/portworx-install-with-kubernetes/px-motion/) page.
+This document will cover the steps required to migrate _PX_ volumes between clusters using `pxctl`. If you want to migrate your volumes using `Stork` on `Kubernetes`, head over to the [PX-Motion](/portworx-install-with-kubernetes/migration/px-motion/) page.
 
 
 ## Prerequisites
