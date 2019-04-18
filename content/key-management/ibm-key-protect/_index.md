@@ -80,7 +80,7 @@ While deploying Portworx using helm chart on an IKS cluster, by default Portworx
 In a non-IKS cluster, set the `secretType` as `ibm-kp` in the helm chart's values.yml configuration file.
 
 ##### Using Portworx Spec Generator
-When generating the [Portworx Kubernetes spec file](https://install.portworx.com/2.0), select `IBM Key Protect` from the "Secrets type" list.
+When generating the [Portworx Kubernetes spec file](https://install.portworx.com/2.1), select `IBM Key Protect` from the "Secrets type" list.
 
 #### Existing installation
 

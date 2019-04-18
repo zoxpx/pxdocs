@@ -73,7 +73,7 @@ Make sure to replace the `Project ID`, `Key Ring Name` and `Asymmetric Key Name`
 
 - **New installation**
 
-When generating the [Portworx Kubernetes spec file](https://install.portworx.com/2.0), select `Google Cloud KMS` from the "Secrets type" list.
+When generating the [Portworx Kubernetes spec file](https://install.portworx.com/2.1), select `Google Cloud KMS` from the "Secrets type" list.
 
 - **Existing installation**
 

@@ -25,7 +25,7 @@ This topic explains how to load these images onto your nodes when they don't hav
 2. Pull all Portworx images
 
     ```text
-    PX_IMGS="$(curl -fsSL "https://install.portworx.com/2.0/?kbver=$KBVER&type=oci&lh=true&ctl=true&stork=true" | awk '/image: /{print $2}' | sort -u)"
+    PX_IMGS="$(curl -fsSL "https://install.portworx.com/2.1/?kbver=$KBVER&type=oci&lh=true&ctl=true&stork=true" | awk '/image: /{print $2}' | sort -u)"
     PX_IMGS="$PX_IMGS portworx/talisman:latest portworx/px-node-wiper:latest"
     PX_ENT=$(echo "$PX_IMGS" | sed 's|^portworx/oci-monitor:|portworx/px-enterprise:|p;d')
 

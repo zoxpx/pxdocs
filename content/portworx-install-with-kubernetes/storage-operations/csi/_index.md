@@ -13,7 +13,7 @@ With CSI, Kubernetes gives storage drivers the opportunity to release on their s
 
 ### Install using the Portworx spec generator
 
-When [Generating the Portworx specs](https://install.portworx.com/2.0) select CSI under Customize->Advanced Settings. This will add the CSI components to the Portworx DaemonSet.
+When [Generating the Portworx specs](https://install.portworx.com/2.1) select CSI under Customize->Advanced Settings. This will add the CSI components to the Portworx DaemonSet.
 
 If you are using [curl to fetch the Portworx spec](/portworx-install-with-kubernetes/px-k8s-spec-curl), you can add `csi=true` to the parameter list to include CSI specs in the generated file.
 
