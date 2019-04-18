@@ -30,7 +30,7 @@ update-theme:
 
 .PHONY: develop
 develop: image
-	docker run -ti --rm \
+	docker run --rm \
 		$(DOCKER_EXTRA_ARGS) \
 		--name $(CONTAINER_NAME) \
 		-e VERSIONS_ALL \
