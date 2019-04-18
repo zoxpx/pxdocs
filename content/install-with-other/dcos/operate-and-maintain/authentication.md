@@ -7,7 +7,7 @@ linkTitle: Authorization with PX Clusters
 ---
 
 
-Once your PX Cluster has been setup as auth-enabled, there are a few steps you must take to integrate DC/OS with your auth-protected cluster.
+Once your PX Cluster has been [setup as auth-enabled](/concepts/authorization/install), there are a few steps you must take to integrate DC/OS with your auth-protected cluster.
 
 ## Authorization with your Portworx Cluster
 There are two ways you can authenticate with your cluster now that it is auth-enabled:

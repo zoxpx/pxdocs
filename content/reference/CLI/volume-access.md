@@ -27,26 +27,34 @@ To set access types, add one of the following suffixes to the group or collabora
 ## Volume access commands
 _Pxctl_ supports the following commands for updating volume access permissions.
 
-__Add volume access for a single group or collaborator__:
+#### Add volume access for a single group or collaborator ####
 
 ```text
 pxctl v access add <volume> --collaborator user1:a
 ```
 
-__Remove volume access from a group or collaborator__:
+#### Remove volume access from a group or collaborator ####
 
 ```text
 pxctl v access remove <volume> --collaborator user1
 ```
 
-__Show volume access__:
+#### Show volume access ####
 
 ```text
 pxctl v access show <volume>
 ```
 
-__Update full volume access spec__:
+#### Update full volume access spec ####
 
 ```text
 pxctl v access update <volume> --groups group1:r,group2:w --collaborators user1:a
 ```
+
+#### Updating volume ownership ####
+
+```text
+pxctl v access update <volume> --owner <username>
+```
+
+__Note:__ The volume owner can only be a single username. In addition, volume ownership updates can only be performed by administrators.

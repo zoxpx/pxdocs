@@ -14,6 +14,10 @@ This document outlines how to interact with an auth-enabled _PX_ cluster. The ma
 
 `pxctl` allows you to store contexts and associated clusters, privileges, and tokens local to your home directory. This way, you can easily switch between these configurations with a few commands.
 
+{{<info>}}
+Since `pxctl context` is stored locally per node, you will need to create your context on the node you're working on. 
+{{</info>}}
+
 To find out the available commands, type:
 
 ```text
@@ -132,8 +136,17 @@ groups: ["*"]
 
 ## Debugging token issues
 
+### Permission denied issues
 You may have gotten an unexpected `"Permission denied"` or other auth-related error. To take a look into your token permissions, you can always decode it with a JWT token decoding tool such as [jwt.io](https://jwt.io/)
 
 {{<info>}}
 [jwt.io](https://jwt.io/) does client-side validation and debugging. It does not store your token anywhere.
 {{</info>}}
+
+
+### Protocol error 
+If you're seeing the below error: 
+
+`rpc error: code = Internal desc = stream terminated by RST_STREAM with error code: PROTOCOL_ERROR`
+
+Make sure that your token does not accidentally contain a newline character. This is due to gRPC/http2 not allowing newline characters.

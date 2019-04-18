@@ -54,3 +54,10 @@ following command line arguments:
 | `jwt_ecds_pubkey_file <file path>` | JSON Web Token ECDS Public file path |
 | `username_claim <claim>` | Claim key from the token to use as the unique id of the user (<claim> is sub, email or name, default: sub) |
 
+## Upgrading from non-auth to auth
+A few steps must be taken to upgrade a cluster from non-auth to auth:
+
+1. Make sure to add auth configurations as documented above
+2. A new cluster token must be generated if you plan on performing cluster pairing and migrations. This can be done by executing `pxctl cluster token reset`.
+3. Ensure that all nodes are configured as auth-enabled. Mixed clusters of auth and non-auth nodes will allow for security vulnerabilities. 
+4. If you're using Kubernetes, ensure that the proper [security annotations](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/manage/#creating-volumes) have been added to your storage class.
