@@ -1,39 +1,64 @@
 ---
-title: Updating Volumes
+title: Updating Volumes using pxctl
 keywords: portworx, pxctl, command-line tool, cli, reference
 description: Updating volumes is done simply with Portworx. Use the pxctl volume update  command to update a specific parameters. Try today!
 weight: 3
 ---
 
-#### pxctl volume update {#pxctl-volume-update}
-
-`pxctl volume update` is used to update a specific parameter of the volume
-
-It has the following options.
+This section will walk you through the commands for updating your _Portworx_ volumes.
+First, let's use the built-in help that to discover the available commands:
 
 ```text
 sudo /opt/pwx/bin/pxctl volume update --help
-NAME:
-   pxctl volume update - Update volume settings
-
-USAGE:
-   pxctl volume update [command options] [arguments...]
-
-OPTIONS:
-   --shared value, -s value  set shared setting to on/off
-   --sticky on/off           set sticky setting to on/off
-   --scale factor            New scale factor [1...1024] (default: 0)
-   --size value              New size for the volume (GiB)
 ```
 
-**Change Shared Option**
+```
+Update volume settings
 
-Using the `--shared` flag, the volume namespace sharing across multiple volumes can be turned on or off.
+Usage:
+  pxctl volume update [flags]
 
-For e.g., for the volume clitest, here is the output of volume inpsect.
+Examples:
+pxctl volume update [flags] volName
+
+Flags:
+  -l, --label string        list of comma-separated name=value pairs to update (use empty label value to remove label)
+      --shared string       set shared setting (Valid Values: [on off]) (default "off")
+      --sticky string       set sticky setting (Valid Values: [on off]) (default "off")
+      --journal string      Journal data for this volume (Valid Values: [on off]) (default "off")
+      --early_ack string    Reply to async write requests after it is copied to shared memory (Valid Values: [on off]) (default "off")
+      --async_io string     Enable async IO to backing storage (Valid Values: [on off]) (default "off")
+      --nodiscard string    Disable discard support for this volume (Valid Values: [on off]) (default "off")
+      --io_profile string   IO Profile (Valid Values: [sequential cms db]) (default "sequential")
+      --sharedv4 string     set sharedv4 setting (Valid Values: [on off]) (default "off")
+      --queue_depth uint    block device queue depth (Valid Range: [1 256]) (default 128)
+      --scale uint          New scale factor (Valid Range: [1 1024]) (default 1)
+  -s, --size uint           New size for the volume (GiB) (default 1)
+  -h, --help                help for update
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+```
+
+## Sharing and unsharing volumes
+
+You can use the `--shared` flag to share or unshare a given volume across multiple namespaces.
+
+Say we've created a volume named `clitest`. You can see its settings using this command:
 
 ```text
-sudo /opt/pwx/bin/pxctl volume inspect clitest
+pxctl volume inspect clitest
+```
+
+```
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -56,16 +81,21 @@ Volume	:  970758537931791410
 			Node 	 :  10.99.117.133
 ```
 
-The `shared` field is shown as ‘no’ indicating that this is not a shared volume
+Note that the `shared` field is shown as `no`, indicating that `clitest` is not a shared volume.
+
+Next, let's turn on sharing:
 
 ```text
-sudo /opt/pwx/bin/pxctl volume update clitest --shared=on
+pxctl volume update clitest --shared=on
 ```
 
-Let’s do a `pxctl volume inspect` on the volume again.
+At this point, the volume's sharing settings should have been updated. We can easily check by running `pxctl volume inspect` on the volume again:
 
 ```text
-sudo /opt/pwx/bin/pxctl volume inspect clitest
+pxctl volume inspect clitest
+```
+
+```
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -88,17 +118,19 @@ Volume	:  970758537931791410
 			Node 	 :  10.99.117.133
 ```
 
-As shown above, the volume is shown as `shared=yes` indicating that this is a shared volume
+As shown above, the `shared` field is set to `yes` indicating that `clitest` is now a shared volume
 
-For adding the `--sticky` attribute to a volume, use the following command.
 
-**Change Volume Sticky Option**
+## Changing a volume's sticky option
+
+For adding the `--sticky` attribute to a volume, use the following command:
+
 
 ```text
-sudo /opt/pwx/bin/pxctl volume update clitest --sticky=on
+pxctl volume update clitest --sticky=on
 ```
 
-Doing a subsequent inspect on the volume shows the `attributes` field set to `sticky`
+Doing a subsequent inspect on the volume shows the `attributes` field set to `sticky`:
 
 ```text
 sudo /opt/pwx/bin/pxctl volume inspect clitest
@@ -126,15 +158,28 @@ Volume	:  970758537931791410
 			Node 	 :  10.99.117.133
 ```
 
-**Increase Volume Size**
 
-Here is an example of how to update size of an existing volume. Let’s create a volume with default parameters. This will create a volume of size 1 GB. We can verify this with volume inspect.
+## Increase volume size
+
+Here is an example of how to increase the size of an existing volume.
+
+First, let’s create a volume with the default parameters (1 GiB):
 
 ```text
-sudo /opt/pwx/bin/pxctl volume create vol_resize_test
-Volume successfully created: 485002114762355071
+pxctl volume create vol_resize_test
+```
 
-sudo /opt/pwx/bin/pxctl volume inspect vol_resize_test
+```
+Volume successfully created: 485002114762355071
+```
+
+Next, we would want inspect our new volume:
+
+```
+pxctl volume inspect vol_resize_test
+```
+
+```
 Volume	:  485002114762355071
 	Name            	 :  vol_resize_test
 	Size            	 :  1.0 GiB
@@ -158,29 +203,56 @@ Volume	:  485002114762355071
 			Node 	 :  172.31.55.104
 ```
 
-In order to update the size of the volume, a non-shared volume needs to be mounted on one of PX nodes. If it’s a shared volume, then this operation can be done from any of the nodes where the volume is attached.
+Note the default volume size - 1 GiB.
+
+{{<info>}}
+In order to update the size of a given volume, you should first mount it. If it’s a shared volume, then this operation can be done from any of the nodes where the volume is attached.
+{{</info>}}
+
+
+Now that we've created a new volume, let's attach it to resize it.
 
 ```text
-/opt/pwx/bin/pxctl host attach vol_resize_test
+pxctl host attach vol_resize_test
+```
+
+```
 Volume successfully attached at: /dev/pxd/pxd485002114762355071
+```
 
+With `vol_resize_test` attached, the next steps are to create a new directory:
+
+```text
 sudo mkdir /var/lib/osd/mounts/voldir
+```
 
-/opt/pwx/bin/pxctl host mount vol_resize_test /var/lib/osd/mounts/voldir
+and then mount the volume:
+
+```text
+pxctl host mount vol_resize_test /var/lib/osd/mounts/voldir
+```
+
+```
 Volume vol_resize_test successfully mounted at /var/lib/osd/mounts/voldir
 ```
 
-Let’s update size of this volume to 5 GB.
+Lastly, to update the size of this volume to 5 GB do:
 
 ```text
-/opt/pwx/bin/pxctl volume update vol_resize_test --size=5
+pxctl volume update vol_resize_test --size=5
+```
+
+```
 Update Volume: Volume update successful for volume vol_resize_test
 ```
 
-We can verify this with volume inspect command.
+Let's verify the size with the following command:
 
 ```text
-/opt/pwx/bin/pxctl volume inspect vol_resize_test
+pxctl volume inspect vol_resize_test
+```
+
+```
 Volume	:  485002114762355071
 	Name            	 :  vol_resize_test
 	Size            	 :  5.0 GiB
@@ -205,17 +277,22 @@ Volume	:  485002114762355071
 			Node 	 :  172.31.55.104
 ```
 
-**Update the Volume Replication Level**
+## Update a volume's replication factor
 
-`pxctl volume ha-update` can be used to increase or decrease the replication factor for a given portworx volume.
+`pxctl volume ha-update` can be used to increase or decrease the replication factor for a given _Portworx_ volume.
 
-The volume `clitest` shown in the previous example is a volume with replication factor set to 1.
+### Increasing the replication factor
 
-Here are the nodes in the cluster.
+Say there was a volume named `clitest` with the replication factor set to 1. Let's look at how to increase it.
+
+
+Start by listing the nodes in the cluster:
 
 ```text
-sudo /opt/pwx/bin/pxctl cluster list
+pxctl cluster list
+```
 
+```
 Cluster ID: MY_CLUSTER_ID
 Status: OK
 
@@ -226,16 +303,20 @@ b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8	10.99.117.137	0.250313	8.4 GB	7.9 GB		N/A		
 bb605ca6-c014-4e6c-8a23-55c967d1a963	10.99.117.135	0.625782	8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
 ```
 
-Using `pxctl volume ha-update`, here is how to increase the replication factor. Note, the command below sets the volume to replicate to the node with NodeID b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
+
+Next, make it so the volume is replicated to `NodeID b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8` by running:
 
 ```text
-sudo /opt/pwx/bin/pxctl volume ha-update --repl=2 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8 clitest
+pxctl volume ha-update --repl=2 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8 clitest
 ```
 
-Once the replication completes and the new node is added to the replication set, the `pxctl volume inspect`shows both the nodes.
+Once the replication completes and the new node is added to the replication set, `pxctl volume inspect` will show both nodes:
 
 ```text
-sudo /opt/pwx/bin/pxctl volume inspect clitest
+pxctl volume inspect clitest
+```
+
+```
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -261,25 +342,36 @@ Volume	:  970758537931791410
 			Node 	 :  10.99.117.137
 ```
 
-`pxctl volume alerts` will show when the replication is complete
+`pxctl alerts show --type volume` will show when the replication is complete:
 
 ```text
-sudo /opt/pwx/bin/pxctl volume alerts
+pxctl alerts show --type volume
+```
+
+```
 AlertID	VolumeID		Timestamp			Severity	AlertType			Description
 25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
 ```
 
-The ha-update command can also be used to reduce the replication factor as well.
+### Decreasing the replication factor
+
+The `ha-update` command can be used to reduce the replication factor as well. Continuing our example with `clitest`, let's reduce the volume's replication factor:
 
 ```text
-sudo /opt/pwx/bin/pxctl volume ha-update  --repl=1 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8 clitest
+pxctl volume ha-update  --repl=1 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8 clitest
+```
+
+```
 Update Volume Replication: Replication update started successfully for volume clitest
 ```
 
-Here is the output of the volume inspect command after the replication factor has been reduced to 1
+Once the replication factor has been reduced to 1, the output of the `volume inspect` command would look something like this:
 
 ```text
-sudo /opt/pwx/bin/pxctl volume inspect clitest
+pxctl volume inspect clitest
+```
+
+```
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -304,7 +396,7 @@ Volume	:  970758537931791410
 			Node 	 :  10.99.117.133
 ```
 
-Here is the output of the volume alerts.
+Here is the output of `pxctl alerts show --type volume`:
 
 ```text
 25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
