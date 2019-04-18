@@ -41,7 +41,7 @@ The option has the following characteristics:
 
 Click on the section below for instructions on how to setup this option.
 
-{{< widelink url="/portworx-install-with-kubernetes/disaster-recovery/px-metro" >}}How to setup Synchronous DR{{</widelink>}}
+{{< widelink url="/portworx-install-with-kubernetes/disaster-recovery/px-metro" >}}How to setup Metro DR{{</widelink>}}
 
 ## 2. Asynchronous DR:Nodes are across different regions/datacenters
 
