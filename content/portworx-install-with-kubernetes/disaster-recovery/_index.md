@@ -9,12 +9,12 @@ This section describes the different methods for achieving Disaster Recovery (DR
 
 There are 2 primary options for this:
 
-1. **Synchronous DR**: Nodes are in the *same* Metro Area Network ([MAN](https://en.wikipedia.org/wiki/Metropolitan_area_network))
+1. **Metro DR**: Nodes are in the *same* Metro Area Network ([MAN](https://en.wikipedia.org/wiki/Metropolitan_area_network))
 2. **Asynchronous DR**: Nodes are across *different* regions/datacenters
 
 Choosing between these options depends on how your cluster nodes are laid out. Below section helps you make that choice.
 
-## 1. Synchronous DR: Nodes are in the Metro Area Network (MAN)
+## 1. Metro DR: Nodes are in the Metro Area Network (MAN)
 
 ![Portworx metro overview](/img/px-metro-overview.png)
 
