@@ -175,7 +175,7 @@ spec:
 
 **Snapshot**
 
-With this snapshot, Stork will run the _cassandra-presnap-rule_ rule on all pods that are using PVCs that match labels _app=cassandra_. Hence this will be a [group snapshot](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group).
+With this snapshot, Stork will run the _cassandra-presnap-rule_ rule on all pods that are using PVCs that match labels _app=cassandra_. Hence this will be a [group snapshot](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group).
 
 ```yaml
 apiVersion: stork.libopenstorage.org/v1alpha1
@@ -191,5 +191,5 @@ spec:
 
 ## References
 
-* To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-local#pvc-from-snap).
-* To create PVCs from group snapshots, read [Creating PVCs from group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group#restoring-from-group-snapshots).
+* To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-local#pvc-from-snap).
+* To create PVCs from group snapshots, read [Creating PVCs from group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group#restoring-from-group-snapshots).

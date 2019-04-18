@@ -723,7 +723,7 @@ Pass volume name as part of the metrics end point so Prometheus/Grafana can disp
 
 #### Key Features and Changes {#key-features-and-changes}
 
-* PWX-4178 Perform snapshots in kubernetes via [annotations](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-annotations)
+* PWX-4178 Perform snapshots in kubernetes via [annotations](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-annotations)
 
 ### 1.2.11.4 Release notes {#12114-release-notes}
 

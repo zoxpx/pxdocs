@@ -8,8 +8,7 @@ description: Learn to take a snapshot of a volume from a Kubernetes persistent v
 This document will show you how to take a snapshot of a volume using Portworx and use that snapshot as the volume for a new pod.
 
 {{<info>}}
-The suggested way to manage snapshots on Kuberenetes is now to use STORK. Instructions for
-using STORK to manage snapshots can be found
+The suggested way to manage snapshots on Kuberenetes is now to use STORK. Instructions for using STORK to manage snapshots can be found
 [here](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
 {{</info>}}
 

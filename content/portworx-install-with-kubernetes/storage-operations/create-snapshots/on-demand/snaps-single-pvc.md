@@ -93,7 +93,7 @@ NAME                                                      PVC                   
 jenkins-jobs-jenkins-master-0-snapshot-2019-03-20-snap1   jenkins-jobs-jenkins-master-0   Ready     20 Mar 19 15:22 PDT   20 Mar 19 15:22 PDT   local
 ```
 
-To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-local#pvc-from-snap).
+To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-local#pvc-from-snap).
 
 ## Creating snapshots across namespaces
 

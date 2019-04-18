@@ -7,18 +7,11 @@ description: Learn how to create application consistent snapshots/backups and re
 series: k8s-storage
 ---
 
-This document will show you how to create snapshots of Portworx volumes and how you can clone those snapshots to use them in pods.
+_Portworx_ provides two methods of taking snapshots of your volumes: On-demand and Scheduled. Check out below for more on which might serve you better.
 
-{{<info>}}The suggested way to manage snapshots on Kuberenetes is to use STORK. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-annotations).
-{{</info>}}
+{{<homelist series="k8s-storage-snapshots">}}
 
-## Snapshot types
-Using STORK, you can take 2 types of snapshots:
-
-1. [Local](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-local): These are per volume snapshots where the snapshots are stored locally in the current Portworx cluster's storage pools.
-2. [Cloud](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-cloud): These snapshots are uploaded to the configured S3-compliant endpoint (e.g AWS S3).
-
-## 3DSnaps
+### 3DSnaps
 {{<info>}}
 3DSnaps are supported in Portworx version 1.4 and above and Stork version 1.2 and above. 3DSnaps are not supported on Kubernetes on DC/OS.
 {{</info>}}

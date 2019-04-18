@@ -38,9 +38,9 @@ spec:
 
 Above spec will take a group snapshot of all PVCs that match labels `app=cassandra`.
 
-The [Examples](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group-cloud#examples) section has a more detailed end-to-end example.
+The [Examples](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group-cloud#examples) section has a more detailed end-to-end example.
 
-{{<info>}}Above spec backs up the snapshots to a cloud S3 endpoint. If you intend on taking snapshots just local tot he cluster, refer to [Create local group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group).{{</info>}}
+{{<info>}}Above spec backs up the snapshots to a cloud S3 endpoint. If you intend on taking snapshots just local tot he cluster, refer to [Create local group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group).{{</info>}}
 
 The `GroupVolumeSnapshot` object also supports specifying pre and post rules that are run on the application pods using the volumes being snapshotted. This allows users to quiesce the applications before the snapshot is taken and resume I/O after the snapshot is taken. Refer to [3D Snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d) for more detailed documentation on that.
 

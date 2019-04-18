@@ -34,5 +34,5 @@ With cloud snapshots, you can either snapshot individual PVCs one by one or snap
 
 ## References
 
-* To create PVCs from existing snapshots, read [Creating PVCs from cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-cloud#creating-pvcs-from-cloud-snapshots).
-* To create PVCs from group snapshots, read [Creating PVCs from group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group#restoring-from-group-snapshots).
+* To create PVCs from existing snapshots, read [Creating PVCs from cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-cloud#creating-pvcs-from-cloud-snapshots).
+* To create PVCs from group snapshots, read [Creating PVCs from group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group#restoring-from-group-snapshots).

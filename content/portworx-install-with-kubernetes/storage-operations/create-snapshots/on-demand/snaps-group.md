@@ -17,7 +17,7 @@ This document will show you how to create group snapshots of Portworx volumes an
 
 This page describes the steps for group snapshots for Portworx version 2.0.2 or above. The Stork version also needs to be above 2.0.2.
 
-If you have a lower Stork and Portworx version, refer to legacy method [Create group snapshots using VolumeSnapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group-legacy).
+If you have a lower Stork and Portworx version, refer to legacy method [Create group snapshots using VolumeSnapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group-legacy).
 
 ### Kubernetes Version
 
@@ -44,9 +44,9 @@ spec:
 
 Above spec will take a group snapshot of all PVCs that match labels `app=cassandra`.
 
-The [Examples](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group#examples) section has a more detailed end-to-end example.
+The [Examples](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group#examples) section has a more detailed end-to-end example.
 
-{{<info>}}Above spec will keep all the snapshots local to the Portworx cluster. If you intend on backing up the group snapshots to cloud (S3 endpoint), refer to [Create group cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group-cloud).{{</info>}}
+{{<info>}}Above spec will keep all the snapshots local to the Portworx cluster. If you intend on backing up the group snapshots to cloud (S3 endpoint), refer to [Create group cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group-cloud).{{</info>}}
 
 The `GroupVolumeSnapshot` object also supports specifying pre and post rules that are run on the application pods using the volumes being snapshotted. This allows users to quiesce the applications before the snapshot is taken and resume I/O after the snapshot is taken. Refer to [3D Snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d) for more detailed documentation on that.
 
@@ -241,7 +241,7 @@ You can also describe these individual volume snapshots using
 ```bash
  kubectl describe volumesnapshot cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
 ```
- 
+
 ```
 Name:         cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
 Namespace:    default

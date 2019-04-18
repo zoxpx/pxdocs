@@ -40,7 +40,7 @@ The group snapshot method supports the following annotations:
 
 If both annotations and group ID are specified above, all PVCs that match annotations *and* group ID will be snapshotted.
 
-To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-local#pvc-from-snap).
+To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-local#pvc-from-snap).
 
 ## Examples
 
