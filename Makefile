@@ -3,7 +3,6 @@ SEARCH_INDEX_IMAGE?=pxdocs-search-index:developer
 DEPLOYMENT_IMAGE?=pxdocs-deployment:developer
 PORT=1313
 CONTAINER_NAME=pxdocs-develop
-DOCKER_EXTRA_ARGS=
 
 .PHONY: image
 image:
