@@ -63,6 +63,45 @@ You can stop the applications from running by changing the replica count of your
 kubectl scale --replicas 0 deployment/mysql -n migrationnamespace
 ```
 
+Since the replicas for the mysql deployment are set to 0, we need to suspend the migration schedule on the source cluster. This is done so that the mysql deployment on the target cluster doesn't get updated to 0 replicas.
+
+```text
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: MigrationSchedule
+metadata:
+  name: mysqlmigrationschedule
+  namespace: migrationnamespace
+spec:
+  template:
+    spec:
+      # This should be the name of the cluster pair created above
+      clusterPair: remotecluster
+      # If set to false this will migrate only the Portworx volumes. No PVCs, apps, etc will be migrated
+      includeResources: true
+      # If set to false, the deployments and stateful set replicas will be set to 0 on the destination.
+      # If set to true, the deployments and stateful sets will start running once the migration is done
+      # There will be an annotation with "stork.openstorage.org/migrationReplicas" on the destinationto store the replica count from the source.
+      startApplications: false
+       # If set to false, the volumes will not be migrated
+      includeVolumes: false
+      # List of namespaces to migrate
+      namespaces:
+      - migrationnamespace
+  schedulePolicyName: testpolicy
+  suspend: true
+```
+
+Using storkctl, verify the schedule is suspended.
+
+```text
+storkctl get migrationschedule -n migrationnamespace
+```
+```
+NAME                        POLICYNAME   CLUSTERPAIR      SUSPEND   LAST-SUCCESS-TIME     LAST-SUCCESS-DURATION
+mysqlmigrationschedule      testpolcy    remotecluster     true      17 Apr 19 15:18 PDT   2m0s
+```
+
+
 ### Start the application on the destination cluster
 
 In step 2., we migrated the applications to the destination cluster but the replica count was set to 0 for all the deployments and statefulsets, so that they do not run.
