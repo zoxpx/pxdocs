@@ -73,13 +73,13 @@ kubectl apply -f policy-weekly.yaml
 If you want to check the status of our schedule policy, type:
 
 ```text
-kubectl get schedulepolicy
+storkctl get schedulepolicy
 ```
 
 ```
-NAME     AGE
-daily    111s
-weekly   108s
+NAME      INTERVAL-MINUTES   DAILY     WEEKLY             MONTHLY
+daily     N/A                10:14PM   N/A                N/A
+weekly    N/A                N/A       Thursday@10:13PM   N/A
 ```
 
 ## Creating a storage class
