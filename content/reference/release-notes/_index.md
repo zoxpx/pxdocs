@@ -6,6 +6,53 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.1.0
+
+### Key Features
+
+* PX-Security
+  * [General Concepts](/concepts/authorization)
+  * [Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization)
+  * [CLI Volume access](/reference/cli/volume-access)
+  * [CLI Authorization](/reference/cli/authorization)
+  * [CLI Role](/reference/cli/role)
+* [PX-DR](/portworx-install-with-kubernetes/disaster-recovery)
+  * [Metro DR](/portworx-install-with-kubernetes/disaster-recovery/px-metro)
+  * [Asynchronous DR](/portworx-install-with-kubernetes/disaster-recovery/async-dr)
+* [Automated application level scheduled snaps and cloudsnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/scheduled)
+* [Automated app-consistent cluster to cluster migration](/portworx-install-with-kubernetes/migration/px-motion/#pre-and-post-exec-rules)
+* [Optimized incremental cloudsnap restores](/reference/cli/cloud-snaps/#restore-from-a-cloud-backup)
+
+### Key Fixes
+
+* PWX-7160 - Fix issues with cloudsnaps to IBM Objectstore
+* PWX-7481 - Shared volume failed to detach with an error that the volume is mounted. But the volume was not mounted
+* PWX-7650 - Portworx install errors w/ "tar: .: file changed as we read it"
+* PWX-7794 - License: Aggressive node-decomissions and "Cluster max capacity" error handling
+* PWX-7869 - Cloudsnaps: Handle cloud backup deletes in background 
+* PWX-7891 - pxctl svc nw --all failed to delete multi-path devices
+* PWX-7951 - In Kubernetes OCI-Mon restarts during updates may leave Portworx down
+* PWX-7963 - Cloudsnap restore for xfs volumes has wrong fs type
+* PWX-7968 - Cloudsnaps cleanup fails because of missing start timestamp in metadata
+* PWX-7989 - Skip cleanup when pre-existing node fails to join due to licensing
+* PWX-8025 - Alert for storage full is deleted even though the condition still exists  
+* PWX-8033 - DC/OS portworx-mongo now works with nested folders
+* PWX-8055 - pxctl import: copy links after all regular files have been copied  
+* PWX-8060 - Cloudsnap restores will fail when the volume is heavily fragmented
+* PWX-8064 - Reducing the HA level of an aggregated volume may cause any active cloud backups on the volume to fail. New cloud backup can be restarted once the HA level has been reduced on the volume
+* PWX-8261 - Startup issue with debian 9 (4.19.0-0.bpo.2-cloud-amd64)
+* PWX-8297 - K8S: OCI-Mon must force-pull px-enterprise b4 reinstalling incomplete Portworx 
+* PWX-8311 - IKS: OCI Monitor not starting PX when both Docker and ContainerD services running
+* PWX-8334 - Fixed install progress-bar
+* PWX-8335 - Handle mpath device partitions in nodewipe
+* PWX-8403 - Error when trying to mount sharedv4 volume with encryption. First pod comes up okay, but second and subsequent pods mount results in failure
+* PWX-8472 - OpenShift: Portworx mounts leak. Each portworx-service restart will increase number of mounts
+* PWX-8504 - Cloudsnaps: No incremental backups created for cloud backups that have user tags( created by external schedulers)
+
+### Errata
+
+* PWX-8470: ASG: CLI does not update metadata device name, if after restart device name changes
+
 ## 2.0.3.3
 
 ### Key Fixes
