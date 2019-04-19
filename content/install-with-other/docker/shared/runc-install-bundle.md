@@ -10,8 +10,8 @@ on your host system:
 
 ```text
 # Uncomment appropriate `REL` below to select desired Portworx release
-REL="/2.0"          # DEFAULT portworx release
-#REL="/1.7"     # 1.7 portworx release
+REL="/2.1"       # 2.1 portworx release
+#REL="/2.0"     # 2.0 portworx release
 
 latest_stable=$(curl -fsSL "https://install.portworx.com$REL/?type=dock&stork=false" | awk '/image: / {print $2}')
 

@@ -22,7 +22,7 @@ In this mode of operation, a single Portworx cluster will stretch across multipl
 
 ### New Installation
 
-To install Portworx on each of the Kubernetes clusters, you will need to generate a separate Portworx Kubernetes manifest file for each of them using [Portworx Spec Generator](https://install.portworx.com/2.0)
+To install Portworx on each of the Kubernetes clusters, you will need to generate a separate Portworx Kubernetes manifest file for each of them using [Portworx Spec Generator](https://install.portworx.com/2.1)
 
 While generating the spec file for each Kubernetes cluster, make sure you provide the same values for the following arguments:
 
@@ -50,10 +50,10 @@ metadata:
   name: portworx
   namespace: kube-system
   annotations:
-    portworx.com/install-source: "https://install.portworx.com/2.0?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
+    portworx.com/install-source: "https://install.portworx.com/2.1?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
 ```
 
-Otherwise you can always generate a new spec using [Portworx Spec Generator](https://install.portworx.com/2.0)
+Otherwise you can always generate a new spec using [Portworx Spec Generator](https://install.portworx.com/2.1)
 
 {{<info>}}
 **Note**: If your existing Kubernetes cluster uses internal kvdb, then you cannot stretch your Portworx clusters across multiple Kubernetes cluster. This mode of deployments requires an external kvdb running outside your Kubernetes cluster

@@ -10,7 +10,7 @@ This document describes how to create shared Portworx volumes using the [CSI](ht
 
 ### Prerequisite
 
-Ensure that your Portworx installation supports CSI. When [Generating the Portworx specs](https://install.portworx.com/2.0) select CSI under Customize->Advanced Settings. This will add the CSI components to the Portworx DaemonSet.
+Ensure that your Portworx installation supports CSI. When [Generating the Portworx specs](https://install.portworx.com/2.1) select CSI under Customize->Advanced Settings. This will add the CSI components to the Portworx DaemonSet.
 
 ### Step 1 : Create a CSI StorageClass
 
