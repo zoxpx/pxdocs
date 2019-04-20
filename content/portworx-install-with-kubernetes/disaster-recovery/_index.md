@@ -34,7 +34,7 @@ The option has the following characteristics:
 * A **single Portworx cluster** that stretches across multiple Kubernetes clusters.
 * Portworx installation on all clusters use a common **external key-value store** (e.g etcd).
 * Volumes are automatically **replicated** across the Kubernetes clusters as they share the same Portworx storage fabric.
-* This option will have an **RPO** and **RTO** close to 0 seconds.
+* This option will have zero **RPO** and **RTO** less than 60 seconds.
 
 
 ### How
@@ -61,7 +61,7 @@ The option has the following characteristics:
 * A separate Portworx cluster installation for each Kubernetes clusters.
 * Portworx installations on each cluster can use their own key-value store (e.g etcd).
 * Users create scheduled migrations of application and volumes between 2 clusters that are paired.
-* This option will have an **RPO** of 15 minutes and **RTO** close to 0 seconds.
+* This option will have an **RPO** of 15 minutes and **RTO** less than 60 seconds.
 
 ### How
 
