@@ -8,6 +8,10 @@ disableprevnext: true
 scrollspy-container: false
 ---
 
+{{<info>}}Portworx 2.1 is released !
+
+You are viewing docs for Portworx 2.0. For 2.1, click [Portworx 2.1 Documentation](https://2.1.docs.portworx.com/).{{</info>}}
+
 Portworx is a software defined storage overlay that allows you to
 
 * Run containerized stateful applications that are highly-available (HA) across multiple nodes, cloud instances, regions, data centers or even clouds
