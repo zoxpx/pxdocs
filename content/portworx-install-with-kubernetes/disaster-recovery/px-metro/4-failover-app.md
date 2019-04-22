@@ -65,6 +65,8 @@ kubectl scale --replicas 0 deployment/mysql -n migrationnamespace
 
 Since the replicas for the mysql deployment are set to 0, we need to suspend the migration schedule on the source cluster. This is done so that the mysql deployment on the target cluster doesn't get updated to 0 replicas.
 
+Apply the below spec. Notice the `suspend: true`.
+
 ```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: MigrationSchedule
