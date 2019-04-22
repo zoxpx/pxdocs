@@ -1,5 +1,5 @@
 ---
-title: "Disaster Recovery (DR)"
+title: "Disaster Recovery (DR) for Kubernetes"
 linkTitle: "Disaster Recovery (DR)"
 keywords: cloud, backup, restore, snapshot, DR, migration
 hidesections: true
