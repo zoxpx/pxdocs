@@ -2,7 +2,7 @@
 title: Other Operations
 keywords: certificates, kubernetes, Portworx
 description: Other useful articles relating to running Portworx on Kubernetes
-weight: 99
+weight: 900
 series: k8s-op-maintain
 ---
 
