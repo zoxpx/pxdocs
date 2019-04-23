@@ -64,6 +64,17 @@ Make sure you update the theme for each of the version branches if the theme cha
 
 If you want to make changes to the templates or CSS - these files live in the `layouts` and `static` folder of the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo.  Make the changes there and then re-update each of the version branches.
 
+### Updating the theme to a custom branch
+
+Production build should only use the master branch of the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo. For testing private changes, you can use the following:
+
+```bash
+TOOLING_BRANCH=my-branch make update-theme
+```
+
+This will update the submodule for tooling/theme to the given "my-branch".
+
+
 ## Deployment to production
 
 Deployment of your changes is handled by Travis upon a git push to the git repo.  Once you have made changes and viewed them locally - a `git push` of the version branch you are working on will result in the content being deployed into production.

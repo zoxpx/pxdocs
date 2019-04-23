@@ -1,6 +1,7 @@
 BUILDER_IMAGE?=pxdocs:developer
 SEARCH_INDEX_IMAGE?=pxdocs-search-index:developer
 DEPLOYMENT_IMAGE?=pxdocs-deployment:developer
+TOOLING_BRANCH?=master
 PORT?=1313
 CONTAINER_NAME=pxdocs-develop
 
@@ -24,8 +25,8 @@ deployment-image:
 update-theme:
 	git submodule init 
 	git submodule update 
-	git submodule foreach git checkout master 
-	git submodule foreach git pull origin master 
+	git submodule foreach git checkout $(TOOLING_BRANCH)
+	git submodule foreach git pull origin $(TOOLING_BRANCH)
 
 .PHONY: develop
 develop: image
