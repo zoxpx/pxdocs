@@ -21,12 +21,18 @@ deployment-image:
 	docker build -t $(DEPLOYMENT_IMAGE) nginx_build_folder
 	rm -rf nginx_build_folder
 
-.PHONY: update-theme
+.PHONY: update-theme reset-theme
 update-theme:
 	git submodule init 
 	git submodule update 
 	git submodule foreach git checkout $(TOOLING_BRANCH)
 	git submodule foreach git pull origin $(TOOLING_BRANCH)
+
+reset-theme:
+	git submodule foreach --recursive git clean -xfd
+	git reset --hard
+	git submodule foreach --recursive git reset --hard
+	git submodule update --init --recursive
 
 .PHONY: develop
 develop: image
