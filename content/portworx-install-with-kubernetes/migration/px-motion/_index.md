@@ -117,14 +117,17 @@ spec:
           client-certificate-data: <CLIENT_CERT_DATA>
           client-key-data: <CLIENT_KEY_DATA>
   options:
-      ip: <ip_of_remote_px_node>
-      port: <port_of_remote_px_node_default_9001>
-      token: <token_generated_from_destination_cluster>>
+      ip: "<ip_of_remote_px_node>"
+      port: "<port_of_remote_px_node_default_9001>"
+      token: "<token_generated_from_destination_cluster>"
 status:
   remoteStorageId: ""
   schedulerStatus: ""
   storageStatus: ""
 ```
+
+{{<info>}}In the updated spec, ensure values for all fields under options are quoted.{{</info>}}
+
 Copy and save this to a file called `clusterpair.yaml` on the source cluster.
 
 ### Creating the ClusterPair
