@@ -74,6 +74,12 @@ TOOLING_BRANCH=my-branch make update-theme
 
 This will update the submodule for tooling/theme to the given "my-branch".
 
+### Resetting the theme
+
+```bash
+make reset-theme
+```
+
 
 ## Deployment to production
 
