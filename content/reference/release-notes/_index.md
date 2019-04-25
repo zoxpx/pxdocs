@@ -6,6 +6,14 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.3.4
+
+### Key Fixes
+
+* PWX-8472 - OpenShift: Portworx mounts leak. Each portworx-service restart will increase number of mounts
+* PWX-8529 - Fix Cloudsnap restore performance for backups that have dependent incremental with large data sets
+* PWX-8652 - AWS: Allow specifying custom tags for EBS volumes in spec
+
 ## 2.0.3.3
 
 ### Key Fixes
