@@ -13,6 +13,7 @@ weight: 2
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be reachable by the source cluster.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
+* **License**: You will need a DR enabled Portworx License to use this feature.
 
 ## Overview
 
