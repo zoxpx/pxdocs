@@ -4,6 +4,12 @@ keywords: portworx, px-enterprise, px-lighthouse, release notes
 meta-description: "Release notes for Lighthouse, the Portworx UI."
 ---
 
+## Lighthouse 2.0.4 Release notes
+
+### Key Fixes
+
+* LD-430 - Security and vulnerability scan fixes 
+
 ## Lighthouse 2.0.3 Release notes
 
 ### Key Fixes
