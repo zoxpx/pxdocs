@@ -1,8 +1,8 @@
 Provide the instances running Portworx privileges to access the GCP API server. This is the preferred method since it requires the least amount of setup on each instance.
 
-- **Compute Admin Role**
+- **Owner and Compute Admin Roles**
 
-    The Compute Admin Role provides portworx access to the Google Cloud Storage APIs to provision persistent disks.
+    These Roles provides portworx access to the Google Cloud Storage APIs to provision persistent disks. Make sure the service account for the instances has these roles.
 
 - **Cloud KMS predefined roles**
 
