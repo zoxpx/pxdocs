@@ -15,6 +15,11 @@ This topic explains how to install Portworx with Google Kubernetes Engine (GKE).
 
 {{<info>}}**Resource requirements**: Portworx requires that each node in the Kubernetes cluster has at least 4 CPUs and 4 GB memory for Portworx. It is important to keep this in mind when selecting the machine types during cluster creation.{{</info>}}
 
+
+### Permissions for Cloud API
+
+Portworx needs access to the Google Cloud Storage APIs to provision persistent disks. Make sure the user creating the GKE cluster has **Owner** and **Compute Admin** Roles.
+ 
 ### Configure gcloud
 
 If this is your first time running with Google Cloud, please follow this quickstart to install gcloud shell and configure your project and compute zone. If you already have gcloud setup, you can skip this.

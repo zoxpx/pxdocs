@@ -2,9 +2,9 @@ Alternatively, you can give Portworx access to the GCP API server via an account
 
 To access the GCP API server, Portworx needs a service account with the following roles
 
-- **Compute Admin Role**
+- **Owner and Compute Admin Roles**
 
-    The Compute Admin Role provides portworx access to the Google Cloud Storage APIs to provision persistent disks.
+    These Roles provides portworx access to the Google Cloud Storage APIs to provision persistent disks. Make sure the service account created below has these roles.
 
 - **Cloud KMS predefined roles**
 
