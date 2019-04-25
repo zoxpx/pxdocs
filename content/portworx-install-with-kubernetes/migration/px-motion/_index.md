@@ -117,7 +117,7 @@ spec:
           client-certificate-data: <CLIENT_CERT_DATA>
           client-key-data: <CLIENT_KEY_DATA>
   options:
-      ip: "<ip_of_remote_px_node>"
+      ip: "<ip-address-of-node-in-the-destination-cluster>"
       port: "<port_of_remote_px_node_default_9001>"
       token: "<token_generated_from_destination_cluster>"
 status:
@@ -126,7 +126,12 @@ status:
   storageStatus: ""
 ```
 
-{{<info>}}In the updated spec, ensure values for all fields under options are quoted.{{</info>}}
+Instead of the IP address of the node in the destination cluster, you can use the hostname, or any DNS name.
+
+{{<info>}}
+In the updated spec, ensure values for all fields under options are quoted.
+{{</info>}}
+
 
 Copy and save this to a file called `clusterpair.yaml` on the source cluster.
 
