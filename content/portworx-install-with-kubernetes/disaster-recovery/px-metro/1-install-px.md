@@ -15,6 +15,7 @@ The goal of this document is to setup a single Portworx cluster that spans acros
 * **Network Connectivity**: Ports between 9001 and 9020 should be open between the two Kubernetes clusters.
 * **External Kvdb**: A kvdb like etcd or consul setup outside of the Kubernetes clusters.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
+* **License**: You will need a DR enabled Portworx License to use this feature.
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
 
 ## Installing Portworx
