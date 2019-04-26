@@ -22,7 +22,7 @@ To install and configure PX to run directly with OCI/runC, please use the config
 * _SYSTEMD_: The installation below assumes the [systemd](https://en.wikipedia.org/wiki/Systemd) package is installed on your system \(i.e. _systemctl_ command works\).
   * Note, if you are running Ubuntu 16.04, CentoOS 7 or CoreOS v94 \(or newer\) the “systemd” is already installed and no actions will be required.
 * _SCHEDULERS_: If you are installing PX into **Kubernetes** or **Mesosphere DC/OS** cluster, we recommend to install the scheduler-specific Portworx package, which provides tighter integration, and better overall user experience.
-* _FIREWALL_: Ensure ports 9001-9015 are open between the cluster nodes that will run Portworx.
+* _FIREWALL_: Ensure ports 9001-9022 are open between the cluster nodes that will run Portworx.
 * _NTP_: Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.
 * _KVDB_: Please have a clustered key-value database \(etcd or consul\) installed and ready. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
 * _STORAGE_: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.  Also please note that storage devices explicitly given to Portworx \(ie. `px-runc ... -s /dev/sdb -s /dev/sdc3`\) will be automatically formatted by PX.
