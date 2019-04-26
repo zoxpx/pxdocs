@@ -28,7 +28,7 @@ series: k8s-op-maintain
 
 #### Configuring the Networking Infrastructure {#configuring-the-networking-infrastructure}
 
-* Make sure the following ports are open in all the servers. 9001-9015
+* Make sure the following ports are open in all the servers. 9001-9022
 * Configure separate networks for Data and Management networks to isolate the traffic
   * Data network is specified giving the ‘-d’ switch and Management networks with the ‘-m’ switch. Refer to [scheduler guides](/portworx-install-with-kubernetes) for specifics to enable it in your scheduler.
   * With multiple NICs, create a bonded ethernet port for data interface for improved availability and performance.

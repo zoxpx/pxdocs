@@ -21,7 +21,7 @@ Prior to installing Portworx, your system needs to meet the hardware, software a
 
 |**Network** ||
 |--- | ---|
-|Open needed ports | Open ports 9001-9016 on all Portworx nodes. Also open the KVDB port. \(As an example, `etcd` typically runs on port 2379\)|
+|Open needed ports | Open ports 9001-9022 on all Portworx nodes. Also open the KVDB port. \(As an example, `etcd` typically runs on port 2379\)|
 | Lighthouse | If installing the Portworx Lighthouse management UI please open ports 32678 and 32679 |
 
 |**Software** ||

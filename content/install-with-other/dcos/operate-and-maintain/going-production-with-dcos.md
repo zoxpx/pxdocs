@@ -33,7 +33,7 @@ linkTitle: Running Portworx in Production with DC/OS
 
 ### Configuring the Networking Infrastructure
 
-* Make sure the following ports are open in all the servers. 9001-9014
+* Make sure the following ports are open in all the servers. 9001-9022
 
 * Configure separate networks for Data and Management networks to isolate the traffic
 
