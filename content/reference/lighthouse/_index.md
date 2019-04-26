@@ -9,7 +9,7 @@ series: reference
 
 Lighthouse is a GUI dashboard that can be used to monitor multiple Portworx clusters.
 
-Any cluster running Portworx 1.4 or above can be added to Lighthouse.  Lighthouse must have network access on ports 9001 - 9015 to the nodes in the Portworx cluster.
+Any cluster running Portworx 1.4 or above can be added to Lighthouse.  Lighthouse must have network access on ports 9001 - 9022 to the nodes in the Portworx cluster.
 
 ## Start Lighthouse
 

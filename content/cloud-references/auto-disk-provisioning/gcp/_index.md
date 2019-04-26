@@ -19,7 +19,7 @@ Portworx uses a key-value store for it's clustering metadata. Please have a clus
 
 **Firewall**
 
-Ensure ports 9001-9015 are open between the nodes that will run Portworx. Your nodes should also be able to reach the port KVDB is running on (for example etcd usually runs on port 2379).
+Ensure ports 9001-9022 are open between the nodes that will run Portworx. Your nodes should also be able to reach the port KVDB is running on (for example etcd usually runs on port 2379).
 
 ## Create a GCP cluster
 
