@@ -165,25 +165,6 @@ While installing Portworx set the input argument `-secret_type` to `gcloud-kms`.
 
 Based on your installation method provide the `-secret_type gcloud-kms` input argument and restart Portworx on all the nodes.
 
-## Creating Named Secrets
-
-Use the following CLI command to create a new secret in Google Cloud KMS and provide it an identifier/name.
-
-```bash
-/opt/pwx/bin/pxctl secrets gcloud create-secret --secret_id mysecret --passphrase mysecretpassphrase
-```
-
-The above command will create a new key value pair `mysecret=mysecretpassphrase`. Portworx will use Google Cloud KMS to encrypt the
-passphrase `mysecretpassphrase` and store it in its internal metadata store. To use this passphrase for encrypting volumes provide only the secret ID `mysecret` to Portworx while creating/attaching the volume.
-
-To list all the named secrets use the following command
-
-```bash
-/opt/pwx/bin/pxctl secrets gcloud list-secrets
-```
-
-More information on how to use named secrets is provided in the next section.
-
 ## Using Google Cloud KMS with Portworx
 
 {{<homelist series="gcloud-secret-uses">}}
