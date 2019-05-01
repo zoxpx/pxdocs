@@ -14,7 +14,7 @@ series: key-management
 **NOTE:** Supported from PX Enterprise 2.0.2 onwards
 {{</info>}}
 
-Portworx integrates with Google Cloud KMS to store  Portworx secrets for Volume Encryption and Cloud Credentials. This guide will help configure Portworx with Google Cloud KMS. 
+Portworx integrates with Google Cloud KMS to store  Portworx secrets for Volume Encryption and Cloud Credentials. This guide will help configure Portworx with Google Cloud KMS.
 
 Portworx requires the following Google Cloud credentials to use its APIs
 
@@ -23,13 +23,13 @@ Portworx requires the following Google Cloud credentials to use its APIs
     Portworx requires permissions to use Google CloudKMS APIs. It requires the following two predefined roles
     - roles/cloudkms.cryptoKeyEncrypterDecrypter
     - roles/cloudkms.publicKeyViewer
-    
+
     More info about these roles and the included permissions can be found [here](https://cloud.google.com/kms/docs/reference/permissions-and-roles#predefined_roles)
 
 - **Google KMS Public Key Resource ID [GOOGLE_KMS_RESOURCE_ID]**
 
     Portworx uses Google's asymmetric key pairs to encrypt and decrypt secrets. More information about asymmetric key pairs and how to create them can be found [here](https://cloud.google.com/kms/docs/creating-asymmetric-keys)
-    
+
     Make sure that while creating the asymmetric key you specify the *purpose* of the key as *Asymmetric decrypt*
 
     Once the asymmetric key is created, provide its complete resourceID to Portworx. A typical asymmetric key pair's resource ID looks like this
@@ -106,7 +106,7 @@ containers:
     name: portworx
 ```
 
-##### Step 3b: Patch Portworx daemon set 
+##### Step 3b: Patch Portworx daemon set
 
 Use the following command to patch the daemon set, so that it has access to the secret created Step 2
 
@@ -156,7 +156,7 @@ Provide the following Google Cloud credentials (key value pairs) as environment 
 - [Required] GOOGLE_KMS_RESOURCE_ID=[asymmetric_resource_id]
 
 {{<info>}}
-**Important:**  
+**Important:**
 The service account file needs to be present on all the nodes where Portworx is running.
 {{</info>}}
 
@@ -169,25 +169,6 @@ While installing Portworx set the input argument `-secret_type` to `gcloud-kms`.
 #### Existing installation
 
 Based on your installation method provide the `-secret_type gcloud-kms` input argument and restart Portworx on all the nodes.
-
-## Creating Named Secrets
-
-Use the following CLI command to create a new secret in Google Cloud KMS and provide it an identifier/name.
-
-```bash
-/opt/pwx/bin/pxctl secrets gcloud create-secret --secret_id mysecret --passphrase mysecretpassphrase
-```
-
-The above command will create a new key value pair `mysecret=mysecretpassphrase`. Portworx will use Google Cloud KMS to encrypt the 
-passphrase `mysecretpassphrase` and store it in its internal metadata store. To use this passphrase for encrypting volumes provide only the secret ID `mysecret` to Portworx while creating/attaching the volume.
-
-To list all the named secrets use the following command
-
-```bash
-/opt/pwx/bin/pxctl secrets gcloud list-secrets
-```
-
-More information on how to use named secrets is provided in the next section.
 
 ## Using Google Cloud KMS with Portworx
 
