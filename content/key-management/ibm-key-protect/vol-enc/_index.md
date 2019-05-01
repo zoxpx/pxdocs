@@ -70,3 +70,7 @@ To attach and mount an encrypted volume through docker, run the following comman
 ```
 
 Note the `secret_key` is set to the value `default` to indicate PX to use the cluster-wide secret key
+
+{{<info>}}
+{{% content  "key-management/shared/shared-secret-warning-note.md" %}}
+{{</info>}}

@@ -2,7 +2,7 @@
 
 {{% content "shared/encryption/intro.md" %}}
 
-Portworx has two different kinds of encrypted volumes
+_Portworx_ has two different kinds of encrypted volumes:
 
 - **Encrypted Volumes**
 

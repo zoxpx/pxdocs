@@ -95,3 +95,6 @@ Take a note of the annotation `px/secret-name: default`. This specific annotatio
 
 Again, if your Storage Class does not have the `secure` flag set, but you want to encrypt the PVC using the same Storage Class, then add the annotation `px/secure: "true"` to the above PVC.
 
+{{<info>}}
+{{% content  "key-management/shared/shared-secret-warning-note.md" %}}
+{{</info>}}

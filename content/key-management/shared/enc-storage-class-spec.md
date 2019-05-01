@@ -1,5 +1,5 @@
-Create a storage class with `secure` parameter set to `true`.
-```yaml
+Create a storage class with the `secure` parameter set to `true`.
+```text
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:

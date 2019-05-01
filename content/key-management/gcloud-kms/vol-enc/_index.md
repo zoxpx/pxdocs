@@ -14,7 +14,7 @@ hidden: true
 
 ### Using per volume secret keys
 
-There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to PX. In this method portworx generates a 128 bit passphrase. This passphrase will be used during encryption and decryption.
+In this method portworx generates a 128 bit passphrase. This passphrase will be used during encryption and decryption.
 
 To create a volume through pxctl, run the following command
 
@@ -41,6 +41,12 @@ Note that no `secret_key` needs to be passed in any of the commands.
 In this method a default cluster wide secret will be set for the Portworx cluster. Such a secret will be referenced by the user and Portworx as **default** secret. Any volume request referencing the
 secret name as `default` will use this cluster wide secret as a passphrase to encrypt the volume.
 
+#### Step1: Create a cluster wide secret
+
+{{% content "key-management/shared/set-cluster-wide-passphrase.md" %}}
+
+#### Step2: Use the cluster wide secret for encrypting volumes
+
 To create a volume using a cluster wide secret through pxctl, run the following command
 
 ```
@@ -62,10 +68,17 @@ docker run --rm -it -v secure=true,secret_key=default,name=enc_vol:/mnt busybox
 
 Note the `secret_key` is set to the value `default` to indicate PX to use the cluster-wide secret key
 
+{{<info>}}
+{{% content  "key-management/shared/shared-secret-warning-note.md" %}}
+{{</info>}}
 
 ### Using named secrets
 
-In this method Portworx will use the named secret created by you for encrypting and decrypting a volume. To create a named secret follow [this](/key-management/gcloud-kms/#creating-named-secrets) doc. While creating the named secret take a note of the `secret_id`. If the `secret_id` was set to `mysecret` then any volume request referencing the secret name as `mysecret` will use the corresponding passphrase to encrypt the volume.
+#### Step1: Create a Named Secret
+
+{{% content "key-management/gcloud-kms/shared/named-secrets.md" %}}
+
+#### Step2: Use the Named Secret for encrypting volumes
 
 To create a volume using a named secret through pxctl, run the following command
 
@@ -74,15 +87,19 @@ To create a volume using a named secret through pxctl, run the following command
 
 ```
 
-To create a volume using a cluster wide secret through docker, run the following command
+To create a volume using a named secret through docker, run the following command
 
 ```bash
 docker volume create --volume-driver pxd secret_key=mysecret,name=enc_vol
 
 ```
 
-To attach and mount an encrypted volume through docker, run the following command
+To attach and mount the same encrypted volume through docker, run the following command
 
 ```
 docker run --rm -it -v secure=true,secret_key=mysecret,name=enc_vol:/mnt busybox
 ```
+
+{{<info>}}
+{{% content  "key-management/shared/shared-secret-warning-note.md" %}}
+{{</info>}}
