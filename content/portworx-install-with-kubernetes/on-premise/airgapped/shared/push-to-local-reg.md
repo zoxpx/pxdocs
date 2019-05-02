@@ -6,7 +6,7 @@
 {{<info>}} The registry location above can be a registry and it's port (e.g _myregistry.net:5443_) or it could include your own repository in the registry (e.g _myregistry.net:5443/px-images_).
 {{</info>}}
 
-2. Push it to the above registry.
+2. Push images to the above registry:
 
     ```text
     # Trim trailing slashes:
