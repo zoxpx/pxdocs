@@ -104,7 +104,7 @@ Product SKU                  PX-Developer  permanent
 The "Trial" license activates automatically when the [px-enterprise](/) is installed.
 The trial license provides the full product functionality for 30 days.
 
-```bash
+```text
 DESCRIPTION                  ENABLEMENT  ADDITIONAL INFO
 Number of nodes maximum         1000
 Number of volumes maximum       1024

@@ -42,7 +42,7 @@ Perform these steps on any machine where you have the bosh CLI.
 2. Add the addon to the Bosh Director.
 
     First let's fetch your current Bosh Director runtime config.
-    ```bash
+    ```text
     bosh -e director-environment runtime-config
     ```
 
@@ -52,7 +52,7 @@ Perform these steps on any machine where you have the bosh CLI.
 
 
     Once we have the runtime config file prepared, let's update it in the Director.
-    ```bash
+    ```text
     bosh -e director-environment update-runtime-config runtime-configs/director-runtime-config.yaml
     ```
 
