@@ -164,7 +164,7 @@ c) A match directive is the output or the action to be taken based on the input.
 fluentd would collect logs from the `path /var/log/containers` and push them to the Elasticsearch database.
 A view of Elastic search indices for cluster level logs collected for all the pods.
 
-```bash
+```text
 curl -XGET 'http://10.108.118.191:9200/_cat/indices?v&pretty'
 health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
 green  open   px-logs-2017.09.12  LIHcjH74Q2ScLoDf5hAQIA   5   1       1178            0      1.8mb          895kb

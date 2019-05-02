@@ -34,7 +34,7 @@ spec:
 
 In order to invoke from command-line, run the following:
 
-```bash
+```text
 kubectl create -f clusterdomainupdate.yaml
 ```
 

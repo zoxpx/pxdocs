@@ -22,14 +22,14 @@ needs to be restarted on all the nodes to pick up the new image name. This can b
 update-portworx plan through the dcos cli. This step will perform a rolling restart of Portworx so as not to cause an
 outage.
 
-```bash
+```text
 $ dcos portworx plan force-restart update-portworx
 "update-portworx" plan has been restarted.
 ```
 
 Now wait for the tasks to go to COMPLETE state on all the agents
 
-```bash
+```text
 $ dcos portworx plan status update-portworx
 update-portworx (COMPLETE)
 ├─ update-service (COMPLETE)

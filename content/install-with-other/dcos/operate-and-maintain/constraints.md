@@ -34,7 +34,7 @@ specify Mesos attributes that allow for affinity of tasks to nodes that are part
 
 If using Mesosphere/DCOS:
 
-```bash
+```text
 # echo MESOS_ATTRIBUTES=pxfabric:pxclust1 >> /var/lib/dcos/mesos-slave-common
 # rm -f /var/lib/mesos/slave/meta/slaves/latest
 # systemctl restart dcos-mesos-slave.service
@@ -43,7 +43,7 @@ If using Mesosphere/DCOS:
 
 If using Apache Mesos:
 
-```bash
+```text
 # mkdir -p /etc/default/mesos-slave/attributes
 # echo pxclust1 > /etc/default/mesos-slave/attributes/pxfabric
 # rm -f /var/lib/mesos/slave/meta/slaves/latest
@@ -55,7 +55,7 @@ Please note that restarting a dcos/mesos-slave to change the MESOS_ATTRIBUTES wi
 
 ## Deploy Portworx with 'constraints'
 When deploying the Portworx framework you would then add the following constraint to node.placement_constraint
-```bash
+```text
 pxfabric:LIKE:pxclust1
 ```
 

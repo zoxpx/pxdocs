@@ -2,14 +2,14 @@ The following steps can be used to download `storkctl`:
 
 * Linux:
 
-    ```bash
+    ```text
     curl http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/linux/storkctl -o storkctl &&
     sudo mv storkctl /usr/local/bin &&
     sudo chmod +x /usr/local/bin/storkctl
     ```
 * OS X:
 
-    ```bash
+    ```text
     curl http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/darwin/storkctl -o storkctl &&
     sudo mv storkctl /usr/local/bin &&
     sudo chmod +x /usr/local/bin/storkctl

@@ -164,7 +164,7 @@ spec:
 
 Apply the specification for the Elastic search Master nodes and the service for the same.
 
-```bash
+```text
 $ kubectl apply -f es-master-svc.yaml
 service "elasticsearch-discovery" created
 
@@ -179,7 +179,7 @@ elasticsearch-master-2       0/1       PodInitializing   0          22s
 ```
 
 Verify that the master nodes have create and joined the cluster.
-```bash
+```text
 $ kubectl logs po/elasticsearch-master-0
 ```
 
@@ -272,7 +272,7 @@ spec:
 ```
 
 Apply the specification for the coordinator `Deployment` and its service.
-```bash
+```text
 $ kubectl apply -f es-coordinator-deployment.yaml
 deployment "elasticsearch-coordinator" created
 
@@ -289,7 +289,7 @@ po/elasticsearch-master-2                       1/1       Running   0          4
 ```
 
 Verify that the coordinator nodes have joined the cluster.
-```bash
+```text
 $ kubectl logs po/elasticsearch-coordinator-2155074821-nxdkt
 ```
 
@@ -386,7 +386,7 @@ spec:
 ```
 
 Apply the StatefulSet spec for the Elastic search data nodes along with the headless service.
-```bash
+```text
 $ kubectl apply -f es-data-svc.yaml
 service "es-data-srv" created
 
@@ -411,7 +411,7 @@ elasticsearch-data-2   0/1       PodInitializing   0          5s
 elasticsearch-data-2   1/1       Running                0          18s
 ```
 Cluster state
-```bash
+```text
 $ kubectl get all
 NAME                                            READY     STATUS    RESTARTS   AGE
 po/elasticsearch-data-0                         1/1       Running   0          18m
@@ -447,7 +447,7 @@ rs/elasticsearch-coordinator-2193029848   2         2         2         2m
 
 Portworx volumes are created with 2 replicas for storing Indexes and Documents for Elasticsearch. This is based on the Storageclass definition.
 
-```bash
+```text
 $ kubectl get pv
 NAME                                       CAPACITY   ACCESSMODES   RECLAIMPOLICY     STATUS    CLAIM                                       STORAGECLASS     REASON    AGE
 pvc-60acf83a-e6b6-11e8-ba45-000c29dcfd58   80Gi       RWO            Delete           Bound     default/px-storage-elasticsearch-data-0     px-es-data-sc               6m
@@ -517,7 +517,7 @@ Volume    :  507832545683763135
 ### Verify Elastic search cluster state.
 
 Obtain the External IP address from the elasticsearch coordinator service.
-```bash
+```text
 kubectl describe svc elasticsearch
 Name:            elasticsearch
 Namespace:        default
@@ -670,7 +670,7 @@ spec:
 
 Deploy the Kibana spec for the `Deployment` as well as the service.
 
-```bash
+```text
 $ kubectl apply -f kibana-svc.yaml
 service "kibana" created
 
@@ -708,10 +708,10 @@ This will help create dashboards and visualizations.
 
 Save the data from the following location:
 [Download accounts.json](/samples/k8s/efk/accounts.json?raw=true)
-```bash
+```text
 $ kubectl exec -it elasticsearch-master-0 curl -- -XGET 'samples/k8s/efk/accounts.json?raw=true' -o accounts.json
 ```
-```bash
+```text
 $ kubectl exec -it elasticsearch-master-0 curl -- -H "Content-Type:application/json" -XPOST 'http://elasticsearch.default.svc:9200/bank/account/_bulk?pretty&refresh' --data-binary "@accounts.json"
 
 $ kubectl exec -it elasticsearch-master-0 curl -- 'http://elasticsearch.default.svc:9200/_cat/indices?v
@@ -735,7 +735,7 @@ Portworx runs as a DaemonSet in Kubernetes. Hence when you add a new node to you
 If you did use the [Terraform scripts](https://github.com/portworx/terraporx) to create a kubernetes cluster, you would need to update the minion count and apply the changes via Terraform to add a new Node.
 
 Scale your Elastic Search Cluster.
-```bash
+```text
 $ kubectl scale sts elasticsearch-data --replicas=5
 statefulset "elasticsearch-data" scaled
 
@@ -796,7 +796,7 @@ ID                    NAME                                        SIZE      HA  
 Portworx provides durable storage for the Elastic search pods.
 Cordon a node so that pods do not get scheduled on it, delete a pod manually to simulate a failure scenario and watch the pod get scheduled on another node. However the StatefulSet with PX as the volume would reattach the
 
-```bash
+```text
 $ kubectl get pods -l "component=elasticsearch, role=data"  -o wide
 NAME                   READY     STATUS    RESTARTS   AGE       IP          NODE
 elasticsearch-data-0   1/1       Running   0          1h        10.40.0.3   pdc3-sm19
@@ -820,7 +820,7 @@ pdc3-sm19                      Ready                      21d       v1.7.2
 ```
 
 Find the docs count on this data node.
-```bash
+```text
 $ kubectl exec -it elasticsearch-master-0 curl --'http://elasticsearch.default.svc:9200/_nodes/elasticsearch-data-3/stats/indices'
 
 {"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"escluster","nodes":{"Y53C7xqeS-Wi2UHDdE3hgg":{"timestamp":1503479282677,"name":"elasticsearch-data-3","transport_address":"10.39.0.1:9300","host":"10.39.0.1","ip":"10.39.0.1:9300","roles":["data"],"indices":{"docs":{"count":401,"deleted":0}.....
@@ -846,7 +846,7 @@ elasticsearch-data-3   1/1       Running               0         6s        10.36
 ```
 
 Verify that the same volume has been attached back to the pod which was scheduled post failover.
-```bash
+```text
 $ kubectl exec -it elasticsearch-master-0 curl -- 'http://elasticsearch.default.svc:9200/_nodes/elasticsearch-data-3/stats/indices'
 
 {"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"escluster","nodes":{"Y53C7xqeS-Wi2UHDdE3hgg":{"timestamp":1503479456687,"name":"elasticsearch-data-3","transport_address":"10.36.0.2:9300","host":"10.36.0.2","ip":"10.36.0.2:9300","roles":["data"],"indices":{"docs":{"count":401,"deleted":0},

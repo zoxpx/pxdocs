@@ -15,7 +15,7 @@ Any cluster running Portworx 1.4 or above can be added to Lighthouse.  Lighthous
 
 Lighthouse runs as a Docker container.
 
-```bash
+```text
 sudo docker run --restart=always                            \
        --name px-lighthouse -d                              \
        -p 80:80 -p 443:443                                  \

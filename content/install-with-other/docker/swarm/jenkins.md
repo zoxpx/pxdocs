@@ -11,14 +11,14 @@ Portworx can easily be used to simplify the deployment of Jenkins running as a c
 ## Create Portworx Volume
 The example below create a 5GB "jenkins_vol1" volume, replicated on 3 different nodes.
 
-```bash
+```text
 docker volume create -d pxd --name jenkins_vol1 --opt size=5 --opt repl=3
 ```
 
 ## Launch Jenkins through Docker
 Using the name of the volume previously created, start up Jenkins as a container.
 
-```bash
+```text
 docker run -d -p 49001:8080 -v jenkins_vol1:/var/jenkins_home:z -t jenkins
 ```
 
@@ -30,7 +30,7 @@ You should see
 
 Run "docker ps" to find the CONTAINER ID of the Jenkins container:
 
-```bash
+```text
 [root@mesos2 ~]# docker ps
 CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                                NAMES
 9dfa72c4328c        jenkins                  "/bin/tini -- /usr/lo"   29 seconds ago      Up 23 seconds       50000/tcp, 0.0.0.0:49001->8080/tcp   ecstatic_ptolemy
@@ -38,7 +38,7 @@ CONTAINER ID        IMAGE                    COMMAND                  CREATED   
 
 Run the following command to extract the secret password (substituting the actual CONTAINER ID):
 
-```bash
+```text
 docker exec -it 9dfa72c4328c cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 

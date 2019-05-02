@@ -38,7 +38,7 @@ On Kubernetes you will define a trust object called **ClusterPair**. This object
 
 ### Get cluster token from destination cluster
 On the destination cluster, run the following command from one of the Portworx nodes to get the cluster token:
-```bash
+```text
 pxctl cluster token show
 ```
 
@@ -90,7 +90,7 @@ Next, let's edit the  **ClusterPair** spec. Under `spec.options`, add  the follo
 
 The updated **ClusterPair** should look like this:
 
-```
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterPair
 metadata:
@@ -144,7 +144,7 @@ On the **source** cluster, create the clusterpair by applying `clusterpair.yaml`
 ```text
 kubectl apply -f clusterpair.yaml
 ```
-```
+```output
 clusterpair.stork.libopenstorage.org/remotecluster created
 ```
 
@@ -155,13 +155,11 @@ Once you apply the above spec on the source cluster, you should be able to check
 ```text
 storkctl get clusterpair
 ```
-
-On a successful pairing, you should see the "Storage Status" and "Scheduler Status" as "Ready":
-
-```
+```output
 NAME               STORAGE-STATUS   SCHEDULER-STATUS   CREATED
 remotecluster      Ready            Ready              26 Oct 18 03:11 UTC
 ```
+On a successful pairing, you should see the "Storage Status" and "Scheduler Status" as "Ready":
 
 If so, you’re all set and ready to [migrate] (#migrating-volumes-and-resoruces).
 
@@ -222,8 +220,7 @@ or automate it through `storkctl`:
 ```text
 storkctl create migration mysqlmigration --clusterPair remotecluster --namespaces migrationnamespace --includeResources --startApplications -n migrationnamespace
 ```
-
-```
+```output
 Migration mysqlmigration created successfully
 ```
 
@@ -238,9 +235,7 @@ Once the migration has been started using the above commands, you can check the 
 ```text
 storkctl get migration -n migrationnamespace
 ```
-
-First, you should see something like this:
-```
+```output
 NAME            CLUSTERPAIR     STAGE     STATUS       VOLUMES   RESOURCES   CREATED
 mysqlmigration  remotecluster   Volumes   InProgress   0/1       0/0         26 Oct 18 20:04 UTC
 ```
@@ -249,7 +244,7 @@ If the migration is successful, the `Stage` will go from Volumes→ Application�
 
 Here is how the output of a successful migration would look like:
 
-```
+```output
 NAME            CLUSTERPAIR     STAGE     STATUS       VOLUMES   RESOURCES   CREATED
 mysqlmigration  remotecluster   Final     Successful   1/1       3/3         26 Oct 18 20:04 UTC
 ```

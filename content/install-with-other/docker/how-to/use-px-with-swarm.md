@@ -53,7 +53,7 @@ You can inspect the _jenkins_vol_ volume using the `pxctl` CLI:
 ### (Optional) Create node labels for convergence
 * Identify the nodes where the replica set of the `jenkins_vol` volume resides using output of inspect command above.
 * Add a label to each of these nodes as below. This will later allow us to create a service whose tasks only run on these nodes.
-```bash
+```text
 $ docker node update --label-add jenkins_vol=true <node_name>
 ```
 {{<info>}}
