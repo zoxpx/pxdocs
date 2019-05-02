@@ -23,7 +23,7 @@ DCOS 1.10 cluster that is "Portworx-ready".
 ## Pre-install (only required if moving from a Portworx Docker installation)
 If you are moving from a Docker install of Portworx to an OCI install, please make sure that the Portworx service is stopped
 on all the agents before updating to the OCI install. To do this run the following command on all your private agents:
-```text
+```bash
 sudo systemctl stop portworx
 ```
 
@@ -152,7 +152,7 @@ that cluster in which it is deployed. You will have to manually add other cluste
 to monitor using the Lighthouse. Also, the password will be reset to `Password1`.
 
 In case of node failures, to move the Lighthouse task to some other node, run the following command:
-```text
+```bash
 dcos portworx pod replace lighthouse-0
 ```
 
@@ -165,6 +165,6 @@ which didn't have it previously.
 
 ## Install DCOS Portworx CLI
 To install the `dcos portworx` CLI, run the following DCOS CLI command:
-```text
+```bash
 dcos package install portworx --cli
 ```

@@ -25,7 +25,7 @@ Before running the kvdb restore tool
 * Select the node which has the latest key dump and run the restore tool on that node.
 
 #### px-kvdb-restore
-```text
+```bash
 $ px-kvdb-restore --help
 NAME:
 px-kvdb-restore run - Runs the px kvdb restore operation.
@@ -41,7 +41,7 @@ OPTIONS:
 
 Here is an example of how to run the restore tool
 
-```text
+```bash
 $ px-kvdb-restore --kvdb_dump_file /var/cores/kvdb_dump/pwx_kvdb_2018-05-25T22:59:08Z.dump
 ```
 

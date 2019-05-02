@@ -70,7 +70,7 @@ For using annotations Portworx daemon set requires extra permissions to read ann
 
 You can run the following command to edit your existing Portworx ClusterRole
 
-```text
+```bash
 $ kubectl edit clusterrole node-get-put-list-role
 ```
 
@@ -136,7 +136,7 @@ Note we used used the existing snapshot name in the source part of the inline sp
 
 #### Listing snapshots
 To list snapshots taken by Portworx, use the `/opt/pwx/bin/pxctl volume snapshot list` command. For example:
-```text
+```bash
 # /opt/pwx/bin/pxctl volume snapshot list
 ID			NAME	SIZE	HA	SHARED	IO_PRIORITY	SCALE STATUS
 1067822219288009613	snap001	1 GiB	2	no	LOW		1	up - detached

@@ -56,7 +56,7 @@ Provide the Google credentials to Portworx by using any one of these methods
 
 Copy the downloaded account file in a directory `gcloud-secrets/` and rename it `gcloud.json` to create a Kubernetes secret from it.
 
-```text
+```bash
 ls -1 gcloud-secrets
 gcloud.json
 ```
@@ -83,7 +83,7 @@ For an existing Portworx cluster follow these steps:
 
 Edit the Portworx daemonset `secret_type` field to `gcloud-kms`, so that all the new Portworx nodes will also start using Google Cloud KMS.
 
-```text
+```bash
 kubectl edit daemonset portworx -n kube-system
 ```
 
@@ -108,7 +108,7 @@ Use the following command to patch the daemon set, so that it has access to the 
 
 Create a patch file
 
-```text
+```bash
 cat <<EOF> patch.yaml
 spec:
   template:

@@ -16,7 +16,7 @@ plugin.
 
 ## Install Ark Plugin
 Run the following command to install the Portworx plugin for Ark:
-```text
+```bash
 ark plugin add portworx/ark-plugin:0.3
 ```
 
@@ -29,13 +29,13 @@ Once the plugin is installed you need to configure Ark to use Portworx as the
 Persistent Volume Provider when taking snapshots. To edit the config run the
 following command:
 
-```text
+```bash
 $ kubectl edit config -n heptio-ark
 ```
 
 And set up `portworx` as the `persistentVolumeProvider` by adding the following
 snippet to the config spec:
-```text
+```bash
 persistentVolumeProvider:
   name: portworx
 ```
@@ -43,7 +43,7 @@ persistentVolumeProvider:
 ### Using local snapshots (default)
 By default, local snapshots will be created for PVCs backed by Portworx. You can explicitly configure this by specifying
 `local` as the `type` in the `config` section:
-```text
+```bash
 persistentVolumeProvider:
   name: portworx
   config:
@@ -53,7 +53,7 @@ persistentVolumeProvider:
 ### Using cloud snapshots (Supported from PX-Enterprise 1.4 onwards)
 To use cloud snapshots to backup your PVCs, you need to specify `cloud` as the `type` in the `config` section. If you have
 more than one credential configured with Portworx you also need to specify the UUID of the credential using `credId`:
-```text
+```bash
 persistentVolumeProvider:
   name: portworx
   config:

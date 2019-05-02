@@ -108,7 +108,7 @@ With _Portworx_, you can create encrypted shared volumes that can be accessed fr
 
 The `--shared` flag is used to indicate that we would want to share an encrypted volume:
 
-```text
+```bash
 pxctl volume create --shared --secure --size 10 encrypted_volume
 ```
 

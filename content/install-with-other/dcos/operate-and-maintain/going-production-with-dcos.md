@@ -71,7 +71,7 @@ PX replicated volumes distributes data across failure domains. For on-premise in
 PX  auto-detects availabilty zones and regions and provisions replicas across
   different zones. For e.g., see below for the partial output of `pxctl status`
 
-  ```text
+  ```bash
   sudo /opt/pwx/bin/pxctl status
    Status: PX is operational
    License: Trial (expires in 23 days)
@@ -311,7 +311,7 @@ TODO: *Update the above page to show runc*
 
 #### Step 1: Enter Maintenance mode
 
-```text
+```bash
 /opt/pwx/bin/pxctl service  maintenance --enter
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
@@ -325,14 +325,14 @@ Ensure the replacement drive is already available in the system.
 
 For e.g., Replace drive /dev/sde with /dev/sdc
 
-```text
+```bash
 /opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation start
 "Replace operation is in progress"
 ```
 
 Check the replace status
 
-```text
+```bash
 /opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation status
 "Started on 16.Dec 22:17:06, finished on 16.Dec 22:17:06, 0 write errs, 0 uncorr. read errs\n"
 ```
@@ -340,14 +340,14 @@ Check the replace status
 
 #### Step 3: Exit Maintenance mode
 
-```text
+```bash
 /opt/pwx/bin/pxctl service  maintenance --exit
 PX is now operational
 ```
 
 #### Step 4: Check if the drive has been successfully replaced
 
-```text
+```bash
 /opt/pwx/bin/pxctl service drive show
 PX drive configuration:
 Pool ID: 0

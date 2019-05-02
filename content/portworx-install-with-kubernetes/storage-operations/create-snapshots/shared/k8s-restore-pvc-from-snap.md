@@ -26,7 +26,7 @@ spec:
 
 Once you apply the above spec you will see a PVC created by STORK. This PVC will be backed by a Portworx volume clone of the snapshot created above.
 
-```text
+```bash
 kubectl get pvc  
 ```
 

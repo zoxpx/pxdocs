@@ -84,7 +84,7 @@ Portworx provides a Docker based installation utility to help deploy the PX OCI
 bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
-```text
+```bash
 latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
 # Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
 sudo docker run --entrypoint /runc-entry-point.sh \
@@ -97,7 +97,7 @@ sudo docker run --entrypoint /runc-entry-point.sh \
 
 Now that the PX OCI bundle has been deployed, we have to configure it by running the following:
 
-```text
+```bash
 # Basic installation
 sudo /opt/pwx/bin/px-runc install -sysd /dev/null -c MY_CLUSTER_ID \
   -k etcd://myetc.company.com:2379 \
@@ -108,7 +108,7 @@ sudo /opt/pwx/bin/px-runc install -sysd /dev/null -c MY_CLUSTER_ID \
 
 Since the Amazon ECS systems do not have the `systemd` service available, we will need to start Portworx service via the custom init-script:
 
-```text
+```bash
 sudo curl https://docs.portworx.com/install-with-other/ecs/portworx-sysvinit.sh -o /etc/rc.d/init.d/portworx
 sudo chmod 755 /etc/rc.d/init.d/portworx
 sudo chkconfig --add portworx
@@ -119,7 +119,7 @@ sudo service portworx start
 
 Finally, since the Portworx service creates some amount of log-files, we need to ensure these logs are recycled on regular basis, using systems' "logrotate" service:
 
-```text
+```bash
 cat > /etc/logrotate.d/portworx << _EOF
 /var/log/portworx.log {
   minsize 50M
@@ -141,14 +141,14 @@ From your linux workstation download and setup AWS ECS CLI utilities
 
   1. Download and install ECS CLI ([detail instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html))
 
-    ```text
+    ```bash
     $ sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
     $ sudo chmod +x /usr/local/bin/ecs-cli
     ```
 
   2. Configure AWS ECS CLI on your workstation
 
-    ```text
+    ```bash
     $ export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXX
     $ export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXX
     $ ecs-cli configure --region us-east-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo1
@@ -156,7 +156,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
 
   3. Create a 1GB PX volume using the Docker CLI.  ssh into one of the ECS instances and create this PX volumes.
 
-    ```text
+    ```bash
      $ ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
      $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
      demovol
@@ -169,7 +169,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
 
   4. From your ECS CLI workstation which has ecs-cli command; setup and launch ECS task definition with previously created PX volume. Create a task definition file "redis.yml" which will launch two containers: redis based on redis image, and web based on binocarlos/moby-counter. Then use ecs-cli command to post this task definition and launch it.
 
-     ```text
+     ```bash
        $ cat redis.yml
        web:
        image: binocarlos/moby-counter
@@ -200,7 +200,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
   6. On the above ECS console, Clusters -> pick your cluster ```ecs-demo1``` and click on the ```Container Instance``` ID that corresponding to the running task. This will display the containers information including where are these containers deployed into which EC2 instance. Below, we find that the task defined containers are deployed on EC2 instance with public IP address ```52.91.191.220```.
   ![task](/img/aws-ecs-setup_withPX_003z.PNG "ecs3z")
   7. From above, ssh into the EC2 instance 52.91.191.220 and verify PX volume is attached to running container.
-    ```text
+    ```bash
     [ec2-user@ip-172-31-31-61 ~]$ sudo docker ps -a
     CONTAINER ID        IMAGE                            COMMAND                  CREATED             STATUS              PORTS                                             NAMES
     7ba93d51918b        binocarlos/moby-counter          "node index.js"          12 hours ago        Up 12 hours         80/tcp                                            ecs-ecscompose-root-1-web-c2fbfff3bf92b1dad401
@@ -212,7 +212,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
     ```
   8. Check the redis container ```ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601``` and verify a 1GB pxfs volume is mounted on /data
 
-    ```text
+    ```bash
     [ec2-user@ip-172-31-31-61 ~]$ sudo docker exec -it ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601 sh -c 'df -kh'
     Filesystem                                                                                        Size  Used Avail Use% Mounted on
     /dev/mapper/docker-202:1-263203-3f7e353e23d7ba722fc74d1fb7db60e34f98933355ac65f78e6b4f2bcde19778  9.8G  215M  9.0G   3% /
@@ -231,7 +231,7 @@ Create a ECS tasks definition directly via the ECS console (GUI) and using PX vo
 
   1. ssh into one of the EC2 instance and create a new PX volume using Docker CLI.
 
-    ```text
+    ```bash
     $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
     ```
 

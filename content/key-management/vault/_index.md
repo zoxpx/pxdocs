@@ -99,7 +99,7 @@ For an existing Portworx cluster follow these steps to configure Vault as the se
 
 Portworx needs permissions to access the `px-vault` secret created in Step 1. The following Kubernetes spec grants portworx access to all the secrets defined under the `portworx` namespace
 
-```text
+```bash
 cat <<EOF | kubectl apply -f -
 # Namespace to store credentials
 apiVersion: v1

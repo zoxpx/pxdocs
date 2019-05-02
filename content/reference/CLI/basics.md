@@ -14,7 +14,7 @@ By default, the CLI displays the information in human readable form. For example
 pxctl help
 ```
 
-```output
+```
 px cli
 
 Usage:
@@ -90,7 +90,7 @@ Here's how to find out the current version:
 pxctl -v
 ```
 
-```output
+```
 pxctl version 2.1.0.0-d594892 (OCI)
 ```
 
@@ -104,7 +104,7 @@ The following example shows how the output looks like if the global capacity for
 pxctl status
 ```
 
-```output
+```
 Status: PX is operational
 Node ID: 0a0f1f22-374c-4082-8040-5528686b42be
 	IP: 172.31.50.10
@@ -134,7 +134,7 @@ Global Storage Pool
 pxctl upgrade --help
 ```
 
-```output
+```
 Usage:
   pxctl upgrade [flags]
 
@@ -162,7 +162,7 @@ Global Flags:
 pxctl upgrade --tag 1.1.6 my-px-enterprise
 ```
 
-```output
+```
 Upgrading my-px-enterprise to version: portworx/px-enterprise:1.1.6
 Downloading PX portworx/px-enterprise:1.1.6 layers...
 <Output truncated>
@@ -185,7 +185,7 @@ Here's an example of configuring PX with Vault:
 pxctl secrets vault login --vault-address http://myvault.myorg.com --vault-token myvaulttoken
 ```
 
-```output
+```
 Successfully authenticated with Vault.
 ```
 

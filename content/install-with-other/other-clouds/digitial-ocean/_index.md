@@ -25,7 +25,7 @@ Download, unzip and install Terraform for your particular OS distro from the mai
 
 ### Step 2: Clone the Terraporx Repository
 
-```text
+```bash
 git clone https://github.com/portworx/terraporx.git
 cd terraporx/digital_ocean
 ```

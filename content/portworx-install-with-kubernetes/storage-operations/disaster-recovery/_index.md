@@ -18,7 +18,7 @@ plugin.
 
 ## Install Ark Plugin
 Run the following command to install the Portworx plugin for Ark:
-```text
+```bash
 ark plugin add portworx/ark-plugin:0.5
 ```
 {{<info>}}*Note*: For PX-Enterprise pre v2.0, use `portworx/ark-plugin:0.4` {{</info>}}
@@ -31,7 +31,7 @@ plugin.
 Once the plugin is installed, you need to create VolumeSnapshotLocation objects for ark to use when
 taking volume snapshots. These specify whether you want to take local or cloud snapshots.
 
-```text
+```bash
 apiVersion: ark.heptio.com/v1
 kind: VolumeSnapshotLocation
 metadata:
@@ -55,7 +55,7 @@ spec:
 ```
 
 After applying the above specs you should see them when you list the VolumeSnapshotLocaions
-```text
+```bash
 kubectl get volumesnapshotlocation -n heptio-ark
 ```
 ```
