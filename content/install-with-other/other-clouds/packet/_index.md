@@ -45,7 +45,7 @@ The attached local block storage will automatically be configured for multipath 
 
 Use the following command to identify the multipath devices:
 
-```bash
+```text
    multipath -ll|more
 ```
 

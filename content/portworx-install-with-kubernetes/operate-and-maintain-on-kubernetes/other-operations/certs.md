@@ -11,19 +11,19 @@ Sometimes it is necessary to store an SSL certificate as a Kubernetes secret. Th
  * Copy your certificate to somewhere `kubectl` is configured for this Kubernetes cluster. We will call the file `objectstore.pem` and copy it to the `/opt/certs` folder.
  * Create the secret:
 
-```bash
+```text
 kubectl -n kube-system create secret generic objectstore-cert --from-file=/opt/certs/
 ```
 
  * Confirm it was created correctly:
 
-```bash
+```text
 kubectl -n kube-system describe secret objectstore-cert
 ```
 
  * Update the Portworx daemonset to add the mount secret and the environment variable:
 
-```bash
+```text
 kubectl -n kube-system edit ds portworx
 ```
 

@@ -82,14 +82,14 @@ Note the `secret_key` is set to the value `default` to indicate PX to use the cl
 
 To create a volume using a named secret through pxctl, run the following command
 
-```bash
+```text
 /opt/pwx/bin/pxctl volume create --secure --secret_key mysecret enc_vol
 
 ```
 
 To create a volume using a named secret through docker, run the following command
 
-```bash
+```text
 docker volume create --volume-driver pxd secret_key=mysecret,name=enc_vol
 
 ```
