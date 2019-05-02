@@ -5,4 +5,6 @@ If the status is in error state you can describe the clusterpair to get more inf
 kubectl describe clusterpair remotecluster
 ```
 
-{{<info>}} *Note*: You might need to perform additional steps for [GKE](gke) and [EKS](eks) {{</info>}}
+{{<info>}}
+You might need to perform additional steps for [GKE](/portworx-install-with-kubernetes/cloud/gcp/gke) and [EKS](/portworx-install-with-kubernetes/cloud/aws/aws-eks/).
+{{</info>}}

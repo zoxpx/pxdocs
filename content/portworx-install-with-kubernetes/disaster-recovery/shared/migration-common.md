@@ -94,6 +94,6 @@ spec:
 
 ## Advanced Operations
 
-* [Migrating to GKE](gke)
-* [Migrating to EKS](eks)
-* [Configuring a namespace as a cluster namespace](cluster-admin-namespace)
+* [Migrating to GKE](/portworx-install-with-kubernetes/cloud/gcp/gke)
+* [Migrating to EKS](/portworx-install-with-kubernetes/cloud/aws/aws-eks/)
+* [Configuring a namespace as a cluster namespace](/portworx-install-with-kubernetes/migration/px-motion/cluster-admin-namespace)
