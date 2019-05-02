@@ -26,7 +26,7 @@ This topic explains how to load these images onto your nodes when they don't hav
 
     ```text
     PX_IMGS="$(curl -fsSL "https://install.portworx.com/2.1/?kbver=$KBVER&type=oci&lh=true&ctl=true&stork=true" | awk '/image: /{print $2}' | sort -u)"
-    PX_IMGS="$PX_IMGS portworx/talisman:latest portworx/px-node-wiper:latest"
+    PX_IMGS="$PX_IMGS portworx/talisman:latest portworx/px-node-wiper:2.0.2.1"
     PX_ENT=$(echo "$PX_IMGS" | sed 's|^portworx/oci-monitor:|portworx/px-enterprise:|p;d')
 
     echo $PX_IMGS $PX_ENT | xargs -n1 docker pull
