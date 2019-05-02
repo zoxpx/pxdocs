@@ -22,7 +22,7 @@ to upgrade to v1.3.1.4 you would set this to `portworx/px-enterprise:1.3.1.4`.
 
 If you want to update Portworx using the DCOS CLI instead of the UI, you can perform the following steps:
 
-```bash
+```text
 dcos portworx describe | \
   jq '.node.portworx_image="portworx/px-enterprise:1.3.1.4"' > \
   new-options.json
@@ -31,7 +31,7 @@ dcos portworx update start --options=new-options.json
 ```
 
 Now wait for the portworx install tasks to go to COMPLETE state on all the agents
-```bash
+```text
 dcos portworx --name=portworx update status
 deploy (serial strategy) (COMPLETE)
 └─ portworx-install (serial strategy) (COMPLETE)

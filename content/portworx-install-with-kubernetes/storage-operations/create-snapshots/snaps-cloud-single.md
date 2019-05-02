@@ -48,13 +48,13 @@ spec:
 
 Once you apply the above object you can check the status of the snapshots using `kubectl`:
 
-```bash
+```text
 $ kubectl get volumesnapshot
 NAME                             AGE
 volumesnapshots/mysql-snapshot   2s
 ```
 
-```bash
+```text
 $ kubectl get volumesnapshotdatas
 NAME                                                                            AGE
 volumesnapshotdatas/k8s-volume-snapshot-2bc36c2d-227f-11e8-a3d4-5a34ec89e61c    1s
@@ -62,7 +62,7 @@ volumesnapshotdatas/k8s-volume-snapshot-2bc36c2d-227f-11e8-a3d4-5a34ec89e61c    
 
 The creation of the volumesnapshotdatas object indicates that the snapshot has been created. If you describe the volumesnapshotdatas object you can see the Portworx Cloud Snapshot ID and the PVC for which the snapshot was created.
 
-```bash
+```text
 $ kubectl describe volumesnapshotdatas
 Name:         k8s-volume-snapshot-2bc36c2d-227f-11e8-a3d4-5a34ec89e61c
 Namespace:    
@@ -124,7 +124,7 @@ spec:
 
 Once you apply the above spec you will see a PVC created by STORK. This PVC will be backed by a Portworx volume clone of the snapshot created above.
 
-```bash
+```text
 $ kubectl get pvc  
 NAMESPACE   NAME                                   STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS                AGE
 default     mysql-data                             Bound     pvc-f782bf5c-20e7-11e8-931d-0214683e8447   2Gi        RWO            px-mysql-sc                 2d

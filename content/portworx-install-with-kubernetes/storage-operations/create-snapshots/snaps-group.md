@@ -56,7 +56,7 @@ A new VolumeSnapshot object will get created for each PVC that matches the given
 
 You can track the status of the group volume snapshots using:
 
-```bash
+```text
 kubectl describe groupvolumesnapshot <group-snapshot-name>
 ```
 
@@ -158,7 +158,7 @@ spec:
 
 Once you apply the above object you can check the status of the snapshots using `kubectl`:
 
-```bash
+```text
 kubectl describe groupvolumesnapshot cassandra-group-snapshot
 ```
 
@@ -238,7 +238,7 @@ These correspond to the PVCs _cassandra-data-cassandra-0_, _cassandra-data-cassa
 
 You can also describe these individual volume snapshots using
 
-```bash
+```text
  kubectl describe volumesnapshot cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
 ```
  

@@ -9,7 +9,7 @@ Below is an example of using curl to generate the Portworx spec file. Review the
 
 >**Openshift Users:**<br/> Make sure you use `osft=true` when generating the spec.
 
-```bash
+```text
 $ VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
 # For the 1.4 tech preview release
 $ curl -L -o px-spec.yaml "https://install.portworx.com/1.4/?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
