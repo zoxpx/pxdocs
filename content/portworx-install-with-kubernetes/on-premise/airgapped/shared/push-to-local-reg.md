@@ -10,7 +10,7 @@
 
     ```text
     # Trim trailing slashes:
-    REGISTRY=${$(echo $REGISTRY | tr -s /)%/}
+    REGISTRY=${REGISTRY%/}
     # re-tag and push into custom/local registry defined previously
     # Check if using custom registry+repository (e.g. `REGISTRY=myregistry.net:5443/px-images`)
     # or just the registry (e.g. `REGISTRY=myregistry.net:5443`)
