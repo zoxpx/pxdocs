@@ -37,13 +37,15 @@ This steps assumes your cluster nodes have access to a custom/private registry.
 
 {{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-local-reg.md" %}}
 
-Now that you have the images in your registry, continue with [Step 3: Run the wiper script](#step-3-run-the-wiper-script).
+Now that you have the images in your registry, continue with [Step 4: Run the wiper script](#step-3-run-the-wiper-script).
 
 ## Step 4: Run the wiper script
 
 First let's figure out the image names and tags for our private registry. 
 
 Below we are simply prefixing the actual image names with the custom/private registry.
+
+{{<info>}}Below commands use the REGISTRY variable. Ensure it's still exported on the terminal you run the below commands by using `echo $REGISTRY`.{{</info>}}
 
 ```text
 export WIPER_IMAGE=$REGISTRY/portworx/px-node-wiper
