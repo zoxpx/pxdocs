@@ -21,14 +21,14 @@ reachable by the source cluster.
 The following steps can be used to download `storkctl`:
   * Linux:
 
-         ```bash
+         ```text
 curl http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/2.0.0/linux/storkctl -o storkctl &&
 sudo mv storkctl /usr/local/bin &&
 sudo chmod +x /usr/local/bin/storkctl
          ```
   * OS X:
 
-         ```bash
+         ```text
 curl http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/2.0.0/darwin/storkctl -o storkctl &&
 sudo mv storkctl /usr/local/bin &&
 sudo chmod +x /usr/local/bin/storkctl
@@ -51,8 +51,10 @@ Get the **ClusterPair** spec from the destination cluster. This is required to m
 You can generate the template for the spec using `storkctl generate clusterpair -n migrationnamespace remotecluster` on the destination cluster.
 Here, the name (remotecluster) is the Kubernetes object that will be created on the source cluster representing the pair relationship.
 During the actual migration, you will reference this name to identify the destination of your migration
+```text
+storkctl generate clusterpair -n migrationnamespace remotecluster
 ```
-$ storkctl generate clusterpair -n migrationnamespace remotecluster
+```output
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterPair
 metadata:
@@ -138,8 +140,10 @@ Copy and save this to a file called clusterpair.yaml on the source cluster.
 
 ### Create the ClusterPair
 On the source cluster create the clusterpair by applying the generated spec.
+```text
+kubectl apply -f clusterpair.yaml
 ```
-$ kubectl apply -f clusterpair.yaml
+```output
 clusterpair.stork.libopenstorage.org/remotecluster created
 ```
 
@@ -147,15 +151,15 @@ clusterpair.stork.libopenstorage.org/remotecluster created
 Once you apply the above spec on the source cluster you should be able to check the status of the pairing. On a successful pairing, you should
 see the "Storage Status" and "Scheduler Status" as "Ready" using storkctl on the
 source cluster:
-```
-$ storkctl get clusterpair
+```text
+storkctl get clusterpair
 NAME               STORAGE-STATUS   SCHEDULER-STATUS   CREATED
 remotecluster      Ready            Ready              26 Oct 18 03:11 UTC
 ```
 
 ### Troubleshooting
 If the status is in error state you can describe the clusterpair to get more information
-```
+```text
 kubectl describe clusterpair remotecluster
 ```
 
@@ -172,7 +176,7 @@ specification. In that YAML, you will specify an object called a Migration.
 In the specification, you will define the scope of the 
 applications to move and decide whether to automatically start the applications.
 Here, create a migration and save as migration.yaml.
-```
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: Migration
 metadata:
@@ -195,14 +199,16 @@ You can now invoke or schedule the now defined migration. This step is automatea
 be user invoked. In order to invoke from the command-line, run the following
 steps:
 
-```
+```text
 kubectl apply -f migration.yaml
 ```
 
 #### Using storkctl
 You can also start a migration using storkctl:
+```text
+storkctl create migration mysqlmigration --clusterPair remotecluster --namespaces migrationnamespace --includeResources --startApplications -n migrationnamespace
 ```
-$ storkctl create migration mysqlmigration --clusterPair remotecluster --namespaces migrationnamespace --includeResources --startApplications -n migrationnamespace
+```output
 Migration mysqlmigration created successfully
 ```
 
@@ -215,23 +221,29 @@ cluster. Instructions for setting this admin namespace to stork can be found
 
 ### Monitoring Migration
 Once the migration has been started using the above step, you can check the status of the migration using storkctl
+```text
+storkctl get migration -n migrationnamespace
 ```
-$ storkctl get migration -n migrationnamespace
+```output
 NAME            CLUSTERPAIR     STAGE     STATUS       VOLUMES   RESOURCES   CREATED
 mysqlmigration  remotecluster   Volumes   InProgress   0/1       0/0         26 Oct 18 20:04 UTC
 ```
 
 The Stages of migration will go from Volumes→ Application→Final if successful.
+```text
+storkctl get migration -n migrationnamespace
 ```
-$ storkctl get migration -n migrationnamespace
+```output
 NAME            CLUSTERPAIR     STAGE     STATUS       VOLUMES   RESOURCES   CREATED
 mysqlmigration  remotecluster   Final     Successful   1/1       3/3         26 Oct 18 20:04 UTC
 ```
 
 ### Troubleshooting
 If there is a failure or you want more information about what resources were migrated you can describe the migration object using kubectl:
+```text
+kubectl describe migration mysqlmigration
 ```
-$ kubectl describe migration mysqlmigration
+```output
 Name:         mysqlmigration
 Namespace:    migrationnamespace
 Labels:       <none>
