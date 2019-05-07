@@ -23,9 +23,9 @@ sudo docker run --entrypoint /runc-entry-point.sh \
 Inspect the mounts so these can be provided to the runC installer.
 
 {{<info>}}
-**Note:**  
-Mounts for `/dev`, `/proc`, `/sys`, `/etc/pwx`, `/opt/pwx`, `/run/docker/plugins`, `/usr/src`, `/var/cores`, `/var/lib/osd`, `/var/run/docker.sock` can be safely ignored \(omitted\).  
-Custom mounts will need to be passed to PX-OCI in the next step, using the following notation:  
+**Note:**
+Mounts for `/dev`, `/proc`, `/sys`, `/etc/pwx`, `/opt/pwx`, `/run/docker/plugins`, `/usr/src`, `/var/cores`, `/var/lib/osd`, `/var/run/docker.sock` can be safely ignored \(omitted\).
+Custom mounts will need to be passed to PX-OCI in the next step, using the following notation:
 `px-runc install -v <Source1>:<Destination1>[:<Propagation1 if shared,ro>] ...`
 {{</info>}}
 
@@ -33,9 +33,15 @@ Custom mounts will need to be passed to PX-OCI in the next step, using the follo
 # Inspect Arguments
 sudo docker inspect --format '{{.Args}}' px-enterprise
 [ -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb ]
+```
 
+
+```text
 # Inspect Mounts
 sudo docker inspect --format '{{json .Mounts}}' px-enterprise | python -mjson.tool
+```
+
+```output
 [...]
     {
         "Destination": "/var/lib/kubelet",
@@ -45,7 +51,9 @@ sudo docker inspect --format '{{json .Mounts}}' px-enterprise | python -mjson.to
         "Source": "/var/lib/kubelet",
         "Type": "bind"
     },
+```
 
+```text
 # Alternatively, one can use 'jq' and 'egrep' to filter out the "standard" Portworx mounts,
 # and leave only your custom mounts (if any)
 sudo docker inspect px-enterprise | \

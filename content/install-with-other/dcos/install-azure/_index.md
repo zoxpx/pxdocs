@@ -22,31 +22,59 @@ The cluster definition file enables the following customizations to your Docker 
 
 The instructions below are presented only as a *template* for how to deploy Portworx on ACS-Engine using DCOS.
 
-### Install `acs-engine` and `azure CLI`
+### Install acs-engine and azure CLI
 Install and build the [`acs-engine` binary](https://github.com/Azure/acs-engine/blob/master/docs/acsengine.md)
 
 From a Linux host:
-* git clone https://github.com/Azure/acs-engine.git
-* cd acs-engine
-* ./scripts/devenv.sh
-* make prereqs && make build
-* ```curl -L https://aka.ms/InstallAzureCli | bash```
+
+* clone the repo:
+
+```text
+git clone https://github.com/Azure/acs-engine.git
+```
+
+* `cd` into `acs-engine`
+
+```text
+cd acs-engine
+```
+
+* install `acs-engine`
+
+```text
+./scripts/devenv.sh && make prereqs && make build
+```
+
+* install Azure CLI:
+
+```text
+curl -L https://aka.ms/InstallAzureCli | bash
+```
 
 ### Login to Azure and Set Subscription
 
-* az login
-* az account set --subscription "Your-Azure-Subscription-UUID"
+```text
+az login
+```
+
+```text
+az account set --subscription "Your-Azure-Subscription-UUID"
+```
 
 ### Create Azure Resource Group and Location
 
 Pick a name for the Azure Resource Group and choose a LOCATION value
-among the following:  
+among the following:
 `centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus`
 <br>`southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest`
 <br>`brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia`
 <br>`canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth`
 
-* az group create --name "$RGNAME" --location "$LOCATION"
+Then, run the following command:
+
+```text
+az group create --name "$RGNAME" --location "$LOCATION"
+```
 
 ### Select and customize the deployment configuration
 

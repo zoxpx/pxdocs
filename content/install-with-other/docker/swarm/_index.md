@@ -22,6 +22,9 @@ For example:
 
 ```text
 lsblk
+```
+
+```output
     NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
     xvda                      202:0    0     8G  0 disk
     └─xvda1                   202:1    0     8G  0 part /
@@ -33,7 +36,7 @@ Note that devices without the partition are shown under the **TYPE** column as *
 
 Identify the storage devices you will be allocating to PX. PX can run in a heterogeneous environment, so you can mix and match drives of different types. Different servers in the cluster can also have different drive configurations.
 
-## Install {#install}
+## Install
 
 PX runs as a container directly via OCI runC. This ensures that there are no cyclical dependencies between Docker and PX.
 
@@ -54,11 +57,11 @@ On each swarm node, perform the following steps to install PX.
 {{% content "install-with-other/docker/shared/runc-enable-portworx.md" %}}
 
 
-### Adding Nodes {#adding-nodes}
+### Adding Nodes
 
 To add nodes to increase capacity and enable high availability, simply repeat these steps on other servers. As long as PX is started with the same cluster ID, they will form a cluster.
 
-### Access the pxctl CLI {#access-the-pxctl-cli}
+### Access the pxctl CLI
 
 After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool.
 
@@ -67,13 +70,16 @@ With **pxctl**, you can also inspect volumes, the volume relationships with cont
 To view the global storage capacity, run:
 
 ```text
-sudo /opt/pwx/bin/pxctl status
+pxctl status
 ```
 
 The following sample output of `pxctl status` shows that the global capacity for Docker containers is 128 GB.
 
 ```text
-/opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 Status: PX is operational
 Node ID: 0a0f1f22-374c-4082-8040-5528686b42be
 	IP: 172.31.50.10

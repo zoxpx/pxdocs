@@ -9,7 +9,7 @@ The Portworx-Cassandra service can be found in the DC/OS catalog:
 
 ![Cassandra-PX in DCOS Universe](/img/dcos-cassandra-px-universe.png)
 
-#### Default Install {#default-install}
+#### Default Install
 
 If you want to use the defaults, you can now run the dcos command to install the service
 
@@ -19,7 +19,7 @@ dcos package install --yes portworx-cassandra
 
 You can also click on the “Install” button on the WebUI next to the service and then click “Install Package”. The default install will create PX volumes of size 5GB with 1 replica.
 
-#### Advanced Install and Volume Options {#advanced-install-and-volume-options}
+#### Advanced Install and Volume Options
 
 If you want to modify the default, click on the “Install” button next to the package on the DCOS UI and then click on “Advanced Installation”
 
@@ -29,7 +29,7 @@ Here you have the option to change the service name, volume name, volume size, a
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
-#### Install Status {#install-status}
+#### Install Status
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
@@ -51,17 +51,20 @@ If you run the “dcos service” command you should see the portworx-cassandra 
 
 ```text
 dcos service
+```
+
+```output
 NAME                            HOST                    ACTIVE  TASKS  CPU    MEM    DISK  ID
 portworx-cassandra           10.0.0.179                  True     3    1.5  12288.0  0.0   5c6438b2-1f63-4c23-b62a-ad0a7d354a91-0115
 marathon                     10.0.4.21                   True     1    1.0   1024.0  0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0001
 metronome                    10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000
 ```
 
-### Hyperconvergence {#hyperconvergence}
+### Hyperconvergence
 
 Running your Cassandra task on the same host as its data provides the best performance. This is called hyperconvergence and it is supported by the DC/OS Cassandra framework when using Portworx. When each Cassandra task is first launched, they create the required PX volumes. These volumes are created with data local to the node where they are first launched.
 
-### Failover {#failover}
+### Failover
 
 On subsequent launches of the same pod, for example in the case of a failover, the framework queries Portworx to figure out where the data for the volume resides and uses this to decide where the pod should be launched.
 
@@ -69,7 +72,7 @@ If there are not enough system resources \(like CPU, memory\) on the nodes where
 
 If the volume was created with a replication factor greater than 1, then the framework can decide to start the task on any of the nodes where the data is local.
 
-### Scaling {#scaling}
+### Scaling
 
 You do not need to create additional PX volumes manually to scale up your cluster. Just go to the Cassandra service page, click on the three dots on the top right corner of the page, select “nodes”, scroll down and increase the nodes parameter to the desired nodes.
 
@@ -80,13 +83,13 @@ Click on “Review and Run” and then “Run Service”. The service scheduler 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 {{<info>}}
-**Note:**  
+**Note:**
 This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
 {{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
 
-### See Also {#see-also}
+### See Also
 
 For further reading on Cassandra:
 

@@ -31,7 +31,10 @@ You should see
 Run "docker ps" to find the CONTAINER ID of the Jenkins container:
 
 ```text
-[root@mesos2 ~]# docker ps
+docker ps
+```
+
+```output
 CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                                NAMES
 9dfa72c4328c        jenkins                  "/bin/tini -- /usr/lo"   29 seconds ago      Up 23 seconds       50000/tcp, 0.0.0.0:49001->8080/tcp   ecstatic_ptolemy
 ```
@@ -58,7 +61,7 @@ Start Using Jenkins
 
 ## How to speed up Jenkins
 
-Be sure to read [How to speed up Jenkins builds](https://portworx.com/speed-up-jenkins-builds/) on the ways in which Portworx can help improve Jenkins performance and speed up CI/CD workloads.  
+Be sure to read [How to speed up Jenkins builds](https://portworx.com/speed-up-jenkins-builds/) on the ways in which Portworx can help improve Jenkins performance and speed up CI/CD workloads.
 
 ## Highly Resilient Jenkins Using Docker Swarm
 
