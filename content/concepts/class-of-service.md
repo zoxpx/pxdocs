@@ -8,39 +8,39 @@ series: concepts
 
 Portworx provides the ability to specify a class of service for IOPS, throughput and more at the container granularity. Through class of service \(also known as a `CoS`\), a single volume’s class of service can be controlled and mapped to specific underlying storage infrastructure capabilities.
 
-### Explanation of Class of Service {#explanation-of-class-of-service}
+### Explanation of Class of Service
 
 Applications have different storage performance requirements; some require higher IOPS/throughput performance characteristics than others. Portworx provides the ability to specify a class of service level at the container granularity. Containers operating at different classes of service can co-exist in the same node/cluster. Using class of service you can tune your volume for higher throughput and/or IOPS. The _High_CoS is optimized for IOPS, _Medium_ is optimized for throughput.
 
-### Usage {#usage}
+### Usage
 
 To create a volume with a specific class of service level, use the `--io_prioirity` parameter in the volume create options. As with other parameters, this CoS parameter can also be passed in as a label via Docker or any scheduler.
 
 ```text
-/opt/pwx/bin/pxctl volume create --io_priority high volume-name
+pxctl volume create --io_priority high volume-name
 ```
 
 Here is an example output from [fio](https://github.com/axboe/fio) when measuring the CoS feature on an Intel server with NVMe and SATA drives.
 
 | Random | Low CoS IOPS | High CoS IOPS |
-| --- | --- | --- | --- |
+| :---: | :---: | :---: |
 | 4K | 768 | 65024 |
 | 8K | 642 | 46848 |
 | 64K | 496 | 9824 |
 
 The graph below shows the sequential and random read and write performance on high and low CoS volume types:
 
-#### Random Read and Writes {#random-read-and-writes}
+#### Random Read and Writes
 
 ![CoS Random](/img/cos-random.png)
 
-#### Sequential Read and Writes {#sequential-read-and-writes}
+#### Sequential Read and Writes
 
 ![CoS Sequential](/img/cos-seq.png)
 
-### Try it out on Amazon {#try-it-out-on-amazon}
+### Try it out on Amazon
 
-#### Create EBS volumes AWS {#create-ebs-volumes-aws}
+#### Create EBS volumes AWS
 
 Here, we create volumes of 3 different volume types in AWS. Refer to [AWS EBS volume types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) for more information on the EBS volume capabilities. PWX will automatically detect the volume type and classify it into the correct service category.
 
@@ -54,6 +54,9 @@ Here is what you should see when you list your block devices:
 
 ```text
 lsblk
+```
+
+```output
 NAME                                                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 xvda                                                    202:0    0   64G  0 disk
 └─xvda1                                                 202:1    0   64G  0 part /
@@ -66,6 +69,9 @@ Create a `config.json` with the following drives in it… we will add the fourth
 
 ```text
 cat /etc/pwx/config.json
+```
+
+```output
 {
     "alertingurl": "",
     "clusterid": "cos-demo-cluster",
@@ -86,6 +92,9 @@ cat /etc/pwx/config.json
 
 ```text
 pxctl status
+```
+
+```output
 Status: PX is operational
 Node ID: 5f794df0-b337-42d7-afc0-440c19fc4b0e
         IP: 172.31.2.134
@@ -110,10 +119,13 @@ Global Storage Pool
 
 The `status` command on any node shows the pools with different classes of services listed. The format `x:y`in the Device column indicates the `pool:device` participating in that pool.
 
-#### Inspect different pools {#inspect-different-pools}
+#### Inspect different pools
 
 ```text
-/opt/pwx/bin/pxctl service drives
+pxctl service drives
+```
+
+```output
 PX drive configuration:
 Pool ID: 0
 	Cos: COS_TYPE_LOW
@@ -138,18 +150,18 @@ Pool ID: 2
 	1: /dev/xvdj, 2.1 GiB allocated of 128 GiB, Online
 ```
 
-#### Measure Performance {#measure-performance}
+#### Measure Performance
 
 Let’s first create three volumes with a high, medium and low class of service:
 
 ```text
-/opt/pwx/bin/pxctl volume create --io_priority high test-high --size 8
+pxctl volume create --io_priority high test-high --size 8
 test-high
 
-/opt/pwx/bin/pxctl volume create --io_priority med test-med --size 8
+pxctl volume create --io_priority med test-med --size 8
 test-med
 
-/opt/pwx/bin/pxctl volume create --io_priority low test-low --size 8
+pxctl volume create --io_priority low test-low --size 8
 test-low
 ```
 
@@ -157,7 +169,9 @@ Now we use [fio](https://github.com/axboe/fio) to measure PX volume performance 
 
 ```text
 iostat -xm 1
+```
 
+```output
 Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
 xvdj             30.00   114.00  660.00  380.00    10.61    43.66   106.87    48.63   93.53    1.30  253.71   0.67  70.00
 xvdl              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
@@ -175,9 +189,7 @@ docker run --rm --volume-driver=pxd -v test-high:/test          \
 	--iodepth=128 --randrepeat=1  --end_fsync=1
 ```
 
-Results:
-
-```text
+```output
 test: (g=0): rw=randread, bs=4K-4K/4K-4K/4K-4K, ioengine=libaio, iodepth=128
 fio-2.1.11
 Starting 1 process
@@ -208,9 +220,7 @@ docker run --rm --volume-driver=pxd -v test-med:/test            \
 	--iodepth=128 --randrepeat=1  --end_fsync=1
 ```
 
-Results:
-
-```text
+```output
 test: (g=0): rw=randread, bs=4K-4K/4K-4K/4K-4K, ioengine=libaio, iodepth=128
 fio-2.1.11
 Starting 1 process
@@ -241,9 +251,7 @@ docker run --rm --volume-driver=pxd -v test-low:/test           \
 	--iodepth=128 --randrepeat=1  --end_fsync=1
 ```
 
-Results:
-
-```text
+```output
 test: (g=0): rw=randread, bs=4K-4K/4K-4K/4K-4K, ioengine=libaio, iodepth=128
 fio-2.1.11
 Starting 1 process
@@ -264,10 +272,10 @@ Disk stats (read/write):
   pxd!pxd660995725854051776: ios=260024/5, merge=0/2, ticks=376295185/22319, in_queue=376318258, util=100.00%
 ```
 
-#### Summary of AWS Results \(4K Random Reads\) {#summary-of-aws-results-4k-random-reads}
+#### Summary of AWS Results \(4K Random Reads\)
 
 | CoS | Avg IOPS | Avg Response Time |
-| --- | --- | --- | --- |
+| :---: | :---: | :---: |
 | High | 10346 | 0.58ms |
 | Medium | 5783 | 0.54ms |
 | Low | 89 | 23.61ms |

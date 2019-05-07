@@ -6,11 +6,11 @@ weight: 3
 series: concepts
 ---
 
-From version 2.0, Portworx can be installed with built-in internal kvdb. It removes the requirement of an external kvdb such as etcd or consul to be installed along side of Portworx. This document explains the different concepts associated with Portworx's internal kvdb.
+From version 2.0, Portworx can be installed with built-in internal kvdb. It removes the requirement of an external kvdb such as etcd or consul to be installed alongside of Portworx. This document explains the different concepts associated with Portworx's internal kvdb.
 
 ## Setup
 
-Portworx when installed with appropriate arguments, will automatically deploy an internal kvdb cluster on a set of 3 nodes within the Portworx cluster. Based on your scheduler provide the appropriate input argument to setup Portworx with internal kvdb
+Portworx, when installed with appropriate arguments, will automatically deploy an internal kvdb cluster on a set of 3 nodes within the Portworx cluster. Based on your scheduler provide the appropriate input argument to setup Portworx with internal kvdb
 
 #### Kubernetes
 
@@ -18,11 +18,11 @@ On the Portworx [install](https://install.portworx.com/2.0) page, under the ETCD
 
 #### Mesos (DCOS)
 
-While deploying the Portworx framework provide the `-b` argument in the extra arguments section.
+While deploying the Portworx framework, provide the `-b` argument in the extra arguments section.
 
 #### Other schedulers
 
-For all other schedulers, Portworx requires an external etcd or consul, to bootstrap its internal kvdb. Portworx will use this external etcd or consul, to discover its own internal kvdb nodes. While installing Portworx provide the `-b` argument to instruct Portworx to setup internal kvdb. Along with `-b`, provide the `-k` argument with a list of external etcd or consul endpoints.
+For all other schedulers, Portworx requires an external etcd or consul, to bootstrap its internal kvdb. Portworx will use this external etcd or consul, to discover its own internal kvdb nodes. While installing Portworx, provide the `-b` argument to instruct Portworx to setup internal kvdb. Along with `-b`, provide the `-k` argument with a list of external etcd or consul endpoints.
 
 
 ## Storage for internal kvdb
@@ -42,13 +42,14 @@ The metadata drive needs to be at least 64Gi in size
 This is the recommended method as the disk IO for internal kvdb is not shared with PX volume IO.
 
 ### Auto (Not recommended)
+
 If a metadata drive is not provided Portworx will reserve some space in the same storage pool which is used for storing your volume data.
 
 This method is not recommended as the disk will be shared between internal kvdb IO and Portworx volume IO causing degraded internal kvdb performance.
 
 ## Designating internal kvdb nodes (Only Kubernetes)
 
-If your scheduler is kubernetes you can designate a set of nodes to run internal kvdb. Only those nodes which have the label `px/metadata-node=true` will be a part of the internal kvdb cluster.
+If your scheduler is kubernetes, you can designate a set of nodes to run internal kvdb. Only those nodes which have the label `px/metadata-node=true` will be a part of the internal kvdb cluster.
 
 Use the following command to label nodes in kubernetes
 
@@ -68,7 +69,7 @@ Depending upon the labels and their values a decision will be made
 
 If a Portworx node which was a part of the internal kvdb cluster goes down for more than 3 minutes, then any other available storage nodes which are not part of the kvdb cluster will try to join it.
 
-This are a set of actions that are taken on the node which tries to join the kvdb cluster
+This is a set of actions that are taken on the node which tries to join the kvdb cluster
 
 - The down member is removed from the internal kvdb cluster. (Note: The node will be still part of the Portworx cluster)
 - Internal kvdb is started on the new node
@@ -92,10 +93,13 @@ A typical backup file will look like this
 
 ```text
 ls /var/cores/kvdb_backup
+```
+
+```output
 pwx_kvdb_schedule_153664_2019-02-06T22:30:39-08:00.dump
 ```
 
-These backup files, can be used for recovering the internal kvdb cluster in case of a disaster.
+These backup files can be used for recovering the internal kvdb cluster in case of a disaster.
 
 ## Recovery
 
@@ -110,7 +114,7 @@ Follow these steps to recover.
 
 ### Step 1: Identify the latest and golden kvdb backup file
 
-A timestamp is associated with each internal kvdb backup that is taken. Choose one latest backup file from all of the nodes. 
+A timestamp is associated with each internal kvdb backup that is taken. Choose the latest backup file from all the nodes.
 
 ### Step 2: Rename the backup file
 
@@ -130,7 +134,3 @@ Portworx will be able to recover the internal kvdb cluster from the golden dump 
 - There is only one node with the file `pwx_kvdb_disaster_recovery_golden.dump`
 
 As soon as this node recovers the internal kvdb cluster, all other Portworx nodes will start coming back up one by one.
-
-
-
-

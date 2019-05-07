@@ -25,7 +25,7 @@ Follow Docker documentation to install Docker EE 2.x https://docs.docker.com/ins
 
 Follow Docker documentation to install UCP https://docs.docker.com/ee/ucp/admin/install.
 
-{{<info>}}Note that UCP version must be 3.1.x or higher for RBAC compitability https://docs.docker.com/ee/ucp/release-notes.{{</info>}}
+{{<info>}}Note that UCP version must be 3.1.x or higher for RBAC compatability https://docs.docker.com/ee/ucp/release-notes.{{</info>}}
 
 #### Install UCP
 
@@ -44,6 +44,7 @@ docker container run --rm -it --name ucp -v /var/run/docker.sock:/var/run/docker
 #### Login to UCP
 
 Use the credentials to login to UCP Dashboard, example: admin/password.
+
 ```text
 https://<node-ip>:443
 ```
@@ -53,9 +54,11 @@ https://<node-ip>:443
 #### Check your Kubernetes version
 
 Navigate to Admin -> About -> Kubernetes and look for GoVersion.
+
 ```text
 https://<node-ip>/manage/about/kubernetes
 ```
+
 ![Get K8S Version](/img/docker-ee-k8s1.png)
 
 #### Install kubectl
@@ -69,6 +72,7 @@ Navigate to Admin -> My Profile -> Client Bundles and select Generate New Client
 ```text
 https://<node-ip>/manage/profile/clientbundle
 ```
+
 ![Generate New Client Bundle](/img/docker-ee-k8s2.png)
 
 #### Download Client Bundle and set env

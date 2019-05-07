@@ -13,18 +13,23 @@ You can use Portworx to provide storage for your Docker Swarm services. Portworx
 Below steps demonstrate how to set up a three-node cluster for [Jenkins](https://jenkins.io/) and use a Portworx volume.
 
 ### Create a volume
+
 ```text
 docker volume create -d pxd --name jenkins_vol --opt \
         size=4 --opt block_size=64 --opt repl=3 --opt fs=ext4 --opt shared=true
 ```
-* This command creates a volume called _jenkins_vol_.
+
+* This command creates a volume called _jenkins\_vol_.
 * This volume has a replication factor of _3_, which means that the data will be protected on 3 separate nodes.
 * Also the volume is shared so multiple swarm nodes can have shared access
 
-You can inspect the _jenkins_vol_ volume using the `pxctl` CLI:
-```text
-# sudo /opt/pwx/bin/pxctl volume inspect jenkins_vol
+You can inspect the _jenkins\_vol_ volume using the `pxctl` CLI:
 
+```text
+pxctl volume inspect jenkins_vol
+```
+
+```output
     Volume : 27052673284397061
     Name : jenkins_vol
     Size : 4.0 GiB
@@ -51,11 +56,14 @@ You can inspect the _jenkins_vol_ volume using the `pxctl` CLI:
 ```
 
 ### (Optional) Create node labels for convergence
+
 * Identify the nodes where the replica set of the `jenkins_vol` volume resides using output of inspect command above.
 * Add a label to each of these nodes as below. This will later allow us to create a service whose tasks only run on these nodes.
+
 ```text
-$ docker node update --label-add jenkins_vol=true <node_name>
+docker node update --label-add jenkins_vol=true <node_name>
 ```
+
 {{<info>}}
 **Automatic label placements:**<br/> In the upcoming 1.2.4 release, Portworx will place these labels automatically.
 {{</info>}}
@@ -64,8 +72,9 @@ $ docker node update --label-add jenkins_vol=true <node_name>
 We will now create a Jenkins service using the newly created volume.
 
 We will use service constraints to influence on which worker node Swarm schedules a container (task) based on the container volume's data location.
+
 ```text
-# docker service create --name jenkins \
+docker service create --name jenkins \
          --replicas 3 \
          --publish 8082:8080 \
          --publish 50000:50000 \
@@ -75,6 +84,7 @@ We will use service constraints to influence on which worker node Swarm schedule
          --constraint 'node.labels.jenkins_vol == true' \
          jenkins
 ```
+
 * Note how the volume binding is done via `--mount`. This causes the Portworx `jenkins_vol` to get bind mounted at `/var/jenkins_home`, which is where the jenkins Docker container stores it’s data.
 * Make sure you specify `volume-driver=pxd` in the `--mount` option. This ensures that docker always uses `jenkins_vol` provided the Portworx's pxd volume driver
 * Also note how we put a constraint using `--constraint 'node.labels.jenkins_vol == true'`.
@@ -82,7 +92,8 @@ We will use service constraints to influence on which worker node Swarm schedule
 Now Docker Swarm will place the jenkins container _only_ on Swarm nodes that contain our volume's data locally leading to great I/O performance.
 
 ### Verify Service
-Use following command to verify if various tasks for the service came up.
+Use following command to verify if various tasks for the service came up:
+
 ```text
 docker service ps jenkins
 ```

@@ -19,9 +19,11 @@ created using the volume spec of the scaled volume as a template.  An error is r
 
 {{<info>}}
 **Important:**<br/>You **must** use DCOS constraints when using PX volume sets:
-```json
+
+```text
 "constraints": [["hostname", "UNIQUE"]]
 ```
+
 Failing to do so may cause inconsistent results in the event that Marathon relaunches or reschedules an application upon failure, with the possibility of multiple instances landing on the same host.
 {{</info>}}
 
@@ -29,13 +31,22 @@ Failing to do so may cause inconsistent results in the event that Marathon relau
 A `volume-set` can be created using the pxctl CLI, docker CLI, or inline volume spec.  This can be done via the `pxctl` cli, or docker directly as follows:
 
 ## pxctl CLI
+
 The `--scale` parameter automatically creates a volume set:
 
 ```text
-# pxctl volume create elk_vol --scale 10
-Volume successfully created: 232783593254518125
+pxctl volume create elk_vol --scale 10
+```
 
-# pxctl volume list
+```output
+Volume successfully created: 232783593254518125
+```
+
+```text
+pxctl volume list
+```
+
+```output
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 232783593254518125      elk_vol         1 GiB        1       no      no              LOW             10      up - detached
 ```
@@ -43,19 +54,31 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 ## Docker CLI
 
 ```text
-# docker volume create --driver pxd --name elk_vol --opt scale=10
-# pxctl volume list
+docker volume create --driver pxd --name elk_vol --opt scale=10
+```
+
+```text
+pxctl volume list
+```
+
+```output
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 232783593254518125      elk_vol         1 GiB        1       no      no              LOW             10      up - detached
 ```
 
-## Inline `volume-set` creation through DCOS
-This is useful when creating volumes through DCOS.
+## Inline volume-set creation through DCOS
+
+This is useful when creating volumes through DCOS:
 
 ```text
-# docker volume create -d pxd --name scale=10,size=1G,repl=1,name=elk_vol
+docker volume create -d pxd --name scale=10,size=1G,repl=1,name=elk_vol
+```
 
-# pxctl volume list
+```text
+pxctl volume list
+```
+
+```output
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 232783593254518125      elk_vol         1 GiB        1       no      no              LOW             10      up - detached
 ```
@@ -65,8 +88,14 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 A `volume-set`'s scale factor can be modified after the volume is created:
 
 ```text
-# pxctl volume update scale_vol --scale 12
-# pxctl volume list
+pxctl volume update scale_vol --scale 12
+```
+
+```text
+pxctl volume list
+```
+
+```output
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 232783593254518125      elk_vol         1 GiB        1       no      no              LOW             12      up - detached
 ```
@@ -74,9 +103,10 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 Decreasing the scaled volume only restricts creation of future volumes. Decreasing scale will not delete any volumes.
 
 ### Examples
-Following is an example that takes advantage of `volume-sets`
 
-```json
+Following is an example that takes advantage of `volume-sets`:
+
+```text
 {
    "id":"/minio",
    "cpus": 2.0,
@@ -137,11 +167,14 @@ Following is an example that takes advantage of `volume-sets`
 
 ## FAQ
 
-### Can I attach more than one instance of a `volume-set` on the same node?
+### Can I attach more than one instance of a volume-set on the same node?
+
 If multiple containers request the same volume from a `volume-set` on a node, only one instance is created. The volume will be shared between client containers.  This is done to ensure cross application shared-data integrity.
 
 ### How do I delete a scaled volume
+
 At present all the instances of the `volume-set` need to be deleted one by one.
 
 ### How do I request for a specific instance of a scaled volume
-You can always specify a an instance of a `volume-set` by name.
+
+You can always specify an instance of a `volume-set` by name.

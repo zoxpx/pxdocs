@@ -30,9 +30,7 @@ First, use this command to view the storage devices on your server:
 lsblk
 ```
 
-The output should look similar to:
-
-```
+```output
     NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
     xvda                      202:0    0     8G  0 disk
     └─xvda1                   202:1    0     8G  0 part /
@@ -116,13 +114,13 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 2.  Create a directory for the configuration file.
 
     ```text
-    # sudo mkdir -p /etc/pwx
+    sudo mkdir -p /etc/pwx
     ```
 
 3.  Move the configuration file to that directory. This directory later gets passed in on the Docker command line.
 
     ```text
-    # sudo cp -p config.json /etc/pwx
+    sudo cp -p config.json /etc/pwx
     ```
 
 4.  Edit the config.json to include the following:
@@ -133,7 +131,7 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 
 Example config.json:
 
-```json
+```text
    {
       "clusterid": "make this unique in your k/v store",
       "dataiface": "bond0",
@@ -187,7 +185,7 @@ docker ps
 
 To use `etcd` with authentication and a `cafile`, use this in your `config.json`:
 
-```json
+```text
 "kvdb": [
    "etcd:https://<ip1>:<port>",
    "etcd:https://<ip2>:<port>"
@@ -199,7 +197,7 @@ To use `etcd` with authentication and a `cafile`, use this in your `config.json`
 
 To use `consul` with an `acltoken`, use this in your `config.json`:
 
-```json
+```text
 "kvdb": [
    "consul:http://<ip1>:<port>",
    "consul:http://<ip2>:<port>"
@@ -209,7 +207,7 @@ To use `consul` with an `acltoken`, use this in your `config.json`:
 
 Alternatively, you could specify and explicit username and password as follows:
 
-```
+```text
  "username": "root",
  "password": "xxx",
  "cafile": "/etc/pwx/cafile",
@@ -222,7 +220,7 @@ Once _Portworx_ is running, you can create and delete storage volumes through th
 To view all **pxctl** options, run:
 
 ```text
-/opt/pwx/bin/pxctl help
+pxctl help
 ```
 
 For more information on using **pxctl**, see the [CLI Reference](/reference/cli).
@@ -232,7 +230,7 @@ Now, you have successfully setup _Portworx_ on your first server. To increase ca
 To view the cluster status, run:
 
 ```text
-/opt/pwx/bin/pxctl status
+pxctl status
 ```
 
 ### Adding Nodes

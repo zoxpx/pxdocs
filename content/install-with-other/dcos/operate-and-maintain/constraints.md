@@ -35,20 +35,20 @@ specify Mesos attributes that allow for affinity of tasks to nodes that are part
 If using Mesosphere/DCOS:
 
 ```text
-# echo MESOS_ATTRIBUTES=pxfabric:pxclust1 >> /var/lib/dcos/mesos-slave-common
-# rm -f /var/lib/mesos/slave/meta/slaves/latest
-# systemctl restart dcos-mesos-slave.service
-# systemctl status dcos-mesos-slave.service -l
+echo MESOS_ATTRIBUTES=pxfabric:pxclust1 >> /var/lib/dcos/mesos-slave-common
+rm -f /var/lib/mesos/slave/meta/slaves/latest
+systemctl restart dcos-mesos-slave.service
+systemctl status dcos-mesos-slave.service -l
 ```
 
 If using Apache Mesos:
 
 ```text
-# mkdir -p /etc/default/mesos-slave/attributes
-# echo pxclust1 > /etc/default/mesos-slave/attributes/pxfabric
-# rm -f /var/lib/mesos/slave/meta/slaves/latest
-# systemctl restart mesos-slave
-# systemctl status mesos-slave -l
+mkdir -p /etc/default/mesos-slave/attributes
+echo pxclust1 > /etc/default/mesos-slave/attributes/pxfabric
+rm -f /var/lib/mesos/slave/meta/slaves/latest
+systemctl restart mesos-slave
+systemctl status mesos-slave -l
 ```
 
 Please note that restarting a dcos/mesos-slave to change the MESOS_ATTRIBUTES will cause the node to register under a new UUID.
@@ -64,7 +64,7 @@ This should be used in addition to the "hostname:UNIQUE" constraint.
 ## Consume Portworx with constraints
 The following example shows how to use constraints for running `mysql` only on nodes where Portworx is installed.
 
-```json
+```text
 {
     "id": "mysql",
     "cpus": 0.5,

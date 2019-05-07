@@ -5,20 +5,20 @@ description: Installing DC/OS with CouchDB service.
 keywords: Portworx, Mesosphere, DCOS, CouchDB
 ---
 
-DC/OS provides a CouchDB service that makes it easy to deploy and manage CouchDB on Mesosphere DC/OS. This guide will help you to install and run the containerized CouchDB service backed by Portworx volumes for [persistent DCOSstorage](https://portworx.com/use-case/persistent-storage-dcos/).
+DC/OS provides a CouchDB service that makes it easy to deploy and manage CouchDB on Mesosphere DC/OS. This guide will help you to install and run the containerized CouchDB service backed by Portworx volumes for [persistent DCOS storage](https://portworx.com/use-case/persistent-storage-dcos/).
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 {{<info>}}
-**Note:**  
+**Note:**
 This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
 {{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
 
-### Install {#install}
+### Install
 
-#### Adding the repository for the service {#adding-the-repository-for-the-service}
+#### Adding the repository for the service
 
 For this step you will need to login to a node which has the dcos cli installed and is authenticated to your DCOS cluster.
 
@@ -33,7 +33,7 @@ Once you have run the above command you should see the `portworx-couchdb` servic
 
 ![Couchdb-PX in DCOS Universe](/img/dcos-portworx-couchdb-universe.png)
 
-#### Default Install {#default-install}
+#### Default Install
 
 If you want to use the defaults, you can now run the dcos command to install the service
 
@@ -43,7 +43,7 @@ dcos package install --yes portworx-couchdb
 
 You can also click on the “Install” button on the WebUI next to the service and then click “Install Package”. The default install will create PX volumes of size 10GB with 1 replica.
 
-#### Advanced Install and Volume Options {#advanced-install-and-volume-options}
+#### Advanced Install and Volume Options
 
 If you want to modify the default, click on the “Install” button next to the package on the DCOS UI and then click on “Advanced Installation”
 
@@ -53,7 +53,7 @@ Here you have the option to change the service name, volume name, volume size, a
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
-#### Install Status {#install-status}
+#### Install Status
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
@@ -75,6 +75,9 @@ If you run the “dcos service” command you should see the `portworx-couchdb` 
 
 ```text
 dcos service
+```
+
+```output
 NAME                   HOST      ACTIVE  TASKS  CPU   MEM     DISK   ID
 marathon          192.168.65.90   True     2    1.5  2048.0   0.0    b69b8ce2-fe89-4688-850c-9a70438fc8f3-0000
 metronome         192.168.65.90   True     0    0.0   0.0     0.0    b69b8ce2-fe89-4688-850c-9a70438fc8f3-0001
@@ -82,7 +85,7 @@ portworx             a1.dcos      True     2    0.6  2048.0  1024.0  b69b8ce2-fe
 portworx-couchdb     a1.dcos      True     3    1.5  6144.0   0.0    b69b8ce2-fe89-4688-850c-9a70438fc8f3-0029
 ```
 
-### Verify Setup {#verify-setup}
+### Verify Setup
 
 From the DCOS client, install the new command for `portworx-couchdb`
 
@@ -94,6 +97,9 @@ Find out all CouchDB client endpoints
 
 ```text
 dcos portworx-couchdb endpoints cluster-port
+```
+
+```output
 {
   "address": [
     "192.168.65.131:5984",
@@ -118,6 +124,9 @@ From the DCOS master node, run the CouchDB REST API to any of the nodes on port 
 
 ```text
 curl -s http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/_membership | python -m json.tool
+```
+
+```output
 {
     "all_nodes": [
         "couchdb@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory",
@@ -136,11 +145,19 @@ To verify the CouchDB cluster we try to create a new database `testdb` and add a
 
 ```text
 curl -s -X PUT http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/testdb -d {} | python -m json.tool
+```
+
+```output
 {
     "ok": true
 }
+```
 
+```text
 curl -s -X PUT http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/testdb/001 -d '{"name":"Alice"}' | python -m json.tool
+```
+
+```output
 {
     "id": "001",
     "ok": true,
@@ -152,6 +169,9 @@ Verify the inserted document
 
 ```text
 curl -s http://admin:password@couchdb-1-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/testdb/001 | python -m json.tool
+```
+
+```output
 {
     "_id": "001",
     "_rev": "1-4cb726bf80cfbb1457e6cce338834b1f",
@@ -159,7 +179,7 @@ curl -s http://admin:password@couchdb-1-install.portworx-couchdb.autoip.dcos.thi
 }
 ```
 
-### Scaling {#scaling}
+### Scaling
 
 You do not need to create additional PX volumes manually to scale up your cluster. Just go to the CouchDB service page, click on the three dots on the top right corner of the page, select “nodes”, scroll down and increase the nodes parameter to the desired nodes.
 

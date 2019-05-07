@@ -12,7 +12,7 @@ The number of Data and Yarn nodes can be set during install. They can also be up
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 {{<info>}}
-**Note:**  
+**Note:**
 This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
 {{</info>}}
 
@@ -22,9 +22,9 @@ The Portworx-hadoop service can be found in the DC/OS catalog:
 
 ![Hadoop-PX in DCOS Universe](/img/dcos-hadoop-px-universe.png)
 
-### Installation {#installation}
+### Installation
 
-#### Default Install {#default-install}
+#### Default Install
 
 If you want to use the defaults, you can now run the dcos command to install the service
 
@@ -34,7 +34,7 @@ dcos package install --yes portworx-hadoop
 
 You can also click on the “Install” button on the WebUI next to the service and then click “Install Package”.
 
-#### Advanced Install {#advanced-install}
+#### Advanced Install
 
 If you want to modify the default, click on the “Install” button next to the package on the DCOS UI and then click on “Advanced Installation”
 
@@ -44,7 +44,7 @@ Here you have the option to change the service name, volume name, volume size, a
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
-### Install Status {#install-status}
+### Install Status
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
@@ -66,18 +66,21 @@ If you run the “dcos service” command you should see the portworx-hadoop ser
 
 ```text
 dcos service
-NAME                         HOST                    ACTIVE  TASKS  CPU    MEM    DISK  ID                                         
-portworx-hadoop           10.0.0.135                  True     13   9.0  32768.0  0.0   5c6438b2-1f63-4c23-b62a-ad0a7d354a91-0113  
-marathon                  10.0.4.21                   True     1    1.0   1024.0  0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0001  
-metronome                 10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000  
 ```
 
-###  Running Hadoop with Portworx on DCOS {#running-hadoop-with-portworx-on-dcos}
+```output
+NAME                         HOST                    ACTIVE  TASKS  CPU    MEM    DISK  ID
+portworx-hadoop           10.0.0.135                  True     13   9.0  32768.0  0.0   5c6438b2-1f63-4c23-b62a-ad0a7d354a91-0113
+marathon                  10.0.4.21                   True     1    1.0   1024.0  0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0001
+metronome                 10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000
+```
 
-Here is a short video that shows how to install and run Hadoop on Portworx with DCOS  
+### Running Hadoop with Portworx on DCOS
+
+Here is a short video that shows how to install and run Hadoop on Portworx with DCOS
 
 
-### Scaling the Data Nodes {#scaling-the-data-nodes}
+### Scaling the Data Nodes
 
 You do not need to create additional volumes of perform to scale up your cluster. Just go to the Hadoop service page, click on the three dots on the top right corner of the page, select “Data”, scroll down and increase the nodes parameter to the desired nodes.
 

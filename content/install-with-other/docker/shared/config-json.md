@@ -4,7 +4,7 @@ description: Reference for the Portworx config.json configuration file
 hidden: true
 ---
 
-This is the schema definition for a valid PX configuration file.  This file is expected to be available at `/etc/pwx/config.json`
+This is the schema definition for a valid PX configuration file.  This file is expected to be available at `/etc/pwx/config.json`.
 
 ```text
 {
@@ -169,34 +169,31 @@ This is the schema definition for a valid PX configuration file.  This file is e
 **kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.
 For 'etcd', an example would be:
 
-```
- Ex:  
-    "kvdb": [
-        "etcd:http://etcd0.yourdomain.com:4001",
-        "etcd:http://etcd1.yourdomain.com:4001",
-        "etcd:http://etcd2.yourdomain.com:4001"
-     ]
+```text
+"kvdb": [
+  "etcd:http://etcd0.yourdomain.com:4001",
+  "etcd:http://etcd1.yourdomain.com:4001",
+  "etcd:http://etcd2.yourdomain.com:4001"
+]
 ```
 
 For 'consul', an example would be:
 
-```
-Ex:
-    "kvdb": [
-        "consul:http://consul.yourdomain.com:8500"
-     ]
+```text
+"kvdb": [
+  "consul:http://consul.yourdomain.com:8500"
+]
 ```
 
-**storage**:   Array of devices to be used as part of the PX Storage Fabric.  Includes optional "debug_level" flag ("low", "medium", "high"[default]) in the clause.  
+**storage**: Array of devices to be used as part of the PX Storage Fabric.  Includes optional "debug_level" flag ("low", "medium", "high"[default]) in the clause.
 
-```           
- Ex:
-           "storage": {
-               "devices": [
-                   "/dev/nvme0n1",
-                   "/dev/sdc",
-                   "/dev/sdd"
-                ],
-                "debug_level": "low"
-             }
+```text
+"storage": {
+    "devices": [
+        "/dev/nvme0n1",
+        "/dev/sdc",
+        "/dev/sdd"
+    ],
+    "debug_level": "low"
+  }
 ```
