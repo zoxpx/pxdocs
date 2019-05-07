@@ -6,6 +6,15 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.1.1
+
+### Key Fixes
+
+* PWX-8668 - K8S: Pods get stuck again on "Terminating 0/1". Failing to unmount shared volumes, because they are not found                  
+* PWX-8652 - AWS: Allow specifying custom tags for EBS volumes in spec                                                                      
+* PWX-8643 - Storage pool does not recover out of storage full condition after deleting volumes                                                                                                                                                                                                       
+* PWX-8529 - Cloudsnap restore very slow for backups that have dependent incremental with large data sets   
+
 ## 2.1.0
 
 ### Key Features
