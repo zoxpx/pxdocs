@@ -17,20 +17,24 @@ For example, if you want to upgrade to v1.2.11 you would set this to "portworx/p
 
 ### Restart the Portworx update task
 
-Once the image name has been updated, the service file for Portworx needs to be updated on each node and the Portworx service
-needs to be restarted on all the nodes to pick up the new image name. This can be done by force restarting the
-update-portworx plan through the dcos cli. This step will perform a rolling restart of Portworx so as not to cause an
-outage.
+Once the image name has been updated, the service file for Portworx needs to be updated on each node and the Portworx service needs to be restarted on all the nodes to pick up the new image name. This can be done by force restarting the update-portworx plan through the dcos cli. This step will perform a rolling restart of Portworx so as not to cause an
+outage:
 
 ```text
-$ dcos portworx plan force-restart update-portworx
+dcos portworx plan force-restart update-portworx
+```
+
+```output
 "update-portworx" plan has been restarted.
 ```
 
-Now wait for the tasks to go to COMPLETE state on all the agents
+Now, wait for the tasks to go to COMPLETE state on all the agents:
 
 ```text
-$ dcos portworx plan status update-portworx
+dcos portworx plan status update-portworx
+```
+
+```output
 update-portworx (COMPLETE)
 ├─ update-service (COMPLETE)
 │  ├─ portworx-0:[install] (COMPLETE)

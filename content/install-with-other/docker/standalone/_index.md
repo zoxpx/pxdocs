@@ -15,9 +15,9 @@ To install and configure PX to run directly with OCI/runC, please use the config
 
 {{<info>}}**Migrating from PX-Containers to PX-OCI**: If you already had PX running as a Docker container (Portworx 1.2.10 and lower) and now want to upgrade to runC, follow the instructions at [Migrate Portworx installed using Docker to OCI/runc](/install-with-other/docker/standalone/migrate-docker-to-oci). {{</info>}}
 
-## Install {#install}
+## Install
 
-### Prerequisites {#prerequisites}
+### Prerequisites
 
 * _SYSTEMD_: The installation below assumes the [systemd](https://en.wikipedia.org/wiki/Systemd) package is installed on your system \(i.e. _systemctl_ command works\).
   * Note, if you are running Ubuntu 16.04, CentoOS 7 or CoreOS v94 \(or newer\) the “systemd” is already installed and no actions will be required.
@@ -49,7 +49,8 @@ The installation and setup of PX OCI bundle is a 3-step process:
 
 To upgrade the OCI bundle, simply re-run the [installation Step 1](/install-with-other/docker/standalone#step-1-install-the-px-oci-bundle) with the `--upgrade` option. After the upgrade, you will need to restart the Portworx service.
 
-Below command upgrades your installation to the latest stable Portworx version.
+Below command upgrades your installation to the latest stable Portworx version:
+
 ```text
 latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
 sudo docker run --entrypoint /runc-entry-point.sh \
@@ -59,7 +60,7 @@ sudo docker run --entrypoint /runc-entry-point.sh \
 sudo systemctl restart portworx
 ```
 
-## Uninstalling the PX OCI bundle {#uninstalling-the-px-oci-bundle}
+## Uninstalling the PX OCI bundle
 
 To uninstall the PX OCI bundle, please run the following:
 
@@ -132,7 +133,9 @@ Alternatively, one might prefer to first start the PX interactively \(for exampl
 sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
     -k etcd://myetc.company.com:2379 \
     -s /dev/xvdb
+```
 
+```output
 [...]
 > time="2017-08-18T20:34:23Z" level=info msg="Cloud backup schedules setup done"
 > time="2017-08-18T20:34:23Z" level=info msg="Starting REST service on socket : /run/docker/plugins/pxd.sock"

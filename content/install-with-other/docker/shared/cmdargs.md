@@ -6,7 +6,7 @@ keywords: portworx, px-developer, px-enterprise, plugin, install, configure, con
 
 ##### General options
 
-```
+```text
 -c                        [REQUIRED] Specifies the cluster ID that this PX instance is to join
 -k                        [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
 -s                        [REQUIRED unless -a is used] Specifies the various drives that PX should use for storing the data
@@ -25,13 +25,14 @@ keywords: portworx, px-developer, px-enterprise, plugin, install, configure, con
 
 * additional PX-OCI -specific options:
 
-```
+```text
 -oci <dir>                [OPTIONAL] Specify OCI directory (default: /opt/pwx/oci)
 -sysd <file>              [OPTIONAL] Specify SystemD service file (default: /etc/systemd/system/portworx.service)
 ```
 
 ##### KVDB options
-```
+
+```text
 -userpwd <user:passwd>    [OPTIONAL] Username and password for ETCD authentication
 -ca <file>                [OPTIONAL] Specify location of CA file for ETCD authentication
 -cert <file>              [OPTIONAL] Specify location of certificate for ETCD authentication
@@ -40,20 +41,25 @@ keywords: portworx, px-developer, px-enterprise, plugin, install, configure, con
 ```
 
 ##### Secrets options
-```
+
+```text
 -secret_type <aws|dcos|docker|k8s|kvdb|vault>   [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features.
 -cluster_secret_key <id>        [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
 ```
 
 #### Sharedv4 options
-To enable sharedv4 type of volumes provide the following portworx input argument
-```
+
+To enable sharedv4 type of volumes provide the following portworx input argument:
+
+```text
    -enable-shared-and-shared-v4  Enables both regular and NFSv4 volume sharing
 ```
 
 <a name="env-variables"></a>
+
 ##### Environment variables
-```
+
+```text
 PX_HTTP_PROXY         [OPTIONAL] If running behind an HTTP proxy, set the PX_HTTP_PROXY variables to your HTTP proxy.
 PX_HTTPS_PROXY        [OPTIONAL] If running behind an HTTPS proxy, set the PX_HTTPS_PROXY variables to your HTTPS proxy.
 PX_ENABLE_CACHE_FLUSH [OPTIONAL] Enable cache flush deamon. Set PX_ENABLE_CACHE_FLUSH=true.
@@ -61,8 +67,9 @@ PX_ENABLE_CACHE_FLUSH [OPTIONAL] Enable cache flush deamon. Set PX_ENABLE_CACHE_
 
 {{<info>}} Setting environment variables can be done using the `-e` option{{</info>}}
 
-Below is an example install command with extra "PX_ENABLE_CACHE_FLUSH" environment variable.
+Below is an example install command with extra "PX_ENABLE_CACHE_FLUSH" environment variable:
+
 ```text
-$ sudo /opt/pwx/bin/px-runc install -e PX_ENABLE_CACHE_FLUSH=yes \
+sudo /opt/pwx/bin/px-runc install -e PX_ENABLE_CACHE_FLUSH=yes \
     -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
 ```

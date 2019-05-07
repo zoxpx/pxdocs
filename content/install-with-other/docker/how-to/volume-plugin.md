@@ -12,18 +12,18 @@ Portworx implements the [Docker Volume Plugin Specification](https://docs.docker
 
 The plugin API allows creation, instantiation, and lifecycle management of Portworx volumes. This allows direct use by Docker, Docker swarm, and DCOS via [dvdi](https://mesosphere.github.io/marathon/docs/external-volumes.html).
 
-###  Discovery
+### Discovery
 
-Docker scans the plugin directory (/run/docker/plugins) on startup and whenever a user or a container requests a plugin by name.
-When the Portworx container is run, a unix domain socket `pxd.sock` is exported under /var/run/docker/plugins directory.  Portworx volumes are shown as owned by volume driver `pxd`.
+Docker scans the plugin directory (`/run/docker/plugins`) on startup and whenever a user or a container requests a plugin by name.
+When the Portworx container is run, a unix domain socket `pxd.sock` is exported under `/var/run/docker/plugins` directory.  Portworx volumes are shown as owned by volume driver `pxd`.
 
 ### Create
 
 See https://docs.docker.com/engine/reference/commandline/volume_create/
 
-Portworx volume are created by specifying volume driver as `pxd`.
+Portworx volumes are created by specifying volume driver as `pxd`.
 
-Here is an example of how to create a 10GB volume with replication factor set to 3
+Here is an example of how to create a 10GB volume with replication factor set to 3:
 
 ```text
 docker volume create --driver pxd \
@@ -33,7 +33,7 @@ docker volume create --driver pxd \
 
 ```
 
-Docker looks in its cache before sending the create request to Portworx.  For this reason, we recommend to not mix-and-match create and delete operations with pxctl and docker.  If a volume with the same name is created again, it is a No-op.
+Docker looks in its cache before sending the request to create to Portworx. For this reason, we recommend to not mix-and-match create and delete operations with pxctl and docker. If a volume with the same name is created again, it is a No-op.
 
 #### Use of options in docker volume create
 
@@ -60,7 +60,7 @@ Options:
 
 **Specify replica nodes**
 
-Multiple nodes through docker volume create is supported from 1.3.0.1
+Multiple nodes through docker volume create is supported from 1.3.0.1.
 
 Use the _nodes_ option to specify the nodes you wish the replicas to reside on.
 
@@ -104,7 +104,7 @@ docker volume create --driver pxd \
            --name snap_of_my_portworx_vol
 ```
 
-Snapshots can then be used as a regular Portworx volume.
+The snapshot can then be used as a regular Portworx volume.
 
 ### Mount
 
@@ -114,7 +114,7 @@ Mount operation mounts the Portworx volume in the propagated mount location. If 
 
 The docker plugin API does not have an Attach call. The Attach call is called internally via Mount on the first mount call for the volume.
 
-Portworx exports virtual block devices in the host namespace. This is done via the Portworx Container running on the system and does *not* rely on an external protocol such as iSCSI or NBD. Portworx virtual block devices only exist in host kernel memory. Two interesting consequences of this architecture is
+Portworx exports virtual block devices in the host namespace. This is done via the Portworx Container running on the system and does *not* rely on an external protocol such as iSCSI or NBD. Portworx virtual block devices only exist in host kernel memory. Two interesting consequences of this architecture are:
 1) volumes can be unmounted from dead/disconnected nodes
 2) IOs on porworx can survive a Portworx restart.
 
@@ -145,11 +145,12 @@ Detach operation involves unexporting the virtual block device from the host nam
 
 Remove will delete the underlying Portworx volume and all associated data. The operation will fail if the volume is mounted.
 
-The following command will remove the volume `my_portworx_vol`
+The following command will remove the volume `my_portworx_vol`:
 
 ```text
 docker volume rm my_portworx_vol
 ```
 
 ### Capabilities
-The portworx volume driver identifies itself as a `global` driver.  Portworx operations can be executed on any node in the cluster. Portworx volumes can be used and managed from any node in the cluster.
+
+The Portworx volume driver identifies itself as a `global` driver.  Portworx operations can be executed on any node in the cluster. Portworx volumes can be used and managed from any node in the cluster.

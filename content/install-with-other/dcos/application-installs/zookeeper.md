@@ -9,15 +9,15 @@ DC/OS provides a Zookeeper service that makes it easy to deploy and manage Zooke
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 {{<info>}}
-**Note:**  
+**Note:**
 This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
 {{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
 
-### Install {#install}
+### Install
 
-#### Adding the repository for the service {#adding-the-repository-for-the-service}
+#### Adding the repository for the service
 
 For this step you will need to login to a node which has the dcos cli installed and is authenticated to your DCOS cluster.
 
@@ -27,11 +27,11 @@ Run the following command to add the repository to your DCOS cluster:
 dcos package repo add --index=0 portworx-zookeeper-aws https://universe-converter.mesosphere.com/transform?url=https://px-dcos-dev.s3.amazonaws.com/autodelete7d/portworx-zookeeper/20180108-191631-sIi4sgvQfmd1yaDY/stub-universe-portworx-zookeeper.json
 ```
 
-Once you have run the above command you should see the `portworx-zookeeper` service available in your universe
+Once you have run the above command, you should see the `portworx-zookeeper` service available in your universe
 
 ![portworx-zookeeper in DCOS Universe](/img/dcos-portworx-zookeeper-universe.png)
 
-#### Default Install {#default-install}
+#### Default Install
 
 If you want to use the defaults, you can now run the dcos command to install the service
 
@@ -41,7 +41,7 @@ dcos package install --yes portworx-zookeeper
 
 You can also click on the “Install” button on the WebUI next to the service and then click “Install Package”. The default install will create PX volumes of size 2GB with 1 replica.
 
-#### Advanced Install and Volume Options {#advanced-install-and-volume-options}
+#### Advanced Install and Volume Options
 
 If you want to modify the default, click on the “Install” button next to the package on the DCOS UI and then click on “Advanced Installation”
 
@@ -51,7 +51,7 @@ Here you have the option to change the service name, volume name, volume size, a
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
-#### Install Status {#install-status}
+#### Install Status
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
@@ -73,6 +73,9 @@ If you run the “dcos service” command you should see the `portworx-zookeeper
 
 ```text
 dcos service
+```
+
+```output
 NAME                     HOST      ACTIVE  TASKS  CPU   MEM     DISK   ID
 marathon            192.168.65.90   True     2    2.0  2048.0   0.0    b69b8ce2-fe89-4688-850c-9a70438fc8f3-0000
 metronome           192.168.65.90   True     0    0.0   0.0     0.0    b69b8ce2-fe89-4688-850c-9a70438fc8f3-0001
@@ -80,7 +83,7 @@ portworx               a1.dcos      True     2    0.6  2048.0  1024.0  b69b8ce2-
 portworx-zookeeper     a1.dcos      True     3    1.5  3072.0   0.0    b69b8ce2-fe89-4688-850c-9a70438fc8f3-0028
 ```
 
-### Verify Setup {#verify-setup}
+### Verify Setup
 
 From the DCOS client, install the new command for `portworx-zookeeper`
 
@@ -92,6 +95,9 @@ Find out all Zookeeper client endpoints
 
 ```text
 dcos portworx-zookeeper endpoints client-port
+```
+
+```output
 {
   "address": [
     "192.168.65.131:2182",
@@ -108,7 +114,7 @@ dcos portworx-zookeeper endpoints client-port
 
 Using any of the above DNS names, you can now connect to the Zookeeper cluster backed by Portworx volumes.
 
-### Scaling {#scaling}
+### Scaling
 
 You do not need to create additional PX volumes manually to scale up your cluster. Just go to the Zookeeper service page, click on the three dots on the top right corner of the page, select “nodes”, scroll down and increase the nodes parameter to the desired nodes.
 

@@ -15,7 +15,10 @@ Run `dcos service --inactive` to find the ID of the service that you want to cle
 ie ACTIVE should be set to False.
 
 ```text
-$ dcos service --inactive
+dcos service --inactive
+```
+
+```output
 NAME                     HOST            ACTIVE  TASKS  CPU    MEM      DISK   ID
 cassandra-px  ip-10-0-2-15.ec2.internal   False    2    6.7  27530.0  59890.0  cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051
 marathon              10.0.4.203          True     4    3.1   3200.0    0.0    cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0001
@@ -26,14 +29,15 @@ portworx      ip-10-0-2-15.ec2.internal   True     6    1.8   5632.0  16384.0  c
 Then use the `dcos service shutdown` command to shutdown the service
 
 ```text
-$ dcos service shutdown cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051
+dcos service shutdown cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051
 ```
 
 ## Run the janitor script to clean up the reserved resources as well as any state stored in Zookeeper
+
 ```text
-$ SERVICE_NAME=cassandra-px
-$ PRE_RESERVED_ROLE="your_pre_reserved_role/" # Set this if you started the service with a pre-reserved-role
-$ dcos node ssh --master-proxy --leader "docker run mesosphere/janitor /janitor.py -r ${PRE_RESERVED_ROLE}${SERVICE_NAME}-role -p ${SERVICE_NAME}-principal -z dcos-service-${SERVICE_NAME}"
+SERVICE_NAME=cassandra-px
+PRE_RESERVED_ROLE="your_pre_reserved_role/" # Set this if you started the service with a pre-reserved-role
+dcos node ssh --master-proxy --leader "docker run mesosphere/janitor /janitor.py -r ${PRE_RESERVED_ROLE}${SERVICE_NAME}-role -p ${SERVICE_NAME}-principal -z dcos-service-${SERVICE_NAME}"
 ```
 
 ## Cleanup PX remnants from slave nodes
@@ -52,18 +56,21 @@ sudo rm /etc/systemd/system/multi-user.target.wants/portworx.service –f
 sudo systemctl daemon-reload
 ```
 
-**Note:** If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they can be picked
-up by Portworx in the next install. This can be done by running the following pxctl command
+**Note:** If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they can be picked up by Portworx in the next install. This can be done by running the following pxctl command:
+
 ```text
 # Use with care since this will wipe data from all the disks given to Portworx
-sudo /opt/pwx/bin/pxctl service node-wipe --all
+pxctl service node-wipe --all
 ```
-If you are running Portworx version < 1.3, run the following command instead of `node-wipe`,
+
+If you are running Portworx version < 1.3, run the following command instead of `node-wipe`:
+
 ```text
 sudo wipefs -a /dev/sda123 # Replace with your disk names
 ```
 
-Remove the Portworx config and files from all the nodes
+Remove the Portworx config and files from all the nodes:
+
 ```text
 sudo chattr -i /etc/pwx/.private.json
 sudo rm -rf /etc/pwx
@@ -71,12 +78,14 @@ sudo umount /opt/pwx/oci
 sudo rm -rf /opt/pwx
 ```
 
-Also remove the Portworx kernel module from all the nodes
+Also, remove the Portworx kernel module from all the nodes:
+
 ```text
 sudo rmmod px -f
 ```
 
-If you have the dcos cli installed then you can execute the above steps on all the nodes by running the following script
+If you have the dcos cli installed, then you can execute the above steps on all the nodes by running the following script:
+
 ```text
 ips=(`dcos node --json | jq -r '.[] | select(.type == "agent") | .id'`)
 for ip in "${ips[@]}"
