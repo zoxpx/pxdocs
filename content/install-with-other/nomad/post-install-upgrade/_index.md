@@ -10,10 +10,10 @@ noicon: true
 hidden: true
 ---
 
-It is straightforward to upgrade _Portworx_ with Nomad. Just edit the `portworx.nomadfile` you used for initial deployment and update the container version. As an example, here's how you would update to version 2.1.0 :
+It is straightforward to upgrade _Portworx_ with Nomad. Just edit the `portworx.nomadfile` you used for initial deployment and update the container version. As an example, here's how you would update to version 2.1.1 :
 
 ```text
- image = "portworx/oci-monitor:2.1.0"
+ image = "portworx/oci-monitor:2.1.1"
  ```
 
  Then, run the following command again:
@@ -50,7 +50,7 @@ Cluster Summary
     Scheduler: none
     Nodes: 3 node(s) with storage (3 online)
     IP        ID                    SchedulerNodeName    StorageNode    Used    Capacity    Status    StorageStatus    Version        Kernel        OS
-    10.1.2.34    6aab46fd-50dc-4df6-ab6e-e0aa8d74b458    N/A            Yes        4.3 GiB    50 GiB        Online    Up (This node)    2.1.0.0-6495007    4.4.0-1079-aws    Ubuntu 16.04.6 LTS
+    10.1.2.34    6aab46fd-50dc-4df6-ab6e-e0aa8d74b458    N/A            Yes        4.3 GiB    50 GiB        Online    Up (This node)    2.1.1.0-9df38f7    4.4.0-1079-aws    Ubuntu 16.04.6 LTS
     10.1.1.111    4c128653-0569-4696-afea-063ddc7ef522    N/A            Yes        4.3 GiB    50 GiB        Online    Up        2.0.3.4-0c0bbe4    4.4.0-1079-aws    Ubuntu 16.04.6 LTS
     10.1.1.199    27e3c1b5-48bc-41f4-981e-25fc5d0ee7f4    N/A            Yes        4.3 GiB    50 GiB        Online    Up        2.0.3.4-0c0bbe4    4.4.0-1079-aws    Ubuntu 16.04.6 LTS
     Warnings:

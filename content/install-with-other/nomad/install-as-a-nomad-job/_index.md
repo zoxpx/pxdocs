@@ -86,7 +86,7 @@ job "portworx" {
 
       # container config
       config {
-        image        = "portworx/oci-monitor:2.0.3.4"
+        image        = "portworx/oci-monitor:2.1.1"
         network_mode = "host"
         ipc_mode = "host"
         privileged = true
@@ -243,9 +243,9 @@ Cluster Summary
     Scheduler: none
     Nodes: 3 node(s) with storage (3 online)
     IP        ID                    SchedulerNodeName            StorageNode    Used    Capacity    Status    StorageStatus    Version        Kernel        OS
-    10.1.1.111    8a003439-d361-4cfa-8e53-2c32f808290e    8a003439-d361-4cfa-8e53-2c32f808290e    Yes        4.3 GiB    50 GiB        Online    Up        2.0.3.4-0c0bbe4    4.4.0-1079-aws    Ubuntu 16.04.6 LTS
-    10.1.1.199    6f160613-1fe4-45c4-8d04-079f3bde2921    6f160613-1fe4-45c4-8d04-079f3bde2921    Yes        4.3 GiB    50 GiB        Online    Up (This node)    2.0.3.4-0c0bbe4    4.4.0-1079-aws    Ubuntu 16.04.6 LTS
-    10.1.2.34    5f51038a-5296-492a-894e-031bab836747    5f51038a-5296-492a-894e-031bab836747    Yes        4.3 GiB    50 GiB        Online    Up        2.0.3.4-0c0bbe4    4.4.0-1079-aws    Ubuntu 16.04.6 LTS
+    10.1.1.111    8a003439-d361-4cfa-8e53-2c32f808290e    8a003439-d361-4cfa-8e53-2c32f808290e    Yes        4.3 GiB    50 GiB        Online    Up        2.1.1.0-9df38f7    4.4.0-1079-aws    Ubuntu 16.04.6 LTS
+    10.1.1.199    6f160613-1fe4-45c4-8d04-079f3bde2921    6f160613-1fe4-45c4-8d04-079f3bde2921    Yes        4.3 GiB    50 GiB        Online    Up (This node)    2.1.1.0-9df38f7    4.4.0-1079-aws    Ubuntu 16.04.6 LTS
+    10.1.2.34    5f51038a-5296-492a-894e-031bab836747    5f51038a-5296-492a-894e-031bab836747    Yes        4.3 GiB    50 GiB        Online    Up        2.1.1.0-9df38f7    4.4.0-1079-aws    Ubuntu 16.04.6 LTS
 Global Storage Pool
     Total Used        :  13 GiB
     Total Capacity    :  150 GiB
