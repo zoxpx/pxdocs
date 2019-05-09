@@ -20,7 +20,7 @@ Below are the parameters you can specify when generating the spec file.
 **Optional Parameters**
 
 | Parameter | **Description** | **Example** |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- |
 | s | Specify comma-separated list of drives. | s=/dev/sdb,/dev/sdc |
 | d | Specify data network interface. This is useful if your instances have non-standard network interfaces. | d=eth1 |
 | m | Specify management network interface. This is useful if your instances have non-standard network interfaces. | m=eth1 |
@@ -37,7 +37,7 @@ Below are the parameters you can specify when generating the spec file.
 **KVDB Parameters \(All required except** _**e**_**\)**
 
 | Parameter | **Description** | **Example** |
-| --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- |
 | pwd | Username and password for ETCD authentication in the form user:password | pwd=username:password |
 | ca | Location of CA file for ETCD authentication. | ca=/path/to/server.ca |
 | cert | Location of certificate for ETCD authentication. | cert=/path/to/server.crt |
