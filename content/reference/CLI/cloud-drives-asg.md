@@ -16,7 +16,7 @@ If you run _Portworx_ in ASG mode, the CLI provides a set of commands that displ
 pxctl clouddrive --help
 ```
 
-```
+```output
 NAME:
    pxctl clouddrive - Manage cloud drives
 
@@ -39,7 +39,7 @@ To display all the cloud drives being used by _Portworx_, type:
 pxctl clouddrive list
 ```
 
-```
+```output
 Cloud Drives Summary
         Number of nodes in the cluster:  3
         Number of drive sets in use:  3
@@ -61,7 +61,7 @@ Run the following command to display more detailed information about the drives 
 pxctl clouddrive inspect --nodeid ip-172-20-53-168.ec2.internal
 ```
 
-```
+```output
 Drive Set Configuration
         Number of drives in the Drive Set:  2
         NodeID:  ip-172-20-53-168.ec2.internal

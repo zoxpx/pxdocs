@@ -22,7 +22,7 @@ To get a glimpse of the available commands, run:
 /opt/pwx/bin/pxctl credentials --help
 ```
 
-```
+```output
 Manage credentials for cloud providers
 
 Usage:
@@ -63,7 +63,7 @@ To list all configured credentials, use this command:
 pxctl credentials list
 ```
 
-```
+```output
 S3 Credentials
 UUID						REGION			ENDPOINT			ACCESS KEY			SSL ENABLED	ENCRYPTION
 ffffffff-ffff-ffff-1111-ffffffffffff		us-east-1		s3.amazonaws.com		AAAAAAAAAAAAAAAAAAAA		false		false
@@ -86,7 +86,7 @@ pxctl credentials create \
   --s3-endpoint s3.amazonaws.com
 ```
 
-```
+```output
 Credentials created successfully
 ```
 
@@ -102,7 +102,7 @@ To delete a particular set of credentials, you can run `pxctl credentials delete
 pxctl credentials delete <uuid or name>
 ```
 
-```
+```output
 Credential deleted successfully
 ```
 
@@ -120,7 +120,7 @@ If you want to validate a set of credentials for a particular cloud provider, ru
 pxctl credentials validate <uuid or name>
 ```
 
-```
+```output
 Credential validated successfully
 ```
 

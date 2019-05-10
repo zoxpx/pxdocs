@@ -13,7 +13,13 @@ Here are some of the commands that are needed for maintenance operations
 ## Some general maintenance commands
 
 ### Enter Maintenance Mode
-Run ``pxctl service maintenance --enter``.
+
+Run the following command:
+
+```text
+pxctl service maintenance --enter
+```
+
 This takes Portworx out of an "Operational" state for a given node.  Perform whatever physical maintenance is needed.
 
 ### Restart Portworx
@@ -29,8 +35,10 @@ This puts Portworx back in to "Operational" state for a given node.
 The drive management commands are organized under `pxctl service drive` command
 
 ```text
-/opt/pwx/bin/pxctl service drive
+pxctl service drive
+```
 
+```output
 NAME:
    pxctl service drive - Storage drive maintenance
 
@@ -52,8 +60,10 @@ Here is a typical workflow on how to identify and replace drives.
 ## Show the list of drives in the system
 
 ```text
-/opt/pwx/bin/pxctl service drive show
+pxctl service drive show
+```
 
+```
 PX drive configuration:
 Pool ID: 0
 	IO_Priority: LOW
@@ -76,7 +86,10 @@ Pool ID: 1
 ### Step 1: Enter Maintenance Mode
 
 ```text
-/opt/pwx/bin/pxctl service  maintenance --enter
+pxctl service  maintenance --enter
+```
+
+```output
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 Entering maintenance mode...
@@ -87,51 +100,74 @@ Entering maintenance mode...
 For e.g., Add drive /dev/sdb to PX cluster
 
 ```text
-/opt/pwx/bin/pxctl service drive add --drive /dev/sdb --operation start
+pxctl service drive add --drive /dev/sdb --operation start
+```
+
+```output
 Adding device  /dev/sdb ...
 "Drive add done: Storage rebalance is in progress"
 ```
 
 ### Step 3: Rebalance the storage pool
 
-**Pool rebalance is a must to spread data across all available drives in the pool.**
+**Pool rebalance is a must. It spreads data across all available drives in the pool.**
 
 Check the rebalance status and wait for completion.
 
 ```text
-/opt/pwx/bin/pxctl sv drive add --drive /dev/sdb --operation status
-"Drive add: Storage rebalance running: 1 out of about 9 chunks balanced (2 considered),  89% left"
+pxctl sv drive add --drive /dev/sdb --operation status
+```
 
-/opt/pwx/bin/pxctl sv drive add --drive /dev/sdb --operation status
+```output
+"Drive add: Storage rebalance running: 1 out of about 9 chunks balanced (2 considered),  89% left"
+```
+
+```text
+pxctl sv drive add --drive /dev/sdb --operation status
+```
+
+```output
 "Drive add: Storage rebalance complete"
 ```
 
 In case drive add operation did not start a rebalance, start it manually.
-For e.g., If the drive was added to pool 0
+For e.g., if the drive was added to pool 0:
 
 ```text
-/opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation start
+pxctl service drive rebalance --poolID 0 --operation start
+```
+
+```output
 Done: "Pool 0: Balance is running"
 ```
 
 Check the rebalance status and wait for completion.
 
 ```text
-/opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation status
+pxctl service drive rebalance --poolID 0 --operation status
+```
+
+```output
 Done: "Pool 0: Balance is not running"
 ```
 
 ### Step 4: Exit Maintenance mode
 
 ```text
-/opt/pwx/bin/pxctl service  maintenance --exit
+pxctl service  maintenance --exit
+```
+
+```output
 Exiting maintenance mode...
 ```
 
-Check if the drive is added using drive show command
+Check if the drive is added using drive show command:
 
 ```text
-/opt/pwx/bin/pxctl service drive show
+pxctl service drive show
+```
+
+```output
 PX drive configuration:
 
 Pool ID: 0
@@ -156,7 +192,10 @@ Pool ID: 1
 ### Step 1: Enter Maintenance mode
 
 ```text
-/opt/pwx/bin/pxctl service  maintenance --enter
+pxctl service  maintenance --enter
+```
+
+```output
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 Entering maintenance mode...
@@ -169,29 +208,40 @@ Ensure the replacement drive is already available in the system.
 For e.g., Replace drive /dev/sde with /dev/sdc
 
 ```text
-/opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation start
+pxctl service drive replace --source /dev/sde --target /dev/sdc --operation start
+```
+
+```output
 "Replace operation is in progress"
 ```
 
 Check the replace status
 
 ```text
-/opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation status
-"Started on 16.Dec 22:17:06, finished on 16.Dec 22:17:06, 0 write errs, 0 uncorr. read errs\n"
+pxctl service drive replace --source /dev/sde --target /dev/sdc --operation status
 ```
 
+```output
+"Started on 16.Dec 22:17:06, finished on 16.Dec 22:17:06, 0 write errs, 0 uncorr. read errs\n"
+```
 
 ### Step 3: Exit Maintenance mode
 
 ```text
-/opt/pwx/bin/pxctl service  maintenance --exit
+pxctl service  maintenance --exit
+```
+
+```output
 Exiting maintenance mode...
 ```
 
 ### Step 4: Check if the drive has been successfully replaced
 
 ```text
-/opt/pwx/bin/pxctl service drive show
+pxctl service drive show
+```
+
+```output
 PX drive configuration:
 Pool ID: 0
 	IO_Priority: LOW
@@ -209,14 +259,17 @@ Pool ID: 1
 	Drives:
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
 ```
+
 ## Storage pool maintenance
 Storage pools are automatically created by selected like disks in terms of capacity and capability. These pools are classified as High/Medium/Low based on IOPS and latency.
 
 Help for storage pool commands is available as:
 
 ```text
-/opt/pwx/bin/pxctl service pool -h
+pxctl service pool -h
+```
 
+```output
 NAME:
    pxctl service pool - Storage pool maintenance
 
@@ -232,10 +285,14 @@ OPTIONS:
 ```
 
 ### List Storage pools
+
 This is an alias for /opt/pwx/bin/pxctl service drive show
 
 ```text
-/opt/pwx/bin/pxctl service pool show
+pxctl service pool show
+```
+
+```output
 PX drive configuration:
 Pool ID: 0
 	IO_Priority: LOW
@@ -257,8 +314,10 @@ Pool ID: 1
 ### Update Storage pool
 
 ```text
-/opt/pwx/bin/pxctl service update -h
+pxctl service update -h
+```
 
+```output
 NAME:
    pxctl service pool update - Update pool properties
 
@@ -275,7 +334,10 @@ During create each pool is benchmarked and assigned an io_prioriy classification
 To update pool 0 priority classification to 'MEDIUM'
 
 ```text
-/opt/pwx/bin/pxctl service pool update 0 --io_priority medium
+pxctl service pool update 0 --io_priority medium
+```
+
+```output
 Pool properties updated
 ```
 
@@ -285,7 +347,10 @@ To resize pool 0
 ### Step 1: Enter Maintenance mode
 
 ```text
-/opt/pwx/bin/pxctl service  maintenance --enter
+pxctl service  maintenance --enter
+```
+
+```output
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 Entering maintenance mode...
@@ -296,14 +361,21 @@ Entering maintenance mode...
 Use appropriate utility - fdisk, lvresize, aws cli etc. to resize the drive. If the pool is backed by more than one drive, each drive in the pool needs to be resized first before the pool can be resized.
 
 ### Step 3: Resize pool
+
 ```text
-/opt/pwx/bin/pxctl service pool update 0 --resize
+pxctl service pool update 0 --resize
+```
+
+```output
 Pool properties updated
 ```
 
 ### Step 3: Exit Maintenance mode
 
 ```text
-/opt/pwx/bin/pxctl service  maintenance --exit
+pxctl service  maintenance --exit
+```
+
+```output
 Exiting maintenance mode...
 ```

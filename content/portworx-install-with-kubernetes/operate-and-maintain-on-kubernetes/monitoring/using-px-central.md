@@ -5,7 +5,7 @@ description: How to deploy and control Portworx using PX-Central
 ---
 
 ## Overview
-With PX-Enterprise 2.0, Portworx just released PX-Central to simplify management, monitoring and metadata services for one or more Portworx Clusters on Kubernetes. Using this single pane of glass, enterprises can easily manage the state of their hybrid- and multi-cloud Kubernetes applications with embedded monitoring and metrics directly in the Portworx user interface. 
+With PX-Enterprise 2.0, Portworx just released PX-Central to simplify management, monitoring and metadata services for one or more Portworx Clusters on Kubernetes. Using this single pane of glass, enterprises can easily manage the state of their hybrid- and multi-cloud Kubernetes applications with embedded monitoring and metrics directly in the Portworx user interface.
 
 Portworx Clusters needs to be updated to PX-Enterprise 2.0 before using PX-Central. In the first release, PX-Central includes the following components:
 
@@ -44,7 +44,7 @@ PX-Central can be setup for any of the above deployment scenarios by following a
 ### Pre-requisites
 
 * Have a K8S cluster running
-* Have the Prometheus Operator [spec](/samples/k8s/portworx-pxc-operator.yaml) installed.  
+* Have the Prometheus Operator [spec](/samples/k8s/portworx-pxc-operator.yaml) installed.
 
     ```text
     kubectl apply -f portworx-pxc-operator.yaml
@@ -111,7 +111,7 @@ Prometheus & Grafana can be be accessed using a NodePort service.
 * Lighthouse GUI can be used to manage one or more Portworx clusters
 * Grafana and Prometheus have shortcuts from Lighthouse for easy access.
 * Prometheus will scrape the nodes for metrics.
-* AlertManager will notify using a set of default rules 
+* AlertManager will notify using a set of default rules
 * Grafana will use Prometheus as it’s datasource and includes pre-built dashboards for Portworx cluster, node and volume monitoring.
 * Grafana will also have pre-built etcd dashboard (from community) to monitor metadata cluster
 
@@ -119,13 +119,13 @@ Prometheus & Grafana can be be accessed using a NodePort service.
 
 If your cluster has more than 20 nodes or is resource intensive we recommend using this installation to create a dedicated monitoring cluster, and let this cluster monitor the others. If not consider using the single cluster installation (above). The steps below will help you setup PX-Central and first PX-Enterprise Cluster.
 
-1. Create a secret using this [template](/samples/k8s/portworx-pxc-alertmanager.yaml). Replace the values corresponding to your email settings. 											
+1. Create a secret using this [template](/samples/k8s/portworx-pxc-alertmanager.yaml). Replace the values corresponding to your email settings.
 
     ```text
     kubectl create secret generic alertmanager-portworx --from-file=portworx-pxc-alertmanager.yaml -n kube-system
     ```
 
-2. Create a secret using this [template](/samples/k8s/portworx-pxc-prometheus-additional.yaml). Replace the values corresponding to your other K8S clusters.											
+2. Create a secret using this [template](/samples/k8s/portworx-pxc-prometheus-additional.yaml). Replace the values corresponding to your other K8S clusters.
 
     ```text
     kubectl create secret generic additional-scrape-configs --from-file=portworx-pxc-prometheus-additional.yaml -n kube-system
@@ -184,9 +184,7 @@ Quick way to Identify nodes running px-kvdb is by running the pxctl command belo
 pxctl sv kvdb members
 ```
 
-This should display output like:
-
-```text
+```output
 Kvdb Cluster Members:
 ID                    PEER URLs            CLIENT URLs            LEADER    HEALTHY    DBSIZE
 91b988c5-7a6e-4d3d-9ca1-a54a388a0741    [http://XX.XX.XX.XX:9018]    [http://XX.XX.XX.XX:9019]    false    true    1.7 GiB
@@ -196,7 +194,7 @@ ID                    PEER URLs            CLIENT URLs            LEADER    HEAL
 5fc10a25-4bf4-4681-b737-bb8d4753cfb6    [http://XX.XX.XX.XX:9018]    [http://XX.XX.XX.XX:9019]    true    true    1.7 GiB
 ```
 
-*Prometheus* 
+*Prometheus*
 
 Verify Prometheus is up and running by logging into Prometheus (external_ip:port). Click the ‘targets’ from Status dropdown as shown below to verify if all the targets are scraped. In the example below, you can see the PX-kvdb nodes (port:9019) and PX-Enterprise (port:9001) cluster nodes as targets
 
@@ -226,9 +224,9 @@ PX-Central node configuration for running metadata services is described in the 
 **Cluster Size** | **Description**| **CPU config (cores)** | **Memory Config (GB)**| **Max concurrent IOPS** | **Disk Bandwidth (MB/s)**|
 -----------------|----------------|------------------------|-------------|-------------------------|--------------------------|
 Small (upto 50 node cluster) | Serves fewer than 100 clients, fewer than 200 of requests per second, and stores no more than 100MB of data | 2 | 8 | 3600 | 56.25 |
-Medium (upto 250 nodes cluster) | Serves fewer than 500 clients, fewer than 1,000 of requests per second, and stores no more than 500MB of data | 4 | 16 | 6000 | 93.75 | 
+Medium (upto 250 nodes cluster) | Serves fewer than 500 clients, fewer than 1,000 of requests per second, and stores no more than 500MB of data | 4 | 16 | 6000 | 93.75 |
 Large (upto 1000 nodes cluster) | Serves fewer than 1,500 clients, fewer than 10,000 of requests per second, and stores no more than 1GB of data | 8 | 32 | 8000 | 125 |
-X-Large (upto 3000 nodes cluster) | Serves fewer than 1,500 clients, fewer than 10,000 of requests per second, and stores more than 1GB of data |  16 | 64 | 16000 | 250 |  
+X-Large (upto 3000 nodes cluster) | Serves fewer than 1,500 clients, fewer than 10,000 of requests per second, and stores more than 1GB of data |  16 | 64 | 16000 | 250 |
 
 ## Adding PX-Central to existing PX installations
 

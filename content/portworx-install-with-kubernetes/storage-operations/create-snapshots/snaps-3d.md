@@ -48,7 +48,8 @@ This section covers examples of creating 3DSnapshots for various applications.
 ### Hello world
 
 Below rule is a generic example on how to run an echo command on a single pod that matches the label selector app=foo.
-```yaml
+
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: Rule
 metadata:
@@ -67,7 +68,8 @@ spec:
 **Pre-snapshot rule**
 
 Below rule will flush tables on all mysql pods that match label app=mysql and take a read lock on the tables.
-```yaml
+
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: Rule
 metadata:
@@ -90,7 +92,7 @@ Creating the below VolumeSnapshot will do the following:
 * Once the rule is executed, Stork will take a snapshot of the _mysql-data_ PVC.
 * After the snapshot has been triggered, Stork will terminate any background actions that may exist in the rule _px-presnap-rule_.
 
-```yaml
+```text
 apiVersion: volumesnapshot.external-storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -106,7 +108,8 @@ spec:
 **Pre-snapshot rule**
 
 Below pre-snapshot rule forces the mongod to flush all pending write operations to disk and locks the entire mongod instance to prevent additional writes until the user releases the lock with a corresponding db.fsyncUnlock() command. (See [reference](https://docs.mongodb.com/manual/reference/method/db.fsyncLock/))
-```yaml
+
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: Rule
 metadata:
@@ -122,7 +125,8 @@ spec:
 **Post-snapshot rule**
 
 Below post-snapshot rule reduces the lock taken by db.fsyncLock() on a mongod instance by 1. (See [reference](https://docs.mongodb.com/manual/reference/method/db.fsyncUnlock/#db.fsyncUnlock))
-```yaml
+
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: Rule
 metadata:
@@ -143,7 +147,7 @@ Creating the below VolumeSnapshot will do the following:
 * Once the rule is executed, Stork will take a snapshot of the _px-mongo-pvc_ PVC.
 * After the snapshot has been triggered, Stork will run the _px-mongodb-postsnap-rule_ rule on pod using the _px-mongo-pvc_ PVC.
 
-```yaml
+```text
 apiVersion: volumesnapshot.external-storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -160,7 +164,8 @@ spec:
 **Pre-snapshot rule**
 
 Below rule flushes the tables from the memtable on all cassandra pods.
-```yaml
+
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: Rule
 metadata:
@@ -177,7 +182,7 @@ spec:
 
 With this snapshot, Stork will run the _cassandra-presnap-rule_ rule on all pods that are using PVCs that match labels _app=cassandra_. Hence this will be a [group snapshot](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-group).
 
-```yaml
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: GroupVolumeSnapshot
 metadata:

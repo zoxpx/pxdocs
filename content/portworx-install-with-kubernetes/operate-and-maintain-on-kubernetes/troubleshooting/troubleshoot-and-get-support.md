@@ -7,7 +7,7 @@ description: Useful information for troubleshooting Portworx on Kubernetes
 series: support
 ---
 
-### Useful commands {#useful-commands}
+### Useful commands
 
 * List PX pods:
 
@@ -50,7 +50,7 @@ series: support
     ```
   * This can be useful to understand why a particular pod is stuck in creating or terminating state on a node.
 
-### Collecting Logs from PX {#collecting-logs-from-px}
+### Collecting Logs from PX
 
 Please run the following commands on any one of the nodes running Portworx:
 
@@ -67,13 +67,13 @@ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl volume list
 
 Include above logs when contacting us.
 
-### Get support {#get-support}
+### Get support
 
 If you have an enterprise license, please contact us at support@portworx.com with your license key and logs.
 
 We are always available on Slack. Join us! [![Slack](/img/slack.png)](http://slack.portworx.com)
 
-### Etcd {#etcd}
+### Etcd
 
 * Px container will fail to come up if it cannot reach etcd. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
   * The etcd location specified when creating the Portworx cluster needs to be reachable from all nodes.
@@ -83,7 +83,7 @@ We are always available on Slack. Join us! [![Slack](/img/slack.png)](http://sla
 ### Internal Kvdb
 * In an event of a disaster where, internal kvdb is in an unrecoverable error state follow this [doc](/concepts/internal-kvdb#backup) to recover your Portworx cluster
 
-### Portworx cluster {#portworx-cluster}
+### Portworx cluster
 
 * Ports 9001 - 9022 must be open for internal network traffic between nodes running PX. Without this, px cluster nodes will not be able to communicate and cluster will be down.
 * If one of your nodes has a custom taint, the Portworx pod will not get scheduled on that node unless you add a toleration in the Portworx DaemonSet spec. Read [here](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature) for more information about taints and tolerations.
@@ -99,7 +99,7 @@ We are always available on Slack. Join us! [![Slack](/img/slack.png)](http://sla
     1. Downgrade the “kubectl” version to match your server’s version, or
     2. Reapply the spec with client-validation turned off, e.g.: `kubectl apply --validate=false ...`
 
-### PVC creation {#pvc-creation}
+### PVC creation
 
 If the PVC creation is failing, this could be due the following reasons
 
@@ -112,7 +112,7 @@ If the PVC creation is failing, this could be due the following reasons
 * Describe the PVC using `kubectl describe pvc <pvc-name>` and look at errors in the events section which might be causing failure of the PVC creation.
 * Make sure you are running Kubernetes 1.6 and above. Kubernetes 1.5 does not have our native driver which is required for PVC creation.
 
-### DNS policy updates {#dns-policy-updates}
+### DNS policy updates
 
 If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pods-dns-policy) parameter for the PX-OCI service, please also restart the PX-OCI service\(s\) after changing/editing the YAML-spec:
 
@@ -127,7 +127,7 @@ If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/servic
   sleep 30; kubectl label nodes --all px/service-
 ```
 
-### Application pods {#application-pods}
+### Application pods
 
 * Ensure Portworx container is running on the node where the application pod is scheduled. This is required for Portworx to mount the volume into the pod.
 * Ensure the PVC used by the application pod is in “Bound” state.
@@ -140,7 +140,7 @@ If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/servic
   * Portworx was down on this node for a period of more than 10 minutes. This caused the volume to go into read-only state. Hence the application pod can no longer write to the volume filesystem. To fix this issue, delete the pod. A new pod will get created and the volume will be setup again. The pod will resume with the same persistent data since that is being backed by a PVC provisioned by Portworx.
   * The application container found existing data in the mounted PVC volume and was expecting an empty volume.
 
-### Known issues {#known-issues}
+### Known issues
 
 **Kubernetes on CoreOS deployed through Tectonic**
 

@@ -29,15 +29,17 @@ Once you apply the above object you can check the status of the snapshots using 
 ```text
 kubectl get -n jenkins volumesnapshot
 ```
-```
+
+```output
 NAME                                                      AGE
 jenkins-jobs-jenkins-master-0-snapshot-2019-03-20-snap1   6m
 ```
+
 ```text
 kubectl get -n jenkins volumesnapshotdatas
 ```
-```
 
+```output
 NAME                                                       AGE
 k8s-volume-snapshot-ab059f02-4b5e-11e9-bca9-0242ac110002   8m
 ```
@@ -49,7 +51,8 @@ Portworx Volume Snapshot ID and the PVC for which the snapshot was created.
 ```text
 kubectl describe volumesnapshotdatas
 ```
-```
+
+```output
 Name:         k8s-volume-snapshot-ab059f02-4b5e-11e9-bca9-0242ac110002
 Namespace:
 Labels:       <none>
@@ -88,7 +91,8 @@ In addition, you can use storkctl to verify that the snapshot was created succes
 ```text
 storkctl -n jenkins get snap
 ```
-```
+
+```output
 NAME                                                      PVC                             STATUS    CREATED               COMPLETED             TYPE
 jenkins-jobs-jenkins-master-0-snapshot-2019-03-20-snap1   jenkins-jobs-jenkins-master-0   Ready     20 Mar 19 15:22 PDT   20 Mar 19 15:22 PDT   local
 ```

@@ -80,7 +80,7 @@ For a more detailed setup, maintenance and tuning information refer the followin
 * [Maintenance](https://coreos.com/etcd/docs/latest/op-guide/maintenance.html)
 * [Tuning](https://coreos.com/etcd/docs/latest/tuning.html)
 * [Troubleshooting](https://coreos.com/etcd/docs/latest/op-guide/recovery.html)
-* [Consul](https://www.consul.io/intro/getting-started/join.html) 
+* [Consul](https://www.consul.io/intro/getting-started/join.html)
 
 ### Securing with certificates in Kubernetes
 
@@ -89,13 +89,16 @@ SSL certificates for etcd can be stored as Kubernetes secrets. Three files are r
 ```text
 kubectl -n kube-system create secret generic px-etcd-certs --from-file=etcd-secrets/
 ```
-```
+
+```output
 secret/px-etcd-certs created
 ```
+
 ```text
 kubectl -n kube-system describe secret px-etcd-certs
 ```
-```
+
+```output
 Name:         px-etcd-certs
 Namespace:    kube-system
 Labels:       <none>

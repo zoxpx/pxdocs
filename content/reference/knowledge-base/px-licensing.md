@@ -15,7 +15,7 @@ Starting with the v1.2.8 release, the Portworx products support the following li
 | Portworx Developer           | Embedded into [px-developer](/install-with-other/docker/standalone/px-developer), free license that supports select functionality.
 | Trial                  | Automatically installed with [px-enterprise](/), enables functionality for 30 days.
 | Portworx Enterprise VM       | Enterprise license, suitable for Virtual Machine (VM) installs on-prem and in cloud
-| Portworx Enterprise Metal    | Enterprise license, suitable for installs on any bare metal hardware 
+| Portworx Enterprise Metal    | Enterprise license, suitable for installs on any bare metal hardware
 
 
 Depending on the type of the container you are installing, a different license will be automatically activated:
@@ -31,7 +31,8 @@ A brief license summary is provided with the `pxctl status` command:
 ```text
 pxctl status
 ```
-```
+
+```output
 Status: PX is operational
 License: Trial license (expires in 30 days)
  [...]
@@ -42,7 +43,8 @@ More details about each individual licensed feature is displayed via `pxctl lice
 ```text
 pxctl license list
 ```
-```
+
+```output
 DESCRIPTION                  ENABLEMENT  ADDITIONAL INFO
 Number of nodes maximum         1000
 Number of volumes maximum       1024 [...]
@@ -82,7 +84,8 @@ It supports the following features:
 ```text
 pxctl license list
 ```
-```
+
+```output
 DESCRIPTION                  ENABLEMENT    ADDITIONAL INFO
 Number of nodes maximum             3
 Number of volumes maximum         256
@@ -104,7 +107,7 @@ Product SKU                  PX-Developer  permanent
 The "Trial" license activates automatically when the [px-enterprise](/) is installed.
 The trial license provides the full product functionality for 30 days.
 
-```text
+```
 DESCRIPTION                  ENABLEMENT  ADDITIONAL INFO
 Number of nodes maximum         1000
 Number of volumes maximum       1024
@@ -167,7 +170,8 @@ Customers will be asked to provide the `Cluster UUID` information (available via
 ```text
 pxctl cluster list
 ```
-```
+
+```output
 Cluster ID: MY_FAVORITE_PX_CLUSTER
 Cluster UUID: f987ad4b-987c-4e7e-a8bd-788c89cc40f1
 Status: OK [...]
@@ -194,7 +198,7 @@ License transfer command requires 'clusterUUID' from the source cluster, (availa
 pxctl license transfer -h
 ```
 
-```
+```output
 NAME:
    pxctl license transfer - Transfer license to remote PX cluster
 
@@ -214,8 +218,7 @@ EXAMPLE:
    pxctl license transfer f91531d9-bf65-46f5-9619-eb99128e3270 10.0.15.201
 ```
 
-{{<info>}}Note:
-
+{{<info>}}
 * The license transfer happens directly between the Portworx clusters, so at least one node from source cluster must have a network connectivity to a node in the target Portworx cluster.
 * After the successful license transfer, the two Portworx clusters will have swapped identities, and licenses (for example, Portworx cluster A will have Trial license originally from Portworx cluster B, while the cluster B will have the PX Enterprise license originally from cluster A)
 {{</info>}}

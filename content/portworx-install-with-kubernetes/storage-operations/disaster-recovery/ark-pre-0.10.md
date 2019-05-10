@@ -15,6 +15,7 @@ Portworx volumes through Ark you need to install and configure the Portworx
 plugin.
 
 ## Install Ark Plugin
+
 Run the following command to install the Portworx plugin for Ark:
 ```text
 ark plugin add portworx/ark-plugin:0.3
@@ -30,7 +31,7 @@ Persistent Volume Provider when taking snapshots. To edit the config run the
 following command:
 
 ```text
-$ kubectl edit config -n heptio-ark
+kubectl edit config -n heptio-ark
 ```
 
 And set up `portworx` as the `persistentVolumeProvider` by adding the following
@@ -51,6 +52,7 @@ persistentVolumeProvider:
 ```
 
 ### Using cloud snapshots (Supported from PX-Enterprise 1.4 onwards)
+
 To use cloud snapshots to backup your PVCs, you need to specify `cloud` as the `type` in the `config` section. If you have
 more than one credential configured with Portworx you also need to specify the UUID of the credential using `credId`:
 ```text
@@ -63,14 +65,20 @@ persistentVolumeProvider:
 ```
 
 ## Managing snapshots
+
 Once the plugin has been installed and configured, everytime you take backups
 using Ark and include PVCs, it will also take Portworx snapshots of your volumes.
 
 ### Creating backups
+
 For example, to backup all your apps in the default namespace and also snapshot
 your volumes, you would run the following command:
+
+```text
+ark backup create default-ns-backup --include-namespaces=default --snapshot-volumes
 ```
-$ ark backup create default-ns-backup --include-namespaces=default --snapshot-volumes
+
+```output
 Backup request "default-ns-backup" submitted successfully.
 Run `ark backup describe default-ns-backup` for more details.
 ```
@@ -78,18 +86,26 @@ Run `ark backup describe default-ns-backup` for more details.
 Once the specs and volumes have been backed up you should see the backup marked
 as `Completed` in ark.
 
+```text
+ark get backup
 ```
-$ ark get backup
+
+```output
 NAME                STATUS      CREATED                         EXPIRES   SELECTOR
 default-ns-backup   Completed   2018-05-29 20:10:45 +0000 UTC   29d       <none>
 ```
 
 ### Restoring from backups
+
 When restoring from backups, a clone volume will be created from the snapshot and
 bound to the restored PVC. To restore from the backup created above you can run
 the following command:
+
+```text
+ark restore create --from-backup default-ns-backup
 ```
-$ ark restore create --from-backup default-ns-backup
+
+```output
 Restore request "default-ns-backup-20180529201245" submitted successfully.
 Run `ark restore describe default-ns-backup-20180529201245` for more details.
 ```

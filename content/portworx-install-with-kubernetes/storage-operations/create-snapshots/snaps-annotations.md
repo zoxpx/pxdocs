@@ -13,11 +13,12 @@ using STORK to manage snapshots can be found
 [here](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
 {{</info>}}
 
-## Managing snapshots through `kubectl`
+## Managing snapshots through kubectl
 
 ### Taking periodic snapshots on a running POD
 When you create the Storage Class, you can specify a snapshot schedule on the volume as specified below:
-```yaml
+
+```text
 kind: StorageClass
 apiVersion: storage.k8s.io/v1beta1
 metadata:
@@ -37,7 +38,7 @@ You can trigger a new snapshot on a running POD by creating a PersistentVolumeCl
 
 Portworx uses a special annotation _px/snapshot-source-pvc_ which can be used to identify the name of the source PVC whose snapshot needs to be taken.
 
-```yaml
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -62,7 +63,7 @@ Note the format of the _name_ field  - `ns.<namespace_of_source_pvc>-name.<name_
 
 For using annotations Portworx daemon set requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
 
-```yaml
+```text
 - apiGroups: [""]
   resources: ["persistentvolumeclaims"]
   verbs: ["get", "list"]
@@ -71,14 +72,14 @@ For using annotations Portworx daemon set requires extra permissions to read ann
 You can run the following command to edit your existing Portworx ClusterRole
 
 ```text
-$ kubectl edit clusterrole node-get-put-list-role
+kubectl edit clusterrole node-get-put-list-role
 ```
 
 ##### Clone from a snapshot
 
 You can restore a clone from a snapshot using the following spec file. In 1.3 and higher releases, this is required to create a read-write clone as snapshots are read only.
 
-```yaml
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -100,7 +101,8 @@ The above example restores a volume from the source snapshot PVC with name _ns.p
 #### Using inline spec
 
 If you do not wish to use annotations you can take a snapshot by providing the source PVC name in the name field of the claim.  However this method does not allow you to provide namespaces.
-```yaml
+
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
   metadata:
@@ -112,13 +114,14 @@ spec:
     requests:
       storage: 1Gi
 ```
+
 Note the format of the “name” field. The format is `name.<new_snap_name>-source.<old_volume_name>`. Above example references the parent (source) persistent volume claim _pvc001_ and creates a snapshot by the name _snap001_.
 
 ##### Clone from a snapshot
 
 You can restore a clone from a snapshot using the following spec file. In 1.3 and higher releases, this is required to create a read-write clone as snapshots are read only.
 
-```yaml
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -130,14 +133,19 @@ spec:
     requests:
       storage: 1Gi
 ```
+
 Note we used used the existing snapshot name in the source part of the inline spec.
 
 ### Using snapshots
 
 #### Listing snapshots
 To list snapshots taken by Portworx, use the `/opt/pwx/bin/pxctl volume snapshot list` command. For example:
+
 ```text
-# /opt/pwx/bin/pxctl volume snapshot list
+pxctl volume snapshot list
+```
+
+```output
 ID			NAME	SIZE	HA	SHARED	IO_PRIORITY	SCALE STATUS
 1067822219288009613	snap001	1 GiB	2	no	LOW		1	up - detached
 ```
@@ -148,39 +156,78 @@ You can use the ID or NAME of the snapshots when using them to restore a volume.
 
 To restore a pod to use the created snapshot, use the pvc `name.snap001-source.pvc001` in the pod spec.
 
-## Managing snapshots through `pxctl`
+## Managing snapshots through pxctl
 
 To demonstrate the capabilities of the SAN like functionality offered by portworx, try creating a snapshot of your mysql volume.
 
 First create a database and a demo table in your mysql container.
+
 ```text
-# mysql --user=root --password=password
-MySQL [(none)]> create database pxdemo;
+mysql --user=root --password=password
+```
+
+```text
+create database pxdemo;
+```
+
+```output
 Query OK, 1 row affected (0.00 sec)
-MySQL [(none)]> use pxdemo;
+```
+
+```text
+use pxdemo;
+```
+
+```output
 Database changed
-MySQL [pxdemo]> create table grapevine (counter int unsigned);
+```
+
+```text
+create table grapevine (counter int unsigned);
+```
+
+```output
 Query OK, 0 rows affected (0.04 sec)
-MySQL [pxdemo]> quit;
+```
+
+```text
+quit;
+```
+
+```output
 Bye
 ```
+
 ### Now create a snapshot of this database using pxctl.
 
 First use pxctl volume list to see what volume you want to snapshot
+
 ```text
-# /opt/pwx/bin/pxctl v l
+bin/pxctl v l
+```
+
+```output
 ID					NAME										SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 381983511213673988	pvc-e7e66f98-0915-11e7-94ca-7cd30ac1a138	20 GiB	2	no		no			LOW			0		up - attached on 147.75.105.241
 ```
+
 Then use pxctl to snapshot your volume
+
 ```text
-/opt/pwx/bin/pxctl snap create 381983511213673988 --name snap-01
+pxctl snap create 381983511213673988 --name snap-01
+```
+
+```output
 Volume successfully snapped: 835956864616765999
 ```
 
 You can use pxctl to see your snapshot
+
 ```text
-# /opt/pwx/bin/pxctl snap list
+pxctl snap list
+```
+
+```output
 ID					NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 835956864616765999	snap-01	20 GiB	2	no		no			LOW			0		up - detached
 ```
@@ -190,8 +237,10 @@ Now you can create a mysql Pod to mount the snapshot
 ```text
 kubectl create -f portworx-mysql-snap-pod.yaml
 ```
+
 [Download example](/samples/k8s/portworx-mysql-snap-pod.yaml?raw=true)
-```yaml
+
+```text
 apiVersion: v1
 kind: Pod
 metadata:
@@ -219,8 +268,14 @@ spec:
 Inspect that the database shows the cloned tables in the new mysql instance.
 
 ```text
-# mysql --user=root --password=password
-mysql> show databases;
+mysql --user=root --password=password
+```
+
+```text
+show databases;
+```
+
+```output
 +--------------------+
 | Database           |
 +--------------------+
@@ -231,17 +286,29 @@ mysql> show databases;
 +--------------------+
 4 rows in set (0.00 sec)
 
-mysql> use pxdemo;
+```
+
+```text
+use pxdemo;
+```
+
+```output
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
 Database changed
-mysql> show tables;
+```
+
+
+```text
+show tables;
+```
+
+```output
 +------------------+
 | Tables_in_pxdemo |
 +------------------+
 | grapevine        |
 +------------------+
 1 row in set (0.00 sec)
-
 ```

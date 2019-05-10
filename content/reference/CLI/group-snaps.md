@@ -5,28 +5,61 @@ description: Explore the CLI reference guide for taking group snapshots of conta
 weight: 7
 ---
 
+This document explains how to take group snapshots of your container data with _Portworx_.
+
+First, let's get an overview of the available flags before diving in:
+
 ```text
-/opt/pwx/bin/pxctl volume snapshot group -h
-NAME:
-   pxctl volume snapshot group - Create group snapshots for given group id or labels
-USAGE:
-   pxctl volume snapshot group [command options] [arguments...]
-OPTIONS:
-   --group value, -g value  group id
-   --label pairs, -l pairs  list of comma-separated name=value pairs
+pxctl volume snapshot group -h
+```
 
-Take snapshot for volumes with label “v1=x1”:
+```output
+Create group snapshots for given group id or labels
 
-opt/pwx/bin/pxctl volume snapshot group --label v1=x1
+Usage:
+  pxctl volume snapshot group [flags]
+
+Aliases:
+  group, g
+
+Flags:
+  -g, --group string        group id
+  -l, --label string        list of comma-separated name=value pairs
+  -v, --volume_ids string   list of comma-separated volume IDs
+  -h, --help                help for group
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+```
+
+To take a group snapshot of the volumes labelled with `v1=x1`, use this command:
+
+```text
+pxctl volume snapshot group --label v1=x1
+```
+
+```output
 Volume 549285969696152595 : Snapshot 1026872711217134654
 Volume 952350606466932557 : Snapshot 218459942880193319
 
 
 Take snapshot for volumes created with group “group1”
 
-/opt/pwx/bin/pxctl volume snapshot group --group “group1”
-Volume 273677465608441312 : Snapshot 609476927441905746
-
+```text
+pxctl volume snapshot group --group “group1”
 ```
 
-[Edit this page on Github](https://github.com/portworx/px-docs/blob/gh-pages/control/groupsnap.md)  
+```output
+Volume 83958335106174418 : Snapshot 362408823552094597
+Volume 874802361339616936 : Snapshot 895516478416742770
+```
+
+[Edit this page on Github](https://github.com/portworx/px-docs/blob/gh-pages/control/groupsnap.md)

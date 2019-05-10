@@ -190,7 +190,6 @@ Successfully authenticated with Vault.
 ```
 
 {{<info>}}
-**Note:**
 To install and configure Vault, peruse [this link](https://www.vaultproject.io/docs/install/index.html)
 {{</info>}}
 

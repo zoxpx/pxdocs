@@ -14,7 +14,7 @@ To view a list of the available commands, run the following:
 /opt/pwx/bin/pxctl volume -h
 ```
 
-```
+```output
 Manage volumes
 
 Usage:
@@ -88,7 +88,7 @@ pxctl volume create myVol
 
 `pxctl` will create the volume and will print its `id`:
 
-```
+```output
 3903386035533561360
 ```
 
@@ -111,9 +111,7 @@ Before you move on, take a bit of time to make sure you understand the following
 pxctl volume create -h
 ```
 
-You should see something like:
-
-```
+```output
 Create a volume
 
 Usage:
@@ -186,7 +184,7 @@ Let's look at a simple example. Say you want to create a volume named `localVolu
 pxctl volume create --nodes=LocalNode localVolume
 ```
 
-```
+```output
 Volume successfully created: 756818650657204847
 ```
 
@@ -196,7 +194,7 @@ Now, let's quickly check that the volume's replica is on the node where the comm
 pxctl volume inspect localVolume
 ```
 
-```
+```output
 Volume  :  756818650657204847
         Name                     :  localVolume
         Size                     :  1.0 GiB
@@ -235,7 +233,7 @@ The following `docker volume` command creates a volume named `testVol`:
 docker volume create -d pxd --name testVol
 ```
 
-```
+```output
 testVol
 ```
 
@@ -246,9 +244,7 @@ Just to make sure the command is reflected into _Portworx_, try running this com
 pxctl volume list --name testVol
 ```
 
-You should see something like:
-
-```
+```output
 ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS		SNAP-ENABLED
 426544812542612832	testVol	1 GiB	1	no	no		LOW		up - detached	no
 ```
@@ -263,7 +259,7 @@ The command below uses the `--opt` flag to set the container's filesystem and vo
 docker volume create -d pxd --name opt_example --opt fs=ext4 --opt size=1G
 ```
 
-```
+```output
 opt_example
 ```
 
@@ -273,7 +269,7 @@ Now, let's check by running this command:
 pxctl volume list --name opt_example
 ```
 
-```
+```output
 ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS		SNAP-ENABLED
 282820401509248281	opt_example	1 GiB	1	no	no		LOW		up - detached	no
 ```
@@ -295,6 +291,7 @@ Let's look at another example that uses `docker run` to create a volume dynamica
 ```text
 docker run --volume-driver pxd -it -v io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume:/data busybox sh
 ```
+
 The above command will create a volume called `demovolume` with an initial size of 10G, HA factor of 3, snap schedule with periodic and daily snapshot creation, and a high IO priority level. Next, it will start the busybox container dynamically.
 
 {{<info>}}
@@ -316,7 +313,7 @@ snap_schedule    - "periodic=mins#k;daily=hh:mm#k;weekly=weekday@hh:mm#k;monthly
 
 The inline specs can be passed in through the scheduler application template. For example, below is a snippet from a marathon configuration file:
 
-```
+```text
 "parameters": [
 	{
 		"key": "volume-driver",
@@ -340,7 +337,7 @@ Volumes can be deleted like so:
 pxctl volume delete myOldVol
 ```
 
-```
+```output
 Delete volume 'myOldVol', proceed ? (Y/N): y
 Volume myOldVol successfully deleted.
 ```
@@ -356,7 +353,7 @@ As an example, you can import files from `/path/to/files` into `myVol` with the 
 pxctl volume import --src /path/to/files myVol
 ```
 
-```
+```output
 Starting import of  data from /path/to/files into volume myVol...Beginning data transfer from /path/to/files myVol
 Imported Bytes :   0% [>---------------------------------------------------------------------------------------------------------------------------------------] 14ms
 Imported Files :   0% [>---------------------------------------------------------------------------------------------------------------------------------------] 16ms
@@ -372,7 +369,7 @@ To find out more information about a volume's settings and its usage, run:
 pxctl volume inspect clitest
 ```
 
-```
+```output
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -407,7 +404,7 @@ To inspect the volume in `json` format, run `pxctl volume inspect` with the `-j`
 pxctl -j volume inspect 486256711004992211
 ```
 
-```
+```output
 [{
  "id": "486256711004992211",
  "source": {
@@ -508,7 +505,7 @@ To list all volumes within a cluster, use this command:
 pxctl volume list
 ```
 
-```
+```output
 ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS				SNAP-ENABLED
 951679824907051932	objectstorevol	10 GiB	1	no	no		LOW		up - attached on 192.168.99.101	no
 810987143668394709	testvol		1 GiB	1	no	no		LOW		up - detached			no
@@ -524,7 +521,7 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS				SNAP-ENABLED
 pxctl volume locate 794896567744466024
 ```
 
-```
+```output
 host mounted:
   /directory1
   /directory2
@@ -551,7 +548,7 @@ Let's first refer to the in-built help, which can be accessed by giving the `--h
 pxctl volume clone --help
 ```
 
-```
+```output
 Create a clone volume
 
 Usage:
@@ -588,7 +585,7 @@ As an example, if we want to make a clone named `myvol_clone` from the parent vo
 pxctl volume clone -name myvol_clone myvol
 ```
 
-```
+```output
 Volume clone successful: 55898055774694370
 ```
 
@@ -608,7 +605,7 @@ Please see the documentation for [snapshots] (/reference/cli/snapshots) for more
 pxctl volume stats mvVol
 ```
 
-```
+```output
 TS			Bytes Read	Num Reads	Bytes Written	Num Writes	IOPS		IODepth		Read Tput	Write Tput	Read Lat(usec)	Write Lat(usec)
 2019-3-4:11 Hrs		0 B		0		0 B		0		0		0		0 B/s		0 B/s		0		0
 ```

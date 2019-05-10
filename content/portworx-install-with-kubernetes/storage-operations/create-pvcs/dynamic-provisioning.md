@@ -42,7 +42,7 @@ kubectl create -f examples/volumes/portworx/portworx-sc.yaml
 
 Example:
 
-```yaml
+```text
 kind: StorageClass
 apiVersion: storage.k8s.io/v1beta1
 metadata:
@@ -55,8 +55,11 @@ parameters:
 
 Verifying storage class is created:
 
-```
+```text
 kubectl describe storageclass portworx-sc
+```
+
+```output
      Name: 	        	portworx-sc
      IsDefaultClass:	        No
      Annotations:		<none>
@@ -69,13 +72,13 @@ kubectl describe storageclass portworx-sc
 
 Creating the persistent volume claim:
 
-```
+```text
 kubectl create -f examples/volumes/portworx/portworx-volume-pvcsc.yaml
 ```
 
 Example:
 
-```yaml
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -93,50 +96,56 @@ spec:
 
 Verifying persistent volume claim is created:
 
-```
+```text
 kubectl describe pvc pvcsc001
-    Name:	      	pvcsc001
-    Namespace:      default
-    StorageClass:   portworx-sc
-    Status:	      	Bound
-    Volume:         pvc-e5578707-c626-11e6-baf6-08002729a32b
-    Labels:	      	<none>
-    Capacity:	    2Gi
-    Access Modes:   RWO
-    No Events.
+```
+
+```output
+Name:	      	pvcsc001
+Namespace:      default
+StorageClass:   portworx-sc
+Status:	      	Bound
+Volume:         pvc-e5578707-c626-11e6-baf6-08002729a32b
+Labels:	      	<none>
+Capacity:	    2Gi
+Access Modes:   RWO
+No Events.
 ```
 Persistent Volume is automatically created and is bounded to this pvc.
 
 Verifying persistent volume claim is created:
 
-```
+```text
 kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
-    Name: 	      	pvc-e5578707-c626-11e6-baf6-08002729a32b
-    Labels:        	<none>
-    StorageClass:  	portworx-sc
-    Status:	      	Bound
-    Claim:	      	default/pvcsc001
-    Reclaim Policy: 	Delete
-    Access Modes:   	RWO
-    Capacity:	        2Gi
-    Message:
-    Source:
-    Type:	      	PortworxVolume (a Portworx Persistent Volume resource)
-    VolumeID:   	374093969022973811
-    No events.
+```
+
+```output
+Name: 	      	pvc-e5578707-c626-11e6-baf6-08002729a32b
+Labels:        	<none>
+StorageClass:  	portworx-sc
+Status:	      	Bound
+Claim:	      	default/pvcsc001
+Reclaim Policy: 	Delete
+Access Modes:   	RWO
+Capacity:	        2Gi
+Message:
+Source:
+Type:	      	PortworxVolume (a Portworx Persistent Volume resource)
+VolumeID:   	374093969022973811
+No events.
 ```
 
 #### Step 3: Create Pod which uses Persistent Volume Claim with storage class.
 
 Create the pod:
 
-```
+```text
 kubectl create -f examples/volumes/portworx/portworx-volume-pvcscpod.yaml
 ```
 
 Example:
 
-```yaml
+```text
 apiVersion: v1
 kind: Pod
 metadata:
@@ -157,10 +166,13 @@ spec:
 
 Verifying pod is created:
 
-```
+```text
 kubectl get pod pvpod
-   NAME      READY     STATUS    RESTARTS   AGE
-   pvpod       1/1     Running   0          48m
+```
+
+```output
+NAME      READY     STATUS    RESTARTS   AGE
+pvpod       1/1     Running   0          48m
 ```
 
 {{<info>}}To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)

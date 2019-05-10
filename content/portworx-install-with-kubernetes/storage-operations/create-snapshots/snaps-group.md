@@ -145,7 +145,7 @@ In below example, we will take a group snapshot for all PVCs in the *default* na
 
 Apply the following spec to take the cassandra group snapshot. Portworx will quiesce I/O on all volumes before triggering their snapshots.
 
-```yaml
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: GroupVolumeSnapshot
 metadata:

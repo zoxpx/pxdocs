@@ -12,7 +12,7 @@ This document describes how to use portworx **sharedv4** (ReadWriteMany) volumes
 
 In order to use Portworx sharedv4 volumes, you need to pass the following environment variable to the Portworx daemon set.
 
-```
+```text
   env:
     - name: "ENABLE_SHARED_AND_SHARED_v4"
       value: "true"
@@ -37,7 +37,7 @@ EOF
 
 Patch the daemon set
 
-```
+```text
 kubectl -n kube-system patch ds portworx --patch "$(cat patch.yaml)" --type=strategic
 ```
 
@@ -111,6 +111,9 @@ Verifying persistent volume claim is created:
 
 ```text
 kubectl get pvc
+```
+
+```output
 NAME            STATUS    VOLUME                                   CAPACITY   ACCESSMODES   STORAGECLASS   AGE
 px-sharedv4-pvc   Bound     pvc-a38996b3-76e9-11e7-9d47-080027b25cdf 10Gi       RWX           px-sharedv4-sc   12m
 
@@ -176,6 +179,9 @@ Verifying pods are running:
 
 ```text
 kubectl get pods
+```
+
+```output
 NAME      READY     STATUS    RESTARTS   AGE
 pod1      1/1       Running   0          2m
 pod2      1/1       Running   0          1m
@@ -185,10 +191,9 @@ pod2      1/1       Running   0          1m
 
 You can update an existing shared volume to use the new v4 protocol and convert it into a sharedv4 volume. Run the following pxctl command to update the volume setting
 
+```text
+pxctl volume update --sharedv4=on <vol-name>
 ```
-/opt/pwx/bin/pxct volume update --sharedv4=on <vol-name>
-```
-
 
 {{<info>}}To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
 {{</info>}}

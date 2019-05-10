@@ -8,7 +8,8 @@ If the snapshot exists in another namespace, the snapshot namespace should be sp
 Note that the storageClassName needs to be the Stork StorageClass `stork-snapshot-sc` as in the example below.
 
 For the above snapshot, the spec would like this:
-```yaml
+
+```text
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -24,13 +25,13 @@ spec:
       storage: 2Gi
 ```
 
-Once you apply the above spec you will see a PVC created by STORK. This PVC will be backed by a Portworx volume clone of the snapshot created above.
+Once you apply the above spec, you will see a PVC created by STORK. This PVC will be backed by a Portworx volume clone of the snapshot created above.
 
 ```text
-kubectl get pvc  
+kubectl get pvc
 ```
 
-```
+```output
 NAMESPACE   NAME                                   STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS                AGE
 default     mysql-data                             Bound     pvc-f782bf5c-20e7-11e8-931d-0214683e8447   2Gi        RWO            px-mysql-sc                 2d
 default     mysql-snap-clone                       Bound     pvc-05d3ce48-2280-11e8-98cc-0214683e8447   2Gi        RWO            stork-snapshot-sc           2s
