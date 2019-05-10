@@ -11,7 +11,7 @@ image:
 
 .PHONY: search-index-image
 search-index-image:
-	docker build -t $(SEARCH_INDEX_IMAGE) themes/pxdocs-tooling/deploy/algolia
+	docker build -t $(SEARCH_INDEX_IMAGE) themes/pxRefresh/deploy/algolia
 
 .PHONY: deployment-image
 deployment-image:
@@ -48,7 +48,7 @@ develop: image
 		-e TRAVIS_BRANCH \
 		-p $(PORT):1313 \
 		-v "$(PWD):/pxdocs" \
-		$(BUILDER_IMAGE) server --bind=0.0.0.0 --disableFastRender
+		$(BUILDER_IMAGE) server --bind=0.0.0.0 --watch=true --disableFastRender
 
 .PHONY: publish-docker
 publish-docker:

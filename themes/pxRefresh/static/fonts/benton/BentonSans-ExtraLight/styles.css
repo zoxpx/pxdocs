@@ -1,0 +1,8 @@
+
+@font-face {
+  font-family: 'BentonSans-ExtraLight';
+  src: url('BentonSans-ExtraLight.eot?#iefix') format('embedded-opentype'),  url('BentonSans-ExtraLight.otf')  format('opentype'),
+	     url('BentonSans-ExtraLight.woff') format('woff'), url('BentonSans-ExtraLight.ttf')  format('truetype'), url('BentonSans-ExtraLight.svg#BentonSans-ExtraLight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

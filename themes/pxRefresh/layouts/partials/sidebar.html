@@ -1,0 +1,43 @@
+<!--
+  SIDEBAR
+ -->
+
+
+
+<nav id="leftSidebar" class="sideBar  ">
+
+  <header id="search-container-holding-space">
+    <div id="search-box-holding">
+      <div id="ais-search-box-holding">
+        <input autocapitalize="off" autocomplete="off" autocorrect="off"
+               placeholder="Search for pages" role="textbox" spellcheck="false" type="text" value="" class="ais-search-box--input-holding">
+      </div>
+    </div>
+  </header>
+  <header id="search-container">
+    <div id="search-box">
+
+    </div>
+  </header>
+  <footer id="version-menu">
+    <div class="btn-group dropdown row-full">
+      <button id="versionBtn" data-toggle="dropdown" class="btn btn-secondary btn-sm" type="button">
+        Version
+      </button>
+      <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+      </div>
+    </div>
+
+
+  </footer>
+
+
+  <ul id="leftSideBarMenu" class="list-unstyled components">
+    {{- partial "menu.html" . }}
+  </ul>
+</nav>
+
+

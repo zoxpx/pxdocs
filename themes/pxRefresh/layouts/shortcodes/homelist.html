@@ -1,0 +1,49 @@
+{{ if .IsNamedParams }}
+  {{- $series := .Get "series" -}}
+  {{- $series2 := .Get "series2" -}}
+  {{- $series3 := .Get "series3" -}}
+  <div class="row listOfLinks mt-3 mb-3">
+
+    {{- range where .Site.Pages "Params.series" $series }}
+      {{- if . }}
+        {{- template "dsTitleCards" dict "node" . "Title" .Title "Description" .Description "Permalink" .Permalink }}
+      {{- end }}
+    {{- end }}
+    {{- range where .Site.Pages "Params.series2" $series2 }}
+      {{- if . }}
+        {{- template "dsTitleCards" dict "node" . "Title" .Title "Description" .Description "Permalink" .Permalink }}
+      {{- end }}
+    {{- end }}
+    {{- range where .Site.Pages "Params.series3" $series3 }}
+      {{- if . }}
+        {{- template "dsTitleCards" dict "node" . "Title" .Title "Description" .Description "Permalink" .Permalink }}
+      {{ end }}
+    {{- end }}
+  </div>
+{{ end }}
+
+
+{{- define "dsTitleCards" }}
+  {{- $Title := .Title }}
+  {{- $Description := .Description }}
+  {{- $Permalink := .Permalink }}
+
+  {{- with .node }}
+  <div class="col-sm-12">
+    <a href="{{ $Permalink }}">
+    <div class="card shadowHover">
+      <div class="card-body">
+        <h5 class="card-title"> {{ $Title }} </h5>
+        <p>{{ $Description }}</p>
+      </div>
+    </div>
+    </a>
+
+  </div>
+  {{- end }}
+{{- end }}
+
+
+
+
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    {{- partial "head.html" . -}}
+    <body>
+        <div class="container-fluid ">
+            {{- partial "mainNavBar.html" -}}
+        </div>
+        <div class="container-fluid ">
+
+            <div class="row" id="mainContentContainer">
+
+                    <div class="col-flex">
+                        <div id="search-hits">
+                        </div>
+                        <div class="myLeftSidebar ">
+                            {{- partial "sidebar.html" . }}
+                        </div>
+                        <div class="col-content docs-content">
+                            <div id="mainContentArea">
+                                {{- block "main" . }}{{- end }}
+                            </div>
+
+                        </div>
+                        <div class="myRightSidebar d-none d-lg-block">
+                            <div id="scrollspy-container" class="mt-4">
+                                <nav>
+                                    <ul id="scrollspy-list">
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            
+        </div>
+        <div class="container-fluid ">
+            {{- partial "footer.html" . -}}
+        </div>
+
+        {{- partial "scripts.html" . -}}
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="{{ .Description }}">
+    <meta name="keywords" content="{{ .Keywords }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>{{ .Title }}</title>
+
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ .Title }}" />
+    <meta property="og:description" content="{{ .Description }}" />
+    <meta property="og:url" content="{{ .URL }}" />
+    <meta property="og:site_name" content="Portworx Documentation" />
+    <meta property="fb:app_id" content="1541540289287091" />
+    <meta property="og:image" content="https://portworx.com/wp-content/uploads/2016/06/portworx-logo.png" />
+    <meta property="og:image:secure_url" content="https://portworx.com/wp-content/uploads/2016/06/portworx-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="{{ .Description }}" />
+    <meta name="twitter:title" content="{{ .Title }}" />
+    <meta name="twitter:site" content="@portwx" />
+    <meta name="twitter:image" content="https://portworx.com/wp-content/uploads/2016/06/portworx-logo.png" />
+    <meta name="twitter:creator" content="@portwx" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="{{"/images/favicon-32x32.png" | relURL}}?timestamp={{ now.Unix }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{"/images/favicon-96x96.png" | relURL}}?timestamp={{ now.Unix }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{"/images/favicon-16x16.png" | relURL}}?timestamp={{ now.Unix }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{"/images/favicon.ico" | relURL}}?timestamp={{ now.Unix }}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="{{"icons/icon.css" | relURL}}?timestamp={{ now.Unix }}">
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+
+    <link rel="stylesheet" href='{{"/css/instantsearch.min.css" | relURL}}?timestamp={{ now.Unix }}'>
+    <link rel="stylesheet" href='{{"/css/instantsearch-theme-algolia.min.css" | relURL}}?timestamp={{ now.Unix }}'>
+
+    <link rel="stylesheet" href="/css/theme.css?timestamp={{ now.Unix }}">
+    <link rel="stylesheet" href="/css/style.css?timestamp={{ now.Unix }}">
+    <link rel="stylesheet" href="/css/media.css?timestamp={{ now.Unix }}">
+    <link rel="canonical" href="{{ .Permalink }}">
+
+</head>

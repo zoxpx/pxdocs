@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 MAINTAINER Kai Davenport <kai@portworx.com>
 
-ENV HUGO_VERSION 0.42.1
+ENV HUGO_VERSION 0.55.5
 ENV HUGO_BINARY hugo_${HUGO_VERSION}_linux-64bit
 
 RUN apt-get update -yq

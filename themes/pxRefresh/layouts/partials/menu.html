@@ -1,0 +1,110 @@
+{{- $currentNode := . }}
+{{- $depth := 0 }}
+
+{{- .Scratch.Set "pages" (.Site.Home.Pages | union .Site.Home.Sections) }}
+{{- $pages := (.Scratch.Get "pages") }}
+
+{{- range $pages.ByWeight}}
+  {{- if eq .Parent .Site.Home }}
+    {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" $depth "dataParent"  "leftSideBarMenu"  }}
+  {{- end}}
+{{- end}}
+
+
+
+<!--
+  nav-link template
+ -->
+{{- define "nav-link" }}
+  {{- $currentNode := .currentnode }}
+  {{- $depth := .depth }}
+  {{- $node := .node }}
+  {{- $mode := .mode }}
+
+  {{- with .node}}
+      {{- if or (eq $mode "leaf") ( .Params.noicon ) }}
+        <a  class="pointer" href="{{ .URL }}">{{.LinkTitle}}</a>
+      {{- else}}
+        <a class="pointer dropdown-toggle collapsed"
+           data-target="#DSID{{- .File.UniqueID -}}"
+           data-toggle="collapse" aria-expanded="false" >{{.LinkTitle}}
+        </a>
+      {{- end}}
+  {{- end}}
+{{- end}}
+
+<!--
+  nav-tree template
+ -->
+{{- define "nav-tree" }}
+  {{- $currentNode := .currentnode }}
+  {{- $depth := .depth }}
+  {{- $section := .section }}
+  {{- $dataParent := .dataParent }}
+
+  {{- with .section}}
+
+    <!--
+      open/close toggle
+
+      if one of these is true - then render the children
+
+        * the item is the current page
+        * the item is an ancestor of the current page
+     -->
+    {{- $open := or (.IsAncestor $currentNode) (eq $currentNode $section) }}
+
+    {{- if not .Params.Hidden }}
+      <!--
+        SECTION BLOCK
+       -->
+        {{- $numberOfPages := (add (len .Pages) (len .Sections)) }}
+
+        <li class="{{- if eq .URL $currentNode.URL}} active {{ end }}" data-numpages="{{$numberOfPages}}">
+            {{- if ne $numberOfPages 0 }}
+                {{- template "nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "branch"}}
+
+                <ul class="list-unstyled collapse {{- if $open }} show {{ end }}" id="DSID{{- .File.UniqueID -}}"
+                    aria-expanded="false"
+
+                    data-title="{{.LinkTitle}}">
+
+                    <!--
+                          collate children
+                         -->
+                    {{- .Scratch.Set "pages" .Pages }}
+                    {{- if .Sections}}
+                    {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
+                    {{- end}}
+                    {{- $pages := (.Scratch.Get "pages") }}
+
+                    <!--
+                      loop children
+                     -->
+                    {{- $dataParent := .File.UniqueID }}
+                    {{- range $pages.ByWeight }}
+                        {{- if and .Params.hidden (not $.showhidden) }}
+                        {{- else}}
+
+
+                            {{- if .Parent }}
+                                {{- $dataParent := .Parent.File.UniqueID -}}
+                            {{- end}}
+                            {{- template "nav-tree" dict "section" . "currentnode" $currentNode "dataParent" $dataParent  "depth" (add $depth 1)}}
+                        {{- end}}
+                    {{- end}}
+
+                </ul>
+            {{- else}}
+                {{- template "nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "leaf"}}
+            {{- end}}
+        </li>
+
+
+
+
+    {{- end}}
+
+
+  {{- end}}
+{{- end}}

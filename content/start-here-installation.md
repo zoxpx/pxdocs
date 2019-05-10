@@ -12,7 +12,7 @@ keywords: Portworx, containers, storage
 Prior to installing Portworx, your system needs to meet the hardware, software and network requirements listed below.
 
 |**Hardware** ||
-|-------------------------|------------|
+|--- | ---|
 |     CPU | 4 cores|
 |     RAM | 4GB|
 | Disk (/var) | 2GB free |

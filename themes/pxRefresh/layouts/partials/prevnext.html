@@ -1,0 +1,109 @@
+<!--
+  prev-link
+ -->
+{{- define "prev-page" }}
+  <a href="{{ .url }}" class="no-underline">
+    <div class="prevnextlink-container shadowHover mdl-shadow--2dp">
+      <i class="material-icons float-left">arrow_back_ios</i> Previous
+      <div class="dsfloat-right prev-next-title">{{ .title }}</div>
+    </div>
+  </a>
+{{- end}}
+
+<!--
+  next-link
+ -->
+{{- define "next-page" }}
+  <a href="{{ .url }}" class="no-underline">
+    <div class="prevnextlink-container shadowHover mdl-shadow--2dp">
+      <span class="dsfloat-right"> <span>Next</span> <i class="material-icons float-right">arrow_forward_ios</i></span>
+      <div class="prev-next-title">{{ .title }}</div>
+    </div>
+  </a>
+{{- end}}
+
+<div class="border-top mb-3 mt-3">
+
+  {{- .Scratch.Set "prevnext-colsize" "12" }}
+
+  <!--
+    work out the auto prev and next based on page structure
+    if the page has disabled auto prev and next then don't
+
+    NOTE - this is the wrong way around because somehow higher numbers
+    mean lower in the ordering in hugo :-()
+   -->
+  {{- if not .Params.disableprevnext }}
+    {{- if .NextInSection }}
+      {{- .Scratch.Set "prevpage" .NextInSection }}
+    {{- end}}
+    {{- if .PrevInSection }}
+      {{- .Scratch.Set "nextpage" .PrevInSection }}
+    {{- end}}
+  {{- end}}
+
+  <!--
+    allow page overrides of the prev and next pages in the frontmatter
+    this ignores disableprevnext meaning we can have a custom next page
+    with no automatic previous for example
+   -->
+  {{- if isset .Params "prevpage" }}
+    {{- .Scratch.Set "prevpage" ($.Site.GetPage "page" .Params.prevpage) }}
+  {{- end}}
+
+  {{- if isset .Params "nextpage" }}
+    {{- .Scratch.Set "nextpage" ($.Site.GetPage "page" .Params.nextpage) }}
+  {{- end}}
+
+  <!--
+    work out the grid size
+    it's 12 unless both are set
+   -->
+  {{- if and (.Scratch.Get "prevpage") (.Scratch.Get "nextpage")}}
+    {{- .Scratch.Set "prevnext-colsize" "6" }}
+  {{- end}}
+
+  {{- $colSize := .Scratch.Get "prevnext-colsize" }}
+
+  {{- if or (.Scratch.Get "prevpage") (.Scratch.Get "nextpage")}}
+
+  {{- end}}
+
+  <div class="row mt-3">
+    <div class="col-sm-6">
+      {{- with .Scratch.Get "prevpage" }}
+      {{- template "prev-page" dict "url" .URL "title" .Title }}
+      {{- end}}
+    </div>
+    <div class="col-sm-6">
+      {{- with .Scratch.Get "nextpage" }}
+      {{- template "next-page" dict "url" .URL "title" .Title }}
+      {{- end}}
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<div class="header-container border-top">
+  <div class="row mt-5">
+    <div class="col-sm-6">
+      <div class="page-subtitle">
+        Last edited: {{ dateFormat "Monday, Jan 2, 2006" .Lastmod }} {{- with .GitInfo }} {{- end}}
+      </div>
+      <div class="page-subtitle">
+        <a target="_blank" href="{{- .Site.Params.GithubRepo }}/edit/{{ default "master" (getenv "TRAVIS_BRANCH") }}/content/{{ replace .File.Dir "\\" "/" }}{{ .File.LogicalName }}">
+        edit this page
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-6 text-xs-left text-sm-right">
+      <div class="page-subtitle">
+        Questions? <a target="_blank" href="https://forums.portworx.com/">Visit the Portworx forum.</a>
+      </div>
+    </div>
+  </div>
+
+</div>
