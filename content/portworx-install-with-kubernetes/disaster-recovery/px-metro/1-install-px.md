@@ -9,7 +9,7 @@ The goal of this document is to setup a single Portworx cluster that spans acros
 
 ## Pre-requisites
 
-* **Kubernetes Clusters**: You should have at least two Kubernetes clusters which are a part of the same metropolitan area network with a network latency of 500ms between them.
+* **Kubernetes Clusters**: You should have at least two Kubernetes clusters which are a part of the same metropolitan area network with a network latency of 5ms between them.
 * **Version**: A single Portworx cluster of v2.1 or later release needs to be installed on both clusters. Also requires Stork v2.2+ on both the clusters.
 * **Secret Store** : Make sure you have configured a [secret store](/key-management) on both your clusters. This will be used to store the credentials for the objectstore.
 * **Network Connectivity**: Ports between 9001 and 9020 should be open between the two Kubernetes clusters.
