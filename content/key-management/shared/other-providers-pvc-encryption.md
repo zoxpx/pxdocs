@@ -1,4 +1,4 @@
-```yaml
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
