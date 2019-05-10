@@ -11,18 +11,24 @@ This section illustrates how to add a journal device to an existing node.
 
 ### 1. Enter maintenance mode
 
-In order to add journal device to a node, the node must be put in maintenance mode
+In order to add journal device to a node, the node must be put in maintenance mode:
 
 ```text
-sudo /opt/pwx/bin/pxctl service maintenance --enter
+pxctl service maintenance --enter
+```
+
+```output
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): Y
 ```
 
-Check if the node is in maintenance mode
+Check if the node is in maintenance mode:
 
 ```text
-sudo /opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 PX is in maintenance mode.  Use the service mode option to exit maintenance mode.
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
 	IP: 147.75.104.185
@@ -47,17 +53,22 @@ AlertID	Resource	ResourceID				Timestamp	Severity	AlertType		Description
 
 ### 2. Add the journal device to the node
 
-A journal device  is recommended to be an SSD/NVME.
+A journal device is recommended to be an SSD/NVME:
 
 ```text
-sudo /opt/pwx/bin/pxctl service drive add -d /dev/nvme01 --journal
+pxctl service drive add -d /dev/nvme01 --journal
+```
+
+```output
 Successfully added journal device /dev/nvme010p1
 ```
 
-NOTE: The journal device is expected to not have any filesystem on it, This can be verified by running `blkid /dev/nvme01`. If it has a filesystem on it and you still want to use it as a journal device, the filesystem should be removed by running `wipefs -a /dev/nvme01`
+{{<info>}}
+The journal device is expected to not have any filesystem on it, This can be verified by running `blkid /dev/nvme01`. If it has a filesystem on it and you still want to use it as a journal device, the filesystem should be removed by running `wipefs -a /dev/nvme01`.
+{{</info>}}
 
 ### 3. Exit maintenance mode
 
 ```text
-sudo /opt/pwx/bin/pxctl service maintenance --exit
+bin/pxctl service maintenance --exit
 ```

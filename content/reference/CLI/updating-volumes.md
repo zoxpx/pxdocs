@@ -12,7 +12,7 @@ First, let's use the built-in help that to discover the available commands:
 sudo /opt/pwx/bin/pxctl volume update --help
 ```
 
-```
+```output
 Update volume settings
 
 Usage:
@@ -58,7 +58,7 @@ Say we've created a volume named `clitest`. You can see its settings using this 
 pxctl volume inspect clitest
 ```
 
-```
+```output
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -95,7 +95,7 @@ At this point, the volume's sharing settings should have been updated. We can ea
 pxctl volume inspect clitest
 ```
 
-```
+```output
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -133,7 +133,10 @@ pxctl volume update clitest --sticky=on
 Doing a subsequent inspect on the volume shows the `attributes` field set to `sticky`:
 
 ```text
-sudo /opt/pwx/bin/pxctl volume inspect clitest
+pxctl volume inspect clitest
+```
+
+```output
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -169,17 +172,17 @@ First, let’s create a volume with the default parameters (1 GiB):
 pxctl volume create vol_resize_test
 ```
 
-```
+```output
 Volume successfully created: 485002114762355071
 ```
 
 Next, we would want inspect our new volume:
 
-```
+```text
 pxctl volume inspect vol_resize_test
 ```
 
-```
+```output
 Volume	:  485002114762355071
 	Name            	 :  vol_resize_test
 	Size            	 :  1.0 GiB
@@ -216,7 +219,7 @@ Now that we've created a new volume, let's attach it to resize it.
 pxctl host attach vol_resize_test
 ```
 
-```
+```output
 Volume successfully attached at: /dev/pxd/pxd485002114762355071
 ```
 
@@ -232,7 +235,7 @@ and then mount the volume:
 pxctl host mount vol_resize_test /var/lib/osd/mounts/voldir
 ```
 
-```
+```output
 Volume vol_resize_test successfully mounted at /var/lib/osd/mounts/voldir
 ```
 
@@ -242,7 +245,7 @@ Lastly, to update the size of this volume to 5 GB do:
 pxctl volume update vol_resize_test --size=5
 ```
 
-```
+```output
 Update Volume: Volume update successful for volume vol_resize_test
 ```
 
@@ -252,7 +255,7 @@ Let's verify the size with the following command:
 pxctl volume inspect vol_resize_test
 ```
 
-```
+```output
 Volume	:  485002114762355071
 	Name            	 :  vol_resize_test
 	Size            	 :  5.0 GiB
@@ -292,7 +295,7 @@ Start by listing the nodes in the cluster:
 pxctl cluster list
 ```
 
-```
+```output
 Cluster ID: MY_CLUSTER_ID
 Status: OK
 
@@ -316,7 +319,7 @@ Once the replication completes and the new node is added to the replication set,
 pxctl volume inspect clitest
 ```
 
-```
+```output
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -348,7 +351,7 @@ Volume	:  970758537931791410
 pxctl alerts show --type volume
 ```
 
-```
+```output
 AlertID	VolumeID		Timestamp			Severity	AlertType			Description
 25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
 ```
@@ -361,7 +364,7 @@ The `ha-update` command can be used to reduce the replication factor as well. Co
 pxctl volume ha-update  --repl=1 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8 clitest
 ```
 
-```
+```output
 Update Volume Replication: Replication update started successfully for volume clitest
 ```
 
@@ -371,7 +374,7 @@ Once the replication factor has been reduced to 1, the output of the `volume ins
 pxctl volume inspect clitest
 ```
 
-```
+```output
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB

@@ -15,7 +15,7 @@ This document outlines how to interact with an auth-enabled _PX_ cluster. The ma
 `pxctl` allows you to store contexts and associated clusters, privileges, and tokens local to your home directory. This way, you can easily switch between these configurations with a few commands.
 
 {{<info>}}
-Since `pxctl context` is stored locally per node, you will need to create your context on the node you're working on. 
+Since `pxctl context` is stored locally per node, you will need to create your context on the node you're working on.
 {{</info>}}
 
 To find out the available commands, type:
@@ -24,7 +24,7 @@ To find out the available commands, type:
 /opt/pwx/bin/pxctl context --help
 ```
 
-```
+```output
 Portworx pxctl context commands for setting authentication and connection info
 
 Usage:
@@ -64,7 +64,7 @@ Your contexts live in `~/.pxctl/contextconfig`. You can easily view them with th
 pxctl context list
 ```
 
-```
+```output
 contextconfig:
   current: user
   configurations:
@@ -144,8 +144,8 @@ You may have gotten an unexpected `"Permission denied"` or other auth-related er
 {{</info>}}
 
 
-### Protocol error 
-If you're seeing the below error: 
+### Protocol error
+If you're seeing the below error:
 
 `rpc error: code = Internal desc = stream terminated by RST_STREAM with error code: PROTOCOL_ERROR`
 

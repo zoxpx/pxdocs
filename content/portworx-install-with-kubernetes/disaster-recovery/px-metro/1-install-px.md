@@ -19,7 +19,7 @@ The goal of this document is to setup a single Portworx cluster that spans acros
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
 
 ## Installing Portworx
-In this mode of operation, a single Portworx cluster will stretch across multiple Kubernetes clusters. 
+In this mode of operation, a single Portworx cluster will stretch across multiple Kubernetes clusters.
 
 ### New Installation
 
@@ -33,7 +33,7 @@ While generating the spec file for each Kubernetes cluster, make sure you provid
 Specifying the same **ClusterID** and **Kvdb Endpoints** in each Kubernetes manifest file ensures that a single Portworx cluster will stretch across multiple Kubernetes clusters.
 
 ### Existing Installation
-If you already have an existing Kubernetes cluster, you can add another Kubernetes cluster and let its nodes join the same Portworx cluster. 
+If you already have an existing Kubernetes cluster, you can add another Kubernetes cluster and let its nodes join the same Portworx cluster.
 
 To achieve this, make sure you provide the following arguments same as your existing cluster:
 
@@ -44,7 +44,7 @@ Specifying the same **ClusterID** and **Kvdb Endpoints** as your existing cluste
 
 If your Kubernetes clusters have exactly the same configuration you can use the URL specified by the `portworx.com/install-source` annotation on the existing Portworx DaemonSet to fetch the spec for your new cluster:
 
-```
+```text
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -99,7 +99,7 @@ Once the Kubernetes manifest is applied on both the clusters, Portworx will form
 kubectl get nodes -o wide
 ```
 
-```
+```output
 ip-172-20-33-100.ec2.internal   Ready     node      3h        v1.11.9   18.205.7.13      Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
 ip-172-20-36-212.ec2.internal   Ready     node      3h        v1.11.9   18.213.118.236   Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
 ip-172-20-48-24.ec2.internal    Ready     master    3h        v1.11.9   18.215.34.139    Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
@@ -112,7 +112,7 @@ ip-172-20-59-248.ec2.internal   Ready     node      3h        v1.11.9   34.200.2
 kubectl get nodes -o wide
 ```
 
-```
+```output
 ip-172-40-34-140.ec2.internal   Ready     node      3h        v1.11.9   34.204.2.95     Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
 ip-172-40-35-23.ec2.internal    Ready     master    3h        v1.11.9   34.238.44.60    Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
 ip-172-40-40-230.ec2.internal   Ready     node      3h        v1.11.9   52.90.187.179   Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
@@ -121,11 +121,11 @@ ip-172-40-50-47.ec2.internal    Ready     node      3h        v1.11.9   3.84.27.
 
 A single Portworx cluster running across both the Kubernetes clusters
 
-```
+```text
 kubectl exec -it portworx-d6rk7 -n kube-system /opt/pwx/bin/pxctl status
 ```
 
-```
+```output
 Status: PX is operational
 License: Trial (expires in 31 days)
 Node ID: 04de0858-4081-47c3-a2ab-f0835b788738
@@ -165,9 +165,7 @@ Each Kubernetes cluster where Stork is deployed will have this object automatica
 storkctl get clusterdomainsstatus
 ```
 
-For the above Portworx cluster, `storkctl` will return the following output
-
-```
+```output
 NAME            ACTIVE                    INACTIVE   CREATED
 px-dr-cluster   [us-east-1a us-east-1b]   []         09 Apr 19 17:12 PDT
 ```
@@ -178,9 +176,7 @@ You can also use `kubectl` to inspect the ClusterDomainsStatus object
 kubectl describe clusterdomainsstatus -n kube-system
 ```
 
-The output of the above `kubectl` command looks like this:
-
-```
+```output
 Name:         px-dr-cluster
 Namespace:
 Labels:       <none>

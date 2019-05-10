@@ -39,12 +39,11 @@ Below are the steps to wipe your entire Portworx installation on PKS.
 
 ## References
 
-<a name="pks-px-vsphere-secret"></a>
 ### Secret for vSphere credentials
 
 {{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-secret.md" %}}
 
-<a name="pks-px-spec"></a>
+
 ### Portworx spec
 
 * If you are using secured etcd, download [Portworx spec for PKS with secure etcd](/samples/k8s/vsphere/px-pks-vsphere-shared-specs-secure-etcd.yaml).

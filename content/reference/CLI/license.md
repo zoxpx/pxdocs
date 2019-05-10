@@ -17,7 +17,7 @@ Here's how to get the list of the available subcommands:
 pxctl license --help
 ```
 
-```
+```output
 Manage licenses
 
 Usage:
@@ -57,7 +57,7 @@ You can use `pxctl license list` to list installed licenses as follows:
 pxctl license list
 ```
 
-```
+```output
 DESCRIPTION				ENABLEMENT	ADDITIONAL INFO
 Number of nodes maximum			1000
 Number of volumes maximum		100000

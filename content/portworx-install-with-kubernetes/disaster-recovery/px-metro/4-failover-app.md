@@ -98,7 +98,8 @@ Using storkctl, verify the schedule is suspended.
 ```text
 storkctl get migrationschedule -n migrationnamespace
 ```
-```
+
+```output
 NAME                        POLICYNAME   CLUSTERPAIR      SUSPEND   LAST-SUCCESS-TIME     LAST-SUCCESS-DURATION
 mysqlmigrationschedule      testpolcy    remotecluster     true      17 Apr 19 15:18 PDT   2m0s
 ```
@@ -133,7 +134,7 @@ Let's make sure our application is up and running. List the pods with:
 kubectl get pods -n migrationnamespace
 ```
 
-```
+```output
 NAME                     READY     STATUS    RESTARTS   AGE
 mysql-5857989b5d-48mwf   1/1       Running   0          3m
 ```

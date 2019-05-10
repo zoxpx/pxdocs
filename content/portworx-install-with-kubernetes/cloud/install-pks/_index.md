@@ -62,7 +62,6 @@ Perform these steps on any machine where you have the bosh CLI.
 
     If you already have an existing PX cluster, you will need to recreate the VM instances using the bosh recreate command.
 
-<a name="install-etcd-pks"></a>
 ## Step 2: Install Etcd
 
 Portworx uses a key-value store for it’s clustering metadata. There are couple of options here:
@@ -83,7 +82,7 @@ kubectl -n kube-system describe secret px-etcd-certs
 ```
 
 This should output the below and shows the etcd certs are present in the secret.
-```text
+```
 Name:         px-etcd-certs
 Namespace:    kube-system
 Labels:       <none>
@@ -98,7 +97,6 @@ etcd.crt:  1680 bytes
 etcd.key:  414  bytes
 ```
 
-<a name="install-px-pks"></a>
 ## Step 3: Installing Portworx
 
 Portworx supports [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) on various platforms.

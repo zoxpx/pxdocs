@@ -75,7 +75,7 @@ Added another 100G of storage to this node and the device is seen as /dev/dm-1
 
 ```text
 # multipath -ll
-volume-a9e55549 (360014055671ce0d20184a619c27b31d0) dm-1   ,IBLOCK          
+volume-a9e55549 (360014055671ce0d20184a619c27b31d0) dm-1   ,IBLOCK
 size=100G features='0' hwhandler='1 alua' wp=rw
 `-+- policy='round-robin 0' prio=1 status=active
   |- 2:0:0:0 sdb 8:16 active ready running

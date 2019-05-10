@@ -6,7 +6,7 @@ description: Learn how to use portworx shared volumes (ReadWriteMany) in your Ku
 series: k8s-vol
 ---
 
-This document describes how to use portworx **shared** (ReadWriteMany) volumes in your Kubernetes cluster. If you wish to create **sharedv4** volumes refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs) 
+This document describes how to use portworx **shared** (ReadWriteMany) volumes in your Kubernetes cluster. If you wish to create **sharedv4** volumes refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs)
 
 ## Provision a Shared Volume
 
@@ -148,10 +148,14 @@ Verifying pods are running:
 
 ```text
 kubectl get pods
+```
+
+```output
 NAME      READY     STATUS    RESTARTS   AGE
 pod1      1/1       Running   0          2m
 pod2      1/1       Running   0          1m
 ```
+
 {{<info>}}To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
 {{</info>}}
 

@@ -3,10 +3,10 @@
 If there is a failure or you want more information about what resources were migrated you can `describe` the migration object using `kubectl`:
 
 ```text
-$ kubectl describe migration mysqlmigration
+kubectl describe migration mysqlmigration
 ```
 
-```
+```output
 Name:         mysqlmigration
 Namespace:    migrationnamespace
 Labels:       <none>

@@ -2,12 +2,14 @@
 title: Generating the Portworx spec using curl
 hidden: true
 keywords: portworx, kubernetes
-description: Learn how to generate the Portworx spec using curl. 
+description: Learn how to generate the Portworx spec using curl.
 ---
 
 Below is an example of using curl to generate the Portworx spec file. Review the [query parameters table](/portworx-install-with-kubernetes/px-k8s-spec-curl) below and add parameters as needed.
 
->**Openshift Users:**<br/> Make sure you use `osft=true` when generating the spec.
+{{<info>}}
+Make sure you use `osft=true` when generating the spec.
+{{</info>}}
 
 ```text
 $ VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
@@ -22,7 +24,6 @@ $ curl -L -o px-spec.yaml "https://install.portworx.com/1.2/?c=mycluster&k=etcd:
 ```
 
 Below are all parameters that can be given in the query string.
-<a name="px-k8s-query-params"></a>
 
 | Value  | Description                                                                                                                           | Example                                                    |
 |:-------|:--------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------|
@@ -53,5 +54,5 @@ Below are all parameters that can be given in the query string.
 
 
 {{<info>}}
-**Note:**<br/> If using secure etcd provide "https" in the URL and make sure all the certificates are in the `/etc/pwx/` directory on each host which is bind mounted inside PX container.
+If using secure etcd provide "https" in the URL and make sure all the certificates are in the `/etc/pwx/` directory on each host which is bind mounted inside PX container.
 {{</info>}}

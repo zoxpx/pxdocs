@@ -25,8 +25,12 @@ Before running the kvdb restore tool
 * Select the node which has the latest key dump and run the restore tool on that node.
 
 #### px-kvdb-restore
+
 ```text
-$ px-kvdb-restore --help
+px-kvdb-restore --help
+```
+
+```output
 NAME:
 px-kvdb-restore run - Runs the px kvdb restore operation.
 
@@ -36,17 +40,15 @@ px-kvdb-restore run [command options] [arguments...]
 OPTIONS:
 --kvdb_dump_file value Location of the kvdb dump file.
 --force Force will delete any existing keys from the kvdb and restore.
-
 ```
 
 Here is an example of how to run the restore tool
 
 ```text
-$ px-kvdb-restore --kvdb_dump_file /var/cores/kvdb_dump/pwx_kvdb_2018-05-25T22:59:08Z.dump
+px-kvdb-restore --kvdb_dump_file /var/cores/kvdb_dump/pwx_kvdb_2018-05-25T22:59:08Z.dump
 ```
 
-If the tool finds existing keys under the same cluster ID it aborts the restore. If you are sure that you want to overwrite all the keys then you can run the above
-command with the `--force` argument.
+If the tool finds existing keys under the same cluster ID, it aborts the restore process. If you are sure that you want to overwrite all the keys, then you can run the above command with the `--force` argument.
 
 ### Etcd disaster recovery best practices
 

@@ -44,7 +44,7 @@ pxctl cluster token show
 
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/cluster-pair.md" %}}
 
-```
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterPair
 metadata:
@@ -215,6 +215,10 @@ Next, you can invoke this migration manually from the command line:
 kubectl apply -f migration.yaml
 ```
 
+```output
+Migration mysqlmigration created successfully
+```
+
 or automate it through `storkctl`:
 
 ```text
@@ -235,7 +239,10 @@ Once the migration has been started using the above commands, you can check the 
 ```text
 storkctl get migration -n migrationnamespace
 ```
-```output
+
+First, you should see something like this:
+
+```
 NAME            CLUSTERPAIR     STAGE     STATUS       VOLUMES   RESOURCES   CREATED
 mysqlmigration  remotecluster   Volumes   InProgress   0/1       0/0         26 Oct 18 20:04 UTC
 ```

@@ -45,8 +45,7 @@ Run the following command to list the existing nodes and their labels.
 kubectl get nodes --show-labels
 ```
 
-This should output something like:
-```text
+```output
 NAME      STATUS    AGE       VERSION   LABELS
 vm-1      Ready     14d       v1.7.4    beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/hostname=vm-1,node-role.kubernetes.io/master=
 vm-2      Ready     14d       v1.7.4    beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/hostname=vm-2
@@ -60,12 +59,12 @@ kubectl label nodes vm-2 px/rack=rack1
 ```
 
 Now let's check your updated node labels.
+
 ```text
 kubectl get nodes --show-labels
 ```
 
-This should output:
-```
+```output
 NAME      STATUS    AGE       VERSION   LABELS
 vm-1      Ready     14d       v1.7.4    beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/hostname=vm-1,node-role.kubernetes.io/master=
 vm-2      Ready     14d       v1.7.4    beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/hostname=vm-2,px/rack=rack1
@@ -77,11 +76,10 @@ This verifies that node vm-2 has the new `px/rack` label.
 Double check if the rack information is reflected in the PX cluster.
 
 ```text
-/opt/pwx/bin/pxctl cluster provision-status
+pxctl cluster provision-status
 ```
 
-This should output something like:
-```text
+```output
 NODE        NODE STATUS        POOL        POOL STATUS .....   ZONE           REGION        RACK
 vm-2        Online                0        Online      .....   default        default       rack1
 vm-3        Online                0        Online      .....   default        default       default

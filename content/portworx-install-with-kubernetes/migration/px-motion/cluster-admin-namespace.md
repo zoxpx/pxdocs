@@ -14,13 +14,14 @@ This requires passing in an additional parameter to the stork deployment with
 the admin namespace.
 
 Run the following command to edit the stork deployment:
-```
-$ kubectl edit deployment -n kube-system stork
+
+```text
+kubectl edit deployment -n kube-system stork
 ```
 
-If `admin-namespace` is your admin namepsace, in the editor, update the arguments to the stork container to specify the
-cluster admin namespace using the `--migration-admin-namespace` parameter:
-```
+If `admin-namespace` is your admin namepsace, in the editor, update the arguments to the stork container to specify the cluster admin namespace using the `--migration-admin-namespace` parameter:
+
+```text
       - command:
         - /stork
         - --driver=pxd
@@ -31,7 +32,8 @@ cluster admin namespace using the `--migration-admin-namespace` parameter:
 
 Save the changes and wait for all the stork pods to be in running state after applying the
 changes:
-```
-$ kubectl get pods -n kube-system -l name=stork
+
+```text
+kubectl get pods -n kube-system -l name=stork
 ```
 

@@ -29,7 +29,7 @@ Now edit the Portworx spec file to reference the certificates. Given the names o
     name: etcdcerts
 ```
 
-```text
+```output
   volumes:
   - name: etcdcerts
     secret:

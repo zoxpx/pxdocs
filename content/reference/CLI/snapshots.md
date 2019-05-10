@@ -20,7 +20,7 @@ To list existing snapshots, you can use `pxctl volume list`. Let's have a look a
 pxctl volume list --help
 ```
 
-```
+```output
 List volumes in the cluster
 
 Usage:
@@ -62,7 +62,7 @@ To list your _user created snapshots_, use one of the following commands:
 pxctl volume list --all
 ```
 
-```
+```output
 ID          NAME                                    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITY SCALE   STATUS
 234835613696329810  mysnap                                  1 GiB   1   no  no      no      LOW     1   up - detached
 1125771388930868153 myvol                                   1 GiB   1   no  no      no      LOW     1   up - detached
@@ -78,7 +78,7 @@ The above command shows **all volumes, including snapshots**.
 pxctl volume list --snapshot
 ```
 
-```
+```output
 ID          NAME                                    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITY SCALE   STATUS
 234835613696329810  mysnap                                  1 GiB   1   no  no      no      LOW     1   up - detached
 ```
@@ -95,7 +95,7 @@ To list all your scheduled snapshots, run this command:
 pxctl volume list --snapshot-schedule
 ```
 
-```
+```output
 ID          NAME                                    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITYSCALE    STATUS
 423119103642927058  myvol_periodic_2018_Feb_26_21_12                    1 GiB   1   no  no      no      LOW     1up - detached
 ```
@@ -108,7 +108,7 @@ You can filter the results with the `–parent` and `–label` options. For inst
 pxctl volume list --parent myvol --snapshot
 ```
 
-```
+```output
 ID          NAME    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITY SCALE   STATUS
 234835613696329810  mysnap  1 GiB   1   no  no      no      LOW     1   up - detached
 ```
@@ -119,7 +119,7 @@ Giving labels restricts the list to snapshots that have all of the specified lab
 pxctl volume list --parent myvol --snapshot --label fabric=wool
 ```
 
-```
+```output
 ID          NAME    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITY SCALE   STATUS
 234835613696329810  mysnap  1 GiB   1   no  no      no      LOW     1   up - detached
 ```
@@ -132,7 +132,7 @@ To delete a snapshot, run `pxctl volume delete` with the `name` or the `id` of t
 pxctl volume delete mysnap
 ```
 
-```
+```output
 Delete volume 'mysnap', proceed ? (Y/N): y
 Volume mysnap successfully deleted.
 ```
@@ -153,7 +153,7 @@ To create a snapshotting policy, use the `pxctl sched-policy create` command. Ru
 pxctl sched-policy create --help
 ```
 
-```
+```output
 Create a schedule policy
 
 Usage:
@@ -215,7 +215,7 @@ To list the schedule policies, run the following command:
 pxctl sched-policy list
 ```
 
-```
+```output
 Policy	Description
 p1		periodic 1h0m0s,keep last 5, weekly Sunday@12:00,keep last 4
 ```
@@ -228,7 +228,7 @@ To update a schedule policy, use `pxctl sched-policy update`. Run it with the `-
 pxctl sched-policy update --help
 ```
 
-```
+```output
 Update a schedule policy
 
 Usage:
@@ -271,7 +271,7 @@ Now, let's make sure our new settings are applied:
 pxctl sched-policy list
 ```
 
-```
+```output
 Policy	Description
 p1		periodic 2h0m0s,keep last 5, weekly Sunday@12:00,keep last 4
 ```
@@ -340,7 +340,7 @@ First, let's see the available flags:
 pxctl volume snap-interval-update --help
 ```
 
-```
+```output
 Update volume configuration
 
 Usage:
@@ -394,7 +394,7 @@ To view the snapshot schedule for a volume, use the `pxctl volume inspect` comma
 pxctl volume inspect myvol
 ```
 
-```
+```output
 Volume	:  1125771388930868153
 	Name            	 :  myvol
 	Size            	 :  1.0 GiB

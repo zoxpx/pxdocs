@@ -34,7 +34,7 @@ The cloud snapshot method supports the following annotations:
 
 In below example, we create a cloud snapshot for a PVC called _mysql-data_ backed by a Portworx volume.
 
-```yaml
+```text
 apiVersion: volumesnapshot.external-storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -49,13 +49,19 @@ spec:
 Once you apply the above object you can check the status of the snapshots using `kubectl`:
 
 ```text
-$ kubectl get volumesnapshot
+kubectl get volumesnapshot
+```
+
+```output
 NAME                             AGE
 volumesnapshots/mysql-snapshot   2s
 ```
 
 ```text
-$ kubectl get volumesnapshotdatas
+kubectl get volumesnapshotdatas
+```
+
+```output
 NAME                                                                            AGE
 volumesnapshotdatas/k8s-volume-snapshot-2bc36c2d-227f-11e8-a3d4-5a34ec89e61c    1s
 ```
@@ -63,15 +69,18 @@ volumesnapshotdatas/k8s-volume-snapshot-2bc36c2d-227f-11e8-a3d4-5a34ec89e61c    
 The creation of the volumesnapshotdatas object indicates that the snapshot has been created. If you describe the volumesnapshotdatas object you can see the Portworx Cloud Snapshot ID and the PVC for which the snapshot was created.
 
 ```text
-$ kubectl describe volumesnapshotdatas
+kubectl describe volumesnapshotdatas
+```
+
+```output
 Name:         k8s-volume-snapshot-2bc36c2d-227f-11e8-a3d4-5a34ec89e61c
-Namespace:    
+Namespace:
 Labels:       <none>
 Annotations:  <none>
 API Version:  volumesnapshot.external-storage.k8s.io/v1
 Kind:         VolumeSnapshotData
 Metadata:
-  Cluster Name:                   
+  Cluster Name:
   Creation Timestamp:             2018-03-08T03:17:02Z
   Deletion Grace Period Seconds:  <nil>
   Deletion Timestamp:             <nil>
@@ -90,10 +99,10 @@ Spec:
 Status:
   Conditions:
     Last Transition Time:  <nil>
-    Message:               
-    Reason:                
-    Status:                
-    Type:                  
+    Message:
+    Reason:
+    Status:
+    Type:
   Creation Timestamp:      <nil>
 Events:                    <none>
 ```
@@ -106,7 +115,8 @@ To create a PVC from a snapshot, you would add the `snapshot.alpha.kubernetes.io
 name.
 
 For the above snapshot, the spec would like this:
-```yaml
+
+```text
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -125,7 +135,10 @@ spec:
 Once you apply the above spec you will see a PVC created by STORK. This PVC will be backed by a Portworx volume clone of the snapshot created above.
 
 ```text
-$ kubectl get pvc  
+kubectl get pvc
+```
+
+```output
 NAMESPACE   NAME                                   STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS                AGE
 default     mysql-data                             Bound     pvc-f782bf5c-20e7-11e8-931d-0214683e8447   2Gi        RWO            px-mysql-sc                 2d
 default     mysql-snap-clone                       Bound     pvc-05d3ce48-2280-11e8-98cc-0214683e8447   2Gi        RWO            stork-snapshot-sc           2s

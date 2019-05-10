@@ -17,7 +17,7 @@ weight: 2
 
 ## Overview
 
-With asynchronous DR, you can replicate Kubernetes applications and their data between two Kubernetes clusters. Here, a separate Portworx Enterprise cluster runs under each Kubernetes cluster. 
+With asynchronous DR, you can replicate Kubernetes applications and their data between two Kubernetes clusters. Here, a separate Portworx Enterprise cluster runs under each Kubernetes cluster.
 
 * The active Kubernetes cluster asynchronously backs-up apps, configuration and data to a standby Kubernetes cluster.
 * The standby Kubernetes cluster has running controllers, configuration and PVCs that map to a local volumes.
@@ -100,7 +100,7 @@ Let's now run `kubectl describe` and see how the output would look like:
 kubectl describe migrationschedules.stork.libopenstorage.org -n mysql
 ```
 
-```
+```output
 Name:         mysqlmigrationschedule
 
 Namespace:    mysql
@@ -161,11 +161,11 @@ Events:
 
 Each migration is associated with a Migrations object. To get the most important information, type:
 
-```
+```text
 kubectl get migration -n mysql
 ```
 
-```
+```output
 NAME AGE
 mysqlmigrationschedule-daily-2019-02-14-221651 1d
 mysqlmigrationschedule-interval-2019-02-16-004052 5m
@@ -174,4 +174,4 @@ mysqlmigrationschedule-monthly-2019-02-14-200541 1d
 mysqlmigrationschedule-weekly-2019-02-14-221351 1d
 ```
 
-Once the MigrationSchedule object is deleted, all the associated Migration objects should also be deleted as well.
+Once the MigrationSchedule object is deleted, all the associated Migration objects should be deleted as well.

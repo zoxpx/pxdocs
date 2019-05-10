@@ -149,7 +149,8 @@ spec:
 
 ### Install the Service Monitor
 
-Create a file named `service-monitor.yaml` with the below contents and apply the spec.
+Create a file named `service-monitor.yaml` with the below contents:
+
 ```text
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -169,7 +170,11 @@ spec:
     targetPort: 9001
 ```
 
-`kubectl apply -f <service-monitor.yaml>`
+Next, apply the spec:
+
+```text
+kubectl apply -f <service-monitor.yaml>
+```
 
 ### Install the Alertmanager
 Create a file named `alertmanager.yaml` with the following contents and create a secret from it.
@@ -195,11 +200,13 @@ receivers:
     auth_identity: "<sender-email-address>"
     auth_password: "<sender-email-password>"
 ## Edit the file and create a secret with it using the following command
-```
+
+```text
 `kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system`
 
 
-Create a file named `alertmanager-cluster.yaml` with the below contents and apply the spec on your cluster.
+Create a file named `alertmanager-cluster.yaml` with the below contents:
+
 ```text
 apiVersion: monitoring.coreos.com/v1
 kind: Alertmanager
@@ -212,10 +219,14 @@ spec:
   replicas: 3
 ```
 
-`kubectl apply -f alertmanager-cluster.yaml`
+Now, apply the spec on your cluster:
+
+```text
+kubectl apply -f alertmanager-cluster.yaml
+```
 
 
-Create a file named `alertmanager-service.yaml` with the following contents and apply the spec.
+Create a file named `alertmanager-service.yaml` with the following contents:
 
 ```text
 apiVersion: v1
@@ -234,11 +245,15 @@ spec:
     alertmanager: portworx
 ```
 
-`kubectl apply -f alertmanager-service.yaml`
+Apply the spec:
+
+```text
+kubectl apply -f alertmanager-service.yaml
+```
 
 ### Install Prometheus
 
-Create a file named `prometheus-rules.yaml` with the following contents and apply the spec.
+Create a file named `prometheus-rules.yaml` with the following contents:
 
 ```text
 apiVersion: monitoring.coreos.com/v1
@@ -352,9 +367,15 @@ spec:
         issue: Portworx cluster member(s) is(are) down.
         severity: critical
 ```
-`kubectl apply -f prometheus-rules.yaml`
 
-Create a file named `prometheus-cluster.yaml` with the following contents and apply the spec.
+Apply the spec by running:
+
+```text
+kubectl apply -f prometheus-rules.yaml
+```
+
+Create a file named `prometheus-cluster.yaml` with the following contents:
+
 
 ```text
 apiVersion: v1
@@ -442,7 +463,12 @@ spec:
   selector:
     prometheus: prometheus
 ```
-`kubectl apply -f prometheus-cluster.yaml`
+
+Apply the spec:
+
+```text
+kubectl apply -f prometheus-cluster.yaml
+```
 
 ### Post Install verification
 
@@ -461,7 +487,7 @@ Navigate to the Prometheus web UI by going to `http://<master_ip>:<service_nodep
 
 ### Installing Grafana
 
-Create a file named `grafana-deployment.yaml` with the below contents and apply the spec.
+Create a file named `grafana-deployment.yaml` with the below contents:
 
 ```text
 kind: ConfigMap
@@ -6560,7 +6586,11 @@ spec:
             name: grafana-dashboards
 ```
 
-`kubectl apply -f grafana-deployment.yaml`
+Next, apply the spec:
+
+```text
+kubectl apply -f grafana-deployment.yaml
+```
 
 #### Grafana access details
 

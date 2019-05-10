@@ -26,9 +26,9 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
 This script will also monitor the above operations.
 
-## Customizing the upgrade process {#customizing-the-upgrade-process}
+## Customizing the upgrade process
 
-#### Specify a different Portworx upgrade image {#specify-a-different-portworx-upgrade-image}
+#### Specify a different Portworx upgrade image
 
 You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.0.2.2_ image.
 
@@ -133,7 +133,9 @@ One can run the following command to inspect the Portworx cluster:
 ```text
 PX_POD=$(kubectl get pods -n kube-system -l name=portworx -o jsonpath='{.items[0].metadata.name}')
 kubectl exec -it $PX_POD -n kube-system /opt/pwx/bin/pxctl cluster list
+```
 
+```output
 [...]
 Nodes in the cluster:
 ID      DATA IP         CPU        MEM TOTAL  ...   VERSION             STATUS
@@ -147,7 +149,7 @@ minion2 192.168.56.71   3.316327   4.1 GB     ...   1.2.11.10-421c67f   Online
   * “minion4” and “minion5” are still on the old Portworx version \(1.2.11.4\), while
   * “minion3” and “minion2” have already been upgraded to the latest version \(in our case, v1.2.11.10\).
 
-#### Manually restoring scaled down shared applications {#manually-restoring-scaled-down-shared-applications}
+#### Manually restoring scaled down shared applications
 
 If the upgrade job crashes unexpectedly and fails to restore shared applications back to their original replica counts, you can run the following command to restore them.
 
@@ -155,7 +157,7 @@ If the upgrade job crashes unexpectedly and fails to restore shared applications
 curl -fsL https://install.portworx.com/upgrade | bash -s -- --scaledownsharedapps off
 ```
 
-#### Disable scaling down of shared Portworx applications during the upgrade {#disable-scaling-down-of-shared-portworx-applications-during-the-upgrade}
+#### Disable scaling down of shared Portworx applications during the upgrade
 
 You can invoke the upgrade script with _–scaledownsharedapps off_ to skip scaling down Deployments and StatefulSets that use shared Portworx PersistentVolumeClaim.
 

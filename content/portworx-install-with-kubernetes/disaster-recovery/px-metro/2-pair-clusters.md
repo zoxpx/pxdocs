@@ -18,7 +18,7 @@ For reference,
 
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/cluster-pair.md" %}}
 
-```
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterPair
 metadata:
@@ -75,11 +75,11 @@ Once you apply the above spec on the source cluster you should be able to check 
 storkctl get clusterpair
 ```
 
-On a successful pairing you should see the "Scheduler Status" as "Ready" and the "Storage Status" as "Not Provided"
-
-```
+```output
 NAME               STORAGE-STATUS   SCHEDULER-STATUS   CREATED
 remotecluster      NotProvided      Ready              09 Apr 19 18:16 PDT
 ```
+
+So, on a successful pairing you should see the "Scheduler Status" as "Ready" and the "Storage Status" as "Not Provided"
 
 Once the pairing is configured, applications can now failover from one cluster to another. In order to achieve that, we need to migrate the Kubernetes resources to the destination cluster. The next step will help your synchronize the Kubernetes resources between your clusters.

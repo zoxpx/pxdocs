@@ -28,7 +28,7 @@ _PX_ volumes can be backed up to cloud via `pxctl cloudsnap`. If you run this co
 pxctl cloudsnap --help
 ```
 
-```
+```output
 Backup and restore snapshots to/from cloud
 
 Usage:
@@ -64,7 +64,7 @@ To see the list of available command line options, type:
 pxctl credentials create --help
 ```
 
-```
+```output
 Create a credential for cloud providers
 
 Usage:
@@ -128,7 +128,7 @@ pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-
 
 The user created/specified bucket at a minimum must have the following permissions:
 
-```json
+```text
 {
      "Version": "2012-10-17",
      "Statement": [
@@ -189,7 +189,7 @@ Use `pxctl credentials list` to verify the credentials supplied as follows:
 pxctl credentials list
 ```
 
-```
+```output
 S3 Credentials
 UUID						NAME		REGION			ENDPOINT						ACCESS KEY			SSL ENABLED		ENCRYPTION		BUCKET		WRITE THROUGHPUT (KBPS)
 af563a4d-afd7-48df-90f7-8e8f9414ff77		my-s3-cred	us-east-1		70.0.99.121:9010,70.0.99.122:9010,70.0.99.123:9010	AB6R80F3SY0VW9NS6HYQ		false			false			<nil>		1979
@@ -211,7 +211,7 @@ For more information, run:
 pxctl secrets help
 ```
 
-```
+```output
 Manage Secrets. Supported secret stores AWS KMS | Vault | DCOS Secrets | IBM Key Protect | Kubernetes Secrets | Google Cloud KMS
 
 Usage:
@@ -254,7 +254,7 @@ To get more details, run it with the `--help` flag:
 pxctl cloudsnap backup --help
 ```
 
-```
+```output
 NAME:
    pxctl cloudsnap backup - Backup a snapshot to cloud
 
@@ -293,7 +293,7 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  pxctl volume list
  ```
 
- ```
+ ```output
  ID			NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
  56706279008755778	NewVol	4 GiB	1	no	no		LOW		1	up - attached on 70.0.9.73
  980081626967128253	evol	2 GiB	1	no	no		LOW		1	up - detached
@@ -305,7 +305,7 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  pxctl cloudsnap credentials list
  ```
 
- ```
+ ```output
  Azure Credentials
  UUID						ACCOUNT NAME		ENCRYPTION
  ef092623-f9ba-4697-aeb5-0d5d6d9b5742		portworxtest		false
@@ -317,7 +317,7 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  pxctl secrets kvdb login
  ```
 
- ```
+ ```output
  Successful Login to Secrets Endpoint!
  ```
 
@@ -331,7 +331,7 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  pxctl cloudsnap backup NewVol
  ```
 
- ```
+ ```output
  Cloudsnap backup started successfully with id: 3f4f0a67-e12a-4d35-81ad-985657757352
  ```
 
@@ -345,7 +345,7 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  pxctl cloudsnap status
  ```
 
- ```
+ ```output
  NAME					SOURCEVOLUME									STATE		NODE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED
  39f66859-14b1-4ce0-a4c0-c858e714689e	2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr	Backup-Done	70.0.73.246	420044800	17.460186585s	Wed, 16 Jan 2019 22:27:30 UTC
  3f4f0a67-e12a-4d35-81ad-985657757352	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463	Backup-Active	70.0.73.246	1247805440	10.525438874s
@@ -357,7 +357,7 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  pxctl cloudsnap status -n 3f4f0a67-e12a-4d35-81ad-985657757352
  ```
 
- ```
+ ```output
  NAME					SOURCEVOLUME									STATE		NODE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED
  3f4f0a67-e12a-4d35-81ad-985657757352	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463	Backup-Active	70.0.73.246	1840250880	16.57831394s
  ```
@@ -370,7 +370,7 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  pxctl cloudsnap list
  ```
 
- ```
+ ```output
  SOURCEVOLUME					SOURCEVOLUMEID			CLOUD-SNAP-ID										CREATED-TIME				TYPE		STATUS
  volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719		Wed, 16 Jan 2019 21:51:53 UTC		Manual		Done
  volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr		Wed, 16 Jan 2019 22:27:13 UTC		Manual		Done
@@ -385,7 +385,7 @@ _Portworx_ 2.0.3 and higher supports backing up multiple volumes to cloud at the
 pxctl cloudsnap backup-group --help
 ```
 
-```
+```output
 Backup a group of snapshot for a given group id or labels to cloud
 
 Usage:
@@ -422,7 +422,7 @@ The below command  takes a group cloud backup of volumes _vol1_ and _vol2_:
 pxctl cloudsnap backup-group  -v vol1,vol2
 ```
 
-```
+```output
 Group Cloudsnap backup started successfully with groupID:a1c8ba67-90e1-4c58-acbe-8eaca61a02ae
 ```
 
@@ -432,7 +432,7 @@ Then, you can grab the `groupID` from above and use it to check the status of th
 pxctl cs status -n a1c8ba67-90e1-4c58-acbe-8eaca61a02ae
 ```
 
-```
+```output
 NAME                                    SOURCEVOLUME                                                                    STATE           NODE            BYTES-PROCESSED TIME-ELAPSED    COMPLETED
 29bf533d-1469-4610-953e-bd24f945e6de    fb468067-d7aa-40ff-992d-8f40a9e51c9a/201412281295404839-463199598055620776-incr Backup-Done     192.168.56.92   0 B             1.627836177s    Fri, 08 Mar 2019 22:12:14 UTC
 650e26f3-f7c9-42c5-b830-2601da6d5fff    fb468067-d7aa-40ff-992d-8f40a9e51c9a/592806372953104727-884041223239759095-incr Backup-Done     192.168.56.92   0 B             1.629703129s    Fri, 08 Mar 2019 22:12:14 UTC
@@ -444,7 +444,7 @@ You can also take a group cloud backup by selecting the volumes based on their l
  pxctl volume list -l app=mysql
 ```
 
-```
+```output
 ID                      NAME    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     STATUS          SNAP-ENABLED
 592806372953104727      vol1    1 GiB   1       no      no              LOW             up - detached   no
 201412281295404839      vol2    1 GiB   1       no      no              LOW             up - detached   no
@@ -456,7 +456,7 @@ To back them up as a group to the cloud backup, run the following:
 pxctl cloudsnap backup-group --label app=mysql
 ```
 
-```
+```output
 Group Cloudsnap backup started successfully with groupID:3b1de846-1078-40e6-ac1a-2e66ef3986d1
 ```
 
@@ -484,7 +484,7 @@ Use `pxctl cloudsnap restore` to restore from a cloud backup. To see the availab
 pxctl cloudsnap restore --help
 ```
 
-```
+```output
 Restore volume to a cloud snapshot
 
 Usage:
@@ -522,9 +522,7 @@ To restore a backup from cloud, use:
 pxctl cloudsnap restore --snap cs30/669945798649540757-864783518531595119 --cred-id 82998914-5245-4739-a218-3b0b06160332
 ```
 
-Then, you should see something like:
-
-```
+```output
 Cloudsnap restore started successfully on volume: 104172750626071399 with task name:59c4cfd5-4160-45db-b326-f37b327d9225
 ```
 
@@ -545,9 +543,7 @@ Use `pxctl cloudsnap list` to list your cloud backups.
 pxctl cloudsnap list
 ```
 
-Here is how the output should look like:
-
-```
+```output
 SOURCEVOLUME					SOURCEVOLUMEID			CLOUD-SNAP-ID										CREATED-TIME				TYPE		STATUS
 volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719		Wed, 16 Jan 2019 21:51:53 UTC		Manual		Done
 volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr		Wed, 16 Jan 2019 22:27:13 UTC		Manual		Done
@@ -564,7 +560,7 @@ Next, let's pick one of these backups and have `pxctl` restore it:
 pxctl cloudsnap restore -s 2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463
 ```
 
-```
+```output
 Cloudsnap restore started successfully on volume: 104172750626071399 with task name:59c4cfd5-4160-45db-b326-f37b327d9225
 ```
 
@@ -574,7 +570,7 @@ While the job is running, `pxctl cloudsnap status` gives the status of the resto
 pxctl cloudsnap status
 ```
 
-```
+```output
 NAME					SOURCEVOLUME									STATE		NODE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED
 3f4f0a67-e12a-4d35-81ad-985657757352	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463	Backup-Done	70.0.73.246	11988570112	3m29.825766964s	Thu, 17 Jan 2019 00:07:29 UTC
 39f66859-14b1-4ce0-a4c0-c858e714689e	2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr	Backup-Done	70.0.73.246	420044800	17.460186585s	Wed, 16 Jan 2019 22:27:30 UTC
@@ -607,7 +603,7 @@ As an example, to delete the backup `pqr9-cl1/538316104266867971-807625803401928
 pxctl cloudsnap delete --snap pqr9-cl1/538316104266867971-807625803401928868
 ```
 
-```
+```output
 Cloudsnap deleted successfully
 pxctl cloudsnap list
 SOURCEVOLUME 	CLOUD-SNAP-ID					CREATED-TIME			STATUS
@@ -624,7 +620,7 @@ To view the list of available commands and flags, use:
 pxctl cloudsnap schedules --help
 ```
 
-```
+```output
 Manage schedules for cloud-snaps
 
 Usage:
@@ -664,7 +660,7 @@ Cloud backup schedules can be created using `pxctl cloudsnap schedules create`. 
 pxctl cloudsnap schedules create  --help
 ```
 
-```
+```output
 Create a cloud-snap schedule
 
 Usage:
@@ -702,7 +698,7 @@ Let's look at a simple example:
  pxctl cloudsnap schedules create testVol --daily 21:00 --max 15 --cred-id cc84ef11-6d94-4c20-b4b9-01615119a442
  ```
 
-```
+```output
  Cloudsnap schedule created successfully
 ```
 
@@ -719,7 +715,7 @@ You can list the backup schedules that are currently configured using the follow
 pxctl cloudsnap schedules list
 ```
 
-```
+```output
 UUID						VOLUMEID			MAX-BACKUPS		FULL		SCHEDULE(UTC)
 078557a3-26c7-49b1-9822-34e6f816c2d1		648038464574631167		15			false		daily @21:00
 ```
@@ -732,6 +728,6 @@ Run the following to delete a backup schedule:
 pxctl cloudsnap schedules  delete --uuid 078557a3-26c7-49b1-9822-34e6f816c2d1
 ```
 
-```
+```output
 Cloudsnap schedule deleted successfully
 ```
