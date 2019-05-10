@@ -4,7 +4,8 @@
 
 #### Step 3: Create Persistent Volume Claim
 Create a PVC that uses the above `px-secure-sc` storage class.
-```yaml
+
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -20,9 +21,13 @@ spec:
 
 #### Step 4: Verify the volume
 Once the PVC has been created, verify the volume created in Portworx is encrypted.
+
+```text
+PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
+kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl volume list
 ```
-# PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
-# kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl volume list
+
+```output
 ID                 NAME                                      ...  ENCRYPTED  ...
 10852605918962284  pvc-5a885584-44ca-11e8-a17b-080027ee1df7  ...  yes        ...
 ```

@@ -11,7 +11,10 @@ This document illustrates how to add a new node with attached storage to a PX cl
 ### Display current cluster status
 
 ```text
-sudo /opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 Status: PX is operational
 Node ID: a56a4821-6f17-474d-b2c0-3e2b01cd0bc3
 	IP: 147.75.198.197
@@ -33,6 +36,7 @@ Global Storage Pool
 	Total Used    	:  4.3 GiB
 	Total Capacity	:  520 GiB
 ```
+
 The above cluster has three nodes and 520GiB of total capacity.
 
 ### Provision a new node with storage
@@ -42,15 +46,18 @@ Provision a server or a cloud instance from a provider of your choice with some 
 In this case, for e.g., this node comes with 100GiB of storage
 
 ```text
-# multipath -ll
-volume-a9e55549 (360014055671ce0d20184a619c27b31d0) dm-1   ,IBLOCK          
+multipath -ll
+```
+
+```output
+volume-a9e55549 (360014055671ce0d20184a619c27b31d0) dm-1   ,IBLOCK
 size=100G features='0' hwhandler='1 alua' wp=rw
 `-+- policy='round-robin 0' prio=1 status=active
   |- 2:0:0:0 sdb 8:16 active ready running
   `- 3:0:0:0 sdc 8:32 active ready running
 ```
 
-The storage is available at /dev/dm-1
+The storage is available at `/dev/dm-1`.
 
 ### Add this node to the PX Cluster
 
@@ -71,7 +78,10 @@ ensures that the node is added to the same cluster.
 As seen below, the 100G of additional capacity is added to the cluster with total capacity of the cluster going to 620GB
 
 ```text
-sudo /opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 Status: PX is operational
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
 	IP: 147.75.104.185

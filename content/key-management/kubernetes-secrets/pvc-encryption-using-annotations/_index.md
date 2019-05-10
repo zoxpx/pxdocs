@@ -30,22 +30,26 @@ PVC level encryption is achieved using following PVC annotations:
 A cluster wide secret key is a common key that points to a secret value/passphrase which can be used to encrypt all your volumes.
 
 Create a cluster wide secret in Kubernetes, if not already created:
+
 ```text
-$ kubectl -n portworx create secret generic px-vol-encryption \
+kubectl -n portworx create secret generic px-vol-encryption \
   --from-literal=cluster-wide-secret-key=<value>
 ```
+
 Note that the cluster wide secret has to reside in the `px-vol-encryption` secret under the `portworx` namespace.
 
 Now you have to give Portworx the cluster wide secret key, that acts as the default encryption key for all volumes.
+
 ```text
-$ PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
-$ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl secrets set-cluster-key \
+PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
+kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl secrets set-cluster-key \
   --secret cluster-wide-secret-key
 ```
 
 #### Step 2: Create the secure PVC
 If your Storage Class does not have the `secure` flag set, but you want to encrypt the PVC using the same Storage Class, then create the PVC as below:
-```yaml
+
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -74,7 +78,8 @@ Similar to the above example, if you want to use a Storage Class with `secure` p
 
 #### Kubernetes secrets
 You can encrypt your PVC using a custom secret as follows:
-```yaml
+
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -101,7 +106,7 @@ From the annotations in the above PVC, only `px/secret-name` is mandatory.
 ##### (Optional) Different namespace to store secret keys
 By default, Portworx has permissions to read secrets under `portworx` namespace. If your secrets are stored in some other namespace, then you need to give Portworx permissions to read the secrets. To grant Portworx permission to read `vol-secrets` secret, under `example` namespace, do the following:
 
-```yaml
+```text
 cat <<EOF | kubectl apply -f -
 # Role to access 'vol-secrets' secret under 'example' namespace
 kind: Role

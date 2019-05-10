@@ -9,6 +9,7 @@ This guide shows you how to configure prometheus to monitor your portworx node a
 ## Configure Prometheus
 
 Prometheus requires the following two files: config file, alert rules file. These files need to be bind mounted into Prometheus container.
+
 ```text
 # This can be any directory on the host.
 PROMETHEUS_CONF=/etc/prometheus
@@ -18,7 +19,7 @@ PROMETHEUS_CONF=/etc/prometheus
 
 Modify the below configuration to include your PX nodes' IP addresses, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
 
-```yaml
+```text
 global:
   scrape_interval: 1m
   scrape_timeout: 10s
@@ -56,7 +57,10 @@ docker run --restart=always --name prometheus -d -p 9090:9090 \
 -v ${PROMETHEUS_CONF}:/etc/prometheus \
 prom/prometheus
 ```
-Prometheus UI is available at http://&lt;IP_ADDRESS&gt;:9090
+
+```output
+Prometheus UI is available at http://IP_ADDRESS:9090
+```
 
 ## Configure AlertManager
 
@@ -73,9 +77,9 @@ ALERTMANAGER_CONF=/etc/alertmanager
 ### AlertManager config file
 
 Modify the below config file to use Google's SMTP server for your account.
-Save it as ${ALERTMANAGER_CONF}/config.yml.
+Save it as `${ALERTMANAGER_CONF}/config.yml`.
 
-```yaml
+```text
 global:
   # The smarthost and SMTP sender used for mail notifications.
   smtp_smarthost: 'smtp.gmail.com:587'

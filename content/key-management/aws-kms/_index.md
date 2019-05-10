@@ -102,7 +102,8 @@ Along with the EC2 role you will still need to provide `AWS_CMK` and `AWS_REGION
 ```text
 cat /etc/pwx/config.json
 ```
-```
+
+```output
 {
     "clusterid": "<cluster-id>",
     "secret": {

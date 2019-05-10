@@ -6,12 +6,15 @@ description: Discover how to add a new node to a PX cluster and how to add addit
 
 ## Adding Storage to exising PX Cluster Nodes
 
-This section illustrates how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added
+This section illustrates how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added.
 
 ### Display current cluster status
 
 ```text
-sudo /opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 Status: PX is operational
 Node ID: a56a4821-6f17-474d-b2c0-3e2b01cd0bc3
 	IP: 147.75.198.197
@@ -33,20 +36,24 @@ Global Storage Pool
 	Total Used    	:  4.3 GiB
 	Total Capacity	:  520 GiB
 ```
+
 The above cluster has three nodes and 520GiB of total capacity.
 
 ### Add a new node to cluster
 
-Below is an example of how to run PX in a new node so it joins an existing cluster. Note how docker run command is invoked with a cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID to which we want to add the new node
+Below is an example of how to run PX in a new node so it joins an existing cluster. Note how docker run command is invoked with a cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID to which we want to add the new node.
 
 ```text
 docker run --restart=always --name px-enterprise -d --net=host --privileged=true -v /run/docker/plugins:/run/docker/plugins -v /var/lib/osd:/var/lib/osd:shared -v /dev:/dev -v /etc/pwx:/etc/pwx -v /opt/pwx/bin:/export_bin:shared -v /var/run/docker.sock:/var/run/docker.sock -v /mnt:/mnt:shared -v /var/cores:/var/cores -v /usr/src:/usr/src -e API_SERVER=http://lighthouse-new.portworx.com portworx/px-enterprise -t token-bb4bcf4b-d394-11e6-afae-0242ac110002 -m team0:0 -d team0
 ```
 
-Here is how the cluster would look like after a new node is added without any storage
+Here is how the cluster would look like after a new node is added without any storage:
 
 ```text
-sudo /opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 Status: PX is operational
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
 	IP: 147.75.104.185
@@ -67,15 +74,15 @@ Global Storage Pool
 	Total Used    	:  4.3 GiB
 	Total Capacity	:  520 GiB
 ```
+
 Note how the capacity of the cluster has remained unchanged.
 
 ### Add more storage to the new node
 
-Added another 100G of storage to this node and the device is seen as /dev/dm-1
+Added another 100G of storage to this node and the device is seen as `/dev/dm-1`:
 
 ```text
-# multipath -ll
-volume-a9e55549 (360014055671ce0d20184a619c27b31d0) dm-1   ,IBLOCK          
+
 size=100G features='0' hwhandler='1 alua' wp=rw
 `-+- policy='round-robin 0' prio=1 status=active
   |- 2:0:0:0 sdb 8:16 active ready running
@@ -85,10 +92,13 @@ size=100G features='0' hwhandler='1 alua' wp=rw
 
 ### Enter Maintenance Mode
 
-In order to add more storage to a node, that node must be put in maintenance mode
+In order to add more storage to a node, that node must be put in maintenance mode:
 
 ```text
-sudo /opt/pwx/bin/pxctl service maintenance --enter
+pxctl service maintenance --enter
+```
+
+```output
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): Y
 ```
@@ -96,7 +106,10 @@ Are you sure you want to proceed ? (Y/N): Y
 Check if the node is in maintenance mode
 
 ```text
-sudo /opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 PX is in maintenance mode.  Use the service mode option to exit maintenance mode.
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
 	IP: 147.75.104.185
@@ -122,43 +135,66 @@ AlertID	Resource	ResourceID				Timestamp	Severity	AlertType		Description
 ### Add the new drive to cluster to increase the storage
 
 ```text
-sudo /opt/pwx/bin/pxctl service drive add --drive /dev/dm-1 --operation start
+pxctl service drive add --drive /dev/dm-1 --operation start
+```
+
+```output
 Adding device  /dev/dm-1 ...
 "Drive add done: Storage rebalance is in progress"
 ```
 
 ### Rebalance the storage pool
 
-**Pool rebalance is a must to spread data across all available drives in the pool.**
+{{<info>}}
+Pool rebalance is a must. It spreads data across all available drives in the pool.
+{{</info>}}
 
-Check the rebalance status and wait for completion.
+Check the rebalance status and wait for completion:
 
 ```text
-/opt/pwx/bin/pxctl sv drive add --drive /dev/dm-1 --operation status
-"Drive add: Storage rebalance running: 1 out of about 9 chunks balanced (2 considered),  89% left"
+pxctl sv drive add --drive /dev/dm-1 --operation status
+```
 
-/opt/pwx/bin/pxctl sv drive add --drive /dev/dm-1 --operation status
+```output
+"Drive add: Storage rebalance running: 1 out of about 9 chunks balanced (2 considered),  89% left"
+```
+
+```text
+pxctl sv drive add --drive /dev/dm-1 --operation status
+```
+
+```output
 "Drive add: Storage rebalance complete"
 ```
 
 In case drive add operation did not start a rebalance, start it manually.
-For e.g., If the drive was added to pool 0
+For e.g., if the drive was added to pool 0:
 
 ```text
-/opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation start
+pxctl service drive rebalance --poolID 0 --operation start
+```
+
+```output
 Done: "Pool 0: Balance is running"
 ```
 
-Check the rebalance status and wait for completion.
+Check the rebalance status and wait for completion:
 
 ```text
-/opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation status
+pxctl service drive rebalance --poolID 0 --operation status
+```
+
+```output
 Done: "Pool 0: Balance is not running"
 ```
+
 ### Exit Maintenance Mode
 
 ```text
-sudo /opt/pwx/bin/pxctl service maintenance --exit
+pxctl service maintenance --exit
+```
+
+```output
 PX is now operational.
 ```
 
@@ -167,7 +203,10 @@ PX is now operational.
 As seen below, the 100G of additional capacity is available with total capacity of the cluster going to 620GB
 
 ```text
-sudo /opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 Status: PX is operational
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
 	IP: 147.75.104.185

@@ -54,7 +54,7 @@ Portworx requires the following IBM Key Protect credentials to use its APIs
 
 Portworx reads the IBM credentials required to authenticate with IBM Key Protect through a Kubernetes secret. Create a Kubernetes secret with the name `px-ibm` in the `portworx` namespace. Following is an example kubernetes secret spec
 
-```yaml
+```text
 apiVersion: v1
 kind: Secret
 metadata:
@@ -135,7 +135,7 @@ kubectl edit daemonset portworx -n kube-system
 ```
 
 Add the `"-secret_type", "ibm-kp"` arguments to the `portworx` container in the daemonset. It should look something like this:
-```yaml
+```text
 containers:
   - args:
     - -c
