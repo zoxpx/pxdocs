@@ -224,7 +224,7 @@ spec:
 Note the format of the `name` field - `ns.<namespace_of_source_pvc>-name.<name_of_the_snapshot>`. The above example takes a snapshot with the name “px-snap-1” of the source PVC “px-vol-1” in the “prod” namespace.
 
 {{<info>}}
-**Note:**  
+**Note:**
 Annotations support is available from PX Version 1.2.11.6
 {{</info>}}
 
@@ -252,7 +252,7 @@ $ kubectl edit clusterrole node-get-put-list-role
 Portworx recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
 
 {{<info>}}
-**Note:**  
+**Note:**
 Please remember to setup cadvisor and nodexporter properly so they mount the ‘/’ partition as ro:slave. Refer to this [link](/install-with-other/operate-and-maintain/monitoring) for more information
 {{</info>}}
 
@@ -296,7 +296,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 **Scaling out a cluster on-prem**
 
-* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/install-with-other/operate-and-maintain/scaling/scale-out) shows how to scale up a existing cluster by adding more nodes TODO: _Update the above page to show runc_
+* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/install-with-other/operate-and-maintain/scaling/scale-out) shows how to scale up a existing cluster by adding more nodes.
 * In Kubernetes, PX is deployed as a Daemonset. This enables PX to automatically scale as the cluster scales. So there is no specific action needed from the user to scale PX along with the cluster scaling
 
 #### Cluster Capacity Expansion {#cluster-capacity-expansion}

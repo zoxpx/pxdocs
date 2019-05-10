@@ -221,7 +221,6 @@ While Prometheus can be deployed as a container within the container orchestrato
 #### Scaling out a cluster on-prem
 
 * The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/install-with-other/operate-and-maintain/scaling/scale-out) shows how to scale up a existing cluster by adding more nodes.
-TODO: *Update the above page to show runc*
 
 * Using DC/OS, if PX is installed as a framework, you can also scale a PX cluster by using the DC/OS PX [framework](/install-with-other/dcos/#scaling-up-portworx-nodes).
 
