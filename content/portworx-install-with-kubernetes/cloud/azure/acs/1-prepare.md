@@ -31,11 +31,12 @@ az account list-locations
 ```
 
 Example locations:
-
-`centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus`   
-`southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest`   
-`brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia`   
-`canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth`
+```
+centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus
+southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest
+brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia
+canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth
+```
 
 ### Create an Azure resource group by specifying a name and a location
 
@@ -62,8 +63,8 @@ The example deployment here uses Kubernetes with pre-attached disks and VM scale
 
 Ensure that the Portworx target nodes have at least one “local” attached disk which can be used to contribute storage to the global storage pool.
 
-For the `masterProfile`, specify an appropriate value for `dnsPrefix` which will be used for fully qualified domain name \(FQDN\) \[ Ex: “myacsk8scluster”\].   
-Use the default `vmSize` or select an appropriate value for the machine type and size.   
+For the `masterProfile`, specify an appropriate value for `dnsPrefix` which will be used for fully qualified domain name \(FQDN\) \[ Ex: “myacsk8scluster”\].
+Use the default `vmSize` or select an appropriate value for the machine type and size.
 Specify the number and size of disks that will be attached to each DCOS private agent as per the template default:
 
 ```text
@@ -74,7 +75,7 @@ Specify the number and size of disks that will be attached to each DCOS private 
 
 Specify the `adminUsername` and public key data in `keyData`
 
-Specify the `clientId` and `secret`  which are located under the `servicePrincipalProfile`  
+Specify the `clientId` and `secret`  which are located under the `servicePrincipalProfile`
 
 ### Generate the Azure Resource Management \(ARM\) templates
 
