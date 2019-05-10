@@ -5,4 +5,9 @@ description: Learn about applying the spec with Portworx on Kubernetes with ACS.
 weight: 2
 ---
 
-{{% content "portworx-install-with-kubernetes/cloud/azure/shared/2-deploy-px-azure.md" %}}
+## Install
+{{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
+
+{{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
+
+{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}

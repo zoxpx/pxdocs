@@ -18,7 +18,7 @@ az login
 az account set –subscription <Your-Azure-Subscription-UUID>
 ```
 
-### Create the Azure resource group and location
+### Check locations to create AKS cluster
 
 Get the Azure locations using the Azure CLI command:
 
@@ -26,21 +26,26 @@ Get the Azure locations using the Azure CLI command:
 az account list-locations
 ```
 
-Example locations: `centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus`   
-`southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest`   
-`brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia`   
-`canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth`
-
-### Create an Azure Resource Group by specifying a name and a location:
-
-```text
-az group create –name <region-name> –location <location>
+Example locations:
+```
+centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus
+southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest
+brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia
+canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth
 ```
 
-### Create a service principal in Azure AD
-
+### Create an Azure Resource Group
+Create a Resource Group by specifying its name and location in which you will be deploying your AKS cluster.
 ```text
-az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9"
+az group create –name <resource-group-name> –location <location>
+```
+
+### Create a Service Principal in Azure AD
+This Service Principal will be used to grant _Portworx_ permissions to manage the disks used in the cluster. Store the `password` which acts as the client secret and the `appId` will is the client ID.
+```text
+az ad sp create-for-rbac \
+   --role="Contributor" \
+   --scopes="/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9/resourceGroups/<resource-group-name>"
 {
   "appId": "1311e5f6-xxxx-xxxx-xxxx-ede45a6b2bde",
   "displayName": "azure-cli-2017-10-27-07-37-41",
@@ -52,12 +57,4 @@ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/72c299a4-
 
 ### Create the AKS cluster
 
-Create the AKS cluster using either the Azure CLI or the Azure Portal. This is described on the [AKS docs page](https://docs.microsoft.com/en-us/azure/aks/).
-
-### Attach a Data Disk to Azure VM
-
-Follow these instructions: [How to attach a data disk to a AKS nodes in the Azure portal ](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-attach-disk-portal/)
-
-Below is an example of how your deployment may look:
-
-![Azure Add Disk](/img/azure-add-disk.png)
+Create the AKS cluster in the above Resource Group using either the Azure CLI or the Azure Portal. This is described on the [AKS docs page](https://docs.microsoft.com/en-us/azure/aks/). If you have already deployed an AKS cluster, then create the Service Principal for the Resource Group in which your AKS cluster is present.
