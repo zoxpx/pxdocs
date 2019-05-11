@@ -40,6 +40,7 @@ If the above step is successful you should see the destination cluster in the li
 ```
 $ /opt/pwx/bin/pxctl cluster pair list
 
+```output
 CLUSTER-ID                                       NAME            ENDPOINT                     CREDENTIAL-ID
 2937523c-a8f6-4564-a683-e3b53b92a3b7 (default)   disrani-px2     http://192.168.56.106:9001   952e15df-ca3e-49df-8c20-92f862a44a78
 ```
@@ -53,20 +54,21 @@ Migration can be done at two granularities. If no ClusterID is specified during 
 * Migrate all volumes from the cluster:
 
 ```
-/opt/pwx/bin/pxctl cloudmigrate start --all [ --cluster_id <cluster_id> ]
-```
-* Migrate a particular volume from the cluster: 
+
+* Migrate a particular volume from the cluster:
 
 ```
 /opt/pwx/bin/pxctl cloudmigrate start --volume_id <volumeId> [ --cluster_id <cluster_id> ]
 ```
 
 ### Monitor migrations
+
 3. The status for a migration can be checked by running the following command:
 
 ```
 $ /opt/pwx/bin/pxctl cloudmigrate status
 
+```output
 CLUSTER UUID: 2937523c-a8f6-4564-a683-e3b53b92a3b7
 TASK-ID                                  VOLUME-ID           VOLUME-NAME  STAGE  STATUS      LAST-UPDATE
 107655ea-0f66-4ffe-99e2-1ef06434aa40     589129994411792979  testVolume   Done   Complete    Sat, 27 Oct 2018 01:12:40 UTC

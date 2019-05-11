@@ -2,27 +2,48 @@ Cluster wide secret key is basically a key value pair where the value part is th
 
 To create a volume using a cluster wide secret key run the following command
 
+```text
+pxctl volume create --secure --size 10 encrypted_volume
 ```
-# /opt/pwx/bin/pxctl volume create --secure --size 10 encrypted_volume
+
+```output
 Volume successfully created: 822124500500459627
-# /opt/pwx/bin/pxctl volume list
+```
+
+```text
+pxctl volume list
+```
+
+```output
 ID	      	     		NAME		SIZE	HA SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 822124500500459627	 encrypted_volume	10 GiB	1    no yes		LOW		1	up - detached
 ```
 
 To create a **shared encrypted** volume using the cluster wide secret key run the following command
 
+```text
+pxctl volume create --shared --secure --size 10 encrypted_volume
 ```
-# /opt/pwx/bin/pxctl volume create --shared --secure --size 10 encrypted_volume
+
+```output
 Encrypted Shared volume successfully created: 77957787758406722
 ```
 
 You can attach and mount the encrypted volume
 
+```text
+pxctl host attach encrypted_volume
 ```
-# /opt/pwx/bin/pxctl host attach encrypted_volume
+
+```output
 Volume successfully attached at: /dev/mapper/pxd-enc822124500500459627
-# /opt/pwx/bin/pxctl host mount encrypted_volume /mnt
+```
+
+```text
+pxctl host mount encrypted_volume /mnt
+```
+
+```output
 Volume encrypted_volume successfully mounted at /mnt
 ```
 

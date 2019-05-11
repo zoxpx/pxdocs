@@ -18,19 +18,19 @@ There are two ways in which Portworx volumes can be encrypted and are dependent 
 
 To create a volume through pxctl, run the following command
 
-```
-/opt/pwx/bin/pxctl volume create --secure  enc_vol
+```text
+pxctl volume create --secure  enc_vol
 ```
 
 To create a volume through docker, run the following command
 
-```
+```text
 docker volume create --volume-driver pxd secure=true,name=enc_vol
 ```
 
 To attach and mount an encrypted volume through docker, run the following command
 
-```
+```text
 docker run --rm -it -v secure=true,name=enc_vol:/mnt busybox
 ```
 
@@ -43,20 +43,19 @@ secret name as `default` will use this cluster wide secret as a passphrase to en
 
 To create a volume using a cluster wide secret through pxctl, run the following command
 
-```
-/opt/pwx/bin/pxctl volume create --secure --secret_key default enc_vol
+```text
+pxctl volume create --secure --secret_key default enc_vol
 ```
 
 To create a volume using a cluster wide secret through docker, run the following command
 
-```
+```text
 docker volume create --volume-driver pxd secret_key=default,name=enc_vol
-
 ```
 
 To attach and mount an encrypted volume through docker, run the following command
 
-```
+```text
 docker run --rm -it -v secure=true,secret_key=default,name=enc_vol:/mnt busybox
 ```
 
@@ -70,19 +69,17 @@ In this method Portworx will use the named secret created by you for encrypting 
 To create a volume using a named secret through pxctl, run the following command
 
 ```text
-/opt/pwx/bin/pxctl volume create --secure --secret_key mysecret enc_vol
-
+pxctl volume create --secure --secret_key mysecret enc_vol
 ```
 
 To create a volume using a cluster wide secret through docker, run the following command
 
 ```text
 docker volume create --volume-driver pxd secret_key=mysecret,name=enc_vol
-
 ```
 
 To attach and mount an encrypted volume through docker, run the following command
 
-```
+```text
 docker run --rm -it -v secure=true,secret_key=mysecret,name=enc_vol:/mnt busybox
 ```

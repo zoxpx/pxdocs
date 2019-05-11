@@ -17,7 +17,7 @@ Other supported bare metal cloud providers are
 * [Packet.net](/install-with-other/other-clouds/packet)
 * [Rackspace](/install-with-other/other-clouds/rackspace)
 
-Pre-requisites:   You will need to have a valid Digital Ocean account
+Pre-requisites: You will need to have a valid Digital Ocean account
 
 ### Step 1: Install Terraform
 
@@ -82,13 +82,23 @@ You can then login to validate the cluster state:
 
 ```text
 ssh core@138.197.219.111
+```
+
+```output
 The authenticity of host '138.197.219.111 (138.197.219.111)' can't be established.
 ECDSA key fingerprint is 0e:9f:26:88:2a:3b:66:3d:08:11:b7:70:84:df:92:1f.
 Are you sure you want to continue connecting (yes/no)? yes
 Warning: Permanently added '138.197.219.111' (ECDSA) to the list of known hosts.
 Container Linux by CoreOS stable (1353.7.0)
 Update Strategy: No Reboots
-core@my-coreos-1 ~ $ sudo /opt/pwx/bin/pxctl status
+core@my-coreos-1 ~ $
+```
+
+```text
+pxctl status
+```
+
+```output
 Status: PX is operational
 Node ID: dd2d8751-3740-4188-9915-741d1b2996f5
 	IP: 138.197.219.111

@@ -11,7 +11,7 @@ weight: 2
 
 Portworx exports mounts to other containers and these in turn also get exported to node_exporter and cadvisor. In order for all mount events to be propagated to these containers, the root fs on the host should be bind mounted as "ro:slave". If this is not done, it is possible that these containers hold on to these volume mounts preventing the portworx volumes from being used on other hosts.
 
-```
+```text
 # Host root filesystem should be mounted as read-only:slave
 -v "/:/rootfs:ro" \
 ```

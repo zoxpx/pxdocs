@@ -58,12 +58,15 @@ Copy the downloaded account file in a directory `gcloud-secrets/` and rename it 
 
 ```text
 ls -1 gcloud-secrets
+```
+
+```output
 gcloud.json
 ```
 
 Create a kubernetes secret with the following command
 
-```
+```text
  kubectl -n kube-system create secret generic px-gcloud --from-file=gcloud-secrets/ --from-literal=gcloud-kms-resource-id=projects/<Project ID>/locations/<Region>/keyRings/<Key Ring Name>/cryptoKeys/<Asymmetric Key Name>/cryptoKeyVersions/1
 ```
 
@@ -88,7 +91,8 @@ kubectl edit daemonset portworx -n kube-system
 ```
 
 Add the `"-secret_type", "gcloud-kms"` arguments to the `portworx` container in the daemonset. It should look something like this:
-```yaml
+
+```text
 containers:
   - args:
     - -c
@@ -138,9 +142,10 @@ EOF
 
 Apply the patch
 
-```
+```text
 kubectl -n kube-system patch ds portworx --patch "$(cat patch.yaml)" --type=strategic
 ```
+
 ## Other users
 
 ### Step 1: Provide Google Cloud credentials to Portworx.

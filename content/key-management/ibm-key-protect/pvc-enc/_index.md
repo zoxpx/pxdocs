@@ -23,7 +23,7 @@ In this method each volume will use its own unique passphrase to encrypt the vol
 
 #### Step 2: Create a Persistent Volume Claim
 
-```yaml
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -42,7 +42,7 @@ spec:
 
 If you do not want to specify the `secure` flag in the storage class, but you want to encrypt the PVC using that Storage Class, then create the PVC as below
 
-```yaml
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -57,6 +57,7 @@ spec:
     requests:
       storage: 2Gi
 ```
+
 Note the `px/secure: "true"` annotation on the PVC object.
 
 ### Encryption using cluster wide secret
@@ -73,7 +74,7 @@ In this method a default cluster wide secret will be set for the Portworx cluste
 
 #### Step 3: Create a Persistent Volume Claim
 
-```yaml
+```text
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
