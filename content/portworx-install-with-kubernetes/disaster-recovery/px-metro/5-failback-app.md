@@ -39,7 +39,7 @@ In order to invoke from command-line, you will need to run the following:
 kubectl create -f clusterdomainupdate.yaml
 ```
 
-```
+```output
 clusterdomainupdate "activate-us-east-1a" created
 ```
 
@@ -49,7 +49,7 @@ You need to run the above command from the Kubernetes cluster which is **Active*
 storkctl get clusterdomainsstatus
 ```
 
-```
+```output
 NAME            ACTIVE                    INACTIVE   CREATED
 px-dr-cluster   [us-east-1a us-east-1b]   []         09 Apr 19 17:13 PDT
 ```
@@ -79,7 +79,7 @@ Lastly, let's check that our application is running:
 kubectl get pods -n migrationnamespace
 ```
 
-```
+```output
 NAME                     READY     STATUS    RESTARTS   AGE
 mysql-5857989b5d-48mwf   1/1       Running   0          3m
 ```
@@ -88,7 +88,7 @@ mysql-5857989b5d-48mwf   1/1       Running   0          3m
 kubectl scale --replicas 0 deployment/mysql -n migrationnamespace
 ```
 
-If we had suspended the migration schedule in source cluster during step 4, we now have to unsuspend it. 
+If we had suspended the migration schedule in source cluster during step 4, we now have to unsuspend it.
 
 Apply the below spec. Notice the `suspend: false`.
 
@@ -123,7 +123,8 @@ Using storkctl, verify the schedule is unsuspended.
 ```text
 storkctl get migrationschedule -n migrationnamespace
 ```
-```
+
+```output
 NAME                        POLICYNAME   CLUSTERPAIR      SUSPEND   LAST-SUCCESS-TIME     LAST-SUCCESS-DURATION
 mysqlmigrationschedule      testpolcy    remotecluster    false      17 Apr 19 17:16 PDT   2m0s
 ```

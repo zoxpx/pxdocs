@@ -22,8 +22,9 @@ Fluentd is a log collector which enables you to log everything in a unified mann
 fluentd runs as a deamonset on the kubernetes cluster thus allows it to collect logs from all the PX pods placed on each node.
 If the need is to also enable the entire kubernetes cluster level logging, then please add `@include kubernetes.conf` and add a relevant `match` directive in the `ConfigMap`
 
-Create a file named ```fluentd-spec.yaml``` and apply the configuration using `kubectl`
-```yaml
+Create a file named ```fluentd-spec.yaml``` and apply the configuration using `kubectl`:
+
+```text
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -64,7 +65,7 @@ subjects:
   namespace: kube-system
 - kind: ServiceAccount
   name: default
-  namespace: kube-system   
+  namespace: kube-system
 
 ---
 apiVersion: v1
@@ -166,6 +167,9 @@ A view of Elastic search indices for cluster level logs collected for all the po
 
 ```text
 curl -XGET 'http://10.108.118.191:9200/_cat/indices?v&pretty'
+```
+
+```output
 health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
 green  open   px-logs-2017.09.12  LIHcjH74Q2ScLoDf5hAQIA   5   1       1178            0      1.8mb          895kb
 green  open   px-logs-2017.09.13  ks7A6lLTR8CUOROgXPiPCQ   5   1        759            0      2.1mb          1.1mb

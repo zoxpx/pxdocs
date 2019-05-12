@@ -23,7 +23,7 @@ _PX_ comes with a few standard roles that you can use when issuing tokens to use
 pxctl role --help
 ```
 
-```
+```output
 Portworx pxctl authorization role commands.  Roles define permission rules for users capabilities.
 
 Usage:
@@ -66,7 +66,7 @@ If the details are fuzzy, take a moment to run the following:
 pxctl role create --help
 ```
 
-```
+```output
 Create a role using a JSON file which specifies the role and its rules.  A role consist of a set of rules defining services
 and api's which are allowable.
 e.g. Rule file which allows inspection of any object and listings of only volumes:
@@ -161,7 +161,7 @@ Once you've created your custom roles, you can simply add the role names during 
 * For OIDC, see your provider documentation on how to add the `roles` identifier to your tokens. __Note:__ Some OIDC providers have differently scoped roles at the system or user level. Please ensure that you've added the roles at the base level of the token.
 * For self-signed tokens, add the custom role in your auth-config during token creation:
 
-```text
+```
 name: Jim Stevens
 email: jstevens@portworx.com
 sub: jstevens@portworx.com/jstevens

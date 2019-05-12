@@ -5,11 +5,11 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, pe
 description: Find out how to scale or restrict Portworx nodes in your Kubernetes cluster
 ---
 
-#### Scaling {#scaling}
+#### Scaling
 
 Portworx is deployed as a [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Therefore it automatically scales as you grow your Kubernetes cluster. There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
-#### Restricting PX to certain nodes {#restricting-px-to-certain-nodes}
+#### Restricting PX to certain nodes
 
 Choose either of the below options based on current state of Portworx in the cluster.
 

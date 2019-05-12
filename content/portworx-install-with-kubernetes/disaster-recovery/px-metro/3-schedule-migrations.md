@@ -61,7 +61,7 @@ Let's now run `kubectl describe` and see how the output would look like:
 kubectl describe migrationschedules.stork.libopenstorage.org -n mysql
 ```
 
-```
+```output
 Name:         mysqlmigrationschedule
 
 Namespace:    migrationnamespace
@@ -123,11 +123,11 @@ Events:
 
 Each migration is associated with a Migrations object. To get the most important information, type:
 
-```
+```text
 kubectl get migration -n migrationnamespace
 ```
 
-```
+```output
 NAME AGE
 mysqlmigrationschedule-daily-2019-02-14-221651 1d
 mysqlmigrationschedule-interval-2019-02-16-004052 5m

@@ -18,7 +18,7 @@ To learn about the available commands, type:
 pxctl storage-policy --help
 ```
 
-```
+```output
 Manage storage policies for creating volumes
 
 Usage:
@@ -88,7 +88,7 @@ Now, let's inspect the storage policy by typing:
 pxctl storage-policy list
 ```
 
-```
+```output
 StoragePolicy   Description
 devpol          HA="2,Minimum" Encrypted="true" Sticky="true"...
 qapol           HA="2,Minimum" Encrypted="true" Sticky="true"...
@@ -104,7 +104,7 @@ Here is how to set `devpol` as the default storage policy in your PX cluster:
 pxctl storage-policy set-default devpol
 ```
 
-```
+```output
 Storage Policy *devpol* is set to default
 ```
 
@@ -114,9 +114,7 @@ Now, let's list the storage policies again:
 pxctl storage-policy list
 ```
 
-The output should look something like this:
-
-```
+```output
 StoragePolicy   Description
 *devpol         Encrypted="true" Sticky="true" SnapInterval="periodic 1h0m0s,keep last 10"...
 qapol           HA="2,Minimum" Encrypted="true" Sticky="true"...
@@ -130,7 +128,7 @@ Let's say you don't remember the settings of the `devpol` storage policy. If so,
 pxctl storage-policy inspect devpol
 ```
 
-```
+```output
 Storage Policy  :  devpol
     Default                   : Yes
     HA                        : 2,Minimum
@@ -145,8 +143,8 @@ Now that we've created a storage policy and set it as the default one, let's mov
 pxctl v c polvol --repl 1 --size 10
 ```
 
-```
-pxctl v i Volume successfully created: 745102698654969688
+```output
+Volume successfully created: 745102698654969688
 ```
 
 Lastly, we would want to check the settings of the new volume:
@@ -155,7 +153,7 @@ Lastly, we would want to check the settings of the new volume:
 pxctl v i polvol
 ```
 
-```
+```output
 Volume  :  745102698654969688
     Name                 :  polvol
     Size                 :  10 GiB
@@ -200,7 +198,7 @@ Suppose `devpol` was initially set as the default storage policy:
 pxctl storage-policy list
 ```
 
-```
+```output
 StoragePolicy   Description
 *devpol         Encrypted="true" Sticky="true" SnapInterval="periodic 1h0m0s,keep last 10"...
 qapol           HA="2,Minimum" Encrypted="true" Sticky="true"...
@@ -212,7 +210,7 @@ We can remove the default storage policy like so:
 pxctl stp unset-default qapol
 ```
 
-```
+```output
 Default storage policy restriction is removed
 ```
 
@@ -222,7 +220,7 @@ To check whether the policy is disabled type:
 pxctl storage-policy list
 ```
 
-```
+```output
 devpol          Encrypted="true" Sticky="true" SnapInterval="periodic 1h0m0s,keep last 10"...
 qapol           HA="2,Minimum" Encrypted="true" Sticky="true"...
 
@@ -234,7 +232,7 @@ Can't recall the settings for `devpol`? Here's how to refresh your memory:
 pxctl storage-policy inspect devpol
 ```
 
-```
+```output
 Storage Policy  :  devpol
     Default                  :  No
     HA                       :  Minimum 2
@@ -249,7 +247,7 @@ The following creates a volume with a replication level lower than the one speci
 pxctl v c nonpol --size 10 --repl 1
 ```
 
-```
+```output
 Volume successfully created: 880058853866312532
 ```
 
@@ -259,7 +257,7 @@ So, we've created a new volume. Go ahead and inspect its settings:
 pxctl v i nonpol
 ```
 
-```
+```output
 Volume  :  880058853866312532
     Name                 :  nonpol
     Size                 :  10 GiB
@@ -298,7 +296,7 @@ First, let's list our storage policies:
 pxctl stp list
 ```
 
-```
+```output
 StoragePolicy Description
 prodpol       IOProfile="IO_PROFILE_CMS" SnapInterval="policy=snapSched" HA="2,Equal"...
 qapol         SnapInterval="policy=weekpol" HA="2,Minimum" Sticky="true"...
@@ -316,7 +314,7 @@ Lastly, we would want to check if the parameter has been updated:
 pxctl stp list
 ```
 
-```
+```output
 StoragePolicy Description
 prodpol       HA="2,Equal" Encrypted="true" Sticky="true"...
 qapol         HA="1,Minimum" Sticky="true" SnapInterval="policy=weekpol"...
@@ -333,7 +331,7 @@ Start by listing existing storage policies:
 pxctl stp list
 ```
 
-```
+```output
 StoragePolicy Description
 prodpol       Sticky="true" IOProfile="IO_PROFILE_CMS" SnapInterval="policy=snapSched"...
 *qapol        HA="1,Minimum" Sticky="true" SnapInterval="policy=weekpol"...
@@ -345,7 +343,7 @@ The above shows that `qapol` is the default policy. Let's get more details:
 pxctl stp inspect qapol
 ```
 
-```
+```output
 Storage Policy : qapol
     Default         : Yes
     HA              : 1,Minimum
@@ -365,7 +363,7 @@ The following checks if the parameters were successfully updated:
 pxctl stp inspect qapol
 ```
 
-```
+```output
 Storage Policy : qapol
         Default         : Yes
         HA              : 1,Minimum
@@ -379,7 +377,7 @@ Let's create a new volume. It will have **snapSched** as snapshot policy attache
 pxctl v c updatedqapol --size 10
 ```
 
-```
+```output
 Volume successfully created: 1131539442993682535
 ```
 
@@ -390,7 +388,7 @@ Lastly, we would want to inspect the settings of the new volume like so:
 pxctl v i updatedqapol
 ```
 
-```
+```output
 Volume  :  1131539442993682535
     Name                 :  updatedqapol
     Size                 :  10 GiB
@@ -425,7 +423,7 @@ Use `pxctl storage-policy delete policyname` to delete storage policy:
 pxctl stp delete  devpol
 ```
 
-```
+```output
 Storage Policy devpol is deleted
 ```
 
@@ -435,7 +433,7 @@ If you need to delete the default policy, then the `--force` flag is required.
 pxctl stp delete qapol --force
 ```
 
-```
+```output
 Storage Policy qapol is deleted
 ```
 
@@ -457,11 +455,11 @@ pxctl stp create testpol --replication 2,min --sticky --weekly sunday@08:30,8
 
 List storage policies:
 
-```
+```text
 pxctl stp list
 ```
 
-```
+```output
 StoragePolicy   Description
 testpol         HA="2,Minimum" Sticky="true" SnapInterval="weekly Sunday@08:30,keep last 8"...
 ```
@@ -472,7 +470,7 @@ Inspect `testpol`:
 pxctl stp inspect testpol
 ```
 
-```
+```output
 Storage Policy  :  testpol
     Default                  :  No
     Sticky                    : true
@@ -486,7 +484,7 @@ Now, let's create a volume named `customvol` using **testpol**:
 pxctl v c customvol --size 10 --storagepolicy testpol
 ```
 
-```
+```output
 Volume successfully created: 492212712402729915
 ```
 
@@ -496,7 +494,7 @@ Lastly, let's check `customvol`'s settings:
 pxctl v i customvol
 ```
 
-```
+```output
 Volume  :  492212712402729915
     Name                 :  customvol
     Size                 :  10 GiB
@@ -654,7 +652,7 @@ To see the ACLs for a given storage-policy, you can use `pxctl stp access show` 
 pxctl stp access show devpol
 ```
 
-```
+```output
 Storage Policy:  devpol
 Ownership:
   Owner:  collaborator1
@@ -672,9 +670,8 @@ To remove or add a single collaborator or group access, you can do so with:
  pxctl stp access add devpol --collaborator user:w
  ```
 
- 
- or 
- 
- ```
+ or
+
+ ```text
  pxctl stp access remove devpol --group group1
  ```

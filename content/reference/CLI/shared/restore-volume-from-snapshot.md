@@ -5,13 +5,13 @@ keywords: portworx, kubernetes
 description: Learn how to restore volumes from snapshots
 ---
 
-In order to restore a volume from snapshot, Use `pxctl volume restore` command.
+In order to restore a volume from snapshot use the `pxctl volume restore` command:
 
 ```text
 /opt/pwx/bin/pxctl volume restore -h
 ```
 
-```
+```output
 NAME:
    pxctl volume restore - Restore volume from snapshot
 
@@ -28,6 +28,6 @@ In the below example parent volume `myvol` is restored from its snapshot `mysnap
 pxctl volume restore --snapshot mysnap myvol
 ```
 
-```
+```output
 Successfully started restoring volume myvol from mysnap.
 ```

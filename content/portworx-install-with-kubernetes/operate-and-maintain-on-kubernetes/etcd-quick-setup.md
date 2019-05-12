@@ -22,7 +22,7 @@ Following are the requirements from the three nodes that form the etcd cluster:
 Get the etcd tar ball from CoreOS official site.
 
 ```text
-$ ETCD_VER=v3.2.7 && curl -L https://storage.googleapis.com/etcd/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd.tar.gz
+ETCD_VER=v3.2.7 && curl -L https://storage.googleapis.com/etcd/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd.tar.gz
 ```
 
 You can replace the __ETCD_VER__ with the etcd version you wish to install
@@ -30,15 +30,15 @@ You can replace the __ETCD_VER__ with the etcd version you wish to install
 Untar the etcd tar ball
 
 ```text
-$ rm -rf /tmp/etcd && mkdir -p /tmp/etcd
-$ tar xzvf /tmp/etcd.tar.gz -C /tmp/etcd --strip-components=1
+rm -rf /tmp/etcd && mkdir -p /tmp/etcd
+tar xzvf /tmp/etcd.tar.gz -C /tmp/etcd --strip-components=1
 ```
 
 Install the etcd binaries
 
 ```text
-$ sudo cp /tmp/etcd/etcd /usr/local/bin/
-$ sudo cp /tmp/etcd/etcdctl /usr/local/bin/
+sudo cp /tmp/etcd/etcd /usr/local/bin/
+sudo cp /tmp/etcd/etcdctl /usr/local/bin/
 ```
 
 Repeat the above steps on all the 3 nodes before moving forward.
@@ -48,7 +48,10 @@ Repeat the above steps on all the 3 nodes before moving forward.
 Create a systemd environment file __/etc/etcd.conf__ which has the IPs of all the nodes.
 
 ```text
-$ cat /etc/etcd.conf
+cat /etc/etcd.conf
+```
+
+```output
 # SELF_IP is the IP of the node where this file resides.
 SELF_IP=70.0.40.154
 # IP of Node 1
@@ -66,7 +69,10 @@ Create a copy of the above file on all the 3 nodes. The contents of the file wil
 Create a systemd unit file for the etcd3 service.
 
 ```text
-$ cat /etc/systemd/system/etcd3.service
+cat /etc/systemd/system/etcd3.service
+```
+
+```output
 [Unit]
 Description=etcd
 Documentation=https://github.com/coreos/etcd
@@ -97,9 +103,9 @@ Make sure the systemd files are setup correctly on all the 3 nodes.
 Run the following commands on all the 3 nodes to start etcd.
 
 ```text
-$ sudo systemctl daemon-reload
-$ sudo systemctl enable etcd3
-$ sudo systemctl start etcd3
+sudo systemctl daemon-reload
+sudo systemctl enable etcd3
+sudo systemctl start etcd3
 ```
 
 #### Step 4: Validate etcd setup
@@ -107,7 +113,10 @@ $ sudo systemctl start etcd3
 Run the following command to check if etcd is setup correctly.
 
 ```text
-$ etcdctl cluster-health
+etcdctl cluster-health
+```
+
+```output
 member 56a14e6f53fae617 is healthy: got healthy result from http://70.0.40.154:2379
 member 7e34afa2930c40e5 is healthy: got healthy result from http://70.0.40.155:2379
 member 8ff90a5cbffc52d4 is healthy: got healthy result from http://70.0.40.153:2379

@@ -12,7 +12,10 @@ PX-Enterprise can be run in a client-only mode such that the storage available i
 ### Show current PX Cluster
 
 ```text
-sudo /opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 Status: PX is operational
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
 	IP: 147.75.104.185
@@ -55,7 +58,10 @@ NOTE: if you already have config.json in /etc/pwx/ then the config.json settings
 ### Display the cluster node list
 
 ```text
-[root@pxnostorage ~]# sudo /opt/pwx/bin/pxctl cluster list
+pxctl cluster list
+```
+
+```output
 Cluster ID: bb4bcf13-d394-11e6-afae-0242ac110002
 Status: OK
 
@@ -74,7 +80,10 @@ a56a4821-6f17-474d-b2c0-3e2b01cd0bc3	147.75.198.197	0.375469	8.4 GB	7.9 GB		N/A	
 The status below shows that the new node (147.75.99.55) is the zero storage node that has been added to the cluster
 
 ```text
-sudo /opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 Status: PX is operational
 Node ID: da758d06-aa9e-4bcb-8cc8-a74ee09030e3
 	IP: 147.75.99.55

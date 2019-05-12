@@ -11,7 +11,7 @@ Here's an example of how to create a snapshot:
 pxctl volume snapshot create --name mysnap --label color=blue,fabric=wool myvol
 ```
 
-```
+```output
 Volume snap successful: 234835613696329810
 ```
 

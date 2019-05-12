@@ -30,6 +30,7 @@ Perform these steps on any machine where you have the bosh CLI.
 1. Create and upload the release.
 
     Replace _director-environment_ below with the environment which points to the Bosh Director.
+
     ```text
     git clone https://github.com/portworx/portworx-stop-bosh-release.git
     cd portworx-stop-bosh-release
@@ -40,6 +41,7 @@ Perform these steps on any machine where you have the bosh CLI.
 2. Add the addon to the Bosh Director.
 
     First let's fetch your current Bosh Director runtime config.
+
     ```text
     bosh -e director-environment runtime-config
     ```
@@ -50,6 +52,7 @@ Perform these steps on any machine where you have the bosh CLI.
 
 
     Once we have the runtime config file prepared, let's update it in the Director.
+
     ```text
     bosh -e director-environment update-runtime-config runtime-configs/director-runtime-config.yaml
     ```
@@ -60,7 +63,6 @@ Perform these steps on any machine where you have the bosh CLI.
 
     If you already have an existing PX cluster, you will need to recreate the VM instances using the bosh recreate command.
 
-<a name="install-etcd-pks"></a>
 ## Step 2: Install Etcd
 
 Portworx uses a key-value store for it’s clustering metadata. There are couple of options here:
@@ -81,6 +83,7 @@ kubectl -n kube-system describe secret px-etcd-certs
 ```
 
 This should output the below and shows the etcd certs are present in the secret.
+
 ```text
 Name:         px-etcd-certs
 Namespace:    kube-system
@@ -96,7 +99,6 @@ etcd.crt:  1680 bytes
 etcd.key:  414  bytes
 ```
 
-<a name="install-px-pks"></a>
 ## Step 3: Installing Portworx
 
 For on-premise clusters, [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) supports VMware vSphere.

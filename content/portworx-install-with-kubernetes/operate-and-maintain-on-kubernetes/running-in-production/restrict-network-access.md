@@ -107,7 +107,7 @@ So in this model where we’re using network policies to restrict control plane 
 
 {{<info>}}Replace `70.0.0.0/16` with the subnet of your Kubernetes worker nodes.{{</info>}}
 
-```
+```text
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
@@ -125,6 +125,7 @@ spec:
   policyTypes:
   - Egress
 ```
+
 Now we’ll have access to the API service from pods in the default namespace.
 
 ## Limitations

@@ -37,9 +37,7 @@ First, let's get the cluster token of the destination cluster. Run the following
 pxctl cluster token show
 ```
 
-You should see something like:
-
-```
+```output
 Token is 0795a0bcd46c9a04dc24e15e7886f2f957bfee4146442774cb16ec582a502fdc6aebd5c30e95ff40a6c00e4e8d30e31d4dbd16b6c9b93dfd56774274ee8798cd
 ```
 
@@ -52,12 +50,10 @@ pxctl cluster pair create --ip <ip_of_source_destination_cluster_node> --token <
 Just to make sure our pairing was created, try running the following command on the second cluster:
 
 ```text
-/opt/pwx/bin/pxctl cluster pair list
+pxctl cluster pair list
 ```
 
-The output should look similar to this:
-
-```
+```output
 ClusterID                                               Name        IP              Port           CredID
 7c6fbc24-5b36-4fa1-bf5e-10cbe9576427 (default)          mycluster   192.168.56.75   9001           e28b4bcc-e4d5-4bb9-b9ad-c86a2554d71e
 ```
@@ -67,7 +63,7 @@ You can pair multiple clusters with each other. The first pair created will be l
 
 You can delete a cluster pair by running the following command:
 
-```
+```text
 pxctl cluster pair delete --id <cluster_id>
 ```
 
@@ -81,7 +77,7 @@ Let's get a glimpse of the available commands:
 pxctl cloudmigrate --help
 ```
 
-```
+```output
 Migrate volumes across clusters
 
 Usage:
@@ -117,7 +113,7 @@ Now, let's use again the built-in help and take a look at how to start migration
 pxctl cloudmigrate start --help
 ```
 
-```
+```output
 Migrate volume(s) to a paired Portworx cluster
 
 Usage:
@@ -168,9 +164,7 @@ While _Portworx_ migrates your volume(s), you can check the status by running th
 pxctl cloudmigrate status
 ```
 
-You should see something similar to this:
-
-```
+```output
 Cluster UUID: 7c6fbc24-5b36-4fa1-bf5e-10cbe9576427
 VolumeId            VolumeName                                  Stage   Status      LastUpdate                          LastSuccess
 1028723504085545761 pvc-e0231935-a651-11e8-9e30-0214683e8447    Done    Complete    Wed, 05 Sep 2018 03:04:10 UTC       Wed, 05 Sep 2018 03:04:10 UTC
@@ -185,4 +179,4 @@ VolumeId            VolumeName                                  Stage   Status  
 
 The stages of a particular migration will progress from Backup→ Restore→ Done. If any stage fails the status will be marked as Failed.
 
-If the migration is successful you should see the volume(s) with the same name created on the destination cluster.
+If the migration is successful, you should see the volume(s) with the same name created on the destination cluster.

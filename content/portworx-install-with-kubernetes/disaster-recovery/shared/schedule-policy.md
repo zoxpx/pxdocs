@@ -51,7 +51,7 @@ To display a policy, run `storkctl get` with the name of the policy as a paramet
 storkctl get schedulepolicy
 ```
 
-```
+```output
 NAME           INTERVAL-MINUTES   DAILY     WEEKLY             MONTHLY
 testpolicy     1                  10:14PM   Thursday@10:13PM   14@8:05PM
 ```

@@ -44,17 +44,20 @@ Once you have the spec, proceed below.
 
 Below are the steps to wipe your entire Portworx installation on PKS.
 
-1. Run cluster-scoped wipe: ```curl -fsL https://install.portworx.com/px-wipe | bash -s -- -T pks```
+1. Run cluster-scoped wipe:
+
+```text
+curl -fsL https://install.portworx.com/px-wipe | bash -s -- -T pks
+```
+
 2. Go to each virtual machine and delete the additional vmdks Portworx created.
 
 ## References
 
-<a name="pks-px-vsphere-secret"></a>
 ### Secret for vSphere credentials
 
 {{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-secret.md" %}}
 
-<a name="pks-px-spec"></a>
 ### Portworx spec
 
 Things to replace in the below spec to match your environment:
@@ -64,7 +67,7 @@ Things to replace in the below spec to match your environment:
 3. **VSPHERE_VCENTER**: Hostname of the vCenter server.
 4. **VSPHERE_DATASTORE_PREFIX**: Prefix of the ESXi datastores that Portworx will use for storage.
 
-```
+```text
 apiVersion: v1
 kind: ServiceAccount
 metadata:

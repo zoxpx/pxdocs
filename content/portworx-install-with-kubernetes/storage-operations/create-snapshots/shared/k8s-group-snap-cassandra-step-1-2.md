@@ -7,7 +7,7 @@ keywords: portworx, kubernetes
 
 #### Step 1: Deploy cassandra statefulset and PVCs
 
-Following spec creates a replica 3 cassandra statefulset. Each replica pod will use it's own PVC.
+Following spec creates a replica 3 cassandra statefulset. Each replica pod will use its own PVC.
 
 ```text
 ##### Portworx storage class
@@ -135,7 +135,7 @@ List the cassandra pods:
 kubectl get pods -l app=cassandra
 ```
 
-```
+```output
 NAME          READY     STATUS    RESTARTS   AGE
 cassandra-0   1/1       Running   0          3m
 cassandra-1   1/1       Running   0          2m
@@ -148,7 +148,7 @@ Once you see all the 3 pods, you can also list the cassandra PVCs.
 kubectl get pvc -l app=cassandra
 ```
 
-```
+```output
 NAME                         STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
 cassandra-data-cassandra-0   Bound     pvc-ff752ad9-1607-11e9-a9a4-080027ee1df7   2Gi        RWO            stork-snapshot-sc   3m
 cassandra-data-cassandra-1   Bound     pvc-ff767dcf-1607-11e9-a9a4-080027ee1df7   2Gi        RWO            stork-snapshot-sc   2m

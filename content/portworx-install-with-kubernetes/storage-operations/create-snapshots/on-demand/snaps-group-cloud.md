@@ -23,7 +23,7 @@ Group cloud snapshots using Stork are supported in Portworx and Stork 2.0.2 and 
 
 To take group snapshots, you need use the GroupVolumeSnapshot CRD object and pass in _portworx/snapshot-type_ as _cloud_. Here is a simple example:
 
-```yaml
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: GroupVolumeSnapshot
 metadata:
@@ -104,7 +104,7 @@ Status:
 
   * You can see 3 volume snapshots which are part of the group snapshot. The name of the volume snapshot is in the _Volume Snapshot Name_ field. For more details on the `volumesnapshot`, you can do:
 
-    ```
+    ```text
     kubectl get volumesnapshot <volume-snapshot-name> -o yaml
     ```
 
@@ -114,7 +114,7 @@ If a cloud groupvolumesnapshot fails to trigger, it will be retried. However, by
 
 If you want to change this behavior, you can set the `maxRetries` field in the spec. In below example, we will perform 3 retries on failures.
 
-```yaml
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: GroupVolumeSnapshot
 metadata:
@@ -166,7 +166,7 @@ In below example, we will take a group snapshot for all PVCs in the *default* na
 
 Apply the following spec to take the cassandra group snapshot. Portworx will quiesce I/O on all volumes before triggering their snapshots.
 
-```yaml
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: GroupVolumeSnapshot
 metadata:
@@ -269,7 +269,7 @@ You can also describe these individual volume snapshots using
 kubectl describe volumesnapshot cassandra-group-cloudsnapshot-cassandra-data-cassandra-0-31d9e5df-183b-11e9-a9a4-080027ee1df7
 ```
 
-```
+```output
 Name:         cassandra-group-cloudsnapshot-cassandra-data-cassandra-0-31d9e5df-183b-11e9-a9a4-080027ee1df7
 Namespace:    default
 Labels:       <none>

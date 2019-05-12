@@ -46,7 +46,7 @@ The keyspace can be compacted automatically with etcd's time windowed history re
 We recommend keeping history for last 3 hours. While setting up etcd you can specify the retention policy in the following way:
 
 ```text
-$ etcd --auto-compaction-retention=3
+etcd --auto-compaction-retention=3
 ```
 
 #### Database Size (Space Quota)
@@ -56,7 +56,7 @@ The space quota in etcd ensures the cluster operates in a reliable fashion. With
 We recommend setting the space quota to max value of 8Gi. While setting up etcd you can specify the space quota in the following way:
 
 ```text
-$ etcd --quota-backend-bytes=$((8*1024*1024*1024))
+etcd --quota-backend-bytes=$((8*1024*1024*1024))
 ```
 
 #### Snapshot Policy
@@ -64,7 +64,7 @@ $ etcd --quota-backend-bytes=$((8*1024*1024*1024))
 Etcd can take periodic snapshots of its keyspace which can be used to restore the etcd cluster in case of a complete disaster. By default etcd takes a snapshot after every 10,000 changes to its key value space. If you want the snapshot strategy to be more aggressive you can tune the frequency in the following way:
 
 ```text
-$ etcd --snapshot-count=5000
+etcd --snapshot-count=5000
 ```
 
 For a more detailed setup, maintenance and tuning information refer the following coreos etcd reference docs.

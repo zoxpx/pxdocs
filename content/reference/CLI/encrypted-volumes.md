@@ -29,7 +29,7 @@ The first step is to create a new volume. Let's make it encrypted with the `--se
 /opt/pwx/bin/pxctl volume create --secure --size 10 encrypted_volume
 ```
 
-```
+```output
 Volume successfully created: 822124500500459627
 ```
 
@@ -39,9 +39,7 @@ Just to make sure our new encrypted volume was created, try running the followin
 pxctl volume list
 ```
 
-You should see something like:
-
-```
+```output
 ID	      	     		NAME		SIZE	HA SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 822124500500459627	 encrypted_volume	10 GiB	1    no yes		LOW		1	up - detached
 ```
@@ -52,7 +50,7 @@ Next, you can attach the volume:
 pxctl host attach encrypted_volume
 ```
 
-```
+```output
 Volume successfully attached at: /dev/mapper/pxd-enc822124500500459627
 ```
 
@@ -62,7 +60,7 @@ We're almost done. Let's mount the volume by running the following command:
 pxctl host mount encrypted_volume /mnt
 ```
 
-```
+```output
 Volume encrypted_volume successfully mounted at /mnt
 ```
 
@@ -81,7 +79,7 @@ Let's look at a simple example. First, we'll run  `pxctl volume create` with the
 pxctl volume create --secure --secret_key key1 enc_vol
 ```
 
-```
+```output
 Volume successfully created: 374663852714325215
 ```
 
@@ -112,7 +110,7 @@ The `--shared` flag is used to indicate that we would want to share an encrypted
 pxctl volume create --shared --secure --size 10 encrypted_volume
 ```
 
-```
+```output
 Encrypted Shared volume successfully created: 77957787758406722
 ```
 
@@ -122,9 +120,7 @@ Try inspecting our new volume:
 pxctl volume inspect encrypted_volume
 ```
 
-You should see something like:
-
-```
+```output
 Volume	:  77957787758406722
 Name            	 :  encrypted_volume
 Size            	 :  10 GiB

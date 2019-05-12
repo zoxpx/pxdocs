@@ -44,7 +44,7 @@ pxctl cluster token show
 
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/cluster-pair.md" %}}
 
-```
+```text
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterPair
 metadata:
@@ -144,6 +144,7 @@ On the **source** cluster, create the clusterpair by applying `clusterpair.yaml`
 ```text
 kubectl apply -f clusterpair.yaml
 ```
+
 ```output
 clusterpair.stork.libopenstorage.org/remotecluster created
 ```
@@ -155,10 +156,12 @@ Once you apply the above spec on the source cluster, you should be able to check
 ```text
 storkctl get clusterpair
 ```
+
 ```output
 NAME               STORAGE-STATUS   SCHEDULER-STATUS   CREATED
 remotecluster      Ready            Ready              26 Oct 18 03:11 UTC
 ```
+
 On a successful pairing, you should see the "Storage Status" and "Scheduler Status" as "Ready":
 
 If so, you’re all set and ready to [migrate] (#migrating-volumes-and-resoruces).
@@ -215,11 +218,16 @@ Next, you can invoke this migration manually from the command line:
 kubectl apply -f migration.yaml
 ```
 
+```output
+Migration mysqlmigration created successfully
+```
+
 or automate it through `storkctl`:
 
 ```text
 storkctl create migration mysqlmigration --clusterPair remotecluster --namespaces migrationnamespace --includeResources --startApplications -n migrationnamespace
 ```
+
 ```output
 Migration mysqlmigration created successfully
 ```
@@ -235,7 +243,10 @@ Once the migration has been started using the above commands, you can check the 
 ```text
 storkctl get migration -n migrationnamespace
 ```
-```output
+
+First, you should see something like this:
+
+```
 NAME            CLUSTERPAIR     STAGE     STATUS       VOLUMES   RESOURCES   CREATED
 mysqlmigration  remotecluster   Volumes   InProgress   0/1       0/0         26 Oct 18 20:04 UTC
 ```

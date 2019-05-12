@@ -48,7 +48,7 @@ policy:
 kubectl apply -f policy-daily.yaml
 ```
 
-```
+```output
 schedulepolicy.stork.libopenstorage.org/daily created
 ```
 
@@ -76,7 +76,7 @@ If you want to check the status of our schedule policy, type:
 storkctl get schedulepolicy
 ```
 
-```
+```output
 NAME      INTERVAL-MINUTES   DAILY     WEEKLY             MONTHLY
 daily     N/A                10:14PM   N/A                N/A
 weekly    N/A                N/A       Thursday@10:13PM   N/A
@@ -128,7 +128,8 @@ Next, let's apply our newly created storage class:
 ```text
 kubectl apply -f sc-with-snap-schedule.ymal
 ```
-```
+
+```output
 storageclass.storage.k8s.io/px-sc-with-snap-schedules created
 ```
 
@@ -157,7 +158,7 @@ Paste the listing from above into a file named `pvc-snap-schedules-demo.yaml` an
 kubectl create -f pvc-snap-schedules-demo.yaml
 ```
 
-```
+```output
 persistentvolumeclaim/pvc-snap-schedules-demo created
 ```
 
@@ -167,7 +168,7 @@ Let's see our PVC:
 kubectl get pvc
 ```
 
-```
+```output
 NAME                      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS                AGE
 pvc-snap-schedules-demo   Bound    pvc-3491fc8a-6222-11e9-89a9-080027ee1df7   2Gi        RWO            px-sc-with-snap-schedules   14s
 ```
@@ -186,7 +187,7 @@ First let's verify that the snapshot schedules are created correctly.
 storkctl get volumesnapshotschedules
 ```
 
-```
+```output
 NAME                                       PVC                       POLICYNAME   PRE-EXEC-RULE   POST-EXEC-RULE   RECLAIM-POLICY   SUSPEND   LAST-SUCCESS-TIME
 pvc-snap-schedules-demo-default-schedule   pvc-snap-schedules-demo   daily                                         Retain           false
 pvc-snap-schedules-demo-weekly-schedule    pvc-snap-schedules-demo   weekly                                        Retain           false
@@ -206,7 +207,7 @@ Also, you can use `storkctl` to make sure that the snapshots are created by runn
 storkctl get volumesnapshots
 ```
 
-```
+```output
 NAME                                                                  PVC                       STATUS    CREATED               COMPLETED             TYPE
 pvc-snap-schedules-demo-default-schedule-interval-2019-03-27-015546   pvc-snap-schedules-demo   Ready     26 Mar 19 21:55 EDT   26 Mar 19 21:55 EDT   local
 pvc-snap-schedules-demo-weekly-schedule-interval-2019-03-27-015546    pvc-snap-schedules-demo   Ready     26 Mar 19 21:55 EDT   26 Mar 19 21:55 EDT   cloud

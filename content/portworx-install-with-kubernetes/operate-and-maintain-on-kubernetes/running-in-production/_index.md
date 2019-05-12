@@ -22,7 +22,10 @@ series: k8s-op-maintain
 * The base operating system of the server supports linux kernel 3.10+ . Newer 4.x linux kernels have many performance and stability related fixes and is recommended.
 
 ```text
-[centos@ip-172-31-51-89 ~]$ uname -r
+uname -r
+```
+
+```output
 3.10.0-327.22.2.el7.x86_64
 ```
 
@@ -64,17 +67,20 @@ PX replicated volumes distributes data across failure domains. For on-premise in
 PX auto-detects availabilty zones and regions and provisions replicas across different zones. For e.g., see below for the partial output of `pxctl status`
 
 ```text
-  sudo /opt/pwx/bin/pxctl status
-   Status: PX is operational
-   License: Trial (expires in 23 days)
-   Node ID: a17f382d-b2ef-41b8-81fc-d9b86d56b5d1
-	  IP: 172.31.51.89
- 	  Local Storage Pool: 2 pools
-	  POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
-	  0	LOW		raid0		64 GiB	1.1 GiB	Online	b	us-east-1
-	  1	LOW		raid0		128 GiB	65 GiB	Online	b	us-east-1
-    ...
-    ...
+pxctl status
+```
+
+```output
+Status: PX is operational
+License: Trial (expires in 23 days)
+Node ID: a17f382d-b2ef-41b8-81fc-d9b86d56b5d1
+IP: 172.31.51.89
+Local Storage Pool: 2 pools
+POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
+0	LOW		raid0		64 GiB	1.1 GiB	Online	b	us-east-1
+1	LOW		raid0		128 GiB	65 GiB	Online	b	us-east-1
+...
+...
 ```
 
 This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor is created, it will have the replicas automatically created in other nodes in other zones.
@@ -87,7 +93,7 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 * Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. Monitor for for Volume Space Low alerts
 
-  ```text
+  ```
   30|VolumeSpaceLow|ALARM|VOLUME|Triggered when the free space available in a volume goes below a threshold.
   ```
 
@@ -239,7 +245,7 @@ For using annotations Portworx daemon set requires extra permissions to read ann
 You can run the following command to edit your existing Portworx ClusterRole
 
 ```text
-$ kubectl edit clusterrole node-get-put-list-role
+kubectl edit clusterrole node-get-put-list-role
 ```
 
 * Refer to the [Snapshots document](/reference/cli/snapshots) in the Kubernetes section of the docs for more up to date information on snapshots.
@@ -371,7 +377,10 @@ While Prometheus can be deployed as a container within the container orchestrato
 **Step 1: Enter Maintenance mode**
 
 ```text
-/opt/pwx/bin/pxctl service  maintenance --enter
+pxctl service  maintenance --enter
+```
+
+```output
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 
@@ -385,28 +394,40 @@ Ensure the replacement drive is already available in the system.
 For e.g., Replace drive /dev/sde with /dev/sdc
 
 ```text
-/opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation start
+pxctl service drive replace --source /dev/sde --target /dev/sdc --operation start
+```
+
+```output
 "Replace operation is in progress"
 ```
 
 Check the replace status
 
 ```text
-/opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation status
+pxctl service drive replace --source /dev/sde --target /dev/sdc --operation status
+```
+
+```output
 "Started on 16.Dec 22:17:06, finished on 16.Dec 22:17:06, 0 write errs, 0 uncorr. read errs\n"
 ```
 
 **Step 3: Exit Maintenance mode**
 
 ```text
-/opt/pwx/bin/pxctl service  maintenance --exit
+pxctl service  maintenance --exit
+```
+
+```output
 PX is now operational
 ```
 
 **Step 4: Check if the drive has been successfully replaced**
 
 ```text
-/opt/pwx/bin/pxctl service drive show
+pxctl service drive show
+```
+
+```output
 PX drive configuration:
 Pool ID: 0
 	IO_Priority: LOW

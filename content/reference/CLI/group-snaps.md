@@ -14,7 +14,7 @@ First, let's get an overview of the available flags before diving in:
 pxctl volume snapshot group -h
 ```
 
-```
+```output
 Create group snapshots for given group id or labels
 
 Usage:
@@ -47,7 +47,7 @@ To take a group snapshot of the volumes labelled with `v1=x1`, use this command:
 pxctl volume snapshot group --label v1=x1
 ```
 
-```
+```output
 Volume 549285969696152595 : Snapshot 1026872711217134654
 Volume 952350606466932557 : Snapshot 218459942880193319
 ```
@@ -58,9 +58,8 @@ You can easily group volumes by IDs and take a group snapshot with the `--volume
 pxctl volume snapshot group --volume_ids 83958335106174418,874802361339616936
 ```
 
-```
+```output
 Volume 83958335106174418 : Snapshot 362408823552094597
 Volume 874802361339616936 : Snapshot 895516478416742770
-
 ```
 
