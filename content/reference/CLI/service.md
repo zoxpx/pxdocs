@@ -102,7 +102,7 @@ OPTIONS:
 ```
 
 ```text
-/opt/pwx/bin/pxctl service diags --container px-enterprise
+pxctl service diags --container px-enterprise
 ```
 
 ```output

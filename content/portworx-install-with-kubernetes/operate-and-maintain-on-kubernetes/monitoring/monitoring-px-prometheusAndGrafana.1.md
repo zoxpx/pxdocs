@@ -210,6 +210,7 @@ receivers:
 kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system
 ```
 
+
 Create a file named `alertmanager-cluster.yaml` with the below contents:
 
 ```text
