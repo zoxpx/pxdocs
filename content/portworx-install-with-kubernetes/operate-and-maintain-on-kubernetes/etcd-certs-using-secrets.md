@@ -32,7 +32,7 @@ Notice that the secret has 3 keys `etcd-ca.crt`, `etcd.crt` and `etcd.key`, corr
 kubectl -n kube-system describe secret px-etcd-certs
 ```
 
-```
+```output
 Name:         px-etcd-certs
 Namespace:    kube-system
 Labels:       <none>

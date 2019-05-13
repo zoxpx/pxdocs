@@ -46,7 +46,7 @@ The keyspace can be compacted automatically with etcd's time windowed history re
 We recommend keeping history for last 3 hours. While setting up etcd you can specify the retention policy in the following way:
 
 ```text
-$ etcd --auto-compaction-retention=3
+etcd --auto-compaction-retention=3
 ```
 
 #### Database Size (Space Quota)

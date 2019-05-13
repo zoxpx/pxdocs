@@ -33,7 +33,7 @@ Grafana is a dashboarding and visualization tool with integrations to several ti
 ## Installation
 
 ### Install the Prometheus Operator
-Create a file named `prometheus-operator.yaml` with the below contents and apply the spec.
+Create a file named `prometheus-operator.yaml` with the below contents:
 
 ```text
 apiVersion: rbac.authorization.k8s.io/v1
@@ -145,7 +145,11 @@ spec:
       serviceAccountName: prometheus-operator
 ```
 
-`kubectl apply -f <prometheus-operator.yaml>`
+Apply the spec by running:
+
+```text
+kubectl apply -f <prometheus-operator.yaml>
+```
 
 ### Install the Service Monitor
 
@@ -200,9 +204,11 @@ receivers:
     auth_identity: "<sender-email-address>"
     auth_password: "<sender-email-password>"
 ## Edit the file and create a secret with it using the following command
+```
 
 ```text
-`kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system`
+kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system
+```
 
 
 Create a file named `alertmanager-cluster.yaml` with the below contents:
