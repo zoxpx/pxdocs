@@ -63,7 +63,7 @@ Here is a typical workflow on how to identify and replace drives.
 pxctl service drive show
 ```
 
-```
+```output
 PX drive configuration:
 Pool ID: 0
 	IO_Priority: LOW

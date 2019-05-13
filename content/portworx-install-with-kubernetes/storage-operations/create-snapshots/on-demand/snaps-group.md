@@ -242,7 +242,7 @@ You can also describe these individual volume snapshots using
  kubectl describe volumesnapshot cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
 ```
 
-```
+```output
 Name:         cassandra-group-snapshot-cassandra-data-cassandra-0-86ce35eb-1826-11e9-a9a4-080027ee1df7
 Namespace:    default
 Labels:       <none>

@@ -54,7 +54,7 @@ kvdb-response	none	KV response audit not yet available
 You can use this command to enable and disable the call home feature
 
 ```text
-/opt/pwx/bin/pxctl service call-home --help
+pxctl service call-home --help
 ```
 
 ```output
@@ -66,7 +66,7 @@ USAGE:
 ```
 
 ```text
-/opt/pwx/bin/pxctl service call-home enable
+pxctl service call-home enable
 ```
 
 ```output
@@ -102,7 +102,7 @@ OPTIONS:
 ```
 
 ```text
-/opt/pwx/bin/pxctl service diags --container px-enterprise
+pxctl service diags --container px-enterprise
 ```
 
 ```output
@@ -152,7 +152,7 @@ OPTIONS:
 Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc…
 
 ```text
-/opt/pwx/bin/pxctl service maintenance --help
+pxctl service maintenance --help
 ```
 
 ```output
@@ -169,7 +169,7 @@ OPTIONS:
 ```
 
 ```text
-/opt/pwx/bin/pxctl service maintenance --enter
+pxctl service maintenance --enter
 ```
 
 ```output

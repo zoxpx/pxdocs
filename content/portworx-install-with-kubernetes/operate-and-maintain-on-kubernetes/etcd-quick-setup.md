@@ -30,15 +30,15 @@ You can replace the __ETCD_VER__ with the etcd version you wish to install
 Untar the etcd tar ball
 
 ```text
-$ rm -rf /tmp/etcd && mkdir -p /tmp/etcd
-$ tar xzvf /tmp/etcd.tar.gz -C /tmp/etcd --strip-components=1
+rm -rf /tmp/etcd && mkdir -p /tmp/etcd
+tar xzvf /tmp/etcd.tar.gz -C /tmp/etcd --strip-components=1
 ```
 
 Install the etcd binaries
 
 ```text
-$ sudo cp /tmp/etcd/etcd /usr/local/bin/
-$ sudo cp /tmp/etcd/etcdctl /usr/local/bin/
+sudo cp /tmp/etcd/etcd /usr/local/bin/
+sudo cp /tmp/etcd/etcdctl /usr/local/bin/
 ```
 
 Repeat the above steps on all the 3 nodes before moving forward.
@@ -103,9 +103,9 @@ Make sure the systemd files are setup correctly on all the 3 nodes.
 Run the following commands on all the 3 nodes to start etcd.
 
 ```text
-$ sudo systemctl daemon-reload
-$ sudo systemctl enable etcd3
-$ sudo systemctl start etcd3
+sudo systemctl daemon-reload
+sudo systemctl enable etcd3
+sudo systemctl start etcd3
 ```
 
 #### Step 4: Validate etcd setup
@@ -113,7 +113,7 @@ $ sudo systemctl start etcd3
 Run the following command to check if etcd is setup correctly.
 
 ```text
-$ etcdctl cluster-health
+etcdctl cluster-health
 ```
 
 ```output
