@@ -59,7 +59,7 @@ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/72c299a4-
 
 ### Select and customize the deployment configuration
 
-The example deployment here uses Kubernetes with pre-attached disks and VM scale sets. Find a sample JSON file in the acs-engine repository here: [examples/disks-managed/kubernetes-preAttachedDisks-vmas.json](https://github.com/Azure/acs-engine/blob/master/examples/disks-managed/kubernetes-preAttachedDisks-vmas.json)
+The example deployment here uses Kubernetes with pre-attached disks and VM scale sets. Find a sample JSON file in the acs-engine repository [here](https://github.com/Azure/acs-engine/blob/master/examples/disks-managed/kubernetes-preAttachedDisks-vmas.json).
 
 Ensure that the Portworx target nodes have at least one “local” attached disk which can be used to contribute storage to the global storage pool.
 
