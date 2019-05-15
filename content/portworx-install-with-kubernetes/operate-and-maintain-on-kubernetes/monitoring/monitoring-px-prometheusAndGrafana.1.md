@@ -493,7 +493,7 @@ Navigate to the Prometheus web UI by going to `http://<master_ip>:<service_nodep
 
 ### Installing Grafana
 
-Create a file named `grafana-deployment.yaml` with [this content](/samples/k8s/grafana/grafana-deployment.yaml?raw=true):
+Create a file named `grafana-deployment.yaml` with {{< direct-download url="/samples/k8s/grafana/grafana-deployment.yaml" name="this content" >}}:
 
 Next, apply the spec:
 
