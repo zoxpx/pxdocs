@@ -9,9 +9,8 @@ The goal of this document is to setup a single Portworx cluster that spans acros
 
 ## Pre-requisites
 
-* **Kubernetes Clusters**: You should have at least two Kubernetes clusters that are part of the same metropolitan area network with a maximum network latency of ~10 ms between them.
-* **Version**: A single Portworx cluster of v2.1 or later release needs to be installed on both clusters. Also requires Stork v2.2+ on both the clusters.
-* **Secret Store** : Make sure you have configured a [secret store](/key-management) on both your clusters. This will be used to store the credentials for the objectstore.
+* **Kubernetes Clusters**: You should have at least two Kubernetes clusters which are part of the same metropolitan area network with a maximum network latency of 10ms between them.
+* **Version**: A single Portworx cluster of v2.1 or later release needs to be installed on both clusters. This also requires Stork v2.2+ on both the clusters.
 * **Network Connectivity**: Ports between 9001 and 9020 should be open between the two Kubernetes clusters.
 * **External Kvdb**: A kvdb like etcd or consul setup outside of the Kubernetes clusters.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
@@ -42,7 +41,7 @@ To achieve this, make sure you provide the following arguments same as your exis
 
 Specifying the same **ClusterID** and **Kvdb Endpoints** as your existing cluster ensures that a single Portworx cluster will stretch across multiple Kubernetes clusters.
 
-If your Kubernetes clusters have exactly the same configuration you can use the URL specified by the `portworx.com/install-source` annotation on the existing Portworx DaemonSet to fetch the spec for your new cluster:
+If your Kubernetes clusters have exactly the same configuration, you can use the URL specified by the `portworx.com/install-source` annotation on the existing Portworx DaemonSet to fetch the spec for your new cluster:
 
 ```text
 apiVersion: extensions/v1beta1
