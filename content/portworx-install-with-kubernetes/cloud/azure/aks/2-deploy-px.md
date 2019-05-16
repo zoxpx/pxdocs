@@ -17,7 +17,13 @@ AZURE_CLIENT_SECRET=ac49a307-xxxx-xxxx-xxxx-fa551e221170
 If generating the DaemonSet spec via the GUI wizard, specify the Azure environment variables in the **List of environment variables** field. If generating the DaemonSet spec via the command line, specify the Azure environment variables using the `e` parameter.
 {{</info>}}
 
-{{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
+### Generate the specs
+
+To install _Portworx_ with Kubernetes, you will first generate Kubernetes manifests that you will deploy in your cluster.
+
+To generate the specs, click {{<iframe url="https://aks-install.portworx.com/2.1" text="Generating the Portworx specs.">}}
+
+_Portworx_ can also be installed using it's Helm chart by following instructions [here](/portworx-install-with-kubernetes/install-px-helm). The above method is recommended over helm as the wizard will guide you based on your environment.
 
 {{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
 
