@@ -7,15 +7,20 @@ weight: 2
 
 ## Install
 
-{{<info>}}
-You must specify Azure environment variables in the DaemonSet spec file for _Portworx_ to manage the disks. The environment variables to specify are:
+### Create a secret to give Portworx access to Azure APIs
+
+Update `<AZURE_TENANT_ID>`, `<AZURE_CLIENT_ID>` and `<AZURE_CLIENT_SECRET>` in below command and create a secret called _px-aks-secret_. 
+
+```text
+kubectl create secret generic px-azure --from-literal=AZURE_TENANT_ID=<AZURE_TENANT_ID> \
+                                       --from-literal=AZURE_CLIENT_ID=<AZURE_CLIENT_ID> \
+                                       --from-literal=AZURE_CLIENT_SECRET=<AZURE_CLIENT_SECRET>
 ```
-AZURE_TENANT_ID=ca9700ce-xxxx-xxxx-xxxx-09c48f71d0ce
-AZURE_CLIENT_ID=1311e5f6-xxxx-xxxx-xxxx-ede45a6b2bde
-AZURE_CLIENT_SECRET=ac49a307-xxxx-xxxx-xxxx-fa551e221170
+```output
+secret/px-aks-secret created
 ```
-If generating the DaemonSet spec via the GUI wizard, specify the Azure environment variables in the **List of environment variables** field. If generating the DaemonSet spec via the command line, specify the Azure environment variables using the `e` parameter.
-{{</info>}}
+
+When you generate the spec in the next step, the Portworx pod will fetch the Azure environment variables from this secret.
 
 ### Generate the specs
 
