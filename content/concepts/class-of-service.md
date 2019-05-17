@@ -122,7 +122,7 @@ The `status` command on any node shows the pools with different classes of servi
 #### Inspect different pools
 
 ```text
-pxctl service drives
+pxctl service drive show
 ```
 
 ```output
