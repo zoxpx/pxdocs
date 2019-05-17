@@ -14,7 +14,38 @@ For this section, we will refer to,
 
 In order to failover the application, you need to instruct Stork and Portworx that one of your Kubernetes clusters is down and inactive.
 
-### Create a ClusterDomainUpdate object
+### Deactivate failed Cluster Domain
+
+In order to initiate a failover, we need to first mark the source cluster as inactive.
+
+#### Using storkctl
+
+Run the following storkctl command to deactivate the source cluster
+
+`storkctl`:
+
+```text
+storkctl deactivate clusterdomain us-east-1a
+```
+
+Run the above command on the destination cluster where Portworx is still running. To validate that the command has succeeded you can check the status of all the cluster domains using `storkctl`:
+
+```text
+storkctl get clusterdomainsstatus
+```
+
+When a domain gets successfully deactivated the above command should return something like this:
+
+```
+NAME            ACTIVE         INACTIVE       CREATED
+px-dr-cluster   [us-east-1b]   [us-east-1a]   09 Apr 19 17:12 PDT
+```
+
+You can see that the cluster domain `us-east-1a` is now **Inactive**
+
+#### Using kubectl
+
+If you wish to use `kubectl` instead of `storkctl`, you can create a `ClusterDomainUpdate` object as explained below. If you have already used `storkctl` you can skip this section.
 
 Let's create a new file named `clusterdomainupdate.yaml` that specifies an object called `ClusterDomainUpdate` and designates the cluster domain of the source cluster as inactive:
 
@@ -37,21 +68,6 @@ In order to invoke from command-line, run the following:
 ```text
 kubectl create -f clusterdomainupdate.yaml
 ```
-
-You can run the above command on any Kubernetes cluster which is alive. To validate that the command has succeeded you can check the status of all the cluster domains using `storkctl`:
-
-```text
-storkctl get clusterdomainsstatus
-```
-
-When a domain gets successfully deactivated the above command should return something like this:
-
-```
-NAME            ACTIVE         INACTIVE       CREATED
-px-dr-cluster   [us-east-1b]   [us-east-1a]   09 Apr 19 17:12 PDT
-```
-
-You can see that the cluster domain `us-east-1a` is now **Inactive**
 
 ### Stop the application on the source cluster (if accessible)
 
