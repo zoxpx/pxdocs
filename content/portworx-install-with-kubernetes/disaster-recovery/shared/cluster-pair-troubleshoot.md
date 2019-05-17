@@ -6,5 +6,5 @@ kubectl describe clusterpair remotecluster
 ```
 
 {{<info>}}
-You might need to perform additional steps for [GKE](/portworx-install-with-kubernetes/cloud/gcp/gke) and [EKS](/portworx-install-with-kubernetes/cloud/aws/aws-eks/).
+You might need to perform additional steps for [GKE](/portworx-install-with-kubernetes/cloud/gke) and [EKS](/portworx-install-with-kubernetes/cloud/aws/aws-eks/).
 {{</info>}}
