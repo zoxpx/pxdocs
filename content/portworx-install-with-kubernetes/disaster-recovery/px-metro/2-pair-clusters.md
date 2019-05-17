@@ -65,7 +65,7 @@ Once the modifications are done, save it into a file `clusterpair.yaml`
 On the **source** cluster create the clusterpair by applying the generated spec.
 
 ```text
-kubectl apply -f clusterpair.yaml
+kubectl create -f clusterpair.yaml
 ```
 
 ### Verify the Pair status

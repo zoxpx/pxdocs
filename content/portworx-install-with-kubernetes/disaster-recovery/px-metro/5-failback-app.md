@@ -15,7 +15,34 @@ For this section, we will refer to,
 * **Source Cluster** as the Kubernetes cluster which is back online and where your applications need to failback to. (In this example: `cluster_domain: us-east-1a`)
 * **Destination Cluster** as the Kubernetes cluster where the applications will be failed over. (In this example: `cluster_domain: us-east-1b`)
 
-### Create a ClusterDomainUpdate CRD
+### Reactivate inactive Cluster Domain
+
+In order to initiate a failback, we need to first mark the source cluster as active.
+
+#### Using storkctl
+
+Run the following storkctl command to activate the source cluster
+
+`storkctl`:
+
+```text
+storkctl activate clusterdomain us-east-1a
+```
+
+You need to run the above command from the Kubernetes cluster which is **Active**. To validate that the command has succeeded you can do the following checks:
+
+```text
+storkctl get clusterdomainsstatus
+```
+
+```output
+NAME            ACTIVE                    INACTIVE   CREATED
+px-dr-cluster   [us-east-1a us-east-1b]   []         09 Apr 19 17:13 PDT
+```
+
+#### Using kubectl
+
+If you wish to use `kubectl` instead of `storkctl`, you can create a `ClusterDomainUpdate` object as explained below. If you have already used `storkctl` you can skip this section.
 
 Start by creating a new file named `clusterdomainupdate.yaml`. In this file, let's specify an object called a ClusterDomainUpdate and designate the cluster domain of the source cluster as active:
 
@@ -41,17 +68,6 @@ kubectl create -f clusterdomainupdate.yaml
 
 ```output
 clusterdomainupdate "activate-us-east-1a" created
-```
-
-You need to run the above command from the Kubernetes cluster which is **Active**. To validate that the command has succeeded you can do the following checks:
-
-```text
-storkctl get clusterdomainsstatus
-```
-
-```output
-NAME            ACTIVE                    INACTIVE   CREATED
-px-dr-cluster   [us-east-1a us-east-1b]   []         09 Apr 19 17:13 PDT
 ```
 
 You can see that the cluster domain `us-east-1a` is now **Active**
