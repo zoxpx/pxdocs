@@ -61,11 +61,11 @@ In your environment, you will put the interface dedicated to Portworx traffic in
 
 ### Advanced Parameters
 
-Set the Install Stork and Lighthouse fields to true.  Define a Portworx Cluster Name that is relevant to your environment.  Set the following version information:
+Set the Install Stork and Lighthouse fields to true.  Define a Portworx Cluster Name that is relevant to your environment.  Set the latest version information, for example:
 
-* Stork version: 2.1.0
-* Lighthouse version:	2.0.2 
-* Portworx version:	2.0.3.1
+* Stork version: 2.1.2
+* Lighthouse version:	2.0.4 
+* Portworx version:	2.1.1
 
 Once completed with the form select Launch.  Depending on your Internet speed and the performance of your systems it will take 5-20 minutes to install.  Once completed all process for Portworx will be green.
 
