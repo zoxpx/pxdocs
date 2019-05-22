@@ -105,7 +105,7 @@ Product SKU                  PX-Developer  permanent
 ### Trial License
 
 The "Trial" license activates automatically when the [px-enterprise](/) is installed.
-The trial license provides the full product functionality for 30 days.
+The trial license provides the full product functionality (except PX-DR) for 30 days.
 
 ```
 DESCRIPTION                  ENABLEMENT  ADDITIONAL INFO
