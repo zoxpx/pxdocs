@@ -12,15 +12,15 @@ Make sure you use `osft=true` when generating the spec.
 {{</info>}}
 
 ```text
-$ VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
 # For the 1.4 tech preview release
-$ curl -L -o px-spec.yaml "https://install.portworx.com/1.4/?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
+curl -L -o px-spec.yaml "https://install.portworx.com/1.4/?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
 
 # For the 1.3 stable release
-$ curl -L -o px-spec.yaml "https://install.portworx.com/1.3/?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
+curl -L -o px-spec.yaml "https://install.portworx.com/1.3/?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
 
 # For the 1.2 stable release
-$ curl -L -o px-spec.yaml "https://install.portworx.com/1.2/?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
+curl -L -o px-spec.yaml "https://install.portworx.com/1.2/?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
 ```
 
 Below are all parameters that can be given in the query string.

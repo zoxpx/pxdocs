@@ -44,6 +44,9 @@ Note the `shared` field in the list of parameters is set to true. Verifying stor
 
 ```text
 kubectl describe storageclass px-shared-sc
+```
+
+```output
 Name:	  	   px-shared-sc
 IsDefaultClass:	   No
 Annotations:	   <none>
@@ -83,9 +86,11 @@ Verifying persistent volume claim is created:
 
 ```text
 kubectl get pvc
+```
+
+```output
 NAME            STATUS    VOLUME                                   CAPACITY   ACCESSMODES   STORAGECLASS   AGE
 px-shared-pvc   Bound     pvc-a38996b3-76e9-11e7-9d47-080027b25cdf 10Gi       RWX           px-shared-sc   12m
-
 ```
 
 ### Step 3: Create Pods which uses Persistent Volume Claim

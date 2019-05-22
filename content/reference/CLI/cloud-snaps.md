@@ -586,7 +586,7 @@ This feature is only supported starting with _PX_ version 1.4 or later.
 To delete a cloud backup, run:
 
 ```text
-pxctl cloudsnap delete`
+pxctl cloudsnap delete
 ```
 
 The command will flag a cloudsnap for deletion and a job will take care of deleting objects associated with these backups from the objectstore.
