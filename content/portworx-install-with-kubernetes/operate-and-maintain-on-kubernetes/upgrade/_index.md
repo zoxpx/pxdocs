@@ -111,6 +111,9 @@ To get more information about the status of Portworx daemonset across the nodes,
 
 ```text
 kubectl get pods -o wide -n kube-system -l name=portworx
+```
+
+```output
 NAME             READY   STATUS              RESTARTS   AGE   IP              NODE
 portworx-9njsl   1/1     Running             0          16d   192.168.56.73   minion4
 portworx-fxjgw   1/1     Running             0          16d   192.168.56.74   minion5

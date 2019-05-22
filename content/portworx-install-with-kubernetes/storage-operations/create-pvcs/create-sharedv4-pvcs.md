@@ -72,6 +72,9 @@ Note the `sharedv4` field in the list of parameters is set to true. Verifying st
 
 ```text
 kubectl describe storageclass px-sharedv4-sc
+```
+
+```output
 Name:	  	   px-sharedv4-sc
 IsDefaultClass:	   No
 Annotations:	   <none>

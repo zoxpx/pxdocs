@@ -70,5 +70,5 @@ The journal device is expected to not have any filesystem on it, This can be ver
 ### 3. Exit maintenance mode
 
 ```text
-bin/pxctl service maintenance --exit
+pxctl service maintenance --exit
 ```
