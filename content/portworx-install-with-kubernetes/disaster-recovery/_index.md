@@ -1,7 +1,7 @@
 ---
 title: "Disaster Recovery (DR) for Kubernetes"
 linkTitle: "Disaster Recovery (DR)"
-keywords: cloud, backup, restore, snapshot, DR, migration
+keywords: cloud, backup, restore, snapshot, DR, PX-DR, migration
 hidesections: true
 ---
 
@@ -68,3 +68,9 @@ The option has the following characteristics:
 Click on the section below to instructions on how to setup this option.
 
 {{< widelink url="/portworx-install-with-kubernetes/disaster-recovery/async-dr" >}}How to setup Asynchronous DR{{</widelink>}}
+
+
+## Licensing
+
+Please note that the Disaster Recovery (PX-DR) license is not included with the PX-Enterprise Trial license.
+If you are interested in testing or purchasing this functionality, please reach out to us at support@portworx.com.
