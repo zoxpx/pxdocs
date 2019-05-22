@@ -27,7 +27,7 @@ linkTitle: Running Portworx in Production with DC/OS
 * The base operating system of the server supports linux kernel 3.10+ . Newer 4.x linux kernels have many performance and stability related fixes and is recommended.
 
 ```text
-[centos@ip-172-31-51-89 ~]$ uname -r
+uname -r
 ```
 
 ```output

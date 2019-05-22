@@ -141,16 +141,16 @@ From your linux workstation download and setup AWS ECS CLI utilities
   1. Download and install ECS CLI ([detail instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html))
 
     ```text
-    $ sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
-    $ sudo chmod +x /usr/local/bin/ecs-cli
+    sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+    sudo chmod +x /usr/local/bin/ecs-cli
     ```
 
   2. Configure AWS ECS CLI on your workstation
 
     ```text
-    $ export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXX
-    $ export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXX
-    $ ecs-cli configure --region us-east-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo1
+    export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXX
+    export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXX
+    ecs-cli configure --region us-east-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo1
     ```
 
   3. Create a 1GB PX volume using the Docker CLI.  ssh into one of the ECS instances and create this PX volumes.
@@ -230,8 +230,13 @@ From your linux workstation download and setup AWS ECS CLI utilities
     CONTAINER ID        IMAGE                            COMMAND                  CREATED             STATUS              PORTS                                             NAMES
     7ba93d51918b        binocarlos/moby-counter          "node index.js"          12 hours ago        Up 12 hours         80/tcp                                            ecs-ecscompose-root-1-web-c2fbfff3bf92b1dad401
     e25ba9131f9b        redis                            "docker-entrypoint.sh"   12 hours ago        Up 12 hours         6379/tcp                                          ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601
+    ```
 
-    [ec2-user@ip-172-31-31-61 ~]$ sudo /opt/pwx/bin/pxctl v l
+    ```text
+    pxctl v l
+    ```
+
+    ```output
     ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
     1061916907972944739     demovol                 1 GiB   3       yes     no              LOW             0       up - attached on 172.31.31.61
     ```

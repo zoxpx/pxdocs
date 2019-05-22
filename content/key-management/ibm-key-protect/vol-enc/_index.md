@@ -48,7 +48,7 @@ secret name as `default` will use this cluster wide secret as a passphrase to en
 To create a volume using a cluster wide secret through pxctl, run the following command
 
 ```text
-bin/pxctl volume create --secure --secret_key default enc_vol
+pxctl volume create --secure --secret_key default enc_vol
 ```
 
 ```output
