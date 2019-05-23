@@ -7,7 +7,8 @@ weight: 3
 noicon: true
 ---
 
-This guide explains how the Portworx Dynamic Disk Provisioning feature works on VMware and the requirements for it.
+This guide explains how the Portworx Dynamic Disk Provisioning feature works within Kubernetes on VMware and the requirements for it.
+It is _not_ a requirement to have [VMWare cloud provider](https://github.com/kubernetes/cloud-provider-vsphere) plugin, nor [VCP](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/) nor [PKS](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-shared/) for the below setup to work (e.g. a vanilla/upstream Kubernetes setup will work as well).
 
 {{<info>}}Disk provisioning on VMware is only supported if you are running with Kubernetes.{{</info>}}
 
@@ -52,9 +53,33 @@ Continue to [Install on-premise](/portworx-install-with-kubernetes/on-premise/) 
 
 ### Step 3: Add env variables in the DaemonSet spec
 
-You will need to change the following sections in the downloaded spec to match your environment:
+You will need to change (or add) the following sections in the Portworx DaemonSet section of the downloaded spec to match your environment:
 
 1. **VSPHERE_VCENTER**: Hostname of the vCenter server.
 2. **VSPHERE_DATASTORE_PREFIX**: Prefix of the ESXi datastore(s) that Portworx will use for storage.
+3. **VSPHERE_INSTALL_MODE**: "shared"
+4. **VSPHERE_USER**: should be a `valueFrom` with a secretKeyRef of `VSPHERE_USER` (referencing to the px-vsphere-secret defined above)
+5. **VSPHERE_PASSWORD**: should be a `valueFrom` with a secretKeyRef of `VSPHERE_PASSWORD` (referencing to the px-vsphere-secret defined above)
+
+Optionally, you may also need to specify these:
+
+6. **VSPHERE_VCENTER_PORT**: with the port number, if your vsphere services are not on the default port 443
+7. **VSPHERE_INSECURE**: if you are using self-signed certificates
+
+### Step 4: Permission your vcenter-server-user appropriately
+
+Your _vcenter-server-user_ will need to either have the full Admin role or, for increased security, a custom-created role with the following minimum [vsphere privileges](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.security.doc/GUID-FEAB5DF5-F7A2-412D-BF3D-7420A355AE8F.html):
+
+  - Datastore.Browse
+  - Datastore.FileManagement
+  - Host.Local.ReconfigVM
+  - VirtualMachine.Config.AddExistingDisk
+  - VirtualMachine.Config.AddNewDisk
+  - VirtualMachine.Config.AddRemoveDevice
+  - VirtualMachine.Config.EditDevice
+  - VirtualMachine.Config.RemoveDisk
+  - VirtualMachine.Config.Settings
+
+The above permissions are in the format returned from the [govc utility](https://github.com/collabnix/govc) (which is in itself useful for troubleshooting your vcenter-server-user access as well).
 
 {{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
