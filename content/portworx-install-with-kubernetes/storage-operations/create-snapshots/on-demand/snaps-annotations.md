@@ -19,7 +19,7 @@ When you create the Storage Class, you can specify a snapshot schedule on the vo
 
 ```text
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
   name: portworx-io-priority-high
 provisioner: kubernetes.io/portworx-volume

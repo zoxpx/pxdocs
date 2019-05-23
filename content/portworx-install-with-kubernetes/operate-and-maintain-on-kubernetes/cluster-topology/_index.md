@@ -97,7 +97,7 @@ Following is an example of a storage class that replicates its volume data acros
 
 ```text
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
     name: px-postgres-sc
 provisioner: kubernetes.io/portworx-volume

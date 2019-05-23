@@ -32,7 +32,7 @@ Create ```portworx-sc.yaml``` with Portworx as the provisioner and apply the con
 
 ```yaml
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
     name: px-es-data-sc
 provisioner: kubernetes.io/portworx-volume
@@ -42,7 +42,7 @@ parameters:
    fg: "false"
 ---
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
     name: px-es-master-sc
 provisioner: kubernetes.io/portworx-volume

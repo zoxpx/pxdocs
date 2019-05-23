@@ -12,7 +12,7 @@ Following spec creates a replica 3 cassandra statefulset. Each replica pod will 
 ```text
 ##### Portworx storage class
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
     name: portworx-repl2
 provisioner: kubernetes.io/portworx-volume
