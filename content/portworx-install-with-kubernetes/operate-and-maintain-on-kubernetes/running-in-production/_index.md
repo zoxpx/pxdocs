@@ -103,7 +103,7 @@ Failure domains in terms of RACK information can be passed in as described [here
 
   ```text
    kind: StorageClass
-   apiVersion: storage.k8s.io/v1beta1
+   apiVersion: storage.k8s.io/v1
    metadata:
    name: portworx-sc
    provisioner: kubernetes.io/portworx-volume
@@ -115,7 +115,7 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 ```text
  kind: StorageClass
- apiVersion: storage.k8s.io/v1beta1
+ apiVersion: storage.k8s.io/v1
  metadata:
    name: portworx-sc
  provisioner: kubernetes.io/portworx-volume
@@ -130,7 +130,7 @@ For e.g., for PX cluster running on AWS,
 
 ```text
  kind: StorageClass
- apiVersion: storage.k8s.io/v1beta1
+ apiVersion: storage.k8s.io/v1
  metadata:
    name: portworx-sc
  provisioner: kubernetes.io/portworx-volume
@@ -144,7 +144,7 @@ For e.g., for PX cluster running on AWS,
 
 ```text
  kind: StorageClass
- apiVersion: storage.k8s.io/v1beta1
+ apiVersion: storage.k8s.io/v1
  metadata:
    name: portworx-sc
  provisioner: kubernetes.io/portworx-volume
@@ -158,7 +158,7 @@ For e.g., for PX cluster running on AWS,
 
 ```text
  kind: StorageClass
- apiVersion: storage.k8s.io/v1beta1
+ apiVersion: storage.k8s.io/v1
  metadata:
    name: portworx-sc
  provisioner: kubernetes.io/portworx-volume
@@ -173,7 +173,7 @@ For e.g., for PX cluster running on AWS,
 
 ```text
  kind: StorageClass
- apiVersion: storage.k8s.io/v1beta1
+ apiVersion: storage.k8s.io/v1
  metadata:
    name: portworx-sc
  provisioner: kubernetes.io/portworx-volume
@@ -197,7 +197,7 @@ This [page](/concepts) gives more details on different volume types, how to crea
 
 ```text
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
   metadata:
     name: portworx-repl-1-snap-internal
 provisioner: kubernetes.io/portworx-volume

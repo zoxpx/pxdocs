@@ -17,7 +17,7 @@ Create the file`px-postgres-sc.yaml` with the following:
 
 #### Portworx storage class
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
     name: px-postgres-sc
 provisioner: kubernetes.io/portworx-volume
