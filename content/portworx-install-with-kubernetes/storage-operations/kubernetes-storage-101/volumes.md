@@ -41,6 +41,14 @@ In above StorageClass,
 
 [This table](/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) lists all parameters that are supported by the Portworx driver.
 
+{{<info>}}
+Some fields like `allowVolumeExpansion` cannot be added after the storage class has been created.
+{{</info>}}
+
+Let's take a look at an example.
+
+{{% content "portworx-install-with-kubernetes/shared/resize-portworx-pvc.md" %}}
+
 ## PersistentVolumeClaim (PVC)
 
 A PersistentVolumeClaim (PVC) is a request for storage by a user. It is similar to a pod. Pods consume node resources and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory). Claims can request specific size and access modes (e.g., can be mounted once read/write or many times read-only).
