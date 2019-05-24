@@ -1,47 +1,65 @@
 ---
 title: Cluster operations using pxctl
-linkTitle: Cluster
+linkTitle: Cluster Operations
 keywords: portworx, pxctl, command-line tool, cli, reference
-description: This guide shows you how to use the PXCL CLI to perform cluster operations.  Try today!
+description: This guide shows you how to use the pxctl to perform cluster operations.
 weight: 4
 ---
 
+This document outlines how to manage your _Portworx_ cluster operation with `pxctl cluster`.
+
+First, let's get an overview of the available commands:
+
 ```text
-sudo /opt/pwx/bin/pxctl cluster --help
-NAME:
-   pxctl cluster - Manage the cluster
-
-USAGE:
-   pxctl cluster command [command options] [arguments...]
-
-COMMANDS:
-     list, l              List nodes in the cluster
-     inspect, i           Inspect a node
-     delete, d            Delete a node
-     alerts, a            Show cluster wide alerts
-     node-alerts          Show node related alerts
-     provision-status, p  Show cluster provision status
-     drive-alerts         Show drive related alerts
-
-OPTIONS:
-   --help, -h  show help
+/opt/pwx/bin/pxctl cluster --help
 ```
 
-**pxctl cluster list**
+```
+Manage the cluster
 
-Shows all nodes in the portworx cluster
+Usage:
+  pxctl cluster [flags]
+  pxctl cluster [command]
 
-```text
-sudo /opt/pwx/bin/pxctl cluster list --help
-NAME:
-   pxctl cluster list - List nodes in the cluster
+Aliases:
+  cluster, c
 
-USAGE:
-   pxctl cluster list [arguments...]
+Available Commands:
+  delete           Delete a node
+  domains          A set of commands to manage Portworx Cluster Domains
+  inspect          Inspect a node
+  list             List nodes in the cluster
+  options          List and update cluster wide options
+  pair             Manage Portworx cluster pairs
+  provision-status Show cluster provision status
+  token            Manage cluster authentication token
+
+Flags:
+  -h, --help   help for cluster
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+
+Use "pxctl cluster [command] --help" for more information about a command.
 ```
 
+## Listing all nodes in a cluster
+
+To list all nodes in your _Portworx_ cluster, run:
+
 ```text
-sudo /opt/pwx/bin/pxctl cluster list
+pxctl cluster list
+```
+
+```
 Cluster ID: 8ed1d365-fd1b-11e6-b01d-0242ac110002
 Status: OK
 
@@ -52,21 +70,15 @@ bf9eb27d-415e-41f0-8c0d-4782959264bc	147.75.99.243	0.125078	34 GB		33 GB		N/A		1
 492596eb-94f3-4422-8cb8-bc72878d4be5	147.75.99.189	0.125078	34 GB		33 GB		N/A		1.1.4-6b35842	Online
 ```
 
-**pxctl cluster inspect**
+## Inspecting a node
 
-Use pxctl cluser inspect to get information on a node in the cluster.
+Use the following command to get information on a node in the cluster:
 
 ```text
-sudo /opt/pwx/bin/pxctl cluster inspect --help
-NAME:
-   pxctl cluster inspect - Inspect a node
-
-USAGE:
-   pxctl cluster inspect [arguments...]
+pxctl cluster inspect 492596eb-94f3-4422-8cb8-bc72878d4be5
 ```
 
-```text
-sudo /opt/pwx/bin/pxctl cluster inspect 492596eb-94f3-4422-8cb8-bc72878d4be5
+```
 ID       	:  492596eb-94f3-4422-8cb8-bc72878d4be5
 Mgmt IP  	:  147.75.99.189
 Data IP  	:  147.75.99.189
@@ -77,79 +89,75 @@ Status  	:  Online
 Containers:	There are no running containers on this node.
 ```
 
-**pxctl cluster delete**
+## Deleting a node in a cluster
 
-Use this command to delete a node in the cluster
+Here is how to delete a node:
 
 ```text
-sudo /opt/pwx/bin/pxctl cluster delete --help
-NAME:
-   pxctl cluster delete - Delete a node
-
-USAGE:
-   pxctl cluster delete [arguments...]
+pxctl cluster delete bf9eb27d-415e-41f0-8c0d-4782959264bc
 ```
 
-```text
-sudo /opt/pwx/bin/pxctl cluster delete bf9eb27d-415e-41f0-8c0d-4782959264bc
+```
 node bf9eb27d-415e-41f0-8c0d-4782959264bc deleted successfully
 ```
 
-**pxctl cluster alerts**
-
-Shows cluster wide alerts
+To get help, run:
 
 ```text
-sudo /opt/pwx/bin/pxctl cluster alerts -help
-NAME:
-   pxctl cluster alerts - Show cluster wide alerts
-
-USAGE:
-   pxctl cluster alerts [command options] [arguments...]
-
-OPTIONS:
-   --sev value, -s value    Filter alerts based on severity : [WARN|NOTIFY|ALARM]
-   --start value, -t value  Time start : Jan 2 15:04:05 UTC 2006
-   --end value, -e value    Time end : Jan 2 15:04:05 UTC 2006
-   --all                    Specify --all to show cleared alerts in the output
+pxctl cluster delete --help
 ```
 
-```text
-sudo /opt/pwx/bin/pxctl cluster alerts
-AlertID	ClusterID	Timestamp	Severity	AlertType	Description
+```
+Delete a node
+
+Usage:
+  pxctl cluster delete [flags]
+
+Aliases:
+  delete, d
+
+Examples:
+/opt/pwx/bin/pxctl cluster delete [flags] nodeID
+
+Flags:
+  -f, --force   Forcibly remove node, which may cause volumes to be irrevocably deleted
+  -h, --help    help for delete
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
 ```
 
-**pxctl cluster node-alerts**
+## Showing nodes based on IO Priority
 
-Shows node alerts
+To list the nodes in your _Portworx_ cluster based on IO Priority (high, medium and low), type:
 
 ```text
-sudo /opt/pwx/bin/pxctl cluster node-alerts --help
-NAME:
-   pxctl cluster node-alerts - Show node related alerts
-
-USAGE:
-   pxctl cluster node-alerts [command options] [arguments...]
-
-OPTIONS:
-   --sev value, -s value    Filter alerts based on severity : [WARN|NOTIFY|ALARM]
-   --start value, -t value  Time start : Jan 2 15:04:05 UTC 2006
-   --end value, -e value    Time end : Jan 2 15:04:05 UTC 2006
-   --all                    Specify --all to show cleared alerts in the output
+pxctl cluster provision-status --io_priority low
 ```
 
-```text
-sudo /opt/pwx/bin/pxctl cluster node-alerts
-AlertID	NodeID					Timestamp		Severity	AlertType		Description
-20	7d97f9ea-a4ff-4969-9ee8-de2699fa39b4	Mar 3 20:20:20 UTC 2017	ALARM		Cluster manager failure	Cluster Manager Failure: Entering Maintenance Mode because of Storage Maintenance Mode
+```
+Node					Node Status	Pool	Pool Status	IO_Priority	Size	Available	Used	Provisioned	ReserveFactor	Zone	Region
+492596eb-94f3-4422-8cb8-bc72878d4be5	Online		0	Online		LOW		100 GiB	99 GiB		1.0 GiB	0 B		default	default
+492596eb-94f3-4422-8cb8-bc72878d4be5	Online		1	Online		LOW		200 GiB	199 GiB		1.0 GiB	0 B		50		default	default
+7d97f9ea-a4ff-4969-9ee8-de2699fa39b4	Online		0	Online		LOW		100 GiB	92 GiB		8.2 GiB	70 GiB		default	default
+bf9eb27d-415e-41f0-8c0d-4782959264bc	Online		0	Online		LOW		150 GiB	149 GiB		1.0 GiB	0 B		default	default
 ```
 
-**pxctl cluster provision-status**
-
-Shows nodes in the cluster based on IO Priority high, medium and low.
+To get help, type the following:
 
 ```text
-sudo /opt/pwx/bin/pxctl cluster provision-status --help
+pxctl cluster provision-status --help
+```
+
+```
 NAME:
    pxctl cluster provision-status - Show cluster provision status
 
@@ -158,32 +166,4 @@ USAGE:
 
 OPTIONS:
    --io_priority value  IO Priority: [high|medium|low] (default: "low")
-```
-
-```text
-sudo /opt/pwx/bin/pxctl cluster provision-status --io_priority low
-Node					Node Status	Pool	Pool Status	IO_Priority	Size	Available	Used	Provisioned	ReserveFactor	Zone	Region
-492596eb-94f3-4422-8cb8-bc72878d4be5	Online		0	Online		LOW		100 GiB	99 GiB		1.0 GiB	0 B		default	default
-492596eb-94f3-4422-8cb8-bc72878d4be5	Online		1	Online		LOW		200 GiB	199 GiB		1.0 GiB	0 B		50		default	default
-7d97f9ea-a4ff-4969-9ee8-de2699fa39b4	Online		0	Online		LOW		100 GiB	92 GiB		8.2 GiB	70 GiB		default	default
-bf9eb27d-415e-41f0-8c0d-4782959264bc	Online		0	Online		LOW		150 GiB	149 GiB		1.0 GiB	0 B		default	default
-```
-
-**pxctl cluster drive-alerts**
-
-Shows cluster wide drive alerts
-
-```text
-sudo /opt/pwx/bin/pxctl cluster drive-alerts --help
-NAME:
-   pxctl cluster drive-alerts - Show drive related alerts
-
-USAGE:
-   pxctl cluster drive-alerts [command options] [arguments...]
-
-OPTIONS:
-   --sev value, -s value    Filter alerts based on severity : [WARN|NOTIFY|ALARM]
-   --start value, -t value  Time start : Jan 2 15:04:05 UTC 2006
-   --end value, -e value    Time end : Jan 2 15:04:05 UTC 2006
-   --all                    Specify --all to show cleared alerts in the output
 ```
