@@ -52,6 +52,10 @@ Virtual machine hosts            yes
 Product SKU                     Trial    expires in 30 days
 ```
 
+{{<info>}}
+7 days before your _PX_ license is set to expire, an alert will trigger saying that your license is getting ready to expire. The alert will tell you how long you have to renew your license. Note that the alert will also keep triggering after the license has expired. For more details, see [this page](/install-with-other/operate-and-maintain/monitoring/portworx-alerts#list-of-alerts).
+{{</info>}}
+
 ## Licensed features
 
 In the table below, we can see the overview of features that are controlled via licensing as of PX v1.2.8.
