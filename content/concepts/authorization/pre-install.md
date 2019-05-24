@@ -32,10 +32,10 @@ sections provide the permissions necessary to access certain APIs and resources.
 
 You may need to configure your OIDC provider to "map" information about your
 users into the `roles` and `groups` section of the JWT token. Please refer with
-your OIDC provider on how map values. These claims are called _custom_ claims
+your OIDC provider on how to map values. These claims are called _custom_ claims
 and depending on your OIDC, it may place custom claims under a namespace.
 Portworx supports both un-namespaced and namespaced `roles` and `groups` in the
-JWT claims. For example an un-namespaced `role` would look as follows:
+JWT claims. For example, an un-namespaced `role` would look as follows:
 
 ```json
 {
@@ -59,17 +59,16 @@ support.
 
 ## Self signing tokens
 If you are using self-signed model, you then need to determine if you will be
-using a shared-secret or a an RSA or ECDSA public/private key model.  Creating a
+using a shared-secret or an RSA or ECDSA public/private key model.  Creating a
 JWT is a standard and there are many applications and libraries for multiple
 languages to generate tokens.  For simplicity, Portworx has added support to
 [`pxctl`](/reference/cli/authorization/#generate_tokens) to generate tokens.
 
 Self signed tokens must also contain an identifier of the _issuer_. This value
-in the JWT claims is set as `iss` and is used by Portworx to determine if the
-token is from a trusted token authority.
+in the JWT claims is set as `iss` and is used by Portworx to determine if the token is from a trusted token authority.
 
 ### Generating a shared secret
-If you choose to use shared secret for your self-signed tokens, here is a simple
+If you choose to use a shared secret for your self-signed tokens, here is a simple
 way to generate a very secure secret:
 
 ```text
@@ -99,8 +98,8 @@ Second, you can try out the token on a running Portworx system which has
 authorization enabled. There are multiple ways to do this. One is to use [`pxctl
 context`](/reference/cli/authorization) on a Portworx node. You can then run a
 set of commands that confirm the token access. Another way is to use the REST
-SDK Gatway by going to `http://<node ip>:9021/sdk` or `https://<node
-ip>:9021/sdk` depending if TLS has been enabled for your Portworx system or not.
+SDK Gateway by going to `http://<node ip>:9021/sdk` or `https://<node
+ip>:9021/sdk` depending on if TLS has been enabled for your Portworx system or not.
 Once the page has loaded, click on the `Authorize` button, and paste your token.
 You can then execute a set of APIs to confirm the token access.
 

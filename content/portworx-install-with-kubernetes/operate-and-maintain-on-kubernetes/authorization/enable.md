@@ -1,24 +1,21 @@
 ---
 title: Enabling Authorization
-description: Enable Portworx authoriztion in Kubernetes
+description: Enable Portworx authorization in Kubernetes
 keywords: portworx, kubernetes, security, authorization, jwt, shared secret
 weight: 100
 series: k8s-op-maintain-auth
 ---
 
-Before proceeding with this installation, please review the
-[Security](/concepts/authorization) model used by Portworx.
+Before proceeding with this installation, please review the [Security](/concepts/authorization) model used by Portworx.
 
 ## Enabling authorization
 {{<info>}}
 The following will be a cluster level interruption event while all the
-nodes in the system come back online with security enabled
+nodes in the system come back online with security enabled.
 {{</info>}}
 
 To enable authorization you must simply edit your Portworx `yaml` configuration
-to add the appropriate information. You must first create a Kubernetes Secret
-which holds the values of the environment variables. Then populate the
-environment variables required from your Secret. Here is an example of how to
+to add the appropriate information. You must first create a Kubernetes Secret which holds the values of the environment variables. Then populate the environment variables required from your Secret. Here is an example of how to
 setup an environment variable from a Secret:
 
 * Create a secret:
@@ -89,6 +86,6 @@ kubectl create secret generic mysecret \
 ...
 ```
 
-You will now need to apply the change to update the stork Deployment and the
+You will now need to apply the change to update the Stork Deployment and the
 Portworx DaemonSet. Wait until the update is complete and all pods are ready
 with `1/1`.
