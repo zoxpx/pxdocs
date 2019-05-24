@@ -26,7 +26,7 @@ Each alert has a severity from one of the following levels:
 0|DriveOperationFailure|ALARM|DRIVE|Triggered when a driver operation such as add or replace fails.
 1|DriveOperationSuccess|NOTIFY|DRIVE|Triggered when a driver operation such as add or replace succeeds.
 2|DriveStateChange|WARN|DRIVE|Triggered when there is a change in the driver state viz. Free Disk space goes below the recommended level of 10%.
-3|VolumeOperationFailureAlarm|ALARM|VOLUME|Triggered when a volume operation fails. Volume operations could be resize, cloudsnap etc. The alert message will give more info about the specific error case.
+3|VolumeOperationFailureAlarm|ALARM|VOLUME|Triggered when a volume operation fails. Volume operations could be resize, cloudsnap, etc. The alert message will give more info about the specific error case.
 4|VolumeOperationSuccess|NOTIFY|VOLUME|Triggered when a volume operation such as resize succeeds.
 5|VolumeStateChange|WARN|VOLUME|Triggered when there is a change in the state of the volume.
 6|VolGroupOperationFailure|ALARM|CLUSTER|Triggered when a volume group operation fails.
@@ -34,22 +34,22 @@ Each alert has a severity from one of the following levels:
 8|VolGroupStateChange|WARN|CLUSTER|Triggered when a volume group's state changes.
 9|NodeStartFailure|ALARM|CLUSTER|Triggered when a node in the PX cluster fails to start.
 10|NodeStartSuccess|NOTIFY|CLUSTER|Triggered when a node in the PX cluster successfully initializes.
-11|&gt;Internal PX Alert&lt;|-|-|Alert code used for internal PX book keeping.
+11|&gt;Internal PX Alert&lt;|-|-|Alert code used for internal PX bookkeeping.
 12|NodeJournalHighUsage|ALARM|CLUSTER|Triggered when a node's timestamp journal usage is not within limits.
 13|IOOperation|ALARM|VOLUME|Triggered when an IO operation such as Block Read/Block Write fails.
-14-16|&gt;Internal PX Alerts&lt;|-|-|Alert codes used for internal PX book keeping.
+14-16|&gt;Internal PX Alerts&lt;|-|-|Alert codes used for internal PX bookkeeping.
 17|PXInitFailure|ALARM|NODE|Triggered when PX fails to initialize on a node.
 18|PXInitSuccess|NOTIFY|NODE|Triggered when PX successfully initializes on a node.
 19|PXStateChange|WARN|NODE|Triggered when the PX daemon shuts down in error.
-20|VolumeOperationFailureWarn|WARN|VOLUME|Triggered when a volume operation fails. Volume operations could be resize, cloudsnap etc. The alert message will give more info about the specific error case.
+20|VolumeOperationFailureWarn|WARN|VOLUME|Triggered when a volume operation fails. Volume operations could be resize, cloudsnap, etc. The alert message will give more info about the specific error case.
 21|StorageVolumeMountDegraded|ALARM|NODE|Triggered when PX storage enters degraded mode on a node.
 22|ClusterManagerFailure|ALARM|NODE|Triggered when Cluster manager on a PX node fails to start. The alert message will give more info about the specific error case.
-23|KernelDriverFailure|ALARM|NODE|Triggered when an incorrect PX kernel module is detected. Indicates that PX is started with an incorrect version of kernel module.
+23|KernelDriverFailure|ALARM|NODE|Triggered when an incorrect PX kernel module is detected. Indicates that PX is started with an incorrect version of the kernel module.
 24|NodeDecommissionSuccess|NOTIFY|CLUSTER|Triggered when a node is successfully decommissioned from PX cluster.
 25|NodeDecommissionFailure|ALARM|CLUSTER|Triggered when a node could not be decommissioned from PX cluster.
 26|NodeDecommissionPending|WARN|CLUSTER|Triggered when a node decommission is kept in pending state as it has data which is not replicated on other nodes.
 27|NodeInitFailure|ALARM|CLUSTER|Triggered when PX fails to initialize on a node.
-28|&gt;Internal PX Alert&lt;|-|-|Alert code used for internal PX book keeping.
+28|&gt;Internal PX Alert&lt;|-|-|Alert code used for internal PX bookkeeping.
 29|NodeScanCompletion|NOTIFY|NODE|Triggered when node media scan completes without error.
 30|VolumeSpaceLow|ALARM|VOLUME|Triggered when the free space available in a volume goes below a threshold.
 31|ReplAddVersionMismatch|WARN|VOLUME|Triggered when a volume HA update fails with version mismatch.
@@ -68,11 +68,33 @@ Each alert has a severity from one of the following levels:
 44|VolumeUnmountFailure|ALARM|VOLUME|Triggered when a volume cannot be unmounted. The alert message provides more info about the specific error case.
 45|VolumeHAUpdateSuccess|NOTIFY|VOLUME|Triggered when a volume's replication factor (HA factor) is successfully updated.
 46|VolumeHAUpdateFailure|ALARM|VOLUME|Triggered when an update to volume's replication factor (HA factor) fails.
-47|SnapshotCreateSuccess|NOTIFY|VOLUME|Triggered when a volume is successfully created.Snapshot create success
+47|SnapshotCreateSuccess|NOTIFY|VOLUME|Triggered when a volume is successfully created.
 48|SnapshotCreateFailure|ALARM|VOLUME|Triggered when a volume snapshot creation fails.
 49|SnapshotRestoreSuccess|NOTIFY|VOLUME|Triggered when a snapshot is successfully restored on a volume.
-50|SnapshotRestoreFailure|ALARM|VOLUME|Triggered when the restore of snapshot fails.
+50|SnapshotRestoreFailure|ALARM|VOLUME|Triggered when the operation of restoring a snapshot fails.
 51|SnapshotIntervalUpdateFailure|ALARM|VOLUME|Triggered when an update of the snapshot interval for a volume fails.
 52|SnapshotIntervalUpdateSuccess|NOTIFY|VOLUME|Triggered when a snapshot interval of a volume is successfully updated.
 53|PXReady|NOTIFY|NODE|Triggered when PX is ready on a node.
 54|StorageFailure|ALARM|NODE|Triggered when the provided storage drives could not be mounted by PX.
+55|ObjectstoreFailure|ALARM|NODE|Triggered when an object store error is detected.
+56|ObjectstoreSuccess|NOTIFY|NODE|Triggered upon a successful object store operation.
+57|ObjectstoreStateChange|NOTIFY|NODE|Triggered in response to a state change.
+58|LicenseExpiring|WARN|Cluster|Warning triggers 7 days before the installed PX-Enterprise or Trial license will expire (e.g. "PX-Enterprise license will expire in 6 days, 12:00"). It will also keep triggering after the license has expired (e.g. "Trial license expired 4 days, 06:22 ago").
+59|VolumeExtentDiffSlow|WARN|VOLUME| Volume extent diff is taking too long.
+60|VolumeExtentDiffOk|WARN|VOLUME| Volume extent diff is okay.
+61|SharedV4SetupFailure|WARN|NODE|Triggered when the creation of a sharedv4 volume fails.
+62|SnapshotDeleteSuccess|NOTIFY|VOLUME|Triggered when a snapshot is successfully deleted.
+63|SnapshotDeleteFailure|ALARM|VOLUME|Triggered when a snapshot delete is successfully deleted.
+64|DriveStateChangeClear|WARN|DRIVE|Triggered when the drive's state gets cleared.
+65|VolumeSpaceLowCleared|NOTIFY|Volume|Triggered when the free disk space goes above the recommended level of 10%.
+66|ClusterPairSuccess|NOTIFY|CLUSTER|Triggered when a cluster pair operation succeeds.
+67|ClusterPairFailure|ALARM|ALARM|Triggered when a cluster pair operation fails.
+68|CloudMigrationUpdate|NOTIFY|VOLUME|Triggered if a cloud migration is updated.
+69|CloudMigrationSuccess|NOTIFY|VOLUME|Triggered when a cloud migration operation succeeds.
+70|CloudMigrationFailure|ALARM|VOLUME|Triggered when a cloud migration operation fails.
+71|ClusterDomainAdded|NOTIFY|CLUSTER|Triggered when a cluster domain is added.
+72|ClusterDomainRemoved|NOTIFY|CLUSTER|Triggered when a cluster domain is removed.
+73|ClusterDomainActivated|NOTIFY|CLUSTER|Triggered when a cluster domain is activated.
+74|ClusterDomainDeactivated|NOTIFY|CLUSTER|Triggered when a cluster domain is deactivated.
+75|MeteringAgentWarning|WARN|CLUSTER|Triggered when the metering agent encounters a non-critical problem.
+76|MeteringAgentCritical|ALARM|CLUSTER|Triggered when the metering agent encounters a critical problem.
