@@ -8,6 +8,11 @@ pxctl secrets aws generate-kms-data-key --secret_id mysecret
 
 The above command generates an AWS KMS Data Key and associates it with the name `mysecret`. To use this Data Key for encrypting volumes provide only the secret ID `mysecret` to _Portworx_ while creating/attaching the volume.
 
+{{<info>}}
+**Important**:
+You should not run the above command with the same `secret_id` if you have volumes using the `secret_id`
+{{</info>}}
+
 To list all the named secrets, use the following command:
 
 ```text
