@@ -156,6 +156,11 @@ To generate a new KMS Data Key run the following command:
 
 The above command generates a KMS Data Key and associates it with the name ```portworx_secret```. For any subsequent operations that require a secret you can use this name ```portworx_secret```
 
+{{<info>}}
+**Important**:
+You should not run the above command with the same `secret_id` if you have volumes using the `secret_id`
+{{</info>}}
+
 Run the following command to create an encrypted volume using the newly generated KMS Data Key.
 
 ```text
@@ -170,4 +175,9 @@ A cluster wide secret key is a common key that can be used to encrypt all your v
 /opt/pwx/bin/pxctl secrets set-cluster-key --secret portworx_secret
 ```
 
-You can provide any ```--secret_id``` that was used in the ```generate-kms-data-key``` command as the `--secret` argument to the above command.. From our example we can set the cluster secret key to ```portworx_secret```. This command needs to be run just once for the cluster.
+You can provide any ```--secret_id``` that was used in the ```generate-kms-data-key``` command as the `--secret` argument to the above command. From our example we can set the cluster secret key to ```portworx_secret```.
+
+{{<info>}}
+**Important**:
+This command needs to be run just once for the cluster. Running it again will overwrite the cluster secret key and encrypted volumes using the original key may become inaccessible.
+{{</info>}}
