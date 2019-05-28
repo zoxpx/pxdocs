@@ -82,7 +82,7 @@ The current release of `pxctl` is located in the `/opt/pwx/bin/` directory of ev
 
 Let's look at some simple commands.
 
-#### Version
+## Version
 
 Here's how to find out the current version:
 
@@ -94,7 +94,7 @@ pxctl -v
 pxctl version 2.1.0.0-d594892 (OCI)
 ```
 
-#### Status
+## Status
 
 The status command gives a summary like node details, cluster members,  global storage capacity, etc.
 
@@ -126,7 +126,7 @@ Global Storage Pool
 	Total Capacity	:  192 GiB
 ```
 
-#### Upgrade related operations
+## Upgrade related operations
 
 `pxctl` provides access to several upgrade related operations. You can get details on how to use it and of the available flags by running:
 
@@ -154,7 +154,7 @@ Global Flags:
       --ssl              ssl enabled for portworx
 ```
 
-##### Running pxctl upgrade
+### Running pxctl upgrade
 
 `pxctl upgrade` upgrades the PX version on a node. Let's suppose you want to upgrade PX to version _1.1.16_. If so, you would then type the following command:
 
@@ -170,14 +170,14 @@ Downloading PX portworx/px-enterprise:1.1.6 layers...
 
 It is recommended to upgrade the nodes in a **staggered manner**. This way, the quorum and the continuity of IOs will be maintained.
 
-#### Login/Authentication
+## Login/Authentication
 
 You must make PX login to the secrets endpoint when using encrypted volumes and ACLs.
 
 `pxctl secrets` can be used to configure authentication credentials and endpoints.
 Currently, Vault, Amazon KMS, and KVDB are supported.
 
-##### Vault example
+### Vault example
 
 Here's an example of configuring PX with Vault:
 
@@ -193,7 +193,7 @@ Successfully authenticated with Vault.
 To install and configure Vault, peruse [this link](https://www.vaultproject.io/docs/install/index.html)
 {{</info>}}
 
-##### AWS KMS example
+### AWS KMS example
 
 To configure PX with Amazon KMS, type the following command:
 
