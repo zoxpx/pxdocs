@@ -15,6 +15,10 @@ series: reference
 * PWX-8643 - Storage pool does not recover out of storage full condition after deleting volumes                                                                                                                                                                                                       
 * PWX-8529 - Cloudsnap restore very slow for backups that have dependent incremental with large data sets   
 
+## 2.1.0.1
+
+PWX-8870 - PX Metro DR didn't mark a node as offline
+
 ## 2.1.0
 
 ### Key Features
