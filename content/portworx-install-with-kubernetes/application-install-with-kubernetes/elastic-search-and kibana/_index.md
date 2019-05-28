@@ -11,7 +11,8 @@ These below instructions will provide you with a step by step guide in deploying
 
 Elasticsearch creates a cluster based on the cluster name property specified in the configuration. Each node within the cluster can forward client requests to the appropriate node and also knows about every other node in the cluster.
 
-An Elasticsearch cluster node can have one or more purposes.
+An Elasticsearch cluster node can have one or more purposes:
+
 - Master-eligible node
     A node that has node.master set to true (default), which makes it eligible to be elected as the master node, which controls the cluster.
 - Data node
@@ -854,7 +855,8 @@ $ kubectl exec -it elasticsearch-master-0 curl -- 'http://elasticsearch.default.
 
 ### Node Failover
 
-In the case of a StatefulSet if the node is unreachable, which could happen in either of two cases
+In the case of a StatefulSet if the node is unreachable, which could happen in either of two cases:
+
 - The node is down for maintenance
 - There has been a network partition.
 
