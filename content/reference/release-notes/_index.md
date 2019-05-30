@@ -6,6 +6,13 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.3.6
+
+### Key Fixes
+
+* PWX-8740 - Cloudsnaps: Do not create multiple grpc clients to px-storage                                                                     
+* PWX-8299 - Core with 'concurrent map writes' when object store on remote cluster was unreachable 
+
 ## 2.0.3.5
 
 ### Key Fixes
