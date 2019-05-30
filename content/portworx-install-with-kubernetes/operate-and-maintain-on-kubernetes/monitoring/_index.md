@@ -2,7 +2,7 @@
 title: Monitoring
 keywords: monitoring, kubernetes, portworx
 description: Learn how to monitor your Portworx cluster on Kubernetes
-weight: 4
+weight: 1
 series: k8s-op-maintain
 ---
 
