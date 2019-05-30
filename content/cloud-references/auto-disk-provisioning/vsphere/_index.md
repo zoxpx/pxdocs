@@ -76,6 +76,7 @@ Your _vcenter-server-user_ will need to either have the full Admin role or, for 
   - VirtualMachine.Config.AddExistingDisk
   - VirtualMachine.Config.AddNewDisk
   - VirtualMachine.Config.AddRemoveDevice
+  - VirtualMachine.Config.AdvancedConfig
   - VirtualMachine.Config.EditDevice
   - VirtualMachine.Config.RemoveDisk
   - VirtualMachine.Config.Settings
