@@ -2,7 +2,6 @@
 title: Using PX Central
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, monitoring, prometheus, alertmanager, servicemonitor, grafana, lighthouse, px-central, px-kvdb
 description: How to deploy and control Portworx using PX-Central
-weight: 3
 ---
 
 ## Overview

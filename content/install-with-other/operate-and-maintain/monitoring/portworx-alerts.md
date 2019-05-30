@@ -2,7 +2,6 @@
 title: "Portworx Alerts"
 keywords: portworx, container, storage, alerts, alarms, warnings, notifications
 description: How to monitor alerts with Portworx.
-weight: 4
 ---
 
 ## Portworx Alerts
