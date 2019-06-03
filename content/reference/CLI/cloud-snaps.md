@@ -533,8 +533,10 @@ If the command fails, it shows the reason why it failed.
 Note that the restored volume will not be attached or mounted automatically.
 
 {{<info>}}
-Note: With PX-Enterprise 2.1.0, users can choose to do optimized restores. This is useful for worflows that involves frequent restores from a different cluster. With optimized restores enabled, every successful restore creates a snapshot that will be used for next incremental restore of the same volume. Hence for an incremental restore, only the last incremental backup will downloaded instead of downloading all the dependent backups. However this works, only if dependent backups were downloaded previously. Currently this requires runtime option `optimized_restore=1` to be set while starting portworx container.
+{{% content "reference/CLI/shared/optimized-restores-definition.md" %}}
+For more details, check out [this link](/reference/cli/cluster/#enabling-optimized-restores)
 {{</info>}}
+
 ### List cloud backups
 
 Use `pxctl cloudsnap list` to list your cloud backups.
