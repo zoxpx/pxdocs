@@ -167,3 +167,119 @@ USAGE:
 OPTIONS:
    --io_priority value  IO Priority: [high|medium|low] (default: "low")
 ```
+
+## Enabling optimized restores
+
+{{% content "reference/CLI/shared/optimized-restores-definition.md" %}}
+
+First, let's take a look at the available subcommands and flags:
+
+```
+pxctl cluster options --help
+```
+
+```output
+List and update cluster wide options
+
+Usage:
+  pxctl cluster options [flags]
+  pxctl cluster options [command]
+
+Available Commands:
+  list        List cluster wide options
+  update      Update cluster wide options
+
+Flags:
+  -h, --help   help for options
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+
+Use "pxctl cluster options [command] --help" for more information about a command.
+```
+
+
+Next, we would want to list the options:
+
+```
+pxctl cluster options list
+```
+
+```output
+Auto decommission timeout (minutes)  :  20
+Replica move timeout (minutes)       :  1440
+Internal Snapshot Interval (minutes) :  30
+Re-add timeout (minutes)             :  1440
+Resync repl-add                      :  off
+Domain policy                        :  strict
+Optimized Restores                   :  off
+```
+
+Now, let's see how to update these options:
+
+
+```text
+pxctl cluster options update --help
+```
+
+```output
+Update cluster wide options
+
+Usage:
+  pxctl cluster options update [flags]
+
+Flags:
+      --resync-repl-add string            Enable or disable repl-add based resync (Valid Values: [on off]) (default "off")
+      --domain-policy string              Domain policy for domains (Valid Values: [strict eventual]) (default "strict")
+      --optimized-restores string         Enable or disable optimized restores (Valid Values: [on off]) (default "off")
+      --auto-decommission-timeout uint    Timeout (in minutes) after which storage-less nodes will be automatically decommissioned. Timeout cannot be set to zero. (default 20)
+      --internal-snapshot-interval uint   Interval (in minutes) after which internal snapshots are rotated (default 30)
+      --repl-move-timeout uint            Timeout (in minutes) after which offline replicas will be moved to available nodes. Set timeout to zero to disable replica move. (default 1440)
+      --re-add-wait-timeout uint          Timeout (in minutes) after which re-add will abort and new replication node is added instead. Set timeout to zero to disable replica move. (default 1440)
+  -h, --help                              help for update
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+```
+
+Use the following command to enable optimized restores:
+
+```text
+pxctl cluster options update --optimized-restores on
+```
+
+```output
+Successfully updated cluster wide options
+```
+
+Let's make sure the new settings were applied:
+
+```text
+pxctl cluster options list
+```
+
+```output
+Auto decommission timeout (minutes)  :  20
+Replica move timeout (minutes)       :  1440
+Internal Snapshot Interval (minutes) :  30
+Re-add timeout (minutes)             :  1440
+Resync repl-add                      :  off
+Domain policy                        :  strict
+Optimized Restores                   :  on
+```
