@@ -12,9 +12,9 @@ weight: 2
 Update `<AZURE_TENANT_ID>`, `<AZURE_CLIENT_ID>` and `<AZURE_CLIENT_SECRET>` in below command and create a secret called _px-azure_.
 
 ```text
-kubectl create secret generic px-azure --from-literal=AZURE_TENANT_ID=<AZURE_TENANT_ID> \
-                                       --from-literal=AZURE_CLIENT_ID=<AZURE_CLIENT_ID> \
-                                       --from-literal=AZURE_CLIENT_SECRET=<AZURE_CLIENT_SECRET>
+kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_TENANT_ID=<AZURE_TENANT_ID> \
+                                                      --from-literal=AZURE_CLIENT_ID=<AZURE_CLIENT_ID> \
+                                                      --from-literal=AZURE_CLIENT_SECRET=<AZURE_CLIENT_SECRET>
 ```
 ```output
 secret/px-azure created
