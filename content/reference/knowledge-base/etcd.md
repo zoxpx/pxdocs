@@ -67,13 +67,15 @@ We recommend setting the space quota to max value of 8Gi. While setting up etcd 
 etcd --quota-backend-bytes=$((8*1024*1024*1024))
 ```
 
-#### Snapshot Policy
+#### Snapshots
 
-Etcd can take periodic snapshots of its keyspace which can be used to restore the etcd cluster in case of a complete disaster. By default etcd takes a snapshot after every 10,000 changes to its key value space. If you want the snapshot strategy to be more aggressive you can tune the frequency in the following way:
+Etcd provides a command to take snapshots of its keyspace which can be used to restore the etcd cluster in case of a complete disaster. We recommend running the following command as a part of a cron job which will take periodic snapshots
 
 ```text
-etcd --snapshot-count=5000
+ETCDCTL_API=3 etcdctl --endpoints="<comma-separated-etcd-url>" snapshot save </path/to/snapshot-file> --command-timeout=60s
 ```
+
+You can run the above command either on the etcd nodes or on a separate node where you would want to store these etcd snapshots.
 
 For a more detailed setup, maintenance and tuning information refer the following coreos etcd reference docs.
 
