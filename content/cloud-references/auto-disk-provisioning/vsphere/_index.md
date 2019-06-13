@@ -29,4 +29,6 @@ Since PX is a storage overlay that automatically replicates your data, we recomm
 
 ## Installation
 
+{{<info>}}Run these steps from a machine which has kubectl access to your cluster.{{</info>}}
+
 {{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-px-install.md" %}}
