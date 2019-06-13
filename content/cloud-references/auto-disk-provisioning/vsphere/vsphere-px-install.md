@@ -31,10 +31,10 @@ You will need to provide Portworx with a vCenter server user that will need to e
 Export following env variables based on your vSphere environment.
 
 ```text
-# Hostname of your vCenter server
+# Hostname or IP of your vCenter server
 export VSPHERE_VCENTER=myvcenter.net
 
-# Prefix of your shared ESXi datastore(s) that Portworx will use for storage
+# Prefix of your shared ESXi datastore(s) names. Portworx will use datastores who names match this prefix to create disks.
 export VSPHERE_DATASTORE_PREFIX=mydatastore-
 
 # Change this to the port number vSphere services are running on if you have changed the default port 443
@@ -71,7 +71,7 @@ Now generate the spec with the following curl command.
 
 ```text
 VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-curl -fsL -o px-spec.yaml "https://vsphere.install.portworx.com/?c=portworx-demo-cluster&b=true&csi=true&vsp=true&ds=$VSPHERE_DATASTORE_PREFIX&vc=$VSPHERE_VCENTER&s=%22$VSPHERE_DISK_TEMPLATE%22&md=zeroedthick,size=150"
+curl -fsL -o px-spec.yaml "https://vsphere.install.portworx.com/?c=portworx-demo-cluster&b=true&csi=true&vsp=true&ds=$VSPHERE_DATASTORE_PREFIX&vc=$VSPHERE_VCENTER&s=%22$VSPHERE_DISK_TEMPLATE%22&md=type=zeroedthick,size=150"
 ```
 
 {{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
