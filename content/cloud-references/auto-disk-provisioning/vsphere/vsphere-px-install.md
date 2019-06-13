@@ -55,7 +55,7 @@ The template follows the following format:
   - _thin_
   - _zeroedthick_
   - _eagerzeroedthick_
-- __size__: This is the size of the VMDK
+- __size__: This is the size of the VMDK in GB
 
 Export following variable with the disk template you would like. Following example will create a 150GB zeroed thick vmdk on each VM.
 
@@ -65,7 +65,7 @@ export VSPHERE_DISK_TEMPLATE=type=zeroedthick,size=150
 
 #### Generate the spec file
 
-Now generate the spec with the following curl command. Run this from a machine which has kubectl access to your cluster.
+Now generate the spec with the following curl command.
 
 {{<info>}}Observe how curl below uses the variables setup up above as query parameters.{{</info>}}
 
