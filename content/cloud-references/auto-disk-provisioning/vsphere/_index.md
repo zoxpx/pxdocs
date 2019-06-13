@@ -30,5 +30,3 @@ Since PX is a storage overlay that automatically replicates your data, we recomm
 ## Installation
 
 {{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-px-install.md" %}}
-
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
