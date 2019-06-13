@@ -103,7 +103,7 @@ For generating a token through your OIDC provider, see your provider's
 documentation on generating bearer tokens. The following are some of the
 supported OIDCs:
 
-* [Keycloak](https://www.keycloak.org/docs/1.9/server_development_guide/topics/admin-rest-api.html)
+* [Keycloak](https://www.keycloak.org/docs/latest/server_development/index.html#admin-rest-api)
 * [Auth0](https://auth0.com/docs/api/authentication#get-token)
 * [Okta](https://developer.okta.com/docs/api/getting_started/getting_a_token/#token-expiration)
 
