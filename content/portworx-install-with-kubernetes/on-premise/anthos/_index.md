@@ -16,5 +16,3 @@ This topic explains how to install Portworx with Kubernetes on Anthos. Follow th
 ## Installation
 
 {{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-px-install.md" %}}
-
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
