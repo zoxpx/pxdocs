@@ -7,7 +7,7 @@ linkTitle: Packet.net
 noicon: true
 ---
 
-This guide shows you how you can easily deploy Portworx on the [**packet.net** hosting service](http://packet.net)
+This guide shows you how you can easily deploy Portworx on the [**packet.net** hosting service](https://www.packet.com/)
 
 Other supported bare metal cloud providers are
 
