@@ -28,6 +28,8 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
 Fetch the latest Stork specs using the following curl command. Run these commands on any machine that has kubectl access to your cluster.
 
+{{<info>}}If you are using your own private/custom registry for container images, add `&reg=<your-registry-URL` to the below curl command. e.g `&reg=artifactory.company.org:6555` {{</info>}}
+
 ```text
 KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
 curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.1?kbver=$KBVER&comp=stork"
