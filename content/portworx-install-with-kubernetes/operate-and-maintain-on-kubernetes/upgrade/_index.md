@@ -11,6 +11,8 @@ series: k8s-op-maintain
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
+## Upgrading Portworx
+
 To upgrade to the latest stable **2.1** release, run the curl command:
 
 ```text
@@ -21,6 +23,21 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
 1. Updates RBAC objects that are being used by Portworx with the latest set of permissions that are required
 2. Triggers RollingUpdate of the Portworx DaemonSet to the default stable image and monitors that for completion
+
+## Upgrading Stork
+
+Fetch the latest Stork specs using the following curl command. Run these commands on any machine that has kubectl access to your cluster.
+
+```text
+KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.1?kbver=$KBVER&comp=stork"
+```
+
+Next, apply it in your cluster.
+
+```text
+kubectl apply -f stork-spec.yaml
+```
 
 ## Customizing the upgrade process
 
