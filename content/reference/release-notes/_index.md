@@ -82,6 +82,12 @@ _Recommendations_: Add only one drive at a time or upgrade to 2.0.3.7 to be able
 
 ### Key Fixes
 
+**Issue: PWX-9203** - Connections get reset in networks with long idle time with bursty traffic
+
+_Customer Impact_: In very rare cases, in a specific network setup, the connections between the node were seen to be disrupted after many hours of idle time.
+
+_Recommendations_: 2.0.3.7 implements improved  connection keep-alives to keep node-to-node connections active in case of long idle times
+
 **Issue: PWX-9126** - If a volume has the 'nodiscard' option set,  after the volume gets resized, the 'nodiscard' is not retained.
 
 _Customer Impact_: For customers who have used this option to increase the performance, the performance may drop after a volume gets resized.
