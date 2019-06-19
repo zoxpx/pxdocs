@@ -136,6 +136,33 @@ _Customer Impact_: Users can potentially overwrite their encrypted volume secret
 
 _Recommendations_: Users must double check if they already have the same name that they are trying to add new secrets to the same cluster. 2.0.3.7 implemented a check to look for existing names before accepting a new secret. This prevents the secret from being overwritten.
 
+## 2.0.3.6
+
+### Key Fixes
+
+* PWX-8740 - Cloudsnaps: Do not create multiple grpc clients to px-storage                                                                     
+* PWX-8299 - Core with 'concurrent map writes' when object store on remote cluster was unreachable 
+
+## 2.0.3.5
+
+### Key Fixes
+
+* PWX-5885 - px-runc install is missing option to specify raidlevel                                                                              
+* PWX-7851 - Add pod annotation to prevent scale down of storage nodes in K8s when using autoscaler                                              
+* PWX-8701 - Internal Kvdb: Use DNS names for peer urls instead of IPs for internal kvdb                                                         
+* PWX-8712 - Cloudsnaps: Verify uploaded objects before marking backup as done             
+* PWX-8715 - Node index generation fix to avoid same node index generation
+* PWX-8733 - Post upgrade to 2.0.3.4: shared volumes were errored because the server endpoint wasn’t there anymore                               
+* PWX-8917 - OCI-Mon: PX service not restarted after cpu/mem limits updated  
+
+## 2.0.3.4
+
+### Key Fixes
+
+* PWX-8472 - OpenShift: Portworx mounts leak. Each portworx-service restart will increase number of mounts
+* PWX-8529 - Fix Cloudsnap restore performance for backups that have dependent incremental with large data sets
+* PWX-8652 - AWS: Allow specifying custom tags for EBS volumes in spec
+
 ## 2.0.3.3
 
 ### Key Fixes
