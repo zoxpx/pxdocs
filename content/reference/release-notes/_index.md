@@ -6,6 +6,76 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.0.3.7
+
+{{<info>}}
+PX 2.0.3.7 works with STORK 2.1.2. Here are the [release notes](https://github.com/libopenstorage/stork/releases/tag/v2.1.2) for STORK 2.1.2.
+{{</info>}}
+
+### Key Features and Enhancements
+
+**Feature: PWX-7549** - Provide the ability to add multiple drives to a PX node in a single command.
+
+_Customer Impact_:  None. This is an enhancement as previously PX only allowed only one drive to be added at a time.
+
+_Recommendations_: Add only one drive at a time or upgrade to 2.0.3.7 to be able to multiple drives.
+
+### Key Fixes
+
+**Issue: PWX-9126** - If a volume has the 'nodiscard' option set,  after the volume gets resized, the 'nodiscard' is not retained.
+
+_Customer Impact_: For customers who have used this option to increase the performance, the performance may drop after a volume gets resized.
+
+_Recommendations_: None. Recommend upgrading to 2.0.3.7
+
+**Issue: PWX-9118** - Adding an LVM drive partition as journal device failed.
+
+_Customer Impact_: Adding a journal device which is LVM drive partition will fail but the error is not clear in the logs. In general, it is not recommended to use LVM partitions as journal devices because of the performance limitations of such devices.
+
+_Recommendations_: Don't use LVM partitions as a journal device. Upgrade to 2.0.3.7 for better handling.
+
+**Issue: PWX-9055** - Installing PX with an LVM volume that has a similar name to another LVM volume will deactivate the other LVM volume (not used by PX). For e.g, if Portworx is asked use to /dev/mapper/volone and there is another LVM volume with the name /dev/mapper/volone1, volone1 would get deactivated.
+
+_Customer Impact_: In this case, if the customer was using the raw LVM volume for another application, that volume will be deactivated.
+
+_Recommendations_: Portworx recommends inspecting the system beforehand and to use volume names for LVM volumes that do not overlap with the existing volumes. To completely avoid the issue, Portworx recommends upgrading to 2.0.3.7.
+
+**Issue: PWX-8717** - Adding a journal device to a storage-less node right after a storage device was added results in PX crashing and restarting.
+
+_Customer Impact_: When a user tries to add a journal device to a storage-less node right after adding a storage device,  PX might crash and restart. In general, there is no application error as PX restarts within the 10 min device timeout interval, but there may be a very brief slow down of the I/Os.
+
+_Recomendations_: The workaround is to restart Portworx after a storage device was added and then add a journal device. Upgrading to 2.0.3.7 will eliminate the need for a restart.
+
+**Issue: PWX-9054** - Using the `-A` option during install does not recognize mdraid partitions.
+
+_Customer Impact_: If the storage disks provided to PX during install are from mdraid partitions, PX will not recognize them and will come up in storage-less mode.
+
+_Recommendations_: There is no workaround. Upgrading to 2.0.3.7 will enable adding mdraid partitions
+
+**Issue: PWX-8904** - Restarting PX node could result in not being able to complete the startup sequence.
+
+_Customer Impact_: This was seen in environments where there was heavy I/O with shared and non-shared volumes. Also, there were lots of replicas on the node to which a lot of traffic was being routed to. This resulted in a scenario where the internal credits were exhausted. 2.0.3.7 increased the credits and resource allocation.
+
+_Recommendations_: Upgrading to 2.0.3.7 resolves this issue.
+
+**Issue: PWX-9017** - De-couple OCI-mon constraints from PX systemd service limits
+
+_Customer Impact_: With previous releases, if the user changes the oci-mon system constraints/limits, it will get passed on to PX systemd service.
+
+_Recommendations_: This is addressed in 2.0.3.7 where the oci-mon limits are no longer passed on PX systemd service
+
+**Issue: PWX-8846**  - Storage-less node ended up with stuck I/Os and needed to be restarted.
+
+_Customer Impact_: A storage-less node stopped processing I/Os and had to be restarted to have the resources released.
+
+_Recommendations_: Storage-less node must be restarted to release the resources so application I/O can begin to run. Resources used by volumes which are detached when the node was down are not released when the node comes back online. This was resolved so these resources are now properly released to the global internal resource pool in PX.
+
+**Issue: PWX-9042** - Do not allow overwriting of secrets
+
+_Customer Impact_: Users can potentially overwrite their encrypted volume secrets if they end up using the same name for the new secret.
+
+_Recommendations_: Users must double check if they already have the same name that they are trying to add new secrets to the same cluster. 2.0.3.7 implemented a check to look for existing names before accepting a new secret. This prevents the secret from being overwritten.
+
 ## 2.0.3.6
 
 ### Key Fixes
