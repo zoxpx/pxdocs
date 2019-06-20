@@ -62,4 +62,4 @@ Currently upgrades are _not_ supported. You will need to deploy using CSI onto a
 
 ## Contribute
 
-Portworx welcomes contributions to our CSI implemenation, which is open-source and repository is at [OpenStorage](https://github.com/libopenstorage/openstorage).
+Portworx welcomes contributions to our CSI implementation, which is open-source and repository is at [OpenStorage](https://github.com/libopenstorage/openstorage).
