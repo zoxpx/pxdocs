@@ -51,7 +51,7 @@ job "px-node-wiper" {
 
       # container config
       config {
-        image        = "portworx/px-node-wiper:2.0.2.1"
+        image        = "portworx/px-node-wiper:2.0.3.6"
         network_mode = "host"
         ipc_mode = "host"
         privileged = true
