@@ -54,11 +54,27 @@ Flags:
   -h, --help   help for cloudsnap
 ```
 
+### Login to the secrets database
+
+Note that the cloud credentials are stored in an external secret store. Hence, before creating the credentials, make sure that you have [configured a secret provider](/key-management) of your choice.
+
+Now, we can login to the secrets database by typing:
+
+```text
+pxctl secrets kvdb login
+```
+
+```output
+Successful Login to Secrets Endpoint!
+```
+
+{{<info>}}
+**Kubernetes users:** This is not required if you are using _Portworx 2.0_ and higher on _Kubernetes_ and you have `-secret_type` as k8s in Daemonset
+{{</info>}}
+
 ### Set the required cloud credentials
 
-For this, we will use `pxctl credentials create` command. Note that the cloud credentials are stored in an external secret store. Hence, before you use the command to create credentials, ensure that you have [configured a secret provider of your choice](/key-management).
-
-To see the list of available command line options, type:
+For this, we will use the `pxctl credentials create` command. To see the list of available command line options, type:
 
 ```text
 pxctl credentials create --help
@@ -111,6 +127,22 @@ Here's how you can create the credentials for _Azure_:
 pxctl credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV my-azure-cred
 ```
 
+At this point, we can list the configured credentials as follows:
+
+```text
+pxctl cloudsnap credentials list
+```
+
+```output
+Azure Credentials
+UUID                        ACCOUNT NAME        ENCRYPTION
+ef092623-f9ba-4697-aeb5-0d5d6d9b5742        portworxtest        false
+```
+
+{{<info>}}
+Note that that listing the credentials does mean that connection to a secret-store endpoint has been validated.
+{{</info>}}
+
 #### AWS
 
 If you are using _AWS_, _Portworx_ creates a bucket (`ID` same as the cluster `UUID`) to upload cloudsnaps by default. Starting with _Portworx_ version 1.5.0, users can upload to a pre-created bucket. Thus, the _AWS_ credentials provided to _Portworx_ should either:
@@ -120,10 +152,30 @@ If you are using _AWS_, _Portworx_ creates a bucket (`ID` same as the cluster `U
 
 If you prefer that a user-specified bucket be used for cloudsnaps, specify the bucket id with the `--bucket` option while creating the credentials.
 
-##### With a user specified bucket (applicable only from 1.5.0 onwards)
+##### With a user-specified bucket (applicable only from 1.5.0 onwards)
+
+Say you are using `us-east-1 region`. If so, you should type something like the following:
 
 ```text
 pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com --bucket bucket-id my-s3-cred
+```
+
+If you are using a different region, replace the `--s3-region` and `--s3-endpoint` parameters with the appropriate values. For more information about region-specific endpoints, check out the "Amazon Simple Storage Service (Amazon S3)" section on [this page](https://docs.aws.amazon.com/general/latest/gr/rande.html).
+
+If you use the above command to create the credentials for an s3 endpoint that supports only virt-host-style access, then you will hit an error like below:
+
+```text
+createCred: error validating credential during create: SecondLevelDomainForbidden: Please use virtual hosted style to access. status code: 403, request id: xxyyzzaabbcc, host id:,
+```
+
+In this case, you should specify the `--disable-path-style` parameter while creating credentials as follows:
+
+```text
+pxctl cred create mycreds --provider=s3 --s3-disable-ssl --s3-region=us-east-1 --s3-access-key=<S3-ACCESS_KEY> --s3-secret-key=<S3-SECRET_KEY> --s3-endpoint=mys3-enpoint.com --disable-path-style --bucket=mybucket 
+```
+
+```output
+Credentials created successfully, UUID:77c336ac-9937-46cf-ad42-297ea41c8022
 ```
 
 The user created/specified bucket at a minimum must have the following permissions:
@@ -132,25 +184,25 @@ The user created/specified bucket at a minimum must have the following permissio
 {
      "Version": "2012-10-17",
      "Statement": [
-			{
-				"Sid": "VisualEditor0",
-				"Effect": "Allow",
-				"Action": [
-					"s3:ListAllMyBuckets",
-					"s3:GetBucketLocation"
-				],
-				"Resource": "*"
-			},
-			{
-				"Sid": "VisualEditor1",
-				"Effect": "Allow",
-				"Action": "s3:*",
-				"Resource": [
-					"arn:aws:s3:::<bucket-name>",
-					"arn:aws:s3:::<bucket-name/*"
-				]
-			}
-		]
+            {
+                "Sid": "VisualEditor0",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:ListAllMyBuckets",
+                    "s3:GetBucketLocation"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Sid": "VisualEditor1",
+                "Effect": "Allow",
+                "Action": "s3:*",
+                "Resource": [
+                    "arn:aws:s3:::<bucket-name>",
+                    "arn:aws:s3:::<bucket-name/*"
+                ]
+            }
+        ]
  }
 ```
 
@@ -159,7 +211,7 @@ Note: Replace `<bucket-name>` with name of your user-provided bucket.
 {{</info>}}
 
 
-##### Without a user specified bucket
+##### Without a user-specified bucket
 
 ```text
 pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com my-s3-cred
@@ -191,16 +243,16 @@ pxctl credentials list
 
 ```output
 S3 Credentials
-UUID						NAME		REGION			ENDPOINT						ACCESS KEY			SSL ENABLED		ENCRYPTION		BUCKET		WRITE THROUGHPUT (KBPS)
-af563a4d-afd7-48df-90f7-8e8f9414ff77		my-s3-cred	us-east-1		70.0.99.121:9010,70.0.99.122:9010,70.0.99.123:9010	AB6R80F3SY0VW9NS6HYQ		false			false			<nil>		1979
+UUID                        NAME        REGION            ENDPOINT                        ACCESS KEY            SSL ENABLED        ENCRYPTION        BUCKET        WRITE THROUGHPUT (KBPS)
+af563a4d-afd7-48df-90f7-8e8f9414ff77        my-s3-cred    us-east-1        70.0.99.121:9010,70.0.99.122:9010,70.0.99.123:9010    AB6R80F3SY0VW9NS6HYQ        false            false            <nil>        1979
 
 Google Credentials
-UUID						NAME			PROJECT ID		ENCRYPTION		BUCKET		WRITE THROUGHPUT (KBPS)
-6585cf56-4ccf-42cc-a235-76aaf6fb10f4		my-google-cred		235475231246		false			<nil>		1502
+UUID                        NAME            PROJECT ID        ENCRYPTION        BUCKET        WRITE THROUGHPUT (KBPS)
+6585cf56-4ccf-42cc-a235-76aaf6fb10f4        my-google-cred        235475231246        false            <nil>        1502
 
 Azure Credentials
-UUID						NAME			ACCOUNT NAME		ENCRYPTION		BUCKET		WRITE THROUGHPUT (KBPS)
-1672e1c9-c513-44db-b8b5-b59e3d35a3a2		my-azure-cred		pwx-test		false			<nil>		724
+UUID                        NAME            ACCOUNT NAME        ENCRYPTION        BUCKET        WRITE THROUGHPUT (KBPS)
+1672e1c9-c513-44db-b8b5-b59e3d35a3a2        my-azure-cred        pwx-test        false            <nil>        724
 ```
 
 `pxctl credentials list` only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed. The credentials will be stored as part of the secret endpoint given to _PX_ for persisting authentication across reboots.
@@ -268,7 +320,7 @@ OPTIONS:
 
 ```
 
-As an example, to backup a volume named `volume1`, you would use something like:
+As an example, to back up a volume named `volume1`, you would use something like:
 
 ```text
 pxctl cloudsnap backup volume1 --cred-id 82998914-5245-4739-a218-3b0b06160332
@@ -277,7 +329,7 @@ pxctl cloudsnap backup volume1 --cred-id 82998914-5245-4739-a218-3b0b06160332
 
 Here are a few things to consider about this command:
 
-* it is used to backup a single volume to the cloud provider of your choice using the specified credentials.
+* it is used to back up a single volume to the cloud provider of your choice using the specified credentials.
 * it decides whether to take a full or an incremental backup depending on the existing backups for the volume, as follows:
  * the first backup uploaded to the cloud is always a full backup.
  * after that, subsequent backups are incremental.
@@ -294,36 +346,10 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  ```
 
  ```output
- ID			NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
- 56706279008755778	NewVol	4 GiB	1	no	no		LOW		1	up - attached on 70.0.9.73
- 980081626967128253	evol	2 GiB	1	no	no		LOW		1	up - detached
+ ID            NAME    SIZE    HA    SHARED    ENCRYPTED    IO_PRIORITY    SCALE    STATUS
+ 56706279008755778    NewVol    4 GiB    1    no    no        LOW        1    up - attached on 70.0.9.73
+ 980081626967128253    evol    2 GiB    1    no    no        LOW        1    up - detached
  ```
-
-* List the configured credentials:
-
- ```text
- pxctl cloudsnap credentials list
- ```
-
- ```output
- Azure Credentials
- UUID						ACCOUNT NAME		ENCRYPTION
- ef092623-f9ba-4697-aeb5-0d5d6d9b5742		portworxtest		false
- ```
-
-* Login to the secrets database to authenticate _Portworx_ with the credentials:
-
- ```text
- pxctl secrets kvdb login
- ```
-
- ```output
- Successful Login to Secrets Endpoint!
- ```
-
- {{<info>}}
- **Kubernetes users:** This is not required if you are using _Portworx 2.0_ and higher on _Kubernetes_ and you have `-secret_type` as k8s in Daemonset
- {{</info>}}
 
 * Now, run the backup command:
 
@@ -346,9 +372,9 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  ```
 
  ```output
- NAME					SOURCEVOLUME									STATE		NODE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED
- 39f66859-14b1-4ce0-a4c0-c858e714689e	2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr	Backup-Done	70.0.73.246	420044800	17.460186585s	Wed, 16 Jan 2019 22:27:30 UTC
- 3f4f0a67-e12a-4d35-81ad-985657757352	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463	Backup-Active	70.0.73.246	1247805440	10.525438874s
+ NAME                    SOURCEVOLUME                                    STATE        NODE        BYTES-PROCESSED    TIME-ELAPSED    COMPLETED
+ 39f66859-14b1-4ce0-a4c0-c858e714689e    2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr    Backup-Done    70.0.73.246    420044800    17.460186585s    Wed, 16 Jan 2019 22:27:30 UTC
+ 3f4f0a67-e12a-4d35-81ad-985657757352    2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463    Backup-Active    70.0.73.246    1247805440    10.525438874s
  ```
 
  You could also check the status of a particular job, by passing the `task-id` returned upon the successful execution of the `pxctl cloudsnap backup` command:
@@ -358,23 +384,23 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  ```
 
  ```output
- NAME					SOURCEVOLUME									STATE		NODE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED
- 3f4f0a67-e12a-4d35-81ad-985657757352	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463	Backup-Active	70.0.73.246	1840250880	16.57831394s
+ NAME                    SOURCEVOLUME                                    STATE        NODE        BYTES-PROCESSED    TIME-ELAPSED    COMPLETED
+ 3f4f0a67-e12a-4d35-81ad-985657757352    2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463    Backup-Active    70.0.73.246    1840250880    16.57831394s
  ```
 
  Once the volume is backed up to the cloud successfully, listing the remote cloudsnaps will display the backup that has just been completed.
 
-* List the backups in cloud
+* List the backups in the cloud
 
  ```text
  pxctl cloudsnap list
  ```
 
  ```output
- SOURCEVOLUME					SOURCEVOLUMEID			CLOUD-SNAP-ID										CREATED-TIME				TYPE		STATUS
- volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719		Wed, 16 Jan 2019 21:51:53 UTC		Manual		Done
- volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr		Wed, 16 Jan 2019 22:27:13 UTC		Manual		Done
- NewVol						56706279008755778		2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463		Thu, 17 Jan 2019 00:03:59 UTC		Manual		Done
+ SOURCEVOLUME                    SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
+ volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719        Wed, 16 Jan 2019 21:51:53 UTC        Manual        Done
+ volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr        Wed, 16 Jan 2019 22:27:13 UTC        Manual        Done
+ NewVol                        56706279008755778        2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463        Thu, 17 Jan 2019 00:03:59 UTC        Manual        Done
  ```
 
 ### Perform cloud backup of a group of volumes
@@ -426,7 +452,7 @@ pxctl cloudsnap backup-group  -v vol1,vol2
 Group Cloudsnap backup started successfully with groupID:a1c8ba67-90e1-4c58-acbe-8eaca61a02ae
 ```
 
-Then, you can grab the `groupID` from above and use it to check the status of the group cloud snapshot. The following command will show status of each cloud snapshot in the group:
+Then, you can grab the `groupID` from above and use it to check the status of the group cloud snapshot. The following command will show the status of each cloud snapshot in the group:
 
 ```text
 pxctl cs status -n a1c8ba67-90e1-4c58-acbe-8eaca61a02ae
@@ -541,10 +567,10 @@ pxctl cloudsnap list
 ```
 
 ```output
-SOURCEVOLUME					SOURCEVOLUMEID			CLOUD-SNAP-ID										CREATED-TIME				TYPE		STATUS
-volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719		Wed, 16 Jan 2019 21:51:53 UTC		Manual		Done
-volume20190116214922				590114184663672482		2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr		Wed, 16 Jan 2019 22:27:13 UTC		Manual		Done
-NewVol						56706279008755778		2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463		Thu, 17 Jan 2019 00:03:59 UTC		Manual		Done
+SOURCEVOLUME                    SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
+volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719        Wed, 16 Jan 2019 21:51:53 UTC        Manual        Done
+volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr        Wed, 16 Jan 2019 22:27:13 UTC        Manual        Done
+NewVol                        56706279008755778        2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463        Thu, 17 Jan 2019 00:03:59 UTC        Manual        Done
 ```
 
 {{<info>}}
@@ -568,10 +594,10 @@ pxctl cloudsnap status
 ```
 
 ```output
-NAME					SOURCEVOLUME									STATE		NODE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED
-3f4f0a67-e12a-4d35-81ad-985657757352	2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463	Backup-Done	70.0.73.246	11988570112	3m29.825766964s	Thu, 17 Jan 2019 00:07:29 UTC
-39f66859-14b1-4ce0-a4c0-c858e714689e	2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr	Backup-Done	70.0.73.246	420044800	17.460186585s	Wed, 16 Jan 2019 22:27:30 UTC
-59c4cfd5-4160-45db-b326-f37b327d9225	2e4d4b67-95d7-481e-aec5-14223ac55170/212160250617983239-283838486341798860	Restore-Done	70.0.73.246	1079287808	3.174541219s	Thu, 17 Jan 2019 00:15:19 UTC
+NAME                    SOURCEVOLUME                                    STATE        NODE        BYTES-PROCESSED    TIME-ELAPSED    COMPLETED
+3f4f0a67-e12a-4d35-81ad-985657757352    2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463    Backup-Done    70.0.73.246    11988570112    3m29.825766964s    Thu, 17 Jan 2019 00:07:29 UTC
+39f66859-14b1-4ce0-a4c0-c858e714689e    2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr    Backup-Done    70.0.73.246    420044800    17.460186585s    Wed, 16 Jan 2019 22:27:30 UTC
+59c4cfd5-4160-45db-b326-f37b327d9225    2e4d4b67-95d7-481e-aec5-14223ac55170/212160250617983239-283838486341798860    Restore-Done    70.0.73.246    1079287808    3.174541219s    Thu, 17 Jan 2019 00:15:19 UTC
 ```
 
 ### Deleting a Cloud Backup
@@ -603,8 +629,8 @@ pxctl cloudsnap delete --snap pqr9-cl1/538316104266867971-807625803401928868
 ```output
 Cloudsnap deleted successfully
 pxctl cloudsnap list
-SOURCEVOLUME 	CLOUD-SNAP-ID					CREATED-TIME			STATUS
-dvol		pqr9-cl1/520877607140844016-50466873928636534	Fri, 07 Apr 2017 20:22:43 UTC	Done
+SOURCEVOLUME     CLOUD-SNAP-ID                    CREATED-TIME            STATUS
+dvol        pqr9-cl1/520877607140844016-50466873928636534    Fri, 07 Apr 2017 20:22:43 UTC    Done
 ```
 
 ### Cloud backup schedules
@@ -713,8 +739,8 @@ pxctl cloudsnap schedules list
 ```
 
 ```output
-UUID						VOLUMEID			MAX-BACKUPS		FULL		SCHEDULE(UTC)
-078557a3-26c7-49b1-9822-34e6f816c2d1		648038464574631167		15			false		daily @21:00
+UUID                        VOLUMEID            MAX-BACKUPS        FULL        SCHEDULE(UTC)
+078557a3-26c7-49b1-9822-34e6f816c2d1        648038464574631167        15            false        daily @21:00
 ```
 
 
