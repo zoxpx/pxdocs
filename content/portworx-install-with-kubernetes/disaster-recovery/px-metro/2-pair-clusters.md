@@ -56,7 +56,6 @@ status:
 In the generated **ClusterPair** spec, you will need to do the following modifications:
 
   * You will see an unpopulated *options* section. It expects options that are required to pair Storage. However, as we have a single storage fabric, this section is not needed. You should delete the line `<insert_storage_options_here>`.
-  * Under the options section, the mode is set to **DisasterRecovery**, this is required for scheduling periodic migrations. More information about it in the next step.
 
 Once the modifications are done, save it into a file `clusterpair.yaml`
 
