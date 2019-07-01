@@ -152,7 +152,9 @@ Once you apply the above spec on the source cluster you should be able to check 
 see the "Storage Status" and "Scheduler Status" as "Ready" using storkctl on the
 source cluster:
 ```text
-storkctl get clusterpair
+storkctl -n migrationnamespace get clusterpair
+```
+```output
 NAME               STORAGE-STATUS   SCHEDULER-STATUS   CREATED
 remotecluster      Ready            Ready              26 Oct 18 03:11 UTC
 ```
@@ -160,7 +162,7 @@ remotecluster      Ready            Ready              26 Oct 18 03:11 UTC
 ### Troubleshooting
 If the status is in error state you can describe the clusterpair to get more information
 ```text
-kubectl describe clusterpair remotecluster
+kubectl -n migrationnamespace describe clusterpair remotecluster
 ```
 
 {{<info>}} *Note*: You might need to perform additional steps for [GKE](gke) and [EKS](eks) {{</info>}}
@@ -241,7 +243,7 @@ mysqlmigration  remotecluster   Final     Successful   1/1       3/3         26 
 ### Troubleshooting
 If there is a failure or you want more information about what resources were migrated you can describe the migration object using kubectl:
 ```text
-kubectl describe migration mysqlmigration
+kubectl -n migrationnamespace describe migration mysqlmigration
 ```
 ```output
 Name:         mysqlmigration
