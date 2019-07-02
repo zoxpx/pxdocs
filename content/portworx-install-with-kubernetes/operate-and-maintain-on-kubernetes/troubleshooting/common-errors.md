@@ -23,21 +23,27 @@ description: Common errors
     the Portworx container has started, and such changes will not propagate from host to container.
 <br/>
 
-* Failure to start Portworx service on `Red Hat Enterprise Linux CoreOS 410.8.20190418.1 (Ootpa)`:
-  * You may have encountered the following failure to start Portworx service on RHEL/CoreOS platform:
+---
+
+* Failure to install Portworx:
+  * You may have experienced the following issue installing Portworx  (e.g. Fedora 28 host)
 
     ```
-    @ip-10-0-162-215 systemd[1]: Starting Portworx OCI Container...
-    @ip-10-0-162-215 systemd[1]: Started Portworx OCI Container.
-    @ip-10-0-162-215 systemd[1]: portworx.service: Main process exited, code=exited, status=203/EXEC
-    @ip-10-0-162-215 systemd[1]: portworx.service: Failed with result 'exit-code'.
+    # sudo docker run --entrypoint /runc-entry-point.sh --rm -i --name px-installer --privileged=true \
+      -v /etc/pwx:/etc/pwx -v /opt/pwx:/opt/pwx portworx/px-base-enterprise:2.1.2
+    docker: Error response from daemon: OCI runtime create failed: container_linux.go:345: starting \
+      container process caused "process_linux.go:430: container init caused \
+      \"write /proc/self/attr/keycreate: permission denied\"": unknown.
     ```
     
-  * **EXPLANATION**:<br/> This error occurs due to invalid security context on /opt directory on RHEL/CoreOS system (see [case#02375927](https://access.redhat.com/support/cases/#/case/02375927)).  To fix this for Kubernetes installations, please include the "PRE-EXEC" environment variable into your Portworx YAML as seen below.  For standalone Portworx installations, please run the "if grep -q..." command manually on the host-system:
+  * **EXPLANATION**:<br/> This error is a docker issue (see [moby#39109](https://github.com/moby/moby/issues/39109)), and it prevents running even the simplest containers:
 
     ```
-    env:
-    - name: "PRE-EXEC"
-      value: "if grep -q 'Red Hat Enterprise Linux CoreOS' /etc/os-release && /bin/ls -dZ /var/opt/ | grep -q :object_r:var_t: ; then semanage fcontext -a -t usr_t '/var/opt(/.*)?' ; restorecon -Rv /var/opt/ ; fi"
+    # sudo docker run --rm -it hello-world
+    docker: Error response from daemon: OCI runtime create failed: container_linux.go:345: starting \
+      container process caused "process_linux.go:430: container init caused \
+      \"write /proc/self/attr/keycreate: permission denied\"": unknown.
     ```
+
+  * to work around this issue, one should either turn off the [SELinux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux) support, or make sure to use docker-package provided by the host's platform.
 <br/>
