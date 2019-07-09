@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 Cluster wide secret key is basically a key value pair where the value part is the secret that is used as a passphrase for encrypting volumes. A cluster wide secret key is the default key that can be used to encrypt all the volumes.
 
 To create a volume using a cluster wide secret key run the following command

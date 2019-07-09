@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 For encrypting volumes using specific secret keys, you need to provide that key for every create and attach command.
 
 To create an **encrypted** volume using a specific secret through Portworx CLI, run the following command:

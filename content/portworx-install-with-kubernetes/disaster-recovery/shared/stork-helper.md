@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 The following steps can be used to download `storkctl`:
 
 * Linux:

@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 ```text
 kind: PersistentVolumeClaim
 apiVersion: v1

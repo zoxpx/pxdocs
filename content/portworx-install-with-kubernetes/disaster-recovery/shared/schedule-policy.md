@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 ## Scheduling migrations
 
 You can schedule a migration through a schedule policy. In the next sections, we will walk you through how to spec, validate, and display a schedule policy. Then, we will use our new schedule policy to schedule a migration.

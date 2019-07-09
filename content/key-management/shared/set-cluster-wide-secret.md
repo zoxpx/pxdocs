@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 A cluster wide secret key is a common key that can be used to encrypt all your volumes. You can set the cluster secret key using the following command.
 
 ```text
