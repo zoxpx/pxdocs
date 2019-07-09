@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 ### Troubleshooting
 
 If there is a failure or you want more information about what resources were migrated you can `describe` the migration object using `kubectl`:

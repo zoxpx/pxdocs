@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 ## Portworx Encrypted Volumes
 
 {{% content "shared/encryption/intro.md" %}}

@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 #### Step 2: Create a StorageClass
 
 {{% content "key-management/shared/enc-storage-class-spec.md" %}}

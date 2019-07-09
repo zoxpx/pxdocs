@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 PX allows you to create a heterogenous cluster where some of the nodes are storage nodes and rest of them are storageless.
 
 You can specify the number of storage nodes in your cluster by setting the ```max_storage_nodes_per_zone``` input argument.

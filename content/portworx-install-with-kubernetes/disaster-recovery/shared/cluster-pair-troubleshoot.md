@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 ### Troubleshooting
 If the status is in error state you can describe the clusterpair to get more information by running:
 

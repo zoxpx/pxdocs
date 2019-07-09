@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 ### Generate and Apply ClusterPair Spec
 
 In Kubernetes you will define a trust object called **ClusterPair**. This object is required to communicate with the destination cluster. In a nutshell, it creates a pairing with the storage driver (_Portworx_) as well as the scheduler (Kubernetes) so that the volumes and resources can be migrated between clusters.

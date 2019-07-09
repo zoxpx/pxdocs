@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 Use the following CLI command to create a new secret in Google Cloud KMS and provide it an identifier/name:
 
 ```text

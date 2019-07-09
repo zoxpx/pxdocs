@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 Below steps save all Portworx images into a tarball after which they can be loaded onto nodes individually.
 
 1. Save all Portworx images into a tarball called _px-offline.tar_.

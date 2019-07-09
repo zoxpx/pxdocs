@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 Create a storage class with the `secure` parameter set to `true`.
 ```text
 kind: StorageClass

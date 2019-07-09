@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 Use the following CLI command to generate AWS KMS Data keys. _Portworx_ associates each KMS Data Key with a unique name provided through the `--secret_id` argument.
 
 To generate a new KMS Data Key, run the following command:
