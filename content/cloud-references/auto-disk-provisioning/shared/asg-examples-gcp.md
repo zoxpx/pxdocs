@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 Examples:
 
 * `"-s", "type=pd-ssd,size=200", "-max_storage_nodes_per_zone", "1"`

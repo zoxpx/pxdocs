@@ -1,9 +1,7 @@
 ---
-title: Cluster pair troubleshoot
 hidden: true
-keywords: portworx, kubernetes, dr
-description: cluster pair troubleshooting page
 ---
+
 ### Troubleshooting
 If the status is in error state you can describe the clusterpair to get more information by running:
 

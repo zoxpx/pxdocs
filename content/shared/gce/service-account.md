@@ -1,3 +1,10 @@
+---
+title: Service account
+keywords: portworx, gce, gke, gcp
+description: Service account
+hidden: true
+---
+
 Alternatively, you can give Portworx access to the GCP API server via an account file and environment variables. First, you will need to create a service account in GCP and download the account file.
 
 To access the GCP API server, Portworx needs a service account with the following roles
@@ -14,7 +21,7 @@ To access the GCP API server, Portworx needs a service account with the followin
     roles/cloudkms.cryptoKeyEncrypterDecrypter
     roles/cloudkms.publicKeyViewer
     ```
-    
+
 Follow these steps to create a service account and download its corresponding account file.
 
 1. Create a service account in the "Service Account" section that has the above permissions.

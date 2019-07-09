@@ -1,8 +1,5 @@
 ---
-title: Shared
 hidden: true
-description: Shared content for Kubernetes snapshots
-keywords: portworx, kubernetes
 ---
 
 #### Step 1: Deploy cassandra statefulset and PVCs

@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 Examples:
 
 * `"-s", "type=gp2,size=200", "-max_storage_nodes_per_zone", "1"`

@@ -2,6 +2,7 @@
 title: Enable on Docker (shared)
 description: Learn how to enable Porworx as a runC container
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
+hidden: true
 ---
 
 Once you install the PX OCI bundle and systemd configuration from the steps above, you can start and control PX runC directly via systemd.

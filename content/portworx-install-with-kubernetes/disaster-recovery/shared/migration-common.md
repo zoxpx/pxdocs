@@ -1,9 +1,7 @@
 ---
-title: Migration common
 hidden: true
-keywords: portworx, kubernetes, dr
-description: Common content for migration
 ---
+
 ### Troubleshooting
 
 If there is a failure or you want more information about what resources were migrated you can `describe` the migration object using `kubectl`:

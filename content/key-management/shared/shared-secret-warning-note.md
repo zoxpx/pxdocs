@@ -1,3 +1,6 @@
+---
+hidden: true
+---
 
 If you want to migrate encrypted volumes created through this method between two different Portworx clusters:
 

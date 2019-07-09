@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 1. Export your registry location:
 
     ```text

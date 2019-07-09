@@ -3,6 +3,7 @@ title: Shared and Sharedv4 Volumes
 linkTitle: Shared Volumes
 description: Explanation on Portworx Shared and Sharedv4 volumes to allow multiple containers access to one volume
 keywords: portworx, PX-Developer, container, Shared Volume, Sharedv4 Volume, NFS, storage
+hidden: true
 ---
 
 Through shared and sharedv4 volumes \(also known as a **global namespace**\), a single volume’s filesystem is concurrently available to multiple containers running on multiple hosts.

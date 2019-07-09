@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 Use the following command to set the cluster wide secret key
 
 ```text
