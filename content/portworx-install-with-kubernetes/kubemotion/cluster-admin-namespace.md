@@ -1,6 +1,6 @@
 ---
-title: "Set up a Cluster Admin namespace for PX-Motion"
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+title: "Set up a Cluster Admin namespace for Kubemotion"
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: How to designate a namespace as the cluster admin namespace
 ---
 

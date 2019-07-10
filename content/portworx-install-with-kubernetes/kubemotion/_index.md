@@ -1,9 +1,9 @@
 ---
-title: "PX-Motion with stork on Kubernetes"
-linkTitle: "PX-Motion with stork"
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+title: "Kubemotion with stork on Kubernetes"
+linkTitle: "Kubemotion with stork"
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: How to migrate stateful applications on Kubernetes
-series: px-motion
+series: kubemotion
 aliases:
   - /cloud-references/migration/migration-stork.html
   - /cloud-references/migration/migration-stork
@@ -38,7 +38,7 @@ sudo chmod +x /usr/local/bin/storkctl
       * Move `storkctl.exe` to a directory in your PATH
 
 ## Pairing clusters
-On Kubernetes you will define a trust object required to communicate with the destination cluster called a ClusterPair. This creates a pairing 
+On Kubernetes you will define a trust object required to communicate with the destination cluster called a ClusterPair. This creates a pairing
 with the storage driver (Portworx) as well as the scheduler (Kubernetes) so that the volumes and resources, can be migrated between
 clusters.
 
@@ -173,7 +173,7 @@ Once the pairing is configured, applications can be migrated repeatedly to the d
 #### Using a spec file
 In order to make the process schedulable and repeatable, you can write a YAML
 specification. In that YAML, you will specify an object called a Migration.
-In the specification, you will define the scope of the 
+In the specification, you will define the scope of the
 applications to move and decide whether to automatically start the applications.
 Here, create a migration and save as migration.yaml.
 ```text

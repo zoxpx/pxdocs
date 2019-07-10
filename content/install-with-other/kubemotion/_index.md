@@ -1,9 +1,9 @@
 ---
-title: "PX-Motion to migrate volumes"
-linkTitle: "PX-Motion to migrate volumes"
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+title: "Kubemotion to migrate volumes"
+linkTitle: "Kubemotion to migrate volumes"
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: How to migrate volumes across clusters
-series: px-motion
+series: kubemotion
 weight: 12
 aliases:
   - /cloud-references/migration/migration-pxctl.html
