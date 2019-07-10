@@ -1,6 +1,6 @@
 ---
-title: "PX-Motion with stork on GKE"
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion, gke
+title: "Kubemotion with stork on GKE"
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion, gke
 description: How to migrate stateful appliations to GKE
 hidden: true
 ---
