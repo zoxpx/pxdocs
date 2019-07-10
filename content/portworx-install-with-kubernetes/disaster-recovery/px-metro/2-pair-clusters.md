@@ -1,7 +1,7 @@
 ---
 title: "2. Pair Clusters"
 weight: 2
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: Find out how to pair your clusters
 ---
 

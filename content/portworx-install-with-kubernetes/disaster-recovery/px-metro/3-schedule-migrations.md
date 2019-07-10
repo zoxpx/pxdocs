@@ -1,7 +1,7 @@
 ---
 title: "3. Synchronize your Clusters"
 weight: 3
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: Find out how to synchronize your cluster by scheduling periodic migrations between them
 ---
 

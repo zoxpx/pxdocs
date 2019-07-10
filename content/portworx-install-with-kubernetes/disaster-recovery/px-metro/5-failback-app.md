@@ -1,7 +1,7 @@
 ---
 title: "5. Failback an application"
 weight: 5
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: Find out how to failback an application from the backup Kubernetes cluster to the original one.
 ---
 

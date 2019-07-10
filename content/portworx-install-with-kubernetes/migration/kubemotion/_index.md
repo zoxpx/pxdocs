@@ -1,9 +1,9 @@
 ---
-title: "PX-Motion with stork on Kubernetes"
-linkTitle: "PX-Motion with stork"
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+title: "Kubemotion with stork on Kubernetes"
+linkTitle: "Kubemotion with stork"
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: How to migrate stateful applications on Kubernetes
-series: px-motion
+series: kubemotion
 noicon: true
 aliases:
   - /cloud-references/migration/migration-stork.html

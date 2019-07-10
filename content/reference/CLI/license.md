@@ -68,7 +68,7 @@ Volume sets				 yes
 BYOK data encryption			 yes
 Resize volumes on demand		 yes
 Snapshot to object store [CloudSnap]	 yes
-Cluster-level migration [PX-Motion]	 yes
+Cluster-level migration [Kubemotion]	 yes
 Bare-metal hosts			 yes
 Virtual machine hosts			 yes
 Product SKU				Trial		expires in 6 days, 12:13

@@ -1,7 +1,7 @@
 ---
 title: "4. Failover an application"
 weight: 4
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: Find out how to failover an application from one Kubernetes cluster to another.
 ---
 

@@ -1,9 +1,9 @@
 ---
 title: "Migration"
 linkTitle: "Migration"
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: How to migrate stateful applications on Kubernetes
-series: px-motion
+series: kubemotion
 aliases:
   - /cloud-references/migration/migration-stork.html
   - /cloud-references/migration/migration-stork

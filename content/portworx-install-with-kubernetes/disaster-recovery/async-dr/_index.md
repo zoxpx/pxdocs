@@ -1,7 +1,7 @@
 ---
 title: Asynchronous DR
 linkTitle: Asynchronous DR
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: How to achieve asynchronous DR across Kubernetes clusters using schduled migrations
 weight: 2
 ---

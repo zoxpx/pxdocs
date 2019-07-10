@@ -1,6 +1,6 @@
 ---
-title: "PX-Motion with stork on EKS"
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion, eks
+title: "Kubemotion with stork on EKS"
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion, eks
 description: How to migrate stateful appliations to EKS
 hidden: true
 ---

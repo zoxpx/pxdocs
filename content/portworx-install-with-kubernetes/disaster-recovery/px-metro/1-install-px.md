@@ -1,7 +1,7 @@
 ---
 title: "1. Prepare your Portworx Cluster"
 weight: 1
-keywords: cloud, backup, restore, snapshot, DR, migration, px-motion
+keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: Find out how to install a single stretch Portworx cluster across multiple Kubernetes clusters.
 ---
 
