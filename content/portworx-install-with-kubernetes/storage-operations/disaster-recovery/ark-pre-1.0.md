@@ -1,46 +1,64 @@
 ---
-title: "Using Velero with Portworx"
-keywords: portworx, container, Kubernetes, storage, k8s, pv, persistent disk, snapshot, velero, ark
-description: Learn how the Portworx plugin for Velero can help with disaster recovery in your Kubernetes clusters
+title: "Using Ark with Portworx"
+keywords: portworx, container, Kubernetes, storage, k8s, pv, persistent disk, snapshot
+description: Learn how the Portworx plugin for Heptio Ark can help with disaster recovery in your Kubernetes clusters
 weight: 7
 noicon: true
-series: k8s-storage
+hidden: true
 aliases:
   - portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/disaster-recovery
 ---
 
-Velero is a utility for managing disaster recovery, specifically for your
+Heptio Ark is a utility for managing disaster recovery, specifically for your
 Kubernetes cluster resources and persistent volumes. To take snapshots of
-Portworx volumes through Velero you need to install and configure the Portworx
+Portworx volumes through Ark you need to install and configure the Portworx
 plugin.
 
-{{<info>}}These instructions are for Velero v1.0 and higher. For older versions of Ark (previous name for the Velero project), please [click here.](ark-pre-1.0) {{</info>}}
+{{<info>}}These instructions are for ark v0.10 and higher. For older versions, please [click here.](../ark-pre-0.10) {{</info>}}
 
-## Install Velero Plugin
+## Install Ark Plugin
 
-Run the following command to install the Portworx plugin for Velero:
+Run the following command to install the Portworx plugin for Ark:
 ```text
-velero plugin add portworx/velero-plugin:1.0.0
+ark plugin add portworx/ark-plugin:0.5
 ```
 
-This should add an init container to your Velero deployment to install the
+{{<info>}}For PX-Enterprise pre v2.0, use `portworx/ark-plugin:0.4` {{</info>}}
+
+This should add an init container to your Ark deployment to install the
 plugin.
 
-## Configure Velero to use Portworx snapshots
+## Configure Ark to use Portworx snapshots
 
-Once the plugin is installed, you need to create VolumeSnapshotLocation objects for Velero to use when
+Once the plugin is installed, you need to create VolumeSnapshotLocation objects for ark to use when
 taking volume snapshots. These specify whether you want to take local or cloud snapshots.
 
 ```text
-velero snapshot-location create portworx-local --provider portworx.io/portworx
-
-# credId is optional, required only if Portworx is configured with more than one credential.
-velero snapshot-location create portworx-cloud --provider portworx.io/portworx --config type=cloud,credId=<UUID>
+apiVersion: ark.heptio.com/v1
+kind: VolumeSnapshotLocation
+metadata:
+  name: portworx-local
+  namespace: heptio-ark
+spec:
+  provider: portworx
+  config:
+---
+apiVersion: ark.heptio.com/v1
+kind: VolumeSnapshotLocation
+metadata:
+  name: portworx-cloud
+  namespace: heptio-ark
+spec:
+  provider: portworx
+  config:
+    type: cloud
+    # Optional, required only if Portworx is configured with more than one credential
+    credId: <UUID>
 ```
 
 After applying the above specs you should see them when you list the VolumeSnapshotLocaions
 ```text
-kubectl get volumesnapshotlocation -n velero
+kubectl get volumesnapshotlocation -n heptio-ark
 ```
 
 ```output
@@ -52,7 +70,7 @@ portworx-local   54m
 ## Creating backups
 
 Once the plugin has been installed and configured, everytime you take backups
-using Velero and include PVCs, it will also take Portworx snapshots of your volumes.
+using Ark and include PVCs, it will also take Portworx snapshots of your volumes.
 
 ### Local Backups
 
@@ -60,13 +78,13 @@ To backup all your apps in the default namespace and also create local snapshots
 of the volumes, you would use `portworx-local` for the snapshot location:
 
 ```text
-velero backup create default-ns-local-backup --include-namespaces=default --snapshot-volumes \
+ark backup create default-ns-local-backup --include-namespaces=default --snapshot-volumes \
      --volume-snapshot-locations portworx-local
 ```
 
 ```output
 Backup request "default-ns-local-backup" submitted successfully.
-Run `velero backup describe default-ns-local-backup` for more details.
+Run `ark backup describe default-ns-local-backup` for more details.
 ```
 
 ### Cloud Backups
@@ -75,22 +93,22 @@ To backup all your apps in the default namespace and also create cloud backups
 of the volumes, you would use `portworx-cloud` for the snapshot location:
 
 ```text
-velero backup create default-ns-cloud-backup --include-namespaces=default --snapshot-volumes \
+ark backup create default-ns-cloud-backup --include-namespaces=default --snapshot-volumes \
      --volume-snapshot-locations portworx-cloud
 ```
 
 ```output
 Backup request "default-ns-cloud-backup" submitted successfully.
-Run `velero backup describe default-ns-cloud-backup` for more details.
+Run `ark backup describe default-ns-cloud-backup` for more details.
 ```
 
 ## Listing backups
 
 Once the specs and volumes have been backed up you should see the backup marked
-as `Completed` in velero.
+as `Completed` in ark.
 
 ```text
-velero get backup
+ark get backup
 ```
 
 ```output
@@ -106,10 +124,10 @@ bound to the restored PVC. To restore from the backup created above you can run
 the following command:
 
 ```text
-velero restore create --from-backup default-ns-local-backup
+ark restore create --from-backup default-ns-local-backup
 ```
 
 ```output
 Restore request "default-ns-local-backup-20181111201245" submitted successfully.
-Run `velero restore describe default-ns-local-backup-20181111201245` for more details.
+Run `ark restore describe default-ns-local-backup-20181111201245` for more details.
 ```
