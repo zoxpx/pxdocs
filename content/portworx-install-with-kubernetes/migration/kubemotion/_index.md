@@ -33,7 +33,7 @@ reachable by the source cluster.
 
 ## Pairing clusters
 
-On Kubernetes you will define a trust object called **ClusterPair**. This object is required to communicate with the destination cluster. In a nutshell, it creates a pairing with the storage driver (_Portworx_) as well as the scheduler (Kubernetes) so that the volumes and resources can be migrated between clusters.
+On Kubernetes, you will define a trust object called **ClusterPair**. This object is required to communicate with the destination cluster. In a nutshell, it creates a pairing with the storage driver (_Portworx_) as well as the scheduler (Kubernetes) so that the volumes and resources can be migrated between clusters.
 
 
 ### Get cluster token from destination cluster
@@ -132,7 +132,6 @@ Instead of the IP address of the node in the destination cluster, you can use th
 In the updated spec, ensure values for all fields under options are quoted.
 {{</info>}}
 
-
 Copy and save this to a file called `clusterpair.yaml` on the source cluster.
 
 ### Creating the ClusterPair
@@ -148,6 +147,8 @@ kubectl apply -f clusterpair.yaml
 clusterpair.stork.libopenstorage.org/remotecluster created
 ```
 
+Note that, when the ClusterPair gets created, _Portworx_ also creates a 100 GiB volume called `ObjectstoreVolume`. If you plan to migrate volumes that are significanlty larger than 100GiB, make sure you check out first the [Migrating Large Volumes](#migrating-large-volumes) section.
+
 #### Verifying the Pair status
 
 Once you apply the above spec on the source cluster, you should be able to check the status of the pairing:
@@ -161,7 +162,7 @@ remotecluster      Ready            Ready              26 Oct 18 03:11 UTC
 ```
 On a successful pairing, you should see the "Storage Status" and "Scheduler Status" as "Ready":
 
-If so, you’re all set and ready to [migrate] (#migrating-volumes-and-resoruces).
+If so, you’re all set and ready to [migrate] (#migrating-volumes-and-resources).
 
 #### Troubleshooting
 
@@ -178,6 +179,72 @@ You might need to perform additional steps for [GKE](gke) and [EKS](eks)
 ## Migrating Volumes and Resources
 
 Once the pairing is configured, applications can be migrated repeatedly to the destination cluster.
+
+### Migrating Large Volumes
+
+When the clusterpair gets created, _Portworx_ automatically creates a 100G volume named *ObjectstoreVolume*. If you attempt to migrate a volume significantly larger than 100G, you will find out that the ObjectStore volume doesn't provide sufficient disk space and the migration will fail.
+
+As an example, say you want to migrate a 1 TB volume. If so, you would need to update the size of the *ObjectstoreVolume* by running:
+
+
+```text
+pxctl v update -s 1005 ObjectstoreVolume
+```
+
+{{<info>}}
+Kubemotion uses compression when transferring data. So, if the data is easily compressible, a 100G Objectstore could allow you to transfer more than 100G of data. However, there is no way to tell beforehand how much the data will be compressed.
+In our example, we migrated a few docker images that were not easily compressible. Thus, reallocating the Objectstore to > 1TB was a safe thing to do.
+{{</info>}}
+
+Here's how you can check if a migration failed due to insufficient space:
+
+```text
+storkctl -n nexus get migration nexusmigration -o yaml
+```
+
+```output
+apiVersion: v1
+items:
+- metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"stork.libopenstorage.org/v1alpha1","kind":"Migration","metadata":{"annotations":{},"name":"nexusmigration","namespace":"nexus"},"spec":{"clusterPair":"remoteclusteroldgreatdanetonewgreatdane","includeResources":true,"namespaces":["nexus"],"startApplications":true}}
+    creationTimestamp: "2019-07-02T23:49:13Z"
+    generation: 1
+    name: nexusmigration
+    namespace: nexus
+    resourceVersion: "77951964"
+    selfLink: /apis/stork.libopenstorage.org/v1alpha1/namespaces/nexus/migrations/nexusmigration
+    uid: fec861ca-9d23-11e9-beb8-0cc47ab5f9a2
+  spec:
+    clusterPair: remoteclusteroldgreatdanetonewgreatdane
+    includeResources: true
+    namespaces:
+    - nexus
+    selectors: null
+    startApplications: true
+  status:
+    resources: null
+    stage: Final
+    status: Failed
+    volumes:
+    - namespace: nexus
+      persistentVolumeClaim: nexus-pvc
+      reason: "Migration Backup failed for volume: Backup failed: XMinioStorageFull:
+        Storage backend has reached its minimum free disk threshold. Please delete
+        a few objects to proceed.\n\tstatus code: 500, request id: 15ADBC3B90C3A97F,
+        host id: "
+      status: Failed
+      volume: pvc-9b776615-3f5e-11e8-83b6-0cc47ab5f9a2
+kind: List
+metadata: {}
+```
+
+If you see an error similar to the one above, you should increase the size of the *ObjectstoreVolume* and restart the migration.
+
+{{<info>}}
+Alternatively, you can use your own cloud (S3, Azure, or Google) instead of ObjectStore on the destination cluster. Note that the credentials must be named `clusterPair_<clusterUUID_of_destination>` and you are required to create them on both the source and the destination cluster.
+{{</info>}}
 
 ### Starting a migration
 
@@ -209,7 +276,6 @@ spec:
 ```
 
 Next, you can invoke this migration manually from the command line:
-
 
 ```text
 kubectl apply -f migration.yaml
