@@ -162,7 +162,7 @@ remotecluster      Ready            Ready              26 Oct 18 03:11 UTC
 ```
 On a successful pairing, you should see the "Storage Status" and "Scheduler Status" as "Ready":
 
-If so, you’re all set and ready to [migrate] (#migrating-volumes-and-resources).
+If so, you’re all set and ready to [migrate](#migrating-volumes-and-resources).
 
 #### Troubleshooting
 
