@@ -53,7 +53,7 @@ Portworx also supports storageless mode, where a node participates in a cluster,
 Yes, if replication is > 1, then different blocks will be read from different servers.   We multi-source the read operations across nodes for high-performance.
 
 ### Can one server participate in multiple (different) PX clusters?
-No.  Currently only one instance of PX per server is allowed.  
+No.  Currently only one instance of PX per server is allowed.
 
 ### Can Portworx work in a multi-cloud environment?
 Yes absolutely you can create a fabric, based on servers across multiple different cloud providers.
@@ -64,7 +64,9 @@ With "Shared Volumes", a Portworx volume can be NFS mounted (read/write) outside
 Among the possible use cases:
 * Easily sharing results of containerized workloads with non-containerized apps/reports
 * Providing a "data bridge" for moving from non-containerized workloads towards containerized workloads
-Please see the documentation [here](/concepts/shared-volumes), or view our [YouTube Demo](https://www.youtube.com/watch?v=AIVABlClYAU)
+Please see the documentation [here](/concepts/shared-volumes), or view our YouTube demo below.
+
+{{< youtube AIVABlClYAU >}}
 
 ### How are snapshots implemented?    Thick clones or Thin clones?
 Portworx snapshots are redirect-on-write snapshots and are thin clones.
@@ -82,7 +84,7 @@ We do not support Object native.   But minio provides an S3 Object interface tha
 ### Any way to segregate frontend/backend/management traffic?
 Yes.  Management traffic (for configuration) and statistics traffic will travel over "mgtiface" .
 Traffic associated with replication and resynchronization will travel over "dataiface".
-Please see the [config-json file definition](/install-with-other/docker/shared/config-json).  
+Please see the [config-json file definition](/install-with-other/docker/shared/config-json).
 Regardless, all data requests between the container and the PX volume driver will be handled locally on that host.
 
 ### Does Portworx support volume encryption?
