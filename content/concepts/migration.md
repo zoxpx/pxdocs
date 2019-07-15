@@ -2,7 +2,7 @@
 title: Migration
 description: Move stateful applications between clusters using Kubemotion
 keywords: portworx, cloud, migration, Kubemotion
-weight: 1
+weight: 100
 series: concepts
 aliases:
   - /cloud-references/migration/
@@ -72,3 +72,5 @@ external to the cluster, or imprudent:
 For instructions to setup cluster pair and perform migrations, proceed to one of the below sections.
 
 {{<homelist series="kubemotion">}}
+
+{{<homelist series="datamigration">}}
