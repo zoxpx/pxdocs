@@ -1,9 +1,9 @@
 ---
-title: "Kubemotion to migrate volumes"
-linkTitle: "Kubemotion to migrate volumes"
-keywords: cloud, backup, restore, snapshot, DR, migration, Kubemotion
-description: How to migrate volumes across clusters
-series: kubemotion
+title: Data Migration
+linkTitle: Data Migration
+keywords: cloud, backup, restore, snapshot, DR, migration, Data migration
+description: How to migrate volumes across clusters when running Portworx on other orchestrators.
+series: datamigration
 weight: 12
 aliases:
   - /cloud-references/migration/migration-pxctl.html
@@ -11,13 +11,13 @@ aliases:
 ---
 
 ## Overview
-This method can be used to migrate volumes between two Portworx clusters. It will
-not migrate any scheduler specific resources.
+
+This method can be used to migrate volumes between two Portworx clusters. It will not migrate any scheduler specific resources.
 
 ## Pre-requisites
+
 * **Version**: The source AND destination clusters need the v2.0 or later
-release of PX-Enterprise on both clusters. As future releases are made, the two
-clusters can have different PX-Enterprise versions (e.g. v2.1 and v2.3).
+release of PX-Enterprise on both clusters. As future releases are made, the two clusters can have different PX-Enterprise versions (e.g. v2.1 and v2.3).
 * **Secret Store** : Make sure you have configured a [secret store](/key-management) on both your clusters.
 This will be used to store the credentials for the objectstore.
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be
@@ -26,6 +26,7 @@ reachable by the source cluster.
 ## Pairing clusters
 
 ### Get cluster token from destination cluster
+
 On the destination cluster, run the following command from one of the Portworx nodes to get the cluster token:
 
 ```text
@@ -33,6 +34,7 @@ On the destination cluster, run the following command from one of the Portworx n
 ```
 
 ### Create the cluster pair
+
 On the source cluster create the clusterpair by running the following command:
 
 ```text
@@ -40,6 +42,7 @@ pxctl cluster pair create --ip <ip_of_destination_cluster_node> --token <token_f
 ```
 
 ### Verify creation of cluster pair
+
 If the above step is successful you should see the destination cluster in the list of pairs:
 
 ```text
@@ -52,9 +55,11 @@ CLUSTER-ID                                       NAME            ENDPOINT       
 ```
 
 ## Migrating Volumes
+
 Once you have created cluster pairs you can migrate volumes to it.
 
 ### Start migration
+
 Migration can be done at two granularities. If no ClusterID is specified during migration it'll pick up the default cluster pair.
 
 * Migrate all volumes from the cluster:
