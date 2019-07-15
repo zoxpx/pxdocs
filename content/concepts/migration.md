@@ -72,3 +72,5 @@ external to the cluster, or imprudent:
 For instructions to setup cluster pair and perform migrations, proceed to one of the below sections.
 
 {{<homelist series="kubemotion">}}
+
+{{<homelist series="datamigration">}}
