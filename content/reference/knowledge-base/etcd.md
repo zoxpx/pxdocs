@@ -23,21 +23,21 @@ For production Portworx clusters we recommend the following configuration of an 
 3. Minimum 8G of memory dedicated to each etcd node.
 4. Each Etcd node in the etcd cluster backed with storage disks (minimum 100GB)
 
-More detailed set of hardware requirements as recommended by etcd can be found [here](https://coreos.com/etcd/docs/latest/op-guide/hardware.html#example-hardware-configurations)
+More detailed set of hardware requirements as recommended by etcd can be found [here](https://etcd.io/docs/v3.3.12/op-guide/hardware/).
 
 ### Setup
 
 You can use one of the following methods to setup an etcd cluster
 
-#### Setup ETCD cluster with static set of nodes
+#### Setup an ETCD cluster with a static set of nodes
 
 If you have 3 static nodes where you want to run etcd follow [this](/reference/knowledge-base/etcd-quick-setup) guide to setup systemd services for an etcd cluster.
 
-#### Setup ETCD cluster using CoreOS documentation
+#### Setup an ETCD cluster using the official documentation
 
-Follow [this](https://coreos.com/etcd/docs/latest/op-guide/clustering.html) detailed step by step process provided by etcd to setup a brand new multi-node cluster.
+Follow [this](https://etcd.io/docs/v3.3.12/op-guide/clustering/) detailed step by step process provided by etcd to setup a brand new multi-node cluster.
 
-#### Setup ETCD cluster using Ansible Playbook
+#### Setup an ETCD cluster using Ansible Playbook
 
 Follow [this](https://github.com/portworx/px-docs/blob/gh-pages/etcd/ansible/index.md) ansible playbook to install a 3 node etcd cluster.
 
@@ -79,9 +79,9 @@ You can run the above command either on the etcd nodes or on a separate node whe
 
 For a more detailed setup, maintenance and tuning information refer the following coreos etcd reference docs.
 
-* [Maintenance](https://coreos.com/etcd/docs/latest/op-guide/maintenance.html)
-* [Tuning](https://coreos.com/etcd/docs/latest/tuning.html)
-* [Troubleshooting](https://coreos.com/etcd/docs/latest/op-guide/recovery.html)
+* [Maintenance](https://etcd.io/docs/v3.3.12/op-guide/maintenance/)
+* [Tuning](https://etcd.io/docs/v3.3.12/tuning/)
+* [Recovery from failure](https://etcd.io/docs/v3.3.12/op-guide/recovery/)
 * [Consul](https://www.consul.io/intro/getting-started/join.html)
 
 ### Securing with certificates in Kubernetes
