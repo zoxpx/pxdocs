@@ -216,3 +216,15 @@ Finally, a success message will be displayed:
 ```
 Successfully authenticated with AWS.
 ```
+
+### EULA
+
+You can get a link to our EULA by running:
+
+```text
+pxctl eula
+```
+
+```output
+https://portworx.com/end-user-license-agreement
+```
