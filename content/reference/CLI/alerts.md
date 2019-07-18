@@ -134,6 +134,8 @@ NODE       ObjectstoreSuccess             SEVERITY_TYPE_NOTIFY
 NODE       ObjectstoreStateChange         SEVERITY_TYPE_NOTIFY
 ```
 
+For more details on alerts, please see [this page](/install-with-other/operate-and-maintain/monitoring/portworx-alerts).
+
 ## Reported alerts
 
 You can see what alerts have been reported with the following command:
