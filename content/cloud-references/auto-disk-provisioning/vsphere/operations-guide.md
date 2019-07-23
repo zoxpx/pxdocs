@@ -7,9 +7,9 @@ keywords: portworx, VMware, vSphere ASG
 
 ## Installation
 
-During installation, user provides following parameters which are used to create disks (VMDKs) for the Portworx storage pools. The sum total of disks will be starting storage capacity of your Portworx cluster.
+During installation, user provides following parameters which are used to create disks (VMDKs) for the Portworx storage pools. The sum total of disks will be the starting storage capacity of your Portworx cluster.
 
-1. Prefix of Datastore cluster names
+1. Prefix for names of ESXi Datastore(s) or Datastore cluster(s)
 2. Specification of type and size of disks to create. 
 3. Access details for vCenter server
 
