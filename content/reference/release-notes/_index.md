@@ -32,17 +32,17 @@ April 19, 2019
 ### Key Features and Enhancements
 
 * PX-Security
-  * [General Concepts](/concepts/authorization)
-  * [Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization)
-  * [CLI Volume access](/reference/cli/volume-access)
-  * [CLI Authorization](/reference/cli/authorization)
-  * [CLI Role](/reference/cli/role)
-* [PX-DR](/portworx-install-with-kubernetes/disaster-recovery)
-  * [Metro DR](/portworx-install-with-kubernetes/disaster-recovery/px-metro)
-  * [Asynchronous DR](/portworx-install-with-kubernetes/disaster-recovery/async-dr)
-* [Automated application level scheduled snaps and cloudsnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/scheduled)
-* [Automated app-consistent cluster to cluster migration](/portworx-install-with-kubernetes/migration/kubemotion/#pre-and-post-exec-rules)
-* [Optimized incremental cloudsnap restores](/reference/cli/cloud-snaps/#restore-from-a-cloud-backup)
+  * [General Concepts](https://2.1.docs.portworx.com/concepts/authorization)
+  * [Kubernetes](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization)
+  * [CLI Volume access](https://2.1.docs.portworx.com/reference/cli/volume-access)
+  * [CLI Authorization](https://2.1.docs.portworx.com/reference/cli/authorization)
+  * [CLI Role](https://2.1.docs.portworx.com/reference/cli/role)
+* [PX-DR](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/disaster-recovery)
+  * [Metro DR](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/disaster-recovery/px-metro)
+  * [Asynchronous DR](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/disaster-recovery/async-dr)
+* [Automated application level scheduled snaps and cloudsnaps](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/scheduled)
+* [Automated app-consistent cluster to cluster migration](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/migration/kubemotion/#pre-and-post-exec-rules)
+* [Optimized incremental cloudsnap restores](https://2.1.docs.portworx.com/reference/cli/cloud-snaps/#restore-from-a-cloud-backup)
 
 ### Key Fixes
 
@@ -668,7 +668,7 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 * 3DSnaps - Ability to take [application-consistent](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
   snapshots cluster wide (Available in 05/14 GA version)
   * Volume Group snapshots - Ability to take crash-consistent snapshots on group of volumes based on a user-defined label
-* GCP/GKE automated disk management based on [disk templates](/portworx-install-with-kubernetes/cloud/gcp/gke/)
+* GCP/GKE automated disk management based on [disk templates](/portworx-install-with-kubernetes/cloud/gke/)
 * [Kubernetes per volume secret support](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs) to enable
   volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
 * DC/OS vault integration - Use [Vault integrated with DC/OS](/install-with-other/dcos)
@@ -1033,7 +1033,7 @@ November 22, 2017
 
 ### Key Features and Enhancements
 
-* PWX-4178 Perform snapshots in kubernetes via [annotations](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-annotations)
+* PWX-4178 Perform snapshots in kubernetes via [annotations](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-annotations)
 
 ## 1.2.11.4
 
