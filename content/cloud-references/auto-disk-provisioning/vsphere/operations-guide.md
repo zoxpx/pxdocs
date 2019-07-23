@@ -7,7 +7,7 @@ keywords: portworx, VMware, vSphere ASG
 
 ## Installation
 
-During installation, user following parameters which are used to create disks (VMDKs) for the Portworx storage pools. The sum total of disks will be starting storage capacity of your Portworx cluster.
+During installation, user provides following parameters which are used to create disks (VMDKs) for the Portworx storage pools. The sum total of disks will be starting storage capacity of your Portworx cluster.
 
 1. Prefix of Datastore cluster names
 2. Specification of type and size of disks to create. 
@@ -19,13 +19,13 @@ The [Portworx VMware installation](/cloud-references/auto-disk-provisioning/vsph
 
 ### Listing disks created by Portworx
 
-Portworx with the [pxctl](/reference/cli/) CLI out of the box that users can use to perform management operations.
+Portworx ships with the [pxctl](/reference/cli/) CLI out of the box that users can use to perform management operations.
 
 {{<info>}} Where are Portworx VMDKs located?
 
 _Portworx creates disks in a folder called *osd-provisioned-disks* in the ESXi datastore. The names of the VMDK created by Portworx will have a prefix *PX-DO-NOT-DELETE-*._{{</info>}}
 
-The [Cloud Drives (ASG) using pxctl](/reference/cli/cloud-drives-asg/) CLI commands in particular is useful in getting more insight into the disks provisioned by Portworx in a vSphere environment. Follow command gives details on all VMware disks (VMDKs) created by Portworx in your cluster.
+The [Cloud Drives (ASG) using pxctl](/reference/cli/cloud-drives-asg/) CLI command is particularly useful in getting more insight into the disks provisioned by Portworx in a vSphere environment. Follow command gives details on all VMware disks (VMDKs) created by Portworx in your cluster.
 
 ```text
 pxctl clouddrive list
