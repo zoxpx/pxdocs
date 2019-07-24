@@ -9,6 +9,15 @@ With PX-Enterprise 2.0, Portworx just released PX-Central to simplify management
 
 Portworx Clusters needs to be updated to PX-Enterprise 2.0 before using PX-Central. In the first release, PX-Central includes the following components:
 
+### Key features
+
+* Lighthouse GUI can be used to manage one or more Portworx clusters
+* Grafana and Prometheus have shortcuts from Lighthouse for easy access.
+* Prometheus will scrape the nodes for metrics.
+* AlertManager will notify using a set of default rules
+* Grafana will use Prometheus as it’s datasource and includes pre-built dashboards for Portworx cluster, node and volume monitoring.
+* Grafana will also have pre-built etcd dashboard (from community) to monitor metadata cluster
+
 * [Lighthouse](/reference/lighthouse) - Quick birds-eye view of your multi-cluster Portworx deployment to ensure things are running smoothly.
 ![LHMultiCluster](/img/LH- Multi-cluster.png)
 
@@ -49,31 +58,54 @@ PX-Central can be setup for any of the above deployment scenarios by following a
     ```text
     kubectl apply -f portworx-pxc-operator.yaml
     ```
-
-### Single Cluster Installation for new PX installations
-
-Once the prerequisites are fulfilled, please follow the instructions below.
-
-1. Create a secret using this [template](/samples/k8s/portworx-pxc-alertmanager.yaml). Replace the values corresponding to your email settings
+* Have the Alert Manager Secret [template](/samples/k8s/alertmanager.yaml) created. Replace the values corresponding to your email settings.
 
     ```text
-    kubectl create secret generic alertmanager-portworx --from-file=portworx-pxc-alertmanager.yaml -n kube-system
+    kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system
     ```
-2. Download the Portworx setup [spec](/samples/k8s/portworx-pxc-singlecluster.yaml) which includes PX-Central and PX-Enterprise.
 
-3. Replace <unique id> in the command given below:
+  For more information on how to configure the alertmanager settings please visit: https://prometheus.io/docs/alerting/configuration/
+
+### PX-Central for new PX installations
+
+   Go to https://install.portworx.com/2.1 and follow the steps.
+
+   To enable PX-Central, make sure that in `Advanced Settings` Lighthouse and Monitoring have been ticked.
+
+### Multi-Cluster requirements
+
+  If your cluster has more than 20 nodes or is resource intensive we recommend using this installation to create a dedicated monitoring cluster, and let this cluster monitor the others. If not consider using the single cluster installation (above). The steps below will help you setup PX-Central and first PX-Enterprise Cluster.
+
+  Since this is going to be the cluster that monitors the other clusters we need the `Prometheus` installation to watch the other clusters' `Prometheus` instances. To do this we are going to use `Federation` and we'll need the below secret for this.
+
+  Create a secret using this [template](/samples/k8s/portworx-pxc-prometheus-additional.yaml). Replace the values corresponding to your other K8S clusters.
+
+  ```text
+  kubectl create secret generic additional-scrape-configs --from-file=portworx-pxc-prometheus-additional.yaml -n kube-system
+  ```
+
+  Once you have downloaded the `yaml` from the `spec generator`. Open it up and make a slight addition.
+
+  Search for `Kind: Prometheus` and in this section paste the following snippet above `ruleSelector:`
+
+  ```text
+    additionalScrapeConfigs:
+      name: additional-scrape-configs
+      key: portworx-pxc-prometheus-additional.yaml
+  ```
+
+  Now apply the spec as normal.
+
+#### Subsequent clusters:
+
+  * Generate a new spec
+  * Apply the spec
+  * Add the new cluster to the `Lighthouse` instance in this cluster.
+  * Then in order to enable Prometheus monitoring on this new cluster, update the prometheus secret by adding external ip or LoadBalancer IP and the required port for the cluster.
 
     ```text
-    CLUSTER_ID=<unique id> envsubst < portworx-pxc-singlecluster.yaml | kubectl apply -f -
+    kubectl create secret generic additional-scrape-configs --from-file=portworx-pxc-prometheus-additional.yaml -n kube-system --dry-run -o yaml | kubectl apply -f -
     ```
-
-This should setup the following:
-
-* A Portworx Cluster (including px-kvdb cluster)
-* 1 Grafana Instance
-* 1 Prometheus Instance
-* 1 Lighthouse Instance
-* 1 AlertManager instance
 
 #### Lighthouse access details
 
@@ -106,71 +138,6 @@ Prometheus & Grafana can be be accessed using a NodePort service.
 * For Prometheus, go to `http://<master_ip>:<service_nodeport>`
 * For Grafana `http://<master_ip>:<service_nodeport>`.
 
-### Key features
-
-* Lighthouse GUI can be used to manage one or more Portworx clusters
-* Grafana and Prometheus have shortcuts from Lighthouse for easy access.
-* Prometheus will scrape the nodes for metrics.
-* AlertManager will notify using a set of default rules
-* Grafana will use Prometheus as it’s datasource and includes pre-built dashboards for Portworx cluster, node and volume monitoring.
-* Grafana will also have pre-built etcd dashboard (from community) to monitor metadata cluster
-
-###  Multi-Cluster Installation for new PX installations
-
-If your cluster has more than 20 nodes or is resource intensive we recommend using this installation to create a dedicated monitoring cluster, and let this cluster monitor the others. If not consider using the single cluster installation (above). The steps below will help you setup PX-Central and first PX-Enterprise Cluster.
-
-1. Create a secret using this [template](/samples/k8s/portworx-pxc-alertmanager.yaml). Replace the values corresponding to your email settings.
-
-    ```text
-    kubectl create secret generic alertmanager-portworx --from-file=portworx-pxc-alertmanager.yaml -n kube-system
-    ```
-
-2. Create a secret using this [template](/samples/k8s/portworx-pxc-prometheus-additional.yaml). Replace the values corresponding to your other K8S clusters.
-
-    ```text
-    kubectl create secret generic additional-scrape-configs --from-file=portworx-pxc-prometheus-additional.yaml -n kube-system
-    ```
-
-3. Download the multi-cluster [spec](/samples/k8s/portworx-pxc-multicluster.yaml).
-
-4. Replace <unique id> in the command given below with the desired clustername.
-
-    ```text
-    CLUSTER_ID=<unique id> envsubst < portworx-pxc-multicluster.yaml | kubectl apply -f -
-    ```
-
-You will now have the following:
-
-* A Portworx Cluster
-* 1 Grafana Instance
-* 1 Prometheus Instance
-* 1 Lighthouse Instance
-* 1 AlertManager instance
-
-#### Lighthouse access details
-
-* If you are running **on cloud**, Lighthouse can be be accessed using a LoadBalancer service.
-    * First get the external IP address that the lighthouse service is using
-
-        ```text
-        kubectl get svc -n kube-system  px-lighthouse
-        ```
-    * Now go to `http://<external_ip>`
-* If you are running **on premise**, Lighthouse can be accessed using a NodePort service
-    * First get the node port that lighthouse is using
-
-        ```text
-        kubectl get svc -n kube-system  px-lighthouse
-        ```
-    * Now go to `http://<master_ip>:<service_nodeport>`
-* The default login is admin/Password1
-
-
-* Prometheus will scrape the nodes
-* AlertManager will report issues based on our given rules
-* Grafana will use Prometheus as it’s datasource and has pre-baked dashboards
-
-For subsequent clusters, do not use the multi-cluster spec above. Use the spec generator to create a new cluster (only) installation spec. Then in order to have Lighthouse manage this new cluster, add it to Lighthouse with the add cluster option. To enable Prometheus monitoring on this new cluster, update the prometheus-additional.yaml by adding external ip and nodeport for the cluster.
 
 ### Verifying the setup
 
@@ -210,6 +177,18 @@ Next step is to make sure you are able to view the built-in dashboards for Portw
 
 ![kvdbdashboard](/img/KvdbDashboard.png)
 
+## PX-Central for existing PX-installation
+
+For customers with existing Portworx deployment, it will require the following steps to add PX-Central:
+
+- Identify set of nodes (minimum 3) with the required specifications to deploy PX-Central components.
+
+- First, install the monitoring components (Prometheus, Alertmanager and Grafana) on these nodes to validate you can connect to existing PX clusters.
+
+- Install Lighthouse. Add all the clusters to Lighthouse.
+
+- Follow the process to migrate etcd from the existing to the new one installed as part of PX-Central. PX-kvdb needs underlying PX installation to complete before migration starts.
+
 ## Limitations
 **Issue** | **Description** | **Mitigation**|
 ----------|-----------------|---------------|
@@ -227,18 +206,6 @@ Small (upto 50 node cluster) | Serves fewer than 100 clients, fewer than 200 of 
 Medium (upto 250 nodes cluster) | Serves fewer than 500 clients, fewer than 1,000 of requests per second, and stores no more than 500MB of data | 4 | 16 | 6000 | 93.75 |
 Large (upto 1000 nodes cluster) | Serves fewer than 1,500 clients, fewer than 10,000 of requests per second, and stores no more than 1GB of data | 8 | 32 | 8000 | 125 |
 X-Large (upto 3000 nodes cluster) | Serves fewer than 1,500 clients, fewer than 10,000 of requests per second, and stores more than 1GB of data |  16 | 64 | 16000 | 250 |
-
-## Adding PX-Central to existing PX installations
-
-For customers with existing Portworx deployment, it will require the following steps to add PX-Central:
-
-- Identify set of nodes (minimum 3) with the required specifications to deploy PX-Central components.
-
-- First, install the monitoring components (Prometheus, Alertmanager and Grafana) on these nodes to validate you can connect to existing PX clusters.
-
-- Install Lighthouse. Add all the clusters to Lighthouse.
-
-- Follow the process to migrate etcd from the existing to the new one installed as part of PX-Central. PX-kvdb needs underlying PX installation to complete before migration starts.
 
 ## Troubleshooting
 
