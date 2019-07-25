@@ -14,7 +14,7 @@ July 24, 2019
 
 1. [Cloud drive support for Microsoft Azure](/portworx-install-with-kubernetes/cloud/azure/aks/)
 2. Red Hat OpenShift 4.1 Operator Support
-3. Enhanced Volume placement strategies for advanced volume provisioning rules
+3. [Enhanced Volume placement strategies for advanced volume provisioning rules](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
 
 ### Enhancements:
 
