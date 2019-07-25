@@ -13,8 +13,8 @@ July 24, 2019
 ### Key Features:
 
 1. [Cloud drive support for Microsoft Azure](/portworx-install-with-kubernetes/cloud/azure/aks/)
-2. Red Hat OpenShift 4.1 Operator Support
-3. [Enhanced Volume placement strategies for advanced volume provisioning rules](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
+2. [Enhanced Volume placement strategies for advanced volume provisioning rules](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
+3. Support for Red Hat Enterprise Linux 8 with CRI-O
 
 ### Enhancements:
 
