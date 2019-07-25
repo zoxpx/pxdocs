@@ -1,0 +1,15 @@
+apiVersion: portworx.io/v1beta2
+kind: VolumePlacementStrategy
+metadata:
+  name: cassandra-volume-anti-affinity
+spec:
+  volumeAntiAffinity:
+  - matchExpressions:
+      - key: app
+        operator: In
+        values:
+        - cassandra
+      - key: clustername
+        operator: In
+        values:
+        - cassandra-prod

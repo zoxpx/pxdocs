@@ -1,0 +1,24 @@
+
+apiVersion: portworx.io/v1beta1
+kind: VolumePlacementStrategy
+metadata:
+name: data-collocate-with-log-placement
+spec:
+volumeAffinity:
+  - enforcement: required
+matchExpressions:
+      - key: type
+operator: In
+values:
+        - log
+      - key: type
+operator: NotIn
+values:
+        - data
+replicaAntiAffinity:
+  - enforcement: preferred
+matchExpressions:
+      - key: media_type
+operator: NotIn
+values:
+        - "SSD"

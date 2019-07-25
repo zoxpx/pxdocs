@@ -1,0 +1,21 @@
+apiVersion: portworx.io/v1beta1
+kind: VolumePlacementStrategy
+metadata:
+    name: volume-db-nodes-or-postgres-affinity
+spec:
+    replicaAffinity:
+    -  weight: 200
+       enforcement: preferred
+        matchExpressions:
+        - key: node_type
+          operator: In
+          values:
+          - db_hardware
+    volumeAffinity:
+    -  weight: 100
+       enforcement: preferred
+       matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - postgres 

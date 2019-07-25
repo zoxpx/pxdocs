@@ -1,0 +1,11 @@
+apiVersion: portworx.io/v1beta2
+kind: VolumePlacementStrategy
+metadata:
+  name: ssd-pool-placement
+spec:
+  replicaAffinity:
+  -  matchExpressions:
+      - key: mediatype
+        operator: In
+        values:
+        - "SSD"

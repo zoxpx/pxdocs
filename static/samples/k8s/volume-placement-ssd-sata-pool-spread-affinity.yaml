@@ -1,0 +1,21 @@
+apiVersion: portworx.io/v1beta2
+kind: VolumePlacementStrategy
+metadata:
+  name: ssd-sata-pool-placement-spread
+spec:
+  # first replica in SSD
+  replicaAffinity:
+  -  affectedReplicas: 1
+      matchExpressions:
+        - key: mediatype
+          operator: In
+          values:
+          - "SSD"
+  # second in SATA
+  replicaAffinity:
+  -  affectedReplicas: 1
+      matchExpressions:
+        - key: mediatype
+          operator: In
+          values:
+          - "SATA"
