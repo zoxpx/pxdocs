@@ -145,7 +145,6 @@ _User Impact:_ Portworx fails to attach a cloud drive with the following error m
 
 _Recommendations:_ Portworx is working with Microsoft to resolve this issue, in the meantime, we recommend deleting the impacted VM manually in Azure and allowing it to redeploy.
 
-
 ## 2.1.1
 
 May 4, 2019
@@ -213,6 +212,14 @@ April 19, 2019
 ### Errata
 
 * PWX-8470: ASG: CLI does not update metadata device name, if after restart device name changes
+
+## 2.0.3.8
+
+### Key Fixes
+
+**PWX-9486** - Changes to Portworx runtime configuration.
+
+_User Impact:_ This fix ensures consistent sync times on the backend.
 
 ## 2.0.3.7
 
