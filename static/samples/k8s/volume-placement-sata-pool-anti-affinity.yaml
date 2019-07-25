@@ -1,0 +1,11 @@
+apiVersion: portworx.io/v1beta2
+kind: VolumePlacementStrategy
+metadata:
+  name: anti-ssd-pool-placement
+spec:
+  replicaAntiAffinity:
+    -  matchExpressions:
+      - key: mediatype
+        operator: In
+        values:
+        - "SATA"
