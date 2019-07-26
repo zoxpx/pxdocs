@@ -6,6 +6,145 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.1.2
+
+July 24, 2019
+
+### Key Features:
+
+1. [Cloud drive support for Microsoft Azure](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/cloud/azure/aks/)
+2. [Enhanced Volume placement strategies for advanced volume provisioning rules](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
+3. Support for Red Hat Enterprise Linux 8 with CRI-O
+
+### Enhancements:
+
+**PWX-8635** - Add support for the CRI-O container runtime.
+
+_User Impact:_ Portworx has added support for the CRI-O container runtime, with the some log file limitations:
+
+  * The progress bar while downloading images is not available.
+  * Progress information while installing Portworx binaries is not available.
+
+**PWX-8665** - Support for optimized restores as a cluster option.
+
+_User Impact:_  Users can now enable optimized restores as a cluster level setting using the CLI.
+
+**PWX-9061** - Add ability to remove path-style enforcement for AWS S3.
+
+_User Impact:_ With 2.1.2, Portworx now supports the disabling of path-style enforcement for S3 with the `--disable-path-style` parameter.
+
+### Key Fixes:
+
+**PWX-9352** - Upgrading from 2.0.3.7 to 2.1.1 fails.
+
+_User Impact:_  If you have internal KVDB clusters, upgrading from 2.0.3.7 to 2.1.1 is not supported. Portworx recommends upgrading from 2.0.3.7 to 2.1.2.
+
+**PWX-8730** - Allow storageless nodes to join when licenses have been exhausted if offline storageless nodes remain.
+
+_User Impact:_  Previously, rolling upgrades of customer environments in cloud auto-scaling groups may have exceeded licensing quota if storageless nodes were created before offline nodes were removed from the cluster. With 2.1.2, offline nodes no longer count against licensing count.
+
+_Recommendations:_ Upgrade to 2.1.2 to support rolling upgrades in cloud auto-scaling environments. If you are unable to upgrade to 2.1.2, you can work with Portworx support to get temporary licenses that increase the node count until an upgrade to 2.1.2 can be planned.
+
+**PWX-9042** - Secrets can be overwritten with certain commands.
+
+_User Impact:_ with 2.1.2, It is no longer possible to unintentionally overwrite secrets using a combination of the `pxctl secrets set-cluster-key` and `pxctl generate secret` commands.
+
+**PWX-8953** -   (Consul) KVDB does not pass the CA certificate file to the Consul client.
+
+_User Impact:_ With 2.1.2, CAFile is now properly sent to the Consul client.
+
+**PWX-8966** - (ASG) Limit the maximum number of drives you can attach to a node.
+
+_User Impact:_  Previously, attempting to attach too many drives results resulted in errors. With 2.1.2, Portworx introduces a maximum limit of 12 drives per node, and will respond to attempts to add more than 12 drives with the following error: `cannot provide more than 12 number of drives per node`.
+
+**PWX-7374** - AWS SC1 and ST1 EBS volumes are unsupported.
+
+_User Impact:_ It was previously not possible to add SC1 or ST1 EBS volumes using the `pxctl sv drive add` command. With 2.1.2, Portworx now supports SC1 and ST1 EBS drive types.
+
+**PWX-8792** - Add backoffs to AWS CloudDrive API calls.
+
+_User Impact:_ With 2.1.2, Portworx now slows calls to the AWS Cloud Drive API at increasingly long intervals if it encounters resource limit errors.
+
+**PWX-8701** - The internal KVDB should use DNS names for peer urls.
+
+_User Impact:_ The internal KVDB tracks peer URLs as potentially ephemeral IP addresses. If the entire cluster becomes unavailable in an outage, Portworx may be unable to reconnect. With 2.1.2, internal KVDB now keeps track of nodes using a DNS, and can therefore reconnect in the event of a total cluster outage.
+
+**PWX-8904** - Introduce timeout on storage requests to avoid possible hung situations when Portworx starts.
+
+_User Impact:_ Previously, Portworx may have failed to start, displaying no active I/O operations. With 2.1.2, storage requests now timeout to avoid possible hung situations on node start.
+
+**PWX-8606** - PVC creation fails if no enforcement type is specified in `VolumePlacementStrategy`.
+
+_User Impact:_  Previously, if you did not specify an enforcement type in `VolumePlacementStrategy`, PVC creation failed. With 2.1.2, Portworx will default to `enforcement: required` if you do not specify an enforcement type.
+
+**PWX-8959** - The Snapshot API does not return a typed error if a snapshot already exists.
+
+_User Impact:_ With 2.1.2, this error message is improved. If you try to create a new snapshot where one already exists, a clearly typed error is now returned.
+
+**PWX-9126** - The `nodiscard` option is impacted by volume resize.
+
+_User Impact:_ Previously, resizing a volume sometimes reset a volume’s `nodiscard` option configuration. With 2.1.2, this has been fixed.
+
+**PWX-8690** - Wipe and upgrade scripts fail on Kubernetes 1.14.
+
+_User Impact:_ Due to a feature deprecation with Kubernetes 1.14, wipe and upgrade scripts did not work. With 2.1.2, The `px-wipe` command now correctly removes Portworx pods on Kubernetes 1.14.
+
+**PWX-9175** - Portworx fails to detect the device path on certain types of AWS ec2 instances.
+
+_User Impact:_ With 2.1.2, Portworx no longer fails to detect the device path on certain types of AWS ec2 instances and operating system combinations.
+
+**PWX-7851** - Storage nodes could be removed by the Kubernetes autoscaler.
+
+_User Impact:_ With 2.1.2, Portworx pods are annotated to prevent node removal by the Kubernetes autoscaler.
+
+**PWX-7493** - Portworx selects undesired network interfaces during autodetection.
+
+_User Impact:_ With 2.1.2, Portworx will avoid selecting the undesired network interfaces during configuration.
+
+**PWX-9053** - The pxctl sv node wipe command fails to wipe MDRAID devices.
+
+_User Impact:_ With 2.1.2, MDRAID devices are now correctly wiped with the node wipe command.
+
+**PWX-9046** - Portworx doesn’t recognize MDRAID partitions as journal devices.
+
+_User Impact:_ With 2.1.2, Portworx now recognizes MDRAID partitions as journal devices.
+
+**PWX-9054** - Portworx sometimes fails to detect MDRAID partitions.
+
+_User Impact:_ With 2.1.2, Portworx now detects MDRAID partitions when installed with the `-A` option.
+
+**PWX-8938** - Add “sync” and “noac” sharedv4 mount options.
+
+_User Impact:_ With 2.1.2,  “sync” and “noac” sharedv4 mount options are now available.
+
+**PWX-8893** - Add support for `max_storage_nodes_per_zone` on AKS clusters on Microsoft Azure.
+
+_User Impact:_ With 2.1.2, Portworx supports the max_storage_nodes_per_zone parameter, allowing it to limit storage nodes on AKS availability sets.
+
+**PWX-9263** - Volumes can now be created with the XFS filesystem without needing to provide the "force_unsupported_fs_type" option.
+
+_User Impact:_ Previously, provisioning an XFS volume erroneously created an EXT 4 formatted volume. With 2.1.2, provisioning an XFS volume now creates a properly formatted XFS volume.
+
+**PWX-8712** - Verify completion of a backup before marking it as complete.
+
+_User Impact:_ With 2.1.2, Portworx now verifies that a backup operation has completed before recording a backup as completed.
+
+**PWX-8733** - During upgrade, pods using volume subpaths produce errors.
+
+_User Impact:_ With 2.1.2, pods using volume subpaths are correctly detected and bounced.
+
+**PWX-9476** - OCI-Monitor should not restart the Portworx service unless required.
+
+_User Impact:_ Previously, if the OCI-Monitor restarted Portworx any time it detected a change in the configuration file. With 2.1.2, the OCI-Monitor will only restart Portworx if it’s necessary.
+
+### Errata
+
+**PWX-9473** - Portworx fails to attach a cloud drive to an Azure AKS scale set VM.
+
+_User Impact:_ Portworx fails to attach a cloud drive with the following error messages: `Failed to detach disk...`, and `Failed to attach drive...`
+
+_Recommendations:_ Portworx is working with Microsoft to resolve this issue, in the meantime, we recommend deleting the impacted VM manually in Azure and allowing it to redeploy.
+
 ## 2.1.1
 
 May 4, 2019
@@ -73,6 +212,14 @@ April 19, 2019
 ### Errata
 
 * PWX-8470: ASG: CLI does not update metadata device name, if after restart device name changes
+
+## 2.0.3.8
+
+### Key Fixes
+
+**PWX-9486** - Changes to Portworx runtime configuration.
+
+_User Impact:_ This fix ensures consistent sync times on the backend.
 
 ## 2.0.3.7
 
