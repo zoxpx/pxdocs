@@ -12,9 +12,9 @@ July 24, 2019
 
 ### Key Features:
 
-1. [Cloud drive support for Microsoft Azure](/portworx-install-with-kubernetes/cloud/azure/aks/)
-2. Red Hat OpenShift 4.1 Operator Support
-3. [Enhanced Volume placement strategies for advanced volume provisioning rules](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
+1. [Cloud drive support for Microsoft Azure](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/cloud/azure/aks/)
+2. [Enhanced Volume placement strategies for advanced volume provisioning rules](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
+3. Support for Red Hat Enterprise Linux 8 with CRI-O
 
 ### Enhancements:
 
@@ -171,17 +171,17 @@ April 19, 2019
 ### Key Features and Enhancements
 
 * PX-Security
-  * [General Concepts](/concepts/authorization)
-  * [Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization)
-  * [CLI Volume access](/reference/cli/volume-access)
-  * [CLI Authorization](/reference/cli/authorization)
-  * [CLI Role](/reference/cli/role)
-* [PX-DR](/portworx-install-with-kubernetes/disaster-recovery)
-  * [Metro DR](/portworx-install-with-kubernetes/disaster-recovery/px-metro)
-  * [Asynchronous DR](/portworx-install-with-kubernetes/disaster-recovery/async-dr)
-* [Automated application level scheduled snaps and cloudsnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/scheduled)
-* [Automated app-consistent cluster to cluster migration](/portworx-install-with-kubernetes/migration/kubemotion/#pre-and-post-exec-rules)
-* [Optimized incremental cloudsnap restores](/reference/cli/cloud-snaps/#restore-from-a-cloud-backup)
+  * [General Concepts](https://2.1.docs.portworx.com/concepts/authorization)
+  * [Kubernetes](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization)
+  * [CLI Volume access](https://2.1.docs.portworx.com/reference/cli/volume-access)
+  * [CLI Authorization](https://2.1.docs.portworx.com/reference/cli/authorization)
+  * [CLI Role](https://2.1.docs.portworx.com/reference/cli/role)
+* [PX-DR](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/disaster-recovery)
+  * [Metro DR](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/disaster-recovery/px-metro)
+  * [Asynchronous DR](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/disaster-recovery/async-dr)
+* [Automated application level scheduled snaps and cloudsnaps](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/scheduled)
+* [Automated app-consistent cluster to cluster migration](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/migration/kubemotion/#pre-and-post-exec-rules)
+* [Optimized incremental cloudsnap restores](https://2.1.docs.portworx.com/reference/cli/cloud-snaps/#restore-from-a-cloud-backup)
 
 ### Key Fixes
 
