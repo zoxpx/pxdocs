@@ -140,7 +140,7 @@ To expand the storage capacity of a single node, you have 2 options
     ```
 
     Wait for about 2 minutes until `pxctl status` says *PX is in maintenance Mode*.
-9. List Portworx pools and find the pool that’s affected by the resized vol
+9. List Portworx pools and find the pool that’s affected by the expanded VMDK. If a pool has multiple disks, all of the disks need to have the same size. So make sure to resize them to the same size.
 
     ```text
     pxctl sv pool show
