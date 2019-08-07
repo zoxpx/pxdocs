@@ -20,7 +20,7 @@ Once you have installed STORK, all you need to do is add `schedulerName: stork` 
 For example, this is how you would specify the scheduler name in a MySQL deployment:
 
 ```text
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
