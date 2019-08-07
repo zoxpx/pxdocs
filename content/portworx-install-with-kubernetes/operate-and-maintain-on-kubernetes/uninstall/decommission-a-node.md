@@ -71,7 +71,7 @@ One way to achieve is this to use [inter-pod affinity](https://kubernetes.io/doc
 * Consider below nginx example:
 
   ```text
-  apiVersion: apps/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
   name: nginx-deployment
