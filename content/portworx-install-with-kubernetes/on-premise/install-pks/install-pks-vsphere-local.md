@@ -128,7 +128,7 @@ spec:
       port: 9001
       targetPort: 9001
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: portworx
@@ -299,7 +299,7 @@ roleRef:
   name: portworx-pvc-controller-role
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -467,7 +467,7 @@ spec:
       port: 8099
       targetPort: 8099
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -593,7 +593,7 @@ roleRef:
   name: stork-scheduler-role
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:

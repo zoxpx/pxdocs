@@ -72,7 +72,7 @@ We need to Define the Environment Variables for PostgreSQL
 
 ```text
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
