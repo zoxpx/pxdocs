@@ -83,7 +83,7 @@ EOF
 
 cat <<EOF | kubectl create -f -
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: etcd-operator
@@ -129,7 +129,7 @@ metadata:
   name: etcd-operator
   namespace: default
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: etcd-operator
@@ -142,7 +142,7 @@ subjects:
   name: etcd-operator
   namespace: default
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: etcd-operator
@@ -216,7 +216,7 @@ ETCD_IP=`kubectl get svc etcd-px-client -o yaml | grep clusterIP | awk '{print $
 
 cat <<EOF | kubectl apply -f -
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
@@ -344,7 +344,7 @@ spec:
       port: 9001
       targetPort: 9001
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: portworx
@@ -367,7 +367,7 @@ spec:
                 operator: NotIn
                 values:
                 - "false"
-              
+
               - key: node-role.kubernetes.io/master
                 operator: DoesNotExist
       hostNetwork: true
@@ -503,7 +503,7 @@ spec:
 status: {}
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
