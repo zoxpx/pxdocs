@@ -93,7 +93,7 @@ spec:
 Create `es-master-sts.yaml` with the following content:
 
 ```text
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch-master
@@ -228,7 +228,7 @@ spec:
 Create `es-coordinator-deployment.yaml` with the following content:
 
 ```text
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: elasticsearch-coordinator
@@ -357,7 +357,7 @@ spec:
 Create `es-data-sts.yaml` with the following content:
 
 ```text
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch-data
@@ -744,7 +744,7 @@ spec:
 Create `kibana-deployment.yaml` with the following content:
 
 ```text
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana
