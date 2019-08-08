@@ -13,7 +13,7 @@ spec:
   selector:
     app: mariadb
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mariadb-statefull
@@ -49,4 +49,3 @@ spec:
       resources:
         requests:
           storage: 20Gi
-
