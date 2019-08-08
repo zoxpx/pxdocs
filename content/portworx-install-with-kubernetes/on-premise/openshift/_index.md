@@ -8,4 +8,6 @@ linkTitle: OpenShift
 series2: k8s-airgapped
 ---
 
-This topic explains how to install Portworx with Kubernetes on OpenShift. Follow the steps in this topic in order.
+This topic explains how to install Portworx with Kubernetes on OpenShift. There are following two ways to
+install Portworx on Openshift. For Openshift 4 and above, it is recommended to install using the Portworx
+Operator.
