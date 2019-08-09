@@ -13,7 +13,7 @@ This guide show you how you can easily deploy Portworx on [**Rackspace**](https:
 ### Step 1: Provision Cloud Server
 When chosing an instance, verify that you meet the [minimum requirements](/start-here-installation/#installation-prerequisites)
 
-Detailed Rackspace steps to build a [cloud server](https://support.rackspace.com/how-to/create-a-cloud-server/)
+<!--Detailed Rackspace steps to build a [cloud server](https://support.rackspace.com/how-to/create-a-cloud-server/)-->
 Portworx recommends a minimum cluster of 3 nodes
 
 
