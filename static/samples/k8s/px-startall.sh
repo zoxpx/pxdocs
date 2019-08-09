@@ -84,7 +84,7 @@ EOF
 
 cat <<EOF | kubectl create -f -
 ---
-apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
   name: etcd-operator
@@ -130,7 +130,7 @@ metadata:
   name: etcd-operator
   namespace: default
 ---
-apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
   name: etcd-operator
@@ -143,7 +143,7 @@ subjects:
   name: etcd-operator
   namespace: default
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: etcd-operator
@@ -217,7 +217,7 @@ ETCD_IP=`kubectl get svc etcd-px-client -o yaml | grep clusterIP | awk '{print $
 
 cat <<EOF | kubectl apply -f -
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   creationTimestamp: null
@@ -306,7 +306,7 @@ metadata:
   namespace: kube-system
 ---
 kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1alpha1
 metadata:
    name: node-get-put-list-role
 rules:
@@ -318,7 +318,7 @@ rules:
   verbs: ["get", "list"]
 ---
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1alpha1
 metadata:
   name: node-role-binding
 subjects:
@@ -345,7 +345,7 @@ spec:
       port: 9001
       targetPort: 9001
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: portworx
@@ -368,7 +368,7 @@ spec:
                 operator: NotIn
                 values:
                 - "false"
-
+              
               - key: node-role.kubernetes.io/master
                 operator: DoesNotExist
       hostNetwork: true
@@ -504,7 +504,7 @@ spec:
 status: {}
 
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   creationTimestamp: null
@@ -574,3 +574,4 @@ echo
 echo "Portworx has been deployed and will be available shortly at:"
 echo "http://${MASTER_IP}:30062"
 echo
+
