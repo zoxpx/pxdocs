@@ -1,4 +1,4 @@
-apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
   name: prometheus-operator
@@ -12,7 +12,7 @@ subjects:
   name: prometheus-operator
   namespace: kube-system
 ---
-apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
   name: prometheus-operator
@@ -70,9 +70,9 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: prometheus-operator
-  namespace: kube-system
+  namespace: kube-system  
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
