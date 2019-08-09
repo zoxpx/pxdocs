@@ -66,7 +66,7 @@ kubectl apply -f px-storageclass.yml
 Create `cassandra-statefulset.yml` as shown below. This configuration creates a Statefulset for Cassandra with three replicas. It uses the stork scheduler to enable pods to be placed closer to where their data is located.
 
 ```text
-apiVersion: "apps/v1"
+apiVersion: "apps/v1beta1"
 kind: StatefulSet
 metadata:
   name: cassandra

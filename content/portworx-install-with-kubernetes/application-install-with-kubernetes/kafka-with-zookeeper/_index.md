@@ -96,7 +96,7 @@ spec:
       app: zk
   minAvailable: 2
 ---
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   name: zk
@@ -460,7 +460,7 @@ spec:
   selector:
     app: kafka
 ---
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   name: kafka
