@@ -15,7 +15,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 
 |**Improvement Number**|**Improvement Description**|
 |----|----|
-|PWX-8793|In order to migrate volumes encrypted with an AWS KMS cluster-wide secret between clusters, both clusters must have the same cluster-wide secret.<br/><br/>With 2.1.3, Portworx introduces new CLI commands. These commands allow you to dump the cluster-wide secret from one cluster in order to upload the same cluster-wide secret to the destination cluster where encrypted volumes will be migrated.|
+|PWX-8793|In order to migrate volumes encrypted with an AWS KMS cluster-wide secret between clusters, both clusters must have the same cluster-wide secret.<br/><br/>With 2.1.3, Portworx introduces new CLI commands. These commands allow you to dump the cluster-wide secret from one cluster in order to upload the same cluster-wide secret to the destination cluster where encrypted volumes will be migrated. For more information, visit the [Dump and upload cluster-wide secrets](/reference/cli/dump-upload-cluster-wide-secret/) article.|
 
 ### Fixes
 The following issues have been fixed in the 2.1.3 release:
