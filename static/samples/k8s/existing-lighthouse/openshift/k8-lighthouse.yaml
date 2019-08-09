@@ -27,7 +27,7 @@ spec:
 status: {}
 
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   creationTimestamp: null
@@ -92,7 +92,7 @@ status:
   loadBalancer: {}
 
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   creationTimestamp: null
