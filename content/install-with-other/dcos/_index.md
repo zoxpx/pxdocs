@@ -7,7 +7,7 @@ hideSections: true
 series: px-other
 ---
 
-[Mesosphere DC/OS](https://d2iq.com/solutions/mesosphere) makes it easy to build and run modern distributed applications in production at scale, by pooling resources across an entire datacenter or
+[Mesosphere DC/OS](https://mesosphere.com/product/) makes it easy to build and run modern distributed applications in production at scale, by pooling resources across an entire datacenter or
 cloud.
 
 While the DC/OS platform works great for stateless applications, many enterprises who have tried to use DC/OS for stateful applications at scale have stumbled when it comes to using the platform for services like databases, queues and key-value stores.
