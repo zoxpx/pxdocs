@@ -123,7 +123,7 @@ spec:
     tier: mysql
   clusterIP: None
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: wordpress-mysql
@@ -190,7 +190,7 @@ spec:
     tier: frontend
   type: NodePort
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: wordpress
