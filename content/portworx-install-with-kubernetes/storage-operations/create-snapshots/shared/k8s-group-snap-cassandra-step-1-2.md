@@ -31,7 +31,7 @@ spec:
 
 ---
 
-apiVersion: "apps/v1"
+apiVersion: "apps/v1beta1"
 kind: StatefulSet
 metadata:
   name: cassandra

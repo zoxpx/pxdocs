@@ -52,7 +52,7 @@ spec:
 Now start your application which references the above PVC.
 
 ```text
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: nginx-deployment
