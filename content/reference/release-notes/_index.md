@@ -6,17 +6,44 @@ keywords: portworx, release notes
 series: reference
 ---
 
+## 2.1.3
+
+August 8, 2019
+
+### Improvements
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Number**|**Improvement Description**|
+|----|----|
+|PWX-8793|In order to migrate volumes encrypted with an AWS KMS cluster-wide secret between clusters, both clusters must have the same cluster-wide secret.<br/><br/>With 2.1.3, Portworx introduces new CLI commands. These commands allow you to dump the cluster-wide secret from one cluster in order to upload the same cluster-wide secret to the destination cluster where encrypted volumes will be migrated.|
+
+### Fixes
+The following issues have been fixed in the 2.1.3 release:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+|PWX-8902 |On older versions of Kubernetes configured to use the CRI-O container runtime on CoreOS/RHEL nodes, volume mount operations failed with the following error message: `selinux is enabled on docker. Disable selinux by removing --selinux-enabled from dockerd arguments`<br/><br/>**User impact:** Kubernetes applications running on this particular configuration attempting to use a shared volume never receive their volume and fail to fully start.<br/><br/>**Resolution:** With 2.1.3, Kubernetes application start as expected.|
+|PWX-9610 |Portworx used invalid characters for Prometheus metric labels. <br/><br/>**User impact:** Customers using Prometheus experienced errors when attempting to view metrics.<br/><br/>**Resolution:** With 2.1.3, Portworx replaces invalid '/' characters with '_' characters when serving metrics to Prometheus. |
+|PWX-9632 |Portworx occasionally detected a public network interface, causing the internal ETCD to attempt to use a public IP address to communicate over blocked ports.<br/><br/>**User impact:** Nodes were unable to form a quorum.<br/><br/>**Resolution:** With 2.1.3, Portworx no longer detects public network interfaces.|
+
+### Known Issues
+Portworx is aware of the following issues, check future release notes for fixes on these issues:
+
+|**Issue Number**|**Issue Description**|**Workaround**|
+|----|----|----|
+|PWX-9607 | The `pxctl volume usage` command may fail, causing the storage layer to become unresponsive and freezing storage I/O on the nodes where the volume is provisioned.| With 2.1.3, this command has been hidden. <br/><br/>If you're still on 2.1.2, avoid entering this command. If storage does become unresponsive as a result of `pxctl volume usage`, reboot the nodes on which your volume has been provisioned.|
+
 ## 2.1.2
 
 July 24, 2019
 
-### Key Features:
+### Key Features
 
 1. [Cloud drive support for Microsoft Azure](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/cloud/azure/aks/)
 2. [Enhanced Volume placement strategies for advanced volume provisioning rules](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
 3. Support for Red Hat Enterprise Linux 8 with CRI-O
 
-### Enhancements:
+### Enhancements
 
 **PWX-8635** - Add support for the CRI-O container runtime.
 
@@ -33,7 +60,7 @@ _User Impact:_  Users can now enable optimized restores as a cluster level setti
 
 _User Impact:_ With 2.1.2, Portworx now supports the disabling of path-style enforcement for S3 with the `--disable-path-style` parameter.
 
-### Key Fixes:
+### Key Fixes
 
 **PWX-9352** - Upgrading from 2.0.3.7 to 2.1.1 fails.
 
