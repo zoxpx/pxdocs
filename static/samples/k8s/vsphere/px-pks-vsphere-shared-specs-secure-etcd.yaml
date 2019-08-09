@@ -70,7 +70,7 @@ spec:
       port: 9021
       targetPort: 9021
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: portworx
@@ -275,7 +275,7 @@ roleRef:
   name: portworx-pvc-controller-role
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
@@ -347,7 +347,7 @@ data:
       "extenders": [
         {
           "urlPrefix": "http://stork-service.kube-system.svc:8099",
-          "apiVersion": "v1",
+          "apiVersion": "v1beta1",
           "filterVerb": "filter",
           "prioritizeVerb": "prioritize",
           "weight": 5,
@@ -443,7 +443,7 @@ spec:
       port: 8099
       targetPort: 8099
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
@@ -572,7 +572,7 @@ roleRef:
   name: stork-scheduler-role
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   labels:
@@ -651,7 +651,7 @@ spec:
       port: 9021
       targetPort: 9021
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: portworx-api
