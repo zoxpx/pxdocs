@@ -6,6 +6,8 @@ description: How to use PX CLI service.
 weight: 16
 ---
 
+This document provides details for using the service mode utilities accessible through the `pxctl service` command. First, let's get a glimpse of the available subcommands:
+
 ```text
 pxctl service --help
 ```
@@ -149,7 +151,9 @@ OPTIONS:
 
 ### pxctl service maintenance
 
-Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc…
+Use the `service maintenance` command to enter or exit maintenance mode. Once the node is in maintenance mode, you can add or replace drives, add memory, and so on.
+
+To list the available subcommands, run the following:
 
 ```text
 pxctl service maintenance --help
@@ -168,6 +172,8 @@ OPTIONS:
    -c, --cycle  cycle maintenance mode
 ```
 
+Enter maintenance mode with:
+
 ```text
 pxctl service maintenance --enter
 ```
@@ -176,6 +182,13 @@ pxctl service maintenance --enter
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 ```
+
+Exit maintenance mode by running:
+
+```text
+pxctl service maintenance --exit
+```
+
 
 ### pxctl service drive
 
