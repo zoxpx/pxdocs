@@ -21,7 +21,25 @@ With asynchronous DR, you can replicate Kubernetes applications and their data b
 
 * The active Kubernetes cluster asynchronously backs-up apps, configuration and data to a standby Kubernetes cluster.
 * The standby Kubernetes cluster has running controllers, configuration and PVCs that map to a local volumes.
-* Incremental changes in Kubernetes applications and Portworx data are continuously sent to the standy cluster
+* Incremental changes in Kubernetes applications and Portworx data are continuously sent to the standby cluster.
+
+The following Kubernetes resources are supported as part of the Asynchronous DR feature:
+
+* PV
+* PVC
+* Deployment
+* StatefulSet
+* ConfigMap
+* Service
+* Secret
+* DaemonSet
+* ServiceAccount
+* Role
+* RoleBinding
+* ClusterRole
+* ClusterRoleBinding
+* Ingress
+
 
 ## Enable DR mode
 
