@@ -10,17 +10,21 @@ noicon: true
 hidden: true
 ---
 
-It is straightforward to upgrade _Portworx_ with Nomad. Just edit the `portworx.nomadfile` you used for initial deployment and update the container version. As an example, here's how you would update to version 2.1.1 :
+Upgrade _Portworx_ with Nomad by editing the `portworx.nomad` file you used for initial deployment and updating the container version.
+
+Perform the following steps to update to _Portworx_ version 2.1.2:
+
+1. Modify the `image` key value in your `portworx.nomad` file, changing the version to `2.1.2`:
 
 ```text
- image = "portworx/oci-monitor:2.1.1"
- ```
+image = "portworx/oci-monitor:2.1.2"
+```
 
- Then, run the following command again:
+2. Rerun the `portworx.nomad` file:
 
- ```text
+```text
 nomad run portworx.nomad
- ```
+```
 
 Nomad will do a rolling upgrade, i.e., only one instance will be updated at a time, not causing an impact on any applications (assuming application are running with more than one volume replica).
 
@@ -99,3 +103,5 @@ ID        Node ID   Task Group  Version  Desired  Status    Created     Modified
 54f759fa  2299a3b6  portworx    0        stop     complete  20m15s ago  3m11s ago
 c44ee856  6138409d  portworx    0        stop     complete  20m15s ago  4m46s ago
 ```
+
+{{% content "shared/upgrade/upgrade-to-2-1-2.md" %}}
