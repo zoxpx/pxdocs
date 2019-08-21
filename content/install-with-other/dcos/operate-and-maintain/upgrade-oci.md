@@ -8,6 +8,8 @@ linkTitle: Upgrade
 
 This guide walks through upgrading Portworx deployed on DCOS through the framework available in the DCOS catalog. If you are using a Portworx framework version older than 1.2*, refer to [this guide](/install-with-other/dcos/operate-and-maintain/upgrade) to upgrade Portworx.
 
+{{% content "shared/upgrade/upgrade-to-2-1-2.md" %}}
+
 ### Update the Portworx image from UI
 
 The Portworx image to be used on each node is specified by the config variable `portworx image` under `node` section.
