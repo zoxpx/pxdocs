@@ -76,7 +76,7 @@ pxctl cloudmigrate start --volume_id <volumeId> [ --cluster_id <cluster_id> ]
 
 ### Monitor migrations
 
-3. The status for a migration can be checked by running the following command:
+You can check the migration status by running the following command:
 
 ```text
 pxctl cloudmigrate status
