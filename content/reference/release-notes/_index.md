@@ -5,6 +5,16 @@ description: Notes on Portworx enterprise releases
 keywords: portworx, release notes
 series: reference
 ---
+## 2.1.4
+
+August 26, 2019
+
+### Fixes
+The following issues have been fixed in the 2.1.4 release:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+|PWX-9781 |Cloudsnap backup operations may fail during catalog collection. <br/><br/>**User impact:** User operations relying on Cloudsnap may fail. <br/><br/>**Resolution:** With 2.1.4, catalog collection has been disabled. |
 
 ## 2.1.3
 
