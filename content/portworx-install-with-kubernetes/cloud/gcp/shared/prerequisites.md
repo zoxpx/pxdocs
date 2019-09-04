@@ -11,4 +11,4 @@ Before installing _Portworx-Enterprise_, make sure your environment meets the fo
 
 * **Resource requirements**: _Portworx_ requires that each node in the Kubernetes cluster has at least 4 CPUs and 4 GB memory for _Portworx_. It is important to keep this in mind when selecting the machine types during cluster creation.
 
-* **Owner and Compute Admin Roles**: These roles provides _Portworx_ access to the Google Cloud Storage APIs to provision persistent disks. Make sure the user creating the GKE cluster has these roles.
+* **Compute Admin and Service Account User Roles**: These roles provides _Portworx_ access to the Google Cloud Storage APIs to provision persistent disks. Make sure the user creating the GKE cluster has these roles.
