@@ -2,13 +2,16 @@
 title: "On-Prem Lighthouse Release Notes"
 keywords: portworx, px-enterprise, px-lighthouse, release notes
 meta-description: "Release notes for Lighthouse, the Portworx UI."
+description: "Release notes for Lighthouse, the Portworx UI."
+series: release-notes
+weight: 300
 ---
 
 ## Lighthouse 2.0.4 Release notes
 
 ### Key Fixes
 
-* LD-430 - Security and vulnerability scan fixes 
+* LD-430 - Security and vulnerability scan fixes
 
 ## Lighthouse 2.0.3 Release notes
 
@@ -32,7 +35,7 @@ Fixes:
 
 ## Lighthouse 2.0 Release notes
 
-* Adds Cluster Migration to non Kubernetes clusters for PX Clusters with version 2.0+ 
+* Adds Cluster Migration to non Kubernetes clusters for PX Clusters with version 2.0+
 Note: Cannot migrate to Kubernetes Clusters
 
 Fixes:
@@ -41,9 +44,9 @@ Fixes:
 
 ## Lighthouse 1.5 Release notes
 
-* Adds a volume analyzer feature for Portworx 1.5.0 and above. 
-  Note: It won't show files which are 0.00033% of the total storage. 
-* In k8s, now service DNS name can also be given as cluster endpoint 
+* Adds a volume analyzer feature for Portworx 1.5.0 and above.
+  Note: It won't show files which are 0.00033% of the total storage.
+* In k8s, now service DNS name can also be given as cluster endpoint
 
 ## Lighthouse 1.4 Release notes
 
@@ -93,7 +96,7 @@ To get access to Portworx PX-Lighthouse docker repository, contact us at support
 
 ## Lighthouse 1.1.3 Release notes
 
-In order to use Lighthouse 1.1.3 with authentication, please download and install PX-Enterprise 1.1.2 as well. 
+In order to use Lighthouse 1.1.3 with authentication, please download and install PX-Enterprise 1.1.2 as well.
 
 ### Key Features
 
@@ -119,4 +122,3 @@ In order to use Lighthouse 1.1.3 with authentication, please download and instal
 ### Known issues
 
 * This version does not support clear alerts. This will be fixed in the upcoming 1.1.3 release along with the addition of "Clear All Alerts" capability.
-

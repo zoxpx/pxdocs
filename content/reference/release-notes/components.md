@@ -1,9 +1,10 @@
 ---
 layout: page
-title: "Components"
-description: Release notes for components.
+title: "Component Release Notes"
+description: Release notes for components used with Portworx.
 keywords: portworx, release notes, components
-series: reference
+weight: 400
+series: release-notes
 ---
 
 Release notes for the Stork and Operator components used with Portworx are available in their respective GitHub repositories:
