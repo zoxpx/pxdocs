@@ -107,7 +107,7 @@ First, create the storage and application spec files:
     kind: StorageClass
     apiVersion: storage.k8s.io/v1beta1
     metadata:
-      name: postgres-pgbench-sc
+     name: postgres-pgbench-sc
     provisioner: kubernetes.io/portworx-volume
     parameters:
       repl: "2"
@@ -224,7 +224,7 @@ Create a YAML spec for the autopilot rule named `autopilotrule-example.yaml` and
 apiVersion: autopilot.libopenstorage.org/v1alpha1
 kind: AutopilotRule
 metadata:
-name: volume-resize
+  name: volume-resize
 spec:
   ##### selector filters the objects affected by this rule given labels
   selector:
