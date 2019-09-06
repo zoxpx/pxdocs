@@ -11,3 +11,4 @@ Release notes for the Stork and Operator components used with Portworx are avail
 
   * [Stork release notes](https://github.com/libopenstorage/stork/releases)
   * [Operator release notes](https://github.com/libopenstorage/operator/releases)
+  * [Autopilot](https://github.com/libopenstorage/autopilot/releases)
