@@ -107,7 +107,7 @@ First, create the storage and application spec files:
     kind: StorageClass
     apiVersion: storage.k8s.io/v1beta1
     metadata:
-     name: postgres-pgbench-sc
+      name: postgres-pgbench-sc
     provisioner: kubernetes.io/portworx-volume
     parameters:
       repl: "2"
