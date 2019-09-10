@@ -26,6 +26,19 @@ oc patch namespace kube-system -p '{"metadata": {"annotations": {"openshift.io/n
 oc label nodes mynode1 node-role.kubernetes.io/compute=true
 ```
 
+### Add Portworx service accounts to the privileged security context
+
+Portworx runs as a privileged container. Hence you need to add the Portworx service accounts to the privileged security context.
+
+```text
+oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:px-account
+oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:portworx-pvc-controller-account
+oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:px-lh-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:kube-system:px-lh-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:default:default
+oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:px-csi-account
+```
+
 ### Prepare a docker-registry credentials secret
 
 {{<info>}}This is required in order to retrieve the images from a secure registry. Set these credentials using access information for the Docker registry.{{</info>}}
