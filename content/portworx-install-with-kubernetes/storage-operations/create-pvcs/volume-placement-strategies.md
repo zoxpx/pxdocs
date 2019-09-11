@@ -46,6 +46,7 @@ The `replicaAffinity` section allows you to specify a rule which creates an affi
 * [Affinity to use SSD pools](/samples/k8s/volume-placement-ssd-pool-affinity.yaml)
 * [Place volume on infra nodes](/samples/k8s/volume-infra-node-affinity.yaml)
 * [Place volume only on racks 1, 2 and 3](/samples/k8s/volume-rack-1-2-3-affinity.yaml)
+
 <!--
 * [Affinity to use SSD and SATA and spread replicas evenly](/samples/k8s/volume-placement-ssd-sata-pool-spread-affinity.yaml)
   * First replica on SSD pools, second on SATA
@@ -56,8 +57,11 @@ By default, Portworx automatically adds the following labels to each of its stor
 
 * `iopriority`
 * `medium`
+
+<!--
 * `iops` (_coming soon_)
 * `latency` (_coming soon_)
+-->
 
 ### replicaAntiAffinity
 
