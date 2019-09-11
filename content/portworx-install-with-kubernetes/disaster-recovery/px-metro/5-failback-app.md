@@ -142,5 +142,5 @@ storkctl get migrationschedule -n migrationnamespace
 
 ```output
 NAME                        POLICYNAME   CLUSTERPAIR      SUSPEND   LAST-SUCCESS-TIME     LAST-SUCCESS-DURATION
-mysqlmigrationschedule      testpolcy    remotecluster    false      17 Apr 19 17:16 PDT   2m0s
+mysqlmigrationschedule      testpolicy    remotecluster    false      17 Apr 19 17:16 PDT   2m0s
 ```
