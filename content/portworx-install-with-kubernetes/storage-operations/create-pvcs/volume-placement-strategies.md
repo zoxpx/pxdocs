@@ -44,11 +44,13 @@ The `replicaAffinity` section allows you to specify a rule which creates an affi
 ##### Example uses cases
 
 * [Affinity to use SSD pools](/samples/k8s/volume-placement-ssd-pool-affinity.yaml)
+* [Place volume on infra nodes](/samples/k8s/volume-infra-node-affinity.yaml)
+* [Place volume only on racks 1, 2 and 3](/samples/k8s/volume-rack-1-2-3-affinity.yaml)
+<!--
 * [Affinity to use SSD and SATA and spread replicas evenly](/samples/k8s/volume-placement-ssd-sata-pool-spread-affinity.yaml)
   * First replica on SSD pools, second on SATA
 * [First replica SSD, others SATA](/samples/k8s/volume-placement-one-ssd-other-sata-pool.yaml)
-* [Place volume on infra nodes](/samples/k8s/volume-infra-node-affinity.yaml)
-* [Place volume only on racks 1, 2 and 3](/samples/k8s/volume-rack-1-2-3-affinity.yaml)
+-->
 
 By default, Portworx automatically adds the following labels to each of its storage pools. These can be used for replica affinity anti-affinity rules to target replicas on a specific storage pool type:
 
@@ -140,8 +142,10 @@ Same as Schema for [volumeAffinity](#volumeaffinity).
 2. User creates a StorageClass that references the VolumePlacementStrategy. [(Example)](/samples/k8s/sc-with-ssd-affinity.yaml)
 3. Users creates a PVC from the StorageClass [(Example)](/samples/k8s/pvc-with-ssd-affinity.yaml)
 
-The next section covers more detailed end-to-end examples.
 
+
+<!--
+The next section covers more detailed end-to-end examples.
 ## End-to-end examples
 
 #### Example 1: Default storage class and PVC
@@ -174,3 +178,4 @@ Below are the specs
 2. User creates this [VolumePlacementStrategy](/samples/k8s/data-volume-placement.yaml) to place data volumes on same node as log volumes and not collocate 2 data volumes on same node
 3. User creates this [StorageClass](/samples/k8s/sc-log-volume.yaml) for log volumes
 4. User creates this [StorageClass](/samples/k8s/sc-data-volume.yaml) for data volumes
+-->
