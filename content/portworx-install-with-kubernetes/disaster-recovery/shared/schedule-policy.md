@@ -24,7 +24,7 @@ Let's look at an example of how we could spec a policy:
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: SchedulePolicy
 metadata:
-  name: testpolcy
+  name: testpolicy
   namespace: mysql
 policy:
   interval:
