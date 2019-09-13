@@ -5,6 +5,20 @@ description: Notes on Portworx releases.
 keywords: portworx, release notes
 series: release-notes
 ---
+## 2.1.5
+
+September 13, 2019
+
+### Fixes
+The following issues have been fixed in the 2.1.5 release:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+|PWX-9911 |When running PX-DR, old cloudsnaps might not have been deleted from the objectstore since deletions were triggered only on full backups. <br/><br/>**User impact:** Over time, the objectstore on the PX-DR destination cluster may run out of space. <br/><br/>**Resolution:** With 2.1.5, the next DR cleans up old cloudsnaps and frees up space in the objectstore. |
+|PWX-9892 |Asynchronous DR causes a large number of alerts composed of long strings, which resulted in high memory usage. <br/><br/>**User impact:** ETCD disk usage was unnecessarily high.|
+|PWX-9873 |The DC/OS ACS token used to communicate with DC/OS secrets APIs expires every 5 days, and the auth workflow does not refresh this token when it expires. <br/><br/>**User impact:** This caused users to see an `Unauthorized` error, which required them to restart Portworx.|
+|PWX-9811 |In PKS, unset regions impact volume provisioning. <br/><br/>**User impact:** Volumes would be improperly provisioned into a single region. <br/><br/>**Resolution:** With 2.1.5, an unset region will be set to "default".|
+
 ## 2.1.4
 
 August 26, 2019
