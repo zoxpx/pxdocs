@@ -261,7 +261,6 @@ Pool ID: 1
 ```
 
 ## Storage pool maintenance
-
 Storage pools are automatically created by selected like disks in terms of capacity and capability. These pools are classified as High/Medium/Low based on IOPS and latency.
 
 Help for storage pool commands is available as:

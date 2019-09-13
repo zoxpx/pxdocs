@@ -5,7 +5,6 @@ weight: 3
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, debug, troubleshoot
 description: Useful information for troubleshooting Portworx on Kubernetes
 series: support
-series2: troubleshoot-portworx-on-kubernetes
 ---
 
 ### Useful commands

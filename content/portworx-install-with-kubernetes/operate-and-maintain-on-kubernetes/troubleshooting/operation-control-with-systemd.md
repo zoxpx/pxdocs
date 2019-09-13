@@ -3,7 +3,6 @@ title: Operation control with systemd
 keywords: portworx, kubernetes, systemd
 description: How to perform systemctl operations using Portworx systemd service.
 weight: 9
-series: troubleshoot-portworx-on-kubernetes
 ---
 
 This guide shows how you can perform systemctl operations using _kubectl_ to control the Portworx systemd service. Portworx already manages the lifecycle of the systemd service and hence these operations should not be required in a properly functioning cluster.
