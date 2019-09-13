@@ -3,6 +3,7 @@ title: Common errors
 weight: 2
 keywords: portworx, troubleshoot, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, debug
 description: Common errors
+series: troubleshoot-portworx-on-kubernetes
 ---
 
 ### Common errors {#common-errors}
