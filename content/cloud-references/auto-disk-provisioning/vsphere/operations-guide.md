@@ -83,12 +83,12 @@ To expand the storage capacity of a single node, you have 2 options
 5. List Portworx pools and save the output.
 
     ```text
-    pxctl sv pool show
+    pxctl service pool show
     ```
 6. Use pxctl to add a new disk. This command will provision a new VMDK as per the given spec. Below example creates a 20GB VMDK of type eagerzeroedthick. Change the size as per your needs. It is recommended to use a size that's same as the current disks in your storage pools. This will allow us to expand the existing storage pool.
 
     ```text
-    pxctl sv drive add --spec size=20,type=eagerzeroedthick
+    pxctl service drive add --spec size=20,type=eagerzeroedthick
     ```
     ```output
     Drive add done: Storage rebalance is in progress
@@ -96,12 +96,12 @@ To expand the storage capacity of a single node, you have 2 options
 7. List Portworx pools again and you will see one of the pools now has a new drive added.
 
     ```text
-    pxctl sv pool show
+    pxctl service pool show
     ```
 8. Resize the pool to account for this newly added disk. `<pool-id>` here is the ID of the pool where you see the newly added disk in the previous step.
 
     ```text
-    pxctl sv pool update --resize <pool-id>
+    pxctl service pool update --resize <pool-id>
     ```
 9. Exit maintenance mode.
 
@@ -113,7 +113,7 @@ To expand the storage capacity of a single node, you have 2 options
 10. List Portworx pools again and you will now see the pool has the expanded size.
 
     ```text
-    pxctl sv pool show
+    pxctl service pool show
     ```
 11. Uncordon the node from Kubernetes.
 
@@ -143,12 +143,12 @@ To expand the storage capacity of a single node, you have 2 options
 9. List Portworx pools and find the pool that’s affected by the resized vol
 
     ```text
-    pxctl sv pool show
+    pxctl service pool show
     ```
 10. Resize the pool to account for the expanded VMDK.
 
     ```text
-    pxctl sv pool update --resize <pool-id>
+    pxctl service pool update --resize <pool-id>
     ```
 11. Exit maintenance mode.
 
@@ -160,7 +160,7 @@ To expand the storage capacity of a single node, you have 2 options
 12. List Portworx pools again and you will now see the pool has the expanded size.
 
     ```text
-    pxctl sv pool show
+    pxctl service pool show
     ```
 13. Uncordon the node from Kubernetes.
 

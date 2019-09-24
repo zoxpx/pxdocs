@@ -115,7 +115,7 @@ Adding device  /dev/sdb ...
 Check the rebalance status and wait for completion.
 
 ```text
-pxctl sv drive add --drive /dev/sdb --operation status
+pxctl service drive add --drive /dev/sdb --operation status
 ```
 
 ```output
@@ -123,7 +123,7 @@ pxctl sv drive add --drive /dev/sdb --operation status
 ```
 
 ```text
-pxctl sv drive add --drive /dev/sdb --operation status
+pxctl service drive add --drive /dev/sdb --operation status
 ```
 
 ```output

@@ -110,7 +110,7 @@ _User Impact:_  Previously, attempting to attach too many drives results resulte
 
 **PWX-7374** - AWS SC1 and ST1 EBS volumes are unsupported.
 
-_User Impact:_ It was previously not possible to add SC1 or ST1 EBS volumes using the `pxctl sv drive add` command. With 2.1.2, Portworx now supports SC1 and ST1 EBS drive types.
+_User Impact:_ It was previously not possible to add SC1 or ST1 EBS volumes using the `pxctl service drive add` command. With 2.1.2, Portworx now supports SC1 and ST1 EBS drive types.
 
 **PWX-8792** - Add backoffs to AWS CloudDrive API calls.
 
@@ -152,7 +152,7 @@ _User Impact:_ With 2.1.2, Portworx pods are annotated to prevent node removal b
 
 _User Impact:_ With 2.1.2, Portworx will avoid selecting the undesired network interfaces during configuration.
 
-**PWX-9053** - The pxctl sv node wipe command fails to wipe MDRAID devices.
+**PWX-9053** - The pxctl service node wipe command fails to wipe MDRAID devices.
 
 _User Impact:_ With 2.1.2, MDRAID devices are now correctly wiped with the node wipe command.
 
@@ -241,7 +241,7 @@ April 19, 2019
 * PWX-7650 - Portworx install errors w/ "tar: .: file changed as we read it"
 * PWX-7794 - License: Aggressive node-decommissions and "Cluster max capacity" error handling
 * PWX-7869 - Cloudsnaps: Handle cloud backup deletes in background
-* PWX-7891 - pxctl svc nw --all failed to delete multi-path devices
+* PWX-7891 - pxctl service nw --all failed to delete multi-path devices
 * PWX-7951 - In Kubernetes OCI-Mon restarts during updates may leave Portworx down
 * PWX-7963 - Cloudsnap restore for xfs volumes has wrong fs type
 * PWX-7968 - Cloudsnaps cleanup fails because of missing start timestamp in metadata
@@ -393,7 +393,7 @@ April 5, 2019
 * PWX-8451 - Block adding metadata device when running with internal kvdb
 * PWX-8345 - Node wipe and upgrade doesn't work if portworx is installed in a namespace other than kube-system
 * PWX-8045 - Cloudmigrate fails if credentials use a custom bucket name
-* PWX-7891 - pxctl svc nw --all failed to delete multi-path devices
+* PWX-7891 - pxctl service nw --all failed to delete multi-path devices
 * PWX-8261 - Allow fresh install of PX on Linux Kernel version 4.9.0-7-amd64 and 4.9.0-8-amd64  
 
 ## 2.0.3.2

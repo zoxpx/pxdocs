@@ -153,7 +153,7 @@ Pool rebalance is a must. It spreads data across all available drives in the poo
 Check the rebalance status and wait for completion:
 
 ```text
-pxctl sv drive add --drive /dev/dm-1 --operation status
+pxctl service drive add --drive /dev/dm-1 --operation status
 ```
 
 ```output
@@ -161,7 +161,7 @@ pxctl sv drive add --drive /dev/dm-1 --operation status
 ```
 
 ```text
-pxctl sv drive add --drive /dev/dm-1 --operation status
+pxctl service drive add --drive /dev/dm-1 --operation status
 ```
 
 ```output
