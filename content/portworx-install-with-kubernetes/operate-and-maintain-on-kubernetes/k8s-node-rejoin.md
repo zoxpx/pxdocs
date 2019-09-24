@@ -11,7 +11,7 @@ This guide describes a recommended workflow for a previously decommissioned node
   * Portworx 1.3 and higher:
 
       ```text
-      pxctl sv node-wipe --all
+      pxctl service node-wipe --all
       ```
 
   * Portworx 1.2:
