@@ -14,9 +14,12 @@ When creating PersistentVolumeClaims (PVCs) in the cluster, Portworx allows you 
   * Pool Cos (Class of Service): Select between high, medium or low pools
   * Pool media type: Use pools with SSD drives
   * Pool labels: Select pools based on custom user specified labels
+
+<!--
 * Spread different replicas of volumes across different pools. E.g place first replica is SSD pools, rest of them in other pools
 * Specify affinity or anti-affinity between different volumes matched by labels. The labels here are labels on the PVC metadata.
 * Specify affinity or anti-affinity between multiple replicas of the same volume
+-->
 
 ## The VolumePlacementStrategy CRD
 
@@ -24,8 +27,9 @@ Portworx provides a [CustomResouceDefinition (CRD)](https://kubernetes.io/docs/c
 
 * [replicaAffinity](#replicaaffinity)
 * [replicaAntiAffinity](#replicaantiaffinity)
-* [volumeAffinity](#volumeaffinity)
-* [volumeAntiAffinity](#volumeantiaffinity)
+
+<!-- * [volumeAffinity](#volumeaffinity) -->
+<!-- * [volumeAntiAffinity](#volumeantiaffinity) -->
 
 
 ### replicaAffinity
@@ -37,9 +41,10 @@ The `replicaAffinity` section allows you to specify a rule which creates an affi
 | Field  	| Description    | Optional? | Default |
 |---------|----------------|-----------|---------|
 |**enforcement**|Specifies if the given rule is required (hard) or preferred (soft)|Yes|required|
-|**affectedReplicas**|Number indicating the number of volume replicas that are affected by this rule.|Yes|0 (Interpreted as all volume replicas)|
-|**topologyKey** | Key for the node label that the system uses to denote a topology domain. The key can be for any node label that is present on the Kubernetes node. <br/><br/>Using topologyKey requires nodes to be consistently labelled, i.e. every node in the cluster must have an appropriate label matching topologyKey. If some or all nodes are missing the specified topologyKey label, it can lead to unintended behavior.|Yes* <br/><br/>* required if matchExpressions is empty|empty|
-|**matchExpressions**|matchExpressions is a list of label selector requirements. The requirements are ANDed.<br/><br/>The labels provided here are matched against the following:<ul><li>Kubernetes node labels</li><li>PVC labels</li><li>Portworx storage pool labels</li></ul>|Yes* <br/><br/>* required if topologyKey is empty| empty|
+|**matchExpressions**|matchExpressions is a list of label selector requirements. The requirements are ANDed.<br/><br/>The labels provided here are matched against the following:<ul><li>Kubernetes node labels</li><li>PVC labels</li><li>Portworx storage pool labels</li></ul>|Yes <!-- * <br/><br/>* required if topologyKey is empty -->| empty|
+
+<!-- |**affectedReplicas**|Number indicating the number of volume replicas that are affected by this rule.|Yes|0 (Interpreted as all volume replicas)| -->
+<!-- |**topologyKey** | Key for the node label that the system uses to denote a topology domain. The key can be for any node label that is present on the Kubernetes node. <br/><br/>Using topologyKey requires nodes to be consistently labelled, i.e. every node in the cluster must have an appropriate label matching topologyKey. If some or all nodes are missing the specified topologyKey label, it can lead to unintended behavior.|Yes* <br/><br/>* required if matchExpressions is empty|empty| -->
 
 ##### Example uses cases
 
@@ -72,14 +77,16 @@ The `replicaAntiAffinity` section allows you to specify a rule that creates an a
 | Field  	| Description    | Optional? | Default |
 |---------|----------------|-----------|---------|
 |**enforcement**|Specifies if the given rule is required (hard) or preferred (soft)|Yes|required|
-|**affectedReplicas**|Number indicating the number of volume replicas that are affected by this rule.|Yes|0 (Interpreted as all volume replicas)|
-|**topologyKey**|Key for the node label that the system uses to denote a topology domain. The key can be for any node label that is present on the Kubernetes node. Using topologyKey requires nodes to be consistently labelled, i.e. every node in the cluster must have an appropriate label matching topologyKey. If some or all nodes are missing the specified topologyKey label, it can lead to unintended behavior.|Yes* * required if matchExpressions is empty|empty|
-|**matchExpressions**|matchExpressions is a list of label selector requirements. The requirements are ANDed. <br/><br/>The labels provided here are matched against the following: <ul><li>Kubernetes node labels</li><li>PVC labels</li><li>Portworx storage pool labels</li>| Yes* <br/><br/>* required if topologyKey is empty|empty|
+|**matchExpressions**|matchExpressions is a list of label selector requirements. The requirements are ANDed. <br/><br/>The labels provided here are matched against the following: <ul><li>Kubernetes node labels</li><li>PVC labels</li><li>Portworx storage pool labels</li>| Yes <!-- * <br/><br/>* required if topologyKey is empty -->|empty|
+
+<!-- |**affectedReplicas**|Number indicating the number of volume replicas that are affected by this rule.|Yes|0 (Interpreted as all volume replicas)| -->
+<!-- |**topologyKey**|Key for the node label that the system uses to denote a topology domain. The key can be for any node label that is present on the Kubernetes node. Using topologyKey requires nodes to be consistently labelled, i.e. every node in the cluster must have an appropriate label matching topologyKey. If some or all nodes are missing the specified topologyKey label, it can lead to unintended behavior.|Yes* * required if matchExpressions is empty|empty| -->
 
 ##### Example uses cases
 
 [Anti-affinity to not use SATA pools](/samples/k8s/volume-placement-sata-pool-anti-affinity.yaml)
 
+<!--
 ### volumeAffinity
 
 The `volumeAffinity` section allows specifying rules that create affinity between 2 or more volumes that match the given labels. This should be used when you want to establish an affinity relationship between different volumes.
@@ -108,6 +115,7 @@ Same as Schema for [volumeAffinity](#volumeaffinity).
 ##### Example uses cases
 
 [Do not collocate with other cassandra volumes](/samples/k8s/volume-placement-cassandra-volume-anti-affinity.yaml)
+-->
 
 ## How to use
 
