@@ -5,6 +5,72 @@ description: Notes on Portworx releases.
 keywords: portworx, release notes
 series: release-notes
 ---
+
+## 2.2
+
+September 30, 2019
+
+### New Features
+
+* Introducing [Storage pool caching](https://2.2.docs.portworx.com/concepts/pool-caching/). This is for new clusters only.
+* Portworx now features [stateful application backup and cloning](https://2.2.docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stateful-applications/), allowing you new ways to manage your stateful applications.
+* Introducing [PX-Central](https://central.portworx.com), a place where you can learn all about getting started with Portworx.
+* New [jq filtering documentation](https://2.2.docs.portworx.com/reference/cli/filtering-output-with-jq/) demonstrates how you can filter `pxctl` output.
+* [Portworx CSI](https://2.2.docs.portworx.com/portworx-install-with-kubernetes/storage-operations/csi/) driver is now generally available for Kubernetes 1.13 and higher.
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Number**|**Improvement Description**|
+|----|----|
+| PWX-9026 | Previously, to enable sharedv4 volumes while installing Portworx, users were asked to provide the  `ENABLE_SHARED_AND_SHARED_v4` environment variable. <br/><br/>With 2.2, this environment variable is no longer required and sharedv4 volumes are enabled by default. |
+| PWX-8165 | The `pxctl cluster provision-status` command with the `--show-labels` flag now displays storage pool labels. |
+| PWX-9956 | When encrypting volumes with CSI, users can pass the secret information used for volume encryption through storage class templatized parameters. |
+| PWX-9888 | When a Portworx volume is resized, the volume usage metrics are now immediately updated in Prometheus. |
+| PWX-9831 | Users can use custom labels to designate nodes as KVdb nodes through the `PX_METADATA_NODE_LABEL` environment variable. |
+| PWX-9769 | Users can specify the base path for the Vault secret store using the `VAULT_BASE_PATH` environment variable. |
+| PWX-9727 | With 2.2, Portworx raises an alert every time a pool is resized. |
+| PWX-9481 | Additional `State` column for the `pxctl clouddrive list` and `pxctl clouddrive inspect` commands makes it easier to see the state of a particular drive. |
+| PWX-8951 | The `pxctl` command-line utility now allows users to update the credentials and the cloudsnap schedule for a volume. |
+| PWX-9976 | With 2.2, users can update a node's CloudDriveSet labels by running the `pxctl cd update-labels --nodeid <node-id>` command. This is useful for when the `px/metadata-node` label must be set to `true` on a node which is part of an operational cluster. |
+| PWX-8534 | The `pxctl cloudsnap list` command provides pagination and the users can now specify filters for listing only certain types of backups. By default, migration-related backups are not displayed. |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-9991 | Using Talisman to upgrade Portworx from version 2.0.x to 2.1 may create a DaemonSet called `portworx-api` with a wrong IP address. As a result, the DaemonSet is not present on the host network. <br/><br/> **User Impact:** This prevented Stork from finding the Portworx service. In turn, users experienced issues while trying to create cluster pairs.<br/><br/> **Resolution:** With 2.2, the upgrade process creates the DaemonSet with the correct IP address. |
+| PWX-9777 | If the size of the timestamp file exceeds 10G, Portworx may unexpectedly restart and become stuck in a restart loop. <br/><br/> **User Impact:** Users could not access volumes. |
+| PWX-9765 | A recent update to the IBM IAM service requires every client to set the "Content-Length" header in their HTPP requests. <br/><br/> **User Impact:** This caused users to see an `BXNIM0109E:Property missing or empty.` error. <br/><br/> **Resolution:** With 2.2, Portworx sets the "Content-Length" header in every request. |
+| PWX-9842 | Openshift on IKS: Pods may get stuck in the `terminating` state during teardown. <br/><br/> **User Impact:** This left stale paths for the volumes, causing the pod teardown to get stuck. |
+| PWX-9964 | Under certain circumstances, the volume delete operation may fail. <br/><br/> **User Impact:** Users may see a `Client.Timeout exceeded while awaiting headers` error, and the delete operation may get stuck for approximately 5 minutes. |
+| PWX-9889 | Under certain circumstances, Portworx exposes empty volume usage metrics to Prometheus. <br/><br/> **User Impact:** Users are unable to see the correct volume usage metrics in Prometheus. |
+| PWX-9883 | When running Portworx with the internal KVdb, the Portworx service may restart on the online nodes during a KVdb failover. <br/><br/> **User Impact:** Users see an `Etcd cluster not reachable` error. |
+| PWX-9855 | Rebooting the internal KVdb nodes within a short interval resulted in the configmap entries getting cleaned up. <br/><br/> **User Impact:** The internal KVdb doesn't start, and the cluster goes out of quorum. <br/><br/> **Resolution:** Check the node labels before performing a KVdb node failover. If the node labels don't allow the node to act as a KVdb node, then don't remove the offline KVdb node from the existing cluster. |
+| PWX-9826 | If all the nodes are rebooted at the same time, an application node may try to start the internal KVdb, even though it doesn't have the `px/metadata-node=true` label. <br/><br/> **User Impact:** A storage cloud-drive may get attached to a KVdb node or vice versa. <br/><br/> **Resolution:** Make sure that the KVdb drives are only attached to the designated KVdb nodes, and the application nodes don't attach a `DriveSet` belonging to a KVdb node. |
+| PWX-9334 | A bug in the Grafana dashboard caused storageless nodes to display as `down` in Grafana. |
+| PWX-10031 | If a migration is performed while only the source cluster is licensed for Disaster recovery, Portworx marks the migration as successful even if the resources are not migrated correctly. <br/><br/> **User Impact:** The migrated volume is empty |
+| PWX-10000 | The `pxctl volume usage` command errors out on nodes with more than 100 volumes attached. <br/><br/> **User Impact:** Users see the following error message: `Error: Get http://localhost:9001/v1/osd-volumes/usage/<VOL_ID>: net/http: request canceled (Client.Timeout exceeded while awaiting headers)`. |
+| PWX-6894 | For sharedv4 volumes, Portworx provides multi-RW access to the volumes by maintaining a single server and multiple clients. If this type of server goes down, the clients receive an `Unmount` request for the volume. This results in a server with a dangling client reference. <br/><br/> **User Impact:** The sharedv4 volumes might end up attached even if there is no consumer. |
+| PWX-9974 | Fixed an issue in which the OpenStorage SDK sends the redirect flag for every request to detach a volume. <br/><br/> **User Impact:** Under certain circumstances, the operation of deleting or detaching a volume could timeout after 5 minutes. |
+| PWX-9625 | Installing Portworx using a Helm chart on Kubernetes 1.14.3 fails. <br/><br/> **User Impact:** The user sees several helper pods failing because they try to pull an image which doesn't exist. <br/><br/> **Resolution:** Fixed by replacing the `kubectl` repo with `https://hub.docker.com/r/bitnami/kubectl`. |
+| PWX-10061 | When running Portworx on Kubernetes, the upgrade process can reset the custom port settings in the `portworx-service` spec to their default values. <br/><br/> **User Impact:** Users see an `HTTP error 404` error in `kubelet` while trying to mount a volume. |
+
+
+### Known Issues
+
+Portworx is aware of the following issues, check future release notes for fixes on these issues:
+
+|**Issue Number**|**Issue Description**|**Workaround**|
+|----|----|----|
+| PWX-10049 | CSI: Due to an issue Kubernetes 1.13, if the Kubelet or Portworx goes offline unexpectedly on a node where a volume is attached, the Kubelet will leave orphaned pod directories under `/var/lib/kubelet/pods/*`. The kubelet logs will report these errors every 2 seconds unless this directory is manually cleaned up. | Move or delete the orphaned pod's directory to stop these logs from showing up. |
+| PWX-10057 | CSI: In Kubernetes 1.14 with the Portworx CSI driver, unmount may fail intermittently if a volume is attached to a node where PX is down. | If unmount fails, retry once Portworx is back online. |
+| PWX-10056 | PX-Security: With security enabled, the `pxctl cloudmigrate status` command returns a blank result even there is cloud migration going on. | Use the `pxctl cm status -t <your_cloud_migration_task_ID>` command to view the migration status. |
+| PWX-8421 | Setting collaborator access on a snapshot using `pxctl` may return an error. | `pxctl` properly updates collaborator access, despite returning an error. |
+
 ## 2.1.5
 
 September 13, 2019
