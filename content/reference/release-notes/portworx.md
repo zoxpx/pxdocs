@@ -12,9 +12,9 @@ September 30, 2019
 
 ### New Features
 
-* Introducing [Storage pool caching](/concepts/pool-caching/), available on new clusters only.
+* Introducing [Storage pool caching](/concepts/pool-caching/), this feature is available on new clusters only.
 * Portworx now features [stateful application backup and cloning](/portworx-install-with-kubernetes/storage-operations/stateful-applications/), allowing you new ways to manage your stateful applications.
-* Introducing [PX-Central](https://central.portworx.com), a place where you can learn all about getting started with Portworx.
+* Visit [PX-Central](https://central.portworx.com), a place where you can learn all about getting started with Portworx.
 * New [jq filtering documentation](/reference/cli/filtering-output-with-jq/) demonstrates how you can filter `pxctl` output.
 * The [Portworx CSI](/portworx-install-with-kubernetes/storage-operations/csi/) driver is now generally available for Kubernetes 1.13 and higher.
 
