@@ -18,6 +18,10 @@ For reference,
 
 Once a policy has been created, you can use it to schedule a migration. The MigrationSchedule object is namespaced.
 
+{{<info>}}
+**NOTE:** If your cluster has a DR license applied to it, you can only perform migrations in DR mode; this includes operations involving the `pxctl cluster migrate` command.
+{{</info>}}
+
 Continuing our previous example with `testpolicy`, here is how to create a `MigrationSchedule` object that schedules a migration:
 
 ```text

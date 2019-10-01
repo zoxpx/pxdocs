@@ -180,6 +180,10 @@ You might need to perform additional steps for [GKE](gke) and [EKS](eks)
 
 Once the pairing is configured, applications can be migrated repeatedly to the destination cluster.
 
+{{<info>}}
+**NOTE:** If your cluster has a DR license applied to it, you can only perform migrations in DR mode; this includes operations involving the `pxctl cluster migrate` command.
+{{</info>}}
+
 ### Migrating Large Volumes
 
 When the clusterpair gets created, _Portworx_ automatically creates a 100G volume named *ObjectstoreVolume*. If you attempt to migrate a volume significantly larger than 100G, you will find out that the ObjectStore volume doesn't provide sufficient disk space and the migration will fail.

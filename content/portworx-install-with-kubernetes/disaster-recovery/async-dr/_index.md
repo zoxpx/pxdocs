@@ -13,7 +13,7 @@ weight: 2
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be reachable by the source cluster.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
-* **License**: You will need a DR enabled Portworx License to use this feature.
+* **License**: You will need a DR enabled Portworx License at both the source and destination cluster to use this feature.
 
 ## Overview
 
@@ -88,6 +88,10 @@ status:
 Once a policy has been created, you can use it to schedule a migration. The spec for the MigrationSchedule spec contains the same fields as the Migration spec with the addition of the policy name. The MigrationSchedule object is namespaced like the Migration object.
 
 Note that `startApplications` should be set to false in the spec. Otherwise, the first Migration will start the pods on the remote cluster and will succeed. But all subsequent migrations will fail since the volumes will be in use.
+
+{{<info>}}
+**NOTE:** If your cluster has a DR license applied to it, you can only perform migrations in DR mode; this includes operations involving the `pxctl cluster migrate` command.
+{{</info>}}
 
 Continuing our previous example with `testpolicy`, here is how to create a `MigrationSchedule` object that schedules a migration:
 
