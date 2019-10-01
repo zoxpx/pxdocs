@@ -216,7 +216,7 @@ OPTIONS:
    --help, -h  show help
 ```
 
-You can add drives to a server using the /opt/pwx/bin/pxctl service drive add command. To do so the server must be in maintenance mode.
+You can add drives to a server using the `/opt/pwx/bin/pxctl service drive add` command. To do so the server must be in maintenance mode.
 
 ```text
 pxctl service drive add --help
@@ -241,9 +241,13 @@ Drive add  successful. Requires restart (Exit maintenance mode).
 
 To rebalance the storage across the drives, use pxctl service drive rebalance. This is useful after prolonged operation of a node.
 
+#### Related topics
+
+* [PX-Cache]()
+
 ### pxctl service drive show
 
-You can use pxctl service drive show to display drive information on the server
+You can use the `pxctl service drive show` command to display a node's drive information.
 
 ```text
 pxctl service drive show
@@ -259,6 +263,7 @@ Pool ID: 0
 	Drives:
 	1: /dev/mapper/volume-e85a42ca, 1.0 GiB allocated of 100 GiB, Online
 ```
+<!-- need example output that includes caching -->
 
 ### pxctl service email
 
@@ -388,3 +393,51 @@ Flags:
       --labels string        comma separated name=value pairs (default "NoLabel")
   -h, --help                 help for update
 ```
+
+### pxctl service pool show
+
+Show storage pool information
+
+```text
+pxctl service pool show
+```
+
+```output
+PX drive configuration:
+Pool ID: 0
+        IO Priority:  LOW
+        Labels:
+        Size: 5.5 TiB
+        Status: Online
+        Has metadata:  No
+        Drives:
+        0: /dev/sdb, 2.7 TiB allocated of 2.7 TiB, Online
+        1: /dev/sdc, 2.7 TiB allocated of 2.7 TiB, Online
+        Cache Drives:
+        0:0: /dev/nvme0n1, capacity of 745 GiB, Online
+                Status:  Active
+                TotalBlocks:  762536
+                UsedBlocks:  12
+                DirtyBlocks:  0
+                ReadHits:  487
+                ReadMisses:  42
+                WriteHits:  1134
+                WriteMisses:  7
+                BlockSize:  1048576
+                Mode:  writethrough
+Journal Device:
+        1: /dev/sdg1, STORAGE_MEDIUM_MAGNETIC
+Metadata  Device:
+        1: /dev/sdg2, STORAGE_MEDIUM_MAGNETIC
+```
+
+### pxctl service pool cache
+
+You can use the `pxct service pool cache command` command to:
+
+* Disable caching on a pool
+* Enable caching on a pool
+* Force the cache to be flushed
+* Check if pool caching is enabled for a pool
+
+Refer to the [Pool caching](/concepts/pool-caching) section for more details.
