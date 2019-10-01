@@ -31,17 +31,6 @@ release. As future releases are made, the two clusters can have different _PX-En
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be
 reachable by the source cluster.
 
-## Pairing clusters
-
-On Kubernetes, you will define a trust object called **ClusterPair**. This object is required to communicate with the destination cluster. In a nutshell, it creates a pairing with the storage driver (_Portworx_) as well as the scheduler (Kubernetes) so that the volumes and resources can be migrated between clusters.
-
-
-### Get cluster token from destination cluster
-On the destination cluster, run the following command from one of the Portworx nodes to get the cluster token:
-```text
-pxctl cluster token show
-```
-
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/cluster-pair.md" %}}
 
 ```text
@@ -78,6 +67,13 @@ status:
   storageStatus: ""
 ```
 
+## Show your destination cluster token
+
+On the destination cluster, run the following command from one of the Portworx nodes to get the cluster token. You'll need this token in later steps:
+
+```text
+pxctl cluster token show
+```
 
 #### Update ClusterPair with storage options
 
