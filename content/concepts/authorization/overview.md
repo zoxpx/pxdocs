@@ -8,7 +8,7 @@ series: authorization
 
 From version 2.1, Portworx has support for security. This document provides a high-level overview of the different components used to secure Portworx.
 
-Portworx security centers around the obiquitous JWT based authentication and
+Portworx security centers around the ubiquitous JWT based authentication and
 authorization model. This technology is currently used by most major internet
 systems, providing a proven secure model for user and account identification.
 
