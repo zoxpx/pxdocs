@@ -6,8 +6,15 @@ description: Learn how to install Portworx with Kubenetes
 ---
 ### Generate the specs
 
-To install _Portworx_ with Kubernetes, you will first generate Kubernetes manifests that you will deploy in your cluster.
+To install Portworx with Kubernetes, you must first generate Kubernetes manifests that you will deploy in your cluster:
 
-To generate the specs, click {{<iframe url="https://install.portworx.com/2.1" text="Generating the Portworx specs.">}}
+1. Navigate to <a href="https://central.portworx.com" target="tab">PX-Central</a> and log in, or create an account
+3. Select **Install and Run** to open the Spec Generator
 
-_Portworx_ can also be installed using it's Helm chart by following instructions [here](/portworx-install-with-kubernetes/install-px-helm). The above method is recommended over helm as the wizard will guide you based on your environment.
+    ![Screenshot showing install and run](/img/pxcentral-install.png)
+
+4. Select **New Spec**
+
+    ![Screenshot showing new spec button](/img/pxcentral-spec.png)
+
+Portworx can also be installed using it's Helm chart by following instructions [here](/portworx-install-with-kubernetes/install-px-helm). The above method is recommended over helm as the wizard will guide you based on your environment.
