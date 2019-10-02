@@ -9,16 +9,26 @@ hidden: true
 
 You will need to provide Portworx with a vCenter server user that will need to either have the full Admin role or, for increased security, a custom-created role with the following minimum [vSphere privileges](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.security.doc/GUID-FEAB5DF5-F7A2-412D-BF3D-7420A355AE8F.html):
 
-- Datastore.Browse
-- Datastore.FileManagement
-- Host.Local.ReconfigVM
-- VirtualMachine.Config.AddExistingDisk
-- VirtualMachine.Config.AddNewDisk
-- VirtualMachine.Config.AddRemoveDevice
-- VirtualMachine.Config.AdvancedConfig
-- VirtualMachine.Config.EditDevice
-- VirtualMachine.Config.RemoveDisk
-- VirtualMachine.Config.Settings
+* Datastore
+    * Browse datastore
+    * Low level file operations
+    * Remove file
+* Host
+    * Local operations
+    * Reconfigure virtual machine
+* Virtual machine
+    * Change Configuration
+    * Add existing disk
+    * Add new disk
+    * Add or remove device
+    * Advanced configuration
+    * Change Settings
+    * Modify device settings
+    * Remove disk
+
+If you create a custom role as above, make sure to select "Propagate to children" when assigning the user to the role.
+
+{{<info>}}All commands in the subsequent steps need to be run on a machine with kubectl access.{{</info>}}
 
 ### Step 2: Create a Kubernetes secret with your vCenter user and password
 
@@ -28,7 +38,7 @@ You will need to provide Portworx with a vCenter server user that will need to e
 
 #### vSphere environment details
 
-Export following env variables based on your vSphere environment.
+Export following env variables based on your vSphere environment. These variables will be used in a later step when generating the yaml spec.
 
 ```text
 # Hostname or IP of your vCenter server
@@ -67,7 +77,7 @@ export VSPHERE_DISK_TEMPLATE=type=zeroedthick,size=150
 
 Now generate the spec with the following curl command.
 
-{{<info>}}Observe how curl below uses the variables setup up above as query parameters.{{</info>}}
+{{<info>}}Observe how curl below uses the environment variables setup up above as query parameters.{{</info>}}
 
 ```text
 VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
