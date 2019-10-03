@@ -55,7 +55,7 @@ Each of the above fields can be provided as is to _Portworx_ as environment vari
 
 #### Kubernetes users
 
-If you are installing _Portworx_ on Kubernetes, when generating the _Portworx_ Kubernetes spec file on [https://install.portworx.com/](https://install.portworx.com/):
+If you are installing _Portworx_ on Kubernetes, when generating the _Portworx_ Kubernetes spec file on the Portworx Spec Generator page in [PX-Central](https://central.portworx.com):
 
 1. Pass in all the above variables as is in the Environment Variables section.
 2. Specify the `Secret Store Type` in the Advanced Settings section as `aws`

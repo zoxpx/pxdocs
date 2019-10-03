@@ -68,9 +68,7 @@ PX-Central can be setup for any of the above deployment scenarios by following a
 
 ### PX-Central for new PX installations
 
-   Go to https://install.portworx.com/2.1 and follow the steps.
-
-   To enable PX-Central, make sure that in `Advanced Settings` Lighthouse and Monitoring have been ticked.
+In the Portworx Spec Generator page on [PX-Central](https://central.portworx.com), enable PX-Central by ticking `Lighthouse and Monitoring` in `Advanced Settings`.
 
 ### Multi-Cluster requirements
 

@@ -17,7 +17,7 @@ STORK, Lighthouse and other components that make running stateful applications s
 The StorageCluster provides a Kubernetes native experience to manage a Portworx cluster just like any other application in Kubernetes. Simply creating
 or editing a StorageCluster object will result in the Operator creating or updating the Portworx cluster in the background.
 
-It is recommended to use the [Portworx Spec Generator](https://install.portworx.com/2.1) to create a StorageCluster spec. The spec generator will
+It is recommended to use the Portworx Spec Generator in [PX-Central](https://central.portworx.com) to create a StorageCluster spec. The spec generator will
 walk you through different options which you select based on your environment to generate a StorageCluster spec.
 
 If you want to generate the StorageCluster spec manually, you can refer to the following [examples](#storagecluster-examples) and the [schema description](#storagecluster-schema) of StorageCluster.

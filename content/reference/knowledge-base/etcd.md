@@ -115,4 +115,4 @@ etcd.crt:  1680 bytes
 etcd.key:  414  bytes
 ```
 
-Use the [spec generator](https://install.portworx.com/), selecting "Certificate Auth" under the etcd section, ensuring the filenames match those specified.
+Use the Portworx Spec Generator in [PX-Central](https://central.portworx.com), selecting "Certificate Auth" under the etcd section, ensuring the filenames match those specified.

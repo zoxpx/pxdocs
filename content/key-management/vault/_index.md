@@ -89,7 +89,7 @@ Portworx is going to look for this secret with name `px-vault` under the `portwo
 
 #### New Installation
 
-When generating the [Portworx Kubernetes spec file](https://install.portworx.com/2.0), select `Vault` from the "Secrets type" list.
+When generating the [Portworx Kubernetes spec file](https://central.portworx.com), select `Vault` from the "Secrets type" list.
 
 #### Existing Installation
 

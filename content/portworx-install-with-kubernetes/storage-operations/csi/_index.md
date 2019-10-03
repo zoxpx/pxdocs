@@ -26,7 +26,7 @@ Before you install and use Portworx with CSI, ensure you meet the prerequisistes
 
 Enable CSI during Portworx installation. You can do this in one of two ways:
 
-* If you're generating specs using the Portworx Kubernetes spec generator, [Generate the Portworx specs](https://install.portworx.com/2.1) appropriate for your cluster. In the **Customize** tab, under **Advanced Settings**, select **CSI**. This will add the CSI components to the Portworx DaemonSet.
+* If you're generating specs using the Portworx Kubernetes spec generator, generate the Portworx specs with the Portworx Spec Generator in [PX-Central](https://central.portworx.com) appropriate for your cluster. In the **Customize** tab, under **Advanced Settings**, select **CSI**. This will add the CSI components to the Portworx DaemonSet.
 
 * If you are using [cURL to fetch the Portworx spec](/portworx-install-with-kubernetes/px-k8s-spec-curl), add `csi=true` to the parameter list to include CSI specs in the generated file.
 

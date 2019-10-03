@@ -13,17 +13,17 @@ Portworx can integrate with Azure Key Vault [Secrets](https://docs.microsoft.com
 
 ## Setting up Azure Key Vault {#setting-up-azure-kv}
 
-Peruse [this section](https://docs.microsoft.com/en-us/azure/key-vault/quick-create-portal) for help on setting up Azure Key Vault in your setup. 
-You will also require to register and authenticate application with Azure Key Vault. 
+Peruse [this section](https://docs.microsoft.com/en-us/azure/key-vault/quick-create-portal) for help on setting up Azure Key Vault in your setup.
+You will also require to register and authenticate application with Azure Key Vault.
 
-- Please follow [doc] (https://docs.microsoft.com/en-us/azure/key-vault/key-vault-manage-with-cli2#registering-an-application-with-azure-active-directory) to register application with azure active directory 
+- Please follow [doc] (https://docs.microsoft.com/en-us/azure/key-vault/key-vault-manage-with-cli2#registering-an-application-with-azure-active-directory) to register application with azure active directory
 - Please follow [doc](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-manage-with-cli2#authorizing-an-application-to-use-a-key-or-secret) to grant Azure Key Vault permission to your registered app.
 
-Portworx will need application that has Azure Key Vault `set/get/list/delete` secrets permissions. 
+Portworx will need application that has Azure Key Vault `set/get/list/delete` secrets permissions.
 
 Following are the authentication details required by Portworx to connect Azure Key Vault -
 
-- `AZURE_VAULT_URL`: Azure Key Vault URL 
+- `AZURE_VAULT_URL`: Azure Key Vault URL
 - `AZURE_TENANT_ID`: Azure Active Directory ID
 - `AZURE_CLIENT_ID`: Azure application ID which is registered with Azure active directory and has access to azure key vault mentioned in `AZURE_VAULT_URL`
 - `AZURE_CLIENT_SECRET`: Azure application secret id, you may need to generate one if not created already. Follow [doc](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-application-id-and-authentication-key) to generate new secret key for your application
@@ -31,7 +31,7 @@ Following are the authentication details required by Portworx to connect Azure K
 
 ### Kubernetes users {#kubernetes-users}
 
-If you are installing Portworx on Kubernetes, when generating the [Portworx Kubernetes spec file](https://install.portworx.com/):
+If you are installing Portworx on Kubernetes, when generating the Portworx Kubernetes spec file from the Portworx Spec Generator page in [PX-Central](https://central.portworx.com):
 
 1. Pass in all the above variables as is in the Environment Variables section.
 2. Select `Azure Key Vault` from the `Secrets Store Type` list under `Advanced Settings`
@@ -53,7 +53,7 @@ During installation,
 Based on your installation method provide the `-secret_type azure-kv` input argument and environment variable and restart PX on all the nodes.
 
 {{<info>}}
-**Note**: 
+**Note**:
 <br>
 Portworx supports only the [Azure KeyVault Secrets](https://docs.microsoft.com/en-us/azure/key-vault/about-keys-secrets-and-certificates#key-vault-secrets)
 <br>
