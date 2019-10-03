@@ -58,6 +58,10 @@ CLUSTER-ID                                       NAME            ENDPOINT       
 
 Once you have created cluster pairs you can migrate volumes to it.
 
+{{<info>}}
+**NOTE:** If your cluster has a DR license applied to it, you can only perform migrations in DR mode; this includes operations involving the `pxctl cluster migrate` command.
+{{</info>}}
+
 ### Start migration
 
 Migration can be done at two granularities. If no ClusterID is specified during migration it'll pick up the default cluster pair.

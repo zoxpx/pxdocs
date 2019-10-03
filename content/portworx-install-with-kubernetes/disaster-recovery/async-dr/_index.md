@@ -2,7 +2,7 @@
 title: Asynchronous DR
 linkTitle: Asynchronous DR
 keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
-description: How to achieve asynchronous DR across Kubernetes clusters using schduled migrations
+description: How to achieve asynchronous DR across Kubernetes clusters using scheduled migrations
 weight: 2
 ---
 
@@ -13,7 +13,7 @@ weight: 2
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be reachable by the source cluster.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
-* **License**: You will need a DR enabled Portworx License to use this feature.
+* **License**: You will need a DR enabled Portworx License at both the source and destination cluster to use this feature.
 
 ## Overview
 
@@ -40,6 +40,69 @@ The following Kubernetes resources are supported as part of the Asynchronous DR 
 * ClusterRoleBinding
 * Ingress
 
+## Enable load balancing on cloud clusters
+
+If you're running Kubernetes on the cloud, you must configure an External LoadBalancer (ELB) for the PX API service.
+
+{{<info>}}
+**Warning:** Do not enable load balancing without authorization enabled on the PX cluster.
+{{</info>}}
+
+Enable load balancing by entering the `kubectl edit service` command and changing the service type value from `nodePort` to `loadBalancer`:
+
+```text
+kubectl edit service portworx-service -n kube-system
+```
+```output
+kind: Service
+apiVersion: v1
+metadata:
+  name: portworx-service
+  namespace: kube-system
+  labels:
+    name: portworx
+spec:
+  selector:
+    name: portworx
+  type: loadBalancer
+```
+
+{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/cluster-pair.md" %}}
+
+```text
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: ClusterPair
+metadata:
+    creationTimestamp: null
+    name: remotecluster
+    namespace: migrationnamespace
+spec:
+   config:
+      clusters:
+         kubernetes:
+            LocationOfOrigin: /etc/kubernetes/admin.conf
+            certificate-authority-data: <CA_DATA>
+            server: https://192.168.56.74:6443
+      contexts:
+         kubernetes-admin@kubernetes:
+            LocationOfOrigin: /etc/kubernetes/admin.conf
+            cluster: kubernetes
+            user: kubernetes-admin
+      current-context: kubernetes-admin@kubernetes
+      preferences: {}
+      users:
+         kubernetes-admin:
+            LocationOfOrigin: /etc/kubernetes/admin.conf
+            client-certificate-data: <CLIENT_CERT_DATA>
+            client-key-data: <CLIENT_KEY_DATA>
+    options:
+       <insert_storage_options_here>: ""
+       mode: DisasterRecovery
+status:
+  remoteStorageId: ""
+  schedulerStatus: ""
+  storageStatus: ""
+```
 
 ## Enable DR mode
 
@@ -88,6 +151,10 @@ status:
 Once a policy has been created, you can use it to schedule a migration. The spec for the MigrationSchedule spec contains the same fields as the Migration spec with the addition of the policy name. The MigrationSchedule object is namespaced like the Migration object.
 
 Note that `startApplications` should be set to false in the spec. Otherwise, the first Migration will start the pods on the remote cluster and will succeed. But all subsequent migrations will fail since the volumes will be in use.
+
+{{<info>}}
+**NOTE:** If your cluster has a DR license applied to it, you can only perform migrations in DR mode; this includes operations involving the `pxctl cluster migrate` command.
+{{</info>}}
 
 Continuing our previous example with `testpolicy`, here is how to create a `MigrationSchedule` object that schedules a migration:
 
