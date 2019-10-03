@@ -77,7 +77,7 @@ description: Common errors
   * Please inspect the Portworx Daemonset spec, and ensure the appropriate socket-files/directories are mounted as volumes
     from the host-system into the Portworx POD.
     Alternatively, you can [reinstall Portworx](/portworx-install-with-kubernetes/), or at minimum generate a new
-    YAML-spec via [install.portworx.com](https://install.portworx.com), and copy the volume-mounts into your Portworx spec.
+    YAML-spec via the Portworx Spec Generator page in [PX-Central](https://central.portworx.com), and copy the volume-mounts into your Portworx spec.
 
     | [Container runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)   | Supported since   | Required volume mounts                 |
     |:---------------------------------------------------------------------------------------------------|:------------------|:---------------------------------------|

@@ -15,7 +15,7 @@ Portworx can integrate with Kubernetes Secrets to store your encryption keys/sec
 
 ### New installation
 
-When generating the [Portworx Kubernetes spec file](https://install.portworx.com/), select `Kubernetes` from the `Secrets Store Type` list under `Advanced Settings`. For more details on how to generate Portworx spec for Kubernetes, [click here](/portworx-install-with-kubernetes).
+When generating the Portworx Kubernetes spec file on the Portworx Spec Generator page in [PX-Central](https://central.portworx.com), select `Kubernetes` from the `Secrets Store Type` list under `Advanced Settings`. For more details on how to generate Portworx spec for Kubernetes, [click here](/portworx-install-with-kubernetes).
 
 ### Existing installation
 

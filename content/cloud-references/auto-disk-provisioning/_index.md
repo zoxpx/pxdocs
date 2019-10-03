@@ -6,9 +6,9 @@ weight: 2
 series: arch-references
 ---
 
-In cloud environments, Portworx can dynamically create disks based on an input disk template whenever a new instance spins up and use those disks for the Portworx cluster. 
+In cloud environments, Portworx can dynamically create disks based on an input disk template whenever a new instance spins up and use those disks for the Portworx cluster.
 
-Portworx fingerprints the disks and attaches them to an instance in the autoscaling cluster. In this way an ephemeral instance gets its own identity. 
+Portworx fingerprints the disks and attaches them to an instance in the autoscaling cluster. In this way an ephemeral instance gets its own identity.
 
 ## Why would I need this?
 
@@ -17,6 +17,6 @@ Portworx fingerprints the disks and attaches them to an instance in the autoscal
 
 ## How do I set it up?
 
-On Kubernetes, when generating the spec using https://install.portworx.com, the UI will prompt for the disk specs in the cloud section of the wizard.
+On Kubernetes, when generating the spec using the Portworx Spec Generator in [PX-Central](https://central.portworx.com), the UI will prompt for the disk specs in the cloud section of the wizard.
 
 Based on the cloud platform, you will need to provide access to Portworx to the cloud APIs. Continue to below sections for additional details.

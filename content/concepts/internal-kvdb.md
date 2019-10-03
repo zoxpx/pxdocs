@@ -14,7 +14,7 @@ Portworx, when installed with appropriate arguments, will automatically deploy a
 
 #### Kubernetes
 
-On the Portworx [install](https://install.portworx.com/2.1) page, under the ETCD section select the **Built-in** option to deploy Portworx with internal kvdb.
+On the Portworx Spec Generator page in [PX-Central](https://central.portworx.com), under the ETCD section select the **Built-in** option to deploy Portworx with internal kvdb.
 
 #### Mesos (DCOS)
 

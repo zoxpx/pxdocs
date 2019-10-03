@@ -13,10 +13,10 @@ This guide describes the procedure to upgrade Portworx running as OCI container 
 
 ## Upgrading Portworx
 
-To upgrade to the **2.1.2** release (the latest stable at the time of this writing), run the following command:
+To upgrade to the **2.2** release (the latest stable at the time of this writing), run the following command:
 
 ```text
-curl -fsL https://install.portworx.com/2.1.2/upgrade | bash -s
+curl -fsL https://install.portworx.com/2.2/upgrade | bash -s
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
@@ -34,7 +34,7 @@ Fetch the latest Stork specs using the following curl command. Run these command
 
 ```text
 KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.1?kbver=$KBVER&comp=stork"
+curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.2?kbver=$KBVER&comp=stork"
 ```
 
 Next, apply it in your cluster.
@@ -50,7 +50,7 @@ kubectl apply -f stork-spec.yaml
 You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.0.3.4_ image.
 
 ```text
-curl -fsL https://install.portworx.com/2.1/upgrade | bash -s -- -t 2.0.3.4
+curl -fsL https://install.portworx.com/2.2/upgrade | bash -s -- -t 2.0.3.4
 ```
 
 ## Airgapped clusters
@@ -64,9 +64,9 @@ The below sections outline the exact steps for this.
 If you want to upgrade to the latest 2.1 stable release, skip the below export. If you wish to upgrade to a specific 2.1 release, set the `PX_VER` variable as below to the desired version.
 
 ```text
-# To determine the latest minor 2.1 release currently available, please use the curl-expression below
+# To determine the latest minor 2.2 release currently available, please use the curl-expression below
 # Alternatively, you can specify the version yourself, e.g.: PX_VER=2.0.2.3
-export PX_VER=$(curl -fs https://install.portworx.com/2.1/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
+export PX_VER=$(curl -fs https://install.portworx.com/2.2/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
 ```
 
 Now pull the required Portworx images.
@@ -117,7 +117,7 @@ fi
 
 [[ -z "$PX_VER" ]] || ARG_PX_VER="-t $PX_VER"
 
-curl -fsL https://install.portworx.com/2.1/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
+curl -fsL https://install.portworx.com/2.2/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
 ```
 
 ## Troubleshooting {#troubleshooting}

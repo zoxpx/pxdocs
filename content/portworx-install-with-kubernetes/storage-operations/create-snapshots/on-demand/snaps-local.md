@@ -17,7 +17,7 @@ The suggested way to manage snapshots on Kuberenetes is to use STORK. If you are
 **Installing STORK**
 
 This requires that you already have [STORK](/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
-Kubernetes cluster. If you fetched the Portworx specs from [https://install.portworx.com](https://install.portworx.com) and used the default options, STORK is already installed.
+Kubernetes cluster. If you fetched the Portworx specs from the Portworx Spec Generator in [PX-Central](https://central.portworx.com) and used the default options, STORK is already installed.
 
 ## Creating snapshots
 
