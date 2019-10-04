@@ -148,7 +148,7 @@ Once all the pods are up and running, you can verify different components of PX-
 Quick way to Identify nodes running px-kvdb is by running the pxctl command below on one of the cluster nodes
 
 ```text
-pxctl sv kvdb members
+pxctl service kvdb members
 ```
 
 ```output

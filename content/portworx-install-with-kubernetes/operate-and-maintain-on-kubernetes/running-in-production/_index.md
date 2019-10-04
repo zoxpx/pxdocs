@@ -353,8 +353,8 @@ While Prometheus can be deployed as a container within the container orchestrato
 #### Handling Lost or Stale Nodes on the Cloud and On-Prem {#handling-lost-or-stale-nodes-on-the-cloud-and-on-prem}
 
 * Lost or Stale Nodes can be removed from the PX cluster for force-decommissioning the node from the cluster
-* The command used to remove a node is `pxctl cluster delete -f`
-* For e.g., if a specific node is offline but it no longer exists, use \` pxctl cluster delete -f node-id\` to remove the node from the cluster
+* The command used to remove a node is `pxctl cluster delete --force`
+* For e.g., if a specific node is offline but it no longer exists, use \` pxctl cluster delete --force node-id\` to remove the node from the cluster
 
 #### Volume Data Recovery {#volume-data-recovery}
 

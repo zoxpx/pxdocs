@@ -142,10 +142,10 @@ As the above output shows, you can either migrate all volumes or just one.
 
 ### Migrating all volumes
 
-To migrate all volumes, run `pxctl cloudmigrate start` with the `-a` and `-c` flags:
+To migrate all volumes, run `pxctl cloudmigrate start` with the `--all` and `--cluster_id` flags:
 
 ```text
-pxctl cloudmigrate start -a -c <cluster_id>
+pxctl cloudmigrate start --all --cluster_id <cluster_id>
 ```
 
 ### Migrating a particular volume
@@ -153,7 +153,7 @@ pxctl cloudmigrate start -a -c <cluster_id>
 To migrate a particualr volume, try using:
 
 ```text
-pxctl cloudmigrate start -v <volumeId> -c <cluster_id>
+pxctl cloudmigrate start --volume_id <volumeId> --cluster_id <cluster_id>
 ```
 
 ### Checking the migration status

@@ -57,12 +57,6 @@ Global Flags:
 Use "pxctl storage-policy [command] --help" for more information about a command.
 ```
 
-Note that, instead of typing `pxctl storage-policy`, you can use the `stp` shorthand like this:
-
-```text
-pxctl stp --help
-```
-
 ## Create a Storage Policy
 
 Say we want to create a storage policy named `devpol` with:
@@ -140,7 +134,7 @@ Storage Policy  :  devpol
 Now that we've created a storage policy and set it as the default one, let's move forward and try to create a volume with an HA level lower than the one specified in the default storage policy:
 
 ```text
-pxctl v c polvol --repl 1 --size 10
+pxctl volume create polvol --repl 1 --size 10
 ```
 
 ```output
@@ -150,7 +144,7 @@ Volume successfully created: 745102698654969688
 Lastly, we would want to check the settings of the new volume:
 
 ```text
-pxctl v i polvol
+pxctl volume inspect polvol
 ```
 
 ```output
@@ -207,7 +201,7 @@ qapol           HA="2,Minimum" Encrypted="true" Sticky="true"...
 We can remove the default storage policy like so:
 
 ```text
-pxctl stp unset-default qapol
+pxctl storage-policy unset-default qapol
 ```
 
 ```output
@@ -244,7 +238,7 @@ Storage Policy  :  devpol
 The following creates a volume with a replication level lower than the one specified in `devpol`:
 
 ```text
-pxctl v c nonpol --size 10 --repl 1
+pxctl volume create nonpol --size 10 --repl 1
 ```
 
 ```output
@@ -254,7 +248,7 @@ Volume successfully created: 880058853866312532
 So, we've created a new volume. Go ahead and inspect its settings:
 
 ```text
-pxctl v i nonpol
+pxctl volume inspect nonpol
 ```
 
 ```output
@@ -293,7 +287,7 @@ Say you want to update `qapol` and make it so that the current replication param
 First, let's list our storage policies:
 
 ``` text
-pxctl stp list
+pxctl storage-policy list
 ```
 
 ```output
@@ -305,13 +299,13 @@ qapol         SnapInterval="policy=weekpol" HA="2,Minimum" Sticky="true"...
 Then, here's how to update the `replication` parameter for `qapol`:
 
 ```text
-pxctl stp update qapol --replication 1,min
+pxctl storage-policy update qapol --replication 1,min
 ```
 
 Lastly, we would want to check if the parameter has been updated:
 
 ```text
-pxctl stp list
+pxctl storage-policy list
 ```
 
 ```output
@@ -328,7 +322,7 @@ Again, we are going to walk you through an example.
 Start by listing existing storage policies:
 
 ```text
-pxctl stp list
+pxctl storage-policy list
 ```
 
 ```output
@@ -340,7 +334,7 @@ prodpol       Sticky="true" IOProfile="IO_PROFILE_CMS" SnapInterval="policy=snap
 The above shows that `qapol` is the default policy. Let's get more details:
 
 ```text
-pxctl stp inspect qapol
+pxctl storage-policy inspect qapol
 ```
 
 ```output
@@ -354,13 +348,13 @@ Storage Policy : qapol
 Now, we would want to update its parameters:
 
 ```text
-pxctl stp update qapol --policy snapSched
+pxctl storage-policy update qapol --policy snapSched
 ```
 
 The following checks if the parameters were successfully updated:
 
 ```text
-pxctl stp inspect qapol
+pxctl storage-policy inspect qapol
 ```
 
 ```output
@@ -374,7 +368,7 @@ Storage Policy : qapol
 Let's create a new volume. It will have **snapSched** as snapshot policy attached:
 
 ```text
-pxctl v c updatedqapol --size 10
+pxctl volume create updatedqapol --size 10
 ```
 
 ```output
@@ -385,7 +379,7 @@ Lastly, we would want to inspect the settings of the new volume like so:
 
 
 ```text
-pxctl v i updatedqapol
+pxctl volume inspect updatedqapol
 ```
 
 ```output
@@ -420,7 +414,7 @@ Volume  :  1131539442993682535
 Use `pxctl storage-policy delete policyname` to delete storage policy:
 
 ```text
-pxctl stp delete  devpol
+pxctl storage-policy delete  devpol
 ```
 
 ```output
@@ -430,7 +424,7 @@ Storage Policy devpol is deleted
 If you need to delete the default policy, then the `--force` flag is required.
 
 ```text
-pxctl stp delete qapol --force
+pxctl storage-policy delete qapol --force
 ```
 
 ```output
@@ -450,13 +444,13 @@ Let's see how it works.
 Create a new policy like this:
 
 ```text
-pxctl stp create testpol --replication 2,min --sticky --weekly sunday@08:30,8
+pxctl storage-policy create testpol --replication 2,min --sticky --weekly sunday@08:30,8
 ```
 
 List storage policies:
 
 ```text
-pxctl stp list
+pxctl storage-policy list
 ```
 
 ```output
@@ -467,7 +461,7 @@ testpol         HA="2,Minimum" Sticky="true" SnapInterval="weekly Sunday@08:30,k
 Inspect `testpol`:
 
 ```text
-pxctl stp inspect testpol
+pxctl storage-policy inspect testpol
 ```
 
 ```output
@@ -481,7 +475,7 @@ Storage Policy  :  testpol
 Now, let's create a volume named `customvol` using **testpol**:
 
 ```text
-pxctl v c customvol --size 10 --storagepolicy testpol
+pxctl volume create customvol --size 10 --storagepolicy testpol
 ```
 
 ```output
@@ -491,7 +485,7 @@ Volume successfully created: 492212712402729915
 Lastly, let's check `customvol`'s settings:
 
 ```text
-pxctl v i customvol
+pxctl volume inspect customvol
 ```
 
 ```output
@@ -573,19 +567,19 @@ If storage policy is created with replication 2, Volume created will have exact 
 Storage policies also can have restricted access for specific collaborators and groups. The following commands allow you to update groups and collaborators per storage policy:
 
 ```text
- pxctl stp access add
+ pxctl storage-policy access add
 ```
 
 ```text
-pxctl stp access remove
+pxctl storage-policy access remove
 ```
 
 ```text
-pxctl stp access show
+pxctl storage-policy access show
 ```
 
 ```text
-pxctl stp access update
+pxctl storage-policy access update
 ```
 
 ### Storage policy access types
@@ -599,15 +593,15 @@ When adding or updating storage policy ACLs, you can provide the following acces
 Let's look at a few simple examples:
 
 ```text
-pxctl stp access add devpol --group group1:w
+pxctl storage-policy access add devpol --group group1:w
 ```
 
 ```text
-pxctl stp access add devpol --collaborator collaborator1:a
+pxctl storage-policy access add devpol --collaborator collaborator1:a
 ```
 
 ```text
-pxctl stp access add devpol --collaborator collaborator2:r
+pxctl storage-policy access add devpol --collaborator collaborator2:r
 ```
 
 Here's what will happen once the above commands get executed:
@@ -623,33 +617,33 @@ The update subcommand for storage policies will set the ACLs for that given stor
 For example, you can update a storage policy to be owned by a single owner named `user1`:
 
 ```text
-pxctl stp access update devpol --owner user1
+pxctl storage-policy access update devpol --owner user1
 ```
 
 Or, you can provide a series of collaborators with access to that storage-policy:
 
 ```text
-pxctl stp access update devpol --collaborators user1,user2,user3
+pxctl storage-policy access update devpol --collaborators user1,user2,user3
 ```
 
 Lastly, you can update a storage-policy to be accessible by a series of groups:
 
 ```text
-pxctl stp access update devpol --groups group1,group2
+pxctl storage-policy access update devpol --groups group1,group2
 ```
 
 {{<info>}}
 This command will update all ACLs for a storage-policy. That is if you have given access to a series of groups, but do not provide the same groups the next update, those groups will no longer have access.
 {{</info>}}
 
-To add/remove single groups/collaborators to have access, try using `pxctl stp access add/remove`.
+To add/remove single groups/collaborators to have access, try using `pxctl storage-policy access add/remove`.
 
 ### Storage policy access show
 
-To see the ACLs for a given storage-policy, you can use `pxctl stp access show` as follows:
+To see the ACLs for a given storage-policy, you can use `pxctl storage-policy access show` as follows:
 
 ```text
-pxctl stp access show devpol
+pxctl storage-policy access show devpol
 ```
 
 ```output
@@ -667,11 +661,11 @@ Ownership:
 To remove or add a single collaborator or group access, you can do so with:
 
  ```text
- pxctl stp access add devpol --collaborator user:w
+ pxctl storage-policy access add devpol --collaborator user:w
  ```
 
  or
 
  ```text
- pxctl stp access remove devpol --group group1
+ pxctl storage-policy access remove devpol --group group1
  ```

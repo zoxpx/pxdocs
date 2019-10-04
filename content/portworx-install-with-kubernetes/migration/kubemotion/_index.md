@@ -191,7 +191,7 @@ As an example, say you want to migrate a 1 TB volume. If so, you would need to u
 
 
 ```text
-pxctl v update -s 1005 ObjectstoreVolume
+pxctl volume update --size 1005 ObjectstoreVolume
 ```
 
 {{<info>}}

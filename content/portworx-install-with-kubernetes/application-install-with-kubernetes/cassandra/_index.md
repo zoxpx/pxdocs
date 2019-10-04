@@ -203,7 +203,7 @@ cassandra-0   1/1       Running   0          1m
 cassandra-1   1/1       Running   0          1m
 cassandra-2   0/1       Running   0          47s
 
-/opt/pwx/bin/pxctl v l
+/opt/pwx/bin/pxctl volume list
 
 ID                      NAME                                            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 651254593135168442      pvc-49e8caf6-735d-11e7-9d23-42010a8e0002        1 GiB   2       no      no              LOW             0       up - attached on 10.142.0.3
@@ -238,7 +238,7 @@ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.na
 Verify that the portworx volume has 2 replicas created:
 
 ```text
-/opt/pwx/bin/pxctl v i 651254593135168442 (This volume is up and attached to k8s-0)
+/opt/pwx/bin/pxctl volume inspect 651254593135168442 (This volume is up and attached to k8s-0)
 Volume  :  651254593135168442
         Name                     :  pvc-49e8caf6-735d-11e7-9d23-42010a8e0002
         Size                     :  1.0 GiB

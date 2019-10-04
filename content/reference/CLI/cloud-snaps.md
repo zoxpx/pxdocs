@@ -90,7 +90,7 @@ Aliases:
   create, c
 
 Examples:
-/opt/pwx/bin/pxctl cred create [flags] <name>
+/opt/pwx/bin/pxctl credentials create [flags] <name>
 
 Flags:
       --s3-disable-ssl
@@ -171,7 +171,7 @@ createCred: error validating credential during create: SecondLevelDomainForbidde
 In this case, you should specify the `--disable-path-style` parameter while creating credentials as follows:
 
 ```text
-pxctl cred create mycreds --provider=s3 --s3-disable-ssl --s3-region=us-east-1 --s3-access-key=<S3-ACCESS_KEY> --s3-secret-key=<S3-SECRET_KEY> --s3-endpoint=mys3-enpoint.com --disable-path-style --bucket=mybucket 
+pxctl credentials create mycreds --provider=s3 --s3-disable-ssl --s3-region=us-east-1 --s3-access-key=<S3-ACCESS_KEY> --s3-secret-key=<S3-SECRET_KEY> --s3-endpoint=mys3-enpoint.com --disable-path-style --bucket=mybucket 
 ```
 
 ```output
@@ -380,7 +380,7 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  You could also check the status of a particular job, by passing the `task-id` returned upon the successful execution of the `pxctl cloudsnap backup` command:
 
  ```text
- pxctl cloudsnap status -n 3f4f0a67-e12a-4d35-81ad-985657757352
+ pxctl cloudsnap status --name 3f4f0a67-e12a-4d35-81ad-985657757352
  ```
 
  ```output
@@ -445,7 +445,7 @@ Global Flags:
 The below command  takes a group cloud backup of volumes _vol1_ and _vol2_:
 
 ```text
-pxctl cloudsnap backup-group  -v vol1,vol2
+pxctl cloudsnap backup-group --volume_ids vol1,vol2
 ```
 
 ```output
@@ -455,7 +455,7 @@ Group Cloudsnap backup started successfully with groupID:a1c8ba67-90e1-4c58-acbe
 Then, you can grab the `groupID` from above and use it to check the status of the group cloud snapshot. The following command will show the status of each cloud snapshot in the group:
 
 ```text
-pxctl cs status -n a1c8ba67-90e1-4c58-acbe-8eaca61a02ae
+pxctl cloudsnap status --name a1c8ba67-90e1-4c58-acbe-8eaca61a02ae
 ```
 
 ```output
@@ -467,7 +467,7 @@ NAME                                    SOURCEVOLUME                            
 You can also take a group cloud backup by selecting the volumes based on their labels. In the example below, we have 2 volumes with the label *app=mysql*:
 
 ```text
- pxctl volume list -l app=mysql
+ pxctl volume list --label app=mysql
 ```
 
 ```output
@@ -585,7 +585,7 @@ NewVol                        56706279008755778        2e4d4b67-95d7-481e-aec5-1
 Next, let's pick one of these backups and have `pxctl` restore it:
 
 ```text
-pxctl cloudsnap restore -s 2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463
+pxctl cloudsnap restore --snap 2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463
 ```
 
 ```output

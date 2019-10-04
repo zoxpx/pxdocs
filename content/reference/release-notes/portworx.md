@@ -33,7 +33,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 | PWX-9727 | With 2.2, Portworx raises an alert every time a pool is resized. |
 | PWX-9481 | Additional `State` column for the `pxctl clouddrive list` and `pxctl clouddrive inspect` commands makes it easier to see the state of a particular drive. |
 | PWX-8951 | The `pxctl` command-line utility now allows users to update the credentials and the cloudsnap schedule for a volume. |
-| PWX-9976 | With 2.2, users can update a node's CloudDriveSet labels by running the `pxctl cd update-labels --nodeid <node-id>` command. This is useful for when the `px/metadata-node` label must be set to `true` on a node which is part of an operational cluster. |
+| PWX-9976 | With 2.2, users can update a node's CloudDriveSet labels by running the `pxctl clouddrive update-labels --nodeid <node-id>` command. This is useful for when the `px/metadata-node` label must be set to `true` on a node which is part of an operational cluster. |
 | PWX-8534 | The `pxctl cloudsnap list` command provides pagination and the users can now specify filters for listing only certain types of backups. By default, migration-related backups are not displayed. |
 
 ### Fixes
@@ -68,7 +68,7 @@ Portworx is aware of the following issues, check future release notes for fixes 
 |----|----|----|
 | PWX-10049 | CSI: Due to an issue Kubernetes 1.13, if the Kubelet or Portworx goes offline unexpectedly on a node where a volume is attached, the Kubelet will leave orphaned pod directories under `/var/lib/kubelet/pods/*`. The kubelet logs will report these errors every 2 seconds unless this directory is manually cleaned up. | Move or delete the orphaned pod's directory to stop these logs from showing up. |
 | PWX-10057 | CSI: In Kubernetes 1.14 with the Portworx CSI driver, unmount may fail intermittently if a volume is attached to a node where PX is down. | If unmount fails, retry once Portworx is back online. |
-| PWX-10056 | PX-Security: With security enabled, the `pxctl cloudmigrate status` command returns a blank result even there is cloud migration going on. | Use the `pxctl cm status -t <your_cloud_migration_task_ID>` command to view the migration status. |
+| PWX-10056 | PX-Security: With security enabled, the `pxctl cloudmigrate status` command returns a blank result even there is cloud migration going on. | Use the `pxctl cloudmigrate status --task_id <your_cloud_migration_task_ID>` command to view the migration status. |
 | PWX-8421 | Setting collaborator access on a snapshot using `pxctl` may return an error. | `pxctl` properly updates collaborator access, despite returning an error. |
 
 ## 2.1.5
@@ -459,7 +459,7 @@ April 5, 2019
 * PWX-8451 - Block adding metadata device when running with internal kvdb
 * PWX-8345 - Node wipe and upgrade doesn't work if portworx is installed in a namespace other than kube-system
 * PWX-8045 - Cloudmigrate fails if credentials use a custom bucket name
-* PWX-7891 - pxctl service nw --all failed to delete multi-path devices
+* PWX-7891 - pxctl service node-wipe --all failed to delete multi-path devices
 * PWX-8261 - Allow fresh install of PX on Linux Kernel version 4.9.0-7-amd64 and 4.9.0-8-amd64  
 
 ## 2.0.3.2
@@ -603,7 +603,7 @@ December 20, 2018
 * PWX-7225 - AMI based ASG install does not pick up user config
 * PWX-7097 - `pxctl service kvdb` should display correct cluster status after nodes are decommissioned
 * PWX-7124 - Volume migration fails when the volume has an attached snapshot policy
-* PWX-7101 - Enable task ID-based sorting for `pxctl cm` commands
+* PWX-7101 - Enable task ID-based sorting for `pxctl cloudmigrate` commands
 * PWX-7121 - Creating a paired cluster results in core files in the destination cluster
 * PWX-7110 - Delete paired cluster credentials when the cluster pair is deleted
 * PWX-7031 - Cluster migration restore status does not reflect the cloudsnap status when cloudsnap has failed
@@ -881,7 +881,7 @@ Important note: Consul integration with 1.5.0 has a bug which results in PX quer
  * PWX-5800 - In AWS Autoscaling mode, PX nodes with no storage should always try to attach available drives on restart
  * PWX-5827 - Allow adding cloud drives using pxctl service drive add commands
  * PWX-5915 - Add PX-DO-NOT-DELETE prefix to all cloud drive names
- * PWX-6117 - Fix `pxctl cloudsnap s --local` command failing to execute
+ * PWX-6117 - Fix `pxctl cloudsnap status --local` command failing to execute
  * PWX-5919 - Improve node decommission handling for volumes that are not in quorum
  * PWX-5824 - Improve geo variable handling for kubernetes and DC/OS
  * PWX-5902 - Support SuSE CaaS platform
@@ -1362,7 +1362,7 @@ October 31, 2017
 * PWX-3448 When Portworx statistics are exported, they include the volume ID instead of the volume name.
 * PWX-3472 When snapshots are triggered on a large number of volumes at the same time, the snap operation fails.
 * PWX-3528 Volume create option parsing isn’t unified across Kubernetes, Docker, and pxctl.
-* PWX-3544 Improvements to PX Diagnostics - REST API to retrieve and upload diagnostics for a node or cluster. Diagnostics run using the REST API includes vmstat output and the output of pxctl cluster list and pxctl -j volume list. The diagnostics also include netstat -s before the node went down.
+* PWX-3544 Improvements to PX Diagnostics - REST API to retrieve and upload diagnostics for a node or cluster. Diagnostics run using the REST API includes vmstat output and the output of pxctl cluster list and pxctl --json volume list. The diagnostics also include netstat -s before the node went down.
 * PWX-3558 px-storage dumps core while running an HA increase on multiple volumes during stress.
 * PWX-3577 When Portworx is running in a container environment, it should allow mounts on only those directories which are bind-mounted. Otherwise, Portworx hangs during a docker stop.
 * PWX-3585 If Portworx stops before a container that’s using its volume stops, the container might get stuck in the D state \(I/O in kernel\). As a result, ‘systemctl stop docker’ takes 10 minutes as does system shutdown. The default PXD\_TIMEOUT to error out IOs is 10 minutes, but should be configurable.
