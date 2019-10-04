@@ -27,7 +27,7 @@ Run **"docker restart px-enterprise"**.
 This restarts the Portworx fabric on a given node.
 
 ### Exit Maintenance Mode
-Run ``pxctl service maintenance --exit``.
+Run `pxctl service maintenance --exit`.
 This puts Portworx back in to "Operational" state for a given node.
 
 ### Drive management example

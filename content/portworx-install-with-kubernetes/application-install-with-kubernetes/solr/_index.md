@@ -284,7 +284,7 @@ zk       3/3     6h17m
 ```
 Observe that volumes are bound to zookeeper pods.
 ```text
-pxctl v i pvc-492cc607-db62-11e9-a83a-000c29886e3e 
+pxctl volume inspect pvc-492cc607-db62-11e9-a83a-000c29886e3e 
 ```
 ```output
 Volume	:  534644031852659169
@@ -552,7 +552,7 @@ volsolr-solr-0         Bound         pvc-2d10ff4f-db6c-11e9-a83a-000c29886e3e   
 volsolr-solr-1         Bound         pvc-506f787d-db6c-11e9-a83a-000c29886e3e   32Gi       RWO            portworx-sc    5h13m
 ```
 ```text
-pxctl v l
+pxctl volume list
 ```
 ```output
 ID			NAME						SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS			SNAP-ENABLED	
@@ -563,7 +563,7 @@ ID			NAME						SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS			SNAP-ENABLED
 143480503226632164	pvc-6dca0c3b-db62-11e9-a83a-000c29886e3e	2 GiB	2	no	no		LOW		up - attached on 70.0.87.82	no
 ```
 ```text
-pxctl v i pvc-2d10ff4f-db6c-11e9-a83a-000c29886e3e 
+pxctl volume inspect pvc-2d10ff4f-db6c-11e9-a83a-000c29886e3e 
 ```
 ```output
 Volume	:  865481696383214454

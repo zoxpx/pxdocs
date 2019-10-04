@@ -47,10 +47,10 @@ You can use the following commands to check if caching is enabled:
 		Total Capacity	:  384 GiB
 	```
 
-2. Run the `pxctl sv pool cache status` command with the id of your storage pool as a parameter:
+2. Run the `pxctl service pool cache status` command with the id of your storage pool as a parameter:
 
 	```text
-	pxctl sv pool cache status 0
+	pxctl service pool cache status 0
 	```
 
 	```output
@@ -76,7 +76,7 @@ You can use the following commands to check if caching is enabled:
 1. Enter maintenance mode:
 
 	```text
-	pxctl service maintenance -e
+	pxctl service maintenance --enter
 	```
 
 	```output
@@ -116,17 +116,17 @@ You can use the following commands to check if caching is enabled:
 4. Exit maintenance mode:
 
 	```text
-	pxctl service maintenance -x
+	pxctl service maintenance --exit
 	```
 
 	```output
 	Exiting Maintenance mode...
 	```
 
-5. At this point, you can run the `pxctl sv pool cache status` command to see if caching is disabled:
+5. At this point, you can run the `pxctl service pool cache status` command to see if caching is disabled:
 
 	```text
-	pxctl sv pool cache status 0
+	pxctl service pool cache status 0
 	```
 
 	```output

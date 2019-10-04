@@ -77,7 +77,7 @@ Pass the drives as parameters to the `px-runc` installer. The following example 
 
 <!-- Hiding currently unsupported method:
 
-2. Run the installer with the `-T lmv` and, at a later point, specify the drives you want to use for caching by running the `pxctl sv drive add` . Refer to the [Add caching drive](/concepts/pool-caching/add-caching-drive) page for more details.
+2. Run the installer with the `-T lmv` and, at a later point, specify the drives you want to use for caching by running the `pxctl service drive add` . Refer to the [Add caching drive](/concepts/pool-caching/add-caching-drive) page for more details.
 
 Support may be added and documented later -->
 
