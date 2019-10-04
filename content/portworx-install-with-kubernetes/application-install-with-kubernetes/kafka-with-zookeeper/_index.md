@@ -252,7 +252,7 @@ kubectl get sts
 NAME      DESIRED   CURRENT   AGE
 zk        3         3         1d
 
-/opt/pwx/bin/pxctl v i pvc-b79e96e9-7b79-11e7-a940-42010a8c0002
+/opt/pwx/bin/pxctl volume inspect pvc-b79e96e9-7b79-11e7-a940-42010a8c0002
 
 Volume  :  816480848884203913
         Name                     :  pvc-b79e96e9-7b79-11e7-a940-42010a8c0002
@@ -587,7 +587,7 @@ data-kafka-0   Bound     pvc-c405b033-7c4b-11e7-a940-42010a8c0002   3Gi        R
 data-kafka-1   Bound     pvc-cc70447a-7c4b-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc-rep2   57s
 data-kafka-2   Bound     pvc-d2388861-7c4b-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc-rep2   48s
 
-/opt/pwx/bin/pxctl v l
+/opt/pwx/bin/pxctl volume list
 
 ID                      NAME                                            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 523341158152507227      pvc-0e7a636d-7b7b-11e7-a940-42010a8c0002        3 GiB   1       no      no              LOW             0       up - attached on 10.140.0.4
@@ -597,7 +597,7 @@ ID                      NAME                                            SIZE    
 360663112422496357      pvc-d2388861-7c4b-11e7-a940-42010a8c0002        3 GiB   2       no      no              LOW             0       up - attached on 10.140.0.4
 168733173797215691      pvc-faaedef8-7b7a-11e7-a940-42010a8c0002        3 GiB   1       no      no              LOW             0       up - attached on 10.140.0.3
 
-/opt/pwx/bin/pxctl v i pvc-c405b033-7c4b-11e7-a940-42010a8c0002
+/opt/pwx/bin/pxctl volume inspect pvc-c405b033-7c4b-11e7-a940-42010a8c0002
 
 Volume  :  262949240358217536
         Name                     :  pvc-c405b033-7c4b-11e7-a940-42010a8c0002
@@ -689,7 +689,7 @@ If you did use the [Terraform scripts](https://github.com/portworx/terraporx) to
 Portworx Cluster before scaling the kubernetes nodes.
 
 ```text
-/opt/pwx/bin/pxctl c l
+/opt/pwx/bin/pxctl cluster list
 Cluster ID: px-kafka-cluster
 Cluster UUID: 99c0fa42-03f5-4d05-a2fe-52d914ff39d2
 Status: OK
@@ -739,7 +739,7 @@ Global Storage Pool
         Total Used      :  2.1 GiB
         Total Capacity  :  40 GiB
 
-/opt/pwx/bin/pxctl c l
+/opt/pwx/bin/pxctl cluster list
 Cluster ID: px-kafka-cluster
 Cluster UUID: 99c0fa42-03f5-4d05-a2fe-52d914ff39d2
 Status: OK
@@ -872,7 +872,7 @@ k8s-master   Ready                      2d        v1.7.0
 kubectl get pvc -n kafka | grep data-kafka-1
 data-kafka-1   Bound     pvc-cc70447a-7c4b-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc-rep2   22h
 
-/opt/pwx/bin/pxctl v l | grep pvc-cc70447a-7c4b-11e7-a940-42010a8c0002
+/opt/pwx/bin/pxctl volume list | grep pvc-cc70447a-7c4b-11e7-a940-42010a8c0002
 733731201475618092      pvc-cc70447a-7c4b-11e7-a940-42010a8c0002        3 GiB   2       no      no              LOW             0       up - attached on 10.140.0.5
 
 

@@ -15,7 +15,7 @@ Before you can configure a storage pool's cache, pool caching must be **disabled
 1. Enter maintenance mode:
 
     ```text
-    pxctl service maintenance -e
+    pxctl service maintenance --enter
     ```
 
     ```output
@@ -84,7 +84,7 @@ Before you can configure a storage pool's cache, pool caching must be **disabled
 4. Exit maintenance mode:
 
     ```text
-    pxctl service maintenance -x
+    pxctl service maintenance --exit
     ```
 
     ```output

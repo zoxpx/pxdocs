@@ -42,7 +42,7 @@ You can see information about volumes that have a replica on a given node. This 
 Enter the following `pxctl volume list` command, specifying your own node ID, to list all volumes with a replica on that node:
 
 ```text
-pxctl -j volume list | jq '.[] | select(.replica_sets[].nodes | tostring | contains("598b4c37-459f-45f6-9fbe-14ea0fdd31df"))'
+pxctl --json volume list | jq '.[] | select(.replica_sets[].nodes | tostring | contains("598b4c37-459f-45f6-9fbe-14ea0fdd31df"))'
 ```
 ```output
 {
@@ -137,7 +137,7 @@ Consider the following scenario: you have a new company policy that no users sho
 Enter the following `pxctl volume list` command, specifying your own node ID, to list all volumes attached to that node:
 
 ```text
-pxctl -j v l | jq '.[] | select(.spec.ha_level == "1") | .id '
+pxctl --json volume list | jq '.[] | select(.spec.ha_level == "1") | .id '
 ```
 ```output
 "691032050799382541"
@@ -155,7 +155,7 @@ Consider the following scenario: your cluster, containing 2 nodes, experiences a
 Enter the following `pxctl volume list` command, specifying your own node ID, to list all volumes attached to that node with a running ha-increase operation:
 
 ```text
-pxctl -j v l | jq '.[] | select(.runtime_state[].runtime_state | select(.ReplNewNodeMid == "9a58c096-5085-4e9f-8094-8f341ebaab7a")) '
+pxctl --json volume list | jq '.[] | select(.runtime_state[].runtime_state | select(.ReplNewNodeMid == "9a58c096-5085-4e9f-8094-8f341ebaab7a")) '
 ```
 ```output
 {
@@ -247,7 +247,7 @@ pxctl -j v l | jq '.[] | select(.runtime_state[].runtime_state | select(.ReplNew
   "error": "",
   "fs_resize_required": false
 }
-root@70-0-39-241:/home/ub# /opt/pwx/bin/pxctl v i x1
+root@70-0-39-241:/home/ub# /opt/pwx/bin/pxctl volume inspect x1
 Volume	:  313310790209155406
 	Name            	 :  x1
 	Size            	 :  1.0 GiB
@@ -281,7 +281,7 @@ In many clusters, different nodes have pools with a unique collection of drive t
 Enter the following `pxctl cluster provision-status` command, specifying your own node ID, to list all pools using SSDs in the cluster:
 
 ```text
-pxctl -j cluster provision-status | jq '.provisionInfo | to_entries | .[] | select(.value.Provision[].Pool.labels.ssd == "true")'
+pxctl --json cluster provision-status | jq '.provisionInfo | to_entries | .[] | select(.value.Provision[].Pool.labels.ssd == "true")'
 ```
 
 In this example, the node contains a single pool with SSD storage.

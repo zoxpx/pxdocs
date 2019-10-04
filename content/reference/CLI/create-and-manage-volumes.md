@@ -398,10 +398,10 @@ Volume	:  970758537931791410
 You can also inspect multiple volumes in one command.
 {{</info>}}
 
-To inspect the volume in `json` format, run `pxctl volume inspect` with the `-j` flag:
+To inspect the volume in `json` format, run `pxctl volume inspect` with the `--json` flag:
 
 ```text
-pxctl -j volume inspect 486256711004992211
+pxctl --json volume inspect 486256711004992211
 ```
 
 ```output
@@ -492,10 +492,6 @@ pxctl -j volume inspect 486256711004992211
  "error": ""
 }]
 ```
-
-{{<info>}}
-The above command can be abbreviated as `pxctl -j volume inspect 486256711004992211`
-{{</info>}}
 
 ## Listing volumes
 

@@ -17,7 +17,7 @@ Perform the following steps to add a caching drive to a storage pool:
 1. Enter maintenance mode:
 
     ```text
-    pxctl service maintenance -e
+    pxctl service maintenance --enter
     ```
 
     ```output
@@ -26,30 +26,30 @@ Perform the following steps to add a caching drive to a storage pool:
     Entering Maintenance mode...
     ```
 
-2. Enter the `pxctl sv drive add` command, specifying:
+2. Enter the `pxctl service drive add` command, specifying:
 
-  * The `-d` option with the `<drive_path>` of your caching drive
+  * The `--drive` option with the `<drive_path>` of your caching drive
   * The `--cache` option with the `<pool_id>` of the pool you want to add the caching drive to
 
-    `pxctl sv drive add -d <drive_path> --cache <pool_id>`
+    `pxctl service drive add --drive <drive_path> --cache <pool_id>`
 
     The following example adds a caching drive at the `/dev/sdc` path to a pool with an ID of `0`:
 
     ```text
-    pxctl sv drive add -d /dev/sdc --cache 0
+    pxctl service drive add --drive /dev/sdc --cache 0
     ```
 
-3. Adding a drive is a long-running operation, and Portworx won't exit from the maintenance mode while the operation is still running. Therefore, you must verify that the drive has been added successfully by entering the `pxctl sv drive add` command with the following parameters:
+3. Adding a drive is a long-running operation, and Portworx won't exit from the maintenance mode while the operation is still running. Therefore, you must verify that the drive has been added successfully by entering the `pxctl service drive add` command with the following parameters:
 
-  * The `-d` option with the `<drive_path>` of your caching drive
+  * The `--drive` option with the `<drive_path>` of your caching drive
   * The `--cache` option with the `<pool_id>` of the pool you want to verify
-  * The `-o` option with the `status` value
+  * The `--operation` option with the `status` value
 
-    `pxctl sv drive add -d <drive_path> --cache <pool_id> -o status`
+    `pxctl service drive add --drive <drive_path> --cache <pool_id> --operation status`
 
     The following example verifies that a caching drive `/dev/sdc` has been added to pool `0`:
     ```terminal
-    pxctl sv drive add -d /dev/sdc --cache 0 -o status
+    pxctl service drive add --drive /dev/sdc --cache 0 --operation status
     ```
     <!--
       Need sample output
@@ -58,7 +58,7 @@ Perform the following steps to add a caching drive to a storage pool:
 4. Exit maintenance mode:
 
     ```text
-    pxctl service maintenance -x
+    pxctl service maintenance --exit
     ```
 
     ```output
