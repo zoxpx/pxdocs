@@ -100,11 +100,11 @@ When the last elasticsearch component with ID `portworx-elastic.XXXX` that is th
 The PX volumes for all elasticsearch task components are automatically created, and you can check that from one of the mesos private agent node
 
 ```text
-dcos node ssh --master-proxy --mesos-id=41474f9b-6b81-44ba-ad2c-184f71efbb26-S1 '/opt/pwx/bin/pxctl v l'
+dcos node ssh --master-proxy --mesos-id=41474f9b-6b81-44ba-ad2c-184f71efbb26-S1 '/opt/pwx/bin/pxctl volume list'
 ```
 
 ```output
-  Running `ssh -A -t core@34.203.197.47 ssh -A -t core@10.0.0.236 /opt/pwx/bin/pxctl v l`
+  Running `ssh -A -t core@34.203.197.47 ssh -A -t core@10.0.0.236 /opt/pwx/bin/pxctl volume list`
   ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
   471143287909897714      CoordinatorNodeVolume-0 1 GiB   1       no      no              LOW             0       up - attached on 10.0.0.236
   473886186773881112      DataNodeVolume-0        10 GiB  1       no      no              LOW             0       up - attached on 10.0.2.96

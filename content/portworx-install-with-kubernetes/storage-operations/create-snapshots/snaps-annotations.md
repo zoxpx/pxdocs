@@ -203,7 +203,7 @@ Bye
 First use pxctl volume list to see what volume you want to snapshot
 
 ```text
-bin/pxctl v l
+bin/pxctl volume list
 ```
 
 ```output

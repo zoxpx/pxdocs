@@ -233,7 +233,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
     ```
 
     ```text
-    pxctl v l
+    pxctl volume list
     ```
 
     ```output

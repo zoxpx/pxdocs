@@ -62,10 +62,10 @@ Use "pxctl [command] --help" for more information about a command.
 As seen above, `pxctl` provides the capability to perform fine-grained control of the PX resources cluster-wide. Also, it lets the user manage volumes, snapshots, cluster resources, hosts in the cluster and software upgrade in the cluster.
 {{</info>}}
 
-In addition, every command takes in a `-j` which converts the output to machine parsable `JSON` format. You can do something like the following to save the the output in `JSON` format:
+In addition, every command takes in a `--json` which converts the output to machine parsable `JSON` format. You can do something like the following to save the the output in `JSON` format:
 
 ```text
-pxctl status -j > status.json
+pxctl status --json > status.json
 ```
 
 In most production deployments, you will provision volumes directly using _Docker_ or your scheduler \(such as a _Kubernetes_ pod spec\). However, `pxctl` also lets you directly provision and manage storage. In addition, `pxctl` has a rich set of cluster-wide management features which are explained in this document.
@@ -87,7 +87,7 @@ Let's look at some simple commands.
 Here's how to find out the current version:
 
 ```text
-pxctl -v
+pxctl --version
 ```
 
 ```output
