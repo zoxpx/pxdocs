@@ -682,7 +682,7 @@ green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          0            0   
 kubectl exec -it elasticsearch-master-0 curl -- -XPUT 'http://elasticsearch.default.svc:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
 {
 "name": "Daenerys Targaryen"
-}
+}'
 ```
 
 ```output
