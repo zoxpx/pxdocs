@@ -21,8 +21,8 @@ Create one or more shared datastore(s) or datastore cluster(s) which is dedicate
 
 ## Portworx installation
 
-1. Create a secret using [this template](#pks-px-vsphere-secret). Replace values replace values corresponding to your vSphere environment.
-2. Deploy the Portworx spec using [this template](#pks-px-spec). Replace values replace values corresponding to your vSphere environment.
+1. Create a secret using [this template](#secret-for-vsphere-credentials). Replace values replace values corresponding to your vSphere environment.
+2. Deploy the Portworx spec using [this template](#portworx-spec). Replace values replace values corresponding to your vSphere environment.
 
 Once you have the spec, proceed below.
 
