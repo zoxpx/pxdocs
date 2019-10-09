@@ -71,3 +71,7 @@ Common use cases for this would be:
 * Maintenance: Decommission a cluster in order to perform hardware-level upgrades.
 
 Portworx uses [STORK](https://github.com/libopenstorage/stork) for migration. The [Migration](/concepts/migration) page detailed documentation on this.
+
+## Related topics
+
+* [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/)
