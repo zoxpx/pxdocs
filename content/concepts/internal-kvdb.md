@@ -86,13 +86,13 @@ Only storage nodes are a part of internal kvdb cluster.
 
 ## Backup
 
-Portworx takes regular backup of its key value space and dumps it into a file on the host.
-These internal kvdb backups are taken every 2 minutes and are dumped under the `/var/cores` directory on all the nodes. At a time only 10 backups are kept. These backups are also kept inside the storage drive provided for internal kvdb.
+Portworx takes regular internal backups of its key-value space and dumps them into a file on the host.
+Portworx takes these internal KVDB backups every 2 minutes and places them into the `/var/lib/osd/kvdb_backup` directory on all nodes in your cluster. It also keeps a rolling count of 10 backups at a time within the internal KVDB storage drive. 
 
 A typical backup file will look like this
 
 ```text
-ls /var/cores/kvdb_backup
+ls /var/lib/osd/kvdb_backup
 ```
 
 ```output
@@ -121,7 +121,7 @@ A timestamp is associated with each internal kvdb backup that is taken. Choose t
 On the node where the latest backup exists, rename the backup file to `pwx_kvdb_disaster_recovery_golden.dump`.
 
 ```text
-cp /var/cores/kvdb_backup/pwx_kvdb_schedule_153664_2019-02-06T22:30:39-08:00.dump /var/cores/kvdb_backup/pwx_kvdb_disaster_recovery_golden.dump
+cp /var/lib/osd/kvdb_backup/pwx_kvdb_schedule_153664_2019-02-06T22:30:39-08:00.dump /var/lib/osd/kvdb_backup/pwx_kvdb_disaster_recovery_golden.dump
 ```
 
 ### Step 3: Restart Portworx
