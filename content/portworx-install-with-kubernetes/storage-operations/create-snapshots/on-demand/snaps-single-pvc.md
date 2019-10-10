@@ -101,8 +101,8 @@ To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/por
 
 ## Creating snapshots across namespaces
 
-* When creating snapshots, you can provide comma separated regexes with `stork/snapshot-restore-namespaces` annotation to specify which namespaces the snapshot can be restored to.
-* When creating PVC from snapshots, if a snapshot exists in another namespace, the snapshot namespace should be specified with `stork/snapshot-source-namespace` annotation.
+* When creating snapshots, you can provide comma separated regexes with `stork.libopenstorage.org/snapshot-restore-namespaces` annotation to specify which namespaces the snapshot can be restored to.
+* When creating PVC from snapshots, if a snapshot exists in another namespace, the snapshot namespace should be specified with `stork.libopenstorage.org/snapshot-source-namespace` annotation.
 
 Let's take an example where we have 2 namespaces _dev_ and _prod_. We will create a PVC and snapshot in the _dev_ namespace and then create a PVC in the _prod_ namespace from the snapshot.
 
@@ -159,7 +159,7 @@ metadata:
   name: mysql-snapshot
   namespace: dev
   annotations:
-    stork/snapshot-restore-namespaces: "prod"
+    stork.libopenstorage.org/snapshot-restore-namespaces: "prod"
 spec:
   persistentVolumeClaimName: mysql-data
 
@@ -175,7 +175,7 @@ metadata:
   namespace: prod
   annotations:
     snapshot.alpha.kubernetes.io/snapshot: mysql-snapshot
-    stork/snapshot-source-namespace: dev
+    stork.libopenstorage.org/snapshot-source-namespace: dev
 spec:
   accessModes:
      - ReadWriteOnce
