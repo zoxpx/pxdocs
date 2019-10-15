@@ -71,12 +71,14 @@ We need to Define the Environment Variables for PostgreSQL
 3. PGDATA \(Data Directory for PostgreSQL Database\)
 
 ```text
-
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
 spec:
+  selector:
+    matchLabels:
+      app: postgres
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -120,7 +122,6 @@ spec:
       - name: postgredb
         persistentVolumeClaim:
           claimName: postgres-data
-
 ```
 
 Now let’s deploy PostgreSQL using following commands:
