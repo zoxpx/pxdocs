@@ -6,7 +6,7 @@ metadata:
   namespace: kube-system
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: fluentd
@@ -25,7 +25,7 @@ rules:
 
 ---
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: fluentd
 roleRef:
@@ -38,7 +38,7 @@ subjects:
   namespace: kube-system
 - kind: ServiceAccount
   name: default
-  namespace: kube-system   
+  namespace: kube-system
 
 ---
 apiVersion: v1
@@ -81,20 +81,23 @@ data:
     </match>
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: fluentd
+  name: fluentd-logging
   namespace: kube-system
   labels:
-    k8s-app: fluentd-logging
+    k8s-app: fluentd
     version: v1
     kubernetes.io/cluster-service: "true"
 spec:
+  selector:
+    matchLabels:
+      name: fluentd-logging
   template:
     metadata:
       labels:
-        k8s-app: fluentd-logging
+        name: fluentd-logging
         version: v1
         kubernetes.io/cluster-service: "true"
     spec:

@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: es-master
@@ -6,6 +6,9 @@ metadata:
     component: elasticsearch
     role: master
 spec:
+  selector:
+    matchLabels:
+      component: elasticsearch
   replicas: 3
   template:
     metadata:
