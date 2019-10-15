@@ -105,11 +105,13 @@ If you do not wish to use annotations you can take a snapshot by providing the s
 ```text
 kind: PersistentVolumeClaim
 apiVersion: v1
-  metadata:
-    name: name.snap001-source.pvc001
-    annotations:
-      volume.beta.kubernetes.io/storage-class: px-sc
+metadata:
+  name: name.snap001-source.pvc001
+  annotations:
+    volume.beta.kubernetes.io/storage-class: px-sc
 spec:
+  accessModes:
+     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
@@ -129,6 +131,8 @@ metadata:
   annotations:
     volume.beta.kubernetes.io/storage-class: px-sc
 spec:
+  accessModes:
+     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi

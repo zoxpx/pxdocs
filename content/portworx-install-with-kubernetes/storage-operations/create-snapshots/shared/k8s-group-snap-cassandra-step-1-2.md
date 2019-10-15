@@ -31,11 +31,14 @@ spec:
 
 ---
 
-apiVersion: "apps/v1beta1"
+apiVersion: "apps/v1"
 kind: StatefulSet
 metadata:
   name: cassandra
 spec:
+  selector:
+    matchLabels:
+      app: cassandra
   serviceName: cassandra
   replicas: 3
   template:
