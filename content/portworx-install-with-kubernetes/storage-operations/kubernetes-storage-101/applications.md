@@ -22,8 +22,13 @@ Let's take an example.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: postgres-deployment
+  labels:
+    app: postgres
 spec:
+  selector:
+    matchLabels:
+      app: postgres
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -94,6 +99,9 @@ kind: StatefulSet
 metadata:
   name: cassandra
 spec:
+  selector:
+    matchLabels:
+      app: cassandra
   serviceName: cassandra
   replicas: 3
   template:
