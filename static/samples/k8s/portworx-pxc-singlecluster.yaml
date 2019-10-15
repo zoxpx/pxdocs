@@ -108,7 +108,7 @@ spec:
       port: 8099
       targetPort: 8099
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -118,6 +118,9 @@ metadata:
   name: stork
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+      name: stork
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -235,7 +238,7 @@ roleRef:
   name: stork-scheduler-role
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -245,6 +248,9 @@ metadata:
   name: stork-scheduler
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+      component: scheduler
   replicas: 3
   template:
     metadata:
@@ -384,7 +390,7 @@ roleRef:
   name: px-role
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: portworx
@@ -392,6 +398,9 @@ metadata:
   annotations:
     portworx.com/install-source: "http://localhost:8080/?kbver=1.11.3&b=true&c==${CLUSTER_ID}&stork=true&lh=true"
 spec:
+  selector:
+    matchLabels:
+      name: portworx
   minReadySeconds: 0
   updateStrategy:
     type: RollingUpdate
@@ -574,7 +583,7 @@ metadata:
   name: prometheus-operator
   namespace: kube-system
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -582,6 +591,9 @@ metadata:
   name: prometheus-operator
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+      k8s-app: prometheus-operator
   replicas: 1
   template:
     metadata:
@@ -6888,7 +6900,7 @@ spec:
   selector:
     app: grafana
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana
@@ -6896,6 +6908,9 @@ metadata:
   labels:
     app: grafana
 spec:
+  selector:
+    matchLabels:
+      app: grafana
   replicas: 1
   template:
     metadata:
@@ -6991,7 +7006,7 @@ spec:
   selector:
     tier: px-web-console
 ---
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: px-lighthouse
@@ -6999,6 +7014,9 @@ metadata:
   labels:
     tier: px-web-console
 spec:
+  selector:
+    matchLabels:
+      component: px-lighthouse
   strategy:
     rollingUpdate:
       maxSurge: 1
