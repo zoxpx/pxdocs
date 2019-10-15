@@ -25,6 +25,7 @@ If the need is to also enable the entire kubernetes cluster level logging, then 
 Create a file named ```fluentd-spec.yaml``` and apply the configuration using `kubectl`:
 
 ```text
+
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -33,7 +34,7 @@ metadata:
   namespace: kube-system
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: fluentd
@@ -52,7 +53,7 @@ rules:
 
 ---
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: fluentd
 roleRef:
@@ -105,7 +106,7 @@ data:
        num_threads 8
     </match>
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluentd
@@ -115,12 +116,16 @@ metadata:
     version: v1
     kubernetes.io/cluster-service: "true"
 spec:
+  selector:
+    matchLabels:
+      name: fluentd
   template:
     metadata:
       labels:
-        k8s-app: fluentd-logging
+        k8s-app: fluentd
         version: v1
         kubernetes.io/cluster-service: "true"
+        name: fluentd
     spec:
       serviceAccount: fluentd
       serviceAccountName: fluentd
