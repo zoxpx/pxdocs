@@ -71,7 +71,7 @@ metadata:
   name: prometheus-operator
   namespace: kube-system
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -79,6 +79,9 @@ metadata:
   name: prometheus-operator
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+      k8s-app: prometheus-operator
   replicas: 1
   template:
     metadata:
