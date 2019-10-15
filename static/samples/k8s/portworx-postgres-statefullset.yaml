@@ -21,13 +21,16 @@ spec:
     tier: frontend
   type: LoadBalancer
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
   labels:
     app: postgres
 spec:
+  selector:
+    matchLabels:
+      app: postgres
   serviceName: "postgres"
   replicas: 1
   template:
