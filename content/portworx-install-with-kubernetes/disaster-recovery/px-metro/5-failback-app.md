@@ -47,7 +47,7 @@ If you wish to use `kubectl` instead of `storkctl`, you can create a `ClusterDom
 Start by creating a new file named `clusterdomainupdate.yaml`. In this file, let's specify an object called a ClusterDomainUpdate and designate the cluster domain of the source cluster as active:
 
  ```text
- apiVersion: stork.libopenstorage.org/v1alpha1
+apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterDomainUpdate
 metadata:
  name: activate-us-east-1a
