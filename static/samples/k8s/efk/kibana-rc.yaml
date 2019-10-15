@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana
@@ -29,7 +29,7 @@ spec:
           value: 'false'
         - name: XPACK_REPORTING_ENABLED
           value: 'false'
-# Important that the IP address is changed to the co-ordinator node clusterIP. This will change for each setup. 
+# Important that the IP address is changed to the co-ordinator node clusterIP. This will change for each setup.
         - name: ELASTICSEARCH_URL
           value: 'http://10.105.105.41:9200'
         resources:
