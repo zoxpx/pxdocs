@@ -7,19 +7,17 @@ weight: 1
 
 The Portworx cluster configuration is specified by a Kubernetes CRD (CustomResourceDefinition) called StorageCluster. The StorageCluster object acts as the definition of the Portworx Cluster.
 
-The StorageCluster provides a Kubernetes native experience to manage a Portworx cluster just like any other application in Kubernetes. Simply creating
-or editing a StorageCluster object will result in the Operator creating or updating the Portworx cluster in the background.
+The `StorageCluster` object provides a Kubernetes native experience. You can manage your Portworx cluster just like any other application running on Kubernetes. That is, if you create or edit the `StorageCluster` object, the operator will create or edit the Portworx cluster in the background.
 
-It is recommended to use the [Portworx Spec Generator](https://install.portworx.com/2.1) to create a StorageCluster spec. The spec generator will
-walk you through different options which you select based on your environment to generate a StorageCluster spec.
+To generate a `StorageCluster` spec customized for your environment, point your browser to  [PX-Central](https://central.portworx.com), and click "Install and Run" to start the Portworx spec generator. Then, the wizard will walk you through all the necessary steps to create a `StorageCluster` spec customized for your environment.
 
-If you want to generate the StorageCluster spec manually, you can refer to the following [examples](#storagecluster-examples) and the [schema description](#storagecluster-schema) of StorageCluster.
+Note that using the Portworx spec generator is the recommended way of generating a `StorageCluster` spec. However, if you want to generate the `StorageCluster` spec manually, you can refer to the [StorageCluster Examples](#storagecluster-examples) and [StorageCluster Schema](#storagecluster-schema) sections.
 
 ## StorageCluster Examples
-Here are some sample Portworx configurations for reference. You can set various fields as per your
-environment and cluster requirements.
 
-- Portworx with Internal KVDB and all unused devices on the system
+This section provides a few examples of common Portworx configurations you can use for manually configuring your Portworx cluster. Update the default values in these files to match your environment.
+
+* Portworx with internal KVdb, configured to use all unused devices on the system.
 
 ```text
 apiVersion: core.libopenstorage.org/v1alpha1
@@ -35,7 +33,7 @@ spec:
     useAll: true
 ```
 
-- Portworx with external ETCD, with STORK and Lighthouse enabled.
+* Portworx with external ETCD, STORK, and Lighthouse.
 
 ```text
 apiVersion: core.libopenstorage.org/v1alpha1
@@ -61,7 +59,7 @@ spec:
     image: portworx/px-lighthouse:2.0.4
 ```
 
-- Portworx with update and delete strategies and placement rules
+* Portworx with update and delete strategies, and placement rules.
 
 ```text
 apiVersion: core.libopenstorage.org/v1alpha1
@@ -90,7 +88,7 @@ spec:
             operator: DoesNotExist
 ```
 
-- Portworx with custom image registry, network interfaces and misc options
+* Portworx with custom image registry, network interfaces, and miscellaneous options
 
 ```text
 apiVersion: core.libopenstorage.org/v1alpha1
@@ -116,173 +114,117 @@ spec:
 
 ## StorageCluster Schema
 
-##### `spec.image` (_string_)
-Specify the Portworx monitor image (Example: portworx/oci-monitor:2.1.2)
+This section explains the fields used to configure the `StorageCluster` object.
 
-##### `spec.imagePullPolicy` (_string_)
-Image pull policy for all the images deployed by the operator. Default: Always
+| Field | Description |Type| Default |
+| --- | --- | --- | --- |
+| spec.<br> image| Specifies the Portworx monitor image. | `string` | None |
+| spec.<br> imagePullPolicy | Specifies the image pull policy for all the images deployed by the operator. It can take one of the following values: `Always` or `IfNotPresent` | `string` | `Always` |
+| spec.<br>imagePullSecret | If Portworx pulls images from a secure repository, you can use this field to pass it the name of the secret. Note that the secret should be in the same namespace as the `StorageCluster` object. | `string` | None |
+| spec.<br>customImageRegistry | The custom container registry server Portworx uses to fetch the Docker images. You may include the repository as well. | `string` | None |
+| spec.<br>secretsProvider | The name of the secrets provider Portworx uses to store your credentials. To use features like cloud snapshots or volume encryption, you must configure a secret store provider. Refer to the [Secret store management page](/key-management/) page for more details. | `string` |  None |
+| spec.<br>runtimeOptions | A collection of key-value pairs that overwrites the runtime options. | `map[string]string` | None |
+| spec.<br>featureGates | A collection of key-value pairs specifying which Portworx features should be enabled or disabled. [^1] | `map[string]string` | None |
+| spec.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826). Similar to how environment variables are provided in Kubernetes, you can directly provide values to Portworx or import them from a source like a `Secret`, `ConfigMap`, etc. | `object array` | None |
 
-##### `spec.imagePullSecret` (_string_)
-Image pull secret is the name of the secret in the same namespace as the StorageCluster. This is used
-for pulling images from a secure registry.
+[^1]: As an example, here's how you can enable the `CSI` feature.
+    ```text
+    spec:
+      featureGates:
+        CSI: "true"
+    ```
+    Please note that you can also use `CSI: "True"` or `CSI: "1"`.
 
-##### `spec.customImageRegistry` (_string_)
-Specify a custom container registry server that will be used to Docker images. You may include the
-repository as well (Example: myregistry.net:5443, myregistry.net/myrepository)
+### KVdb configuration
 
-##### `spec.secretsProvider` (_string_)
-Name of the secrets provider that Portworx will connect to for features like volume encryption, cloudsnap, etc. Default: k8s (Kubernetes secrets)
+This section explains the fields used to configure Portworx with a KVdb. Note that, if you don't specify the endpoints, the operator starts Portworx with the internal KVdb.
 
-##### `spec.runtimeOptions` (_map[string]string_)
-Runtime options is a map string keys and values used to overwrite Portworx runtime options.
-
-##### `spec.featureGates` (_map[string]string_)
-Feature gates is a map string key and values to enable/disable Portworx features.
-
-##### `spec.env[]` (_object array_)
-Env is a list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826).
-Just like how environment variables are provided in Kubernetes, you can directly give values
-or import from a source like Secret, ConfigMap, etc.
-
-
-### KVDB configuration
-This section contains all the details to configure the key-value database used by Portworx. If endpoints
-are not specified, the Operator starts Portworx with internal KVDB.
-
-##### `spec.kvdb.internal` (_boolean_)
-If you want to use Portworx's [internal kvdb](/concepts/internal-kvdb), you can set this option.
-
-##### `spec.kvdb.endpoints[]` (_string array_)
-If using external key-value database like ETCD, Consul, specify the endpoints to connect to it in this list.
-If the endpoints are specified, then `spec.kvdb.internal` is ignored and the external KVDB will be used.
-
-##### `spec.kvdb.authSecret` (_string_)
-KVDB Auth secret is the name of the secret in the same namespace as StorageCluster. This secret should have
-information needed to authenticate with the KVDB. It could username/password for basic authentication or
-certificate information or ACL token.
-
-- If using username/password for authentication the secret should have keys called `username` and `password`.
-- If using certificates for authentication the secret should have keys called `kvdb-ca.crt`, `kvdb.crt` and `kvdb.key` for CA certificate, certificate and corresponding certificate key respectively.
-- If using ACL token for authentication the secret should have key called `acl-token`.
-
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>kvdb.<br>internal | Specifies if Portworx starts with the [internal KVdb](/concepts/internal-kvdb). | `boolean` | `true` |
+| spec.<br>kvdb.endpoints[]<br> | A list of endpoints for your external key-value database like ETCD or Consul. This field takes precedence over the `spec.kvdb.internal` field. That is, if you specify the endpoints, Portworx ignores the `spec.kvdb.internal` field and it uses the external KVdb. | `string array` | None |
+| spec.<br>kvdb.<br>authSecret | Indicates the name of the secret Portworx uses to authenticate against your KVdb. The secret must be placed in the same namespace as the `StorageCluster` object. The secret should provide the following information: <br> -  The username and password stored under the `username` and `password` keys, if you're using a username/password authentication schema. <br> - The CA certificate stored under the `kvdb-ca.crt` key and the certificate key stored under the `kvdb.key`, if you're using certificates for authentication. <br> - The ACL token stored under the `acl-token` key, if you're using ACL tokens for authentication. | string | None |
 
 ### Storage configuration
-This section contains all the details to configure the storage for the Portworx cluster. If no devices are
-specified, the Operator starts Portworx with `spec.storage.useAll` set to true.
 
-##### `spec.storage.useAll` (_boolean_)
-This tells Portworx to use all available, unformatted, unpartioned devices. It will be ignored if
-`spec.storage.devices` is not empty.
+This section provides details about the fields used to configure the storage for your Portworx cluster. If you don't specify a device, the operator sets the `spec.storage.useAll` field to `true`.
 
-##### `spec.storage.useAllWithPartitions` (_boolean_)
-This tells Portworx to use all available unformatted devices. It will be ignored if
-`spec.storage.devices` is not empty.
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>storage.<br>useAll | If set to `true`, Portworx uses all available, unformatted, and unpartitioned devices. [^2] | `boolean` | `true` |
+| spec.<br>storage.<br>useAllWithPartitions | If  set to `true`, Portworx uses all the available and unformatted devices. [^2] | `boolean` |  `false` |
+| spec.<br>storage.<br>forceUseDisks | If set to `true`, Portworx uses a device even if there's a file system on it. Note that Portworx may wipe the drive before using it. | `boolean` | `false` |
+| spec.<br>storage.<br>devices[] | Specifies the list of devices Portworx should use. | `string array` | None |
+| spec.<br>storage.<br>journalDevice | Specifies the device Portworx uses for journaling. | `string` | None |
+| spec.<br>storage.<br>systemMetadataDevice | Indicates the device Portworx uses to store metadata. For better performance, specify a system metadata device when using Powrtworx with the internal KVdb. | `string` | None |
 
-##### `spec.storage.forceUseDisks` (_boolean_)
-This tells Portworx to use the devices even if there is file system present on it. Note that
-the __drives may be wiped__ before using.
-
-##### `spec.storage.devices[]` (_string array_)
-Devices is an array of devices that should be used by Portworx.
-
-##### `spec.storage.journalDevice` (_string_)
-Device that will be used for journaling by Portworx.
-
-##### `spec.storage.systemMetadataDevice` (_string_)
-Device that will be used for storing metadata by Portworx. It is recommended to have a system metadata
-device when using internal KVDB for better performance.
-
+[^2]: Note that Portworx ignores this filed if you specify the storage devices using the `spec.storage.devices` field.
 
 ### Cloud storage configuration
-This section contains all the details to configure the storage in cloud. This enables Portworx
-to manage cloud disks automatically for the user based on given specs. `spec.storage` takes precedence
-over this section. Make sure `spec.storage` is empty when specifying cloud storage.
 
-##### `spec.cloudStorage.deviceSpecs[]` (_string array_)
-Device specs is a list of storage device specs. A cloud disk will be created for every spec in the list.
+This section explains the fields used to configure Portworx with cloud storage. Once the cloud storage is configured, Portworx manages the cloud disks automatically based on the provided specs. Note that the `spec.storage` fields take precedence over the fields presented in this section. Make sure the `spec.storage` fields are empty when configuring Portworx with cloud storage.
 
-##### `spec.cloudStorage.journalDeviceSpec` (_string_)
-Device spec for device that will be used for journaling by Portworx.
-
-##### `spec.cloudStorage.systemMetadataDeviceSpec` (_string_)
-Device spec for device that will be used for storing metadata by Portworx. It is recommended to have
-a system metadata device when using internal KVDB for better performance.
-
-##### `spec.cloudStorage.maxStorageNodesPerZone` (_uint32_)
-Specify maximum number of storage nodes per zone. Portworx will not provision drives for additional
-nodes in the zone and start them as compute only nodes.
-
-##### `spec.cloudStorage.maxStorageNodes` (_uint32_)
-Specify maximum number of total storage nodes. Portworx will not provision drives for additional
-nodes in the cluster and start them as compute only nodes. It is recommended to use `maxStorageNodesPerZone`
-as a best practice.
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>cloudStorage.<br>deviceSpecs[] | A list of the specs for your cloud storage devices. Portworx creates a cloud disk for every device. | `string array` | None |
+| spec.<br>cloudStorage.<br>journalDeviceSpec | Specifies the cloud device Portworx uses for journaling. | `string` | None |
+| spec.<br>cloudStorage.<br>systemMetadataDeviceSpec | Indicates the cloud device Portworx uses for metadata. For performance, specify a system metadata device when using Portworx with the internal KVdb. | `string` | None |
+| spec.<br>cloudStorage.<br>maxStorageNodesPerZone | Indicates the maximum number of storage nodes per zone. If this number is reached, and a new node is added to the zone, Portworx doesn't provision drives for the new node. Instead, Portworx starts the node as a compute-only node. | `uint32` | None |
+| spec.<br>cloudStorage.<br>maxStorageNodes | Specifies the maximum number of storage nodes. If this number is reached, and a new node is added, Portworx doesn't provision drives for the new node. Instead, Portworx starts the node as a compute-only node. As a best practice, it is recommended to use the `maxStorageNodesPerZone` field. | `uint32` | None |
 
 ### Network configuration
-This section contains network information needed by Portworx. If nothing is specified, Portworx will
-auto detect and choose network interfaces.
 
-##### `spec.network.dataInterface` (_string_)
-Data interface allows users to override the auto selected network interace for data traffic.
+This section describes the fields used to configure the network settings. If these fields are not specified, Portworx auto-detects the network interfaces.
 
-##### `spec.network.mgmtInterface` (_string_)
-Management interface allows users to override the auto selected network interace for control plane traffic.
-
-
-### Placement Rules
-Placement lets your override where Portworx will be deployed. By default Portworx gets deployed on all worker
-nodes.
-
-##### `spec.placement.nodeAffinity` (_object_)
-[Kubernetes like node affinity](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L2692)
- to restrict Portworx on certain nodes.
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>network.<br>dataInterface | Specifies the network interface Portworx uses for data traffic. | `string` | None |
+| spec.<br>network.<br>mgmtInterface| Indicates the network interface Portworx uses for control plane traffic. | `string` | None |
 
 
-### Update Strategy
-Similar to Kubernetes DaemonSet, this allows you to specify a update strategy for Portworx updates.
+### Placement rules
 
-##### `spec.updateStrategy.type` (_object_)
-Type of update strategy to use. Currently it supports RollingUpdate and OnDelete. Default: RollingUpdate.
+You can use the placement rules to specify where Portworx should be deployed. By default, the operator deploys Portworx on all worker nodes.
 
-##### `spec.updateStrategy.rollingUpdate.maxUnavailable` (_intOrString_)
-Similar to Kubernetes rolling update strategy you can specify this section for rolling updates.
-The default value is 1 which means only one node will be down at a given point of time. You can
-specify a static number of percentage value. (Example: 3, 30%, etc)
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>placement.<br>nodeAffinity | Use this field to restrict Portwox on certain nodes. It works similarly to the [Kubernetes node affinity](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L2692) feature. | `object` | None |
 
 
-### Delete/Uninstall Strategy
-This section contains information on how to uninstall the Portworx cluster.
+### Update strategy
 
-##### `spec.deleteStrategy.type`
-Type of delete strategy to use. Deleting the Portworx StorageCluster object will trigger this delete
-strategy. By default there is no delete strategy, which means only the Kubernetes components deployed by
-the Operator will be removed leaving the Portworx systemd service running without disturbing the apps
-running on it. Currently there are two supported delete strategies:
+This section provides details on how to specify an update strategy.
 
-- Uninstall - Uninstall all Portworx components from the system leaving the devices and KVDB intact.
-- UninstallAndWIpe - Uninstall all Portworx components from the system and also wipe the devices and metadata from KVDB.
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>updateStrategy.<br>type | Indicates the update strategy. Currently, Portworx supports the following update strategies- `RollingUpdate` and `OnDelete`. | `object` | `RollingUpdate` |
+| spec.<br>updateStrategy.<br>rollingUpdate.<br>maxUnavailable | Similarly to how Kubernetes rolling update strategies work, this field specifies how many nodes can be down at any given time. Note that you can specify this as a number or percentage. | `int` or `string` | `1` |
 
+### Delete/Uninstall strategy
+
+This section provides details on how to specify an uninstall strategy for your Portworx cluster.
+
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>deleteStrategy.<br>type | Indicates what happens when the Portworx `StorageCluster` object is deleted. By default, there is no delete strategy, which means only the Kubernetes components deployed by the operator are removed.  The Portworx `systemd` service continues to run, and the Kubernetes applications using the Portworx volumes are not affected. Portworx supports the following delete strategies: <br> - `Uninstall` - Removes all Portworx components from the system and leaves the devices and KVdb intact. <br> - `UninstallAndWipe` - Removes all Portworx components from the system and wipes the devices and metadata from KVdb.  | `string`| None |
 
 ### Stork configuration
-This section contains information to enable and manage stork deployment through the Portworx Operator.
 
-##### `spec.stork.enabled` (_boolean_)
-You can enable/disable STORK by toggling this flag at any given time.
+This section describes the fields used to manage the Stork deployment through the Portworx operator.
 
-##### `spec.stork.image` (_string_)
-Specify the STORK image.
-
-##### `spec.stork.args` (_map[string]string_)
-A map of string keys and values to override the default STORK arguments or to add new arguments.
-
-##### `spec.stork.env[]` (_object array_)
-A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826) that need to be passed to STORK.
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>stork.<br>enabled | Enables or disables Stork at any given time. | `boolean` | `true` |
+| spec.<br>stork.<br>image | Specifies the Stork image. | `string` | None |
+| spec.<br>stork.<br>args | A collection of key-value pairs that overrides the default Stork arguments or adds new arguments. | `map[string]string` | None |
+| spec.<br>stork.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826) passed to Stork. | `object array` | None |
 
 
 ### Lighthouse configuration
-This section contains information to enable and manage Lighthouse deployment through the Portworx Operator.
 
-##### `spec.userInterface.enabled` (_boolean_)
-You can enable/disable Lighthouse by toggling this flag at any given time.
+This section provides details on how to deploy and manage Lighthouse.
 
-##### `spec.userInterface.image` (_string_)
-Specify the Lighthouse image.
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>userInterface.<br>enabled | Enables or disables Lighthouse at any given time. | boolean | `false` |
+| spec.<br>userInterface.<br>image | Specifies the Lighthouse image. | `string` | None |
