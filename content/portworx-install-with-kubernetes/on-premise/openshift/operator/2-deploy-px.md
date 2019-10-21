@@ -1,32 +1,36 @@
 ---
-title: 2. Deploy Portworx
+title: Deploy Portworx using the Operator
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
 description: Find out how to apply the spec for PX within a OpenShift cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 weight: 2
 ---
 
-The _Portworx_ Enterprise Operator takes a new custom Kubernetes resource called `StorageCluster` as input. The `StorageCluster` is
-a representation of your _Portworx_ cluster configuration. Once the `StorageCluster` object is created, the operator will deploy
-a Portworx cluster corresponding to the specification in the `StorageCluster` object. The operator will watch for changes on the
-`StorageCluster` and update your cluster according to the latest specifications.
+The Portworx Enterprise Operator takes a custom Kubernetes resource called `StorageCluster` as input. The `StorageCluster` is a representation of your Portworx cluster configuration. Once the `StorageCluster` object is created, the Operator will deploy a Portworx cluster corresponding to the specification in the `StorageCluster` object. The Operator will watch for changes on the `StorageCluster` and update your cluster according to the latest specifications.
 
-To know more details of the `StorageCluster` object and how operator manages changes, visit the [Portworx Operator page](/reference/crd/storage-cluster).
+For more information about the `StorageCluster` object and how the Operator manages changes, refer to the [StorageCluster](/reference/crd/storage-cluster) article.
 
-### Generate the specs
+## Install Portworx using the OpenShift console
 
-To install _Portworx_ with Openshift, you will first generate `StorageCluster` spec that you will deploy in your cluster.
-To generate the spec, click {{<iframe url="https://openshift4.install.portworx.com" text="Generating the Portworx cluster spec">}}
+To install Portworx with OpenShift, you will first generate `StorageCluster` spec that you will deploy in your cluster.
 
-- Under the _Portworx_ Operator, you can click on `Create New` to create a StorageCluster object.
+1. Generate the `StorageCluster` spec with the {{<iframe url="https://openshift4.install.portworx.com" text="Portworx spec generator tool.">}}
 
-![Create Storage Cluster](/img/openshift-px-operator-storage-cluster.png)
+2. Within the Portworx Operator page, select **Create Instance** to create a `StorageCluster` object.
 
-- Copy the spec created from the spec generator and paste in the YAML editor on the Openshift Console.
+      ![Create Storage Cluster](/img/OpenshiftCreateInstance.png)
 
-![Storage Cluster Spec](/img/openshift-px-operator-create-storage-cluster.png)
+3. The spec displayed here represents a very basic default spec. Copy the spec you created with the spec generator and paste it over the default spec in the YAML editor on the OpenShift Console. Select **Create** to deploy Portworx.
 
-You can also create the StorageCluster object using `oc` or `kubectl` as show below.
+      ![Storage Cluster Spec](/img/OpenshiftCreateStorageCluster.png)
 
-{{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
+4. Verify that Portworx has deployed successfully by navigating to the **Storage Cluster** tab of the **Installed Operators** page. Once Portworx has fully deployed, the status will show as **Online**.
+
+      ![Storage Cluster Online](/img/OpenshiftStatusOnline.png)
+
+## Install Portworx using the command line
+
+If you're not using the OpenShift console, you can create the StorageCluster object using the `oc` command:
+
+{{% content "portworx-install-with-kubernetes/on-premise/openshift/shared/apply-the-spec-oc.md" %}}
 
 {{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}

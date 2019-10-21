@@ -5,14 +5,7 @@ keywords: portworx, operator, storagecluster
 weight: 1
 ---
 
-The Portworx Operator manages the complete lifecycle of a Portworx cluster. It provides easy installation and configuration managment for Portworx.
-The Portworx cluster configuration if specified by a Kubernetes CRD (CustomResourceDefinition) called StorageCluster. The StorageCluster object
-acts as the definition of the Portworx Cluster.
-
-As shown in the below diagram, it manages the Portworx platform consisting of the Portworx nodes,
-STORK, Lighthouse and other components that make running stateful applications seamless for the users.
-
-![Portworx Operator](/img/px-operator-in-kubernetes.jpg)
+The Portworx cluster configuration is specified by a Kubernetes CRD (CustomResourceDefinition) called StorageCluster. The StorageCluster object acts as the definition of the Portworx Cluster.
 
 The StorageCluster provides a Kubernetes native experience to manage a Portworx cluster just like any other application in Kubernetes. Simply creating
 or editing a StorageCluster object will result in the Operator creating or updating the Portworx cluster in the background.
