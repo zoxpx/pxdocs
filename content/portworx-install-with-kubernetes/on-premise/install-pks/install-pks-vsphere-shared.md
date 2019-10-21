@@ -21,14 +21,11 @@ Create one or more shared datastore(s) or datastore cluster(s) which is dedicate
 
 ## Portworx installation
 
-1. Create a secret using [this template](#secret-for-vsphere-credentials). Replace values replace values corresponding to your vSphere environment.
-2. Deploy the Portworx spec using [this template](#portworx-spec). Replace values replace values corresponding to your vSphere environment.
+{{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-install-common.md" %}}
 
-Once you have the spec, proceed below.
+#### Generating the spec if using secure etcd
 
-{{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
-
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+{{% content "portworx-install-with-kubernetes/on-premise/install-pks/vsphere-pks-generate-spec-internal-kvdb.md" %}}
 
 ## Wipe Portworx installation
 
@@ -37,26 +34,4 @@ Below are the steps to wipe your entire Portworx installation on PKS.
 1. Run cluster-scoped wipe: ```curl -fsL https://install.portworx.com/px-wipe | bash -s -- -T pks```
 2. Go to each virtual machine and delete the additional vmdks Portworx created in the shared datastore.
 
-## References
 
-### Secret for vSphere credentials
-
-{{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-secret.md" %}}
-
-
-### Portworx spec
-
-* If you are using secured etcd, download [Portworx spec for PKS with secure etcd](/samples/k8s/vsphere/px-pks-vsphere-shared-specs-secure-etcd.yaml).
-* If you are using non-secured etcd, download [Portworx spec for PKS with non-secure etcd](/samples/k8s/vsphere/px-pks-vsphere-shared-specs.yaml).
-
-You need to change below things in the spec to match your environment. These are sections in the spec with a *CHANGEME* comment.
-
-1. **PX etcd** endpoint in the -k argument.
-2. **Cluster ID** in the -c argument. Choose a unique cluster ID.
-3. **VSPHERE_VCENTER**: Hostname of the vCenter server.
-4. **VSPHERE_DATASTORE_PREFIX**: Prefix of the ESXi datastore(s) that Portworx will use for storage.
-5. **Size of disks**: In the Portworx Daemonset arguments below, change `size=100` to the size of the disks you want each Portworx node in the cluster to create.
-  * For e.g if you have 10 nodes in your cluster and you give size=100, each Portworx node will create a 100GB disk in the shared datastore and the cluster storage capacity will be 1TB.
-
-
-`kubectl apply` the above spec after you update the above template with your environment details.
