@@ -11,7 +11,7 @@ disableprevnext: true
 
 * vSphere 6.5u1 or above.
 * PKS 1.1 or above.
-* Portworx 1.6.0 and later.
+* Shared ESXi datastore
 
 ## Installing Portworx
 
@@ -19,4 +19,4 @@ Based on your ESXi datastore type, proceed to one of the following pages.
 
 If you have **shared** datastores, proceed to [Portworx install on PKS on vSphere using shared datastores](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-shared).
 
-If you have **local** datastores, proceed to [Portworx install on PKS on vSphere using local datastores](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-local).
+<!-- If you have **local** datastores, proceed to [Portworx install on PKS on vSphere using local datastores](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-local). -->
