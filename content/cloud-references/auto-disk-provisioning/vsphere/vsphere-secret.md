@@ -8,8 +8,8 @@ hidden: true
 
 Update the following items in the Secret template below to match your environment:
 
-1. **VSPHERE_USER**: Use output of `echo -n <vcenter-server-user> | base64`
-2. **VSPHERE_PASSWORD**: Use output of `echo -n <vcenter-server-password> | base64`
+1. **VSPHERE_USER**: Use output of `printf <vcenter-server-user> | base64`
+2. **VSPHERE_PASSWORD**: Use output of `printf <vcenter-server-password> | base64`
 
 ```text
 apiVersion: v1
