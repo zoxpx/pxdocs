@@ -64,6 +64,8 @@ action:
   name: <operation>
   params:
     <operation-specific-paramater>: <value>
+    maxsize: "<value>Gi"
+
 ```
 
 ## Supported Autopilot actions
@@ -75,6 +77,7 @@ This action is to perform resize on Kubernetes PersistentVolumeClaims (PVCs).
 ##### Parameters
 
 * **scalepercentage**: Specifies the percentage of current PVC size by which Autopilot should resize the PVC. If not specified, the default is *50%*.
+* **maxsize**: Specifies the maximum PVC size. If not specified, the default max size is not set.
 
 ##### Example
 
@@ -85,4 +88,5 @@ Resize the PVC by 100%.
   - name: openstorage.io.action.volume/resize
     params:
       scalepercentage: "100"
+      maxsize: "12Gi"
 ```

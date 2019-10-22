@@ -44,17 +44,14 @@ spec:
       operator: Gt
       values:
         - "50"
-    # volume capacity should not exceed 400GiB
-    - key: "px_volume_capacity_bytes / 1000000000"
-      operator: Lt
-      values:
-       - "400"
   ##### action to perform when condition is true
   actions:
   - name: openstorage.io.action.volume/resize
     params:
       # resize volume by scalepercentage of current size
       scalepercentage: "100"
+      # volume capacity should not exceed 400GiB
+      maxsize: "400Gi"
 ```
 
 Consider the key sections in this spec.
@@ -65,10 +62,9 @@ Consider the key sections in this spec.
 
 The `selector` determines what objects are acted on by the Autopilot rule by looking for PVCs with the `app: postgres` label. Similarly, the `namespaceSelector` filters PVCs by namespaces and only includes PVCs from namespaces that contain the `type: db` label. Hence, this rule applies only to PVCs running Postgres in the DB namespaces.
 
-The `conditions` section determines the threshold criteria dictating when the rule has to perform its action. In this example, that criteria has 2 formulas:
+The `conditions` section determines the threshold criteria dictating when the rule has to perform its action. In this example, that criteria has a formula:
 
-1. `100 * (px_volume_usage_bytes / px_volume_capacity_bytes)` gives the volume usage percentage and the `Gt` operator puts a condition that volume usage percentage has exceeded 50%.
-2. `px_volume_capacity_bytes / 1000000000` gives the total volume capacity in GiB, and the `Lt` operator to caps it to 400GiB.
+`100 * (px_volume_usage_bytes / px_volume_capacity_bytes)` gives the volume usage percentage and the `Gt` operator puts a condition that volume usage percentage has exceeded 50%.
 
 Conditions are combined using AND logic, requiring all conditions to be true for the rule to trigger.
 
