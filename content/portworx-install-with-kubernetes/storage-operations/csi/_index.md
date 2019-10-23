@@ -44,7 +44,7 @@ To enable CSI for a StorageClass, set the `provisioner` value to `pxd.portworx.c
 
 ```text
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
   name: portworx-csi-sc
 provisioner: pxd.portworx.com
@@ -71,11 +71,14 @@ spec:
 Once you've created a storage class and PVC, you can create a volume as part of a deployment by referencing the PVC. This example creates a MySQL deployment referencing the `px-mysql-pvc` PVC you created in the step above:
 
 ```text
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
 spec:
+  selector:
+    matchLabels:
+      app: mysql
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -128,7 +131,7 @@ This example secures a storage class by specifying hardcoded values for the toke
 
     ```text
     kind: StorageClass
-    apiVersion: storage.k8s.io/v1beta1
+    apiVersion: storage.k8s.io/v1
     metadata:
       name: portworx-csi-sc
     provisioner: pxd.portworx.com
@@ -153,7 +156,7 @@ This example secures a storage class by hardcoding the token and namespace. User
 
     ```text
     kind: StorageClass
-    apiVersion: storage.k8s.io/v1beta1
+    apiVersion: storage.k8s.io/v1
     metadata:
       name: portworx-csi-sc
     provisioner: pxd.portworx.com
@@ -181,7 +184,7 @@ Hardcode the secret name, but use template values for the namespace to allow use
 
 ```text
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
   name: portworx-csi-sc
 provisioner: pxd.portworx.com
@@ -195,7 +198,7 @@ Hardcode the namespace but use template values for the secret to allow users to 
 
 ```text
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
   name: portworx-csi-sc
 provisioner: pxd.portworx.com
