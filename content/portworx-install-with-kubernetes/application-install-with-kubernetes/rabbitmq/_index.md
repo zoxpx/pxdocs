@@ -7,15 +7,17 @@ weight: 2
 noicon: true
 ---
   
-[RabbitMQ]([https://www.rabbitmq.com/](https://www.rabbitmq.com/)) is the most widely used open-source message-queue/broker software used today.  It plays a central role in many distributed systems, and allows messages between decoupled systems to be safely persisted as well as replicated to other nodes.  
+[RabbitMQ](https://www.rabbitmq.com/) is the most widely used open-source message-queue/broker software used today.  It plays a central role in many distributed systems, and allows messages between decoupled systems to be safely persisted as well as replicated to other nodes.  
 
 In this reference architecture document, we will explore setting up RabbitMQ in the "default" namespace, to leverage these features using Portworx for providing a reliable persistent storage facility helping make sure no messages are lost.
 
-## Portworx-powered StorageClass for volume provisioning
+Specifically, RabbitMQ will use mirrored-queues, with messages persisted, to prevent messages from being lost.  It should be understood that these High Availability functionality trades off a bit of performance, as by necessity disk-IO is in the critical path of message processing.
 
-RabbitMQ will first need a [StorageClass]([https://kubernetes.io/docs/concepts/storage/storage-classes/](https://kubernetes.io/docs/concepts/storage/storage-classes/)) definition that sets the Portworx storage parameter for volume-creation, which are later attached to the pods running the RabbitMQ queue-supporting processes.  
+## Portworx-powered volume provisioning
 
-This _StorageClass_ will be referenced by a [_PersistentVolumeClaims_]([https://kubernetes.io/docs/concepts/storage/persistent-volumes/](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)) later in this document, that are used by the RabbitMQ cluster. 
+RabbitMQ will first need a [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/) definition that sets the Portworx storage parameter for volume-creation, which are later attached to the pods running the RabbitMQ queue-supporting processes.  
+
+This _StorageClass_ will be referenced by a [_PersistentVolumeClaims_](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) later in this document, that are used by the RabbitMQ cluster. 
 
 The following will setup volume-parameters, specifying it shall have two replica of the data, and requesting it be backed by a high-IO priority storage pool (internally to Portworx, a collection of similar spec disks/devices)
 
@@ -47,7 +49,7 @@ storageclass.storage.k8s.io/portworx-rabbitmq created
 
 For details on what all the above parameters do, please consult the [the relevant Kubernetes storageclass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#the-storageclass-resource) or the [Portworx-specific Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume).
 
-**Note:**<br/>The above assumes your Kubernetes setup is _not_ using [CSI]([https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/)); if you are then instead set the `provisioner` parameter to `
+**Note:**<br/>The above assumes your Kubernetes setup is _not_ using [CSI](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/) if you are then instead set the `provisioner` parameter to `
 pxd.portworx.com`
 
 ## Setup RabbitMQ (using Helm)
@@ -56,13 +58,13 @@ pxd.portworx.com`
 
 Applications running on Kubernetes typically have _several_ yaml files defining the differnet components.  The more complex an app, the more of these one has to deal with.  
 
-In order to simply a deployment of a system as complex as RabbitMQ, we will utilize the [Helm]([https://helm.sh](https://helm.sh/)) tool to simply if it.  
+In order to simply a deployment of a system as complex as RabbitMQ, we will utilize the [Helm](https://helm.sh) tool to simply if it.  
 
-If you do not have Helm set up, you can either consult [their documentation]([https://helm.sh/docs/using_helm/#quickstart](https://helm.sh/docs/using_helm/#quickstart)) to set Helm up, or skip ahead to the [next section](#setup-RabbitMQ-manually) where we install RabbitMQ in the classic, more involved way (and without the use of Helm).
+If you do not have Helm set up, you can either consult [their documentation](https://helm.sh/docs/using_helm/#quickstart) to set Helm up, or skip ahead to the [next section](#setup-rabbitmq-manually) where we install RabbitMQ in the classic, more involved way (and without the use of Helm).
 
 ### Launching _rmq_ release
 
-The following Helm command will create (or update) a [release]([https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release)) named `rmq`, which will form a two-replica statefulset RabbitMQ cluster.
+The following Helm command will create (or update) a [release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release) named `rmq`, which will form a two-replica statefulset RabbitMQ cluster.
 
 Run:
 ```
@@ -92,7 +94,7 @@ STATUS: DEPLOYED
 ...
 ```
 
-Other than specifying that this should be a two-replica [statefulset]([https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)) (of pods), it is worth mentioning that it is _here_ we also referenced the StorageClass we defined above, and we also specify a few example credentials which you would _not_ want to use in a prod environment  
+Other than specifying that this should be a two-replica [statefulset](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) (of pods), it is worth mentioning that it is _here_ we also referenced the StorageClass we defined above, and we also specify a few example credentials which you would _not_ want to use in a prod environment  
 
 Alternatively, the next section describes how to do manually what helm did for you above: 
 
@@ -100,11 +102,11 @@ Alternatively, the next section describes how to do manually what helm did for y
 
 In this section we will instead take the classic approach of including here all the various yaml definitions needed to set up RabbitMQ.  
 
-**Note:**<br/>The source of the yaml contents are sanitized versions of what the [RabbitMQ chart]([https://github.com/helm/charts/tree/master/stable/rabbitmq-ha](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha)) [templates]([https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates)) provide for Helm.
+**Note:**<br/>The source of the yaml contents are sanitized versions of what the [RabbitMQ chart](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) [templates](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates) provide for Helm.
 
 ### Configuration and credentials
 
-First we will set-up a [configmap and secret]([https://kubernetes.io/blog/2016/04/configuration-management-with-containers/](https://kubernetes.io/blog/2016/04/configuration-management-with-containers/)) that will configure how RabbitMQ starts up and "secure" it with dummy credentials.
+First we will set-up a [configmap and secret](https://kubernetes.io/blog/2016/04/configuration-management-with-containers/) that will configure how RabbitMQ starts up and "secure" it with dummy credentials.
 
 Run:
 ```
@@ -501,13 +503,13 @@ statefulset.apps/rmq-rabbitmq-ha created
 
 You may have spotted that the last line reference that StorageClass created near the beginning of this document.  As a result of the `volumeClaimTemplate` section, a new PersistentVolumeClaim will also be created automatically by Kubernetes for each replica.
 
-## Post-install RabbitMQ validation testing
+## Post-install validation testing
 
 Regardless of the method you used to setup RabbitMQ, you should be able to control and use RabbitMQ.
 
 We will use [PerfTest](https://rabbitmq.github.io/rabbitmq-perf-test/stable/htmlsingle/), a testing suite bundled with RabbitMQ, to verify and measure performance of the system and perform failover testing.
 
-### Example RabbitMQ policy for High-Availability
+### Example RabbitMQ policy for H/A
 
 First we will configure a queue-policy named `perf-test-with-ha` to:
 * match only queues that begin with `perf-test`
