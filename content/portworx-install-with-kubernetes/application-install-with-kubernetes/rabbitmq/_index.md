@@ -60,9 +60,9 @@ For details on what all the above parameters do, please consult the the relevant
 
 Applications running on Kubernetes typically have _several_ yaml files defining the differnet components.  The more complex an app, the more of these one has to deal with.  
 
-In order to simply a deployment of a system as complex as RabbitMQ, we will utilize the [Helm](https://helm.sh) tool to simply if it.  
+In order to simply a deployment of a system as complex as RabbitMQ, we will utilize [Helm](https://helm.sh) to simply deployment.
 
-If you do not have Helm set up, you can either consult [their documentation](https://helm.sh/docs/using_helm/#quickstart) to set Helm up, or skip ahead to the [next section](#setup-rabbitmq-manually) where we install RabbitMQ in the classic, more involved way (and without the use of Helm).
+If you do not have Helm set up, you can either do so by consulting [their documentation](https://helm.sh/docs/using_helm/#quickstart), or skip ahead to the [next section](#setup-rabbitmq-manually) where we install RabbitMQ in the classic, more involved way (without using Helm).
 
 ### Launching RabbitMQ release
 
@@ -509,11 +509,12 @@ You may have spotted that the last line reference that StorageClass created near
 
 Regardless of the method we used to setup RabbitMQ in Kubernetes, we should now be able to control and test our RabbitMQ cluster.
 
-We will use [PerfTest](https://rabbitmq.github.io/rabbitmq-perf-test/stable/htmlsingle/), a testing suite bundled with RabbitMQ, to verify simulate broker-use, measure performance of the system and perform failover testing.
+We will use [PerfTest](https://rabbitmq.github.io/rabbitmq-perf-test/stable/htmlsingle/), a testing suite bundled with RabbitMQ, to simulate broker use, measure performance of the system and perform failover testing.
 
 ### Example RabbitMQ policy for H/A
 
 First we will configure a queue-policy named `perf-test-with-ha` to:
+
   * match only queues that begin with `perf-test`
   * set the [ha-mode parameter](https://www.rabbitmq.com/ha.html#mirroring-arguments) to be exactly 2
   * locate the [queue-masters](https://www.rabbitmq.com/ha.html#behaviour) on whichever is the least loaded node
@@ -695,6 +696,7 @@ kubectl delete pod perftest
 ```
 
 The above deletes the...
+
   * workload itself (statefulset/services)
   * RBAC for the workload (rolebinding/role/serviceaccount)
   * configuration (configmap/secret)
