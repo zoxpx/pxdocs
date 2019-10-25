@@ -62,9 +62,9 @@ In order to simply a deployment of a system as complex as RabbitMQ, we will util
 
 If you do not have Helm set up, you can either consult [their documentation](https://helm.sh/docs/using_helm/#quickstart) to set Helm up, or skip ahead to the [next section](#setup-rabbitmq-manually) where we install RabbitMQ in the classic, more involved way (and without the use of Helm).
 
-### Launching _rmq_ release
+### Launching RabbitMQ release
 
-The following Helm command will create (or update) a [release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release) named `rmq`, which will form a two-replica statefulset RabbitMQ cluster.
+The following Helm command will use the [rabbitmq-ha chart](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) to create (or update) a [release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release) "instance" named `rmq`, which will form a two-replica statefulset RabbitMQ cluster.
 
 Run:
 ```
@@ -81,7 +81,7 @@ helm upgrade \
 rmq stable/rabbitmq-ha
 ```
 
-To which, after a minute or two, you should get back the a response from Helm confirming success and details of the release we created:
+To which, after a minute or two, you should get back the a response from Helm confirming success and details of the release we created (including details of how it is configured):
 
 ```
 ...
@@ -94,9 +94,9 @@ STATUS: DEPLOYED
 ...
 ```
 
-Other than specifying that this should be a two-replica [statefulset](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) (of pods), it is worth mentioning that it is _here_ we also referenced the StorageClass we defined above, and we also specify a few example credentials which you would _not_ want to use in a prod environment  
+Other than specifying that this should be a two-replica [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) (of Pods), it is worth mentioning that it is _here_ we referenced the StorageClass we defined above, and we also specify a few example insecure credentials which you would _not_ want to use in a prod environment  
 
-Alternatively, the next section describes how to do manually what helm did for you above: 
+Alternatively, the following section describes how to do manually what helm did for us above.
 
 ## Setup RabbitMQ manually
 
@@ -106,7 +106,7 @@ In this section we will instead take the classic approach of including here all 
 
 ### Configuration and credentials
 
-First we will set-up a [configmap and secret](https://kubernetes.io/blog/2016/04/configuration-management-with-containers/) that will configure how RabbitMQ starts up and "secure" it with dummy credentials.
+First we will set-up a [ConfigMap and Secret](https://kubernetes.io/blog/2016/04/configuration-management-with-containers/) that will configure how RabbitMQ starts up and "secure" it with the same dummy credentials.
 
 Run:
 ```
@@ -201,9 +201,9 @@ secret/rmq-rabbitmq-ha created
 
 **Note:**<br/>The above credentials are the same example (insecure) credentials as mentioned above in the previous approach that utilized helm.
 
-### Workload RBAC
+### RBAC for RabbitMQ
 
-This section will set up RBAC-related objects for the workloads we'll define in the next section.
+This section will set up RBAC-related objects for the workloads we'll define in the [next section](#rabbitmq-cluster).
 
 Run:
 ```
@@ -259,7 +259,7 @@ role.rbac.authorization.k8s.io/rmq-rabbitmq-ha created
 rolebinding.rbac.authorization.k8s.io/rmq-rabbitmq-ha created
 ```
  
- ### RabbitMQ workload providing a Message-Queue service:
+### RabbitMQ cluster
 
 Here we're finally launching the workload definition, which consists of the StatefulSet and some supporting Services.
 
@@ -505,9 +505,9 @@ You may have spotted that the last line reference that StorageClass created near
 
 ## Post-install validation testing
 
-Regardless of the method you used to setup RabbitMQ, you should be able to control and use RabbitMQ.
+Regardless of the method we used to setup RabbitMQ in Kubernetes, we should now be able to control and test our RabbitMQ cluster.
 
-We will use [PerfTest](https://rabbitmq.github.io/rabbitmq-perf-test/stable/htmlsingle/), a testing suite bundled with RabbitMQ, to verify and measure performance of the system and perform failover testing.
+We will use [PerfTest](https://rabbitmq.github.io/rabbitmq-perf-test/stable/htmlsingle/), a testing suite bundled with RabbitMQ, to verify simulate broker-use, measure performance of the system and perform failover testing.
 
 ### Example RabbitMQ policy for H/A
 
@@ -556,19 +556,19 @@ Forwarding from 127.0.0.1:15672 -> 15672
 ...
 ```
 
-At this point you should be able to hit 15672 on localhost in your web browser, and see the RabbitMQ WebUI.  You can use the credentials referenced earlier in this document to log in, and explore.   If you visit the Queue section, you should see the policy we setup be applied as well
+At this point you should be able to hit TCP port 15672 on [_localhost_](http://127.0.0.1:15672) in your web browser, and see the RabbitMQ WebUI.  You can use the credentials referenced [earlier](#launching-rabbitmq-release) in this document to log in, and explore.   If you then visit the [Queue section](http://127.0.0.1:15672/#/queues),  once the performance test starts and the queues are created, you should see the policy we setup be applied as well.
 
-Additionally, one can examine the log files of the pod that will survive the failover test:
+Additionally, one can examine the log-messages of the pod that will survive the failover test:
 
 ```
 kubectl logs -f rmq-rabbitmq-ha-0
 ```
 
-This will show (after the pod has started) the messages from the container.
+This will show (after the pod has started) the log-messages from the container live.
 
 ### Containerized testing environment
 
-Now we can pre-spawn a pod with a container that will allow us to run PerfTest in the _next_ step:
+Here we will pre-spawn a pod with a container that will allow us to run PerfTest in the [_next_ step](#simulate-broker-usage):
 
 Run:
 
@@ -614,11 +614,11 @@ To which you should get back the following response:
 pod/perftest created
 ```
 
-This will start a sleeping container on one of the other nodes (that _aren't_ running RabbitMQ), which we can later then `kubectl exec` into, in the next step.  This container runs for an hour (by sleeping 3600 seconds) and always restart when finished.   We also specify a non-root user to runAs since your cluster may have PodSecurityPolicies enabled.
+This will start a sleeping container on one of the other nodes (that _aren't_ running RabbitMQ), which we can later then `kubectl exec` into, in the next step.  This container runs for an hour (by sleeping 3600 seconds) and always restart when finished.   We also specify a non-root user to run this environment as, since your cluster may have PodSecurityPolicies enabled.
 
-### Run Perf Test
+### Simulate Broker Usage
 
-Now we're ready to launch the actual testing suite inside the pod's container from the previous step.
+Now we're ready to launch the simulated producers/consumers inside the pod's container from the [previous step](#containerized-testing-environment).
 
 Run:
 
@@ -665,13 +665,13 @@ The performance testing session may pause momentarily (and messages in the queue
 
 ## Cleaning up
 
-If above, you used helm, cleaning us as easy as first running:
+If above helm was used, cleaning us as easy as first running:
 
 ```
 helm delete --purge rmq
 ```
 
-Otherwise, the following will manually delete all the created any created resources from your cluster.
+Otherwise, the following will manually delete all the created any created resources from our cluster.
 
 Run:
 ```
@@ -684,7 +684,7 @@ kubectl delete secret rmq-rabbitmq-ha
 kubectl delete cm rmq-rabbitmq-ha
 ```
 
-Finally (regardless of deployment method), run:
+Finally (regardless of deployment method), also run:
 
 ```
 kubectl delete pvc data-rmq-rabbitmq-ha-0 data-rmq-rabbitmq-ha-1
@@ -696,11 +696,11 @@ The above deletes the...
 * workload itself (statefulset/services)
 * RBAC for the workload (rolebinding/role/serviceaccount)
 * configuration (configmap/secret)
-* storage volumes (persistentvolumeclaims)
+* storage volumes including data (persistentvolumeclaims)
 * volume parameters (storageclass) 
 
-At this point if you wanted to, you could start over from the top of this document.
+At this point if you wanted to, you could start all over from the beginning of this document.
 
 ## Summary
 
-Software as critical to your distributed system as RabbitMQ is to many of its users needs to be set up in a reliable way.  Portworx can be a key ingrediant to achieve that goal as demonstrated in this document.
+Software as critical to distributed systems as RabbitMQ is to many of its users _needs_ to be set up in a reliable way.  Portworx is a key ingredient to achieve that goal, as demonstrated in this document.
