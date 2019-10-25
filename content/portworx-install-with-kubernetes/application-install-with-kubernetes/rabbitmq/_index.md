@@ -47,7 +47,7 @@ storageclass.storage.k8s.io/portworx-rabbitmq created
 
 For details on what all the above parameters do, please consult the [the relevant Kubernetes storageclass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#the-storageclass-resource) or the [Portworx-specific Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume).
 
-> Note: The above assumes your Kubernetes setup is _not_ using [CSI]([https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/)); if you are then instead set the `provisioner` parameter to `
+**Note:**<br/>The above assumes your Kubernetes setup is _not_ using [CSI]([https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/)); if you are then instead set the `provisioner` parameter to `
 pxd.portworx.com`
 
 ## Setup RabbitMQ (using Helm)
@@ -100,7 +100,7 @@ Alternatively, the next section describes how to do manually what helm did for y
 
 In this section we will instead take the classic approach of including here all the various yaml definitions needed to set up RabbitMQ.  
 
-> Note: the source of the yaml contents are sanitized versions of what the [RabbitMQ chart]([https://github.com/helm/charts/tree/master/stable/rabbitmq-ha](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha)) [templates]([https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates)) provide for Helm.
+**Note:**<br/>The source of the yaml contents are sanitized versions of what the [RabbitMQ chart]([https://github.com/helm/charts/tree/master/stable/rabbitmq-ha](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha)) [templates]([https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates)) provide for Helm.
 
 ### Configuration and credentials
 
@@ -196,7 +196,8 @@ To which you should get back the following response:
 configmap/rmq-rabbitmq-ha created
 secret/rmq-rabbitmq-ha created
 ``` 
-> Note: the above credentials are the same example (insecure) credentials as mentioned above in the previous approach that utilized helm.
+
+**Note:**<br/>The above credentials are the same example (insecure) credentials as mentioned above in the previous approach that utilized helm.
 
 ### Workload RBAC
 
