@@ -13,8 +13,6 @@ In this reference architecture document, we will explore setting up RabbitMQ thi
 
 Specifically, our RabbitMQ cluster will use mirrored-queues, so that messages data and metadata is persisted to Portworx volumes, which also are replicated, to prevent messages from being lost.  This provides multiple layers of redundancy.  
 
-**Note:**</br>It should be understood that regardless of which storage solution is used, High Availability functionality we will strive for here, trades off a bit of performance, by necessity of disk-IO being in the critical path of message processing.  Although messages can be handled only inside memory (which is much faster) for highest performance, reliability is  partly sacrificed/limited as memory is more finite resource than disk.
-
 ## Portworx-powered volume provisioning
 
 RabbitMQ will first need a [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/) definition that sets the Portworx storage parameters for volume-creation, which are later attached to the pods that will be created.
@@ -52,7 +50,9 @@ storageclass.storage.k8s.io/portworx-rabbitmq created
 
 For details on what all the above parameters do, please consult the the relevant Kubernetes [storageclass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#the-storageclass-resource) or the [Portworx-specific section](https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume) of that documentation.
 
-**Note:**<br/>The above assumes your Kubernetes is _not_ setup to use [CSI](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/). If you are then instead set the `provisioner` parameter to `pxd.portworx.com`
+{{<info>}}
+The above assumes your Kubernetes is _not_ setup to use [CSI](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/). If you are then instead set the `provisioner` parameter to `pxd.portworx.com`
+{{</info>}}
 
 ## Setup RabbitMQ (using Helm)
 
@@ -104,7 +104,9 @@ Alternatively, the following section describes how to manually do what helm did 
 
 In this section we will instead take the classic approach of including here all the various yaml definitions needed to set up RabbitMQ.  
 
-**Note:**<br/>The source of the yaml contents are sanitized versions of what the [RabbitMQ chart](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) [templates](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates) provide for Helm.
+{{<info>}}
+The contents of the yaml used below, are largely based on what the [RabbitMQ chart](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) [templates](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates) create when using Helm.
+{{</info>}}
 
 ### Configuration and credentials
 
@@ -201,7 +203,9 @@ configmap/rmq-rabbitmq-ha created
 secret/rmq-rabbitmq-ha created
 ``` 
 
-**Note:**<br/>The above credentials are the same example (insecure) credentials as mentioned above in the previous approach that utilized helm.
+{{<info>}}
+The above credentials are the same dummy (insecure) credentials as mentioned above in the previous approach that utilized helm.
+{{</info>}}
 
 ### RBAC for RabbitMQ
 
@@ -621,7 +625,7 @@ This will start a sleeping container on one of the other nodes (that _aren't_ ru
 
 ### Simulate Broker Usage
 
-Now we're ready to launch the simulated producers/consumers inside the pod's container from the [previous step](#containerized-testing-environment).
+Now we're ready to start up the simulated producers/consumers inside the pre-existing pod's container from the [previous step](#containerized-testing-environment).
 
 Run:
 
@@ -708,3 +712,7 @@ At this point if you wanted to, you could start all over from the beginning of t
 ## Summary
 
 Software as critical to distributed systems as RabbitMQ is to many of its users _needs_ to be set up in a reliable way.  Portworx is a key ingredient to achieve that goal, as demonstrated in this document.
+
+{{<info>}}
+It should be understood that regardless of which storage solution is used, the goal of reliability  trades off some performance, by necessity of disk-IO being in the critical path of message processing.  While for highest performance messages can be handled entirely inside memory (which admittedly is orders of magnitudes faster), using that approach reliability would be partially sacrificed and limiting as memory is a far more finite resource than disk.
+{{</info>}}
