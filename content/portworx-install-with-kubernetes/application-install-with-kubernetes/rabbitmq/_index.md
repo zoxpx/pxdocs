@@ -66,7 +66,7 @@ If you do not have Helm set up, you can either do so by consulting [their docume
 
 ### Launching RabbitMQ release
 
-The following Helm command will use the [rabbitmq-ha chart](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) to create (or update) a [release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release) "instance" named `rmq`, which will form a two-replica statefulset RabbitMQ cluster.
+The following Helm command will use the [rabbitmq-ha chart](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) to create (or update) a [release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release) "instance" named `rmq`, which will form a two-member RabbitMQ cluster.  This allows queues and messages to be mirrored between them.
 
 Run:
 ```
@@ -83,7 +83,7 @@ helm upgrade \
 rmq stable/rabbitmq-ha
 ```
 
-..to which, after a minute or two, you should get back the a response from Helm confirming success and details of the release we created (including details of how it is configured):
+..to which, after a minute or two, you should get back the a response from Helm confirming success and specifics of the release we created (including details of how it is configured/accessed):
 
 ```
 ...
@@ -96,9 +96,9 @@ STATUS: DEPLOYED
 ...
 ```
 
-Other than specifying that this should be a two-replica [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) (of Pods), it is worth mentioning that it is _here_ we referenced the StorageClass we defined above, and we also specify a few example insecure credentials which you would _not_ want to use in a prod environment  
+Other than specifying that this should be a two-replica [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), it is worth mentioning that it is _here_ we referenced that StorageClass we defined above, and we also have specify a few dummy credentials (which are insecure and should _not_ be used in anything but a testing environment).
 
-Alternatively, the following section describes how to do manually what helm did for us above.
+Alternatively, the following section describes how to manually do what helm did for us above.
 
 ## Setup RabbitMQ manually
 
