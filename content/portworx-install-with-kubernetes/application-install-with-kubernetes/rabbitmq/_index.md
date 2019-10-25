@@ -17,11 +17,11 @@ Specifically, our RabbitMQ cluster will use mirrored-queues, so that messages da
 
 ## Portworx-powered volume provisioning
 
-RabbitMQ will first need a [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/) definition that sets the Portworx storage parameters for volume-creation, which are later attached to the pods running the RabbitMQ queue-supporting processes.  
+RabbitMQ will first need a [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/) definition that sets the Portworx storage parameters for volume-creation, which are later attached to the pods that will be created.
 
 This _StorageClass_ will be referenced by a [PersistentVolumeClaims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) created later in this document.  The PersistentVolume created by that is then used by the RabbitMQ cluster pods.
 
-The following will specifying ieach volume shall have two replica of the data, and requesting it be backed by a high-IO priority storage pool (which internally to Portworx, are a collection of similar spec disks/devices).
+The following will specifying each volume should have two replicas (of the data), and that it be backed by a high-IO priority storage pool (which internally to Portworx, is a collection of similar spec disks/devices).
 
 Run:
 
@@ -43,7 +43,7 @@ volumeBindingMode: WaitForFirstConsumer
 _EOF
 ```
 
-To which you should get back the following response:
+..to which you should get back the following response:
 
 ```
 ...
@@ -83,7 +83,7 @@ helm upgrade \
 rmq stable/rabbitmq-ha
 ```
 
-To which, after a minute or two, you should get back the a response from Helm confirming success and details of the release we created (including details of how it is configured):
+..to which, after a minute or two, you should get back the a response from Helm confirming success and details of the release we created (including details of how it is configured):
 
 ```
 ...
@@ -193,7 +193,7 @@ data:
 _EOF
 ```
 
-To which you should get back the following response:
+..to which you should get back the following response:
 
 ```
 ...
@@ -252,7 +252,7 @@ roleRef:
 _EOF
 ```
 
-To which you should get back the following response:
+..to which you should get back the following response:
 
 ```
 ...
@@ -494,7 +494,7 @@ spec:
 _EOF
 ```
 
-To which you should get back the following response:
+..to which you should get back the following response:
 
 ```
 ...
@@ -533,7 +533,7 @@ kubectl exec rmq-rabbitmq-ha-0 -- \
 }' --apply-to queues
 ```
 
-To which you should get back the following response:
+..to which you should get back the following response:
 
 ```
 Setting policy "perf-test-with-ha" for pattern "^perf-test" to "{
@@ -551,7 +551,7 @@ Run:
 kubectl port-forward rmq-rabbitmq-ha-0 15672:15672
 ```
 
-To which you should get back the following response:
+..to which you should get back the following response:
 
 ```
 Forwarding from 127.0.0.1:15672 -> 15672
@@ -609,7 +609,7 @@ kubectl run perftest \
 }'
 ```
 
-To which you should get back the following response:
+..to which you should get back the following response:
 
 ```
 ...
@@ -638,7 +638,7 @@ kubectl exec -it perftest -- \
       --uri amqp://admin:secretpassword@rmq-rabbitmq-ha:5672?failover=failover_exchange
 ```
 
-To which you should get back the output of the utility itself.
+..to which you should get back the output of the utility itself.
 
 The test-suite's parameters themselves do the following:
 * run the session for 15 minutes with queues named in the format of `perf-test-` followed by a number (in our case `1` and `2`)
@@ -656,7 +656,7 @@ Run:
 kubectl delete pod rmq-rabbitmq-ha-1 --force --grace-period=0
 ```
 
-To which you should get back the following response:
+..to which you should get back the following response:
 
 ```
 warning: Immediate deletion does not wait for confirmation that the running resource has been terminated. The resource may continue to run on the cluster indefinitely.
