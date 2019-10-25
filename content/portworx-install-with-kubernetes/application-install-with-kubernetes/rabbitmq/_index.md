@@ -668,7 +668,7 @@ warning: Immediate deletion does not wait for confirmation that the running reso
 pod "rmq-rabbitmq-ha-1" force deleted
 ```
 
-The performance testing session may pause momentarily (and messages in the queue pile up) as the system recovers from the failure, failover, then resume with no messages lost (presuming enough time remains during testing, for all the the testing consumers to catch up).
+The performance testing session may pause momentarily (and messages in the queue pile up) as the system recovers from the failure, the queue fails-over eventualy resume with no messages being lost (presuming enough time remains during testing, for all the the testing consumers to catch up).
 
 ## Cleaning up
 
@@ -678,9 +678,8 @@ If helm was used, cleaning is as easy as first running:
 helm delete --purge rmq
 ```
 
-Otherwise, the following will manually delete all the created any created resources from our cluster.
+Otherwise we need to manually delete all the created created resources from our cluster, by running:
 
-Run:
 ```
 kubectl delete sts rmq-rabbitmq-ha
 kubectl delete svc rmq-rabbitmq-ha rmq-rabbitmq-ha-discovery
@@ -691,12 +690,12 @@ kubectl delete secret rmq-rabbitmq-ha
 kubectl delete cm rmq-rabbitmq-ha
 ```
 
-Finally (regardless of deployment method), we throw away the data, volumes, and volume-params by running:
+Finally (regardless of deployment method), we throw away the data-volumes, volume-param definition and perftest pod by running:
 
 ```
 kubectl delete pvc data-rmq-rabbitmq-ha-0 data-rmq-rabbitmq-ha-1
 kubectl delete sc portworx-rabbitmq
-kubectl delete pod perftest
+kubectl delete po perftest
 ```
 
 The above deletes the...
@@ -706,8 +705,9 @@ The above deletes the...
   * configuration (configmap/secret)
   * storage volumes including data (persistentvolumeclaims)
   * volume parameters (storageclass) 
+  * pod we simulated broker use from (pod)
 
-At this point if you wanted to, you could start all over from the beginning of this document.
+At this point you could, if you wanted to, start all over from the beginning of this document.
 
 ## Summary
 
