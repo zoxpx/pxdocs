@@ -6,12 +6,12 @@ description: See how stateful RabbitMQ can be deployed on Kubernetes using Portw
 weight: 2
 noicon: true
 ---
-  
+
 [RabbitMQ](https://www.rabbitmq.com/) is the most widely used open-source message-queue/broker software today.  It plays a central role in many distributed systems and can be configured so that messages between decoupled systems are passed and safely persisted, as well as replicated to other nodes.
 
 In this reference architecture document, we will explore setting up RabbitMQ this way in the "default" namespace, and leverage these features using Portworx for providing a reliable persistent storage layer, helping make sure no messages are lost.
 
-Specifically, our RabbitMQ cluster will use mirrored-queues, so that messages data and metadata is persisted to Portworx volumes, which also are replicated, to prevent messages from being lost.  This provides multiple layers of redundancy.  
+Specifically, our RabbitMQ cluster will use mirrored-queues, so that messages data and metadata is persisted to Portworx volumes, which also are replicated, to prevent messages from being lost.  This provides multiple layers of redundancy.
 
 ## Portworx-powered volume provisioning
 
@@ -58,7 +58,7 @@ The above assumes your Kubernetes is _not_ setup to use [CSI](https://kubernetes
 
 ### Helm
 
-Applications running on Kubernetes typically have _several_ yaml files defining the differnet components.  The more complex an app, the more of these one has to deal with.  
+Applications running on Kubernetes typically have _several_ yaml files defining the differnet components.  The more complex an app, the more of these one has to deal with.
 
 In order to simply a deployment of a system as complex as RabbitMQ, we will utilize [Helm](https://helm.sh) to simply deployment.
 
@@ -102,7 +102,7 @@ Alternatively, the following section describes how to manually do what helm did 
 
 ## Setup RabbitMQ manually
 
-In this section we will instead take the classic approach of including here all the various yaml definitions needed to set up RabbitMQ.  
+In this section we will instead take the classic approach of including here all the various yaml definitions needed to set up RabbitMQ.
 
 {{<info>}}
 The contents of the yaml used below, are largely based on what the [RabbitMQ chart](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) [templates](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates) create when using Helm.
@@ -201,7 +201,7 @@ _EOF
 ...
 configmap/rmq-rabbitmq-ha created
 secret/rmq-rabbitmq-ha created
-``` 
+```
 
 {{<info>}}
 The above credentials are the same dummy (insecure) credentials as mentioned above in the previous approach that utilized helm.
@@ -264,7 +264,7 @@ serviceaccount/rmq-rabbitmq-ha created
 role.rbac.authorization.k8s.io/rmq-rabbitmq-ha created
 rolebinding.rbac.authorization.k8s.io/rmq-rabbitmq-ha created
 ```
- 
+
 ### RabbitMQ cluster
 
 Here we're finally launching the workload definition, which consists of the StatefulSet and some supporting Services.
@@ -575,7 +575,7 @@ This will show (after the pod has started) the log-messages from the container l
 
 ### Containerized testing environment
 
-Here we will pre-spawn a pod with a container that will allow us to run PerfTest in the [_next_ step](#simulate-broker-usage):
+Here we spawn a pod with one container which will allow us to run PerfTest in the [_next_ step](#simulate-broker-usage):
 
 Run:
 
@@ -621,7 +621,7 @@ kubectl run perftest \
 pod/perftest created
 ```
 
-This will start a sleeping container on one of the other nodes (that _aren't_ running RabbitMQ), which we can later then `kubectl exec` into, in the next step.  This container runs for an hour (by sleeping 3600 seconds) and always restart when finished.   We also specify a non-root user to run this environment as, since your cluster may have PodSecurityPolicies enabled.
+A pod with a sleeping container is started on one of the _other_ nodes (that _aren't_ running RabbitMQ).  This container runs for an hour (by sleeping 3600 seconds) and always restart when finished.   We also specify a non-root user to run this environment as, since your cluster may have PodSecurityPolicies enabled.  In the next step we will `kubectl exec` into this pod.
 
 ### Simulate Broker Usage
 
@@ -647,7 +647,7 @@ kubectl exec -it perftest -- \
 
 The test-suite's parameters themselves do the following:
 * run the session for 15 minutes with queues named in the format of `perf-test-` followed by a number (in our case `1` and `2`)
-* create threads for 2 producers and 8 consumers (so theoretically each of the two rabbitmq replicas should host 1 queue and get 1 producers and 4 consumers 
+* create threads for 2 producers and 8 consumers (so theoretically each of the two rabbitmq replicas should host 1 queue and get 1 producers and 4 consumers
 * set messages to be flagged as persistent (so will always involve IO which should be understood that this trades off performance for reliabilty)
 * use the queue with the sample credentials, at the expected address from the previously defined service (and is internal to the kubernetes cluster)
 
@@ -704,7 +704,7 @@ The above deletes the...
   * RBAC for the workload (rolebinding/role/serviceaccount)
   * configuration (configmap/secret)
   * storage volumes including data (persistentvolumeclaims)
-  * volume parameters (storageclass) 
+  * volume parameters (storageclass)
   * pod we simulated broker use from (pod)
 
 At this point you could, if you wanted to, start all over from the beginning of this document.
