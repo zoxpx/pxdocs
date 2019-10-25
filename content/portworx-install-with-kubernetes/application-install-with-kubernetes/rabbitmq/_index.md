@@ -7,21 +7,24 @@ weight: 2
 noicon: true
 ---
   
-[RabbitMQ](https://www.rabbitmq.com/) is the most widely used open-source message-queue/broker software used today.  It plays a central role in many distributed systems, and allows messages between decoupled systems to be safely persisted as well as replicated to other nodes.  
+[RabbitMQ](https://www.rabbitmq.com/) is the most widely used open-source message-queue/broker software today.  It plays a central role in many distributed systems and can be configured so that messages between decoupled systems are passed and safely persisted, as well as replicated to other nodes.
 
-In this reference architecture document, we will explore setting up RabbitMQ in the "default" namespace, to leverage these features using Portworx for providing a reliable persistent storage facility helping make sure no messages are lost.
+In this reference architecture document, we will explore setting up RabbitMQ this way in the "default" namespace, and leverage these features using Portworx for providing a reliable persistent storage layer, helping make sure no messages are lost.
 
-Specifically, RabbitMQ will use mirrored-queues, with messages persisted, to prevent messages from being lost.  It should be understood that these High Availability functionality trades off a bit of performance, as by necessity disk-IO is in the critical path of message processing.
+Specifically, our RabbitMQ cluster will use mirrored-queues, so that messages data and metadata is persisted to Portworx volumes, which also are replicated, to prevent messages from being lost.  This provides multiple layers of redundancy.  
+
+**Note:**</br>It should be understood that regardless of which storage solution is used, High Availability functionality we will strive for here, trades off a bit of performance, by necessity of disk-IO being in the critical path of message processing.  Although messages can be handled only inside memory (which is much faster) for highest performance, reliability is  partly sacrificed/limited as memory is more finite resource than disk.
 
 ## Portworx-powered volume provisioning
 
-RabbitMQ will first need a [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/) definition that sets the Portworx storage parameter for volume-creation, which are later attached to the pods running the RabbitMQ queue-supporting processes.  
+RabbitMQ will first need a [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/) definition that sets the Portworx storage parameters for volume-creation, which are later attached to the pods running the RabbitMQ queue-supporting processes.  
 
-This _StorageClass_ will be referenced by a [_PersistentVolumeClaims_](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) later in this document, that are used by the RabbitMQ cluster. 
+This _StorageClass_ will be referenced by a [PersistentVolumeClaims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) created later in this document.  The PersistentVolume created by that is then used by the RabbitMQ cluster pods.
 
-The following will setup volume-parameters, specifying it shall have two replica of the data, and requesting it be backed by a high-IO priority storage pool (internally to Portworx, a collection of similar spec disks/devices)
+The following will specifying ieach volume shall have two replica of the data, and requesting it be backed by a high-IO priority storage pool (which internally to Portworx, are a collection of similar spec disks/devices).
 
 Run:
+
 ```
 kubectl apply -f - <<'_EOF'
 ---
@@ -47,14 +50,13 @@ To which you should get back the following response:
 storageclass.storage.k8s.io/portworx-rabbitmq created
 ```
 
-For details on what all the above parameters do, please consult the [the relevant Kubernetes storageclass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#the-storageclass-resource) or the [Portworx-specific Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume).
+For details on what all the above parameters do, please consult the the relevant Kubernetes [storageclass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#the-storageclass-resource) or the [Portworx-specific section](https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume) of that documentation.
 
-**Note:**<br/>The above assumes your Kubernetes setup is _not_ using [CSI](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/) if you are then instead set the `provisioner` parameter to `
-pxd.portworx.com`
+**Note:**<br/>The above assumes your Kubernetes is _not_ setup to use [CSI](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/). If you are then instead set the `provisioner` parameter to `pxd.portworx.com`
 
 ## Setup RabbitMQ (using Helm)
 
-### Rationale for using Helm
+### Helm
 
 Applications running on Kubernetes typically have _several_ yaml files defining the differnet components.  The more complex an app, the more of these one has to deal with.  
 
@@ -512,10 +514,10 @@ We will use [PerfTest](https://rabbitmq.github.io/rabbitmq-perf-test/stable/html
 ### Example RabbitMQ policy for H/A
 
 First we will configure a queue-policy named `perf-test-with-ha` to:
-* match only queues that begin with `perf-test`
-* set the [ha-mode parameter](https://www.rabbitmq.com/ha.html#mirroring-arguments) to be exactly 2
-* locate the [queue-masters](https://www.rabbitmq.com/ha.html#behaviour) on whichever is the least loaded node
-* finally set up these queues to be [_lazy_](https://www.rabbitmq.com/lazy-queues.html), which will make them want to use storage for persistance early/automatically
+  * match only queues that begin with `perf-test`
+  * set the [ha-mode parameter](https://www.rabbitmq.com/ha.html#mirroring-arguments) to be exactly 2
+  * locate the [queue-masters](https://www.rabbitmq.com/ha.html#behaviour) on whichever is the least loaded node
+  * finally set up these queues to be [_lazy_](https://www.rabbitmq.com/lazy-queues.html), which will make them want to use storage for persistance early/automatically
 
 Run:
 
@@ -665,7 +667,7 @@ The performance testing session may pause momentarily (and messages in the queue
 
 ## Cleaning up
 
-If above helm was used, cleaning us as easy as first running:
+If helm was used, cleaning is as easy as first running:
 
 ```
 helm delete --purge rmq
@@ -684,7 +686,7 @@ kubectl delete secret rmq-rabbitmq-ha
 kubectl delete cm rmq-rabbitmq-ha
 ```
 
-Finally (regardless of deployment method), also run:
+Finally (regardless of deployment method), we throw away the data, volumes, and volume-params by running:
 
 ```
 kubectl delete pvc data-rmq-rabbitmq-ha-0 data-rmq-rabbitmq-ha-1
@@ -693,11 +695,11 @@ kubectl delete pod perftest
 ```
 
 The above deletes the...
-* workload itself (statefulset/services)
-* RBAC for the workload (rolebinding/role/serviceaccount)
-* configuration (configmap/secret)
-* storage volumes including data (persistentvolumeclaims)
-* volume parameters (storageclass) 
+  * workload itself (statefulset/services)
+  * RBAC for the workload (rolebinding/role/serviceaccount)
+  * configuration (configmap/secret)
+  * storage volumes including data (persistentvolumeclaims)
+  * volume parameters (storageclass) 
 
 At this point if you wanted to, you could start all over from the beginning of this document.
 
