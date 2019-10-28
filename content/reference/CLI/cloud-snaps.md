@@ -390,18 +390,112 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
 
  Once the volume is backed up to the cloud successfully, listing the remote cloudsnaps will display the backup that has just been completed.
 
-* List the backups in the cloud
 
- ```text
- pxctl cloudsnap list
- ```
+### List your cloud backups
 
- ```output
- SOURCEVOLUME                    SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
- volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719        Wed, 16 Jan 2019 21:51:53 UTC        Manual        Done
- volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr        Wed, 16 Jan 2019 22:27:13 UTC        Manual        Done
- NewVol                        56706279008755778        2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463        Thu, 17 Jan 2019 00:03:59 UTC        Manual        Done
- ```
+Use the `pxctl cloudsnap list` command to list your cloud backups:
+
+```text
+pxctl cloudsnap list
+```
+
+```output
+SOURCEVOLUME                    SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
+volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719        Wed, 16 Jan 2019 21:51:53 UTC        Manual        Done
+volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr        Wed, 16 Jan 2019 22:27:13 UTC        Manual        Done
+NewVol                        56706279008755778        2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463        Thu, 17 Jan 2019 00:03:59 UTC        Manual        Done
+```
+
+{{<info>}}
+**Note:** This command assumes that all your credentials are properly set up. If that is not the case, the cloud backups won't show up.
+{{</info>}}
+
+If you enter the `pxctl cloudsnap list` command followed by the `--help` flag, you'll see the avaiable options:
+
+```text
+pxctl cloudsnap list
+```
+
+```output
+pxctl cloudsnap list --help
+List snapshot in cloud
+
+Usage:
+  pxctl cloudsnap list [flags]
+
+Aliases:
+  list, l
+
+Flags:
+  -m, --migration             Optional, lists migration related cloudbackups
+  -a, --all                   List cloud backups of all clusters in cloud
+  -s, --src string            Optional source volume to list cloud backups
+      --cred-id string        Cloud credentials ID to be used for the backup
+  -c, --cluster string        Optional cluster id to list cloud backups. Current cluster-id is default
+  -t, --status string         Optional backup status(failed. aborted, stopped) to list cloud backups; Defaults to Done
+      --label pairs           Optional list of comma-separated name=value pairs to match with cloudsnap metadata
+  -i, --cloudsnap-id string   Optional cloudsnap id to list(lists a single entry)
+  -x, --max uint              Optional number to limit display of backups in each page
+  -h, --help                  help for list
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+```
+
+### Inspect a cloud snapshot
+
+The `pxctl cloudsnap list` command displays all the cloud snapshots for a given credential, source volume, or type of cloud snapshot. To view more details about a particular cloud snapshot, you must specify the `-i` flag with the ID of the cloud snapshot you want to inspect.
+
+Example:
+
+1. Start by listing your cloud snapshots with:
+
+      ```text
+      pxctl cloudsnap list
+      ```
+
+      ```output
+      SOURCEVOLUME            SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
+      agg-cs_journal_1        10769800556491614        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325        Thu, 24 Oct 2019 19:02:08 UTC        Manual        Done
+      agg-cs_0            365276421799434338        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/365276421799434338-461608030527675278        Thu, 24 Oct 2019 19:02:47 UTC        Manual        Done 
+```
+
+
+2. To inspect the first cloud snapshot (`fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325`) and print the output in JSON format, enter the following command:
+
+      ```text
+      pxctl -j cloudsnap list --cloudsnap-id fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325
+      ```
+
+      ```output
+      [
+      {
+        "ID": "fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325",
+        "SrcVolumeID": "10769800556491614",
+        "SrcVolumeName": "agg-cs_journal_1",
+        "Timestamp": "2019-10-24T19:02:08Z",
+        "Metadata": {
+        "cloudsnapType": "Manual",
+        "compression": "lz77",
+        "sizeBytes": "2152751104",
+        "starttime": "Thu, 24 Oct 2019 19:02:08 UTC",
+        "status": "Done",
+        "updatetime": "Thu, 24 Oct 2019 19:06:12 UTC",
+        "version": "V2.00",
+        "volume": "{\"DevSpec\":{\"size\":137438953472,\"format\":2,\"block_size\":4096,\"ha_level\":1,\"cos\":3,\"volume_labels\":{\"best_effort_location_provisioning\":\"true\",\"name\":\"vContainer\"},\"replica_set\":{},\"aggregation_level\":1,\"scale\":1,\"journal\":true,\"queue_depth\":128,\"force_unsupported_fs_type\":true,\"io_strategy\":{}},\"UsedSize\":0,\"PoolId\":0,\"ClusterId\":\"PX-INT-C0-BVT-MN-NS-BRANCH_476_24_Oct_19_04_49_UTC\",\"PublicSecretData\":null,\"Labels\":null}",
+        "volumename": "agg-cs_journal_1"
+        },
+        "Status": "Done"
+      }
+      ```
 
 ### Perform cloud backup of a group of volumes
 
@@ -542,47 +636,7 @@ This command is used to restore a successful backup from the cloud. It requires 
 
 You can restore a backup of a _PX_ to one of your _PX_ volumes in the cluster. Once restored, the volume inherits the attributes from the backup (e.g.: file system, size and block size). The replication level of the restored volume defaults to 1, irrespective of the replication level of the volume that was backed up. Users can increase the replication factor once the restore is complete on the restored volume.
 
-To restore a backup from cloud, use:
-
-```text
-pxctl cloudsnap restore --snap cs30/669945798649540757-864783518531595119 --cred-id 82998914-5245-4739-a218-3b0b06160332
-```
-
-```output
-Cloudsnap restore started successfully on volume: 104172750626071399 with task name:59c4cfd5-4160-45db-b326-f37b327d9225
-```
-
-Once a restore gets started, `pxctl` shows the id of the volume created to restore the cloud snap together with the task-id. The latter can be used to check the job's status.
-
-If the command fails, it shows the reason why it failed.
-
-Note that the restored volume will not be attached or mounted automatically.
-
-{{<info>}}
-{{% content "reference/CLI/shared/optimized-restores-definition.md" %}}
-For more details, check out [this link](/reference/cli/cluster/#enabling-optimized-restores)
-{{</info>}}
-
-### List cloud backups
-
-Use `pxctl cloudsnap list` to list your cloud backups.
-
-```text
-pxctl cloudsnap list
-```
-
-```output
-SOURCEVOLUME                    SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
-volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719        Wed, 16 Jan 2019 21:51:53 UTC        Manual        Done
-volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr        Wed, 16 Jan 2019 22:27:13 UTC        Manual        Done
-NewVol                        56706279008755778        2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463        Thu, 17 Jan 2019 00:03:59 UTC        Manual        Done
-```
-
-{{<info>}}
-**Note:** This command assumes that all your credentials are properly set up. If that is not the case, the cloud backups won't show up.
-{{</info>}}
-
-Next, let's pick one of these backups and have `pxctl` restore it:
+To restore a backup from cloud, enter the following command:
 
 ```text
 pxctl cloudsnap restore --snap 2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463
@@ -592,7 +646,9 @@ pxctl cloudsnap restore --snap 2e4d4b67-95d7-481e-aec5-14223ac55170/567062790087
 Cloudsnap restore started successfully on volume: 104172750626071399 with task name:59c4cfd5-4160-45db-b326-f37b327d9225
 ```
 
-While the job is running, `pxctl cloudsnap status` gives the status of the restore process:
+Once a restore gets started, `pxctl` shows the id of the volume created to restore the cloud snap together with the task-id.
+
+While the restore process is running, run the `pxctl cloudsnap status` command to see its status:
 
 ```text
 pxctl cloudsnap status
@@ -604,6 +660,26 @@ NAME                    SOURCEVOLUME                                    STATE   
 39f66859-14b1-4ce0-a4c0-c858e714689e    2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr    Backup-Done    70.0.73.246    420044800    17.460186585s    Wed, 16 Jan 2019 22:27:30 UTC
 59c4cfd5-4160-45db-b326-f37b327d9225    2e4d4b67-95d7-481e-aec5-14223ac55170/212160250617983239-283838486341798860    Restore-Done    70.0.73.246    1079287808    3.174541219s    Thu, 17 Jan 2019 00:15:19 UTC
 ```
+
+If you want to see the status of a particular process, run the `pxctl cloudsnap status` command and pass it the `--name` flag with the name of the task you want to inspect:
+
+```text
+pxctl cloudsnap status --name 59c4cfd5-4160-45db-b326-f37b327d9225
+```
+
+```output
+59c4cfd5-4160-45db-b326-f37b327d9225    2e4d4b67-95d7-481e-aec5-14223ac55170/212160250617983239-283838486341798860    Restore-Done    70.0.73.246    1079287808    3.174541219s    Thu, 17 Jan 2019 00:15:19 UTC
+```
+
+If the restore command fails, it shows the reason why it failed.
+
+Note that the restored volume will not be attached or mounted automatically.
+
+{{<info>}}
+{{% content "reference/CLI/shared/optimized-restores-definition.md" %}}
+For more details about optimized restores, visit the [Enabling optimized restores](/reference/cli/cluster/#enabling-optimized-restores) section.
+{{</info>}}
+
 
 ### Deleting a Cloud Backup
 
