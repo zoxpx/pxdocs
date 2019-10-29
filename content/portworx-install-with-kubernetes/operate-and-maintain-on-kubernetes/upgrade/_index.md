@@ -1,5 +1,5 @@
 ---
-title: Upgrade on Kubernetes
+title: Upgrade Portworx on Kubernetes
 linkTitle: Upgrade
 weight: 2
 hidesections: true
@@ -11,7 +11,7 @@ series: k8s-op-maintain
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
-## Upgrading Portworx
+## Upgrade Portworx
 
 To upgrade to the **2.1.2** release (the latest stable at the time of this writing), run the following command:
 
@@ -26,24 +26,41 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
 {{% content "shared/upgrade/upgrade-to-2-1-2.md" %}}
 
-## Upgrading Stork
+## Upgrade Stork
 
-Fetch the latest Stork specs using the following curl command. Run these commands on any machine that has kubectl access to your cluster.
+1. On a machine that has kubectl access to your cluster, enter the following commands to download the latest Stork specs:
 
-{{<info>}}If you are using your own private/custom registry for container images, add `&reg=<your-registry-url>` to the below curl command. e.g `&reg=artifactory.company.org:6555` {{</info>}}
+      ```text
+      KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+      curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.1?kbver=$KBVER&comp=stork"
+      ```
 
-```text
-KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.1?kbver=$KBVER&comp=stork"
-```
+      {{% content "portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/shared/private-or-custom-registry.md" %}}
 
-Next, apply it in your cluster.
+2. Next, apply the spec with:
 
-```text
-kubectl apply -f stork-spec.yaml
-```
+      ```text
+      kubectl apply -f stork-spec.yaml
+      ```
 
-## Customizing the upgrade process
+## Upgrade Lighthouse
+
+1. On a machine that has kubectl access to your cluster, enter the following commands to download the latest Lighthouse specs:
+
+      ```text
+      KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/2.1?comp=lighthouse"
+      ```
+
+      {{% content "portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/shared/private-or-custom-registry.md" %}}
+
+2. Apply the spec by running:
+
+      ```text
+      kubectl apply -f lighthouse-spec.yaml
+      ```
+
+## Customize the upgrade process
 
 #### Specify a different Portworx upgrade image
 
