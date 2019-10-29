@@ -24,15 +24,13 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 1. Updates RBAC objects that are being used by Portworx with the latest set of permissions that are required
 2. Triggers RollingUpdate of the Portworx DaemonSet to the default stable image and monitors that for completion
 
-{{% content "shared/upgrade/upgrade-to-2-1-2.md" %}}
-
 ## Upgrade Stork
 
 1.  On a machine that has kubectl access to your cluster, enter the following commands to download the latest Stork specs:
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.1?kbver=$KBVER&comp=stork"
+      curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.0?kbver=$KBVER&comp=stork"
       ```
 
 2. Next, apply the spec with:
@@ -47,7 +45,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/2.1?comp=lighthouse"
+      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/2.0?comp=lighthouse"
       ```
 
       {{% content "portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/shared/private-or-custom-registry.md" %}}
