@@ -49,7 +49,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/2.2.0?comp=lighthouse"
+      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/2.2.0?kbver=$KBVER&comp=lighthouse"
       ```
 
       {{% content "portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/shared/private-or-custom-registry.md" %}}
