@@ -15,6 +15,19 @@ Using Portworx with CSI, you can perform the following operations:
 * Take snapshots of CSI-enabled volumes
 * Create shared CSI-enabled volumes
 
+## Supported features
+
+The following table shows the features supported by the different versions of Kubernetes and Portworx:
+
+| Feature | Minimum Kubernetes version | Minimum Portworx version |
+| --- | --- | --- |
+| Provision, attach, and mount volumes | 1.13.12+ | 2.2 |
+| CSI Snapshots (alpha version) | You can use the `VolumeSnapshotDataSource` feature gate to enable CSI Snapshots on Kubernetes 1.13.12+. Refer to the [Take snapshots of CSI enabled volumes](#take-snapshots-of-csi-enabled-volumes) section for more details | 2.2 |
+| Stork [^1] | 1.13.12+ | 2.2 |
+| Resizer | You can use use the `ExpandCSIVolumes` feature gate to enable the alpha or the beta version of this feature. Refer to the [Kubernetes Feature Gates](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features) page for more details on the specific versions you can set on different Kubernetes versions. | 2.2 |
+
+[^1]: Note that only Stork 2.3.0 or later is supported with CSI.
+
 ## Prerequisites
 
 Before you install and use Portworx with CSI, ensure you meet the prerequisistes:
@@ -115,7 +128,7 @@ You can secure your CSI-enabled volumes with token-based authorization. In using
 * Using hardcoded values
 * Using template values
 
-You can also mix these two methods to form your own hybrid approach.  
+You can also mix these two methods to form your own hybrid approach.
 
 ### Using hardcoded values
 
