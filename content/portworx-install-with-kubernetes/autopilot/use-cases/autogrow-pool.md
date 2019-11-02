@@ -22,28 +22,28 @@ Autopilot uses Portworx APIs to expand storage pools, and these APIs currently s
 
 ## Example
 
-The following example Autopilot rule expands a Portworx storage pool by **50%** whenever its available capacity is lower than **50%** up to a maximum size of **400GiB**:
+The following example Autopilot rule expands a **250GiB** Portworx storage pool composed of a single **250GiB** drive by **100%** whenever its available capacity is lower than **50%** up to a maximum volume size of **2TB**:
 
 ```text
 apiVersion: autopilot.libopenstorage.org/v1alpha1
 kind: AutopilotRule
 metadata:
- name: pool-expand
+  name: pool-expand
 spec:
   enforcement: required
   ##### conditions are the symptoms to evaluate. All conditions are AND'ed
   conditions:
     expressions:
-    # pool available capacity less than 40%
+    # pool available capacity less than 50%
     - key: "100 * ( px_pool_stats_available_bytes/ px_pool_stats_total_bytes)"
       operator: Lt
       values:
         - "50"
-    # volume total capacity should not exceed 400GiB
+    # pool total capacity should not exceed 2TB
     - key: "px_pool_stats_total_bytes/(1024*1024*1024)"
       operator: Lt
       values:
-       - "400"
+       - "2000"
   ##### action to perform when condition is true
   actions:
     - name: "openstorage.io.action.storagepool/expand"
@@ -119,9 +119,7 @@ First, create the storage and application spec files:
 
 3. Create `postgres-app.yaml` and place the following content inside it.
 
-    The application in this example is a [PostgreSQL](https://www.postgresql.org/) database with a [pgbench](https://www.postgresql.org/docs/10/pgbench.html) sidecar. The `SIZE` environment variable in this spec instructs pgbench to write 300GiB of data to the volume. Since the storage pool is 400GiB in size, Autopilot will resize the storage pool when the `conditions` threshold is crossed.
-
-    <!-- These were unchanged from the PVC resize article. How's this? -->
+    The application in this example is a [PostgreSQL](https://www.postgresql.org/) database with a [pgbench](https://www.postgresql.org/docs/10/pgbench.html) sidecar. The `SIZE` environment variable in this spec instructs pgbench to write 300GiB of data to the volume. Since the volume is 400GiB in size, Autopilot will resize the storage pool when the `conditions` threshold is crossed.
 
     ```text
     apiVersion: apps/v1
@@ -197,7 +195,7 @@ Create a YAML spec for the autopilot rule named `autopilotrule-pool-expand-examp
 apiVersion: autopilot.libopenstorage.org/v1alpha1
 kind: AutopilotRule
 metadata:
- name: pool-expand
+  name: pool-expand
 spec:
   enforcement: required
   ##### conditions are the symptoms to evaluate. All conditions are AND'ed
@@ -229,7 +227,6 @@ Once you've designed your specs, deploy them.
 
 ```text
 kubectl apply -f autopilotrule-pool-expand-example.yaml
-kubectl apply -f namespaces.yaml
 kubectl apply -f postgres-sc.yaml
 kubectl apply -f postgres-vol.yaml
 kubectl apply -f postgres-app.yaml
@@ -244,3 +241,10 @@ You can enter the following command to retrieve all the events generated for the
 ```text
 kubectl get events --field-selector involvedObject.kind=AutopilotRule,involvedObject.name=pool-expand --all-namespaces --sort-by .lastTimestamp
 ```
+
+### Known issues
+
+Portworx is aware of the following known issues:
+
+* When an autopilot pod restarts, it does not save previous state of resizing pools. This causes autopilot to trigger resize operations again for the same pools.
+* If Portworx or Portworx storage nodes restart while pool resize operations are underway, affected nodes will mark resize as done, and Autopilot will trigger another resize operation in the queue.
