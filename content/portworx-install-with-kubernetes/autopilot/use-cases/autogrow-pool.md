@@ -10,7 +10,6 @@ You can use Autopilot to expand Portworx storage pools automatically when they b
 
 Autopilot uses Portworx APIs to expand storage pools, and these APIs currently support the following cloud providers:
 
-* AWS
 * Azure
 * VMware vSphere
 
