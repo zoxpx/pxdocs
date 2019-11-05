@@ -54,10 +54,10 @@ Create the storage class which refers to the CSI secret you created in step 2 ab
   * `csi.storage.k8s.io/node-publish-secret-namespace` and the namespace in which your CSI secret is located
 
 ```text
+apiVersion: storage.k8s.io/v1
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
 metadata:
-name: portworx-sc
+  name: portworx-sc
 provisioner: pxd.portworx.com
 parameters:
   repl: "1"
@@ -113,10 +113,10 @@ kubectl create secret generic mysql-pvc-2 -n portworx --from-literal=SECRET_NAME
 Create a StorageClass CRD, specifying the `${pvc.name}` and `${pvc.namespace}` template variables:
 
 ```text
+apiVersion: storage.k8s.io/v1
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
 metadata:
-name: portworx-sc
+  name: portworx-sc
 provisioner: pxd.portworx.com
 parameters:
   repl: "1"

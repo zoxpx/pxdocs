@@ -78,14 +78,15 @@ First, create the storage and application spec files:
 
     ```text
     ##### Portworx storage class
+    apiVersion: storage.k8s.io/v1
     kind: StorageClass
-    apiVersion: storage.k8s.io/v1beta1
     metadata:
       name: postgres-pgbench-sc
     provisioner: kubernetes.io/portworx-volume
     parameters:
       repl: "2"
     allowVolumeExpansion: true
+
     ```
 
 2. Create `postgres-vol.yaml` and place the following content inside it.
