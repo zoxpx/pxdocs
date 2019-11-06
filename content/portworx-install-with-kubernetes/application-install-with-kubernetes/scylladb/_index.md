@@ -321,7 +321,7 @@ Let's look at which nodes are hosting the data in your Scylla db based on partit
 10.233.76.19
 10.233.127.67
 ```
-Cross check the PodIP to the nodes. (node-1 hosts one of the pods)
+Enter the following `kubectl get pods` command to crosscheck the pod IP addresses with the IP addresses you just listed:
 ```text
 kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
 ```
