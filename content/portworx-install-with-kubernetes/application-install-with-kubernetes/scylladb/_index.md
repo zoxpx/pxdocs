@@ -21,7 +21,7 @@ ravi-blr-dev-dour-shoulder-1   Ready    <none>   16d    v1.14.1   70.0.87.82    
 ravi-blr-dev-dour-shoulder-2   Ready    <none>   103d   v1.14.1   70.0.87.118   <none>        CentOS Linux 7 (Core)   3.10.0-862.3.2.el7.x86_64   docker://18.9.6
 ravi-blr-dev-dour-shoulder-3   Ready    <none>   103d   v1.14.1   70.0.87.120   <none>        CentOS Linux 7 (Core)   3.10.0-862.3.2.el7.x86_64   docker://18.9.6
 ```
-Define StorageClass portworx-sc.yaml
+Define the following `portworx-sc.yaml` StorageClass:
 ```text
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
@@ -65,7 +65,7 @@ Apply the configuration
 ```text
 kubectl apply -f scylla-configmap.yaml
 ```
-Create scylla-service.yaml with the following configuration
+Create the following `scylla-service.yaml` Service:
 ```text
 apiVersion: v1
 kind: Service
@@ -80,11 +80,11 @@ spec:
   selector:
     app: scylla
 ```
-Apply the configuration
+Apply the `scylla-service.yaml` Service:
 ```text
 kubectl apply -f scylla-service.yaml
 ```
-Create a scylla-statefulset.yaml as shown below. This configuration will create statefulset for Scylladb with 3 replicas. It uses stork scheduler to enable pods to be placed closer to where their data is located.
+The spec below creates StatefulSet for Scylladb with 3 replicas and uses the Stork scheduler to place pods to closer to where their data is located. Create the following `scylla-statefulset.yaml` StatefulSet:
 ```text
 apiVersion: apps/v1beta2
 kind: StatefulSet
@@ -169,10 +169,12 @@ spec:
           requests:
             storage: 60Gi
 ```
+Apply the `scylla-statefulset.yaml` StatefulSet:
+
 ```text
 kubectl apply scylla-statefulset.yaml
 ```
-Verify that PVC is bound to a volume using the storage class:
+Enter the `kubectl get pvc` command to verify that the PVCs are bound to a volume using the storage class. The PVC status shows as `Bound` if the operation succeeded:
 ```text
 kubectl get pvc
 ```
@@ -206,6 +208,13 @@ UN  10.233.76.19   351.15 KB  256          70.5%             814bf13f-8d4a-441d-
 UN  10.233.121.53  359.24 KB  256          68.0%             013699ce-1fa8-4a32-86ec-640ce9ec9f6e  rack1
 ```
 Note the pods placement and the hosts on which they are scheduled
+Enter the `kubectl get pods` command, filtering the output using jq to display the following:
+
+* Pod name
+* Hostname
+* Host IP
+* Pod IP
+
 ```text
 kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
 ```
@@ -229,7 +238,14 @@ kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,
   "PodIP": "10.233.127.67"
 }
 ```
-Verify portworx volumes. ssh into one of the nodes.
+Enter the `ssh` command to open a shell session into one of your nodes:
+
+```text
+ssh 70.0.87.120
+``
+
+Enter the `pxctl volume list` command to list your volume IDs. Save one of the node IDs for future reference:
+
 ```text
 pxctl volume list
 ```
@@ -239,7 +255,7 @@ ID			NAME						SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS			SNAP-ENABLED
 702215287887827398	pvc-df1cb1a2-e665-11e9-a83a-000c29886e3e	60 GiB	2	no	no		LOW		up - attached on 70.0.87.82	no
 685261507172158119	pvc-ee87e5d7-e665-11e9-a83a-000c29886e3e	60 GiB	2	no	no		LOW		up - attached on 70.0.87.118	no
 ```
-Inspect the volume. Note that portworx volume hase 2 replicas created and it is atteched to node-3.
+Enter the `pxctl volume inspect` command to examine your volume. In the example output below, the Portworx volume contains 2 replica sets and is attached to node 3.
 ```text
 pxctl volume inspect 242236313329814877
 ```
@@ -276,8 +292,10 @@ Volume	:  242236313329814877
 		  Controlled by  : scylla (StatefulSet)
 ```
 ## Failover
+
+Once you've created a ScyllaDB cluster on Kubernetes and Portworx, you can test how the cluster reacts to a failure.
 ### Pod failover
-Verify that you have 3 node scylla cluster running on the Kubernetes cluster
+The steps in this exercise simulate a pod failure and demonstrate Portworx and Kubernetes' ability to recover from that failure. 
 ```text
 kubectl get pods -l "app=scylla"
 ```
@@ -287,10 +305,12 @@ scylla-0   1/1     Running   0          4h
 scylla-1   1/1     Running   0          4h
 scylla-2   1/1     Running   0          4h
 ```
-Creating data on your Scylla DB
+Enter the following `kubectl exec` command to open a bash session with the worker node on which ScyllaDB is running:
 ```text
 kubectl exec -it scylla-0 -- bash
 ```
+Enter the `cqlsh` command to open a Cassandra shell session:
+
 ```text
 cqlsh
 ```
