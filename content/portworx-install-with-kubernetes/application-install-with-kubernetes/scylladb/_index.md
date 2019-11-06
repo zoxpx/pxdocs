@@ -182,7 +182,7 @@ scylla-data-scylla-0   Bound    pvc-cc1c5c4f-e665-11e9-a83a-000c29886e3e   60Gi 
 scylla-data-scylla-1   Bound    pvc-df1cb1a2-e665-11e9-a83a-000c29886e3e   60Gi       RWO            scylla-ssd     3h
 scylla-data-scylla-2   Bound    pvc-ee87e5d7-e665-11e9-a83a-000c29886e3e   60Gi       RWO            scylla-ssd     3h
 ```
-Veryfir Scylladb cluster
+Enter the `kubectl get pods` command to verify that the ScyllaDB pods have deployed successfully. The pod status shows as `Running` if the operation succeeded:
 ```text
 kubectl get pods
 ```
