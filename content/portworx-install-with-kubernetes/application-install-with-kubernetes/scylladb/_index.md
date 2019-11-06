@@ -1,5 +1,5 @@
 ---
-title: ScyllaDB on Kubernetes on Portworx
+title: ScyllaDB on Kubernetes and Portworx
 linkTitle: ScyllaDB
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, scylladb
 description: See how Portworx can be used to deploy a ScyllaDB statefulset on top of Kubernetes.
@@ -7,8 +7,10 @@ weight: 9
 noicon: true
 ---
 
-You can create and run a ScyllaDB cluster on Kubernetes, which stores data on Portworx volumes. 
+ScyllaDB is a NoSQL database that aims to provide low latency and high throughput. Portworx is a software-defined storage overlay that allows you to run highly-available stateful applications. This article shows how you can create and run a ScyllaDB cluster on Kubernetes, which stores data on Portworx volumes. 
+## Prerequisites
 
+* You must have a Kubernetes cluster with a minimum of 3 worker nodes
 ## Create a StorageClass for volume provisioning
 Check the state of cluster nodes
 ```text
