@@ -309,7 +309,7 @@ Create the TABLE
 cqlsh> use demodb;
 cqlsh:demodb> CREATE TABLE emp(emp_id int PRIMARY KEY, emp_name text, emp_city text, emp_sal varint,emp_phone varint);
 ```
-Insert a record
+Enter the following `INSERT INTO` query to insert a record into the table:
 ```text
 cqlsh:demodb> INSERT INTO emp (emp_id, emp_name, emp_city, emp_phone, emp_sal) VALUES(123423445,'Steve', 'Denver', 5910234452, 50000);
 ```
