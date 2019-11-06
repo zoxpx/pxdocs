@@ -22,7 +22,7 @@ Storage requirements? The sc mentions SSDs, and there's probably a minimum stora
 
 ## Create a StorageClass for volume provisioning
 
-1. Check the cluster status:
+1. Use the following command to list the nodes in your cluster:
 
     ```text
     kubectl get nodes -o wide
@@ -57,7 +57,7 @@ Storage requirements? The sc mentions SSDs, and there's probably a minimum stora
     kubectl apply -f portworx-sc.yml
     ```
 
-## Scylladb installation
+## ScyllaDB installation
 
 1. Create a file called `scylla-configmap.yaml` with the following content:
 
@@ -112,7 +112,7 @@ Storage requirements? The sc mentions SSDs, and there's probably a minimum stora
     kubectl apply -f scylla-service.yaml
     ```
 
-5. The spec below creates StatefulSet for Scylladb with 3 replicas and uses the Stork scheduler to place pods to closer to where their data is located. Create a file called `scylla-statefulset.yaml` with the following content:
+5. The spec below creates StatefulSet for ScyllaDB with 3 replicas and uses the Stork scheduler to place pods to closer to where their data is located. Create a file called `scylla-statefulset.yaml` with the following content:
 
       ```text
     apiVersion: apps/v1beta2
@@ -205,7 +205,7 @@ Storage requirements? The sc mentions SSDs, and there's probably a minimum stora
     kubectl apply scylla-statefulset.yaml
     ```
 
-## Verify ScyllaDB installation.
+## Verify ScyllaDB installation
 
 1. Enter the `kubectl get pvc` command to verify that the PVCs are bound to a volume using the storage class. The PVC status shows as `Bound` if the operation succeeded:
 
@@ -233,7 +233,7 @@ Storage requirements? The sc mentions SSDs, and there's probably a minimum stora
     scylla-2   1/1     Running   0          3h
     ```
 
-3. Run the `nodetool status` command in the `scylla-0 ` pod to verify that the ScyllaDB cluster was created:
+3. Run the `nodetool status` command in the `scylla-0` pod to verify that the ScyllaDB cluster was created:
 
     ```text
     kubectl exec scylla-0 -- nodetool status
@@ -388,14 +388,14 @@ The steps in this exercise simulate a pod failure and demonstrate Portworx and K
     ```text
     CREATE KEYSPACE demodb WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
     ```
-5. Enter the following commands to switch to the `demodb` keyspace and create a table within it:
+5. Enter the following commands to switch to the `demodb` keyspace and create a table called `emp` within it:
 
     ```text
     cqlsh> use demodb;
     cqlsh:demodb> CREATE TABLE emp(emp_id int PRIMARY KEY, emp_name text, emp_city text, emp_sal varint,emp_phone varint);
     ```
 
-6. Enter the following `INSERT INTO` command to insert a record into the table:
+6. Enter the following `INSERT INTO` statement to insert a record into the `emp` table:
 
     ```text
     cqlsh:demodb> INSERT INTO emp (emp_id, emp_name, emp_city, emp_phone, emp_sal) VALUES(123423445,'Steve', 'Denver', 5910234452, 50000);
@@ -409,87 +409,114 @@ The steps in this exercise simulate a pod failure and demonstrate Portworx and K
 
 8. Enter the following `nodetool getendpoints` command to list the IP addresses of the nodes which are also hosting ScyllaDB information based on the partition key:
 
-```text
-[root@scylla-0 /]# nodetool getendpoints demodb emp 123423445
-```
-```output
-10.233.76.19
-10.233.127.67
-```
-Enter the following `kubectl get pods` command to crosscheck the pod IP addresses with the IP addresses you just listed:
-```text
-kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
-```
-```output
-{
-  "name": "scylla-0",
-  "hostname": "ravi-blr-dev-dour-shoulder-3",
-  "hostIP": "70.0.87.120",
-  "PodIP": "10.233.121.53"
-}
-{
-  "name": "scylla-1",
-  "hostname": "ravi-blr-dev-dour-shoulder-1",
-  "hostIP": "70.0.87.82",
-  "PodIP": "10.233.76.19"
-}
-{
-  "name": "scylla-2",
-  "hostname": "ravi-blr-dev-dour-shoulder-2",
-  "hostIP": "70.0.87.118",
-  "PodIP": "10.233.127.67"
-}
-```
-Cordon the node where one if the dataset replicas reside.
-```text
-kubectl cordon ravi-blr-dev-dour-shoulder-1
-```
-Delete the pod scylla-1
-```
-kubectl delete pods scylla-1
-```
-The pod gets scheduled on node-2 now.
-```text
-kubectl get pods -o wide 
-```output
-NAME       READY   STATUS    RESTARTS   AGE   IP              NODE                           NOMINATED NODE   READINESS GATES
-scylla-0   1/1     Running   0          4h    10.233.121.53   ravi-blr-dev-dour-shoulder-3   <none>           <none>
-scylla-1   1/1     Running   0          25s   10.233.127.68   ravi-blr-dev-dour-shoulder-2   <none>           <none>
-scylla-2   1/1     Running   0          4h    10.233.127.67   ravi-blr-dev-dour-shoulder-2   <none>           <none> 
-```
-Cross reference the pod placement again
-```text
-kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
-```
-```output
-{
-  "name": "scylla-0",
-  "hostname": "ravi-blr-dev-dour-shoulder-3",
-  "hostIP": "70.0.87.120",
-  "PodIP": "10.233.121.53"
-}
-{
-  "name": "scylla-1",
-  "hostname": "ravi-blr-dev-dour-shoulder-2",
-  "hostIP": "70.0.87.118",
-  "PodIP": "10.233.127.68"
-}
-{
-  "name": "scylla-2",
-  "hostname": "ravi-blr-dev-dour-shoulder-2",
-  "hostIP": "70.0.87.118",
-  "PodIP": "10.233.127.67"
-}
-```
-Check to make sure the data that was inserted earlier is available and accessible. Query for the data.
-```text
-kubectl exec scylla-1 -- cqlsh -e 'select * from demodb.emp'
-```
-```output
- emp_id    | emp_city | emp_name | emp_phone  | emp_sal
------------+----------+----------+------------+---------
- 123423445 |   Denver |    Steve | 5910234452 |   50000
+    ```text
+    nodetool getendpoints demodb emp 123423445
+    ```
+    ```output
+    10.233.76.19
+    10.233.127.67
+    ```
 
-(1 rows)
-```
+9. Enter the following `kubectl get pods` command to crosscheck the pod IP addresses with the IP addresses you just listed:
+
+    ```text
+    kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
+    ```
+
+    ```output
+    {
+      "name": "scylla-0",
+      "hostname": "ravi-blr-dev-dour-shoulder-3",
+      "hostIP": "70.0.87.120",
+      "PodIP": "10.233.121.53"
+    }
+    {
+      "name": "scylla-1",
+      "hostname": "ravi-blr-dev-dour-shoulder-1",
+      "hostIP": "70.0.87.82",
+      "PodIP": "10.233.76.19"
+    }
+    {
+      "name": "scylla-2",
+      "hostname": "ravi-blr-dev-dour-shoulder-2",
+      "hostIP": "70.0.87.118",
+      "PodIP": "10.233.127.67"
+    }
+    ```
+
+10. Enter the following `kubectl cordon` command to mark the `scylla-1` node as unschedulable:
+
+    ```text
+    kubectl cordon ravi-blr-dev-dour-shoulder-1
+    ```
+
+11. Enter the following `kubectl delete` command to delete the `syclla-1` pod:
+
+    ```text
+    kubectl delete pods scylla-1
+    ```
+
+12. Enter the following `kubectl get pods` command to see if Kubernetes scheduled the `syclla-1` pod to a different node:
+
+
+    ```text
+    kubectl get pods -o wide
+    ```
+
+    ```output
+
+    NAME       READY   STATUS    RESTARTS   AGE   IP              NODE                           NOMINATED NODE   READINESS GATES
+    scylla-0   1/1     Running   0          4h    10.233.121.53   ravi-blr-dev-dour-shoulder-3   <none>           <none>
+    scylla-1   1/1     Running   0          25s   10.233.127.68   ravi-blr-dev-dour-shoulder-2   <none>           <none>
+    scylla-2   1/1     Running   0          4h    10.233.127.67   ravi-blr-dev-dour-shoulder-2   <none>           <none> 
+    ```
+
+    Note that the `scyla-1` pod is now scheduled to the `ravi-blr-dev-dour-shoulder-2 ` node.
+
+
+13. Enter the `kubectl get pods` command, filtering the output using the `jq` command to display the following
+
+  * Pod name
+  * Host name
+  * Host IP
+  * Pod IP
+
+    ```text
+    kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
+    ```
+
+    ```output
+    {
+      "name": "scylla-0",
+      "hostname": "ravi-blr-dev-dour-shoulder-3",
+      "hostIP": "70.0.87.120",
+      "PodIP": "10.233.121.53"
+    }
+    {
+      "name": "scylla-1",
+      "hostname": "ravi-blr-dev-dour-shoulder-2",
+      "hostIP": "70.0.87.118",
+      "PodIP": "10.233.127.68"
+    }
+    {
+      "name": "scylla-2",
+      "hostname": "ravi-blr-dev-dour-shoulder-2",
+      "hostIP": "70.0.87.118",
+      "PodIP": "10.233.127.67"
+    }
+    ```
+
+14. Enter the following `SELECT` statement to read the columns from the `demodb.emp` table:
+
+
+    ```text
+    kubectl exec scylla-1 -- cqlsh -e 'select * from demodb.emp'
+    ```
+    ```output
+     emp_id    | emp_city | emp_name | emp_phone  | emp_sal
+    -----------+----------+----------+------------+---------
+     123423445 |   Denver |    Steve | 5910234452 |   50000
+
+    (1 rows)
+    ```
 
