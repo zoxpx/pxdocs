@@ -115,7 +115,7 @@ Storage requirements? The sc mentions SSDs, and there's probably a minimum stora
 5. The spec below creates StatefulSet for ScyllaDB with 3 replicas and uses the Stork scheduler to place pods to closer to where their data is located. Create a file called `scylla-statefulset.yaml` with the following content:
 
       ```text
-    apiVersion: apps/v1beta2
+    apiVersion: apps/v1
     kind: StatefulSet
     metadata:
       name: scylla
