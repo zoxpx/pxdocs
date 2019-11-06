@@ -7,7 +7,7 @@ weight: 9
 noicon: true
 ---
 
-The example provided create a Scylladb cluster running in Kubernetes, which uses Portworx volumes for Scylladb
+You can create and run a ScyllaDB cluster on Kubernetes, which stores data on Portworx volumes. 
 
 ## Create a StorageClass for volume provisioning
 Check the state of cluster nodes
