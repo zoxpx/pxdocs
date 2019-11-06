@@ -300,7 +300,7 @@ Connected to Test Cluster at 10.233.121.53:9042.
 Use HELP for help.
 cqlsh>
 ```
-Create a KEYSPACE "demodb"
+Enter the following `CREATE KEYSPACE` query to create a keyspace named `demodb`:
 ```text
 CREATE KEYSPACE demodb WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
 ```
