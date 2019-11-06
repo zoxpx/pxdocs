@@ -313,7 +313,13 @@ Enter the following `INSERT INTO` query to insert a record into the table:
 ```text
 cqlsh:demodb> INSERT INTO emp (emp_id, emp_name, emp_city, emp_phone, emp_sal) VALUES(123423445,'Steve', 'Denver', 5910234452, 50000);
 ```
-Let's look at which nodes are hosting the data in your Scylla db based on partition key
+Exit the Cassandra shell session:
+
+```text
+cqlsh> exit
+``
+
+Enter the following `nodetool getendpoints` command to list the IP addresses of the nodes which are also hosting ScyllaDB information based on the partition key:
 ```text
 [root@scylla-0 /]# nodetool getendpoints demodb emp 123423445
 ```
