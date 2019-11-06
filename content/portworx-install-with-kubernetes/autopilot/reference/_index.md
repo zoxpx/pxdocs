@@ -63,7 +63,7 @@ Defines what action to take when the conditions are met. See [Supported Actions]
 action:
   name: <operation>
   params:
-    <operation-specific-paramater>: <value>
+    <operation-specific-parameter>: <value>
 ```
 
 ## Supported Autopilot actions
@@ -75,14 +75,40 @@ This action is to perform resize on Kubernetes PersistentVolumeClaims (PVCs).
 ##### Parameters
 
 * **scalepercentage**: Specifies the percentage of current PVC size by which Autopilot should resize the PVC. If not specified, the default is *50%*.
+* **maxsize**: Specifies the maximum threshold size in GiB after which Autopilot should stop resizing the PVCs. If not specified, the default is unlimited. 
 
-##### Example
+##### Examples
 
-Resize the PVC by 100%.
+Resize the PVC by 100% of current size
 
 ```text
   actions:
   - name: openstorage.io.action.volume/resize
     params:
       scalepercentage: "100"
+```
+
+
+### openstorage.io.action.storagepool/expand
+
+This action is to perform expansion on Portworx Storage Pools.
+
+##### Parameters
+
+* **scalepercentage**: Specifies the percentage of current Pool size by which Autopilot should resize it. If not specified, the default is *50%*.
+* **scaletype**: Specifies the type of operation to be performed to expand the pool. Supported values are:
+    * *add-disk*: Portworx will add new disk(s) to the existing storage pool
+    * *resize-disk*: Portworx will resize existing disks in the storage pool
+    * *auto*: Portworx will automatically figure out the best scale type based on current disks and the backing cloud provider.
+
+##### Examples
+
+Expand the pool by 50% of current size by adding disks
+
+```text
+  actions:
+  - name: openstorage.io.action.storagepool/expand
+    params:
+      scalepercentage: "50"
+      scaletype: "add-disk"
 ```

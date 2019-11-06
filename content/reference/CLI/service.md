@@ -241,10 +241,6 @@ Drive add  successful. Requires restart (Exit maintenance mode).
 
 To rebalance the storage across the drives, use pxctl service drive rebalance. This is useful after prolonged operation of a node.
 
-#### Related topics
-
-* [PX-Cache]()
-
 ### pxctl service drive show
 
 You can use the `pxctl service drive show` command to display a node's drive information.
@@ -441,3 +437,50 @@ You can use the `pxct service pool cache command` command to:
 * Check if pool caching is enabled for a pool
 
 Refer to the [Pool caching](/concepts/pool-caching) section for more details.
+
+### pxctl service pool delete
+
+You can use the `pxctl service pool delete` command to delete storage pools which may be misconfigured or otherwise not functioning properly.
+
+```text
+pxctl service pool delete --help
+```
+```output
+Delete pool
+Usage:
+  pxctl service pool delete [flags]
+Flags:
+  -h, --help   help for delete
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+```
+
+Before you remove a pool, consider the following requirements:
+
+* Your target pool for deletion must be empty and contain no replicas
+* If your target pool for deletion is a metadata pool, it must be readable
+* You must have more pools on the node than just your target pool for deletion
+* You must place your node in maintenance mode to use this command
+
+The following example deletes a storage pool from a node containing 2 storage pools:
+
+```text
+pxctl service pool delete 0
+```
+```output
+This will permanently remove storage pool and cannot be undone.
+Are you sure you want to proceed ? (Y/N): y
+Pool 0 DELETED.
+```
+
+{{<info>}}
+**NOTE:** New pools created after a pool deletion increment from the last pool ID. A new pool created after this example would have a pool ID of 2
+{{</info>}}  

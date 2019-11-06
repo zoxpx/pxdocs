@@ -71,11 +71,14 @@ One way to achieve is this to use [inter-pod affinity](https://kubernetes.io/doc
 * Consider below nginx example:
 
   ```text
-  apiVersion: apps/v1beta1
-  kind: Deployment
-  metadata:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: nginx-deployment
-  spec:
+spec:
+  selector:
+    matchLabels:
+      app: nginx
   replicas: 1
   template:
     metadata:

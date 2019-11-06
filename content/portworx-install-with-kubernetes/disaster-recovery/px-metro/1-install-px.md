@@ -44,13 +44,23 @@ Specifying the same **ClusterID** and **Kvdb Endpoints** as your existing cluste
 If your Kubernetes clusters have exactly the same configuration, you can use the URL specified by the `portworx.com/install-source` annotation on the existing Portworx DaemonSet to fetch the spec for your new cluster:
 
 ```text
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: portworx
   namespace: kube-system
+  labels:
+    k8s-app: fluentd-logging
   annotations:
     portworx.com/install-source: "https://install.portworx.com/2.2?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
+spec:
+  selector:
+    matchLabels:
+      name: portworx
+  template:
+    metadata:
+      labels:
+        name: portworx
 ```
 
 Otherwise you can always generate a new spec using the Portworx Spec Generator in [PX-Central](https://central.portworx.com).

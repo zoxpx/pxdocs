@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch-data
@@ -6,6 +6,9 @@ metadata:
     component: elasticsearch
     role: data
 spec:
+  selector:
+    matchLabels:
+      component: elasticsearch
   serviceName: elasticsearch-data
   replicas: 3
   template:

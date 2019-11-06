@@ -198,8 +198,8 @@ This [page](/concepts) gives more details on different volume types, how to crea
 ```text
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
-  metadata:
-    name: portworx-repl-1-snap-internal
+metadata:
+  name: portworx-repl-1-snap-internal
 provisioner: kubernetes.io/portworx-volume
 parameters:
   repl: "1"

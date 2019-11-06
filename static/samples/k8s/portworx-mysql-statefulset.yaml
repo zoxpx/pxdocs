@@ -12,11 +12,14 @@ spec:
   selector:
     app: mysql
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql-statefull
+  name: mysql-stateful
 spec:
+  selector:
+    matchLabels:
+      app: mysql
   serviceName: "mysql"
   replicas: 1
   template:

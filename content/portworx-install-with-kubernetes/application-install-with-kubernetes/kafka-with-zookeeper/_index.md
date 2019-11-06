@@ -96,11 +96,14 @@ spec:
       app: zk
   minAvailable: 2
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: zk
 spec:
+  selector:
+    matchLabels:
+      app: zk
   serviceName: zk-headless
   replicas: 3
   template:
@@ -323,7 +326,6 @@ zk-2.zk-headless.default.svc.cluster.local
 Create `kafka-all.yaml` with the following contents. Note the property `zookeeper.connect`. This points to the zookeeper nodes’ FQDN obtained earlier.
 
 ```text
-
 ---
 apiVersion: v1
 kind: Namespace
@@ -460,12 +462,15 @@ spec:
   selector:
     app: kafka
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: kafka
   namespace: kafka
 spec:
+  selector:
+    matchLabels:
+      app: kafka
   serviceName: "broker"
   replicas: 3
   template:
@@ -550,7 +555,6 @@ spec:
         requests:
           storage: 3Gi
 ---
-
 ```
 
 Apply the manifest

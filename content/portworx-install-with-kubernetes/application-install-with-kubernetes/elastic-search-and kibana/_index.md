@@ -93,7 +93,7 @@ spec:
 Create `es-master-sts.yaml` with the following content:
 
 ```text
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch-master
@@ -102,6 +102,9 @@ metadata:
     role: master
 spec:
   serviceName: elasticsearch-master
+  selector:
+    matchLabels:
+     component: elasticsearch
   replicas: 3
   template:
     metadata:
@@ -228,7 +231,7 @@ spec:
 Create `es-coordinator-deployment.yaml` with the following content:
 
 ```text
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: elasticsearch-coordinator
@@ -236,6 +239,9 @@ metadata:
     component: elasticsearch
     role: coordinator
 spec:
+  selector:
+    matchLabels:
+      component: elasticsearch
   replicas: 2
   template:
     metadata:
@@ -357,7 +363,7 @@ spec:
 Create `es-data-sts.yaml` with the following content:
 
 ```text
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch-data
@@ -365,6 +371,9 @@ metadata:
     component: elasticsearch
     role: data
 spec:
+  selector:
+    matchLabels:
+      component: elasticsearch
   serviceName: elasticsearch-data
   replicas: 3
   template:
@@ -682,7 +691,7 @@ green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          0            0   
 kubectl exec -it elasticsearch-master-0 curl -- -XPUT 'http://elasticsearch.default.svc:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
 {
 "name": "Daenerys Targaryen"
-}
+}'
 ```
 
 ```output
@@ -744,7 +753,7 @@ spec:
 Create `kibana-deployment.yaml` with the following content:
 
 ```text
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana
