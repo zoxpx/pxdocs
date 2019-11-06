@@ -304,7 +304,7 @@ Enter the following `CREATE KEYSPACE` query to create a keyspace named `demodb`:
 ```text
 CREATE KEYSPACE demodb WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
 ```
-Create the TABLE
+Enter the following commands to switch to the `demodb` keyspace and create a table within it:
 ```text
 cqlsh> use demodb;
 cqlsh:demodb> CREATE TABLE emp(emp_id int PRIMARY KEY, emp_name text, emp_city text, emp_sal varint,emp_phone varint);
