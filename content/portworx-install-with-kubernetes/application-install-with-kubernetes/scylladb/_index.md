@@ -1,5 +1,5 @@
 ---
-title: Scylladb on Kubernetes on Portworx
+title: ScyllaDB on Kubernetes on Portworx
 linkTitle: Scylladb
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, scylladb
 description: See how Portworx can be used to deploy scylladb statefulset on top of Kubernetes.
