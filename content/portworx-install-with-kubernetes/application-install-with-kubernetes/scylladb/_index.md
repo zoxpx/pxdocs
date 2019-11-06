@@ -9,7 +9,7 @@ noicon: true
 
 The example provided create a Scylladb cluster running in Kubernetes, which uses Portworx volumes for Scylladb
 
-## Portworx StorageClass for volume provisioning
+## Create a StorageClass for volume provisioning
 Check the state of cluster nodes
 ```text
 kubectl get nodes -o wide
