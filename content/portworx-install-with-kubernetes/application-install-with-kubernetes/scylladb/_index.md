@@ -32,7 +32,7 @@ parameters:
   repl: "2"
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
-AllowVolumeExpansion: true
+allowVolumeExpansion: true
 ```
 Apply the StorageClass configuration
 ```text
