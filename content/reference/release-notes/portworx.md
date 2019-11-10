@@ -6,6 +6,26 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.2.0.1
+
+October 25, 2019
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Number**|**Improvement Description**|
+|----|----|
+| PWX-10125 | The Portworx `pxctl service` CLI command now supports [pool deletion](/reference/cli/service#pxctl-service-pool-delete). |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10204 | For Portworx version 2.2.0 on IBM Cloud: If users install Portworx outside of the catalog, Portworx incorrectly starts the metering agent and cannot report usage to the billing server. <br/><br/> **User Impact:** After 72 hours, users' clusters enter maintenance mode |
+
 ## 2.2
 
 September 30, 2019

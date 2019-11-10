@@ -3,6 +3,7 @@ title: "Automatically grow PVCs"
 linkTitle: "Automatically grow PVCs"
 keywords: install, autopilot
 description: "Autogrow PVCs"
+weight: 100
 ---
 
 ## Using Autopilot to Autogrow PVCs
@@ -44,17 +45,14 @@ spec:
       operator: Gt
       values:
         - "50"
-    # volume capacity should not exceed 400GiB
-    - key: "px_volume_capacity_bytes / 1000000000"
-      operator: Lt
-      values:
-       - "400"
   ##### action to perform when condition is true
   actions:
   - name: openstorage.io.action.volume/resize
     params:
       # resize volume by scalepercentage of current size
       scalepercentage: "100"
+      # volume capacity should not exceed 400GiB
+      maxsize: "400"
 ```
 
 Consider the key sections in this spec.
@@ -65,16 +63,15 @@ Consider the key sections in this spec.
 
 The `selector` determines what objects are acted on by the Autopilot rule by looking for PVCs with the `app: postgres` label. Similarly, the `namespaceSelector` filters PVCs by namespaces and only includes PVCs from namespaces that contain the `type: db` label. Hence, this rule applies only to PVCs running Postgres in the DB namespaces.
 
-The `conditions` section determines the threshold criteria dictating when the rule has to perform its action. In this example, that criteria has 2 formulas:
+The `conditions` section establishes threshold criteria dictating when the rule must perform its action. In this example, that criteria contains the following formula:
 
-1. `100 * (px_volume_usage_bytes / px_volume_capacity_bytes)` gives the volume usage percentage and the `Gt` operator puts a condition that volume usage percentage has exceeded 50%.
-2. `px_volume_capacity_bytes / 1000000000` gives the total volume capacity in GiB, and the `Lt` operator to caps it to 400GiB.
+* `100 * (px_volume_usage_bytes / px_volume_capacity_bytes)` gives the volume usage percentage and the `Gt` operator puts a condition that volume usage percentage has exceeded 50%.
 
 Conditions are combined using AND logic, requiring all conditions to be true for the rule to trigger.
 
 The `actions` section specifies what action Portworx performs when the conditions are met. Action parameters modify action behavior, and different actions contain different action parameters.
 
-Perform the following steps to deploy this example.
+Perform the following steps to deploy this example:
 
 ### Create specs
 
@@ -104,8 +101,8 @@ First, create the storage and application spec files:
 
     ```text
     ##### Portworx storage class
+    apiVersion: storage.k8s.io/v1
     kind: StorageClass
-    apiVersion: storage.k8s.io/v1beta1
     metadata:
       name: postgres-pgbench-sc
     provisioner: kubernetes.io/portworx-volume
@@ -146,8 +143,7 @@ First, create the storage and application spec files:
 
 4. Create`postgres-app.yaml` and place the following content inside it.
 
-    The application in this example is a [PostgreSQL](https://www.postgresql.org/) database with a [pgbench](https://www.postgresql.org/docs/10/pgbench.html) sidecar. The `SIZE` environment variable in this spec tells pgbench to write 70GiB of data to the volume. Since the PVC is only 10GiB in size, Autopilot must resize the PVC when needed.
-
+    The application in this example is a [PostgreSQL](https://www.postgresql.org/) database with a [pgbench](https://www.postgresql.org/docs/10/pgbench.html) sidecar. The `SIZE` environment variable in this spec instructs pgbench to write 70GiB of data to the volume. Since the PVC is only 10GiB in size, Autopilot must resize the PVC when needed.
 
     ```text
     apiVersion: apps/v1
@@ -242,17 +238,14 @@ spec:
       operator: Gt
       values:
         - "50"
-    # volume capacity should not exceed 400GiB
-    - key: "px_volume_capacity_bytes / 1000000000"
-      operator: Lt
-      values:
-      - "400"
   ##### action to perform when condition is true
   actions:
   - name: openstorage.io.action.volume/resize
     params:
       # resize volume by scalepercentage of current size
       scalepercentage: "100"
+      # volume capacity should not exceed 400GiB
+      maxsize: "400"
 ```
 
 ### Apply specs
@@ -271,13 +264,13 @@ kubectl apply -f postgres-app.yaml -n pg2
 
 ### Monitor
 
-Notice that the pgbench pods in the `pg1` and `pg2` namespace will start filing up the pgbench-data PVCs. As the PVC usage starts exceeding 50%, Autopilot will resize the PVCs.
+Notice that the pgbench pods in the `pg1` and `pg2` namespace will start filling up the pgbench-data PVCs. As the PVC usage starts exceeding 50%, Autopilot will resize the PVCs.
 
 You can use the following command to get all the events generated for the `volume-resize` rule:
 
 
 ```text
-kubectl get events --field-selector involvedObject.kind=AutopilotRule,involvedObject.name=volume-resize --all-namespaces
+kubectl get events --field-selector involvedObject.kind=AutopilotRule,involvedObject.name=volume-resize --all-namespaces --sort-by .lastTimestamp
 ```
 ```output
 NAMESPACE   LAST SEEN   TYPE     REASON       KIND            MESSAGE
