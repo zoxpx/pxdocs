@@ -41,7 +41,6 @@ parameters:
 provisioner: kubernetes.io/portworx-volume
 allowVolumeExpansion: true
 reclaimPolicy: Delete
-volumeBindingMode: WaitForFirstConsumer
 _EOF
 ```
 
