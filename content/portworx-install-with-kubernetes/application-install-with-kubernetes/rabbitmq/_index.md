@@ -654,21 +654,21 @@ helm delete --purge rmq
 Otherwise we need to manually delete all the created created resources from our cluster, by running:
 
 ```text
-kubectl delete sts rmq-rabbitmq-ha
-kubectl delete svc rmq-rabbitmq-ha rmq-rabbitmq-ha-discovery
-kubectl delete rolebinding rmq-rabbitmq-ha
-kubectl delete role rmq-rabbitmq-ha
-kubectl delete sa rmq-rabbitmq-ha
-kubectl delete secret rmq-rabbitmq-ha
-kubectl delete cm rmq-rabbitmq-ha
+kubectl delete sts/rmq-rabbitmq-ha \
+  svc/rmq-rabbitmq-ha svc/rmq-rabbitmq-ha-discovery \
+  rolebinding/rmq-rabbitmq-ha \
+  role/rmq-rabbitmq-ha \
+  sa/rmq-rabbitmq-ha \
+  secret/rmq-rabbitmq-ha \
+  cm/rmq-rabbitmq-ha
 ```
 
 Finally (regardless of deployment method), we throw away the data-volumes, volume-param definition and perftest pod by running:
 
 ```text
-kubectl delete pvc data-rmq-rabbitmq-ha-0 data-rmq-rabbitmq-ha-1
-kubectl delete sc portworx-rabbitmq
-kubectl delete po perftest
+kubectl delete pvc/data-rmq-rabbitmq-ha-0 pvc/data-rmq-rabbitmq-ha-1 \
+  sc/portworx-rabbitmq \
+  po/perftest
 ```
 
 The above deletes the...
