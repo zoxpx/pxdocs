@@ -7,7 +7,7 @@ weight: 2
 noicon: true
 ---
 
-[RabbitMQ](https://www.rabbitmq.com/) is an open-source message broker.  It plays a central role in many distributed systems.  You can configure RabbitMQ configure RabbitMQ to safely pass messages between decoupled systems.
+[RabbitMQ](https://www.rabbitmq.com/) is an open-source message broker.  It plays a central role in many distributed systems.  You can configure RabbitMQ to safely pass messages between decoupled systems.
 
 This reference architecture document shows how you can create and run a RabbitMQ with Portworx on Kubernetes. This way, Portworx will provide a reliable persistent storage layer, which makes sure no messages are lost.
 
