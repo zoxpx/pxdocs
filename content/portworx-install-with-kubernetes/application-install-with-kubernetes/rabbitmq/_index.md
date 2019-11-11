@@ -11,7 +11,7 @@ noicon: true
 
 This reference architecture document shows how you can create and run a RabbitMQ with Portworx on Kubernetes. This way, Portworx will provide a reliable persistent storage layer, which makes sure no messages are lost.
 
-The RabbitMQ cluster will use [mirrored queues](https://www.rabbitmq.com/ha.html) to persist data and metadata is persisted to Portworx volumes. Portworx also replicates the volumes, providing multiple layers of redundancy.
+The RabbitMQ cluster will use [mirrored queues](https://www.rabbitmq.com/ha.html) to persist data and metadata to Portworx volumes. Portworx also replicates the volumes, providing multiple layers of redundancy.
 
 ## Prerequisites
 
