@@ -353,6 +353,7 @@ spec:
         checksum/config: 1b2c44d6700bf1d0c528a1dc3867f71e5a5e7c9099e15d68639ba407205c1d30
     spec:
       terminationGracePeriodSeconds: 10
+      schedulerName: stork
       securityContext:
           fsGroup: 101
           runAsGroup: 101
