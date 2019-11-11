@@ -66,6 +66,9 @@ Setup RabbitMQ (using Helm)
 
 A complex application like RabbitMQ relies on several YAML files to define its various components. The next chapter will show how you can use Helm to simplify the deployment of RabbitMQ.
 
+The following Helm command uses the [RabbitMQ High Available](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) Helm chart to create a [release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release) named rmq. This will create a two-member RabbitMQ cluster, and Portworx will mirror queues and messages between the nodes.
+
+
 ```text
 helm upgrade \
   --install \
