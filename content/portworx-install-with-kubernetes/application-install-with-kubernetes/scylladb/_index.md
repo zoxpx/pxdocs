@@ -474,7 +474,7 @@ The steps in this exercise simulate a pod failure and demonstrate Portworx and K
     Note that the `scyla-1` pod is now scheduled to the `ravi-blr-dev-dour-shoulder-2 ` node.
 
 
-13. Enter the `kubectl get pods` command, filtering the output using the `jq` command to display the following
+13. Enter the `kubectl get pods` command, filtering the output using the `jq` command to display the following:
 
   * Pod name
   * Host name
