@@ -191,8 +191,6 @@ data:
 _EOF
 ```
 
-..to which you should get back the following response:
-
 ```output
 ...
 configmap/rmq-rabbitmq-ha created
@@ -250,8 +248,6 @@ roleRef:
   name: rmq-rabbitmq-ha
 _EOF
 ```
-
-..to which you should get back the following response:
 
 ```output
 ...
@@ -493,8 +489,6 @@ spec:
 _EOF
 ```
 
-..to which you should get back the following response:
-
 ```output
 ...
 service/rmq-rabbitmq-ha-discovery created
@@ -531,8 +525,6 @@ kubectl exec rmq-rabbitmq-ha-0 -- \
 }' --apply-to queues
 ```
 
-..to which you should get back the following response:
-
 ```output
 Setting policy "perf-test-with-ha" for pattern "^perf-test" to "{
 ...
@@ -546,8 +538,6 @@ RabbitMQ has a wonderful enabled-by-default [plugin for a web-UI](https://www.ra
 ```text
 kubectl port-forward rmq-rabbitmq-ha-0 15672:15672
 ```
-
-..to which you should get back the following response:
 
 ```output
 Forwarding from 127.0.0.1:15672 -> 15672
@@ -603,8 +593,6 @@ kubectl run perftest \
 }'
 ```
 
-..to which you should get back the following response:
-
 ```output
 ...
 pod/perftest created
@@ -645,8 +633,6 @@ Here we can create a scenario for failure, such as killing one of the pods.
 ```text
 kubectl delete pod rmq-rabbitmq-ha-1 --force --grace-period=0
 ```
-
-..to which you should get back the following response:
 
 ```output
 warning: Immediate deletion does not wait for confirmation that the running resource has been terminated. The resource may continue to run on the cluster indefinitely.
