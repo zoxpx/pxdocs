@@ -84,7 +84,7 @@ EOF
 
 cat <<EOF | kubectl create -f -
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: etcd-operator
@@ -130,7 +130,7 @@ metadata:
   name: etcd-operator
   namespace: default
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: etcd-operator
@@ -313,8 +313,8 @@ metadata:
   name: px-account
   namespace: kube-system
 ---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1alpha1
 metadata:
    name: node-get-put-list-role
 rules:
@@ -325,13 +325,12 @@ rules:
   resources: ["pods"]
   verbs: ["get", "list"]
 ---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1alpha1
 metadata:
   name: node-role-binding
 subjects:
-- apiVersion: v1
-  kind: ServiceAccount
+- kind: ServiceAccount
   name: px-account
   namespace: kube-system
 roleRef:

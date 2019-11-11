@@ -4,13 +4,27 @@ hidden: true
 
 1. Export your registry location:
 
+    ```text 
+    export REGISTRY=<YOUR_REGISTRY_LOCATION>
+    ```
+
+    Note that the registry location can be:
+
+    - a registry and its port:
+
     ```text
     export REGISTRY=myregistry.net:5443
     ```
-{{<info>}} The registry location above can be a registry and it's port (e.g _myregistry.net:5443_) or it could include your own repository in the registry (e.g _myregistry.net:5443/px-images_).
-{{</info>}}
 
-2. Push images to the above registry:
+    or
+
+    - it could include your own repository:
+
+    ```text
+    export REGISTRY=_myregistry.net:5443/px-images
+    ```
+
+2. Push the images to the registry:
 
     ```text
     # Trim trailing slashes:
