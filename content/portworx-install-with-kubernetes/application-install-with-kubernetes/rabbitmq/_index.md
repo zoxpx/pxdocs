@@ -1,29 +1,33 @@
 ---
-title: RabbitMQ on Kubernetes on Portworx
+title: RabbitMQ with Portworx on Kubernetes
 linkTitle: RabbitMQ
 keywords: portworx, container, Kubernetes, rabbitMQ, storage, Docker, k8s, pvc
-description: See how stateful RabbitMQ can be deployed on Kubernetes using Portworx volumes.
+description: See how RabbitMQ can be deployed on Kubernetes using Portworx volumes.
 weight: 2
 noicon: true
 ---
 
-[RabbitMQ](https://www.rabbitmq.com/) is the most widely used open-source message-queue/broker software today.  It plays a central role in many distributed systems and can be configured so that messages between decoupled systems are passed and safely persisted, as well as replicated to other nodes.
+[RabbitMQ](https://www.rabbitmq.com/) is an open-source message broker.  It plays a central role in many distributed systems.  You can configure RabbitMQ configure RabbitMQ to safely pass messages between decoupled systems.
 
-In this reference architecture document, we will explore setting up RabbitMQ this way in the "default" namespace, and leverage these features using Portworx for providing a reliable persistent storage layer, helping make sure no messages are lost.
+This reference architecture document shows how you can create and run a RabbitMQ with Portworx on Kubernetes. This way, Portworx will provide a reliable persistent storage layer, which makes sure no messages are lost.
 
-Specifically, our RabbitMQ cluster will use mirrored-queues, so that messages data and metadata is persisted to Portworx volumes, which also are replicated, to prevent messages from being lost.  This provides multiple layers of redundancy.
+The RabbitMQ cluster will use [mirrored queues](https://www.rabbitmq.com/ha.html) to persist data and metadata is persisted to Portworx volumes. Portworx also replicates the volumes, providing multiple layers of redundancy.
 
-## Portworx-powered volume provisioning
+## Prerequisites
+
+* You must have a Kubernetes cluster with a minimum of 3 worker nodes.
+* Portworx is installed on your Kubernetes cluster. For more details on how to install Portworx, refer to the instructions from the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page.
+* (Optional) Helm in installed on your Kubernetes cluster. Refer to the [Helm Quickstart Guide](https://helm.sh/docs/using_helm/#quickstart) for details about how to install Helm.
+
+## Create a StorageClass
 
 RabbitMQ will first need a [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/) definition that sets the Portworx storage parameters for volume-creation, which are later attached to the pods that will be created.
 
 This _StorageClass_ will be referenced by a [PersistentVolumeClaims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) created later in this document.  The PersistentVolume created by that is then used by the RabbitMQ cluster pods.
 
-The following will specifying each volume should have two replicas (of the data), and that it be backed by a high-IO priority storage pool (which internally to Portworx, is a collection of similar spec disks/devices).
+1. The spec below creates a `StorageClass` with 3 replicas and uses a high-priority storage pool:
 
-Run:
-
-```
+```text
 kubectl apply -f - <<'_EOF'
 ---
 apiVersion: storage.k8s.io/v1
@@ -41,35 +45,28 @@ volumeBindingMode: WaitForFirstConsumer
 _EOF
 ```
 
-..to which you should get back the following response:
-
-```
+```output
 ...
 storageclass.storage.k8s.io/portworx-rabbitmq created
 ```
 
-For details on what all the above parameters do, please consult the the relevant Kubernetes [storageclass documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#the-storageclass-resource) or the [Portworx-specific section](https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume) of that documentation.
+For details about the Portworx-specific parameters, refer to the [Powrtorx Volume]https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume] section.
 
 {{<info>}}
-The above assumes your Kubernetes is _not_ setup to use [CSI](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/). If you are then instead set the `provisioner` parameter to `pxd.portworx.com`
+If you're using Portworx with CSI, you need to set the value of the `provisioner` parameter to `pxd.portworx.com`.
 {{</info>}}
 
-## Setup RabbitMQ (using Helm)
+When you install RabbitMQ with Portworx on Kubernetes, you can choose one of the following options:
+* Set up RabbitMQ using [Helm](https://helm.sh)]
+* Set up RabbitMQ manually
+
+Setup RabbitMQ (using Helm)
 
 ### Helm
 
-Applications running on Kubernetes typically have _several_ yaml files defining the differnet components.  The more complex an app, the more of these one has to deal with.
+A complex application like RabbitMQ relies on several YAML files to define its various components. The next chapter will show how you can use Helm to simplify the deployment of RabbitMQ.
 
-In order to simply a deployment of a system as complex as RabbitMQ, we will utilize [Helm](https://helm.sh) to simply deployment.
-
-If you do not have Helm set up, you can either do so by consulting [their documentation](https://helm.sh/docs/using_helm/#quickstart), or skip ahead to the [next section](#setup-rabbitmq-manually) where we install RabbitMQ in the classic, more involved way (without using Helm).
-
-### Launching RabbitMQ release
-
-The following Helm command will use the [rabbitmq-ha chart](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) to create (or update) a [release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release) "instance" named `rmq`, which will form a two-member RabbitMQ cluster.  This allows queues and messages to be mirrored between them.
-
-Run:
-```
+```text
 helm upgrade \
   --install \
   --set replicaCount=2 \
@@ -85,7 +82,7 @@ rmq stable/rabbitmq-ha
 
 ..to which, after a minute or two, you should get back the a response from Helm confirming success and specifics of the release we created (including details of how it is configured/accessed):
 
-```
+```output
 ...
 Release "rmq" does not exist. Installing it now.
 
@@ -112,8 +109,7 @@ The contents of the yaml used below, are largely based on what the [RabbitMQ cha
 
 First we will set-up a [ConfigMap and Secret](https://kubernetes.io/blog/2016/04/configuration-management-with-containers/) that will configure how RabbitMQ starts up and "secure" it with the same dummy credentials.
 
-Run:
-```
+```text
 kubectl apply -f - <<'_EOF'
 ---
 # Source: rabbitmq-ha/templates/configmap.yaml
@@ -197,7 +193,7 @@ _EOF
 
 ..to which you should get back the following response:
 
-```
+```output
 ...
 configmap/rmq-rabbitmq-ha created
 secret/rmq-rabbitmq-ha created
@@ -211,8 +207,7 @@ The above credentials are the same dummy (insecure) credentials as mentioned abo
 
 This section will set up RBAC-related objects for the workloads we'll define in the [next section](#rabbitmq-cluster).
 
-Run:
-```
+```text
 kubectl apply -f - <<'_EOF'
 ---
 # Source: rabbitmq-ha/templates/serviceaccount.yaml
@@ -258,7 +253,7 @@ _EOF
 
 ..to which you should get back the following response:
 
-```
+```output
 ...
 serviceaccount/rmq-rabbitmq-ha created
 role.rbac.authorization.k8s.io/rmq-rabbitmq-ha created
@@ -269,8 +264,7 @@ rolebinding.rbac.authorization.k8s.io/rmq-rabbitmq-ha created
 
 Here we're finally launching the workload definition, which consists of the StatefulSet and some supporting Services.
 
-Run:
-```
+```text
 kubectl apply -f - <<'_EOF'
 ---
 # Source: rabbitmq-ha/templates/service-discovery.yaml
@@ -501,7 +495,7 @@ _EOF
 
 ..to which you should get back the following response:
 
-```
+```output
 ...
 service/rmq-rabbitmq-ha-discovery created
 service/rmq-rabbitmq-ha created
@@ -525,9 +519,7 @@ First we will configure a queue-policy named `perf-test-with-ha` to:
   * locate the [queue-masters](https://www.rabbitmq.com/ha.html#behaviour) on whichever is the least loaded node
   * finally set up these queues to be [_lazy_](https://www.rabbitmq.com/lazy-queues.html), which will make them want to use storage for persistance early/automatically
 
-Run:
-
-```
+```text
 kubectl exec rmq-rabbitmq-ha-0 -- \
   rabbitmqctl set_policy perf-test-with-ha '^perf-test' \
 '{
@@ -541,7 +533,7 @@ kubectl exec rmq-rabbitmq-ha-0 -- \
 
 ..to which you should get back the following response:
 
-```
+```output
 Setting policy "perf-test-with-ha" for pattern "^perf-test" to "{
 ...
 }" with priority "0" for vhost "/" ...
@@ -551,15 +543,13 @@ Setting policy "perf-test-with-ha" for pattern "^perf-test" to "{
 
 RabbitMQ has a wonderful enabled-by-default [plugin for a web-UI](https://www.rabbitmq.com/management.html) that can be accessed by port-forwarding port 15672 to your local system.  It is useful to have this loaded during the testing to monitor the system.
 
-Run:
-
-```
+```text
 kubectl port-forward rmq-rabbitmq-ha-0 15672:15672
 ```
 
 ..to which you should get back the following response:
 
-```
+```output
 Forwarding from 127.0.0.1:15672 -> 15672
 ...
 ```
@@ -568,7 +558,7 @@ At this point you should be able to hit TCP port 15672 on [_localhost_](http://1
 
 Additionally, one can examine the log-messages of the pod that will survive the failover test:
 
-```
+```text
 kubectl logs -f rmq-rabbitmq-ha-0
 ```
 
@@ -578,9 +568,7 @@ This will show (after the pod has started) the log-messages from the container l
 
 Here we spawn a pod with one container which will allow us to run PerfTest in the [_next_ step](#simulate-broker-usage):
 
-Run:
-
-```
+```text
 kubectl run perftest \
   --restart=Always \
   --image dummy-required-param \
@@ -617,7 +605,7 @@ kubectl run perftest \
 
 ..to which you should get back the following response:
 
-```
+```output
 ...
 pod/perftest created
 ```
@@ -628,9 +616,7 @@ A pod with a sleeping container is started on one of the _other_ nodes (that _ar
 
 Now we're ready to start up the simulated producers/consumers inside the pre-existing pod's container from the [previous step](#containerized-testing-environment).
 
-Run:
-
-```
+```text
 kubectl exec -it perftest -- \
     bin/runjava com.rabbitmq.perf.PerfTest \
       --time 900 \
@@ -656,15 +642,13 @@ The test-suite's parameters themselves do the following:
 
 Here we can create a scenario for failure, such as killing one of the pods.
 
-Run:
-
-```
+```text
 kubectl delete pod rmq-rabbitmq-ha-1 --force --grace-period=0
 ```
 
 ..to which you should get back the following response:
 
-```
+```output
 warning: Immediate deletion does not wait for confirmation that the running resource has been terminated. The resource may continue to run on the cluster indefinitely.
 pod "rmq-rabbitmq-ha-1" force deleted
 ```
@@ -675,13 +659,13 @@ The performance testing session may pause momentarily (and messages in the queue
 
 If helm was used, cleaning is as easy as first running:
 
-```
+```text
 helm delete --purge rmq
 ```
 
 Otherwise we need to manually delete all the created created resources from our cluster, by running:
 
-```
+```text
 kubectl delete sts rmq-rabbitmq-ha
 kubectl delete svc rmq-rabbitmq-ha rmq-rabbitmq-ha-discovery
 kubectl delete rolebinding rmq-rabbitmq-ha
@@ -693,7 +677,7 @@ kubectl delete cm rmq-rabbitmq-ha
 
 Finally (regardless of deployment method), we throw away the data-volumes, volume-param definition and perftest pod by running:
 
-```
+```text
 kubectl delete pvc data-rmq-rabbitmq-ha-0 data-rmq-rabbitmq-ha-1
 kubectl delete sc portworx-rabbitmq
 kubectl delete po perftest
