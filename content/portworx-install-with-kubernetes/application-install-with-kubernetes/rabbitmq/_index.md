@@ -50,7 +50,7 @@ _EOF
 storageclass.storage.k8s.io/portworx-rabbitmq created
 ```
 
-For details about the Portworx-specific parameters, refer to the [Powrtorx Volume]https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume] section.
+For details about the Portworx-specific parameters, refer to the [Portworx Volume](https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume) section.
 
 {{<info>}}
 If you're using Portworx with CSI, you need to set the value of the `provisioner` parameter to `pxd.portworx.com`.
