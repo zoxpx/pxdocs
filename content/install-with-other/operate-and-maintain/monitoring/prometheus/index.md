@@ -68,20 +68,17 @@ px_node_stats_used_mem: total - free
 
 ```text
 px_volume_capacity_bytes: volume size
-px_volume_depth_io: number of i/o operations being served at once
 px_volume_halevel: volume HA level
 px_volume_iops: operations per second
 px_volume_read_bytes: total bytes read from volume
 px_volume_reads: number of read operations served by the volume
-px_volume_readthroughput: bytes read per second
 px_volume_writes: number of write operations served by the volume
-px_volume_writethroughput: bytes written per second
 px_volume_written_bytes: total bytes written to the volume
-px_volume_dev_depth_io: I/Os currently in progress as reported by block device
+px_volume_dev_depth_io: number of I/O operations being served at once
 px_volume_dev_read_latency_secs: read latency for block device (total time spent reading/ number of reads)
-px_volume_dev_readthroughput: read throughput for block device
+px_volume_dev_readthroughput: read throughput for block device in bytes read per second
 px_volume_dev_write_latency_secs: write latency for block device (total time spent writing/ number of writes)
-px_volume_dev_write_throughput: write througput for block device
+px_volume_dev_write_throughput: write througput for block device in bytes written per second
 px_volume_iopriority: configured volume io_priority (0 = low, 1 = medium, 2 = high)
 px_volume_fs_capacity_bytes_bytes: total size reported by filesystem
 px_volume_fs_usage_bytes_bytes: used capacity reported by filesystem
@@ -100,6 +97,6 @@ px_disk_stats_used_bytes: used bytes
 px_disk_stats_write_bytes: write bytes
 px_disk_stats_write_seconds: write seconds
 px_disk_stats_writes: writes
-px_disk_stats_read_latency_seconds: read latency for disk  (read ms / number of reads)
-px_disk_stats_write_latency_seconds: write latency for disk (write ms / number of writes)
+px_disk_stats_read_latency_seconds: read latency for disk in seconds (read seconds / number of reads)
+px_disk_stats_write_latency_seconds: write latency for disk in seconds (write seconds / number of writes)
 ```

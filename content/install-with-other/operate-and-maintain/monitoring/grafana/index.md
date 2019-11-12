@@ -6,39 +6,37 @@ meta-description: Find templates for displaying Portworx cluster information wit
 
 ## Configure Grafana
 
-Start grafana with the follwing docker run command
+1. Start grafana with the follwing docker run command
 
-```text
-docker run --restart=always --name grafana -d -p 3000:3000 grafana/grafana
-```
+      ```text
+      docker run --restart=always --name grafana -d -p 3000:3000 grafana/grafana
+      ```
 
-Login to this grafana at http://&lt;IP_ADDRESS&gt;:3000 in your browser. Default grafana login is admin/admin.
+2. Log in to Grafana at http://<your_ip_address>:3000 in your browser. The default Grafana login is admin/admin.
 
-Here, it will ask you to configure your datastore. We are going to be using prometheus that we configured earlier. To use the templates that are provided later, name your datastore 'prometheus'.
+3. Here, it will ask you to configure your datastore. Use the prometheus that you configured earlier. To use the templates that are provided later, name your datastore 'prometheus'. In the screen below:
 
-In the screen below:
-1) Choose 'Prometheus' from the 'Type' dropdown.
-2) Name datastore 'prometheus'
-3) Add URL of your prometheus UI under Http settings -&gt; Url
+      * Choose 'Prometheus' from the 'Type' dropdown.
+      * Name datastore 'prometheus'
+      * Add URL of your prometheus UI under Http settings -&gt; Url
+      * Select **Save & Test**
 
-Click on 'Save & Test'
+      ![Grafana data store File](/img/grafana_datastore.png "Grafana data store File")
 
-![Grafana data store File](/img/grafana_datastore.png "Grafana data store File")
+4. Import the Portworx provided [Cluster](https://github.com/portworx/pxdocs/blob/master/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Cluster_Dashboard_Jan_2019_No_AM.json), [Volume](https://github.com/portworx/pxdocs/blob/master/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Volume_Dashboard_Sep_2018.json ), and [Node](https://github.com/portworx/pxdocs/blob/master/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Node_Dashboard_Sep_2018_No_AM.json ) Grafana templates: From the dropdown on left in your Grafana dashboard, select **Dashboards** followed by **Import**, and add the cluster, volume, and node templates.
 
-Next step would be to import Portworx provided [Cluster](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/grafana/Cluster_Template.json) and [Volume](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/grafana/Volume_Template.json) grafana templates.
-If using PX 1.2.11, use [Volume 1.2.11](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/Portworx%20Volume%20Status_V2_Nov_2.json) grafana template.
+      Once added, you can view your dashboards:
 
-From the dropdown on left in your grafana dashboard, go to Dashboards -&gt; Import, and add cluster and volume template.
+      ![Grafana Cluster Status File](/img/grafanaClusterStatus.png "Grafana Cluster Status File")
 
-Your dashboard should look like the following.
+      ![Grafana Volume Status File](/img/grafanaVolumeStatus.png "Grafana Volume Status File")
 
-![Grafana Cluster Status File](/img/grafana_cluster_status.png "Grafana Cluster Status File")
+      ![Grafana Node Status File](/img/grafanaVolumeStatus.png "Grafana Volume Status File")
 
-
-![Grafana Volume Status File](/img/grafana_volume_status.png "Grafana Volume Status File")
-
+<!-- are these the same as what's linked through GitHub above? If so, we should probably just show them using one method or the other.
 ## Cluster Template for Grafana
 Use [this template](Cluster_Template.json) to display Portworx cluster details in Grafana
 
 ## Volume Template for Grafana
 Use [this template](Volume_Template.json) to display Portworx volume details in Grafana
+-->
