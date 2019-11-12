@@ -2,7 +2,6 @@
 title: Create and use VolumePlacementStrategies
 keywords: portworx, storage class, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk,StatefulSets, volume placement
 description: Instructions for creating and using VolumePlacementStrategies.
-series: k8s-vol
 ---
 
 Create your VolumePlacementStrategy along with your other storage resources:

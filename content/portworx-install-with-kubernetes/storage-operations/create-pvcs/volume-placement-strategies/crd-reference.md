@@ -2,7 +2,6 @@
 title: VolumePlacementStrategy CRD reference
 keywords: portworx, storage class, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk,StatefulSets, volume placement
 description: Reference material for the VolumePlacementStrategy CRD.
-series: k8s-vol
 ---
 
 Portworx provides a [CustomResouceDefinition (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions) called `VolumePlacementStrategy`. The specification for this CRD is composed of 4 main sections:
