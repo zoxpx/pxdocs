@@ -393,6 +393,36 @@ Flags:
   -h, --help                 help for update
 ```
 
+#### Understand the --labels flag behavior
+
+The `--labels` flag allows you to add, remove, and update labels for your storage pools.
+
+##### Add a new label
+
+Enter the `pxctl service pool update` command with the pool ID and the `--labels` flag with a comma separated list of labels you wish to add:
+
+```text
+pxctl service pool update 0 --labels  ioprofile=HIGH,media_type=SSD
+```
+
+##### Replace a label's value
+
+Enter the `pxctl service pool update` command with the pool ID and the `--labels` flag with a comma separated list of the labels you wish to replace:
+
+```text
+pxctl service pool update 0 --labels  media_type=NVME
+```
+
+Updating a single label does not affect the other labels' stored values.
+
+##### Delete a label's value
+
+Enter the `pxctl service pool update` command with the pool ID and the `--labels` flag with a comma separated list of the labels you wish to delete containing no value:
+
+```text
+pxctl service pool update 0 --labels  ioprofile=,media_type=
+```
+
 ### pxctl service pool show
 
 Show storage pool information
