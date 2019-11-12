@@ -237,25 +237,16 @@ Usage:
   pxctl cluster options update [flags]
 
 Flags:
-      --resync-repl-add string            Enable or disable repl-add based resync (Valid Values: [on off]) (default "off")
-      --domain-policy string              Domain policy for domains (Valid Values: [strict eventual]) (default "strict")
-      --optimized-restores string         Enable or disable optimized restores (Valid Values: [on off]) (default "off")
-      --auto-decommission-timeout uint    Timeout (in minutes) after which storage-less nodes will be automatically decommissioned. Timeout cannot be set to zero. (default 20)
-      --internal-snapshot-interval uint   Interval (in minutes) after which internal snapshots are rotated (default 30)
-      --repl-move-timeout uint            Timeout (in minutes) after which offline replicas will be moved to available nodes. Set timeout to zero to disable replica move. (default 1440)
-      --re-add-wait-timeout uint          Timeout (in minutes) after which re-add will abort and new replication node is added instead. Set timeout to zero to disable replica move. (default 1440)
-  -h, --help                              help for update
-
-Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --resync-repl-add string               Enable or disable repl-add based resync (Valid Values: [on off]) (default "off")
+      --domain-policy string                 Domain policy for domains (Valid Values: [strict eventual]) (default "strict")
+      --optimized-restores string            Enable or disable optimized restores (Valid Values: [on off]) (default "off")
+      --disable-provisioning-labels string   Semi-colon separate string
+      --provisioning-commit-labels string    Json, example of global rule followed by node specific and pool specific rule: '[{'OverCommitPercent': 200, 'SnapReservePercent': 30},{'OverCommitPercent': 50, 'SnapReservePercent':30, 'LabelSelector':{'node':'node-1,node-2', 'poolLabel':'poolValue'},]'
+      --auto-decommission-timeout uint       Timeout (in minutes) after which storage-less nodes will be automatically decommissioned. Timeout cannot be set to zero. (default 20)
+      --internal-snapshot-interval uint      Interval (in minutes) after which internal snapshots are rotated (default 30)
+      --repl-move-timeout uint               Timeout (in minutes) after which offline replicas will be moved to available nodes. Set timeout to zero to disable replica move. (default 1440)
+      --re-add-wait-timeout uint             Timeout (in minutes) after which re-add will abort and new replication node is added instead. Set timeout to zero to disable replica move. (default 1440)
+  -h, --help                                 help for update
 ```
 
 Use the following command to enable optimized restores:
@@ -283,3 +274,15 @@ Resync repl-add                      :  off
 Domain policy                        :  strict
 Optimized Restores                   :  on
 ```
+
+## pxctl cluster options update --provisioning-commit-labels reference
+
+```text
+--provisioning-commit-labels '[{"OverCommitPercent": <percent_value>, "SnapReservePercent": <percent_value>, "LabelSelector": {"<label_key>": "<label_value>"}},{"OverCommitPercent": <percent_value>, "SnapReservePercent":<percent_value>} ]'
+```
+
+| Key | Description | Value |
+| --- | --- | --- |
+| OverCommitPercent | The maximum storage percentage volumes can provision against backing storage | Any integer over 100 |
+| SnapReservePercent | The percent of the previously specified maximum storage storage percentage that is reserved for snapshots | Any integer under 100 |
+| labelSelector | The key values for labels or node IDs you wish to apply this rule to | Enumerated string: `node` with a comma separated list of node IDs <br/> Any existing label key and value. |

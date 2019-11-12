@@ -216,7 +216,7 @@ OPTIONS:
    --help, -h  show help
 ```
 
-You can add drives to a server using the `/opt/pwx/bin/pxctl service drive add` command. To do so the server must be in maintenance mode.
+You can add drives to a server using the `/opt/pwx/bin/pxctl service drive add` command.
 
 ```text
 pxctl service drive add --help
@@ -235,9 +235,12 @@ pxctl service drive add /dev/mapper/volume-3bfa72dd
 ```
 
 ```output
+Adding drives may make storage offline for the duration of the operation.
+Are you sure you want to proceed ? (Y/N): y
 Adding device  /dev/mapper/volume-3bfa72dd ...
 Drive add  successful. Requires restart (Exit maintenance mode).
 ```
+<!-- need to test this full operation to confirm the syntax -->
 
 To rebalance the storage across the drives, use pxctl service drive rebalance. This is useful after prolonged operation of a node.
 
