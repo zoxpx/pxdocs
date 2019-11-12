@@ -49,7 +49,7 @@ spec:
       params:
         # resize pool by scalepercentage of current size
         scalepercentage: "50"
-        # when scaling, resize existing disks in the pool
+        # when scaling, add disks to the pool
         scaletype: "add-disk"
 ```
 
@@ -217,7 +217,7 @@ spec:
       params:
         # resize pool by scalepercentage of current size
         scalepercentage: "50"
-        # when scaling, resize existing disks in the pool
+        # when scaling, add disks to the pool
         scaletype: "add-disk"
 ```
 
