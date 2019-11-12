@@ -271,6 +271,41 @@ In your PVC, if you use `ReadWriteMany`, Portworx defaults to a `Sharedv4` volum
 
 For information about how to encrypt PVCs on CSI using Kubernetes secrets, see the [Encrypting PVCs on CSI with Kubernetes Secrets](/key-management/kubernetes-secrets/pvc-encryption-using-csi/) section of the Portworx documentation.
 
+## Clone volumes with CSI
+
+You can clone CSI-enabled volumes, duplicating both the volume and content within it.
+
+1. Enable the `VolumePVCDataSource` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/):
+
+      ```text
+      --feature-gates=VolumePVCDataSource=true
+      ```
+
+2. Create a PVC that references the PVC you wish to clone, specifying the `dataSource` with the kind and name of the target PVC you wish to clone. The following spec creates a clone of the `px-mysql-pvc` PVC in a YAML file named `clonePVC.yaml`:
+
+      ```text
+      kind: PersistentVolumeClaim
+      apiVersion: v1
+      metadata:
+         name: clone-of-px-mysql-pvc
+      spec:
+         storageClassName: portworx-csi-sc
+         accessModes:
+           - ReadWriteOnce
+         resources:
+           requests:
+             storage: 2Gi
+         dataSource:
+          kind: PersistentVolumeClaim
+          name: px-mysql-pvc
+      ```
+
+3. Apply the `clonePVC.yaml` spec to create the clone:
+
+      ```text
+      kubectl apply -f clonePVC.yaml
+      ```
+
 ## Upgrade
 
 Currently upgrades are _not_ supported. You will need to deploy using CSI onto a new Kubernetes cluster. The Kubernetes community is working very hard to make this possible in the near future.
