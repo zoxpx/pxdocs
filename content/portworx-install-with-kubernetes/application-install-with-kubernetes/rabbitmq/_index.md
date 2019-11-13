@@ -45,7 +45,6 @@ _EOF
 ```
 
 ```output
-...
 storageclass.storage.k8s.io/portworx-rabbitmq created
 ```
 
@@ -56,6 +55,7 @@ If you're using Portworx with CSI, you need to set the value of the `provisioner
 {{</info>}}
 
 When you install RabbitMQ with Portworx on Kubernetes, you can choose one of the following options:
+
 * Set up RabbitMQ using [Helm](https://helm.sh)]
 * Set up RabbitMQ manually
 
@@ -65,7 +65,7 @@ Setup RabbitMQ (using Helm)
 
 A complex application like RabbitMQ relies on several YAML files to define its various components. The section shows how you can use Helm to simplify the deployment of RabbitMQ.
 
-The following Helm command uses the [RabbitMQ High Available](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) Helm chart to create a [release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release) named rmq. This will create a two-member RabbitMQ cluster, and Portworx will mirror queues and messages between the nodes.
+The following Helm command uses the [RabbitMQ High Available](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) Helm chart to create a [release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release) named rmq. The release creates a two-member RabbitMQ cluster, and Portworx will mirror queues and messages between the nodes.
 
 
 ```text
@@ -85,14 +85,12 @@ rmq stable/rabbitmq-ha
 ..to which, after a minute or two, you should get back the a response from Helm confirming success and specifics of the release we created (including details of how it is configured/accessed):
 
 ```output
-...
 Release "rmq" does not exist. Installing it now.
 
 NAME: rmq
 LAST DEPLOYED: Mon Oct 14 16:58:20 2019
 NAMESPACE: default
 STATUS: DEPLOYED
-...
 ```
 
 Note that the `replicaCount` variable in this example creates a two-replica [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) and the `persistentVolume.storageClass` references the `StorageClass` defined above.
@@ -194,7 +192,6 @@ _EOF
 ```
 
 ```output
-...
 configmap/rmq-rabbitmq-ha created
 secret/rmq-rabbitmq-ha created
 ```
@@ -252,7 +249,6 @@ _EOF
 ```
 
 ```output
-...
 serviceaccount/rmq-rabbitmq-ha created
 role.rbac.authorization.k8s.io/rmq-rabbitmq-ha created
 rolebinding.rbac.authorization.k8s.io/rmq-rabbitmq-ha created
@@ -492,7 +488,6 @@ _EOF
 ```
 
 ```output
-...
 service/rmq-rabbitmq-ha-discovery created
 service/rmq-rabbitmq-ha created
 statefulset.apps/rmq-rabbitmq-ha created
@@ -543,7 +538,6 @@ kubectl port-forward rmq-rabbitmq-ha-0 15672:15672
 
 ```output
 Forwarding from 127.0.0.1:15672 -> 15672
-...
 ```
 
 At this point you should be able to hit TCP port 15672 on [_localhost_](http://127.0.0.1:15672) in your web browser, and see the RabbitMQ WebUI.  You can use the credentials referenced [earlier](#launching-rabbitmq-release) in this document to log in, and explore.   If you then visit the [Queue section](http://127.0.0.1:15672/#/queues),  once the performance test starts and the queues are created, you should see the policy we setup be applied as well.
@@ -596,7 +590,6 @@ kubectl run perftest \
 ```
 
 ```output
-...
 pod/perftest created
 ```
 
