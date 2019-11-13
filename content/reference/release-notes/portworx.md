@@ -6,6 +6,31 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.3
+
+November 12, 2019
+
+### New Features
+
+* Introducing new ways to control [volume provisioning](https://2.3.docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/control-volume-provisioning/): customize provisioning ratios, disable thin provisioning, or disable provisioning entirely.
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Number**|**Improvement Description**|
+|----|----|
+|PWX-10275| The `pxctl service pool update <pool_ID> --labels` command functionality has improved. Previously, entering the command would overwrite any existing labels. Users wishing to add a label would have to keep track of and repeat the existing labels they wanted to persist. With the improved functionality, Portworx now behaves as follows: <ul><li>If the label does not exist, Portworx adds it to the current set</li><li>If label already exists, Portworx replaces its value</li><li>If you pass a label with a blank value, Portworx removes the label</li></ul>|
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+|PWX-10155| Portworx storage pool labels do not inherit Kubernetes node labels. <br/><br/> **User Impact:** PVC creation relying on Kubernetes node labels fails.|
+|PWX-10239| Entering the `pxctl service drive add -o status` command with a `--spec` flag included causes Portworx to incorrectly add drives. <br/><br/>**User Impact:** Users entering a status command with the conflicting `--spec` flag can erroneously add new drives. <br/><br/> **Resolution:** With 2.3, Portworx no longer accepts these malformed commands as drive add operations. |
+
 ## 2.2.0.1
 
 October 25, 2019
