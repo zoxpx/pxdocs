@@ -61,9 +61,9 @@ When you install RabbitMQ with Portworx on Kubernetes, you can choose one of the
 
 Setup RabbitMQ (using Helm)
 
-### Helm
+## Set up RabbitMQ using Helm
 
-A complex application like RabbitMQ relies on several YAML files to define its various components. The next chapter will show how you can use Helm to simplify the deployment of RabbitMQ.
+A complex application like RabbitMQ relies on several YAML files to define its various components. The section shows how you can use Helm to simplify the deployment of RabbitMQ.
 
 The following Helm command uses the [RabbitMQ High Available](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) Helm chart to create a [release](https://github.com/helm/helm/blob/release-2.14/docs/glossary.md#release) named rmq. This will create a two-member RabbitMQ cluster, and Portworx will mirror queues and messages between the nodes.
 
@@ -95,21 +95,21 @@ STATUS: DEPLOYED
 ...
 ```
 
-Other than specifying that this should be a two-replica [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), it is worth mentioning that it is _here_ we referenced that StorageClass we defined above, and we also have specify a few dummy credentials (which are insecure and should _not_ be used in anything but a testing environment).
+Note that the `replicaCount` variable in this example creates a two-replica [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) and the `persistentVolume.storageClass` references the `StorageClass` defined above.
 
 Alternatively, the following section describes how to manually do what helm did for us above.
 
-## Setup RabbitMQ manually
+Setup RabbitMQ manually
 
 In this section we will instead take the classic approach of including here all the various yaml definitions needed to set up RabbitMQ.
 
 {{<info>}}
-The contents of the yaml used below, are largely based on what the [RabbitMQ chart](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha) [templates](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates) create when using Helm.
+Note that the spec files used in this chapter are based on these [Helm templates](https://github.com/helm/charts/tree/master/stable/rabbitmq-ha/templates).
 {{</info>}}
 
 ### Configuration and credentials
 
-First we will set-up a [ConfigMap and Secret](https://kubernetes.io/blog/2016/04/configuration-management-with-containers/) that will configure how RabbitMQ starts up and "secure" it with the same dummy credentials.
+Enter the following command to create a `ConfigMap` and a Kubernetes secret:
 
 ```text
 kubectl apply -f - <<'_EOF'
@@ -200,12 +200,12 @@ secret/rmq-rabbitmq-ha created
 ```
 
 {{<info>}}
-The above credentials are the same dummy (insecure) credentials as mentioned above in the previous approach that utilized helm.
+Note that we're separating the application code from the configuration. Please refer to the [Configuration management with Containers](https://kubernetes.io/blog/2016/04/configuration-management-with-containers/) for more details about the `ConfigMap` resource.
 {{</info>}}
 
-### RBAC for RabbitMQ
+Set up RBAC
 
-This section will set up RBAC-related objects for the workloads we'll define in the [next section](#rabbitmq-cluster).
+To set up RBAC, apply the following spec in your cluster:
 
 ```text
 kubectl apply -f - <<'_EOF'
@@ -260,7 +260,7 @@ rolebinding.rbac.authorization.k8s.io/rmq-rabbitmq-ha created
 
 ### RabbitMQ cluster
 
-Here we're finally launching the workload definition, which consists of the StatefulSet and some supporting Services.
+Use the following command to create a `StatefulSet` and the required supporting services:
 
 ```text
 kubectl apply -f - <<'_EOF'
@@ -498,9 +498,9 @@ service/rmq-rabbitmq-ha created
 statefulset.apps/rmq-rabbitmq-ha created
 ```
 
-You may have spotted that the last line reference that StorageClass created near the beginning of this document.  As a result of the `volumeClaimTemplate` section, a new PersistentVolumeClaim will also be created automatically by Kubernetes for each replica.
+Note that the last line of the spec references the `portworx-rabbitmq` storage class defined in the [Create a StorageClass](#create-a-storage-class) section. As a result, Kubernetes will automatically create a new PVC for each replica.
 
-## Post-install validation testing
+Validate the cluster functionality
 
 Regardless of the method we used to setup RabbitMQ in Kubernetes, we should now be able to control and test our RabbitMQ cluster.
 
