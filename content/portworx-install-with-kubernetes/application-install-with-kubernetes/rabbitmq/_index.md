@@ -530,7 +530,9 @@ Setting policy "perf-test-with-ha" for pattern "^perf-test" to "{
 
 ### Monitoring
 
-RabbitMQ has a wonderful enabled-by-default [plugin for a web-UI](https://www.rabbitmq.com/management.html) that can be accessed by port-forwarding port 15672 to your local system.  It is useful to have this loaded during the testing to monitor the system.
+RabbitMQ provides a web-based [user interface](https://www.rabbitmq.com/management.html) that you can use to manage your cluster. To access it, you must forward connections made to a local port to the 15672 port on the   `rmq-rabbitmq-ha-0` pod.
+
+Enter the following `kubectl port-forward` command to forward all connections made to `localhost:15672` to `rmq-rabbitmq-ha-0:15672`:
 
 ```text
 kubectl port-forward rmq-rabbitmq-ha-0 15672:15672
