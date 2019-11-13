@@ -13,5 +13,5 @@ Now generate the spec with the following curl command.
 
 ```text
 export VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-curl -fsL -o px-spec.yaml "https://install.portworx.com/2.2?kbver=$VER&c=portworx-demo-cluster&b=true&st=k8s&csi=true&vsp=true&ds=$VSPHERE_DATASTORE_PREFIX&vc=$VSPHERE_VCENTER&s=%22$VSPHERE_DISK_TEMPLATE%22"
+curl -fsL -o px-spec.yaml "https://install.portworx.com/2.3?kbver=$VER&c=portworx-demo-cluster&b=true&st=k8s&csi=true&vsp=true&ds=$VSPHERE_DATASTORE_PREFIX&vc=$VSPHERE_VCENTER&s=%22$VSPHERE_DISK_TEMPLATE%22"
 ```

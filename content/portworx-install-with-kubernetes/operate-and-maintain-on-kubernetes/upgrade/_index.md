@@ -16,7 +16,7 @@ This guide describes the procedure to upgrade Portworx running as OCI container 
 To upgrade to the **2.2** release (the latest stable at the time of this writing), run the following command:
 
 ```text
-curl -fsL https://install.portworx.com/2.2/upgrade | bash -s
+curl -fsL https://install.portworx.com/2.3/upgrade | bash -s
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
@@ -32,7 +32,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.2?kbver=$KBVER&comp=stork"
+      curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.3?kbver=$KBVER&comp=stork"
       ```
 
       {{% content "portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/shared/private-or-custom-registry.md" %}}
@@ -49,7 +49,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/2.2.0?kbver=$KBVER&comp=lighthouse"
+      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/2.3?kbver=$KBVER&comp=lighthouse"
       ```
 
       {{% content "portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/shared/private-or-custom-registry.md" %}}
@@ -67,7 +67,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.0.3.4_ image.
 
 ```text
-curl -fsL https://install.portworx.com/2.2/upgrade | bash -s -- -t 2.0.3.4
+curl -fsL https://install.portworx.com/2.3/upgrade | bash -s -- -t 2.0.3.4
 ```
 
 ## Airgapped clusters
@@ -83,7 +83,7 @@ If you want to upgrade to the latest 2.1 stable release, skip the below export. 
 ```text
 # To determine the latest minor 2.2 release currently available, please use the curl-expression below
 # Alternatively, you can specify the version yourself, e.g.: PX_VER=2.0.2.3
-export PX_VER=$(curl -fs https://install.portworx.com/2.2/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
+export PX_VER=$(curl -fs https://install.portworx.com/2.3/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
 ```
 
 Now pull the required Portworx images.
@@ -134,7 +134,7 @@ fi
 
 [[ -z "$PX_VER" ]] || ARG_PX_VER="-t $PX_VER"
 
-curl -fsL https://install.portworx.com/2.2/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
+curl -fsL https://install.portworx.com/2.3/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
 ```
 
 ## Troubleshooting {#troubleshooting}
