@@ -503,12 +503,12 @@ We will use [PerfTest](https://rabbitmq.github.io/rabbitmq-perf-test/stable/html
 
 ### Example RabbitMQ policy for H/A
 
-First we will configure a queue-policy named `perf-test-with-ha` to:
 
-  * match only queues that begin with `perf-test`
-  * set the [ha-mode parameter](https://www.rabbitmq.com/ha.html#mirroring-arguments) to be exactly 2
-  * locate the [queue-masters](https://www.rabbitmq.com/ha.html#behaviour) on whichever is the least loaded node
-  * finally set up these queues to be [_lazy_](https://www.rabbitmq.com/lazy-queues.html), which will make them want to use storage for persistance early/automatically
+First, we configure a policy named `perf-test-with-ha`  with the following settings:
+* It's only applied on queues that begin with `perf-test` <!--revisit this -->
+* Sets the [ha-mode parameter].(https://www.rabbitmq.com/ha.html#mirroring-arguments) equal to `2`.
+* Places the [queue-masters](https://www.rabbitmq.com/ha.html#behaviour) on the least-loaded node.
+* Sets up the queues as [lazy](https://www.rabbitmq.com/lazy-queues.html). RabbitMQ will save the queues to disk as early as possible.
 
 ```text
 kubectl exec rmq-rabbitmq-ha-0 -- \
