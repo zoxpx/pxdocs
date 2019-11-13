@@ -200,7 +200,7 @@ secret/rmq-rabbitmq-ha created
 Note that we're separating the application code from the configuration. Please refer to the [Configuration management with Containers](https://kubernetes.io/blog/2016/04/configuration-management-with-containers/) for more details about the `ConfigMap` resource.
 {{</info>}}
 
-Set up RBAC
+### Set up RBAC
 
 To set up RBAC, apply the following spec in your cluster:
 
@@ -495,7 +495,7 @@ statefulset.apps/rmq-rabbitmq-ha created
 
 Note that the last line of the spec references the `portworx-rabbitmq` storage class defined in the [Create a StorageClass](#create-a-storage-class) section. As a result, Kubernetes will automatically create a new PVC for each replica.
 
-Validate the cluster functionality
+## Validate the cluster functionality
 
 Regardless of the method we used to setup RabbitMQ in Kubernetes, we should now be able to control and test our RabbitMQ cluster.
 
