@@ -12,7 +12,7 @@ meta-description: Find templates for displaying Portworx cluster information wit
       docker run --restart=always --name grafana -d -p 3000:3000 grafana/grafana
       ```
 
-2. Log in to Grafana at http://<your_ip_address>:3000 in your browser. The default Grafana login is admin/admin.
+2. Log in to Grafana at `http://your_ip_address:3000` in your browser. The default Grafana login is admin/admin.
 
 3. Here, it will ask you to configure your datastore. Use the prometheus that you configured earlier. To use the templates that are provided later, name your datastore 'prometheus'. In the screen below:
 
