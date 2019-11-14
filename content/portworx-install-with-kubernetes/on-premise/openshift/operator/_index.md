@@ -1,5 +1,5 @@
 ---
-title: The Portworx Operator
+title: Portworx Operator
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift, operator
 description: How to install Portworx with OpenShift using Operator
 weight: 2
@@ -8,7 +8,7 @@ weight: 2
 The Portworx Operator manages the complete lifecycle of a Portworx cluster. Using the Operator, you can install, configure, and update Portworx.
 
 As shown in the diagram below, the Operator manages the Portworx platform consisting of the Portworx nodes,
-STORK, Lighthouse and other components that make running stateful applications seamless for the users.
+Stork, Lighthouse and other components that make running stateful applications seamless for the users.
 
 ![Portworx Operator](/img/px-operator-in-kubernetes.jpg)
 
