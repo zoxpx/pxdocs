@@ -25,7 +25,7 @@ RabbitMQ will first need a [StorageClass](https://kubernetes.io/docs/concepts/st
 
 This _StorageClass_ will be referenced by a [PersistentVolumeClaims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) created later in this document.  The PersistentVolume created by that is then used by the RabbitMQ cluster pods.
 
-1. The spec below creates a `StorageClass` with 3 replicas and uses a high-priority storage pool:
+The spec below creates a `StorageClass` with 3 replicas and uses a high-priority storage pool:
 
 ```text
 kubectl apply -f - <<'_EOF'
