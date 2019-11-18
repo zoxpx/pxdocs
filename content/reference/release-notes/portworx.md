@@ -30,6 +30,7 @@ The following issues have been fixed:
 |----|----|
 |PWX-10155| Portworx storage pool labels do not inherit Kubernetes node labels. <br/><br/> **User Impact:** PVC creation relying on Kubernetes node labels fails.|
 |PWX-10239| Entering the `pxctl service drive add -o status` command with a `--spec` flag included causes Portworx to incorrectly add drives. <br/><br/>**User Impact:** Users entering a status command with the conflicting `--spec` flag can erroneously add new drives. <br/><br/> **Resolution:** With 2.3, Portworx no longer accepts these malformed commands as drive add operations. |
+|PSP-1978| Portworx occasionally causes a read/write operation to wait indefinitely on workloads with a large number of overlapping writes. <br/><br/> **User Impact:** Impacted volumes enter a read-only state or become unresponsive. |
 
 ## 2.2.0.1
 
