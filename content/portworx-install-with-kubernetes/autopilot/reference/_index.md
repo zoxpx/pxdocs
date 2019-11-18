@@ -99,7 +99,6 @@ This action is to perform expansion on Portworx Storage Pools.
 * **scaletype**: Specifies the type of operation to be performed to expand the pool. Supported values are:
     * *add-disk*: Portworx will add new disk(s) to the existing storage pool
     * *resize-disk*: Portworx will resize existing disks in the storage pool
-    * *auto*: Portworx will automatically figure out the best scale type based on current disks and the backing cloud provider.
 
 ##### Examples
 
