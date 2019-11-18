@@ -223,22 +223,30 @@ pxctl service drive add --help
 ```
 
 ```output
-NAME:
-   pxctl service drive add - Add storage
+Add storage
 
-USAGE:
-   pxctl service drive add [arguments...]
+Usage:
+  pxctl service drive add [flags]
+
+Flags:
+      --journal            Use this drive as a journal device.
+      --metadata           Use this drive as a system metadata device.
+  -d, --drive string       comma-separated source drives
+  -s, --spec string        Cloud drive spec in type=<>,size=<> format
+  -o, --operation string   start|status (Valid Values: [start status]) (default "start")
+      --cache int          Use this drive as a cache device for given pool. (default -1)
+  -h, --help               help for add
 ```
 
 ```text
-pxctl service drive add /dev/mapper/volume-3bfa72dd
+pxctl service drive add /dev/mapper/volume-3bfa72dd -o start
 ```
 
 ```output
 Adding drives may make storage offline for the duration of the operation.
 Are you sure you want to proceed ? (Y/N): y
 Adding device  /dev/mapper/volume-3bfa72dd ...
-Drive add  successful. Requires restart (Exit maintenance mode).
+Drive add  successful. Requires restart.
 ```
 <!-- need to test this full operation to confirm the syntax -->
 
