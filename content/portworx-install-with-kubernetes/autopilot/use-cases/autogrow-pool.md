@@ -15,7 +15,7 @@ Autopilot uses Portworx APIs to expand storage pools, and these APIs currently s
 
 ## Prerequisites
 
-* **Portworx version**: Autopilot uses Portworx APIs to expand storage pools which is available only in PX 2.3.0 and above
+* **Portworx version**: Autopilot uses Portworx APIs to expand storage pools which is available only in PX 2.3.1 and above
 * **Portworx cloud drives**: Your Portworx installation must use one of the supported cloud drives where Portworx provisions the backing drives using the cloud provider
 * **Autopilot version**: 1.0.0 and above
 
@@ -247,4 +247,3 @@ kubectl get events --field-selector involvedObject.kind=AutopilotRule,involvedOb
 Portworx is aware of the following known issues:
 
 * When an autopilot pod restarts, it does not save previous state of resizing pools. This causes autopilot to trigger resize operations again for the same pools.
-* If Portworx or Portworx storage nodes restart while pool resize operations are underway, affected nodes will mark resize as done, and Autopilot will trigger another resize operation in the queue.
