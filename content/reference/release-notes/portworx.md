@@ -6,6 +6,32 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.3.1
+
+November 18, 2019
+
+### New Features
+
+* The `pxctl service pool expand` command is now available, allowing you to expand storage pools by adding drives and consuming unused drive capacity. See the [Expand your storage pool size](https://2.3.docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/expand-storage-pool/) section of the documentation for more information.
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Number**|**Improvement Description**|
+|----|----|
+| PWX-10148 | If you're using Portworx on Microsoft Azure, Portworx can now expand storage pools by resizing disks. |
+| PWX-10332 | Portworx now provides more descriptive error messages for pool expansion failures. |
+| PWX-10442 | Added a new flag to the `volume list` command, allowing you to list your volumes per pool UUID: `pxctl volume list --pool-uid <uuid>` |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10414 | Storage pools sometimes fail to come back online after a disk is added as part of a pool expand operation.<br/><br/>**User Impact:** Impacted storage pools may remain down, impacting apps. |
+
 ## 2.3
 
 November 12, 2019
