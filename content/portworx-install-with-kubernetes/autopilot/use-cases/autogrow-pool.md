@@ -6,12 +6,12 @@ description: "Auto-expand storage pools"
 weight: 200
 ---
 
-You can use Autopilot to expand Portworx storage pools automatically when they begin to run out of space. Autopilot monitors the metrics in your cluster (e.g., via Prometheus) and detects high usage conditions. Once high usage conditions occur, Autopilot talks with Portworx to resize the pool.
+You can use Autopilot to expand Portworx storage pools automatically when they begin to run out of space. Autopilot monitors the metrics in your cluster (e.g., via Prometheus) and detects high usage conditions. Once high usage conditions occur, Autopilot communicates with Portworx to resize the pool.
 
 Autopilot uses Portworx APIs to expand storage pools, and these APIs currently support the following cloud providers:
 
 * Azure
-* VMware vSphere
+* AWS
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Autopilot uses Portworx APIs to expand storage pools, and these APIs currently s
 
 ## Example
 
-The following example Autopilot rule expands a **250GiB** Portworx storage pool composed of a single **250GiB** drive by **100%** whenever its available capacity is lower than **50%** up to a maximum volume size of **2TB**:
+The following example Autopilot rule uses the `add-disk` scale type to expand a **250GiB** Portworx storage pool composed of a single **250GiB** drive by **100%** whenever its available capacity is lower than **50%** up to a maximum volume size of **2TB**:
 
 ```text
 apiVersion: autopilot.libopenstorage.org/v1alpha1
