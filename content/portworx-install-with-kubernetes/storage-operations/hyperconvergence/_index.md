@@ -63,11 +63,11 @@ spec:
 
 If you are not able to update the schedulerName for you applications to use
 stork, you can enable the app-initializer feature. This uses the Kubernetes
-[AdmissionController Initializer](https://kubernetes.io/docs/admin/extensible-admission-controllers/#initializers)
+[AdmissionController Initializer](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#initializers)
 feature to automatically update the scheduler to stork if your application
 (deployment or statefulset) is using volumes backed by Portworx.
 
 To enable the Initializer you need to:
-* [Enable the Intializer feature in your Kubernetes cluster](https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature) since it is an alpha feature in Kubernetes.
+* [Enable the Intializer feature in your Kubernetes cluster](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#enable-initializers-alpha-feature) since it is an alpha feature in Kubernetes.
 * Add "--app-initializer=true" option in the stork deployment
 * Add the [stork-initializer spec](https://raw.githubusercontent.com/libopenstorage/stork/master/specs/stork-initializer.yaml) to your Kubernetes cluster using `kubectl apply -f stork-initializer.yaml`
