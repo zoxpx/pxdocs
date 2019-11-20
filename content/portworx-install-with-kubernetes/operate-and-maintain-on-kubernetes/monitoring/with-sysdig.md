@@ -22,9 +22,7 @@ In order to use Sysdig with Portworx, you must deploy both products onto your Ku
     * sysdig-agent-configmap.yaml
     * sysdig-agent-daemonset-v2.yaml
 
-2. The Portworx `px` process sends metrics to port 9001 at the '/metrics' endpoint. Sysdig integrates Prometheus by default, but must be pointed to the endpoint on which the portworx metrics are exposed. Follow the instructions in the [Integrate Prometheus Metrics into Sysdig Monitor UI](https://sysdigdocs.atlassian.net/wiki/spaces/Monitor/pages/204603650/Integrate+Prometheus+Metrics+into+Sysdig+Monitor+UI) section of the Sysdig documentation to integrate Sysdig with Portworx.
-
-3. Once you've deployed Sysdig and integrated Prometheus, you must modify the `px` processes to expose metrics. Do this by adding the following fields to the `Sysdig-agent-configmap.yaml` file:
+2. Once you've deployed Sysdig, you must edit the `Sysdig-agent-configmap.yaml` file to enable Prometheus and configure the `px` processes to expose the metrics. Add the following fields to the `Sysdig-agent-configmap.yaml` file:
 
       ```text
       ...
@@ -33,10 +31,10 @@ In order to use Sysdig with Portworx, you must deploy both products onto your Ku
         interval: 1
         process_filter:  
           - include:
-            process.cmdline: "px"
-            conf:
-              port: 9001
-              path: "/metrics"
+              process.cmdline: "px"
+              conf:
+                port: 9001
+                path: "/metrics"
       ...
       ```
 
