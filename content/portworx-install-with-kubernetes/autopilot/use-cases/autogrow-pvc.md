@@ -52,7 +52,7 @@ spec:
       # resize volume by scalepercentage of current size
       scalepercentage: "100"
       # volume capacity should not exceed 400GiB
-      maxsize: "400"
+      maxsize: "400Gi"
 ```
 
 Consider the key sections in this spec.
@@ -245,7 +245,7 @@ spec:
       # resize volume by scalepercentage of current size
       scalepercentage: "100"
       # volume capacity should not exceed 400GiB
-      maxsize: "400"
+      maxsize: "400Gi"
 ```
 
 ### Apply specs
