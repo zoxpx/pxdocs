@@ -13,7 +13,7 @@ This guide describes the procedure to upgrade Portworx running as OCI container 
 
 ## Upgrade Portworx
 
-To upgrade to the **2.2** release (the latest stable at the time of this writing), run the following command:
+To upgrade to the **2.3** release (the latest stable at the time of this writing), run the following command:
 
 ```text
 curl -fsL https://install.portworx.com/2.3/upgrade | bash -s
@@ -81,7 +81,7 @@ The below sections outline the exact steps for this.
 If you want to upgrade to the latest 2.1 stable release, skip the below export. If you wish to upgrade to a specific 2.1 release, set the `PX_VER` variable as below to the desired version.
 
 ```text
-# To determine the latest minor 2.2 release currently available, please use the curl-expression below
+# To determine the latest minor 2.3 release currently available, please use the curl-expression below
 # Alternatively, you can specify the version yourself, e.g.: PX_VER=2.0.2.3
 export PX_VER=$(curl -fs https://install.portworx.com/2.3/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
 ```
