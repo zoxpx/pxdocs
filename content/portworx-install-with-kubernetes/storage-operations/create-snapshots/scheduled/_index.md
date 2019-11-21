@@ -29,6 +29,10 @@ Schedule policies can be used to specify when a specific action has to be trigge
 * **Weekly:** the day of the week and the time in that day when the action should be triggered
 * **Monthly:** the date of the month and the time on that date when the action should be triggered.
 
+{{<info>}}
+Note that scheduled snapshots do not occur if the volume you are trying to snapshot is not attached to a container.
+{{</info>}}
+
 Let's look at an example of how we could create a daily and weekly policy.
 
 Create a daily policy with the following `policy-daily.yaml`:
