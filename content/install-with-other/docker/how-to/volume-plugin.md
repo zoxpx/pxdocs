@@ -91,6 +91,9 @@ Some examples of snapshots schedules are:
 * snap_schedule="weekly=sunday@12:00,2"
 * snap_schedule="monthly=15@12:00"
 
+{{<info>}}
+Note that scheduled snapshots do not occur if the volume you are trying to snapshot is not attached to a container.
+{{</info>}}
 
 **On-demand snapshots**
 
