@@ -8,6 +8,10 @@ noicon: true
 series: px-other
 ---
 
+{{<info>}}
+This document presents the **non-Kubernetes** method of installing Portworx on Amazon ECS. Please refer to the [AWS](/portworx-install-with-kubernetes/cloud/aws/) page for details on installing Portworx with Kubernetes on AWS.
+{{</info>}}
+
 This guide shows you how you can easily deploy Portworx on Amazon Elastic Container Service [**ECS**](https://aws.amazon.com/ecs/)
 
 ### Step 1: Create an ECS cluster

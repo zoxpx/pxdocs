@@ -6,6 +6,9 @@ weight: 3
 linkTitle: Authorization with PX Clusters
 ---
 
+{{<info>}}
+This document presents the **DC/OS** method of enabling authorization for your Portworx cluster. Please refer to the [Authorization](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/) page if you are running Portworx on Kubernetes.
+{{</info>}}
 
 Once your PX Cluster has been [setup as auth-enabled](/concepts/authorization/install), there are a few steps you must take to integrate DC/OS with your auth-protected cluster.
 
@@ -37,4 +40,3 @@ Similar to other portworx volume options, you must pass `token` as an inline par
 ```text
 docker volume create -d pxd --name token=<jwt-auth-token>,repl=3,name=myvol2
 ```
-

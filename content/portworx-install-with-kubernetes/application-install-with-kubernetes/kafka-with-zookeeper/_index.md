@@ -311,7 +311,7 @@ numChildren = 0
 
 ```
 
-### Install Kafka {#install-kafka}
+## Install Kafka {#install-kafka}
 
 Obtain the Zookeeper node FQDN to be used in the configuration for Kafka.
 
