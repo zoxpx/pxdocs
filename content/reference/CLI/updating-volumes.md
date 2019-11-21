@@ -121,6 +121,10 @@ Volume	:  970758537931791410
 As shown above, the `shared` field is set to `yes` indicating that `clitest` is now a shared volume
 
 
+### Related topics
+
+* For more information about creating shared Portworx volumes through Kubernetes, refer to the [Create shared PVCs](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-shared-pvcs/) page.
+
 ## Changing a volume's sticky option
 
 For adding the `--sticky` attribute to a volume, use the following command:
@@ -279,6 +283,10 @@ Volume	:  485002114762355071
 		Set  0
 			Node 	 :  172.31.55.104
 ```
+
+### Related topics
+
+For more information about dynamically resizing a volume (PVC) using Kubernetes and Portworx, refer to the [Resize a Portworx PVC](/portworx-install-with-kubernetes/storage-operations/create-pvcs/resize-pvc/) page.
 
 ## Update a volume's replication factor
 

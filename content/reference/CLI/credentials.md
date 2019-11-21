@@ -127,3 +127,6 @@ Credential validated successfully
 {{<info>}}
 Don't forget to replace `<uuid or name>` with the actual `uuid` or `name` of the credentials you want to delete.
 {{</info>}}
+
+## Related topics
+* For information about how to integrate Portworx with Kubernetes Secrets, refer to the [Kubernetes Secrets](/key-management/kubernetes-secrets/) page.
