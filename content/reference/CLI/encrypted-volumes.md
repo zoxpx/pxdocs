@@ -154,4 +154,4 @@ The _Portworx_ cluster must be authenticated to access the secret store for the 
 
 ## Related topics
 
-* For information about how to encrypt your Portworx volumes using Kubernetes secrets, refer to the [Using Kubernetes Secrets with Portworx](/key-management/kubernetes-secrets/#using-kubernetes-secrets-with-portworx) section.
+* For information about encrypting your Portworx volumes using Kubernetes secrets, refer to the [Using Kubernetes Secrets with Portworx](/key-management/kubernetes-secrets/#using-kubernetes-secrets-with-portworx) section.
