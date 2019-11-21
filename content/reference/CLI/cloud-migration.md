@@ -17,9 +17,6 @@ With _Portworx_, there are two ways of migrating volumes between clusters:
 * using `pxctl` or
 * using `Stork` on `Kubernetes`
 
-This document will cover the steps required to migrate _PX_ volumes between clusters using `pxctl`. If you want to migrate your volumes using `Stork` on `Kubernetes`, head over to the [Kubemotion](/portworx-install-with-kubernetes/migration/kubemotion/) page.
-
-
 ## Prerequisites
 
 ### Configuring a secret store
@@ -180,3 +177,7 @@ VolumeId            VolumeName                                  Stage   Status  
 The stages of a particular migration will progress from Backup→ Restore→ Done. If any stage fails the status will be marked as Failed.
 
 If the migration is successful, you should see the volume(s) with the same name created on the destination cluster.
+
+## Related topics
+
+For information about how to migrate Portworx volumes between clusters using Stork and Kubernetes, refer to the [Kubemotion](/portworx-install-with-kubernetes/migration/kubemotion/) page.

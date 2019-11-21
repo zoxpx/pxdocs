@@ -182,3 +182,10 @@ Type    ID    Resource    Severity    Count    LastSeen    FirstSeen    Descript
 {{<info>}}
 _Portworx_ recommends setting up monitoring with Prometheus and AlertsManager. If you are using _Portworx_ with Kubernetes, head over to [this page](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/). If you are using _Portworx_ with other orchestrators, check out [this page](/install-with-other/operate-and-maintain/monitoring/alerting/).
 {{</info>}}
+
+
+## Related topics
+
+* For information about how to monitor Portworx on Kubernetes using tools like Prometheus, Grafana, or Sysdig, refer to the [Monitoring](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/) page.
+* If you are running Portworx on other orchestrators, see the [Alering with Portworx](/install-with-other/operate-and-maintain/monitoring/alerting/) page.
+
