@@ -62,23 +62,23 @@ Use "pxctl [command] --help" for more information about a command.
 As seen above, `pxctl` provides the capability to perform fine-grained control of the PX resources cluster-wide. Also, it lets the user manage volumes, snapshots, cluster resources, hosts in the cluster and software upgrade in the cluster.
 {{</info>}}
 
-In addition, every command takes in a `--json` which converts the output to machine parsable `JSON` format. You can do something like the following to save the the output in `JSON` format:
+In addition, every command takes in a `--json` flag which converts the output to a machine-parsable `JSON` format. You can do something like the following to save the output in `JSON` format:
 
 ```text
 pxctl status --json > status.json
 ```
 
-In most production deployments, you will provision volumes directly using _Docker_ or your scheduler \(such as a _Kubernetes_ pod spec\). However, `pxctl` also lets you directly provision and manage storage. In addition, `pxctl` has a rich set of cluster-wide management features which are explained in this document.
+In most production deployments, you will provision volumes directly using _Docker_ or your scheduler (such as a _Kubernetes_ pod spec). However, `pxctl` also lets you directly provision and manage storage. In addition, `pxctl` has a rich set of cluster-wide management features which are explained in this document.
 
 All operations available through `pxctl` are reflected back into the containers that use Portworx storage. In addition to what is exposed in Docker volumes, `pxctl`:
 
 *   Gives access to Portworx storage-specific features, such as cloning a running container’s storage.
 *   Shows the connection between containers and their storage volumes.
-*   Lets you control the Portworx storage cluster, such as adding nodes to the cluster. \(The Portworx tools refer to servers managed by Portworx storage as _nodes_.\)
+*   Lets you control the Portworx storage cluster, such as adding nodes to the cluster. (The Portworx tools refer to servers managed by Portworx storage as _nodes_.)
 
 The scope of the `pxctl` command is global to the cluster. Running `pxctl` on any node within the cluster, therefore, shows the same global details. But `pxctl` also identifies details specific to that node.
 
-The current release of `pxctl` is located in the `/opt/pwx/bin/` directory of every **worker node** and requires that you run as it as a privileged user.
+The current release of `pxctl` is located in the `/opt/pwx/bin/` directory of every **worker node** and requires that you run it as a privileged user.
 
 Let's look at some simple commands.
 
@@ -170,12 +170,19 @@ Downloading PX portworx/px-enterprise:1.1.6 layers...
 
 It is recommended to upgrade the nodes in a **staggered manner**. This way, the quorum and the continuity of IOs will be maintained.
 
+### Related topics
+
+* For information about how to upgrade Portworx through Kubernetes, refer to the [Upgrade on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/) page.
+
+* If you’re using the Portworx Operator, refer to the [Upgrade Portworx using the Operator](/portworx-install-with-kubernetes/on-premise/openshift/operator/upgrade/) page.
+
 ## Login/Authentication
 
 You must make PX login to the secrets endpoint when using encrypted volumes and ACLs.
 
 `pxctl secrets` can be used to configure authentication credentials and endpoints.
 Currently, Vault, Amazon KMS, and KVDB are supported.
+
 
 ### Vault example
 
@@ -217,7 +224,12 @@ Finally, a success message will be displayed:
 Successfully authenticated with AWS.
 ```
 
-### EULA
+### Related topics
+
+* For more information about how to enable and manage Portworx authorization through Kubernetes secrets, refer to the [Authorization](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/) page.
+
+
+## EULA
 
 You can get a link to our EULA by running:
 

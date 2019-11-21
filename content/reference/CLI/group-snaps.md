@@ -62,3 +62,7 @@ pxctl volume snapshot group --volume_ids 83958335106174418,874802361339616936
 Volume 83958335106174418 : Snapshot 362408823552094597
 Volume 874802361339616936 : Snapshot 895516478416742770
 ```
+
+## Related topics
+
+* For more information about how to create group snapshots of Portworx volumes through Kubernetes, refer to the [Snapshot group of PVCs](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group/) page.
