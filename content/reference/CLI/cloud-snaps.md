@@ -759,3 +759,6 @@ pxctl cloudsnap schedules  delete --uuid 078557a3-26c7-49b1-9822-34e6f816c2d1
 ```output
 Cloudsnap schedule deleted successfully
 ```
+## Related topics
+
+* For information about how to create and manage cloud snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-cloud/) page.

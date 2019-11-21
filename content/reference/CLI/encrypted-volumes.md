@@ -151,3 +151,7 @@ You can enable or disable sharing during runtime by passing the `--shared on/off
 Note that volumes must be detached to toggle the `shared` flag during run-time.
 
 The _Portworx_ cluster must be authenticated to access the secret store for the encryption keys.
+
+## Related topics
+
+* For information about how to encrypt your Portworx volumes using Kubernetes secrets, refer to the [Using Kubernetes Secrets with Portworx](/key-management/kubernetes-secrets/#using-kubernetes-secrets-with-portworx) section.
