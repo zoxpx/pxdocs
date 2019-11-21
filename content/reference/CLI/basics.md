@@ -172,9 +172,7 @@ It is recommended to upgrade the nodes in a **staggered manner**. This way, the 
 
 ### Related topics
 
-* For information about how to upgrade Portworx through Kubernetes, refer to the [Upgrade on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/) page.
-
-* If you’re using the Portworx Operator, refer to the [Upgrade Portworx using the Operator](/portworx-install-with-kubernetes/on-premise/openshift/operator/upgrade/) page.
+* For information about upgrading Portworx through Kubernetes, refer to the [Upgrade on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/) page.
 
 ## Login/Authentication
 
@@ -223,11 +221,6 @@ Finally, a success message will be displayed:
 ```
 Successfully authenticated with AWS.
 ```
-
-### Related topics
-
-* For more information about how to enable and manage Portworx authorization through Kubernetes secrets, refer to the [Authorization](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/) page.
-
 
 ## EULA
 

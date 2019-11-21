@@ -137,7 +137,7 @@ Global Flags:
 
 ### Related topics
 
-* For more information about how to decommission a Portworx node through Kubernetes, refer to the [Decommission a Node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/) page.
+* For more information about decommissioning a Portworx node through Kubernetes, refer to the [Decommission a Node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/) page.
 
 ## Showing nodes based on IO Priority
 
