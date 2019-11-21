@@ -135,6 +135,10 @@ Global Flags:
       --ssl              ssl enabled for portworx
 ```
 
+### Related topics
+
+* For more information about how to decommission a Portworx node through Kubernetes, refer to the [Decommission a Node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/) page.
+
 ## Showing nodes based on IO Priority
 
 To list the nodes in your _Portworx_ cluster based on IO Priority (high, medium and low), type:
@@ -283,3 +287,20 @@ Resync repl-add                      :  off
 Domain policy                        :  strict
 Optimized Restores                   :  on
 ```
+
+### Related topics
+
+* For more information about how to create and manage the snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page.
+
+
+## pxctl cluster options update --provisioning-commit-labels reference
+
+```text
+--provisioning-commit-labels '[{"OverCommitPercent": <percent_value>, "SnapReservePercent": <percent_value>, "LabelSelector": {"<label_key>": "<label_value>"}},{"OverCommitPercent": <percent_value>, "SnapReservePercent":<percent_value>} ]'
+```
+
+| Key | Description | Value |
+| --- | --- | --- |
+| OverCommitPercent | The maximum storage percentage volumes can provision against backing storage | Any integer over 100 |
+| SnapReservePercent | The percent of the previously specified maximum storage storage percentage that is reserved for snapshots | Any integer under 100 |
+| labelSelector | The key values for labels or node IDs you wish to apply this rule to | Enumerated string: `node` with a comma separated list of node IDs <br/> Any existing label key and value. |

@@ -150,3 +150,8 @@ If you're seeing the below error:
 `rpc error: code = Internal desc = stream terminated by RST_STREAM with error code: PROTOCOL_ERROR`
 
 Make sure that your token does not accidentally contain a newline character. This is due to gRPC/http2 not allowing newline characters.
+
+
+## Related topics
+
+* For information about how to enable and manage Portworx authorization through Kubernetes, refer to the [Authorization](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/) page.
