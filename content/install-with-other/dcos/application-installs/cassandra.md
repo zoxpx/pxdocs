@@ -5,6 +5,11 @@ keywords: portworx, px-developer, cassandra, database, cluster, storage
 linkTitle: Cassandra
 ---
 
+{{<info>}}
+This document presents the **DC/OS** method of installing Cassandra using Portworx. Please refer to the [Cassandra with Portworx on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
+
 The Portworx-Cassandra service can be found in the DC/OS catalog:
 
 ![Cassandra-PX in DCOS Universe](/img/dcos-cassandra-px-universe.png)
@@ -96,5 +101,4 @@ For further reading on Cassandra:
 * [Cassandra Docker](https://portworx.com/use-case/cassandra-docker-container/) How to run Cassandra in Docker containers
 * [Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)
 * [Cassandra stress test with Portworx](/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra)
-* [Run Cassandra on DCOS](/install-with-other/dcos/application-installs/cassandra)
 * [Snapshotting Cassandra Container Volumes for CI/CD using Mesosphere DC/OS](https://portworx.com/snapshotting-cassandra-container-volumes-ci-using-mesosphere-dcos/)

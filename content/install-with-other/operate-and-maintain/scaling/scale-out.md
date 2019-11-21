@@ -4,6 +4,11 @@ keywords: scale-up, storage, add new nodes
 description: This document illustrates how to add a new node with attached storage to a PX cluster.  Scale out your cluster today!
 ---
 
+{{<info>}}
+This document presents the **non-Kubernetes** method of scaling your Portworx cluster. Please refer to the [Scale or Restrict](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/scale-or-restrict/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
+
 ## Scaling out an existing PX Cluster
 
 This document illustrates how to add a new node with attached storage to a PX cluster

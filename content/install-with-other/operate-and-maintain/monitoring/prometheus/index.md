@@ -3,6 +3,10 @@ title: Portworx integration with prometheus
 keywords: prometheus, graph, stats
 meta-description: Looking to integrate Portworx with Prometheus? Learn to integrate PX storage with Prometheus for monitoring today!
 ---
+{{<info>}}
+This document presents the **non-Kubernetes** method of monitoring your Portworx cluster with Prometheus. Please refer to the [Prometheus and Grafana](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
 
 PX storage and network stats can easily be integrated with [**prometheus**](https://prometheus.io) or similar applications.
 These stats are exported at port 9001; your application can poll http://&lt;IP_ADDRESS&gt;:9001/metrics to get their runtime values.

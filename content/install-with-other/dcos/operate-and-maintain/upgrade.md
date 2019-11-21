@@ -5,6 +5,10 @@ description: Updating Portworx version on your DCOS cluster is simple. Follow th
 hidden: true
 ---
 
+{{<info>}}
+This document presents the **DC/OS** method of upgrading Portworx. Please refer to the [Upgrade Portworx on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
 This guide walks through upgrading Portworx deployed on DCOS through the framework available in the DCOS catalog.
 
 ### Update the Portworx image in the framework config

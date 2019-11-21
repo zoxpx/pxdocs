@@ -6,6 +6,10 @@ weight: 1
 linkTitle: Running Portworx in Production with DC/OS
 ---
 
+{{<info>}}
+This document presents the **DC/OS** method of running Portworx in production. Please refer to the [Running in Production](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/running-in-production/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
 ## DAY 1 Operations
 
 ### Initial Software Setup for Production

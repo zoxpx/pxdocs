@@ -4,6 +4,10 @@ description: Portworx can enable persistent data streams for kafka clusters. To 
 keywords: portworx, px-developer, cassandra, database, cluster, storage
 ---
 
+{{<info>}}
+This document presents the **DC/OS** method of installing Kafka with Portworx. Please refer to the [Kafka and Zookeeper with Portworx on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
 This guide will help you to install the Kafka service on your DCOS cluster backed by PX volumes for persistent storage.
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
