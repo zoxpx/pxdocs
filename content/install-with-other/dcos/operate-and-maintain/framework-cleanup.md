@@ -11,6 +11,7 @@ going to clean up the `portworx-cassandra` service in this example. These steps 
 in DC/OS including the Portworx service.
 
 ## Shutdown the service
+
 Find the ID of the service that you want to cleanup. The service should be in inactive state, i.e. ACTIVE should be
 set to False.
 ```text
@@ -41,6 +42,9 @@ dcos node ssh --master-proxy --leader \
 
 ## Cleanup Portworx framework
 
+{{<info>}}
+This section presents the **DC/OS** method of cleaning up the Portworx framework. Please refer to the [Uninstall on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/) page if you are running Portworx on Kubernetes.
+{{</info>}}
 
 If you are trying to cleanup _Portworx_ framework, you will have to perform additional steps to cleanup the remnants
 from slave nodes. Run the commands below on all the private agents where _Portworx_ was running.

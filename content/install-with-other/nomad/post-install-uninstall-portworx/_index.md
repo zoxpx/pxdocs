@@ -10,6 +10,11 @@ noicon: true
 hidden: true
 ---
 
+{{<info>}}
+This document presents the **Nomad** method of uninstalling a Portworx cluster. Please refer to the [Uninstall on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
+
 There are two steps to completely uninstall _Portworx_ from Nomad:
 
 - Remove the Nomad _Portworx_ job

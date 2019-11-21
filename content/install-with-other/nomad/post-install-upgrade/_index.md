@@ -10,6 +10,10 @@ noicon: true
 hidden: true
 ---
 
+{{<info>}}
+This document presents the **Nomad** method of upgrading a Portworx cluster. Please refer to the [Upgrade Portworx on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/) page if you want to upgrade Portworx on Kubernetes.
+{{</info>}}
+
 Upgrade _Portworx_ with Nomad by editing the `portworx.nomad` file you used for initial deployment and updating the container version.
 
 Perform the following steps to update to _Portworx_ version 2.1.2:

@@ -5,6 +5,11 @@ keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storag
 weight: 4
 ---
 
+{{<info>}}
+This document presents the **DC/OS** method of installing stateful applications with Portworx. Please refer to the [Stateful applications on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/) page if you want to install stateful applications with Portworx on Kubernetes.
+{{</info>}}
+
+
 Since the stateful services in the DCOS universe do not support external volumes, you will need to add additional packages available here in order to use Portworx with these services.
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)

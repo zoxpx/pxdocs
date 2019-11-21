@@ -7,6 +7,10 @@ noicon: true
 series: px-docker-install
 ---
 
+{{<info>}}
+This document presents the **Docker** method of installing a Portworx cluster using Docker in swarm mode. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
+
 This section describes installing Portworx on Docker Swarm.
 
 ## Identify storage
