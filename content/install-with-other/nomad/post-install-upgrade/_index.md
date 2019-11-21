@@ -10,7 +10,15 @@ noicon: true
 hidden: true
 ---
 
-It is straightforward to upgrade _Portworx_ with Nomad. Just edit the `portworx.nomadfile` you used for initial deployment and update the container version. As an example, here's how you would update to version 2.1.1 :
+{{<info>}}
+This document presents the **Nomad** method of upgrading a Portworx cluster. Please refer to the [Upgrade Portworx on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/) page if you want to upgrade Portworx on Kubernetes.
+{{</info>}}
+
+Upgrade _Portworx_ with Nomad by editing the `portworx.nomad` file you used for initial deployment and updating the container version.
+
+Perform the following steps to update to _Portworx_ version 2.1.2:
+
+1. Modify the `image` key value in your `portworx.nomad` file, changing the version to `2.1.2`:
 
 ```text
  image = "portworx/oci-monitor:2.1.1"

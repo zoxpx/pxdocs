@@ -4,6 +4,10 @@ description: Find out how to install the ElasticSearch service on your DCOS clus
 keywords: portworx, container, Mesos, Mesosphere, DCOS, Elasticsearch
 ---
 
+{{<info>}}
+This document presents the **DC/OS** method of installing Elastic Search and Kibana with Portworx. Please refer to the [Elastic Search and Kibana with Portworx on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
 This guide will help you to install the Elasticsearch service on your DCOS cluster backed by PX volumes for persistent storage.
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)

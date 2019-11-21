@@ -4,6 +4,11 @@ keywords: portworx, prometheus, grafana, alertmanager, cluster, storage
 meta-description: Find templates for displaying Portworx cluster information within Grafana.
 ---
 
+{{<info>}}
+This document presents the **non-Kubernetes** method of monitoring your Portworx cluster with Grafana. Please refer to the [Prometheus and Grafana](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
+
 ## Configure Grafana
 
 Start grafana with the follwing docker run command

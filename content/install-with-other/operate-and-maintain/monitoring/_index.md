@@ -1,9 +1,13 @@
 ---
 title: "Monitoring your cluster"
 keywords: portworx, node_exporter, cadvisor prometheus, grafana, alertmanager, cluster, storage
-description: How to monitor various custers on Portworx.
+description: How to monitor your Portworx cluster.
 weight: 2
 ---
+
+{{<info>}}
+This document presents the **non-Kubernetes** method of monitoring a Portworx cluster. Please refer to the [Monitoring](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/) page if you are running Portworx on Kubernetes.
+{{</info>}}
 
 ## Using node_exporter and cadvisor alongside Portworx
 

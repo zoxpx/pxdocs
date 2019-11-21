@@ -7,6 +7,10 @@ linkTitle: DigitalOcean
 noicon: true
 ---
 
+{{<info>}}
+This document presents a **non-Kubernetes** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
+
 This guide shows you how you can easily deploy Portworx on the [**digitalocean.com** cloud platform](http://digitalocean.com)
 using [Terraform](http://terraform.io) infrastructure automation.
 

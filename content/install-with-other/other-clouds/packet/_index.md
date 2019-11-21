@@ -7,6 +7,10 @@ linkTitle: Packet.net
 noicon: true
 ---
 
+{{<info>}}
+This document presents a **non-Kubernetes** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
+
 This guide shows you how you can easily deploy Portworx on the [**packet.net** hosting service](https://www.packet.com/)
 
 Other supported bare metal cloud providers are
