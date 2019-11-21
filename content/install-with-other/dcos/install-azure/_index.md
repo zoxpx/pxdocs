@@ -7,6 +7,10 @@ weight: 3
 noicon: true
 ---
 
+{{<info>}}
+This document presents the **DC/OS** method of installing Portworx on the Azure Container Service Engine (ACS). Please refer to the [Azure Container Service (ACS)](/portworx-install-with-kubernetes/cloud/azure/acs/) page if you want to install Portworx with Kubernetes on the Azure Container Service Engine (ACS).
+{{</info>}}
+
 ### Overview
 The [Azure Container Service Engine](https://github.com/Azure/acs-engine) (acs-engine) generates ARM (Azure Resource Manager) templates for Docker enabled clusters on Microsoft Azure with your choice of DC/OS, Kubernetes, Swarm Mode, or Swarm orchestrators. The input to the tool is a cluster definition. The cluster definition is very similar to (in many cases the same as) the ARM template syntax used to deploy a Microsoft Azure Container Service cluster.
 

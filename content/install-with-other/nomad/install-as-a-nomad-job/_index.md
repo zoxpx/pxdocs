@@ -9,6 +9,10 @@ noicon: true
 hidden: true
 ---
 
+{{<info>}}
+This document presents the **Nomad** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
+
 This section shows how to install _Portworx_ using a Nomad job.
 
 ## Prerequisites

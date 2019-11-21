@@ -7,6 +7,10 @@ weight: 1
 series: px-docker-install
 ---
 
+{{<info>}}
+This document presents the **Docker** method of installing a Portworx cluster using `runC` containers. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
+
 ## Why OCI
 
 Running Portworx as a runC container eliminates any cyclical dependencies between a Docker container consuming storage from the Portworx container. It also enables you to run your Linux containers without a Docker daemon completely, while still getting all of the advantages of a Linux container and cloud native storage from Portworx.

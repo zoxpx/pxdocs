@@ -8,6 +8,10 @@ series: px-other
 noicon: true
 ---
 
+{{<info>}}
+This document presents the **Nomad** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
+
 This section covers information on installing _Portworx_ on Nomad.
 
 Nomad is a scheduler and job orchestrator from HashiCorp for managing a cluster of machines and running applications on them. Nomad abstracts away machines and the location of applications and instead enables users to declare what they want to run and Nomad handles where they should run and how to run them. Portworx can run within Nomad and provide persistent volumes to other applications running on Nomad. This section describes how to deploy and consume Portworx within a Nomad cluster.
