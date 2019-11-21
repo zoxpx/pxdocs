@@ -186,6 +186,6 @@ _Portworx_ recommends setting up monitoring with Prometheus and AlertsManager. I
 
 ## Related topics
 
-* For information about how to monitor Portworx on Kubernetes using tools like Prometheus, Grafana, or Sysdig, refer to the [Monitoring](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/) page.
+* For information about monitoring Portworx on Kubernetes using tools like Prometheus, Grafana, or Sysdig, refer to the [Monitoring](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/) page.
 * If you are running Portworx on other orchestrators, see the [Alering with Portworx](/install-with-other/operate-and-maintain/monitoring/alerting/) page.
 
