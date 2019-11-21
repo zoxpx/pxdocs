@@ -10,10 +10,6 @@ aliases:
   - /cloud-references/migration/migration-pxctl
 ---
 
-{{<info>}}
-This document presents the **non-Kubernetes** method of migrating volumes between two Portworx clusters. Please refer to the [Kubemotion with Stork](/portworx-install-with-kubernetes/migration/kubemotion) page if you are running Portworx on Kubernetes.
-{{</info>}}
-
 ## Overview
 
 This method can be used to migrate volumes between two Portworx clusters. It will not migrate any scheduler specific resources.
