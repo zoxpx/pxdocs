@@ -154,4 +154,4 @@ Make sure that your token does not accidentally contain a newline character. Thi
 
 ## Related topics
 
-* For information about how to enable and manage Portworx authorization through Kubernetes, refer to the [Authorization](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/) page.
+* For information about enabling and managing Portworx authorization through Kubernetes, refer to the [Authorization](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/) page.

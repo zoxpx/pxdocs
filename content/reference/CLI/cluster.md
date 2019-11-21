@@ -137,7 +137,7 @@ Global Flags:
 
 ### Related topics
 
-* For more information about how to decommission a Portworx node through Kubernetes, refer to the [Decommission a Node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/) page.
+* For more information about decommissioning a Portworx node through Kubernetes, refer to the [Decommission a Node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/) page.
 
 ## Showing nodes based on IO Priority
 
@@ -290,7 +290,7 @@ Optimized Restores                   :  on
 
 ### Related topics
 
-* For more information about how to create and manage the snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page.
+* For more information about creating and managing the snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page.
 
 
 ## pxctl cluster options update --provisioning-commit-labels reference
