@@ -761,4 +761,4 @@ Cloudsnap schedule deleted successfully
 ```
 ## Related topics
 
-* For information about how to create and manage cloud snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-cloud/) page.
+* For information about creating and managing cloud snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-cloud/) page.
