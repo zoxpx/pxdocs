@@ -90,7 +90,7 @@ stop-deployment-container:
 check-links:
 	docker run --rm \
 		--link pxdocs-deployment:pxdocs-deployment \
-		linkchecker/linkchecker http://pxdocs-deployment --check-extern --ignore-url=https?:\/\/[www]*[\.]*[support]*\.rackspace\.com[\/a-z\-]*
+		linkchecker/linkchecker http://pxdocs-deployment --check-extern --ignore-url=https?:\/\/[www]*[\.]*[support]*\.rackspace\.com[\/a-z\-]* --ignore-url=https?:\/\/[www]*[\.]*\.youtube\.com[\/a-zA-Z0-9\-\?\=\_\&]*
 
 .PHONY: publish
 publish: image publish-docker
