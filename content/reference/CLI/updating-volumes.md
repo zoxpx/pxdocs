@@ -29,7 +29,7 @@ Flags:
       --early_ack string    Reply to async write requests after it is copied to shared memory (Valid Values: [on off]) (default "off")
       --async_io string     Enable async IO to backing storage (Valid Values: [on off]) (default "off")
       --nodiscard string    Disable discard support for this volume (Valid Values: [on off]) (default "off")
-      --io_profile string   IO Profile (Valid Values: [sequential cms db]) (default "sequential")
+      --io_profile string   IO Profile (Valid Values: [sequential cms db db_remote sync_shared]) (default "sequential")
       --sharedv4 string     set sharedv4 setting (Valid Values: [on off]) (default "off")
       --queue_depth uint    block device queue depth (Valid Range: [1 256]) (default 128)
       --scale uint          New scale factor (Valid Range: [1 1024]) (default 1)
