@@ -4,7 +4,7 @@ keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: How to designate a namespace as the cluster admin namespace
 ---
 
-By default you can only migrate namespaces in which the Migration object is created.
+By default, you can only migrate namespaces in which the Migration object is created.
 This is to prevent any user from migrating namespaces for which they do not have access.
 You can also designate one namespace as an admin namespace. This will allow an
 admin who has access to that namespace to migrate any namespace from the source
@@ -19,7 +19,7 @@ Run the following command to edit the stork deployment:
 kubectl edit deployment -n kube-system stork
 ```
 
-If `admin-namespace` is your admin namepsace, in the editor, update the arguments to the stork container to specify the cluster admin namespace using the `--migration-admin-namespace` parameter:
+If `admin-namespace` is your admin namespace, in the editor, update the arguments to the stork container to specify the cluster admin namespace using the `--migration-admin-namespace` parameter:
 
 ```text
       - command:
