@@ -266,8 +266,10 @@ You restore an application by applying an ApplicationRestore object.
   * **name:** the ApplicationRestore object's name
   * **namespace:** the ApplicationRestore object's namespace
   * **spec:**
-      * **backupName:** the name of the `applicationBackup` object to restore from.
+      * **backupName:** the name of the `applicationBackup` object to restore from
       * **backupLocation:** which backup location object to get application backups from
+      * **namespaceMapping:** a map of source and destination namespaces, allowing you to restore a backup to a different namespace
+      * **replacePolicy:** specifies whether you want to delete or retain any matching existing resource in the target namespace
 
     ```text
     apiVersion: stork.libopenstorage.org/v1alpha1
@@ -278,6 +280,9 @@ You restore an application by applying an ApplicationRestore object.
     spec:
       backupName: backup
       backupLocation: mysql
+      namespaceMapping:
+        mysql: mysql
+      replacePolicy: Delete
     ```
 
     {{<info>}}
