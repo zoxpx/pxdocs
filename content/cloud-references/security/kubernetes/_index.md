@@ -8,4 +8,4 @@ hidesections: true
 disableprevnext: true
 ---
 
-{{<homelist series="kubernetes-security-ref-archs">}}
+{{<homelist series="ra-kubernetes-security">}}
