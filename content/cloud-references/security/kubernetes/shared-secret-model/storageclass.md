@@ -8,13 +8,16 @@ series: ra-shared-secrets-model
 
 # StorageClass for non-CSI
 
-Create a storage class to use secret:
+In the previous section, you saved the Kubernetes token in a secret called
+`px-k8s-user` in the `portworx` namespace. Now you can create a storage class
+which points Portworx to authenticate the request using the token in the
+that secret.
 
 ```
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: px-storage
+  name: px-storage-repl-1
 provisioner: kubernetes.io/portworx-volume
 parameters:
   repl: "1"
@@ -23,9 +26,16 @@ parameters:
 allowVolumeExpansion: true
 ```
 
+As you can see above, requests to manage volumes will be validated by
+Portworx using the token saved in the secret referenced by the storage class.
+As you create more storage classes, remember to reference the secret with the
+token to authenticate the requests.
+
 # StorageClass for CSI
 
-Create a storage class to use secret. The following is a CSI based storage class:
+When using CSI, the storage class references the secret for the three types
+of supported operations: _provision_, _node-publish_ (mount/unmount), and
+_controller-expand_.
 
 ```
 apiVersion: storage.k8s.io/v1
