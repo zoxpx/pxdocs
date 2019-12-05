@@ -6,6 +6,12 @@ weight: 10
 series: ra-kubernetes-security
 ---
 
+# Overview
+
+Kubernetes provides a great authentication model for its users, but storage
+systems could be exposed to malicious requests. Portworx Security provides a
+method to requests, further providing deployers with a complete secured system.
+
 The following reference architecture describes how to setup Portworx security
 to authenticate PVC requests from Kubernetes. This model leverages Kubernetes
 user authentication, which secures access to Namespaces, Secrets, and
@@ -13,5 +19,7 @@ PersistentVolumes. With access already provided and secured by Kubernetes,
 this reference architecture provides a model to secure the communication
 between Kubernetes and Portworx. Securing Portworx also protects the storage
 system from unwanted access from outside Kubernetes.
+
+# Requirements
 
 The following is based on Portworx 2.1.x+ with security.
