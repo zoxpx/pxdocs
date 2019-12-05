@@ -406,7 +406,10 @@ Volume	:  970758537931791410
 ```
 
 {{<info>}}
-You can also inspect multiple volumes in one command.
+**NOTE:** <ul>
+<li>You can inspect multiple volumes in one command.</li>
+<li>The `Bytes used` value only represents the application data held by the volume. This amount may be smaller than the value reported by `pxctl volume usage` due to metadata inclusion and fragmentation.</li>
+</ul>
 {{</info>}}
 
 To inspect the volume in `json` format, run `pxctl volume inspect` with the `--json` flag:
