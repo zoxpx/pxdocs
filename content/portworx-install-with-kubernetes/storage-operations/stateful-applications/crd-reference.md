@@ -147,6 +147,9 @@ metadata:
 spec:
   backupName: backup
   backupLocation: mysql
+  namespaceMapping:
+    mysql: mysql
+  replacePolicy: Delete
 ```
 
 #### Spec Parameters
@@ -155,6 +158,8 @@ spec:
 |----|----|----|----|
 |backupName| The name of the ApplicationBackup you want to restore from | **Default:** None | Yes |
 |backupLocation| Which backup location object to get application backups from | **Default:** None | Yes |
+| namespaceMapping | A map of source and destination namespaces, allowing you to restore a backup to a different namespace. You must provide the map in key value pairs, with the source namespace as the key and the destination namespace as the value. {{<info>}}**NOTE:** You must run this spec from an admin namespace (kube-system by default). {{</info>}} | **Default:** None | No |
+| replacePolicy | What happens if matching resources already exist | **Default:** Retain <br/><br/> **Enumerated string:** Delete, Retain | No |
 
 ## ApplicationClone
 
