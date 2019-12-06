@@ -96,43 +96,7 @@ pxctl version 2.1.0.0-d594892 (OCI)
 
 ## Status
 
-The status command gives a summary like node details, cluster members, global storage capacity, etc.
-
-The following example shows how the output looks like if the global capacity for the Docker containers is 128 GB.
-
-```text
-pxctl status
-```
-
-```output
-Status: PX is operational
-License: PX-Developer
-Node ID: 2069387c-6c60-4e23-a88d-07d391431e01
-        IP: 192.168.57.3
-        Local Storage Pool: 1 pool
-        POOL    IO_PRIORITY     RAID_LEVEL      USABLE  USED    STATUS  ZONE    REGION
-        0       HIGH            raid0           20 GiB  1.3 GiB Online  default default
-        Local Storage Devices: 3 devices
-        Device  Path            Media Type              Size            Last-Scan
-        0:0     /dev/sdc        STORAGE_MEDIUM_MAGNETIC 10 GiB          23 Feb 19 19:21 IST
-        0:1     /dev/sdb        STORAGE_MEDIUM_MAGNETIC 10 GiB          23 Feb 19 19:21 IST
-        total                   -                       20 GiB
-        Cache Devices:
-        Device  Path            Media Type              Size            Last-Scan
-        0:2     /dev/sde        STORAGE_MEDIUM_SSD      4.0 GiB         23 Feb 19 19:21 IST
-        Journal Device:
-        1       /dev/sdf1       STORAGE_MEDIUM_MAGNETIC
-Cluster Summary
-        Cluster ID: 12345
-        Cluster UUID: a6a03e7a-ad9d-42de-bff8-10d07b6bfa7e
-        Scheduler: none
-        Nodes: 1 node(s) with storage (1 online)
-        IP              ID                                      SchedulerNodeName       StorageNode     Used    Capacity        Status  StorageStatus      Version         Kernel                  OS
-        192.168.57.3    2069387c-6c60-4e23-a88d-07d391431e01    N/A                     Yes             1.3 GiB 20 GiB          Online  Up (This node)     3.0.0.0-527cd9a 4.4.0-131-generic       Ubuntu 16.04.5 LTS
-Global Storage Pool
-        Total Used      :  1.3 GiB
-        Total Capacity  :  20 GiB
-```
+This section has been moved to the [status page](/reference/cli/status).
 
 ## Upgrade related operations
 
