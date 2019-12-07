@@ -89,7 +89,7 @@ roleRef:
   name: autopilot-role
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -101,6 +101,9 @@ metadata:
   initializers:
     pending: []
 spec:
+  selector:
+    matchLabels:
+      tier: control-plane
   strategy:
     rollingUpdate:
       maxSurge: 1
