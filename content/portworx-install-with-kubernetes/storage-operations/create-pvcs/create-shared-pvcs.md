@@ -14,9 +14,9 @@ Shared volumes are useful when you want multiple PODs to access the same PVC \(v
 
 {{<info>}}**Openshift users**:
 
-Below procedure describes creating shared PVCs using the native in-tree Portworx driver in Kubernetes. There is a known issue in Openshift 3.9, 3.10 and 3.11 preventing mounts of shared PVCs.
+The following sections describe how you can create shared PVCs using the native in-tree Portworx driver in Kubernetes. If you're running Portworx on Openshift 3.11 or earlier, shared volumes work only if `SELinux` is disabled on the node or in Docker. This issue is caused by a bug in Kubernetes, which is fixed in Kubernetes 1.13.4 and is [shipped](https://bugzilla.redhat.com/show_bug.cgi?id=1634158) with OpenShift 4.1.
 
-Use instructions at [Shared PVCs using CSI](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-shared-pvcs-csi) to create shared Portworx PVCs.
+Please refer to the instructions from the [Shared PVCs using CSI](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-shared-pvcs-csi) page to create shared Portworx PVCs.
 {{</info>}}
 
 ### Step 1: Create Storage Class
