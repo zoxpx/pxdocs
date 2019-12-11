@@ -58,6 +58,30 @@ The following issues have been fixed:
 |PWX-10239| Entering the `pxctl service drive add -o status` command with a `--spec` flag included causes Portworx to incorrectly add drives. <br/><br/>**User Impact:** Users entering a status command with the conflicting `--spec` flag can erroneously add new drives. <br/><br/> **Resolution:** With 2.3, Portworx no longer accepts these malformed commands as drive add operations. |
 |PSP-1978| Portworx occasionally causes a read/write operation to wait indefinitely on workloads with a large number of overlapping writes. <br/><br/> **User Impact:** Impacted volumes enter a read-only state or become unresponsive. |
 
+## 2.2.0.3
+
+December 10, 2019
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10661 | Redacted VMware vSphere environment variable values from Portworx logs. |
+
+## 2.2.0.2
+
+November 27, 2019
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10525 | Portworx periodically queries etcd to retrieve the storage spec and check storage pool status and pending drive operations. This fix limits the periodic calls and makes them only when necessary: on a version update. |
+
 ## 2.2.0.1
 
 October 25, 2019
