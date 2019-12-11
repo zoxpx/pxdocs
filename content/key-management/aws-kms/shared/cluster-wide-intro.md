@@ -2,7 +2,7 @@
 hidden: true
 ---
 
-From **Portworx version 2.1** support for cluster-wide secrets has been deprecated. If you have volumes (using cluster-wide secret) that were created using older Portworx versions, those volumes will still seamlessly work with newer Portworx versions.
+From **Portworx version 2.1** support for cluster-wide secrets has been deprecated. If you have volumes (using cluster-wide secret) that were created using older _Portworx_ versions, those volumes will still seamlessly work with newer _Portworx_ versions.
 
 However, if you wish to use your previous cluster-wide secret, then you will need to pass its name as shown in the previous Named secrets section.
 
