@@ -227,9 +227,50 @@ Use the applicationBackup CRD to specify what namespaces have their applications
 
 ### Create an ApplicationBackupSchedule CRD
 
-The ApplicationBackupSchedule CRD associates a SchedulePolicy with an application backup, allowing you to schedule when application backups are performed.
+The ApplicationBackupSchedule CRD associates a SchedulePolicy with an application backup operation, allowing you to schedule when and how application backups are performed.
 
-1. Create an ApplicationBackupSchedule YAML file, specifying the following:
+1. Create a SchedulePolicy YAML file, specifying the following:
+
+  * **name:** the SchedulePolicy object's name
+  * **policy:**
+      * **interval:** For interval backups, how frequently Portworx will back the application up
+          * **intervalMinutes:** The interval, in minutes, after which Portworx starts the application backup
+          * **retain:** How many backups Portworx will retain.
+      * **daily:** For daily backups, Portworx will start the backup at the specified time every day
+          * **time:**
+          * **retain:** How many backups Portworx will retain.
+      * **weekly:** For weekly backups, Portworx will start the backup at the specified day and time every week
+          * **day:** The backup day, specified by string
+          * **time:** The backup time, specified in 12 hour AM/PM format
+          * **retain:** How many backups Portworx will retain.
+      * **monthly:** for monthly backups, Portworx will start the backup at the specified day and time every month
+          * **date:** The backup day, specified as an integer
+          * **time:** the backup time, specified in 12 hour AM/PM format
+          * **retain:** How many backups Portworx will retain.
+
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: SchedulePolicy
+    metadata:
+      name: backupSchedule
+    policy:
+      interval:
+        intervalMinutes: 60
+        retain: 5
+      daily:
+        time: "10:14PM"
+        retain: 5
+      weekly:
+        day: "Thursday"
+        time: "10:13PM"
+        retain: 5
+      monthly:
+        date: 14
+        time: "8:05PM"
+        retain: 5
+    ```
+
+2. Create an ApplicationBackupSchedule YAML file, specifying the following:
 
   * **name:** the applicationBackupSchedule object's name
   * **namespace:** the namespace the applicationBackupSchedule exists in
