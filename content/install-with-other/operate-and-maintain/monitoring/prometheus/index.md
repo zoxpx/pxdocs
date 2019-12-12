@@ -1,14 +1,14 @@
 ---
-title: Portworx integration with prometheus
+title: Portworx integration with Prometheus
 keywords: prometheus, graph, stats
-meta-description: Looking to integrate Portworx with Prometheus? Learn to integrate PX storage with Prometheus for monitoring today!
+meta-description: Looking to integrate Portworx with Prometheus? Learn to integrate Portworx storage with Prometheus for monitoring today!
 ---
 {{<info>}}
 This document presents the **non-Kubernetes** method of monitoring your Portworx cluster with Prometheus. Please refer to the [Prometheus and Grafana](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
 
-PX storage and network stats can easily be integrated with [**prometheus**](https://prometheus.io) or similar applications.
+Portworx storage and network stats can easily be integrated with [**prometheus**](https://prometheus.io) or similar applications.
 These stats are exported at port 9001; your application can poll http://&lt;IP_ADDRESS&gt;:9001/metrics to get their runtime values.
 
 ## Integration with Prometheus
@@ -18,13 +18,13 @@ Add your px node as a target in Prometheus config file:
 
 ![Prometheus Config File](/img/prometheus-config.png "Prometheus Config File")
 
-In the example above, our node has IP address of 54.173.138.1, so Prometheus is watching 54.173.138.1:9001 as its target. This can be any node in the PX cluster.
+In the example above, our node has IP address of 54.173.138.1, so Prometheus is watching 54.173.138.1:9001 as its target. This can be any node in the Portworx cluster.
 
-### Step 2: PX metrics to watch and building graphs with Prometheus
+### Step 2: Portworx metrics to watch and building graphs with Prometheus
 
-Once Prometheus starts watching px node, you will be able to see new portworx related metrics added to Prometheus.
+Once Prometheus starts watching your Portworx node, you will be able to see new Portworx related metrics added to Prometheus.
 
-![PX Metrics in Prometheus](/img/px-metrics-in-prometheus.png "PX Metrics in Prometheus")
+![Portworx Metrics in Prometheus](/img/px-metrics-in-prometheus.png "PX Metrics in Prometheus")
 
 You can now build graphs:
 
@@ -41,7 +41,7 @@ A curl request on port 9001 also shows the stats:
 ### Cluster stats:
 
 ```text
-px_cluster_cpu_percent: average CPU usage for the PX cluster nodes in percentage
+px_cluster_cpu_percent: average CPU usage for the Portworx cluster nodes in percentage
 px_cluster_disk_available_bytes: available storage in px cluster in bytes
 px_cluster_disk_utilized_bytes: used storage in px cluster in bytes
 px_cluster_memory_utilized_percent: average memory usage for the px cluster nodes
