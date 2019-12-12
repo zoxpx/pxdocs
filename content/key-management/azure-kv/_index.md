@@ -31,7 +31,7 @@ Following are the authentication details required by Portworx to connect Azure K
 
 ### Kubernetes users {#kubernetes-users}
 
-If you are installing Portworx on Kubernetes, when generating the Portworx Kubernetes spec file from the Portworx Spec Generator page in [PX-Central](https://central.portworx.com):
+If you are installing Portworx on Kubernetes, when generating the Portworx Kubernetes spec file from the Portworx spec generator page in [PX-Central](https://central.portworx.com):
 
 1. Pass in all the above variables as is in the Environment Variables section.
 2. Select `Azure Key Vault` from the `Secrets Store Type` list under `Advanced Settings`
@@ -50,7 +50,7 @@ During installation,
 
 #### Existing installation
 
-Based on your installation method provide the `-secret_type azure-kv` input argument and environment variable and restart PX on all the nodes.
+Based on your installation method provide the `-secret_type azure-kv` input argument and environment variable and restart Portworx on all the nodes.
 
 {{<info>}}
 **Note**:
