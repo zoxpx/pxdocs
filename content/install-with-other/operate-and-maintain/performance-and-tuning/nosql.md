@@ -5,7 +5,7 @@ description: Find out how Portworx outperforms Cassandra's three way replication
 weight: 4
 ---
 
-## Containerized NoSQL Workloads: Cassandra performance gains with running PX-Enterprise
+## Containerized NoSQL Workloads: Cassandra performance gains with running PX-Enterprise 
 
 In this example, we show how PX-Enterprise's network-optimized 3-way replication out-performs Cassandra's 3-way replication when running on a 3-node cluster. We compared the performance between the following two configuration and ran these tests on the same servers as the tests above.
 
@@ -14,7 +14,7 @@ In this example, we show how PX-Enterprise's network-optimized 3-way replication
 
 The results demonstrate that running with PX-Enterprise for Cassandra workloads provide significant gains. PX-Enterprise's breakthrough performance for containerized workloads along with the cloud-scale data protection and data services make it a compelling container data services infrastructure for Cassandra and other no-sql workloads
 
-The Read OPS/sec and Write OPS/sec improvements graphs show how running with PX-Enterprise's three-node replication deliver a significantly better OPS/sec than running with Cassandra's three-node replication. This PX-Enterprise performance is also made possible because PX container software stack intelligently leverages NVMe SSDs to deliver high OPS/sec and low latencies.
+The Read OPS/sec and Write OPS/sec improvements graphs show how running with PX-Enterprise's three-node replication deliver a significantly better OPS/sec than running with Cassandra's three-node replication. This PX-Enterprise performance is also made possible because Portworx container software stack intelligently leverages NVMe SSDs to deliver high OPS/sec and low latencies.
 
 ### Cassandra with PX-Enterprise - Read OPS/sec improvements
 

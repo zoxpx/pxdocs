@@ -7,8 +7,8 @@ series: rancher
 hidesections: true
 ---
 
-This page has documentation on how to install portworx in different rancher versions.
+This guide shows how you can install Portworx on Kubernetes using Rancher.
 
-Proceed to one of the below sections. 
+Portworx supports Rancher 1.x and 2.x. Based on your environment, proceed to one of the below sections.
 
 {{<homelist series="px-rancher">}}
