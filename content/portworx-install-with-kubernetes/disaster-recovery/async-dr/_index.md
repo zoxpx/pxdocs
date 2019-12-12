@@ -13,11 +13,11 @@ weight: 2
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be reachable by the source cluster.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
-* **License**: You will need a DR enabled Portworx License at both the source and destination cluster to use this feature.
+* **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
 
 ## Overview
 
-With asynchronous DR, you can replicate Kubernetes applications and their data between two Kubernetes clusters. Here, a separate Portworx Enterprise cluster runs under each Kubernetes cluster.
+With asynchronous DR, you can replicate Kubernetes applications and their data between two Kubernetes clusters. Here, a separate PX-Enterprisecluster runs under each Kubernetes cluster.
 
 * The active Kubernetes cluster asynchronously backs-up apps, configuration and data to a standby Kubernetes cluster.
 * The standby Kubernetes cluster has running controllers, configuration and PVCs that map to a local volumes.
@@ -42,10 +42,10 @@ The following Kubernetes resources are supported as part of the Asynchronous DR 
 
 ## Enable load balancing on cloud clusters
 
-If you're running Kubernetes on the cloud, you must configure an External LoadBalancer (ELB) for the PX API service.
+If you're running Kubernetes on the cloud, you must configure an External LoadBalancer (ELB) for the Portworx API service.
 
 {{<info>}}
-**Warning:** Do not enable load balancing without authorization enabled on the PX cluster.
+**Warning:** Do not enable load balancing without authorization enabled on the Portworx cluster.
 {{</info>}}
 
 Enable load balancing by entering the `kubectl edit service` command and changing the service type value from `nodePort` to `loadBalancer`:

@@ -7,7 +7,7 @@ noicon: true
 series: px-k8s-gcp
 ---
 
-This document shows how to install _Portworx_ with Google Kubernetes Engine (GKE).
+This document shows how to install Portworx with Google Kubernetes Engine (GKE).
 
 ### Prerequisites
 
@@ -86,9 +86,9 @@ Next, we need to open access to the Compute API. Run the following command:
 gcloud services enable compute.googleapis.com
 ```
 
-### Provide permissions to Portworx
+### Provide permissions to Portworx 
 
-_Portworx_ requires a ClusterRoleBinding for your user to deploy the specs. You can do this using:
+Portworx requires a ClusterRoleBinding for your user to deploy the specs. You can do this using:
 
 ```text
 kubectl create clusterrolebinding myname-cluster-admin-binding \
