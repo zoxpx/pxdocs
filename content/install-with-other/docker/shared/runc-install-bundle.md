@@ -5,7 +5,7 @@ keywords: portworx, px-developer, px-enterprise, plugin, install, configure, con
 hidden: true
 ---
 
-Portworx provides a Docker based installation utility to help deploy the PX OCI
+Portworx provides a Docker based installation utility to help deploy the Portworx OCI
 bundle. This bundle can be installed by running the following Docker container
 on your host system:
 
@@ -23,4 +23,4 @@ sudo docker run --entrypoint /runc-entry-point.sh \
     $latest_stable
 ```
 
-{{<info>}}Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle.  If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.{{</info>}}
+{{<info>}}Running the Portworx OCI bundle does not require Docker, but Docker will still be required to _install_ the Portworx OCI bundle.  If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.{{</info>}}

@@ -8,13 +8,13 @@ keywords: portworx, px-developer, cassandra, database, cluster, storage
 This document presents the **DC/OS** method of installing Kafka with Portworx. Please refer to the [Kafka and Zookeeper with Portworx on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
-This guide will help you to install the Kafka service on your DCOS cluster backed by PX volumes for persistent storage.
+This guide will help you to install the Kafka service on your DCOS cluster backed by Portworx volumes for persistent storage.
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 {{<info>}}
 **Note:**
-This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+This framework is only supported directly by Portworx, Inc.. Please contact support@portworx.com directly for any support issues related with using this framework.
 {{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.

@@ -3,16 +3,16 @@ title: Deploy stateful applications with Docker Swarm
 keywords: portworx, container, storage, Docker, swarm
 description: You can use Portworx to provide storage for your stateful services running on Docker Swarm.  Follow the step-by-step tutorial today!
 weight: 1
-linkTitle: Use PX with Swarm
+linkTitle: Use Portworx with Swarm
 ---
 
 {{<info>}}
 This document presents the **Docker** method of deploying stateful applications using Docker Swarm. Please refer to the [Stateful applications on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
-You can use Portworx to provide storage for your Docker Swarm services. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Docker Swarm cluster and have PX provide highly available volumes to any application deployed via Docker Swarm.
+You can use Portworx to provide storage for your Docker Swarm services. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy Portworx within a Docker Swarm cluster and have Portworx provide highly available volumes to any application deployed via Docker Swarm.
 
-## Install Portworx
+## Install Portworx 
 
 Below steps demonstrate how to set up a three-node cluster for [Jenkins](https://jenkins.io/) and use a Portworx volume.
 
@@ -102,4 +102,4 @@ Use following command to verify if various tasks for the service came up:
 docker service ps jenkins
 ```
 
-Read more about Portworx Docker Swarm demo [here](https://portworx.com/highly-resilient-jenkins-using-docker-swarm/).
+Read more about the Portworx Docker Swarm demo [here](https://portworx.com/highly-resilient-jenkins-using-docker-swarm/).

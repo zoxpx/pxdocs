@@ -91,7 +91,7 @@ Now use kubectl to get nodes.
 kubectl get nodes -o wide
 ```
 
-## Install PX
+## Install Portworx 
 
 {{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
 
