@@ -2,7 +2,7 @@
 title: "Manage Users"
 hidden: true
 keywords: portworx, px-enterprise, users, user admin
-description: Want to create a new user or manage an existing one in PX Lighthouse? Follow these steps today.
+description: Want to create a new user or manage an existing one in Portworx Lighthouse? Follow these steps today.
 ---
 
 To create users, click the gear icon in the upper-right corner of the console and choose **Manage Users**.

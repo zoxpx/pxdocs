@@ -139,9 +139,9 @@ curl -fsL https://install.portworx.com/2.3/upgrade | bash -s -- -I $TALISMAN_IMA
 
 ## Troubleshooting {#troubleshooting}
 
-#### Find out status of Portworx pods {#find-out-status-of-portworx-pods}
+#### Find out status of Portworx pods
 
-To get more information about the status of Portworx daemonset across the nodes, run:
+To get more information about the status of Portworx DaemonSet across the nodes, run:
 
 ```text
 kubectl get pods -o wide -n kube-system -l name=portworx
@@ -157,10 +157,10 @@ As we can see in the example output above:
 * looking at the STATUS and READY, we can tell that the rollout-upgrade is currently creating the container on the “minion2” node
 * looking at AGE, we can tell that:
   * “minion4” and “minion5” have Portworx up for 16 days \(likely still on old version, and to be upgraded\), while the
-  * “minion3” has Portworx up for only 5 minutes \(likely just finished upgrade and restarted Portworx\)
+  * “minion3” has Portworx up for only 5 minutes (likely just finished upgrade and restarted Portworx)
 * if we keep on monitoring, we will observe that the upgrade will not switch to the “next” node until STATUS is “Running” and the READY is 1/1 \(meaning, the “readynessProbe” reports Portworx service is operational\).
 
-#### Find out version of all nodes in Portworx cluster {#find-out-version-of-all-nodes-in-portworx-cluster}
+#### Find out version of all nodes in the Portworx cluster
 
 One can run the following command to inspect the Portworx cluster:
 
