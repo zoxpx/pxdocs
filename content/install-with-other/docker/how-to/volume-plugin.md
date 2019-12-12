@@ -6,7 +6,7 @@ weight: 1
 linkTitle: How Portworx Volumes work with Docker
 ---
 
-## Docker interaction with Portworx
+## Docker interaction with Portworx 
 
 Portworx implements the [Docker Volume Plugin Specification](https://docs.docker.com/engine/extend/plugins_volume/).
 
@@ -117,7 +117,7 @@ Mount operation mounts the Portworx volume in the propagated mount location. If 
 
 The docker plugin API does not have an Attach call. The Attach call is called internally via Mount on the first mount call for the volume.
 
-Portworx exports virtual block devices in the host namespace. This is done via the Portworx Container running on the system and does *not* rely on an external protocol such as iSCSI or NBD. Portworx virtual block devices only exist in host kernel memory. Two interesting consequences of this architecture are:
+Portworx exports virtual block devices in the host namespace. This is done via the Portworx container running on the system and does *not* rely on an external protocol such as iSCSI or NBD. Portworx virtual block devices only exist in host kernel memory. Two interesting consequences of this architecture are:
 1) volumes can be unmounted from dead/disconnected nodes
 2) IOs on porworx can survive a Portworx restart.
 

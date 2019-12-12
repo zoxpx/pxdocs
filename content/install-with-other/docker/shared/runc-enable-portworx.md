@@ -5,9 +5,9 @@ keywords: portworx, px-developer, px-enterprise, plugin, install, configure, con
 hidden: true
 ---
 
-Once you install the PX OCI bundle and systemd configuration from the steps above, you can start and control PX runC directly via systemd.
+Once you install the Portworx OCI bundle and systemd configuration from the steps above, you can control Portworx directly via systemd.
 
-Below commands reload systemd configurations, enable and starts the Portworx service.
+Below commands reload systemd configurations, enable and start the Portworx service.
 
 
 ```text

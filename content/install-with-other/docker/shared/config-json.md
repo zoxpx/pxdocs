@@ -4,7 +4,7 @@ description: Reference for the Portworx config.json configuration file
 hidden: true
 ---
 
-This is the schema definition for a valid PX configuration file.  This file is expected to be available at `/etc/pwx/config.json`.
+This is the schema definition for a valid Portworx configuration file.  This file is expected to be available at `/etc/pwx/config.json`.
 
 ```text
 {
@@ -164,7 +164,7 @@ This is the schema definition for a valid PX configuration file.  This file is e
 
 **dataiface**:  Host ethernet interface used for backend activity, such as replication and resync.  Ex: "enp5s0f1"
 
-**loggingurl**: Endpoint used communicating to PX-Enterpise control (aka "Lighthouse").  Primary use is system statistics.
+**loggingurl**: Endpoint used communicating to PX-Enterprise control (aka "Lighthouse").  Primary use is system statistics.
 
 **kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.
 For 'etcd', an example would be:
@@ -185,7 +185,7 @@ For 'consul', an example would be:
 ]
 ```
 
-**storage**: Array of devices to be used as part of the PX Storage Fabric.  Includes optional "debug_level" flag ("low", "medium", "high"[default]) in the clause.
+**storage**: Array of devices to be used as part of the Portworx Storage Fabric.  Includes optional "debug_level" flag ("low", "medium", "high"[default]) in the clause.
 
 ```text
 "storage": {
@@ -194,6 +194,3 @@ For 'consul', an example would be:
         "/dev/sdc",
         "/dev/sdd"
     ],
-    "debug_level": "low"
-  }
-```
