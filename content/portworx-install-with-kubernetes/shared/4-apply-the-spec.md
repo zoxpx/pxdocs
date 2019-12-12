@@ -13,9 +13,9 @@ Apply the generated specs to your cluster.
 kubectl apply -f px-spec.yaml
 ```
 
-#####  Monitor the portworx pods
+#####  Monitor the Portworx pods
 
-Wait till all _Portworx_ pods show as ready in the below output:
+Wait till all Portworx pods show as ready in the below output:
 
 ```text
 kubectl get pods -o wide -n kube-system -l name=portworx
