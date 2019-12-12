@@ -11,7 +11,7 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 
 {{<info>}}
 **Note:**
-This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+This framework is only supported directly by Portworx, Inc.. Please contact support@portworx.com directly for any support issues related with using this framework.
 {{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
@@ -41,7 +41,7 @@ If you want to use the defaults, you can now run the dcos command to install the
 dcos package install --yes portworx-couchdb
 ```
 
-You can also click on the “Install” button on the WebUI next to the service and then click “Install Package”. The default install will create PX volumes of size 10GB with 1 replica.
+You can also click on the “Install” button on the WebUI next to the service and then click “Install Package”. The default install will create Portworx volumes of size 10GB with 1 replica.
 
 #### Advanced Install and Volume Options
 
@@ -181,8 +181,8 @@ curl -s http://admin:password@couchdb-1-install.portworx-couchdb.autoip.dcos.thi
 
 ### Scaling
 
-You do not need to create additional PX volumes manually to scale up your cluster. Just go to the CouchDB service page, click on the three dots on the top right corner of the page, select “nodes”, scroll down and increase the nodes parameter to the desired nodes.
+You do not need to create additional Portworx volumes manually to scale up your cluster. Just go to the CouchDB service page, click on the three dots on the top right corner of the page, select “nodes”, scroll down and increase the nodes parameter to the desired nodes.
 
-Click on “Review and Run” and then “Run Service”. The service scheduler should restart with the updated node count and create more CouchDB nodes with newly created PX volumes. Please make sure you have enough resources and nodes available to scale up the number of nodes. You also need to make sure Portworx is installed on all the agents in the DCOS cluster.
+Click on “Review and Run” and then “Run Service”. The service scheduler should restart with the updated node count and create more CouchDB nodes with newly created Portworx volumes. Please make sure you have enough resources and nodes available to scale up the number of nodes. You also need to make sure Portworx is installed on all the agents in the DCOS cluster.
 
 You can also increase the capacity of your CouchDB data nodes by using the `pxctl volume update` command without taking the service offline.

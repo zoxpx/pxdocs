@@ -34,7 +34,7 @@ portworx:
 
 **dataiface**:  Host ethernet interface used for backend activity, such as replication and resync.  Ex: "enp5s0f1"
 
-**loggingurl**: Endpoint used communicating to PX-Enterpise control (aka "Lighthouse").  Primary use is system statistics.   Ex:  "http://lighthouse.portworx.com/api/stats/listen"
+**loggingurl**: Endpoint used communicating to PX-Enterprise control (aka "Lighthouse").  Primary use is system statistics.   Ex:  "http://lighthouse.portworx.com/api/stats/listen"
 
 **kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.   
 
@@ -53,7 +53,7 @@ Ex:
         consul:http://consul.yourdomain.com:8500
 ```
 
-**storage**:   Array of devices to be used as part of the PX Storage Fabric. This can be either volume-ids for cloud providers or path to attached devices.
+**storage**:   Array of devices to be used as part of the Portworx Storage Fabric. This can be either volume-ids for cloud providers or path to attached devices.
 
 ```yaml
 Ex:

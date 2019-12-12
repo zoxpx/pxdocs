@@ -14,7 +14,7 @@ Portworx, when installed with appropriate arguments, will automatically deploy a
 
 #### Kubernetes
 
-On the Portworx Spec Generator page in [PX-Central](https://central.portworx.com), under the ETCD section select the **Built-in** option to deploy Portworx with internal kvdb.
+On the Portworx spec generator page in [PX-Central](https://central.portworx.com), under the ETCD section select the **Built-in** option to deploy Portworx with internal kvdb.
 
 #### Mesos (DCOS)
 
@@ -22,7 +22,7 @@ While deploying the Portworx framework, provide the `-b` argument in the extra a
 
 #### Other schedulers
 
-For all other schedulers, Portworx requires an external etcd or consul, to bootstrap its internal kvdb. Portworx will use this external etcd or consul, to discover its own internal kvdb nodes. While installing Portworx, provide the `-b` argument to instruct Portworx to setup internal kvdb. Along with `-b`, provide the `-k` argument with a list of external etcd or consul endpoints.
+For all other schedulers, Portworx requires an external etcd or consul, to bootstrap its internal kvdb. Portworx will use this external etcd or consul, to discover its own internal kvdb nodes. While installing Portworx provide the `-b` argument to instruct Portworx to setup internal kvdb. Along with `-b`, provide the `-k` argument with a list of external etcd or consul endpoints.
 
 
 ## Storage for internal kvdb
@@ -39,7 +39,7 @@ This metadata drive will be used for storing  internal kvdb data as well as Port
 The metadata drive needs to be at least 64Gi in size
 {{</info>}}
 
-This is the recommended method as the disk IO for internal kvdb is not shared with PX volume IO.
+This is the recommended method as the disk IO for internal kvdb is not shared with Portworx volume IO.
 
 ### Auto (Not recommended)
 
@@ -62,7 +62,7 @@ Depending upon the labels and their values a decision will be made
 - If a node is labeled px/metadata-node=true then it will be a part of the internal kvdb cluster
 - If node is labeled px/metadata-node=false then it will NOT be a part of the internal kvdb cluster
 - If no node labels are found then all the nodes are potential metadata nodes.
-- If an incorrect label is present on the node like px/metadata-node=blah then PX will not start on that node.
+- If an incorrect label is present on the node like px/metadata-node=blah then Portworx will not start on that node.
 - If no node is labelled as px/metadata-node=true , but one node is labeled as px/metadata-node=false then that node will never be a part of kvdb cluster, but rest of the nodes are potential metadata nodes.
 
 ## Kvdb Node Failover
@@ -124,7 +124,7 @@ On the node where the latest backup exists, rename the backup file to `pwx_kvdb_
 cp /var/lib/osd/kvdb_backup/pwx_kvdb_schedule_153664_2019-02-06T22:30:39-08:00.dump /var/lib/osd/kvdb_backup/pwx_kvdb_disaster_recovery_golden.dump
 ```
 
-### Step 3: Restart Portworx
+### Step 3: Restart Portworx 
 
 On the node where the golden dump exists, restart Portworx service.
 

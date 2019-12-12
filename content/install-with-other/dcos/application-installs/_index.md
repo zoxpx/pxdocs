@@ -36,7 +36,7 @@ Typically, an application has different types of containers that constiture the 
 
 #### Data availability across failures
 
-In the event of a software or physical failure of a host, the framework will re-deploy the failed components of this application onto other hosts, and re-attach the portworx volume maintaining application level high availability.
+In the event of a software or physical failure of a host, the framework will re-deploy the failed components of this application onto other hosts, and re-attach the Portworx volume maintaining application level high availability.
 
 #### Ensuring application aware data placement
 
