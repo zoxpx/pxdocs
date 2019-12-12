@@ -2,7 +2,7 @@
 title: Install the Portworx Operator
 weight: 1
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift, operator
-description: Find out how to prepare PX within a OpenShift cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
+description: Find out how to prepare your OpenShift cluster by installing the Operator.
 ---
 
 Before you can install Portworx on your OpenShift cluster, you must first install the Portworx Operator. Perform the following steps to prepare your OpenShift cluster by installing the Operator.

@@ -29,7 +29,7 @@ iptables -A INPUT -p tcp --match multiport  --dports 9000:9022 -j DROP
 
 ## Step 2: Setup NetworkPolicy to restrict pod access
 
-Apply the following NetworkPolicy in the `kube-system` namespace. This will block traffic to Portworx ports 9001 to 9022 on the host network from all pods except Stork, Kubernetes controller manager and Ligthouse.
+Apply the following NetworkPolicy in the `kube-system` namespace. This will block traffic to Portworx ports 9001 to 9022 on the host network from all pods except Stork, Kubernetes controller manager and Lighthouse.
 
 {{<info>}}Replace `70.0.0.0/16` with the subnet of your Kubernetes worker nodes.{{</info>}}
 
