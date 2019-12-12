@@ -68,7 +68,7 @@ Use the docker run command to launch PX-Enterprise, substituting the appropriate
 
 Alternatively, you can either run the 'px_bootstrap' script from curl, or construct your own [config.json](/install-with-other/docker/shared/config-json) file.
 
-From the server node running px-enterprise container, you should see the following status:
+From the server node running PX-Enterprise container, you should see the following status:
 ![PX-Cluster on Packet](/img/px-cluster-on-packet.png "PX-Cluster on Packet")
 
 
