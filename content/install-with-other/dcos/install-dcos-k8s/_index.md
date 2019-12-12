@@ -8,7 +8,7 @@ noicon: true
 ---
 
 {{<info>}}
-**Note:**<br/> Kubernetes on DC/OS with Portworx is only supported from PX version 1.4 onwards
+**Note:**<br/> Kubernetes on DC/OS with Portworx is only supported from Portworx version 1.4 onwards
 {{</info>}}
 
 Please make sure you have installed [Portworx on DC/OS](/install-with-other/dcos/install) before proceeding further.

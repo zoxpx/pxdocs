@@ -5,13 +5,13 @@ keywords: portworx, px-developer, px-enterprise, plugin, install, configure, con
 hidden: true
 ---
 
-Now that you have downloaded and installed the PX OCI bundle, you can use the `px-runc install` command from the bundle to configure systemd to start PX runC.
+Now that you have downloaded and installed the Portworx OCI bundle, you can use the `px-runc install` command from the bundle to configure systemd to start Portworx.
 
 The _px-runc_ command is a helper-tool that does the following:
 
 1. Prepares the OCI directory for runc
-2. Prepares the runC configuration for PX
-3. Uses systemd to start the PX OCI bundle
+2. Prepares the runC configuration for Portworx 
+3. Uses systemd to start the Portworx OCI bundle
 
 Installation example:
 
@@ -34,13 +34,13 @@ px-runc install -k etcd://my.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc -s /d
 px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8 {{ include.sched-flags }}
 ```
 
-Installing Portworx using consul:
+Installing Portworx using Consul:
 
 ```text
 px-runc install -k consul://my.company.com:8500 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2 {{ include.sched-flags }}
 px-runc install -k consul://70.0.2.65:8500 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8 {{ include.sched-flags }}
 ```
 
-#### Modifying the PX configuration
+#### Modifying the Portworx configuration
 
-After the initial installation, you can modify the PX configuration file at `/etc/pwx/config.json` (see [details](/install-with-other/docker/shared/config-json)) and restart Portworx using `systemctl restart portworx`.
+After the initial installation, you can modify the Portworx configuration file at `/etc/pwx/config.json` (see [details](/install-with-other/docker/shared/config-json)) and restart Portworx using `systemctl restart portworx`.

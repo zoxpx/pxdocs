@@ -40,22 +40,22 @@ dcos node ssh --master-proxy --leader \
     "docker run mesosphere/janitor /janitor.py -r ${PRE_RESERVED_ROLE}${SERVICE_NAME}-role -p ${SERVICE_NAME}-principal -z dcos-service-${SERVICE_NAME}"
 ```
 
-## Cleanup Portworx framework
+## Cleanup the Portworx framework
 
 {{<info>}}
 This section presents the **DC/OS** method of cleaning up the Portworx framework. Please refer to the [Uninstall on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
-If you are trying to cleanup _Portworx_ framework, you will have to perform additional steps to cleanup the remnants
-from slave nodes. Run the commands below on all the private agents where _Portworx_ was running.
+If you are trying to cleanup Portworx framework, you will have to perform additional steps to cleanup the remnants
+from slave nodes. Run the commands below on all the private agents where Portworx was running.
 
-### Stop Portworx service
+### Stop the Portworx service
 ```text
 sudo systemctl stop portworx
 sudo docker rm -f portworx.service
 ```
 
-### Remove Portworx service
+### Remove the Portworx service
 ```text
 sudo rm -f /etc/systemd/system/portworx.service
 sudo rm -f /etc/systemd/system/dcos.target.wants/portworx.service
@@ -63,14 +63,14 @@ sudo rm -f /etc/systemd/system/multi-user.target.wants/portworx.service
 sudo systemctl daemon-reload
 ```
 
-### Wipe Portworx drives and config
+### Wipe the Portworx drives and config
 {{<info>}}
 **Note:** If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they
 can be picked up by Portworx in the next install. This can be done by running the following pxctl command:
 {{</info>}}
 
 ```text
-# Use with care since this will wipe data from all the disks given to Portworx
+# Use with care since this will wipe data from all the disks given to Portworx 
 sudo /opt/pwx/bin/pxctl service node-wipe --all
 ```
 
@@ -114,7 +114,7 @@ done
 
 ### Remove Portworx metadata from Zookeeper
 {{<info>}}
-**Note:** Only if you were running _Portworx_ with internal kvdb, you will have to cleanup _Portworx_ metadata from DC/OS Zookeeper.
+**Note:** Only if you were running Portworx with internal kvdb, you will have to cleanup Portworx metadata from DC/OS Zookeeper.
 {{</info>}}
 
 In the Exhibitor UI, the metadata should be present under the Zookeeper node `/pwx/<portworx_cluster_id>`.

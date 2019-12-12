@@ -143,9 +143,9 @@ where `your-private.key` is the private key that corresponds to `keyData` in the
 
 Once the DCOS GUI is accessible, then install the DCOS CLI on your local machine
 
-### Install Portworx
+### Install Portworx 
 
-Use the [standard Portworx doc guide](/install-with-other/dcos/install) for
+Use the [Run Portworx with Mesosphere DC/OS](/install-with-other/dcos/install) for
 installing the Portworx Frameworks on DCOS.
 
 Once Portworx is installed, then the [Portworx Stateful Service Frameworks](/install-with-other/dcos/application-installs) can be easily deployed as per the reference documentation.

@@ -7,9 +7,9 @@ linkTitle: Dynamically Creating Volumes
 ---
 
 ## Inline volume spec
-PX supports passing the volume spec inline along with the volume name. This is useful when creating a volume with DCOS through a marathon application template. Using the inline spec, volumes can be created dynamically and all PX properties, such as volume size, encryption keys etc can be passed in through marathon.
+Portworx supports passing the volume spec inline along with the volume name. This is useful when creating a volume with DCOS through a marathon application template. Using the inline spec, volumes can be created dynamically and all Portworx properties, such as volume size, encryption keys etc can be passed in through marathon.
 
-For example, a PX inline spec can be specified as the following:
+For example, a Portworx inline spec can be specified as the following:
 
 ```text
 "parameters": [
