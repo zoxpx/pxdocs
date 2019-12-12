@@ -8,7 +8,7 @@ description: Learn how to configure Prometheus to enable you to visualize your P
 This document presents the **non-Kubernetes** method of monitoring your Portworx cluster with Prometheus and Grafana. Please refer to the [Prometheus and Grafana](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
-This guide shows you how to configure prometheus to monitor your portworx node and visualize your cluster status and activities in Grafana. We will also configure AlertManager to send email alerts.
+This guide shows you how to configure prometheus to monitor your Portworx node and visualize your cluster status and activities in Grafana. We will also configure AlertManager to send email alerts.
 
 ## Configure Prometheus
 
@@ -21,7 +21,7 @@ PROMETHEUS_CONF=/etc/prometheus
 
 ### Prometheus config file
 
-Modify the below configuration to include your PX nodes' IP addresses, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
+Modify the below configuration to include your Portworx nodes' IP addresses, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
 
 ```text
 global:

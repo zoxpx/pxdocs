@@ -8,7 +8,7 @@ linkTitle: Jenkins on Swarm with Portworx
 
 Portworx can easily be used to simplify the deployment of Jenkins running as a container, as shown by the example below
 
-## Create Portworx Volume
+## Create a Portworx volume
 The example below create a 5GB "jenkins_vol1" volume, replicated on 3 different nodes.
 
 ```text
@@ -65,4 +65,4 @@ Be sure to read [How to speed up Jenkins builds](https://portworx.com/speed-up-j
 
 ## Highly Resilient Jenkins Using Docker Swarm
 
-Be sure to read [Highly Resilient Jenkins Using Docker Swarm](https://portworx.com/jenkins-docker-swarm/) on way to deploy fault-tolerant on Docker Swarm with Portworx
+Be sure to read [Highly Resilient Jenkins Using Docker Swarm](https://portworx.com/jenkins-docker-swarm/) on way to deploy fault-tolerant on Docker Swarm with Portworx. 
