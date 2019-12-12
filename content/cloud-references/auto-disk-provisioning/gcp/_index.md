@@ -37,7 +37,7 @@ This json file needs to be made available on any GCP instance that will run Port
 
 ## Install
 
-If you used an account file above, you will have to configure the PX installation arguments to access this file by way of it's environmnet variables.  In the installation arguments for PX, pass in the location of this file via the environment variable `GOOGLE_APPLICATION_CREDENTIALS`. For example, use `-e GOOGLE_APPLICATION_CREDENTIALS=/etc/pwx/gcp.json`.
+If you used an account file above, you will have to configure the Portworx installation arguments to access this file by way of it's environmnet variables.  In the installation arguments for Portworx, pass in the location of this file via the environment variable `GOOGLE_APPLICATION_CREDENTIALS`. For example, use `-e GOOGLE_APPLICATION_CREDENTIALS=/etc/pwx/gcp.json`.
 
 If you installing on Kuberenetes, you can use a secret to mount `/etc/pwx/gcp.json` into the Portworx Daemonset and then expose `GOOGLE_APPLICATION_CREDENTIALS` as an env in the Daemonset.
 
@@ -71,9 +71,9 @@ Examples:
 
 **2. Using existing GCP disks as templates**
 
-You can also reference an existing GCP disk as a template. On every node where PX is brought up as a storage node, a new GCP disk(s) identical to the template will be created.
+You can also reference an existing GCP disk as a template. On every node where Portworx is brought up as a storage node, a new GCP disk(s) identical to the template will be created.
 
-For example, if you created a template GCP disk called _px-disk-template-1_, you can pass this in to PX as a parameter as a storage device.
+For example, if you created a template GCP disk called _px-disk-template-1_, you can pass this in to Portworx as a parameter as a storage device.
 
 Ensure that these disks are created in the same zone as the GCP node group.
 

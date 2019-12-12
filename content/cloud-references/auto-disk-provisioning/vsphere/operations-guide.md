@@ -17,11 +17,11 @@ The [Portworx VMware installation](/cloud-references/auto-disk-provisioning/vsph
 
 ## Monitoring
 
-### Listing disks created by Portworx
+### Listing disks created by Portworx 
 
 Portworx ships with the [pxctl](/reference/cli/) CLI out of the box that users can use to perform management operations.
 
-{{<info>}} Where are Portworx VMDKs located?
+{{<info>}} Where are the Portworx VMDKs located?
 
 _Portworx creates disks in a folder called *osd-provisioned-disks* in the ESXi datastore. The names of the VMDK created by Portworx will have a prefix *PX-DO-NOT-DELETE-*._{{</info>}}
 
@@ -80,7 +80,7 @@ To expand the storage capacity of a single node, you have 2 options
     ```
 
     Wait for about 2 minutes until `pxctl status` says *PX is in maintenance Mode*.
-5. List Portworx pools and save the output.
+5. List the Portworx pools and save the output.
 
     ```text
     pxctl service pool show
@@ -93,7 +93,7 @@ To expand the storage capacity of a single node, you have 2 options
     ```output
     Drive add done: Storage rebalance is in progress
     ```
-7. List Portworx pools again and you will see one of the pools now has a new drive added.
+7. List the Portworx pools again and you will see one of the pools now has a new drive added.
 
     ```text
     pxctl service pool show
@@ -110,7 +110,7 @@ To expand the storage capacity of a single node, you have 2 options
     ```
 
     Wait for about 2 minutes until `pxctl status` says *PX is operational*.
-10. List Portworx pools again and you will now see the pool has the expanded size.
+10. List the Portworx pools again and you will now see the pool has the expanded size.
 
     ```text
     pxctl service pool show
@@ -133,14 +133,14 @@ To expand the storage capacity of a single node, you have 2 options
 5. Using vSphere web client, expand the VMDK on the VM for the above node.
 6. Drain all apps using Portworx volumes from this node. You can either use `kubectl drain` or `kubectl cordon` and `kubectl delete pod` for this.
 7. SSH to the Portworx node identified in step 3.
-8. Enter Portworx maintenance mode.
+8. Enter maintenance mode.
 
     ```text
     pxctl service maintenance --enter
     ```
 
     Wait for about 2 minutes until `pxctl status` says *PX is in maintenance Mode*.
-9. List Portworx pools and find the pool that’s affected by the expanded VMDK. If a pool has multiple disks, all of the disks need to have the same size. So make sure to resize them to the same size.
+9. List the Portworx pools and find the pool that’s affected by the expanded VMDK. If a pool has multiple disks, all of the disks need to have the same size. So make sure to resize them to the same size.
 
     ```text
     pxctl service pool show
@@ -157,7 +157,7 @@ To expand the storage capacity of a single node, you have 2 options
     ```
 
     Wait for about 2 minutes until `pxctl status` says *PX is operational*.
-12. List Portworx pools again and you will now see the pool has the expanded size.
+12. List the Portworx pools again and you will now see the pool has the expanded size.
 
     ```text
     pxctl service pool show

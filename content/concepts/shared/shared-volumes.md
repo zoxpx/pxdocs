@@ -10,7 +10,7 @@ Through shared and sharedv4 volumes \(also known as a **global namespace**\), a 
 
 {{<info>}}
 **Note 1:**
-You do not need to use shared/sharedv4 volumes to have your data accessible on any host in the cluster. Any PX volumes can be exclusively accessed from any host as long as they are not simultaneously accessed. Shared volumes are for providing simultaneous \(concurrent or shared\) access to a volume from multiple hosts at the same time.
+You do not need to use shared/sharedv4 volumes to have your data accessible on any host in the cluster. Any Portworx volumes can be exclusively accessed from any host as long as they are not simultaneously accessed. Shared volumes are for providing simultaneous \(concurrent or shared\) access to a volume from multiple hosts at the same time.
 {{</info>}}
 
 {{<info>}}
