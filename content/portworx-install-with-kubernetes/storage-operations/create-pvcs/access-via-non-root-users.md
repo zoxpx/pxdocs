@@ -5,7 +5,7 @@ keywords: portworx, pre-provisioned volumes, container, Kubernetes, storage, Doc
 description: Find out how to access a Portworx volume (PVC/PV) with a non-root user
 ---
 
-This document describes how to access a Portworx Volume \(PVC/PV\) as a non-root user. In Kubernetes, by default all the Persistent Volumes are accessible only by the root user. However you can modify the application pod spec to allow a specific set of users to access the Persistent Volume as explained below.
+This document describes how to access a Portworx Volume (PVC/PV) as a non-root user. In Kubernetes, by default all the Persistent Volumes are accessible only by the root user. However you can modify the application pod spec to allow a specific set of users to access the Persistent Volume as explained below.
 
 #### Modify the application POD spec {#modify-the-application-pod-spec}
 

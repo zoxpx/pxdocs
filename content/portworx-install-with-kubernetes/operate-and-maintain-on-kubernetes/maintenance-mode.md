@@ -22,7 +22,7 @@ pxctl service maintenance --enter
 
 This takes Portworx out of an "Operational" state for a given node.  Perform whatever physical maintenance is needed.
 
-### Restart Portworx
+### RestartPortworx 
 Run **"docker restart px-enterprise"**.
 This restarts the Portworx fabric on a given node.
 
@@ -97,7 +97,7 @@ Entering maintenance mode...
 
 ### Step 2: Add drive to the system
 
-For e.g., Add drive /dev/sdb to PX cluster
+For e.g., Add drive /dev/sdb to the Portworx cluster
 
 ```text
 pxctl service drive add --drive /dev/sdb --operation start
@@ -187,7 +187,7 @@ Pool ID: 1
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
 ```
 
-## Replace a drive that is already part of the Portworx Cluster
+## Replace a drive that is already part of the Portworx cluster
 
 ### Step 1: Enter Maintenance mode
 
