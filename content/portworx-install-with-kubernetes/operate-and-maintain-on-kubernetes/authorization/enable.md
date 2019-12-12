@@ -86,6 +86,5 @@ kubectl create secret generic mysecret \
 ...
 ```
 
-You will now need to apply the change to update the Stork Deployment and the
-Portworx DaemonSet. Wait until the update is complete and all pods are ready
+You will now need to apply the change to update the Stork deployment and the Portworx DaemonSet. Wait until the update is complete and all pods are ready
 with `1/1`.

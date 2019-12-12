@@ -73,7 +73,7 @@ vm-3      Ready     14d       v1.7.4    beta.kubernetes.io/arch=amd64,beta.kuber
 
 This verifies that node vm-2 has the new `px/rack` label.
 
-Double check if the rack information is reflected in the PX cluster.
+Double check if the rack information is reflected in the Portworx cluster.
 
 ```text
 pxctl cluster provision-status
@@ -85,9 +85,9 @@ vm-2        Online                0        Online      .....   default        de
 vm-3        Online                0        Online      .....   default        default       default
 ```
 
-The node vm-2 which was labelled `rack1` is reflected on the PX node while the unlabelled node vm-3 is still using the `default` rack info.
+The node vm-2 which was labelled `rack1` is reflected on the Portworx node while the unlabelled node vm-3 is still using the `default` rack info.
 
-All the subsequent updates to the node labels will be automatically picked up by the PX nodes. A deletion of a `px/rack` label will also be reflected.
+All the subsequent updates to the node labels will be automatically picked up by the Portworx nodes. A deletion of a `px/rack` label will also be reflected.
 
 ## Specifying replica placement for volumes
 

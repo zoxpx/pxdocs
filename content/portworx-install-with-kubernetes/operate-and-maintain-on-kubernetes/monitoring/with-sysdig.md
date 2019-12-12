@@ -1,7 +1,7 @@
 ---
 title: Monitor Portworx with Sysdig
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, monitoring, prometheus, alertmanager, servicemonitor, grafana, lighthouse, px-central, px-kvdb, sysdig
-description: Learn how to monitor portworx with Sysdig
+description: Learn how to monitor Portworx with Sysdig
 ---
 
 Sysdig is a monitoring platform that allows you to monitor your Portworx cluster by running Sysdig agents on each node of your cluster.
@@ -14,7 +14,7 @@ In order to use Sysdig with Portworx, you must deploy both products onto your Ku
 
 * You must have a Kubernetes cluster with Portworx installed on it
 
-## Deploy Sysdig on Kubernetes with Portworx
+## Deploy Sysdig on Kubernetes with Portworx 
 
 1. Follow the [Kubernetes Agent Installation Steps](https://sysdigdocs.atlassian.net/wiki/spaces/Platform/pages/256475253/Kubernetes+Installation+Steps) in the Sysdig documentation to deploy the following YAML files:
 
