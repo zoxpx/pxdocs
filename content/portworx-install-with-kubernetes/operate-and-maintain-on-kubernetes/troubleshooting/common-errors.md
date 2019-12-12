@@ -17,7 +17,7 @@ description: Common errors
     ```
 
   * Please ensure that the `NetworkManager` service has been stopped and disabled on your Linux host system.
-  * **EXPLANATION**:<br/> Portworx processes running inside OCI container must be able to perform the DNS hostname resolution,
+  * **EXPLANATION**:<br/> The Portworx processes running inside the OCI container must be able to perform the DNS hostname resolution,
     especially if using hostnames for KVDB configuration, or the [CloudSnap](/reference/cli/cloud-snaps/) feature.
     However, host's `NetworkManager` service can update the DNS configuration (the `/etc/resolv.conf` file) _after_
     the Portworx container has started, and such changes will not propagate from host to container.
@@ -74,15 +74,9 @@ description: Common errors
     which monitors and manages the Portworx service.
     In order to download, install and/or validate the Portworx service, the OCI-Monitor connects to the appropriate
     Kubernetes container runtime via socket-files that need to be mounted into the OCI-Monitor's POD.
-  * Please inspect the Portworx Daemonset spec, and ensure the appropriate socket-files/directories are mounted as volumes
+  * Please inspect the Portworx DaemonSet spec, and ensure the appropriate socket-files/directories are mounted as volumes
     from the host-system into the Portworx POD.
     Alternatively, you can [reinstall Portworx](/portworx-install-with-kubernetes/), or at minimum generate a new
-    YAML-spec via the Portworx Spec Generator page in [PX-Central](https://central.portworx.com), and copy the volume-mounts into your Portworx spec.
+    YAML-spec via the Portworx spec generator page in [PX-Central](https://central.portworx.com), and copy the volume-mounts into your Portworx spec.
 
     | [Container runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)   | Supported since   | Required volume mounts                 |
-    |:---------------------------------------------------------------------------------------------------|:------------------|:---------------------------------------|
-    | Docker                                                                                             | px-v1.2           | `/var/run/docker.sock`                 |
-    | Containerd                                                                                         | px-v1.6.2         | `/run/containerd`                      |
-    | CRI-O                                                                                              | px-v2.1.2         | `/var/run/crio` and `/etc/crictl.yaml` |
-
-<br/>

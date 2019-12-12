@@ -42,7 +42,7 @@ uname -r
 
 * Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the ‘-s’ flag as a runtime parameter. It can also be provided implicity by passing in the ‘-a’ flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with ‘-f’, Portworx will pick up drives even if they have a filesystem on them \(mounted drives are still excluded\). Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the ‘-z’ switch.
 
-This can be specificed in the args section of the px-spec.yaml used for installing PX as a daemonset.
+This can be specificed in the args section of the px-spec.yaml used for installing Portworx as a DaemonSet.
 
 ```text
           args:
@@ -51,20 +51,20 @@ This can be specificed in the args section of the px-spec.yaml used for installi
 ```
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID \(if available\) and give the block device from a HW RAID volume for Portworx to manage.
-* PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` \(or `priority_io` in kubernetes px spec\) and they offer the levels `high`, `medium` and `low`
-* The `priority_io` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
+* Portworx classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` \(or `priority_io` in kubernetes px spec\) and they offer the levels `high`, `medium` and `low`
+* The `priority_io` of a pool is determined automatically by Portworx. If the intention is to run low latency transactional workloads like databases on Portworx, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
 
 **Working with drives with AWS Auto scaling group**
 
-Portworx supports automatic management of EBS volumes. If you are using AWS ASG to manage PX nodes,then you should to use the ASG [feature](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
+Portworx supports automatic management of EBS volumes. If you are using AWS ASG to manage Portworx nodes,then you should to use the ASG [feature](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
 
-#### PX Node Topology {#px-node-topology}
+#### Portworx node topology
 
-PX replicated volumes distributes data across failure domains. For on-premise installations, this ensures that a power failure to a rack does not result in data unavailability. For cloud deployments this ensures data availability across zones.
+Portworx replicated volumes distributes data across failure domains. For on-premise installations, this ensures that a power failure to a rack does not result in data unavailability. For cloud deployments this ensures data availability across zones.
 
 #### Topology in cloud environments {#topology-in-cloud-environments}
 
-PX auto-detects availabilty zones and regions and provisions replicas across different zones. For e.g., see below for the partial output of `pxctl status`
+Portworx auto-detects availabilty zones and regions and provisions replicas across different zones. For e.g., see below for the partial output of `pxctl status`
 
 ```text
 pxctl status
@@ -83,7 +83,7 @@ POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
 ...
 ```
 
-This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor is created, it will have the replicas automatically created in other nodes in other zones.
+This node is in us-east-1. If Portworx is started in other zones, then when a volume with greater than 1 replication factor is created, it will have the replicas automatically created in other nodes in other zones.
 
 #### Topology in on-premise deployments: {#topology-in-on-premise-deployments}
 
@@ -111,7 +111,7 @@ Failure domains in terms of RACK information can be passed in as described [here
    repl: "3"
   ```
 
-* PX makes best effort to distribute volumes evenly across all nodes and based on the `iopriority` that is requested. When PX cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to create the volume with the next available `iopriority` level.
+* Portworx makes best effort to distribute volumes evenly across all nodes and based on the `iopriority` that is requested. When Portworx cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to create the volume with the next available `iopriority` level.
 
 ```text
  kind: StorageClass
@@ -126,7 +126,7 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 * Volumes can be created in different availability zones by using the `--zones` option in the `pxctl volume create` command
 
-For e.g., for PX cluster running on AWS,
+For e.g., for Portworx cluster running on AWS,
 
 ```text
  kind: StorageClass
@@ -169,7 +169,7 @@ For e.g., for PX cluster running on AWS,
    sticky: "true"
 ```
 
-* For applications that require shared access from multiple containers running in different hosts, Portworx recommends running shared volumes. Shared volumes can be configured as follows by adding `shared: "true"` to the storage class:
+* For applications that require shared access from multiple containers running in different hosts, Portworx, Inc. recommends running shared volumes. Shared volumes can be configured as follows by adding `shared: "true"` to the storage class:
 
 ```text
  kind: StorageClass
@@ -231,10 +231,10 @@ Note the format of the `name` field - `ns.<namespace_of_source_pvc>-name.<name_o
 
 {{<info>}}
 **Note:**
-Annotations support is available from PX Version 1.2.11.6
+Annotations support is available from Portworx version 1.2.11.6
 {{</info>}}
 
-For using annotations Portworx daemon set requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
+For using annotations Portworx DaemonSet requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
 
 ```text
 - apiGroups: [""]
@@ -255,14 +255,14 @@ kubectl edit clusterrole node-get-put-list-role
 
 #### Alerts and Monitoring for Production {#alerts-and-monitoring-for-production}
 
-Portworx recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
+Portworx, Inc. recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
 
 {{<info>}}
 **Note:**
 Please remember to setup cadvisor and nodexporter properly so they mount the ‘/’ partition as ro:slave. Refer to this [link](/install-with-other/operate-and-maintain/monitoring) for more information
 {{</info>}}
 
-While Prometheus can be deployed as a container within the container orchestrator, many of Portworx’s production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
+While Prometheus can be deployed as a container within the container orchestrator, many of Portworx, Inc.’s production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
 * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (/install-with-other/operate-and-maintain/monitoring/prometheus)
 * Configure Grafana via this [template](/install-with-other/operate-and-maintain/monitoring/grafana)
@@ -274,20 +274,20 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 #### Hung Node Recovery {#hung-node-recovery}
 
-* A PX node may hang or appeart to hang because of any of the following reasons
-  * Underlying media being too slow to respond and thus PX trying to error recovery of the media
+* A Portworx node may hang or appear to hang because of any of the following reasons
+  * Underlying media being too slow to respond and thus Portworx trying to error recovery of the media
   * Kernel hangs or panics that are impacting overall operations of the system
   * Other applications that are not properly constrainted putting heavy memory pressure on the system
   * Applications consuming a lot of CPU that are not properly constrained
 * Docker Daemon issues where Docker itself has hung and thus resulting on all other containers not responding properly
-* Running PX as a OCI container greatly alleviates any issues introduced by Docker Daemon hanging or not being responsive as PX runs as a OCI container and not as a docker container thus eliminating the docker dependency
-* If PX appears to not respond, a restart of the PX OCI container via `systemctl` would help.
-* Any PX restart within 10 mins will ensure that applications continue to run without experiencing volume unmounts/outage
+* Running Portworx as a OCI container greatly alleviates any issues introduced by Docker Daemon hanging or not being responsive as Portworx runs as a OCI container and not as a docker container thus eliminating the docker dependency
+* If Portworx appears to not respond, a restart of the Portworx OCI container via `systemctl` would help.
+* Any Portworx restart within 10 mins will ensure that applications continue to run without experiencing volume unmounts/outage
 
 #### Stuck Volume Detection and Resolution {#stuck-volume-detection-and-resolution}
 
-* With K8s, it is possible that even after the application container terminates, a volume is left attached. This volume is still available for use in any other node. PX makes sure that if a a volume is not in use by an application, it can be attached to any other node in the system
-* With this attach operation, the PX will automatically manage the volume attach status with no user intervention required and continue to serve the volume I/Os even a container attaches to the same volume from a different node.
+* With K8s, it is possible that even after the application container terminates, a volume is left attached. This volume is still available for use in any other node. Portworx makes sure that if a volume is not in use by an application, it can be attached to any other node in the system
+* With this attach operation, the Portworx will automatically manage the volume attach status with no user intervention required and continue to serve the volume I/Os even a container attaches to the same volume from a different node.
 
 #### Scaling out a cluster nodes in the Cloud and On-Prem {#scaling-out-a-cluster-nodes-in-the-cloud-and-on-prem}
 
@@ -298,18 +298,18 @@ While Prometheus can be deployed as a container within the container orchestrato
   * Perform sizing of your data needs and determine the amount and type of storage \(EBS volumes\) needed per ecs instance.
   * Create EBS volume [templates](/portworx-install-with-kubernetes/cloud/aws/aws-asg) to match the number of EBS volumes needed per EC2 instance
   * Create a [Stateful AMI](/portworx-install-with-kubernetes/cloud/aws/aws-asg) to associate with your auto-scaling group
-  * Once everything is setup as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This [page](/portworx-install-with-kubernetes/cloud/aws/aws-asg) desribes how PX handles the volume management in a auto-scaling cluster.
+  * Once everything is setup as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This [page](/portworx-install-with-kubernetes/cloud/aws/aws-asg) describes how Portworx handles the volume management in a auto-scaling cluster.
 
 **Scaling out a cluster on-prem**
 
 * The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/install-with-other/operate-and-maintain/scaling/scale-out) shows how to scale up a existing cluster by adding more nodes.
-* In Kubernetes, PX is deployed as a Daemonset. This enables PX to automatically scale as the cluster scales. So there is no specific action needed from the user to scale PX along with the cluster scaling
+* In Kubernetes, Portworx is deployed as a Daemonset. This enables Portworx to automatically scale as the cluster scales. So there is no specific action needed from the user to scale Portworx along with the cluster scaling
 
 #### Cluster Capacity Expansion {#cluster-capacity-expansion}
 
 * Cluster storage capacity can be expanded by adding more drives each node.
 * Drives with similar capacity \(within 1GB capacity difference\) will be grouped together as a same pool
-* Drives can be added per node and PX will add that to the closest pool size by drive size.
+* Drives can be added per node and Portworx will add that to the closest pool size by drive size.
 * Before adding drives to the node, the node will need to be taken into maintenance mode
 * Ensure the volumes in the node have replicas in other nodes
   * If the volumes have replication factor of 1, increase the [replication factor](/reference/cli/updating-volumes)
@@ -318,9 +318,9 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 #### Server and Networking Replacements and Upgrades {#server-and-networking-replacements-and-upgrades}
 
-* Servers running PX can be replaced by performing decommissioning of the server to safely remove them from the cluster
+* Servers running Portworx can be replaced by performing decommissioning of the server to safely remove them from the cluster
 * Ensure that all the volumes in the cluster are replicated before decommissioning the node so that the data is still available for the containers mounting the volumes after the node is decommisioned
-* Delete PX from the node by setting the PX/Enabled=remove [label](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes)
+* Delete Portworx from the node by setting the PX/Enabled=remove [label](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes)
 * Use `pxctl cluster delete` command to manually remove the node from the cluster
 * Follow the instructions in this page to [delete](/install-with-other/operate-and-maintain/scaling/scale-down) nodes in the cluster
 * Once the node is decommissioned, components like network adapters, storage adapters that need to be replaced can be replaced
@@ -331,28 +331,28 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 **Portworx Upgrades**
 
-* Work with Portworx Support before planning major upgrades
+* Work with the Portworx, Inc. support team before planning major upgrades
 * Ensure all volumes have up-to-date [snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
 * Ensure all volumes have up-to-date [cloudsnaps](/reference/cli/cloud-snaps)
 * Refer to [Upgrade Portworx on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade)
 
 **Kubernetes Upgrades**
 
-* Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
+* Work with the Portworx, Inc. support team before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
 * Ensure there are [cloudsnaps](/reference/cli/cloud-snaps) that are taken.
-* After the migration, relaunch PX and ensure that the entire cluster is online by running `pxctl status`
+* After the migration, relaunch Portworx and ensure that the entire cluster is online by running `pxctl status`
 
 **OS upgrades and Docker Upgrades .**
 
-* Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
+* Work with the Portworx, Inc. support team before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
 * Ensure kernel-devel packages are installed after a OS migration
-* If PX is run as a OCI container, Docker Upgrades and Restarts do not impact PX runtime. So recommend running PX as a OCI container
+* If Portworx is run as a OCI container, Docker Upgrades and Restarts do not impact Portworx runtime. So recommend running Portworx as a OCI container
 
 ### Day 3 Operations {#day-3-operations}
 
 #### Handling Lost or Stale Nodes on the Cloud and On-Prem {#handling-lost-or-stale-nodes-on-the-cloud-and-on-prem}
 
-* Lost or Stale Nodes can be removed from the PX cluster for force-decommissioning the node from the cluster
+* Lost or Stale Nodes can be removed from the Portworx cluster for force-decommissioning the node from the cluster
 * The command used to remove a node is `pxctl cluster delete --force`
 * For e.g., if a specific node is offline but it no longer exists, use \` pxctl cluster delete --force node-id\` to remove the node from the cluster
 
@@ -372,7 +372,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 #### Drive Replacements {#drive-replacements}
 
 * Any drive in a given node can be replaced by another drive in the same node
-* In order to perform a drive replacement, the PX node must be put into `maintenance mode`
+* In order to perform a drive replacement, the Portworx node must be put into `maintenance mode`
 
 **Step 1: Enter Maintenance mode**
 
@@ -447,7 +447,7 @@ Pool ID: 1
 ```
 
 * If there is no spare drive available in the system, then the following steps need to be performed
-  * Decommission the PX node \(Refer to `pxctl cluster delete`\)
+  * Decommission the Portworx node \(Refer to `pxctl cluster delete`\)
   * Ensure all volumes have replicas in other nodes if you still need to access the data
   * Replace the bad drive\(s\) with new drive\(s\)
   * Add the node to the cluster as a new node \(refer to [adding cluster nodes](/install-with-other/operate-and-maintain/scaling/scale-out)\)
