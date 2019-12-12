@@ -6,10 +6,10 @@ weight: 30
 series: authorization
 ---
 
-This page will give an overview of how to enable authorization in _Portworx_. For specific details on how to enable authorization in _Portworx_ for a given container orchestration system, please refer to the appropriate installation instructions in this site.
+This page will give an overview of how to enable authorization in Portworx. For specific details on how to enable authorization in Portworx for a given container orchestration system, please refer to the appropriate installation instructions in this site.
 
 ## Requirements
-To enable authorization in _Portworx_, administrators must provide the following
+To enable authorization in Portworx, administrators must provide the following
 information:
 
 1. System shared key for secure cluster communications.
@@ -23,7 +23,7 @@ information:
         1. JWT shared secret or JWT public key
 
 ## Setup
-The information above must be provided to _Portworx_ configuration. Sensitive information like shared secrets can only be provided as environment variables.
+The information above must be provided to Portworx configuration. Sensitive information like shared secrets can only be provided as environment variables.
 These variables can then be filled in automatically by _Secrets_ coming from your container orchestration system.
 
 ### Environment variables
@@ -32,7 +32,7 @@ The following environment variables can be provided to enable authorization:
 | Environment Variable | Required | Description |
 | -------------------- | -------- | ----------- |
 | `PORTWORX_AUTH_SYSTEM_KEY` | Yes | Shared secret used by Portworx to generate tokens for cluster communications |
-| `PORTWORX_AUTH_STORK_KEY` | Yes when using Stork | Share secret used by Stork to generate tokens to communicate with _Portworx_. The shared secret must match the value of `PX_SHARED_SECRET` environment variable in Stork. |
+| `PORTWORX_AUTH_STORK_KEY` | Yes when using Stork | Share secret used by Stork to generate tokens to communicate with Portworx. The shared secret must match the value of `PX_SHARED_SECRET` environment variable in Stork. |
 | `PORTWORX_AUTH_JWT_SHAREDSECRET` | Optional | Self-generated token shared secret, if any |
 
 ### Configuration

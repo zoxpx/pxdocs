@@ -42,7 +42,7 @@ The graph below shows the sequential and random read and write performance on hi
 
 #### Create EBS volumes AWS
 
-Here, we create volumes of 3 different volume types in AWS. Refer to [AWS EBS volume types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) for more information on the EBS volume capabilities. PWX will automatically detect the volume type and classify it into the correct service category.
+Here, we create volumes of 3 different volume types in AWS. Refer to [AWS EBS volume types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) for more information on the EBS volume capabilities. Portworx automatically detect the volume type and classify it into the correct service category.
 
 * Create one 500GB HDD volume
 * Create one 100GB standard volume
@@ -165,7 +165,7 @@ pxctl volume create --io_priority low test-low --size 8
 test-low
 ```
 
-Now we use [fio](https://github.com/axboe/fio) to measure PX volume performance on each of these volumes. Note that backend disk performance while performance tests are running can be visualized with iostat
+Now we use [fio](https://github.com/axboe/fio) to measure Portworx volume performance on each of these volumes. Note that backend disk performance while performance tests are running can be visualized with iostat
 
 ```text
 iostat -xm 1
