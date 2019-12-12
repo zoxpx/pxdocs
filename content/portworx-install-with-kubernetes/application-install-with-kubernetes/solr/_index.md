@@ -7,9 +7,9 @@ weight: 8
 noicon: true
 ---
 
-The examples provided create a Solr cluster running in Kubernetes, which uses Portworx volumes for zookeeper and Solr data.
+The examples provided create a Solr cluster running in Kubernetes, which uses Portworx volumes for Zookeeper and Solr data.
 
-## Portworx StorageClass for Volume provisioning
+## The Portworx StorageClass for Volume provisioning
 Check your cluster nodes
 ```text
 kubectl get nodes -o wide
@@ -253,7 +253,7 @@ Apply the above configuration
 kubectl create -f zookeeper-ensemble.yml
 ```
 ## Post Zookeeper install
-Verify the zookeeper pods are up and running with Portworx volumes
+Verify the Zookeeper pods are up and running with Portworx volumes
 ```text
 kubectl get pods
 ```

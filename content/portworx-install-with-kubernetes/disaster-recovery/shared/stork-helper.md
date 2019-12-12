@@ -2,7 +2,7 @@
 hidden: true
 ---
 
-The following steps can be used to download `storkctl` from the stork pod:
+The following steps can be used to download `storkctl` from the Stork pod:
 
 * Linux:
 

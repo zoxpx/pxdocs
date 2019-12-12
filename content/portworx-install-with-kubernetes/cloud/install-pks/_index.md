@@ -61,7 +61,7 @@ Perform these steps on any machine where you have the bosh CLI.
 
     After the runtime config is updated, go to your Operations Manager Installation Dashboard and click "Apply Changes". This will ensure bosh will add the addon on all new vm instances.
 
-    If you already have an existing PX cluster, you will need to recreate the VM instances using the bosh recreate command.
+    If you already have an existing Portworx cluster, you will need to recreate the VM instances using the bosh recreate command.
 
 ## Step 2: Install Etcd
 
