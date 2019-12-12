@@ -2,7 +2,7 @@
 layout: page
 title: "Portworx install on PKS on vSphere using local datastores"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
-meta-description: "Find out how to install PX in a PKS Kubernetes cluster on vSphere and have PX provide highly available volumes to any application deployed via Kubernetes."
+meta-description: "Find out how to install Portworx in a PKS Kubernetes cluster on vSphere and have Portworx provide highly available volumes to any application deployed via Kubernetes."
 hidden: true
 disableprevnext: true
 ---
@@ -58,7 +58,7 @@ curl -fsL https://install.portworx.com/px-wipe | bash -s -- -T pks
 
 {{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-secret.md" %}}
 
-### Portworx spec
+### The Portworx spec
 
 Things to replace in the below spec to match your environment:
 
@@ -662,4 +662,4 @@ spec:
 
 ## Limitations
 
-If a PX storage node goes down and cluster is still in quorum, a storage less node will not automatically replace the storage node.
+If a Portworx storage node goes down and cluster is still in quorum, a storage less node will not automatically replace the storage node.

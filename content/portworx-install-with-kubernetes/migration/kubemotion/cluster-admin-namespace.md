@@ -10,16 +10,16 @@ You can also designate one namespace as an admin namespace. This will allow an
 admin who has access to that namespace to migrate any namespace from the source
 cluster.
 
-This requires passing in an additional parameter to the stork deployment with
+This requires passing in an additional parameter to the Stork deployment with
 the admin namespace.
 
-Run the following command to edit the stork deployment:
+Run the following command to edit the Stork deployment:
 
 ```text
 kubectl edit deployment -n kube-system stork
 ```
 
-If `admin-namespace` is your admin namespace, in the editor, update the arguments to the stork container to specify the cluster admin namespace using the `--migration-admin-namespace` parameter:
+If `admin-namespace` is your admin namespace, in the editor, update the arguments to the Stork container to specify the cluster admin namespace using the `--migration-admin-namespace` parameter:
 
 ```text
       - command:
@@ -30,7 +30,7 @@ If `admin-namespace` is your admin namespace, in the editor, update the argument
         - --migration-admin-namespace=admin-namespace
 ```
 
-Save the changes and wait for all the stork pods to be in running state after applying the
+Save the changes and wait for all the Stork pods to be in running state after applying the
 changes:
 
 ```text

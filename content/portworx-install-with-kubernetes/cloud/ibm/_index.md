@@ -64,7 +64,7 @@ Review the following information in the IBM Cloud Kubernetes Service documentati
 
 ## Step 5: Install Portworx in your cluster
 
-Provision a Portworx service instance from the IBM Cloud catalog. After you create the service instance, the latest Portworx enterprise edition (`px-enterprise`) is installed on your cluster by using Helm. The installation includes a Portworx license. Make sure to review the costs for the license in the IBM Cloud catalog.
+Provision a Portworx service instance from the IBM Cloud catalog. After you create the service instance, the latest version of PX-Enterprise is installed on your cluster by using Helm. The installation includes a Portworx license. Make sure to review the costs for the license in the IBM Cloud catalog.
 
 Before you begin:
 
