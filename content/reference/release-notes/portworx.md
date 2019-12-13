@@ -6,6 +6,20 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.3.1.2
+
+December 12, 2019
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10681 | For Portworx deployments using an internal KVDB with kubelet running as a docker container,  a crash or other interruption which downs both Docker and Portworx can leave an outdated socket file on the node. On restart, Docker attempts to reconnect to Portworx, but Portworx waits on kubelet causing a cyclic dependency.<br/><br/>**User Impact:** Crashes downing both Portworx and Docker without the chance for cleanup rendered both services unable to recover. <br/><br/>**Resolution:** This fix attempts to address this cyclic dependency. Portworx responds to the outdated socket requests as `not available`, allowing Docker to progress through startup. |
+
+
+
 ## 2.3.1
 
 November 18, 2019
@@ -57,6 +71,18 @@ The following issues have been fixed:
 |PWX-10155| Portworx storage pool labels do not inherit Kubernetes node labels. <br/><br/> **User Impact:** PVC creation relying on Kubernetes node labels fails.|
 |PWX-10239| Entering the `pxctl service drive add -o status` command with a `--spec` flag included causes Portworx to incorrectly add drives. <br/><br/>**User Impact:** Users entering a status command with the conflicting `--spec` flag can erroneously add new drives. <br/><br/> **Resolution:** With 2.3, Portworx no longer accepts these malformed commands as drive add operations. |
 |PSP-1978| Portworx occasionally causes a read/write operation to wait indefinitely on workloads with a large number of overlapping writes. <br/><br/> **User Impact:** Impacted volumes enter a read-only state or become unresponsive. |
+
+## 2.2.0.4
+
+December 12, 2019
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10681 | For Portworx deployments using an internal KVDB with kubelet running as a docker container,  a crash or other interruption which downs both Docker and Portworx can leave an outdated socket file on the node. On restart, Docker attempts to reconnect to Portworx, but Portworx waits on kubelet causing a cyclic dependency.<br/><br/>**User Impact:** Crashes downing both Portworx and Docker without the chance for cleanup rendered both services unable to recover. <br/><br/>**Resolution:** This fix attempts to address this cyclic dependency. Portworx responds to the outdated socket requests as `not available`, allowing Docker to progress through startup. |
 
 ## 2.2.0.3
 
@@ -166,6 +192,18 @@ Portworx is aware of the following issues, check future release notes for fixes 
 | PWX-10057 | CSI: In Kubernetes 1.14 with the Portworx CSI driver, unmount may fail intermittently if a volume is attached to a node where PX is down. | If unmount fails, retry once Portworx is back online. |
 | PWX-10056 | PX-Security: With security enabled, the `pxctl cloudmigrate status` command returns a blank result even there is cloud migration going on. | Use the `pxctl cloudmigrate status --task_id <your_cloud_migration_task_ID>` command to view the migration status. |
 | PWX-8421 | Setting collaborator access on a snapshot using `pxctl` may return an error. | `pxctl` properly updates collaborator access, despite returning an error. |
+
+## 2.1.7
+
+December 12, 2019
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10681 | For Portworx deployments using an internal KVDB with kubelet running as a docker container,  a crash or other interruption which downs both Docker and Portworx can leave an outdated socket file on the node. On restart, Docker attempts to reconnect to Portworx, but Portworx waits on kubelet causing a cyclic dependency.<br/><br/>**User Impact:** Crashes downing both Portworx and Docker without the chance for cleanup rendered both services unable to recover. <br/><br/>**Resolution:** This fix attempts to address this cyclic dependency. Portworx responds to the outdated socket requests as `not available`, allowing Docker to progress through startup. |
 
 ## 2.1.5
 
