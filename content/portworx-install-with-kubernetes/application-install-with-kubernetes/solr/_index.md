@@ -121,11 +121,14 @@ spec:
       app: zk
   minAvailable: 2
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: zk
 spec:
+  selector:
+    matchLabels:
+      app: zk
   serviceName: zk-headless
   replicas: 3
   template:
@@ -246,7 +249,6 @@ spec:
       resources:
         requests:
           storage: 2Gi
-
 ```
 Apply the above configuration
 ```text
@@ -389,7 +391,7 @@ spec:
   selector:
     app: solr-app
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: solr
