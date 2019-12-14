@@ -52,8 +52,8 @@ Create your VolumePlacementStrategy along with your other storage resources:
 1. Create a StorageClass that references the VolumePlacementStrategy you created in the **Construct a VolumePlacementStrategy spec** steps above by specifying the `placement_strategy` parameter with the name of your VolumePlacementStrategy:
 
       ```text
+      apiVersion: storage.k8s.io/v1
       kind: StorageClass
-      apiVersion: storage.k8s.io/v1beta1
       metadata:
         name: postgres-storage-class
       provisioner: kubernetes.io/portworx-volume
