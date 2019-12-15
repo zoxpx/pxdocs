@@ -1,4 +1,4 @@
-Kind: ConfigMap
+kind: ConfigMap
 apiVersion: v1
 metadata:
   name: grafana-dashboards
@@ -6046,7 +6046,7 @@ spec:
   selector:
     app: grafana
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana
@@ -6055,6 +6055,9 @@ metadata:
     app: grafana
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
   template:
     metadata:
       labels:
