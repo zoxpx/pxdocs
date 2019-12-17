@@ -2,7 +2,7 @@
 title: Service operations using pxctl
 linkTitle: Service
 keywords: portworx, pxctl, command-line tool, cli, reference
-description: How to use PX CLI service.
+description: How to use the pxctl service command.
 weight: 16
 ---
 
@@ -77,7 +77,7 @@ Call home feature successfully enabled
 
 ### pxctl service diags
 
-When there is an operational failure, you can use pxctl service diags &lt;name-of-px-container&gt; to generate a complete diagnostics package. This package will be automatically uploaded to Portworx if `--upload` is specified. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /var/cores/diags.tgz inside the PX container.
+When there is an operational failure, you can use pxctl service diags &lt;name-of-px-container&gt; to generate a complete diagnostics package. This package will be automatically sent to Portworx, Inc. if the flag `--upload` is specified. Additionally, the service package can be mailed to Portworx, Inc. at support@portworx.com. The package will be available at /var/cores/diags.tgz inside the Portworx container.
 
 ```text
 pxctl service diags --help

@@ -66,7 +66,7 @@ In the next sections, we will take a look at these commands individually.
 
 ## Creating volumes with pxctl
 
-_Portworx_ creates volumes from the global capacity of a cluster. You can expand the capacity and throughput by adding new nodes to the cluster. _Portworx_ protects storage volumes from hardware and node failures through automatic replication.
+Portworx creates volumes from the global capacity of a cluster. You can expand the capacity and throughput by adding new nodes to the cluster. Portworx protects storage volumes from hardware and node failures through automatic replication.
 
 Things to consider when creating a new volume with `pxctl`:
 
@@ -225,7 +225,7 @@ The replicas are visible in the _"Replica sets on nodes"_ section.
 
 ### Creating volumes with Docker
 
-All `docker volume` commands are reflected in _Portworx_. For example, a `docker volume create` command provisions a storage volume in a _Portworx_ storage cluster.
+All `docker volume` commands are reflected in Portworx. For example, a `docker volume create` command provisions a storage volume in a Portworx storage cluster.
 
 The following `docker volume` command creates a volume named `testVol`:
 
@@ -237,7 +237,7 @@ docker volume create -d pxd --name testVol
 testVol
 ```
 
-Just to make sure the command is reflected into _Portworx_, try running this command:
+Just to make sure the command is reflected into Portworx, try running this command:
 
 
 ```text
@@ -251,7 +251,7 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS		SNAP-ENABLED
 
 ### The --opt flag
 
-As part of the `docker volume` command, you can add optional parameters through the `--opt` flag. The parameters are the same, whether you use _Portworx_ storage through the Docker volume or the `pxctl` command.
+As part of the `docker volume` command, you can add optional parameters through the `--opt` flag. The parameters are the same, whether you use Portworx storage through the Docker volume or the `pxctl` command.
 
 The command below uses the `--opt` flag to set the container's filesystem and volume size:
 
@@ -283,9 +283,9 @@ We're all set.
 
 ## Inline volume spec
 
-_PX_ supports passing the volume spec inline along with the volume name. This is useful if you want to create a volume with your scheduler application template inline and do not want to create volumes beforehand.
+Portworx supports passing the volume spec inline along with the volume name. This is useful if you want to create a volume with your scheduler application template inline and do not want to create volumes beforehand.
 
-For example, a _PX_ inline spec looks like this:
+For example, a Portworx inline spec looks like this:
 
 ```text
 docker volume create -d pxd io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume
