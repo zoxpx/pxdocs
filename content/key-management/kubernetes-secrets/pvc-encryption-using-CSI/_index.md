@@ -9,7 +9,7 @@ series2: k8s-pvc-enc
 hidden: true
 ---
 
-This article discusses PVC encryption methods used with the Kubernetes Container Storage Interface. For information about Portworx with CSI, refer to the [Portworx with CSI](/portworx-install-with-kubernetes/storage-operations/csi/) article of the Portworx documentation.
+This article discusses the PVC encryption methods used with the Kubernetes Container Storage Interface. For detaile about using Portworx with CSI, refer to the [Portworx with CSI](/portworx-install-with-kubernetes/storage-operations/csi/) page.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ You can encrypt your volumes in one of two ways:
 
 You can encrypt your volumes by specifying the encryption key in a Kubernetes secret. This secret can be same as the one created to host the authentication token. Using this method, you can handle both authentication and encryption together, and multiple PVCs referring to this storage class will use the same secret for encryption.
 
-#### Step 1: Create a kubernetes secret that contains the passphrase used for encrypting the PX volume
+#### Step 1: Create a kubernetes secret that contains the passphrase used for encrypting the Portworx volume
 
 Enter the following `kubectl create secret generic` command, specifying your own passphrase in `mysecret-passcode-for-encryption` which will encrypt the PVC:
 

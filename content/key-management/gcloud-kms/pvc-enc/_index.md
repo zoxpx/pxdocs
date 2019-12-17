@@ -13,7 +13,7 @@ hidden: true
 
 ### Encryption using per volume secrets
 
-In this method each volume will use its own unique passphrase for encryption. _Portworx_ generates a  unique 128 bit passphrase. This passphrase will be used during encryption and decryption. If you do not wish _Portworx_ to generate passphrases for you, use named secrets as mentioned [here](/key-management/gcloud-kms/pvc-enc#encryption-using-named-secrets)
+In this method each volume will use its own unique passphrase for encryption. Portworx generates a  unique 128 bit passphrase. This passphrase will be used during encryption and decryption. If you do not wish Portworx to generate passphrases for you, use named secrets as mentioned [here](/key-management/gcloud-kms/pvc-enc#encryption-using-named-secrets)
 
 #### Step 1: Create a Storage Class
 
@@ -99,7 +99,7 @@ spec:
 
 ### Encryption using named secrets
 
-In this method _Portworx_ will use the named secret created by you for encrypting and decrypting a volume. To create a named secret follow [this document](/key-management/gcloud-kms#creating-named-secrets).
+In this method Portworx will use the named secret created by you for encrypting and decrypting a volume. To create a named secret follow [this document](/key-management/gcloud-kms#creating-named-secrets).
 
 #### Step 1: Create a Named Secret
 

@@ -14,7 +14,7 @@ hidden: true
 
 ### Using per volume secret keys
 
-In this method portworx generates a 128 bit passphrase. This passphrase will be used during encryption and decryption.
+In this method Portworx generates a 128 bit passphrase. This passphrase will be used during encryption and decryption.
 
 To create a volume through pxctl, run the following command
 
@@ -65,7 +65,7 @@ To attach and mount an encrypted volume through docker, run the following comman
 docker run --rm -it -v secure=true,secret_key=default,name=enc_vol:/mnt busybox
 ```
 
-Note the `secret_key` is set to the value `default` to indicate PX to use the cluster-wide secret key
+Note the `secret_key` is set to the value `default` to indicate Portworx to use the cluster-wide secret key
 
 {{<info>}}
 {{% content  "key-management/shared/shared-secret-warning-note.md" %}}
