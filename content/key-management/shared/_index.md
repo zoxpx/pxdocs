@@ -5,4 +5,4 @@ description: Shared content for all portworx secret docs
 hidden: true
 ---
 
-Shared content for all portworx secret docs
+Shared content for all Portworx secret docs

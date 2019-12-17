@@ -13,7 +13,7 @@ hidden: true
 
 ## Creating and using encrypted volumes
 
-There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to PX.
+There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to Portworx.
 
 ### Using per volume secret keys
 

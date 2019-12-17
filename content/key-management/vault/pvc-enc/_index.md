@@ -11,11 +11,11 @@ hidden: true
 
 {{% content "key-management/shared/intro.md" %}}
 
-There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to PX.
+There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to Portworx.
 
 ### Encryption using Storage Class
 
-In this method, PX will use the cluster wide secret key to encrypt PVCs.
+In this method, Portworx will use the cluster wide secret key to encrypt PVCs.
 
 #### Step 1: Set a cluster wide secret
 

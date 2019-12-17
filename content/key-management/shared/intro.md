@@ -6,7 +6,7 @@ hidden: true
 
 {{% content "shared/encryption/intro.md" %}}
 
-_Portworx_ has two different kinds of encrypted volumes:
+Portworx has two different kinds of encrypted volumes:
 
 - **Encrypted Volumes**
 

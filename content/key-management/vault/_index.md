@@ -15,7 +15,7 @@ Portworx can integrate with Vault to store your encryption keys/secrets, credent
 
 Peruse [this section](https://www.vaultproject.io/docs/install) for help on setting up Vault in your setup. This includes installation, setting up policies and configuring secrets.
 
-## Vault Credentials {#portworx-vault-environment-variables}
+## Vault Credentials
 
 Portworx requires the following Vault credentials to use its APIs
 
@@ -30,7 +30,7 @@ Portworx requires the following Vault credentials to use its APIs
 
 - **Vault Base Path [VAULT_BASE_PATH]**
 
-    The base path under which portworx has access to secrets.
+    The base path under which Portworx has access to secrets.
 
 - **Vault Backend Path [VAULT_BACKEND_PATH]**
 
@@ -85,7 +85,7 @@ data:
 
 Portworx is going to look for this secret with name `px-vault` under the `portworx` namespace. While installing Portworx it creates a kubernetes role binding which grants access to reading kubernetes secrets only from the `portworx` namespace.
 
-### Step 2: Setup Vault as the secrets provider for Portworx
+### Step 2: Setup Vault as the secrets provider for Portworx 
 
 #### New Installation
 
@@ -97,7 +97,7 @@ For an existing Portworx cluster follow these steps to configure Vault as the se
 
 ##### Step 2a: Add Permissions to access kubernetes secrets
 
-Portworx needs permissions to access the `px-vault` secret created in Step 1. The following Kubernetes spec grants portworx access to all the secrets defined under the `portworx` namespace
+Portworx needs permissions to access the `px-vault` secret created in Step 1. The following Kubernetes spec grants Portworx access to all the secrets defined under the `portworx` namespace
 
 ```text
 cat <<EOF | kubectl apply -f -
@@ -135,7 +135,7 @@ roleRef:
 EOF
 ```
 
-##### Step 2b: Edit the Portworx Daemonset
+##### Step 2b: Edit the Portworx DaemonSet
 
 Edit the Portworx daemonset `secret_type` field to `vault`, so that all the new Portworx nodes will also start using Vault.
 
@@ -158,13 +158,13 @@ containers:
     name: portworx
 ```
 
-Editing the daemonset will restart all the Portworx pods.
+Editing the DaemonSet will restart all the Portworx pods.
 
 ## Other users {#other-users}
 
 ### Step 1: Provide Vault credentials to Portworx.
 
-Provide the following Vault credentials (key value pairs) as environment variables to Portworx
+Provide the following Vault credentials (key value pairs) as environment variables to Portworx 
 
 
 - [Required] VAULT_ADDR=<vault endpoint address>
@@ -239,7 +239,7 @@ If Vault is configured strictly with policies then the Vault Token provided to P
 **Note**: Portworx supports only the kv backend of Vault
 {{</info>}}
 
-All the above Vault related fields as well as the cluster secret key can be set using Portworx CLI which is explained in the next section.
+All the above Vault related fields as well as the cluster secret key can be set using the Portworx CLI which is explained in the next section.
 
 
 ## Key generation with Vault {#key-generation-with-vault}
@@ -256,9 +256,9 @@ pxctl secrets set-cluster-key --secret <cluster-wide-secret-key>
 
 This command needs to be run just once for the cluster. If you have added the cluster secret key through the config.json, the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in config.json will be ignored for the one set through the CLI.
 
-## \(Optional\) Authenticating with Vault using Portworx CLI
+## \(Optional\) Authenticating with Vault using the Portworx CLI
 
-If you do not wish to set Vault environment variables, you can authenticate Portworx with Vault using Portworx CLI. Run the following command:
+If you do not wish to set Vault environment variables, you can authenticate Portworx with Vault using the Portworx CLI. Run the following command:
 
 ```text
 pxctl secrets vault login \
@@ -276,9 +276,9 @@ You need to run this command on all Portworx nodes, so that you could create and
 Make sure that the secret key has been created in Vault.
 {{</info>}}
 
-If the CLI is used to authenticate with Vault, for every restart of Portworx container it needs to be re-authenticated with Vault by running the `vault login` command.
+If the CLI is used to authenticate with Vault, for every restart of the Portworx container it needs to be re-authenticated with Vault by running the `vault login` command.
 
 
-## Using Vault with Portworx
+## Using Vault with Portworx 
 
 {{<homelist series="vault-secret-uses">}}
