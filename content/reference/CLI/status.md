@@ -75,5 +75,5 @@ Note that the command shows the list of alerts that have been reported.
 For more details, please see the [alerts page](/install-with-other/operate-and-maintain/monitoring/portworx-alerts).
 
 {{<info>}}
-Portworx recommends setting up monitoring with Prometheus and AlertsManager. If you are using Portworx with Kubernetes, refer to the [Monitoring with Prometheus and Grafana](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) article. If you are using Portworx with other orchestrators, refer to the [Alerting With Portworx](/install-with-other/operate-and-maintain/monitoring/alerting/) article.
+Portworx, Inc. recommends setting up monitoring with Prometheus and AlertsManager. If you are using Portworx with Kubernetes, refer to the [Monitoring with Prometheus and Grafana](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) article. If you are using Portworx with other orchestrators, refer to the [Alerting With Portworx](/install-with-other/operate-and-maintain/monitoring/alerting/) article.
 {{</info>}}

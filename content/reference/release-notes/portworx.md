@@ -189,7 +189,7 @@ Portworx is aware of the following issues, check future release notes for fixes 
 |**Issue Number**|**Issue Description**|**Workaround**|
 |----|----|----|
 | PWX-10049 | CSI: Due to an issue Kubernetes 1.13, if the Kubelet or Portworx goes offline unexpectedly on a node where a volume is attached, the Kubelet will leave orphaned pod directories under `/var/lib/kubelet/pods/*`. The kubelet logs will report these errors every 2 seconds unless this directory is manually cleaned up. | Move or delete the orphaned pod's directory to stop these logs from showing up. |
-| PWX-10057 | CSI: In Kubernetes 1.14 with the Portworx CSI driver, unmount may fail intermittently if a volume is attached to a node where PX is down. | If unmount fails, retry once Portworx is back online. |
+| PWX-10057 | CSI: In Kubernetes 1.14 with the Portworx CSI driver, unmount may fail intermittently if a volume is attached to a node where Portworx is down. | If unmount fails, retry once Portworx is back online. |
 | PWX-10056 | PX-Security: With security enabled, the `pxctl cloudmigrate status` command returns a blank result even there is cloud migration going on. | Use the `pxctl cloudmigrate status --task_id <your_cloud_migration_task_ID>` command to view the migration status. |
 | PWX-8421 | Setting collaborator access on a snapshot using `pxctl` may return an error. | `pxctl` properly updates collaborator access, despite returning an error. |
 
@@ -452,8 +452,8 @@ April 19, 2019
 * PWX-8060 - Cloudsnap restores will fail when the volume is heavily fragmented
 * PWX-8064 - Reducing the HA level of an aggregated volume may cause any active cloud backups on the volume to fail. New cloud backup can be restarted once the HA level has been reduced on the volume
 * PWX-8261 - Startup issue with Debian 9 (4.19.0-0.bpo.2-cloud-amd64)
-* PWX-8297 - K8S: OCI-Mon must force-pull px-enterprise b4 reinstalling incomplete Portworx
-* PWX-8311 - IKS: OCI Monitor not starting PX when both Docker and ContainerD services running
+* PWX-8297 - K8S: OCI-Mon must force-pull px-enterprise b4 reinstalling incomplete Portworx 
+* PWX-8311 - IKS: OCI Monitor not starting Portworx when both Docker and ContainerD services running
 * PWX-8334 - Fixed install progress-bar
 * PWX-8335 - Handle mpath device partitions in nodewipe
 * PWX-8403 - Error when trying to mount a sharedv4 volume with encryption. The first pod comes up okay, but second and subsequent pods mount results in failure
@@ -477,14 +477,14 @@ _User Impact:_ This fix ensures consistent sync times on the backend.
 June 19, 2019
 
 {{<info>}}
-PX 2.0.3.7 works with STORK 2.1.2. Here are the [release notes](https://github.com/libopenstorage/stork/releases/tag/v2.1.2) for STORK 2.1.2.
+Portworx 2.0.3.7 works with Stork 2.1.2. Here are the [release notes](https://github.com/libopenstorage/stork/releases/tag/v2.1.2) for Stork 2.1.2.
 {{</info>}}
 
 ### Key Features and Enhancements
 
-**Feature: PWX-7549** - Provide the ability to add multiple drives to a PX node in a single command.
+**Feature: PWX-7549** - Provide the ability to add multiple drives to a Portworx node in a single command.
 
-_Customer Impact_:  None. This is an enhancement as previously PX only allowed only one drive to be added at a time.
+_Customer Impact_:  None. This is an enhancement as previously Portworx only allowed only one drive to be added at a time.
 
 _Recommendations_: Add only one drive at a time or upgrade to 2.0.3.7 to be able to multiple drives.
 
@@ -508,41 +508,41 @@ _Customer Impact_: Adding a journal device which is LVM drive partition will fai
 
 _Recommendations_: Don't use LVM partitions as a journal device. Upgrade to 2.0.3.7 for better handling.
 
-**Issue: PWX-9055** - Installing PX with an LVM volume that has a similar name to another LVM volume will deactivate the other LVM volume (not used by PX). For e.g, if Portworx is asked use to /dev/mapper/volone and there is another LVM volume with the name /dev/mapper/volone1, volone1 would get deactivated.
+**Issue: PWX-9055** - Installing Portworx with an LVM volume that has a similar name to another LVM volume will deactivate the other LVM volume (not used by Portworx). For e.g, if Portworx is asked use to /dev/mapper/volone and there is another LVM volume with the name /dev/mapper/volone1, volone1 would get deactivated.
 
 _Customer Impact_: In this case, if the customer was using the raw LVM volume for another application, that volume will be deactivated.
 
 _Recommendations_: Portworx recommends inspecting the system beforehand and to use volume names for LVM volumes that do not overlap with the existing volumes. To completely avoid the issue, Portworx recommends upgrading to 2.0.3.7.
 
-**Issue: PWX-8717** - Adding a journal device to a storage-less node right after a storage device was added results in PX crashing and restarting.
+**Issue: PWX-8717** - Adding a journal device to a storage-less node right after a storage device was added results in Portworx crashing and restarting.
 
-_Customer Impact_: When a user tries to add a journal device to a storage-less node right after adding a storage device,  PX might crash and restart. In general, there is no application error as PX restarts within the 10 min device timeout interval, but there may be a very brief slow down of the I/Os.
+_Customer Impact_: When a user tries to add a journal device to a storage-less node right after adding a storage device,  Portworx might crash and restart. In general, there is no application error as Portworx restarts within the 10 min device timeout interval, but there may be a very brief slow down of the I/Os.
 
 _Recomendations_: The workaround is to restart Portworx after a storage device was added and then add a journal device. Upgrading to 2.0.3.7 will eliminate the need for a restart.
 
 **Issue: PWX-9054** - Using the `-A` option during install does not recognize mdraid partitions.
 
-_Customer Impact_: If the storage disks provided to PX during install are from mdraid partitions, PX will not recognize them and will come up in storage-less mode.
+_Customer Impact_: If the storage disks provided to Portworx during install are from mdraid partitions, Portworx will not recognize them and will come up in storageless mode.
 
 _Recommendations_: There is no workaround. Upgrading to 2.0.3.7 will enable adding mdraid partitions
 
-**Issue: PWX-8904** - Restarting PX node could result in not being able to complete the startup sequence.
+**Issue: PWX-8904** - Restarting Portworx node could result in not being able to complete the startup sequence.
 
 _Customer Impact_: This was seen in environments where there was heavy I/O with shared and non-shared volumes. Also, there were lots of replicas on the node to which a lot of traffic was being routed to. This resulted in a scenario where the internal credits were exhausted. 2.0.3.7 increased the credits and resource allocation.
 
 _Recommendations_: Upgrading to 2.0.3.7 resolves this issue.
 
-**Issue: PWX-9017** - De-couple OCI-mon constraints from PX systemd service limits
+**Issue: PWX-9017** - De-couple OCI-mon constraints from Portworx systemd service limits
 
-_Customer Impact_: With previous releases, if the user changes the oci-mon system constraints/limits, it will get passed on to PX systemd service.
+_Customer Impact_: With previous releases, if the user changes the oci-mon system constraints/limits, it will get passed on to Portworx systemd service.
 
-_Recommendations_: This is addressed in 2.0.3.7 where the oci-mon limits are no longer passed on PX systemd service
+_Recommendations_: This is addressed in 2.0.3.7 where the oci-mon limits are no longer passed on Portworx systemd service
 
 **Issue: PWX-8846**  - Storage-less node ended up with stuck I/Os and needed to be restarted.
 
 _Customer Impact_: A storage-less node stopped processing I/Os and had to be restarted to have the resources released.
 
-_Recommendations_: Storage-less node must be restarted to release the resources so application I/O can begin to run. Resources used by volumes which are detached when the node was down are not released when the node comes back online. This was resolved so these resources are now properly released to the global internal resource pool in PX.
+_Recommendations_: Storage-less node must be restarted to release the resources so application I/O can begin to run. Resources used by volumes which are detached when the node was down are not released when the node comes back online. This was resolved so these resources are now properly released to the global internal resource pool in Portworx.
 
 **Issue: PWX-9042** - Do not allow overwriting of secrets
 
@@ -571,7 +571,7 @@ May 28, 2019
 * PWX-8712 - Cloudsnaps: Verify uploaded objects before marking backup as done
 * PWX-8715 - Node index generation fix to avoid same node index generation
 * PWX-8733 - Post upgrade to 2.0.3.4: shared volumes were errored because the server endpoint wasn’t there anymore
-* PWX-8917 - OCI-Mon: PX service not restarted after cpu/mem limits updated
+* PWX-8917 - OCI-Mon: Portworx service not restarted after cpu/mem limits updated
 
 ## 2.0.3.4
 
@@ -591,10 +591,10 @@ April 5, 2019
 
 * Portworx available on GOOGLE CLOUD PLATFORM MARKETPLACE https://cloud.google.com/marketplace/
 * PWX-8451 - Block adding metadata device when running with internal kvdb
-* PWX-8345 - Node wipe and upgrade doesn't work if portworx is installed in a namespace other than kube-system
+* PWX-8345 - Node wipe and upgrade doesn't work if Portworx is installed in a namespace other than kube-system
 * PWX-8045 - Cloudmigrate fails if credentials use a custom bucket name
 * PWX-7891 - pxctl service node-wipe --all failed to delete multi-path devices
-* PWX-8261 - Allow fresh install of PX on Linux Kernel version 4.9.0-7-amd64 and 4.9.0-8-amd64  
+* PWX-8261 - Allow fresh install of Portworx on Linux Kernel version 4.9.0-7-amd64 and 4.9.0-8-amd64  
 
 ## 2.0.3.2
 
@@ -602,13 +602,13 @@ March 22, 2019
 
 ### Key Fixes
 
-* PWX-8062 - PX cluster running on k8s does not report volumes metrics
+* PWX-8062 - Portworx cluster running on k8s does not report volumes metrics
 * PWX-8136 - Disable kvproxy audit as it causes the etcd client to trigger unnecessary API requests
-* PWX-8098 - PX fails to start after reboot on a system with LVM drives and auto-configured journal device
+* PWX-8098 - Portworx fails to start after reboot on a system with LVM drives and auto-configured journal device
 
 ### Errata
 
-* PWX-8161 - If an LVM partition is added as journal device after node initialization, any subsequent system reboot will need the LVM partition to be made visible before starting PX. This can be done by running "partprobe"
+* PWX-8161 - If an LVM partition is added as journal device after node initialization, any subsequent system reboot will need the LVM partition to be made visible before starting Portworx. This can be done by running "partprobe"
 
 ## 2.0.3.1
 
@@ -647,22 +647,22 @@ March 8, 2019
 * PWX-7481 - Shared volume failed to detach with an error that the Volume is mounted while Volume was not mounted
 * PWX-7485 - Display an appropriate message when cluster-wide diags can not be collected
 * PWX-7491 - Drive provisioning fixes for issues where extra drives were created than what was specified in the spec.
-* PWX-7512 - Speed up portworx install in DC/OS clusters by installing in each node in parallel.
+* PWX-7512 - Speed up Portworx install in DC/OS clusters by installing in each node in parallel.
 * PWX-7513 - In DC/OS, Portworx tasks should restart if they go in LOST state
 * PWX-7516 - The portworx-prometheus framework version need to be corrected.
 * PWX-7571 - CloudSnap : Restore fails sometimes with "failed to get metadata of the backup from cloud"
 * PWX-7595 - Handle spurious storage pool Full/offline condition
-* PWX-7596 - PX creates node labels for every PVs, causing prometheus federation scraping issues
+* PWX-7596 - Portworx creates node labels for every PVs, causing prometheus federation scraping issues
 * PWX-7604 - Anonymize the secrets for Key Management Systems
-* PWX-7605 - DCOS Portworx-prometheus pod replace does not work as expected
+* PWX-7605 - DCOS Portworx-Prometheus pod replace does not work as expected
 * PWX-7619 - Make KVDB URLs optional
-* PWX-7628 - Alertmanager does not run after installing PX 2.0.2
-* PWX-7639 - DCOS portworx framework should install with default options from config.json.
+* PWX-7628 - Alertmanager does not run after installing Portworx 2.0.2
+* PWX-7639 - DCOS Portworx framework should install with default options from config.json.
 * PWX-7650 - Portworx install errors w/ "tar: .: file changed as we read it"
 * PWX-7656 - Shared v4 failover operation fails if the management and data interface of px service is different
 * PWX-7661 - [stork] Snapshot status not being updated for all cloudsnaps in groupsnapshot
 * PWX-7686 - Enable Portworx to install in AWS instances when auto journaling is enabled.
-* PWX-7743 - Prevent PX install if only the journal disk is given in the install script and no data disks were given.
+* PWX-7743 - Prevent Portworx install if only the journal disk is given in the install script and no data disks were given.
 * PWX-7766 - When a groupsnapshot request times out, allow for the snapshot scheduler to retry in the next interval or ask the user to retry if it is a manual request
 * PWX-7773 - runc CVE-2019-5736 fix #3169
 
@@ -725,7 +725,7 @@ January 19, 2019
 ### Key Fixes
 
 * PWX-7431 - Strip the labels on a config map to fit 63 characters.
-* PWX-7411 - PX does not come up after upgrade to 2.0.1 when an auto-detecting network interface
+* PWX-7411 - Portworx does not come up after upgrade to 2.0.1 when an auto-detecting network interface
 
 ## 2.0.1
 
@@ -743,10 +743,10 @@ December 20, 2018
 * PWX-7031 - Cluster migration restore status does not reflect the cloudsnap status when cloudsnap has failed
 * PWX-7090 - Core files generated when a node is decommissioned with replicas on the node
 * PWX-7211 - Fix daemonset affinity in openshift specs
-* PWX-6836 - Don't allow deletion of the PX configuration data when the PX services are still running in the system
+* PWX-6836 - Don't allow deletion of the Portworx configuration data when the Portworx services are still running in the system
 * PWX-7134 - SSD/NVME drives are displayed as STORAGE_MEDIUM_MAGNETIC
 * PWX-7089 - Intermittent failures in `pxctl cloudsnap list`
-* PWX-6852 - If PX starts before Docker is started, the `SchedulerName` field in pxctl CLI shows as N/A
+* PWX-6852 - If Portworx starts before Docker is started, the `SchedulerName` field in pxctl CLI shows as N/A
 * PWX-7129 - Add an option to improve filesystem space utilization in case of SSD/NVMe drives
 * PWX-7011 - Cluster pairing for cluster migration fails when one of the nodes in the destination cluster is down
 * PWX-7120 - Cloudsnap restore failures cannot be viewed through `pxctl cloudsnap status`
@@ -759,7 +759,7 @@ December 7, 2018
 
 * PWX-7131 - Fix an issue with some of the alerts IDs mismatching with the description as part of the upgrade
   from the 1.x version to 2.0.
-* PWX-7122 - Volume restores would occasionally fail when restoring from backups that were done with PX 1.x versions.
+* PWX-7122 - Volume restores would occasionally fail when restoring from backups that were done with Portworx 1.x versions.
 
 ## 2.0.0
 
@@ -769,26 +769,26 @@ December 4, 2018
 
 * PX-Motion - Migration of applications and data between clusters. Application migration is Kubernetes only.
 * PX-Central - Single pane of glass for management, monitoring, and metadata services across multiple
-   PX clusters on Kubernetes
+   Portworx clusters on Kubernetes
 * Lighthouse 2.0 - Supports PX-motion with connection to Kubernetes cluster for application and namespace migration.
 * Shared volumes (v4) for Kubernetes
 * Support Cloudsnaps for Aggregated volumes
 * ‘Extent’ based cloudsnaps - Restartable Cloudsnaps if a large volume cloudsnap gets interrupted
 * Support Journal device for Repl=1 volumes
-* PX-kvdb (etcd) supported internally with PX cluster deployment
+* PX-kvdb (etcd) supported internally with Portworx cluster deployment
 
 ### Key Fixes
 
 * PWX-6458: When decreasing HA of a volume, recover snapshot space unused.
 * PWX-5686: Implement accounting and display of space utilized by snapshots and clones.
 * PWX-6949: Decommissioned node getting listed from one node in the cluster and not from the other
-* PWX-6617: PDM: Dump the cloud drive keys when PX loses kvdb connectivity.
+* PWX-6617: PDM: Dump the cloud drive keys when Portworx loses kvdb connectivity.
 * PWX-5876: Volume should get detached when out of quorum or pool down.
 
 ### Errata
 
-* PWX-7011: Cluster pair creation failing, because of destination PX node is marked down
-  Workaround: Restart the PX node and attempt the cluster pairing again
+* PWX-7011: Cluster pair creation failing, because of destination Portworx node is marked down
+  Workaround: Restart the Portworx node and attempt the cluster pairing again
 
 * PWX-7041: CloudSnap Backup Failed for Pause/Resume by PX Restart - All replicas are down
 
@@ -801,8 +801,8 @@ December 4, 2018
 
 ### Key Fixes
 
-* PWX-7304 - PX keeps restarting if journal device made read-only
-* PWX-7348 - PX keeps restarting, VM reboot after journal device made “offline”
+* PWX-7304 - Portworx keeps restarting if journal device made read-only
+* PWX-7348 - Portworx keeps restarting, VM reboot after journal device made “offline”
 * PWX-7453 - cloudsnap cleanup didn't complete properly in cases where errors were encountered when transmitting the diffs
 * PWX-7481 - Shared volume mounts fail when clients connections abruptly lost and not cleaned up properly
 * PWX-7600 - Volume mount status might be incorrectly displayed when the node where the volume is attached hits a storage full condition and replicas on that node are moved to a new node
@@ -874,7 +874,7 @@ November 7, 2018
 
 ### Key Features and Enhancements
 
-* Restart docker containers using shared volumes for DC/OS to enable automatic re-attach of the containers on PX upgrades
+* Restart docker containers using shared volumes for DC/OS to enable automatic re-attach of the containers on Portworx upgrades
 * Preserve Kubernetes agent node ids across agent restarts when Kubernetes agents are running statelessly in
   auto-scaling based environments
 
@@ -895,7 +895,7 @@ November 3, 2018
 
 * PWX-6616 - Fix shared volume mounts going read-only kubernetes in few corner cases
 * PWX-6551 - px_volume_read_bytes and px_volume_written_bytes are not available in 1.6.2
-* PWX-6479 - Debian 8: PX fails to come up if sharedv4 is enabled
+* PWX-6479 - Debian 8: Portworx fails to come up if sharedv4 is enabled
 * PWX-6560 - PVC creation fails with "Already exists" perpetually
 * PWX-6527 - Clean up orphaned volume paths as PVC are attached and detached over a period of time
 * PWX-6425 - Cloudnsap schedule option to do full backup always.
@@ -909,7 +909,7 @@ October 19, 2018
 This is a minor patch release with the following fixes/enhancements.
 
 * PWX-6655 - Fix to allow storageless nodes to reuse their node ids in k8s
-* PWX-6410 - Fix a bug where PX may detach unused loopback devices that are not owned by PX on restarts.
+* PWX-6410 - Fix a bug where Portworx may detach unused loopback devices that are not owned by Portworx on restarts.
 * PWX-6713 - Allow update of per volume queue depth
 
 ## 1.6.1.3
@@ -947,7 +947,7 @@ October 2, 2018
 
 * Per volume queue depth to ensure volume level quality of service
 * Large discard sizes up to 10MB support faster file deletes. NOTE: You will need a px-fuse driver update to use
-  this setting.  PX 1.6.1 will continue to work with old discard size of 1MB if no driver update was done. This is a
+  this setting.  Portworx 1.6.1 will continue to work with old discard size of 1MB if no driver update was done. This is a
   backward compatible change
 * Enable option to always perform a full clone back up for Cloudsnap
 * Reduce scheduled snapshot intervals to support snapping every 15 mins from the current limit of 1 hour
@@ -986,9 +986,9 @@ September 14, 2018
 * PWX-6208 - Fix GCP provider issues for dynamic disk provisioning in GCP/GKE
 * PWX-5815 - Enable running `pxctl` from oci-monitor PODs in k8s
 * PWX-6295 - Fix LocalNode provisioning pattern when provisioning volumes with greater than 1 replication factor
-* PWX-6277 - PX fails to run sharedv4 volume support for Fedora
-* PWX-6268 - PX does not come up in Amazon Linux V2 AMIs
-* PWX-6229 - PX does not initialize fully in a GKE multi-zone cluster during a fresh install
+* PWX-6277 - Portworx fails to run sharedv4 volume support for Fedora
+* PWX-6268 - Portworx does not come up in Amazon Linux V2 AMIs
+* PWX-6229 - Portworx does not initialize fully in a GKE multi-zone cluster during a fresh install
 
 
 ## 1.5.0
@@ -996,7 +996,7 @@ September 14, 2018
 August 21, 2018
 
 {{<info>}}
-Important note: Consul integration with 1.5.0 has a bug which results in PX querying a Consul Cluster too often for a non-existent key. We will be pushing out a 1.5.1 release with a fix by 08/31/2018
+Important note: Consul integration with 1.5.0 has a bug which results in Portworx querying a Consul Cluster too often for a non-existent key. We will be pushing out a 1.5.1 release with a fix by 08/31/2018
 {{</info>}}
 
 ### Key Features and Enhancements
@@ -1012,7 +1012,7 @@ Important note: Consul integration with 1.5.0 has a bug which results in PX quer
 
 ### Key Fixes
 
- * PWX-5800 - In AWS Autoscaling mode, PX nodes with no storage should always try to attach available drives on restart
+ * PWX-5800 - In AWS Autoscaling mode, Portworx nodes with no storage should always try to attach available drives on restart
  * PWX-5827 - Allow adding cloud drives using pxctl service drive add commands
  * PWX-5915 - Add PX-DO-NOT-DELETE prefix to all cloud drive names
  * PWX-6117 - Fix `pxctl cloudsnap status --local` command failing to execute
@@ -1043,7 +1043,7 @@ July 21, 2018
 
 ### Key Fixes
 
-* PWX-5681 - PX service to handle journald restarts
+* PWX-5681 - Portworx service to handle journald restarts
 * PWX-5814 - Fix automatic diag uploads
 * PWX-5818 - Fix diag uploads via `pxctl service diags` when running under k8s environments
 
@@ -1072,7 +1072,7 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 * DC/OS vault integration - Use [Vault integrated with DC/OS](/install-with-other/dcos)
 * Support Pool Resize - Available in Maintenance Mode only
 * Container Storage Interface (CSI) [Tech Preview](/portworx-install-with-kubernetes/storage-operations/csi)
-* Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting
+* Support port mapping used by Portworx from 9001-9015 to a custom port number range by passing the starting
   port number in [install arguments](/install-with-other/docker/standalone)
 * Provide ability to do a [license transfer](/reference/knowledge-base/px-licensing) from one cluster to another cluster
 * Add support for [cloudsnap deletes](/reference/cli/cloud-snaps#pxctl-cloudsnap-delete)
@@ -1087,7 +1087,7 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 * PWX-5214 - Use device UUID when checking for valid mounts when using device-mapper devices instead of the device names
 * PWX-5242 - Provide facility to add metadata journal devices to an existing cluster
 * PWX-5287 - Clean up px_env variables as well when using node wipe command
-* PWX-5322 - Unmount shared volume on shared volume source mount only on PX restarts
+* PWX-5322 - Unmount shared volume on shared volume source mount only on Portworx restarts
 * PWX-5319 - Use excl open for open device checks
 * PWX-4897 - Allow more time for the resync to complete before changing the replication status
 * PWX-5295 - Fix a nil pointer access during cloudsnap credential delete
@@ -1136,7 +1136,7 @@ This is a patch release with shared volume performance and stability fixes
 * Fix namespace client crashes when client list is generated when few client nodes are down.
 * Allow read/write snapshots in k8s annotations
 * Make adding and removing k8s node labels asynchronous to help with large number volume creations in parallel
-* Fix PX crash when a snapshot is taken at the same time as a node being marked down because of network failures
+* Fix Portworx crash when a snapshot is taken at the same time as a node being marked down because of network failures
 * Fix nodes option in docker inline volume create and supply nodes value as semicolon-separated values
 
 ## 1.3.0.1
@@ -1153,7 +1153,7 @@ March 6, 2018
 
 _**Upgrade Note 1**_: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
 
-_**Upgrade Note 2**_: Ensure all nodes in PX cluster are running 1.3 version before increasing replication factor for the volumes
+_**Upgrade Note 2**_: Ensure all nodes in Portworx cluster are running 1.3 version before increasing replication factor for the volumes
 
 _**Upgrade Note 3**_: Container information parsing code has been disabled and hence the PX-Lighthouse up to 1.1.7 version will not show the container information page. This feature will be back in future releases and with the new lighthouse
 
@@ -1167,18 +1167,18 @@ _**Upgrade Note 3**_: Container information parsing code has been disabled and h
   * _**Important**_ From 1.3 onwards, all snapshots are read-only. If the user wishes to create a read/write snapshot, a volume clone can be created from the snapshot
 * Improved resync performance when a node is down for a long time and restarted with accumulated data in the surviving nodes
 * Improved performance for database workloads by separating transaction logs to a separate journal device
-* Added PX signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted.
+* Added Portworx signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted.
 * Per volume cache attributes for shared volumes
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
   * Allow specifying input EBS volumes in the format “type=gp2,size=100”. \(this is documented\)
-  * Instead of adding labels to EBS volumes, PX now stores all the information related to them in kvdb. All the EBS volumes it creates and attaches are listed in kvdb and this information is then used to find out EBS volumes being used by PX nodes
+  * Instead of adding labels to EBS volumes, Portworx now stores all the information related to them in kvdb. All the EBS volumes it creates and attaches are listed in kvdb and this information is then used to find out EBS volumes being used by Portworx nodes
   * Added command `pxctl cloud list` to list all the drives created via ASG
 * Integrated kvdb - Early Access - Limited Release for small clusters less than 10 nodes
 
 #### New CLI Additions and changes to existing ones
 
-* Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
+* Added `pxctl service node-wipe` to wipe Portworx metadata from a decommisioned node in the cluster
 * Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
 * Add schduler information in `pxctl status` display
 * Add info about cloud volumes CLI [k8s](/cloud-references/auto-disk-provisioning/gcp) , [others](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
@@ -1194,7 +1194,7 @@ _**Upgrade Note 3**_: Container information parsing code has been disabled and h
 * PWX-4378 - Add read/write latency stats to the volume statistics
 * PWX-4923 - Add vol\_ prefix to read/write volume latency statistics
 * PWX-4288 - Handle app container restarts attached to a shared volume if the mount path was unmounted via unmount command
-* PWX-4372 - Gracefully handle trial license expiry and PX cluster reinstall
+* PWX-4372 - Gracefully handle trial license expiry and Portworx cluster reinstall
 * PWX-4544 - PX OCI install is unable to proceed with aquasec container installed
 * PWX-4531 - Add OS Distribution and Kernel version display in `pxctl status`
 * PWX-4547 - cloudsnap display catalog with volume name hits “runtime error: index out of range”
@@ -1203,10 +1203,10 @@ _**Upgrade Note 3**_: Container information parsing code has been disabled and h
 * PWX-4691 - Do not allow snapshots on down nodes or if the node is in maintenance mode
 * PWX-4397 - Set the correct zone information for all replica-sets
 * PWX-4375 - Add `pxctl upgrade` support for OCI containers
-* PWX-4733 - Remove Swarm Node ID check dependencies for PX bring up
+* PWX-4733 - Remove Swarm Node ID check dependencies for Portworx bring up
 * PWX-4484 - Limit replication factor increases to a limit of three at a time within a cluster and one per node
 * PWX-4090 - Reserve space in each pool to handle rebalance operations
-* PWX-4544 - Handle ./aquasec file during OCI-Install so PX can be installed in environments with aquasec
+* PWX-4544 - Handle ./aquasec file during OCI-Install so Portworx can be installed in environments with aquasec
 * PWX-4497 - Enable minio to mount shared volumes
 * PWX-4551 - Improve `pxctl volume inspect` to show pools on which volumes are allocated, replica nodes and replication add
 * PWX-4884 - Prevent replication factor increases if all the nodes in the cluster are not running 1.3.0
@@ -1216,14 +1216,14 @@ _**Upgrade Note 3**_: Container information parsing code has been disabled and h
 * PWX-4812 - Handle Kernel upgrades correctly
 * PWX-4814 - Synchronize snapshot operations per node
 * PWX-4471 - Enhancements to OCI Mount propagation to automount relevant scheduler dirs
-* PWX-4721 - When a large number of volumes are cloud snapped at the same time, PX container hits a panic
+* PWX-4721 - When a large number of volumes are cloud snapped at the same time, Portworx container hits a panic
 * PWX-4789 - Handle cloudsnaps errors when the schedule has been moved or deleted
 * PWX-4709 - Support for adding CloudDrive \(EBS volume\) to an existing node in a cluster
 * PWX-4777 - Fix issues with `pxctl volume inspect` on shared volumes hanging when a large number of volume inspects are done
 * PWX-4525 - `pxctl status` shows an invalid cluster summary in some nodes when performing an upgrade from 1.2 to 1.3
-* PWX-3071 - Provide the ability to force detach a remotely mounted PX volume from a single node when the node is down
+* PWX-3071 - Provide the ability to force detach a remotely mounted Portworx volume from a single node when the node is down
 * PWX-4772 - Handle storage full conditions more gracefully when the backing store for a px volume gets full
-* PWX-4757 - Improve PX initialization during boot to handle out of quorum volumes gracefully.
+* PWX-4757 - Improve Portworx initialization during boot to handle out of quorum volumes gracefully.
 * PWX-4747 - Improve a simultaneous large number of volume creates and volume attach/detach in multiple nodes
 * PWX-4467 - Fix hangs when successive volume inspects come to the same volume with cloudsnap in progress
 * PWX-4420 - Fix race between POD delete and volume unmounts
@@ -1246,7 +1246,7 @@ _**Upgrade Note 3**_: Container information parsing code has been disabled and h
 
 April 20, 2018
 
-This is a minor update that fixes a panic seen in some k8s environments when the user upgraded from an older version of PX to 1.2.22
+This is a minor update that fixes a panic seen in some k8s environments when the user upgraded from an older version of Portworx to 1.2.22
 
 PWX-5107 - Check if node spec is present before adding the node for volume state change events
 
@@ -1278,7 +1278,7 @@ February 15, 2018
 * PWX-4043 When a Portworx POD gets deleted in Kubernetes, no alerts are generated to indicate the POD deletion via kubectl.
 * PWX-4050 For a Portworx cluster that’s about 100 nodes or greater: If the entire cluster goes down with all the nodes offline, as nodes come online a few nodes get restarted because they are marked offline. A short while after, the system converges and the entire cluster becomes operational. No user intervention required.
 * Key Management with AWS KMS doesn’t work anymore because of API changes in the AWS side. Will be fixed in an upcoming release. Refer to this link for additional details. https://github.com/aws/aws-cli/issues/1043
-* PWX-4721 - When cloud-snap is performed on a large number of volumes, it results in a PX container restart. A workaround is to run cloudsnaps on up to 10 volumes concurrently.
+* PWX-4721 - When cloud-snap is performed on a large number of volumes, it results in a Portworx container restart. A workaround is to run cloudsnaps on up to 10 volumes concurrently.
 
 ## 1.2.18.0
 
@@ -1358,10 +1358,10 @@ This is a minor update to enhance metadata performance on a shared namespace vol
 ### Key Fixes
 
 * Readdir performance for directories with a large number of files \(greater 128K file count in a single directory\)
-* PX running on AWS AutoScalingGroup now handles existing devices attached with names such as `/dev/xvdcw` which have an extra letter at the end.
-* Occasionally, containers that use shared volumes could get a “transport end point disconnected” error when PX restarts. This has been resolved.
+* Portworx running on AWS AutoScalingGroup now handles existing devices attached with names such as `/dev/xvdcw` which have an extra letter at the end.
+* Occasionally, containers that use shared volumes could get a “transport end point disconnected” error when Portworx restarts. This has been resolved.
 * Fixed an issue where Portworx failed to resolve Kubernetes services by their DNS names if the user sets the Portworx DaemonSet DNS Policy as `ClusterFirstWithHostNet`.
-* PWX- 4078 When PX runs in 100s of nodes, a few nodes show high memory usage.
+* PWX- 4078 When Portworx runs in 100s of nodes, a few nodes show high memory usage.
 
 ## 1.2.11.10
 
@@ -1371,7 +1371,7 @@ This is a minor update to address an issue with installing a reboot service whil
 
 ### Key Fixes
 
-* When upgrading a runC container, the new version will correctly install a reboot service. A reboot service \(systemd service\) is needed to reduce the wait time before a PX device returns with a timeout when the PX service is down. Without this reboot service, a node can take 10 minutes to reboot.
+* When upgrading a runC container, the new version will correctly install a reboot service. A reboot service \(systemd service\) is needed to reduce the wait time before a Portworx device returns with a timeout when the Portworx service is down. Without this reboot service, a node can take 10 minutes to reboot.
 
 ## 1.2.11.9
 
@@ -1389,7 +1389,7 @@ Pass volume name as part of the metrics endpoint so Prometheus/Grafana can displ
 
 ### Errata
 
-* Do not manually unmount a volume by using Linux `umount` command for shared volume mounts. This errata applies to the previous versions of PX as well.
+* Do not manually unmount a volume by using Linux `umount` command for shared volume mounts. This errata applies to the previous versions of Portworx as well.
 
 ## 1.2.11.8
 
@@ -1402,7 +1402,7 @@ December 11, 2017
 
 ### Errata
 
-* Do not manually unmount a volume by using Linux `umount` command for shared volume mounts. This errata applies to the previous versions of PX as well.
+* Do not manually unmount a volume by using Linux `umount` command for shared volume mounts. This errata applies to the previous versions of Portworx as well.
 
 ## 1.2.11.7
 
@@ -1415,7 +1415,7 @@ December 7, 2017
 
 ### Errata
 
-* Do not manually unmount a volume by using Linux `umount` command for shared volume mounts. This errata applies to the previous versions of PX as well.
+* Do not manually unmount a volume by using Linux `umount` command for shared volume mounts. This errata applies to the previous versions of Portworx as well.
 
 ## 1.2.11.6
 
@@ -1485,7 +1485,7 @@ October 31, 2017
   The option “–labels x1=” results in the labels x2=v2 \(removes a label\).
 
 * Improvements to alerts:
-  * Additional alerts indicate the cluster status in much more finer detail. This document has more details on all the alerts posted by PX: [Here](/install-with-other/operate-and-maintain/monitoring/alerting)
+  * Additional alerts indicate the cluster status in much more finer detail. This document has more details on all the alerts posted by Portworx: [Here](/install-with-other/operate-and-maintain/monitoring/alerting)
   * Rate limiting for alerts so that an alert isn’t repeatedly posted within a short timeframe.
 * You can now update the io\_profile field by using the `pxctl volume update` command so the parameter can be enabled for existing volumes.
 
@@ -1496,7 +1496,7 @@ October 31, 2017
 * PWX-3448 When Portworx statistics are exported, they include the volume ID instead of the volume name.
 * PWX-3472 When snapshots are triggered on a large number of volumes at the same time, the snap operation fails.
 * PWX-3528 Volume create option parsing isn’t unified across Kubernetes, Docker, and pxctl.
-* PWX-3544 Improvements to PX Diagnostics - REST API to retrieve and upload diagnostics for a node or cluster. Diagnostics run using the REST API includes vmstat output and the output of pxctl cluster list and pxctl --json volume list. The diagnostics also include netstat -s before the node went down.
+* PWX-3544 Improvements to Portworx diagnostics - REST API to retrieve and upload diagnostics for a node or cluster. Diagnostics run using the REST API includes vmstat output and the output of pxctl cluster list and pxctl --json volume list. The diagnostics also include netstat -s before the node went down.
 * PWX-3558 px-storage dumps core while running an HA increase on multiple volumes during stress.
 * PWX-3577 When Portworx is running in a container environment, it should allow mounts on only those directories which are bind-mounted. Otherwise, Portworx hangs during a docker stop.
 * PWX-3585 If Portworx stops before a container that’s using its volume stops, the container might get stuck in the D state \(I/O in kernel\). As a result, ‘systemctl stop docker’ takes 10 minutes as does system shutdown. The default PXD\_TIMEOUT to error out IOs is 10 minutes, but should be configurable.
@@ -1535,7 +1535,7 @@ October 31, 2017
 * PWX-3859 After adding a volume template to an Auto Scaling Group and Portworx adds tags to the volume: If you stop that cluster and then start a new cluster with the same volume, without removing the tags, a message indicates that the cluster is already initialized. The message should indicate that it failed to attach template volumes because the tag is already used. You can then manually remove the tags from the stopped cluster.
 * PWX-3862 A volume is stuck in the detaching state indefinitely due to an issue in etcd.
 * PWX-3867 When running under Kubernetes, a pod using namespace volumes generates the messages “Orphaned pod &lt;pod&gt; found, but volume paths are still present on disk”.
-* PWX-3868 A PX cluster shows an extra node when running with ASG templates enabled if the AWS API returns an error when the PX container is booting up.
+* PWX-3868 A Portworx cluster shows an extra node when running with ASG templates enabled if the AWS API returns an error when the Portworx container is booting up.
 * PWX-3871 Added support for dot and hyphen in source and destination names in Kubernetes inline spec for snapshots.
 * PWX-3873 When running under Kubernetes, a volume detach fails on a regular volume, with the message “Failed to detach volume: Failed with status -16”, and px-storage dumps core.
 * PWX-3875 After volume unmount and mount commands are issued in quick succession, sometimes the volume mount fails.
@@ -1563,7 +1563,7 @@ October 31, 2017
 * PWX-4051 Previous versions of Portworx logged too many “Etcd did not return any transaction responses” messages. That error is now rate-limited to log only a few times.
 * PWX-4083 When volume is in a down state due to a create failure but is still attached without a shared volume export, the detach fails with the error “Mountpath is not mounted”.
 * PWX-4085 When running under Kubernetes, too many instances of this message get generated: “Kubernetes node watch channel closed. Restarting the watch..”
-* PWX-4131 Specifying -a or -A for providing disks to PX needs to handle mpath & raid drives/partitions as well
+* PWX-4131 Specifying -a or -A for providing disks to Portworx needs to handle mpath & raid drives/partitions as well
 
   **Errata**
 
@@ -1592,24 +1592,24 @@ September 18, 2017
 
 ### Key Fixes
 
-* Fix issue when a node running PX goes down, it never gets marked down in the kvdb by other nodes.
+* Fix issue when a node running Portworx goes down, it never gets marked down in the kvdb by other nodes.
 * Fix issue when a container in Lighthouse UI always shows as running even after it has exited
-* Auto re-attach containers mounting shared volumes when PX container is restarted.
-* Add Linux immutable \(CAP\_LINUX\_IMMUTABLE\) when PX is running as Docker V2 Plugin
+* Auto re-attach containers mounting shared volumes when Portworx container is restarted.
+* Add Linux immutable \(CAP\_LINUX\_IMMUTABLE\) when Portworx is running as Docker V2 Plugin
 * Set autocache parameter for shared volumes
-* On volume mount, make the path read-only if an unmount comes in if the POD gets deleted or PX is restarted during POD creation. On unmount,  delete the mount path.
+* On volume mount, make the path read-only if an unmount comes in if the POD gets deleted or Portworx is restarted during POD creation. On unmount,  delete the mount path.
 * Remove the volume quorum check during volume mounts so the mount can be retried until the quorum is achieved
-* Allow snapshot volume source to be provided as another PX volume ID and Snapshot ID
+* Allow snapshot volume source to be provided as another Portworx volume ID and Snapshot ID
 * Allow inline snapshot creation in Portworx Kubernetes volume driver using the Portworx Kubernetes volume spec
 * Post log messages indicating when logging URL is changed
-* Handle volume delete requests gracefully when PX container is starting up
-* Handle service account access when PX is running as a container instead of a daemonset when running under kubernetes
+* Handle volume delete requests gracefully when Portworx container is starting up
+* Handle service account access when Portworx is running as a container instead of a daemonset when running under kubernetes
 * Implement a global lock for kubernetes filter such that all cluster-wide Kubernetes filter operations are coordinated through the lock
 * Improvements in unmounting/detaching handling in kubernetes to handle different POD clean up behaviors for deployments and statefulsets
 
 ### Errata
 
-* If two containers using the same shared volume are run in the same node using docker, when one container exits, the container’s connection to the volume will get disrupted as well. The workaround is to run containers using shared volume in two different portworx nodes
+* If two containers using the same shared volume are run in the same node using docker, when one container exits, the container’s connection to the volume will get disrupted as well. The workaround is to run containers using shared volume in two different Portworx nodes
 
 ## 1.2.9
 
@@ -1617,7 +1617,7 @@ August 23, 2017
 
 {{<info>}}
 **Important:**
-If you are upgrading from an older version of PX \(1.2.8 or older\) and have PX volumes in the attached state, you will need node reboot after upgrade in order for the new version to take effect properly.
+If you are upgrading from an older version of Portworx (1.2.8 or older) and have Portworx volumes in the attached state, you will need node reboot after upgrade in order for the new version to take effect properly.
 {{</info>}}
 
 ### Key Features and Enhancements
@@ -1634,8 +1634,8 @@ If you are upgrading from an older version of PX \(1.2.8 or older\) and have PX 
 * Fix S3 provider for compatibility issues with legacy object storage providers not supporting ListObjectsV2 API correctly.
 * Add more cloudsnap related alerts to indicate cloudsnap status and any cloudsnap operation failures.
 * Fix config.json for Docker Plugin installs
-* Read topology parameters on PX restart so RACK topology information is read correctly on restarts
-* Retain environment variables when PX is upgraded via `pxctl upgrade` command
+* Read topology parameters on Portworx restart so RACK topology information is read correctly on restarts
+* Retain environment variables when Portworx is upgraded via `pxctl upgrade` command
 * Improve handling for encrypted scale volumes
 
 ### Errata
@@ -1648,7 +1648,7 @@ June 27, 2017
 
 ### Key Features and Enhancements
 
-* License Tiers for PX-Enterprise
+* License Tiers for PX-Enterprise 
 
 ## 1.2.5 Release notes
 
@@ -1676,7 +1676,7 @@ June 8, 2017
 * Node labels and scheduler convergence for docker swarm
 * Linux Kernel 4.11 support
 * Unique Cluster-specific bucket for each cluster for cloudsnaps
-* Load balanced cloudsnap backups for replicated PX volumes
+* Load balanced cloudsnap backups for replicated Portworx volumes
 * One-time backup schedules for Cloudsnap
 * Removed the requirement to have /etc/pwx/kubernetes.yaml in all k8s nodes
 
@@ -1686,7 +1686,7 @@ June 8, 2017
 * Docker inline volume creation support for setting volume aggregation level
 * –nodes support for docker inline volume spec
 * Volume attach issues after a node restart when container attaching to a volume failed
-* PX Alert display issues in Prometheus
+* Portworx displays issues in Prometheus
 * Cloudsnap scheduler display issues where the existing schedules were not seen by some users.
 * Removed snapshots from being counted into to total volume count
 * Removed non-px related metrics being pushed to Prometheus
@@ -1738,18 +1738,18 @@ April 27, 2017
 ### Key Features and Enhancements
 
 * [AWS Auto-scaling integration with Portworx](/portworx-install-with-kubernetes/cloud/aws/aws-asg) managing EBS volumes for EC2 instances in AWS ASG
-* [Multi-cloud Backup and Restore](/reference/cli/cloud-snaps) of Portworx Volumes
+* [Multi-cloud Backup and Restore](/reference/cli/cloud-snaps) of Portworx volumes
 * [Encrypted Volumes](/reference/cli/encrypted-volumes) with Data-at-rest and Data-in-flight encryption
 * Docker V2 Plugin Support
 * [Prometheus Integeration](/install-with-other/operate-and-maintain/monitoring/prometheus)
 * [Hashicorp Vault](/key-management/vault), [AWS KMS integration](/portworx-install-with-kubernetes/cloud/aws) and Docker Secrets Integration
-* [Dynamically resize](/reference/cli/updating-volumes) PX Volumes with no application downtime
-* Security updates improve PX container security
+* [Dynamically resize](/reference/cli/updating-volumes) Portworx volumes with no application downtime
+* Improved the security of the Portworx container
 
 ### Key Fixes
 
 * Issues with volume auto-attach
-* Improved network diagnostics on PX container start
+* Improved network diagnostics on Portworx container start
 * Added an alert when volume state transitions to read-only due to loss of quorum
 * Display multiple attached hosts on shared volumes
 * Improve shared volume container attach when the volume is in resync state

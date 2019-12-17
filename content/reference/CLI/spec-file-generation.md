@@ -4,7 +4,7 @@ description: Learn how to generate the DaemonSet Portworx spec file with the CLI
 hidden: true
 ---
 
-This section explains how to generate the DaemonSet Portworx spec file via the command line.
+This section explains how to generate the Portworx DaemonSet spec file via the command line.
 
 ## Parameters
 
@@ -24,15 +24,15 @@ Below are the parameters you can specify when generating the spec file.
 | s | Specify comma-separated list of drives. | s=/dev/sdb,/dev/sdc |
 | d | Specify data network interface. This is useful if your instances have non-standard network interfaces. | d=eth1 |
 | m | Specify management network interface. This is useful if your instances have non-standard network interfaces. | m=eth1 |
-| kbver | Specify Kubernetes version \(current default is 1.7\) | kbver=1.8.4 |
-| stork | Specify if you want to install STORK | stork=true |
+| kbver | Specify Kubernetes version (current default is 1.7) | kbver=1.8.4 |
+| stork | Specify if you want to install Stork | stork=true |
 | coreos | REQUIRED if target nodes are running coreos. | coreos=true |
 | osft | REQUIRED if installing on Openshift. | osft =true |
-| mas | Specify if PX should run on the Kubernetes master node. For Kubernetes 1.6.4 and prior, this needs to be true \(default is false\) | mas=true |
-| z | Instructs PX to run in zero storage mode on Kubernetes master. | z=true |
-| f | Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted. | f=true |
-| st | Select the secrets type \(_aws_, _kvdb_ or _vault_\) | st=vault |
-| j | \(PX 1.3 and higher\) Specify a separate block device as a journaling device for px metadata. | j=/dev/sde |
+| mas | Specify if Portworx should run on the Kubernetes master node. For Kubernetes 1.6.4 and prior, this needs to be true (default is false) | mas=true |
+| z | Instructs Portworx to run in zero storage mode on Kubernetes master. | z=true |
+| f | Instructs Portworx to use any available, unused and unmounted drives or partitions. Portworx will never use a drive or partition that is mounted. | f=true |
+| st | Select the secrets type (_aws_, _kvdb_ or _vault_) | st=vault |
+| j | (Portworx 1.3 and higher) Specify a separate block device as a journaling device for px metadata. | j=/dev/sde |
 
 **KVDB Parameters \(All required except** _**e**_**\)**
 
@@ -50,7 +50,7 @@ Below are the parameters you can specify when generating the spec file.
 * `PX_HTTP_PROXY`: If running behind an HTTP proxy, set`PX_HTTP_PROXY` to your HTTP proxy.
 * `PX_HTTPS_PROXY`: If running behind an HTTPS proxy, set `PX_HTTPS_PROXY` to your HTTPS proxy.
 * `PX_ENABLE_CACHE_FLUSH`: To enable the cache flush deamon, set `PX_ENABLE_CACHE_FLUSH=true`.
-* `PX_ENABLE_NFS`: To enable the PX NFS daemon, set `PX_ENABLE_NFS=true`.
+* `PX_ENABLE_NFS`: To enable the Portworx NFS daemon, set `PX_ENABLE_NFS=true`.
 
 ## Generate the Spec via the command line
 
