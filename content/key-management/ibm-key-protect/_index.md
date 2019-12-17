@@ -11,7 +11,7 @@ series: key-management
 
 
 {{<info>}}
-**NOTE:** Supported from Portworx Enterprise 1.7 onwards
+**NOTE:** Supported from PX-Enterprise 1.7 onwards
 {{</info>}}
 
 Portworx integrates with IBM Key Protect to store your encryption keys/secrets and credentials. This guide will help configure Portworx with IBM Key Protect. IBM Key Protect can be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
@@ -67,7 +67,7 @@ data:
   IBM_CUSTOMER_ROOT_KEY: MGYxNGExNzMtODE2blahN2Q3LTg1ZGYtY2M3ZWI5YmYxNzRj
 ```
 
-Portworx is going to look for this secret with name `px-ibm` under the `portworx` namespace. While installing Portworx it creates a kubernetes role binding which grants access to reading kubernetes secrets only from the `portworx` namespace.
+Portworx is going to look for this secret with name `px-ibm` under the `portworx` namespace. While installing Portworx it creates a Kubernetes role binding which grants access to reading Kubernetes secrets only from the `portworx` namespace.
 
 ### Step 2: Set up IBM Key Protect as the secrets provider for Portworx.
 
@@ -79,8 +79,8 @@ While deploying Portworx using helm chart on an IKS cluster, by default Portworx
 
 In a non-IKS cluster, set the `secretType` as `ibm-kp` in the helm chart's values.yml configuration file.
 
-##### Using Portworx Spec Generator
-When generating the Portworx Kubernetes spec file on the Portworx Spec Generator page in [PX-Central](https://central.portworx.com), select `IBM Key Protect` from the "Secrets type" list.
+##### Using the Portworx spec generator
+When generating the Portworx Kubernetes spec file on the Portworx spec generator page in [PX-Central](https://central.portworx.com), select `IBM Key Protect` from the "Secrets type" list.
 
 #### Existing installation
 
@@ -126,9 +126,9 @@ roleRef:
 EOF
 ```
 
-##### Step 2b: Edit the Portworx Daemonset
+##### Step 2b: Edit the Portworx DaemonSet
 
-Edit the Portworx daemonset `secret_type` field to `ibm-kp`, so that all the new Portworx nodes will also start using IBM Key Protect.
+Edit the Portworx DaemonSet `secret_type` field to `ibm-kp`, so that all the new Portworx nodes will also start using IBM Key Protect.
 
 ```text
 kubectl edit daemonset portworx -n kube-system
@@ -174,6 +174,6 @@ While installing Portworx set the input argument `-secret_type` to `ibm-kp`.
 Based on your installation method provide the `-secret_type ibm-kp` input argument and restart Portworx on all the nodes.
 
 
-## Using IBM Key Protect with Portworx
+## Using IBM Key Protect with Portworx 
 
 {{<homelist series="ibm-key-protect-uses">}}

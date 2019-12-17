@@ -51,4 +51,4 @@ pxctl host mount encrypted_volume /mnt
 Volume encrypted_volume successfully mounted at /mnt
 ```
 
-When using cluster wide secret key, the secret key does not need to be provided in any of the commands. When no secret key is provided in the pxctl volume commands, PX defaults to using the cluster wide secret key **if set**
+When using cluster wide secret key, the secret key does not need to be provided in any of the commands. When no secret key is provided in the pxctl volume commands, Portworx defaults to using the cluster wide secret key **if set**
