@@ -2,7 +2,7 @@
 hidden: true
 ---
 
-When you install STORK, it also creates a storage class called _stork-snapshot-sc_. This storage class can be used to create PVCs from snapshots.
+When you install Stork, it also creates a storage class called _stork-snapshot-sc_. This storage class can be used to create PVCs from snapshots.
 
 To create a PVC from a snapshot, you would add the `snapshot.alpha.kubernetes.io/snapshot` annotation to refer to the snapshot
 name.
@@ -29,7 +29,7 @@ spec:
       storage: 2Gi
 ```
 
-Once you apply the above spec, you will see a PVC created by STORK. This PVC will be backed by a Portworx volume clone of the snapshot created above.
+Once you apply the above spec, you will see a PVC created by Stork. This PVC will be backed by a Portworx volume clone of the snapshot created above.
 
 ```text
 kubectl get pvc

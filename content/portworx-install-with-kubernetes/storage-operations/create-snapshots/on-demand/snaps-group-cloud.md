@@ -14,7 +14,7 @@ This document will show you how to create group cloud snapshots of Portworx volu
 
 {{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-cloud-snap-creds-prereq.md" %}}
 
-### Portworx and Stork Version
+### Portworx and Stork version
 
 Group cloud snapshots using Stork are supported in Portworx and Stork 2.0.2 and above. If you are running a lower version, refer to [Upgrade on Kubernetes
 ](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade) to upgrade Portworx to 2.0.2 or above.
@@ -303,7 +303,7 @@ Events:                    <none>
 
 ## Deleting group snapshots
 
-To delete group snapshots, you need to delete the `GroupVolumeSnapshot` that was used to create the group snapshots. STORK will delete all other volumesnapshots that were created for this group snapshot.
+To delete group snapshots, you need to delete the `GroupVolumeSnapshot` that was used to create the group snapshots. Stork will delete all other volumesnapshots that were created for this group snapshot.
 
 ```text
 kubectl delete groupvolumesnapshot cassandra-group-cloudsnapshot
