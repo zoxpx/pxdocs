@@ -16,7 +16,7 @@ This page list various approaches for installing an external ETCD cluster and pr
 
 ### Requirements
 
-For production Portworx clusters we recommend the following configuration of an etcd cluster:
+For production Portworx clusters, Portworx, Inc. recommends the following configuration of an etcd cluster:
 
 1. Etcd Version > 3.1.x
 2. Minimum 3 nodes
@@ -115,4 +115,4 @@ etcd.crt:  1680 bytes
 etcd.key:  414  bytes
 ```
 
-Use the Portworx Spec Generator in [PX-Central](https://central.portworx.com), selecting "Certificate Auth" under the etcd section, ensuring the filenames match those specified.
+Use the Portworx spec generator in [PX-Central](https://central.portworx.com), selecting "Certificate Auth" under the etcd section, ensuring the filenames match those specified.
