@@ -8,7 +8,7 @@ weight: 18
 
 ## Overview
 
-This document outlines how to interact with an auth-enabled _PX_ cluster. The main way to do it is by using the `pxctl context` commands. In addition, you can integrate with an __OIDC provided token__ or __generate self-signed tokens__ through `pxctl`.
+This document outlines how to interact with an auth-enabled Portworx cluster. The main way to do it is by using the `pxctl context` commands. In addition, you can integrate with an __OIDC provided token__ or __generate self-signed tokens__ through `pxctl`.
 
 ## Context
 
@@ -97,7 +97,7 @@ pxctl context unset
 ```
 
 ## Generating tokens {#generate_tokens}
-_PX_ supports two methods of authorization: OIDC and self-signed.
+Portworx supports two methods of authorization: OIDC and self-signed.
 
 For generating a token through your OIDC provider, see your provider's
 documentation on generating bearer tokens. The following are some of the

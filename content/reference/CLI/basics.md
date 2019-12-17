@@ -59,7 +59,7 @@ Use "pxctl [command] --help" for more information about a command.
 ```
 
 {{<info>}}
-As seen above, `pxctl` provides the capability to perform fine-grained control of the PX resources cluster-wide. Also, it lets the user manage volumes, snapshots, cluster resources, hosts in the cluster and software upgrade in the cluster.
+As seen above, `pxctl` provides the capability to perform fine-grained control of the Portworx resources cluster-wide. Also, it lets the user manage volumes, snapshots, cluster resources, hosts in the cluster and software upgrade in the cluster.
 {{</info>}}
 
 In addition, every command takes in a `--json` flag which converts the output to a machine-parsable `JSON` format. You can do something like the following to save the output in `JSON` format:
@@ -128,7 +128,7 @@ Global Flags:
 
 ### Running pxctl upgrade
 
-`pxctl upgrade` upgrades the PX version on a node. Let's suppose you want to upgrade PX to version _1.1.16_. If so, you would then type the following command:
+`pxctl upgrade` upgrades the Portworx version on a node. Let's suppose you want to upgrade Portworx to version _1.1.16_. If so, you would then type the following command:
 
 ```text
 pxctl upgrade --tag 1.1.6 my-px-enterprise
@@ -150,7 +150,7 @@ It is recommended to upgrade the nodes in a **staggered manner**. This way, the 
 
 ## Login/Authentication
 
-You must make PX login to the secrets endpoint when using encrypted volumes and ACLs.
+You must make Portworx login to the secrets endpoint when using encrypted volumes and ACLs.
 
 `pxctl secrets` can be used to configure authentication credentials and endpoints.
 Currently, Vault, Amazon KMS, and KVDB are supported.
@@ -158,7 +158,7 @@ Currently, Vault, Amazon KMS, and KVDB are supported.
 
 ### Vault example
 
-Here's an example of configuring PX with Vault:
+Here's an example of configuring Portworx with Vault:
 
 ```text
 pxctl secrets vault login --vault-address http://myvault.myorg.com --vault-token myvaulttoken
@@ -174,7 +174,7 @@ To install and configure Vault, peruse [this link](https://www.vaultproject.io/d
 
 ### AWS KMS example
 
-To configure PX with Amazon KMS, type the following command:
+To configure Portworx with Amazon KMS, type the following command:
 
 ```text
 pxctl secrets aws login

@@ -6,7 +6,7 @@ description: Migrate cluster-wide secrets used for encrypting volumes between cl
 weight: 18
 ---
 
-_Portworx_ provides the capability to encrypt volumes using cluster-wide secrets. A cluster-wide secret is a unique secret
+Portworx provides the capability to encrypt volumes using cluster-wide secrets. A cluster-wide secret is a unique secret
 for a cluster that can be used as a default key for encrypting your volumes. However, this poses a problem while migrating 
 such volumes across clusters. The destination cluster needs to have the same cluster-wide secret in order to use the
 migrated encrypted volume.

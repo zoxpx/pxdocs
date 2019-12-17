@@ -6,7 +6,7 @@ description: Learn how to manage licenses using the Portworx CLI.
 weight: 14
 ---
 
-This document explains how to manage your _Portworx_ licenses with
+This document explains how to manage your Portworx licenses with
 `pxctl license`. The CLI lets you add, activate, and transfer licenses. It also gives details about the installed licenses, and it shows what features are available within a given license.
 
 ## Overview
@@ -82,7 +82,7 @@ As you can see, the command gives details on the features allowed under the curr
 
 ## Activate a license
 
-The easiest way to activate a license is to get an **activation id** from _Portworx_. Next, run the following:
+The easiest way to activate a license is to get an **activation id** from Portworx, Inc.. Next, run the following:
 
 ```text
 pxctl license activate <activation-id>
