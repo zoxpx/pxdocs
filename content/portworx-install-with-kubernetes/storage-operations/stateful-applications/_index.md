@@ -300,7 +300,18 @@ The ApplicationBackupSchedule CRD associates a SchedulePolicy with an applicatio
 
 ## Restore an application
 
-You restore an application by applying an ApplicationRestore object.
+You can restore an application by applying an ApplicationRestore object.
+
+{{<info>}}
+**NOTE:** If you're restoring an application across namespaces on OpenShift, you must modify your destination namespace to include the same supplemental group annotation values as your source namespace:
+
+```text
+annotations:
+  openshift.io/sa.scc.supplemental-groups: 1001990000/10000
+  openshift.io/sa.scc.uid-range: 1001990000/10000
+```
+
+{{</info>}}
 
 1. Create an ApplicationRestore YAML file, specifying the following:
 
@@ -358,7 +369,21 @@ mysql-6d69b99774-2bv4m   0/1     Pending   0          3s
 
 ## Clone an Application
 
-You can clone an application to a different namespace, or within the same namespace. You must create the `ApplicationClone` object in the **admin** namespace, which is `kube-system` by default.
+You can clone an application to a different namespace or within the same namespace. You must create the `ApplicationClone` object in the **admin** namespace, which is `kube-system` by default.
+
+{{<info>}}
+**NOTE:**
+
+* If you're cloning an application across namespaces on OpenShift, you must modify your destination namespace to include the same supplemental group annotation values as your source namespace:
+
+    ```text
+    annotations:
+      openshift.io/sa.scc.supplemental-groups: 1001990000/10000
+      openshift.io/sa.scc.uid-range: 1001990000/10000
+    ```
+
+* Distributed apps, such as Cassandra, may use the same node IDs on the destination namespace as their source, causing disruption when the new nodes join the source cluster.
+{{</info>}}
 
 1. Create a an ApplicationClone YAML file, specifying the following:
 
