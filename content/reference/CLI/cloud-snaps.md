@@ -8,21 +8,21 @@ weight: 8
 
 ## Overview of cloud backups
 
-This document outlines how to back-up _PX_ volumes to different cloud providers' object storage, including any S3-compatible object storage. To restore a specific backup, the user can restore the volume from that point in time.
+This document outlines how to back-up Portworx volumes to different cloud providers' object storage, including any S3-compatible object storage. To restore a specific backup, the user can restore the volume from that point in time.
 
-_Portworx_ helps administrators running persistent container workloads, on-prem or in the cloud, to safely backup their mission-critical database volumes to any supported cloud storage. Next, they can restore them on-demand. This way, _PX_ enables a **seamless DR integration** for all the important business application data.
+Portworx helps administrators running persistent container workloads, on-prem or in the cloud, to safely backup their mission-critical database volumes to any supported cloud storage. Next, they can restore them on-demand. This way, Portworx enables a **seamless DR integration** for all the important business application data.
 
 ### Supported cloud providers
 
-_Portworx PX-Enterprise_ supports the following cloud providers:
+PX-Enterprise supports the following cloud providers:
 
 1.  Amazon S3 and any S3-compatible Object Storage
 2.  Azure Blob Storage
 3.  Google Cloud Storage
 
-## Performing cloud backups of a PX volume
+## Performing cloud backups of a Portworx volume
 
-_PX_ volumes can be backed up to cloud via `pxctl cloudsnap`. If you run this command with the `--help` flag, it shows the list of available operations for the **full lifecycle management** of your cloud backups:
+Portworx volumes can be backed up to cloud via `pxctl cloudsnap`. If you run this command with the `--help` flag, it shows the list of available operations for the **full lifecycle management** of your cloud backups:
 
 ```text
 pxctl cloudsnap --help
@@ -69,7 +69,7 @@ Successful Login to Secrets Endpoint!
 ```
 
 {{<info>}}
-**Kubernetes users:** This is not required if you are using _Portworx 2.0_ and higher on _Kubernetes_ and you have `-secret_type` as k8s in Daemonset
+**Kubernetes users:** This is not required if you are using Portworx 2.0 and higher on _Kubernetes_ and you have `-secret_type` as k8s in Daemonset
 {{</info>}}
 
 ### Set the required cloud credentials
@@ -145,10 +145,10 @@ Note that that listing the credentials does mean that connection to a secret-sto
 
 #### AWS
 
-If you are using _AWS_, _Portworx_ creates a bucket (`ID` same as the cluster `UUID`) to upload cloudsnaps by default. Starting with _Portworx_ version 1.5.0, users can upload to a pre-created bucket. Thus, the _AWS_ credentials provided to _Portworx_ should either:
+If you are using _AWS_, Portworx creates a bucket (`ID` same as the cluster `UUID`) to upload cloudsnaps by default. Starting with Portworx version 1.5.0, users can upload to a pre-created bucket. Thus, the _AWS_ credentials provided to Portworx should either:
 
 *   have the capability to create a bucket or
-*   the bucket provided to _Portworx_ at a minimum must have the permissions mentioned below.
+*   the bucket provided to Portworx at a minimum must have the permissions mentioned below.
 
 If you prefer that a user-specified bucket be used for cloudsnaps, specify the bucket id with the `--bucket` option while creating the credentials.
 
@@ -229,7 +229,7 @@ pxctl credentials create --provider google --google-project-id px-test --google-
 
 `pxctl credentials create` enables the user to configure the credentials for each supported cloud provider.
 
-An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore. This way, _PX_ will be able to decrypt the data successfully.
+An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore. This way, Portworx will be able to decrypt the data successfully.
 
 These credentials can only be created once and cannot be modified. In order to maintain security, once configured, the secret parts of the credentials will not be displayed.
 
@@ -255,7 +255,7 @@ UUID                        NAME            ACCOUNT NAME        ENCRYPTION      
 1672e1c9-c513-44db-b8b5-b59e3d35a3a2        my-azure-cred        pwx-test        false            <nil>        724
 ```
 
-`pxctl credentials list` only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed. The credentials will be stored as part of the secret endpoint given to _PX_ for persisting authentication across reboots.
+`pxctl credentials list` only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed. The credentials will be stored as part of the secret endpoint given to Portworx for persisting authentication across reboots.
 
 For more information, run:
 
@@ -298,7 +298,7 @@ You can find more details by checking out the [Credentials](/reference/cli/crede
 
 ### Perform cloud backups of single volumes
 
-The actual backup of the _PX_ Volume is done via the `pxctl cloudsnap backup`.
+The actual backup of the Portworx volume is done via the `pxctl cloudsnap backup`.
 
 To get more details, run it with the `--help` flag:
 
@@ -365,7 +365,7 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
  Note that, in this particular example, since only one credential is configured, there is no need to specify the credentials on the command line.
  {{</info>}}
 
-* While _PX_ is working, let's check the progress of our backups:
+* While Portworx is working, let's check the progress of our backups:
 
  ```text
  pxctl cloudsnap status
@@ -499,7 +499,7 @@ Example:
 
 ### Perform cloud backup of a group of volumes
 
-_Portworx_ 2.0.3 and higher supports backing up multiple volumes to cloud at the same consistency point. To see the available command line options, run:
+Portworx 2.0.3 and higher supports backing up multiple volumes to cloud at the same consistency point. To see the available command line options, run:
 
 ```text
 pxctl cloudsnap backup-group --help
@@ -634,7 +634,7 @@ Global Flags:
 
 This command is used to restore a successful backup from the cloud. It requires the cloudsnap ID and the credentials for the cloud storage provider or the object storage. Restore happens on any node where storage can be provisioned.
 
-You can restore a backup of a _PX_ to one of your _PX_ volumes in the cluster. Once restored, the volume inherits the attributes from the backup (e.g.: file system, size and block size). The replication level of the restored volume defaults to 1, irrespective of the replication level of the volume that was backed up. Users can increase the replication factor once the restore is complete on the restored volume.
+You can restore a backup of a Portworx to one of your Portworx volumes in the cluster. Once restored, the volume inherits the attributes from the backup (e.g.: file system, size and block size). The replication level of the restored volume defaults to 1, irrespective of the replication level of the volume that was backed up. Users can increase the replication factor once the restore is complete on the restored volume.
 
 To restore a backup from cloud, enter the following command:
 
@@ -684,7 +684,7 @@ For more details about optimized restores, visit the [Enabling optimized restore
 ### Deleting a Cloud Backup
 
 {{<info>}}
-This feature is only supported starting with _PX_ version 1.4 or later.
+This feature is only supported starting with Portworx version 1.4 or later.
 {{</info>}}
 
 To delete a cloud backup, run:
@@ -698,7 +698,7 @@ The command will flag a cloudsnap for deletion and a job will take care of delet
 Only cloudsnaps which do not have any dependant cloudsnaps (ie incrementals) can be deleted. If there are dependent cloudsnaps then the command will throw an error and will show the list of cloudsnaps that need to be deleted first.
 
 {{<info>}}
-For _PX_ versions above and including 2.1, delete requests are queued and processed in the background. Since querying cloud to figure out dependent backups can take a while, user requests to delete the backups are added to a queue and an immediate response is returned to the user. If a cloud backup could not be deleted because of other dependent backups, an alert is logged and this will be deleted when all other dependent backups are deleted by the user.
+For Portworx versions above and including 2.1, delete requests are queued and processed in the background. Since querying cloud to figure out dependent backups can take a while, user requests to delete the backups are added to a queue and an immediate response is returned to the user. If a cloud backup could not be deleted because of other dependent backups, an alert is logged and this will be deleted when all other dependent backups are deleted by the user.
 {{</info>}}
 
 As an example, to delete the backup `pqr9-cl1/538316104266867971-807625803401928868`, you could run the following:

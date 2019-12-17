@@ -6,7 +6,7 @@ description: This guide shows you how to use the pxctl to perform cluster operat
 weight: 4
 ---
 
-This document outlines how to manage your _Portworx_ cluster operation with `pxctl cluster`.
+This document outlines how to manage your Portworx cluster operation with `pxctl cluster`.
 
 First, let's get an overview of the available commands:
 
@@ -53,7 +53,7 @@ Use "pxctl cluster [command] --help" for more information about a command.
 
 ## Listing all nodes in a cluster
 
-To list all nodes in your _Portworx_ cluster, run:
+To list all nodes in your Portworx cluster, run:
 
 ```text
 pxctl cluster list
@@ -141,7 +141,7 @@ Global Flags:
 
 ## Showing nodes based on IO Priority
 
-To list the nodes in your _Portworx_ cluster based on IO Priority (high, medium and low), type:
+To list the nodes in your Portworx cluster based on IO Priority (high, medium and low), type:
 
 ```text
 pxctl cluster provision-status --io_priority low

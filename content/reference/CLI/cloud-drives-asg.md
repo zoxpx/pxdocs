@@ -8,7 +8,7 @@ linkTitle: Cloud Drives (ASG)
 
 ## Cloud Drive operations
 
-If you run _Portworx_ in ASG mode, the CLI provides a set of commands that display the information about the EBS volumes.
+If you run Portworx in ASG mode, the CLI provides a set of commands that display the information about the EBS volumes.
 
 ### Cloud Drive Help
 
@@ -33,7 +33,7 @@ OPTIONS:
 
 ### Listing all Cloud Drives
 
-To display all the cloud drives being used by _Portworx_, type:
+To display all the cloud drives being used by Portworx, type:
 
 ```text
 pxctl clouddrive list

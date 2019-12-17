@@ -6,7 +6,7 @@ linkTitle: Group Snaps
 weight: 5
 ---
 
-This document explains how to take group snapshots of your container data with _Portworx_.
+This document explains how to take group snapshots of your container data with Portworx.
 
 First, let's get an overview of the available flags before diving in:
 

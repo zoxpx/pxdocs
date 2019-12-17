@@ -6,13 +6,13 @@ description: Learn to migrate volumes between clusters using pxctl
 weight: 12
 ---
 
-This document explains how to migrate _PX_ volumes between clusters. In order to do this, we'll first have to pair up 2 clusters and then issue the migration command to _Portworx_.
+This document explains how to migrate Portworx volumes between clusters. In order to do this, we'll first have to pair up 2 clusters and then issue the migration command to Portworx.
 
 {{<info>}}
 The pairing is **uni-directional**. Say there are two clusters- C1 and C2. If you pair C1 with C2 you can only migrate volumes from C1 to C2.
 {{</info>}}
 
-With _Portworx_, there are two ways of migrating volumes between clusters:
+With Portworx, there are two ways of migrating volumes between clusters:
 
 * using `pxctl` or
 * using `Stork` on `Kubernetes`
@@ -27,7 +27,7 @@ Before we begin, make sure you have configured a [secret store] (/key-management
 
 The installation may take a while, depending on your Intenet connection. Once the installation is finished we're going to want to pair our clusters.
 
-First, let's get the cluster token of the destination cluster. Run the following command from one of the _Portworx_ nodes in the **destination cluster**:
+First, let's get the cluster token of the destination cluster. Run the following command from one of the Portworx nodes in the **destination cluster**:
 
 
 ```text
@@ -155,7 +155,7 @@ pxctl cloudmigrate start --volume_id <volumeId> --cluster_id <cluster_id>
 
 ### Checking the migration status
 
-While _Portworx_ migrates your volume(s), you can check the status by running the following command:
+While Portworx migrates your volume(s), you can check the status by running the following command:
 
 ```text
 pxctl cloudmigrate status

@@ -7,10 +7,10 @@ weight: 20
 ---
 
 ## Overview
-This document outlines how to manage your own custom roles for fine-grained access control within your _PX_ clusters.
+This document outlines how to manage your own custom roles for fine-grained access control within your Portworx clusters.
 
 ## Default Roles
-_PX_ comes with a few standard roles that you can use when issuing tokens to users:
+Portworx comes with a few standard roles that you can use when issuing tokens to users:
 
 *   __system.admin:__ can run any command
 *   __system.view:__ can only run read-only commands
