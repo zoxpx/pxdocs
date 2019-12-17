@@ -9,10 +9,10 @@ This document will show you how to create group snapshots of Portworx volumes an
 
 ## Pre-requisites
 
-**Installing STORK**
+**Installing Stork**
 
-This requires that you already have [STORK](/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
-Kubernetes cluster. If you fetched the Portworx specs from the Portworx Spec Generator in [PX-Central](https://central.portworx.com) and used the default options, STORK is already installed.
+This requires that you already have [Stork](/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
+Kubernetes cluster. If you fetched the Portworx specs from the Portworx spec generator in [PX-Central](https://central.portworx.com) and used the default options, Stork is already installed.
 
 **Kubernetes Version**
 
@@ -21,7 +21,7 @@ Group snapshots are supported in following Kubernetes versions
 * 1.9.4 and above
 * 1.8.9 and above
 
-**PX Version**
+**Portworx version**
 
 Group snapshots are supported in Portworx version 1.4 and above.
 
@@ -46,7 +46,7 @@ To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/por
 
 #### Creating snapshots of all PVCs that match certain annotations
 
-In below example, we are taking a group snapshot that will snap all PVCs in the *default* namespace and that have labels *tier: prod* and *type: db*. The prefix *portworx.selector/* before the annotation keys indiciate these are annotations that STORK will process to select PVCs.
+In below example, we are taking a group snapshot that will snap all PVCs in the *default* namespace and that have labels *tier: prod* and *type: db*. The prefix *portworx.selector/* before the annotation keys indiciate these are annotations that Stork will process to select PVCs.
 
 Portworx will quiesce I/O on all volumes before triggering their snapshots.
 
@@ -214,4 +214,4 @@ spec:
 
 ## Deleting group snapshots
 
-To delete group snapshots, you need to delete the `VolumeSnapshot` that was used to create the group snapshots. STORK will delete all other volumesnapshots that were created for this group snapshot.
+To delete group snapshots, you need to delete the `VolumeSnapshot` that was used to create the group snapshots. Stork will delete all other volumesnapshots that were created for this group snapshot.

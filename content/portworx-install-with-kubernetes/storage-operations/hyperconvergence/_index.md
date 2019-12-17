@@ -13,9 +13,9 @@ When a pod runs on the same host as its volume, it is known as convergence or hy
 
 ### Using scheduler convergence {#using-scheduler-convergence}
 
-The recommended method to run your pods hyperconverged is to use [STORK](/portworx-install-with-kubernetes/storage-operations/stork).
+The recommended method to run your pods hyperconverged is to use [Stork](/portworx-install-with-kubernetes/storage-operations/stork).
 
-Once you have installed STORK, all you need to do is add `schedulerName: stork` in your application specs. STORK will then ensure that the nodes with data for a volume get prioritized when pods are being scheduled.
+Once you have installed Stork, all you need to do is add `schedulerName: stork` in your application specs. Stork will then ensure that the nodes with data for a volume get prioritized when pods are being scheduled.
 
 For example, this is how you would specify the scheduler name in a MySQL deployment:
 
@@ -59,7 +59,7 @@ spec:
 ```
 
 
-### Initializer (Experimental feature in STORK v1.1)
+### Initializer (Experimental feature in Stork v1.1)
 
 If you are not able to update the schedulerName for you applications to use
 stork, you can enable the app-initializer feature. This uses the Kubernetes

@@ -192,7 +192,7 @@ spec:
 In the above spec,
 
 * **replicas: 3** declares that you want 3 replicas for your cassandra cluster.
-* **schedulerName: stork** enables to use [STORK](https://github.com/libopenstorage/stork) scheduler to enable more efficient placement of the pods and faster recovery for failed nodes.
+* **schedulerName: stork** enables to use [Stork](https://github.com/libopenstorage/stork) scheduler to enable more efficient placement of the pods and faster recovery for failed nodes.
 * **volumeClaimTemplates** declares the template to use for the PVC that will be created for each replica pod. The names of the dynamically created PVCs will be cassandra-data-cassandra-0, cassandra-data-cassandra-1 and cassandra-data-cassandra-2.
 
 {{<info>}}[The Cassandra on Kubernetes

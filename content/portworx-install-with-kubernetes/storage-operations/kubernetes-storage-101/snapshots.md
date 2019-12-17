@@ -105,7 +105,7 @@ Common use cases for this would be:
 * Lift/Shift: Move applications and data from an on-prem cluster to a hosted AWS EKS or Google GKE. The reverse is also supported to repatriate, move applications on-prem.
 * Maintenance: Decommission a cluster in order to perform hardware-level upgrades.
 
-Portworx uses [STORK](https://github.com/libopenstorage/stork) for migration. The [Migration](/concepts/migration) page detailed documentation on this.
+Portworx uses [Stork](https://github.com/libopenstorage/stork) for migration. The [Migration](/concepts/migration) page detailed documentation on this.
 
 ## Related topics
 
