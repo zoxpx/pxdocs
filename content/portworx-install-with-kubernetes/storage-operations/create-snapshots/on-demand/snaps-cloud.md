@@ -10,12 +10,12 @@ This document will show you how to create cloud snapshots of Portworx volumes an
 
 ## Pre-requisites
 
-### Installing STORK
+### Installing Stork
 
-This requires that you already have [STORK] (/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
-Kubernetes cluster. If you fetched the Portworx specs from the Portworx Spec Generator in [PX-Central](https://central.portworx.com) and used the default options, STORK is already installed.
+This requires that you already have [Stork](/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
+Kubernetes cluster. If you fetched the Portworx specs from the Portworx spec generator in [PX-Central](https://central.portworx.com) and used the default options, Stork is already installed.
 
-### PX Version
+### Portworx version
 
 Cloud snapshots using below method is supported in Portworx version 1.4 and above.
 Cloud snapshots (for aggregated volumes) using below method is supported in Portworx version 2.0 and above.

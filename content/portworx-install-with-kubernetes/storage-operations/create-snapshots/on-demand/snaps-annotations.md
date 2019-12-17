@@ -8,7 +8,7 @@ description: Learn to take a snapshot of a volume from a Kubernetes persistent v
 This document will show you how to take a snapshot of a volume using Portworx and use that snapshot as the volume for a new pod.
 
 {{<info>}}
-The suggested way to manage snapshots on Kuberenetes is now to use STORK. Instructions for using STORK to manage snapshots can be found
+The suggested way to manage snapshots on Kuberenetes is now to use Stork. Instructions for using Stork to manage snapshots can be found
 [here](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
 {{</info>}}
 
@@ -57,10 +57,10 @@ spec:
 Note the format of the _name_ field  - `ns.<namespace_of_source_pvc>-name.<name_of_the_snapshot>`. The above example takes a snapshot with the name _px-snap-1_ of the source PVC _px-vol-1_ in the _prod_ namespace.
 
 {{<info>}}
-**Note:** Annotations support is available from PX Version 1.2.11.6
+**Note:** Annotations support is available from Portworx version 1.2.11.6
 {{</info>}}
 
-For using annotations Portworx daemon set requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
+For using annotations Portworx DaemonSet requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
 
 ```text
 - apiGroups: [""]
@@ -161,7 +161,7 @@ To restore a pod to use the created snapshot, use the pvc `name.snap001-source.p
 
 ## Managing snapshots through pxctl
 
-To demonstrate the capabilities of the SAN like functionality offered by portworx, try creating a snapshot of your mysql volume.
+To demonstrate the capabilities of the SAN like functionality offered by Portworx, try creating a snapshot of your mysql volume.
 
 First create a database and a demo table in your mysql container.
 
