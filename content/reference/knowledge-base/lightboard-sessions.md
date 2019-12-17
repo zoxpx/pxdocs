@@ -11,7 +11,7 @@ series: kb
 The following is a series of easy to digest lectures about Portworx. Videos are produced with a lightboard which offers a unique and clear perspective for users to learn about Portworx.
 
 
-## Why Portworx
+## Why Portworx 
 
 This short video will explain the Portworx value proposition along with some of the differentiating features such as data mobility, application awareness and infrastructure independence.
 
@@ -55,7 +55,7 @@ Portworx deploys it’s full stack of software in a linux container. In this sho
  - [Deployment Architectures Docs](https://docs.portworx.com/cloud-references/deployment-arch)
  - [Hyperconvergence Docs](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/)
 
-## Deploying Portworx On Kubernetes 
+## Deploying Portworx on Kubernetes
 
 In this video, learn how Portworx runs on any distribution of Kubernetes and what components are involved.
 
@@ -65,7 +65,7 @@ In this video, learn how Portworx runs on any distribution of Kubernetes and wha
 
  - [Install with Kubernetes](https://docs.portworx.com/portworx-install-with-kubernetes/)
  - [Try Installing Portworx on Kubernetes yourself](https://www.katacoda.com/portworx/scenarios/deploy-px-k8s)
- - [Access Kubernetes Spec Generator in PX Central](https://central.portworx.com/)
+ - [Access Kubernetes Spec Generator in PX-Central](https://central.portworx.com/)
 
 ## Understanding Volume Replication
 

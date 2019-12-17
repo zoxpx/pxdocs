@@ -27,7 +27,7 @@ weight: 300
 
 ## Lighthouse 2.0.1 Release notes
 
-* Adds Cluster Migration to Kubernetes clusters for PX Clusters with version 2.0.1+
+* Adds Cluster Migration to Kubernetes clusters for Portworx clusters with version 2.0.1+
 Note: Requires kubeconfig upload and cannot migrate to non Kubernetes clusters
 
 Fixes:
@@ -35,7 +35,7 @@ Fixes:
 
 ## Lighthouse 2.0 Release notes
 
-* Adds Cluster Migration to non Kubernetes clusters for PX Clusters with version 2.0+
+* Adds Cluster Migration to non Kubernetes clusters for Portworx clusters with version 2.0+
 Note: Cannot migrate to Kubernetes Clusters
 
 Fixes:
@@ -50,7 +50,7 @@ Fixes:
 
 ## Lighthouse 1.4 Release notes
 
-Lighthouse 1.4 is a new GUI refresh for lighthouse. Follow this [link](/reference/lighthouse) to install Lighthouse in your environment. Please note that Lighthouse 1.4 only works with PX 1.4 and above.
+Lighthouse 1.4 is a new GUI refresh for lighthouse. Follow this [link](/reference/lighthouse) to install Lighthouse in your environment. Please note that Lighthouse 1.4 only works with Portworx 1.4 and above.
 
 To get access to Portworx PX-Lighthouse docker repository, contact us at support@portworx.com from your company email address.
 
@@ -75,7 +75,7 @@ To get access to Portworx PX-Lighthouse docker repository, contact us at support
 
 * Added in support for the latest Openstorage api's and made Lighthouse work with these.
 * Added creation of the influx px_stats database if not present.
-* Added kubernetes commands for spinning up a px node/cluster
+* Added kubernetes commands for spinning up a Portworx node/cluster
 * Added feature where the user can specify admin email and company.
 * Added feature where the user can specify which port Lighthouse would be running on.
 
