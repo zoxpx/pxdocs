@@ -110,3 +110,21 @@ Portworx uses [Stork](https://github.com/libopenstorage/stork) for migration. Th
 ## Related topics
 
 * [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/)
+
+## Related videos 
+
+### Create a local snapshot of a running MongoDB cluster on GKE and restore it to a new POD
+
+{{< youtube t3H1kM8zED0 >}}
+
+<br>
+
+### Create a cloud snapshot of a running MongoDB cluster on GKE and restore it to a new POD
+
+{{< youtube x2mcOImnyvI >}}
+
+<br>
+
+### Create group snapshots of multiple volumes with Portworx on OpenShift
+
+{{< youtube 4U79__zmAL4 >}}

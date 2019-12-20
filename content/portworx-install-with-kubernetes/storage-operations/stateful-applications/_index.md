@@ -4,6 +4,7 @@ linkTitle: Stateful applications operations
 keywords: backup, restore, clone, stateful
 description: Backup, restore, and clone stateful applications
 hidden: false
+weight: 1
 ---
 
 With Portworx, you can backup and restore stateful applications and their volumes to an external object store. Specifically, you can perform the following operations:
