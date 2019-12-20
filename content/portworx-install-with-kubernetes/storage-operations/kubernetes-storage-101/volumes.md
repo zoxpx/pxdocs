@@ -108,3 +108,9 @@ A PVC can be
 * [Interactive tutorial - Using Portworx Shared Volumes](https://www.katacoda.com/portworx/scenarios/px-k8s-vol-shared)
 * [Interactive tutorial - Encrypting volumes on Kubernetes](https://www.katacoda.com/portworx/scenarios/px-k8s-encryption)
 * [Kubernetes Storage documentation](https://kubernetes.io/docs/concepts/storage/volumes/)
+
+## Related videos
+
+### Backup and restore persistent volumes with Google Cloud Storage
+
+{{< youtube 3doFk56drxw >}}

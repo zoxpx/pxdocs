@@ -260,3 +260,22 @@ mysqlmigrationschedule-weekly-2019-02-14-221351 1d
 ```
 
 Once the MigrationSchedule object is deleted, all the associated Migration objects should be deleted as well.
+
+
+## Related videos 
+
+### Set up multi-cluster application failover with CockroachDB
+
+{{< youtube 9czMCF8MfXA >}}
+
+<br>
+
+### Set up multi-cloud and multi-cluster data movement with Portworx on Openshift
+
+{{< youtube 8aHuFTuByAM >}}
+
+<br>
+
+### Set up cross-cloud application migration from Google Cloud to Microsoft Azure with Portworx on OpenShift 4.2
+
+{{< youtube TV6WAUqdzFI >}}

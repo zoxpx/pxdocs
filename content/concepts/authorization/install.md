@@ -60,3 +60,9 @@ A few steps must be taken to upgrade a cluster from non-auth to auth:
     ```
     
 3. Ensure that all nodes are configured as auth-enabled. Mixed clusters of auth and non-auth nodes will allow for security vulnerabilities.
+
+## Related videos 
+
+### Use OpenID Connect with roles and groups to authorize users
+
+{{< youtube  F9LVUWTeqBE >}}
