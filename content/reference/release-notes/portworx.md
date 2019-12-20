@@ -72,6 +72,19 @@ The following issues have been fixed:
 |PWX-10239| Entering the `pxctl service drive add -o status` command with a `--spec` flag included causes Portworx to incorrectly add drives. <br/><br/>**User Impact:** Users entering a status command with the conflicting `--spec` flag can erroneously add new drives. <br/><br/> **Resolution:** With 2.3, Portworx no longer accepts these malformed commands as drive add operations. |
 |PSP-1978| Portworx occasionally causes a read/write operation to wait indefinitely on workloads with a large number of overlapping writes. <br/><br/> **User Impact:** Impacted volumes enter a read-only state or become unresponsive. |
 
+## 2.2.0.5
+
+December 19, 2019
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10657 | The etcdv3 client Portworx uses currently contains the following critical bug: https://github.com/etcd-io/etcd/pull/10911. When connected to a secure etcd cluster, if the first endpoint goes offline, the etcd client does not failover and fails to create a new connection. <br/><br/>**User Impact:** Portworx restarts and does not reconnect to the etcd cluster. <br/><br/>**Resolution:** After restarting, Portworx now reshuffles the list of endpoints so that the etcd client reconnects to the cluster. |
+| PWX-10456 | Portworx Inc. currently packages filesystem dependencies required for Linux kernels into an archive in the Portworx container. Under this current scheme, Portworx does not contain new versions of Linux kernels released after it in the archive. <br/><br/>**User Impact:** Portworx fails to install on clusters using newer versions of RHEL 8 kernels. <br/><br/>**Resolution:** During installation, Portworx now checks mirrors.portworx.com for the latest filesystem dependencies required for running Linux kernels if it cannot find them locally. |
+
 ## 2.2.0.4
 
 December 12, 2019
@@ -453,7 +466,7 @@ April 19, 2019
 * PWX-8064 - Reducing the HA level of an aggregated volume may cause any active cloud backups on the volume to fail. New cloud backup can be restarted once the HA level has been reduced on the volume
 * PWX-8261 - Startup issue with Debian 9 (4.19.0-0.bpo.2-cloud-amd64)
 * PWX-8297 - K8S: OCI-Mon must force-pull px-enterprise b4 reinstalling incomplete Portworx
-* PWX-8311 - IKS: OCI Monitor not starting PX when both Docker and ContainerD services running
+* PWX-8311 - IKS: OCI Monitor not starting Portworx when both Docker and ContainerD services running
 * PWX-8334 - Fixed install progress-bar
 * PWX-8335 - Handle mpath device partitions in nodewipe
 * PWX-8403 - Error when trying to mount a sharedv4 volume with encryption. The first pod comes up okay, but second and subsequent pods mount results in failure
