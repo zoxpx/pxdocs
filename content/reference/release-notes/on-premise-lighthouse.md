@@ -7,6 +7,19 @@ series: release-notes
 weight: 300
 ---
 
+## Lighthouse 2.0.6 Release notes
+
+### Key Fixes
+
+* LD-507 - Swapped from using nodelabels to using the Kubernetes constant value for a master node to determine what node we should contact for cluster information. Previously, nodes could not have master labels and that would cause Lighthouse to fail the /config call.
+* LD-503 - Addressed security vulnerabilities found during scanning.
+
+## Lighthouse 2.0.5 Release notes
+
+### Key Fixes
+
+* LD-435 - Lighthouse indicates when a drive is a cache drive
+
 ## Lighthouse 2.0.4 Release notes
 
 ### Key Fixes
