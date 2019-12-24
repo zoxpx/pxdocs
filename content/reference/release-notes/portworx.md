@@ -6,6 +6,41 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.3.2
+
+December 18, 2019
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Number**|**Improvement Description**|
+|----|----|
+| PWX-10095 | Portworx now restricts access to SharedV4 volumes to nodes requesting a mount on that volume. |
+| PWX-10499 | The `storage pool expansion` operation now supports the `auto` option. |
+| PWX-10570 | Portworx now accepts the `VAULT_BACKEND` input argument. When `VAULT_BACKEND` is provided, Portworx uses that version of Vault Backend instead of querying Vault's `sys/mounts/*` directory to fetch all the backends. |
+| PWX-10535 | If a SharedV4 Portworx volume must be accessed over NFS outside the Portworx cluster, set the label "allow_all_ips=true" on the volume. This will export the volume on 0.0.0.0/0.0.0.0, which allows you to mount this volume on any node accessible in the network. |
+| PWX-10380 | SharedV4 volumes are now enabled when SELinux is enabled on Portworx nodes. If you expect SELinux labels to be propagated from an NFS client to a server, set the `ExportOptions` on a volume to `security_label`. You can use the following command to update the volume option: `pxctl volume update --export_options security_label <vol-name>` |
+| PWX-10690 | Portworx now uses hourly usage billing. At end of billing cycle, customers are charged by the number of hours Portworx ran rather than the maximum number of nodes used in a given billing cycle. |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10366 | Portworx did not delete node region or zone values when instructed. <br/><br/>**User Impact:** Portworx continued to show deleted node and region zone labels after users deleted them. This issue persisted over restarts. <br/><br/>**Resolution:** Portworx now properly deletes these labels and replaces them with the `default` value. |
+| PWX-10381 | Portworx enabled a license feature intended only for cloud deployments in on-prem clusters. <br/><br/>**User Impact:** This feature transferred licenses of offline storageless nodes to available nodes when running on an on-prem cluster. <br/><br/> **Resolution:** Portworx now only enables this feature when deployed in cloud environments. |
+| PWX-10468 | On nodes which were also volume servers and had attached SharedV4 volumes, Portworx did not restart application pods when it entered maintenance mode or was decommissioned. <br/><br/>**User Impact:** Users experienced I/O errors caused by missing application pods. <br/><br/>**Resolution:**  Portworx nodes now delete the application pods to recover the application. |
+| PWX-10575 | On AKS clusters with VM scale sets, if a Portworx node with cloud drives failed to bootstrap, detach operations also failed.<br/><br/>**User Impact:** Cloud drives remained attached to non-existent Portworx nodes.<br/><br/>**Resolution:** Portworx now properly detaches cloud drives if it fails to bootstrap a node. |
+| PWX-10525 | Portworx frequently queried etcd to retrieve the storage spec and check storage pool status and pending drive operations. <br/><br/>**User Impact:** These frequent queries placed an unnecessary load on etcd, resulting in higher than expected resource usage. <br/><br/>**Resolution:** This fix limits the periodic calls and makes them only when necessary: on a version update. |
+| PWX-10455 | A failure during a volume create operation can result in a partially formatted volume. A subsequent attach on this volume will retry the formatting operation. In the case of xfs volumes, this formatting operation can fail if the new operation finds an xfs signature on the volume from the previous incomplete operation. <br/><br/>**User Impact:** Partially formatted xfs volumes could not be attached.<br/><br/>**Resolution:** Portworx now uses the force flag when retrying the format operation. |
+| PWX-10657 | The etcdv3 client Portworx uses currently contains the following critical bug: https://github.com/etcd-io/etcd/pull/10911. When connected to a secure etcd cluster, if the first endpoint goes offline, the etcd client does not failover and fails to create a new connection. <br/><br/>**User Impact:** Portworx restarts and does not reconnect to the etcd cluster. <br/><br/>**Resolution:** After restarting, Portworx now reshuffles the list of endpoints so that the etcd client reconnects to the cluster. |
+| PWX-10701 | In the `pxctl cluster options update` command, Portworx did not use the configured value associated with the `SnapReservePercent` field for overcommit rules if no label selectors were specified. <br/><br/> **User Impact:** Users could not change from the default `SnapReservePercent` value. <br/><br/> **Resolution:** The `SnapReservePercent` value can now be properly configured. |
+| PWX-10685 | Portworx accepted invalid inputs to the `pxctl sv drive add --operation status` command. <br/><br/>**User Impact:** Users adding cloud drives were unable to see the status of their add operations.<br/><br/>**Resolution:** Portworx now allows only device paths in `pxctl service drive add --operation status` command. |
+| PWX-10632 | With the new BlueStore backend, Ceph no longer uses an ext4 formatted backend. As a result, Ceph doesn't mount the drives and Bluestore opens the devices without the `o_excl` flag.<br/><br/>**User Impact:** When installing with the `-a` option, Portworx saw the device as "not in use" and picked it up as its storage device. <br/><br/>**Resolution:** Portworx now uses additional filters based on the device name and on-disk signature to prevent this. |
+
+
 ## 2.3.1.2
 
 December 12, 2019
