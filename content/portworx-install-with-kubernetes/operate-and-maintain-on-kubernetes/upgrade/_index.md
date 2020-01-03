@@ -16,7 +16,8 @@ This guide describes the procedure to upgrade Portworx running as OCI container 
 To upgrade to the **2.3** release (the latest stable at the time of this writing), run the following command:
 
 ```text
-curl -fsL https://install.portworx.com/2.3/upgrade | bash -s
+PXVER='2.3'
+curl -fsL https://install.portworx.com/${PXVER}/upgrade | bash -s
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
@@ -32,11 +33,18 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.3?kbver=$KBVER&comp=stork"
+      PXVER='2.3'
+      curl -fsL -o stork-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=stork"
       ```
 
-      {{% content "portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/shared/private-or-custom-registry.md" %}}
 
+    If you are using your own private or custom registry for your container images, add `&reg=<your-registry-url>` to the URL. Example:
+
+      ```text
+      KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+      PXVER='2.3'
+      curl -fsL -o stork-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=stork&reg=artifactory.company.org:6555"
+      ```
 2. Next, apply the spec with:
 
       ```text
@@ -49,11 +57,17 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/2.3?kbver=$KBVER&comp=lighthouse"
+      PXVER='2.3'
+      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=lighthouse"
       ```
 
-      {{% content "portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/shared/private-or-custom-registry.md" %}}
+    If you are using your own private or custom registry for your container images, add `&reg=<your-registry-url>` to the URL. Example:
 
+    ```text
+    KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+    PXVER='2.3'
+    curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=lighthouse&reg=artifactory.company.org:6555"
+    ```
 2. Apply the spec by running:
 
       ```text
@@ -67,7 +81,8 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.0.3.4_ image.
 
 ```text
-curl -fsL https://install.portworx.com/2.3/upgrade | bash -s -- -t 2.0.3.4
+PXVER='2.3'
+curl -fsL https://install.portworx.com/${PXVER}/upgrade | bash -s -- -t 2.0.3.4
 ```
 
 ## Airgapped clusters
