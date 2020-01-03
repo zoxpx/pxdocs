@@ -12,7 +12,7 @@ weight: 2
 * **Secret Store** : Make sure you have configured a [secret store](/key-management) on both your clusters. This will be used to store the credentials for the objectstore.
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be reachable by the source cluster.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
 * **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
 
 ## Overview
@@ -67,7 +67,7 @@ spec:
   type: loadBalancer
 ```
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/cluster-pair.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-cluster-pair.md" %}}
 
 ```text
 apiVersion: stork.libopenstorage.org/v1alpha1
@@ -144,7 +144,7 @@ status:
   storageStatus: ""
 ```
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/schedule-policy.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-schedule-policy.md" %}}
 
 ### Scheduling a migration
 

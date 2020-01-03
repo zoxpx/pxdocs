@@ -102,13 +102,13 @@ Otherwise, follow [Step 2b: Push directly to nodes using tarball](#step-2b-push-
 
 #### Step 2a: Push to local registry server, accessible by air-gapped nodes
 
-{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-local-reg.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-local-reg.md" %}}
 
 Now that you have the images in your registry, continue with [Step 3: Start the upgrade](#step-3-start-the-upgrade).
 
 #### Step 2b: Push directly to nodes using tarball
 
-{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-nodes-tarball.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-nodes-tarball.md" %}}
 
 ### Step 3: Start the upgrade
 
