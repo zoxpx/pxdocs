@@ -12,6 +12,7 @@ Portworx provides a way to monitor your cluster using alerts. It has a predefine
 2. Nodes
 3. Disks
 4. Volumes
+5. Pools
 
 Each alert has a severity from one of the following levels:
 
@@ -98,3 +99,7 @@ Each alert has a severity from one of the following levels:
 74|ClusterDomainDeactivated|NOTIFY|CLUSTER|Triggered when a cluster domain is deactivated.
 75|MeteringAgentWarning|WARN|CLUSTER|Triggered when the metering agent encounters a non-critical problem.
 76|MeteringAgentCritical|ALARM|CLUSTER|Triggered when the metering agent encounters a critical problem.
+77|CloudsnapOperationWarning|WARN|VOLUME|Triggered when a cloud snap operation encounters a problem.|
+78|PoolExpandInProgress|NOTIFY|POOL|Triggered when a pool expand operation starts.|
+79|PoolExpandSuccessful|NOTIFY|POOL|Triggered when a pool expand operation succeeds.|
+80|PoolExpandFailed|ALARM|POOL|Triggered when a pool expand operation fails.|
