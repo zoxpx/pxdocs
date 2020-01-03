@@ -35,15 +35,15 @@ The installation and setup of Portworx OCI bundle is a 3-step process:
 
 ### Step 1: Install the Portworx OCI bundle
 
-{{% content "install-with-other/docker/shared/runc-install-bundle.md" %}}
+{{% content "shared/install-with-other-docker-shared-runc-install-bundle.md" %}}
 
 ### Step 2: Configure Portworx under runC
 
-{{% content "install-with-other/docker/shared/runc-configure-portworx.md" %}}
+{{% content "shared/install-with-other-docker-runc-configure-portworx.md" %}}
 
 ### Step 3: Starting Portworx runC
 
-{{% content "install-with-other/docker/shared/runc-enable-portworx.md" %}}
+{{% content "shared/install-with-other-docker-shared-runc-enable-portworx.md" %}}
 
 ## Upgrading the Portworx OCI bundle {#upgrading-the-px-oci-bundle}
 
