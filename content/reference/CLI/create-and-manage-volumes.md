@@ -332,7 +332,7 @@ The inline specs can be passed in through the scheduler application template. Fo
 
 ## Global Namespace (Shared Volumes)
 
-{{% content "concepts/shared/shared-volumes.md" %}}
+{{% content "shared/concepts-shared-volumes.md" %}}
 
 
 ### Related topics
