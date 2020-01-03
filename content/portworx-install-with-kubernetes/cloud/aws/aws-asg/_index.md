@@ -13,7 +13,7 @@ For more information on using Auto-Scaling groups, go [here](https://docs.aws.am
 
 ## Prepare
 
-{{% content "portworx-install-with-kubernetes/cloud/aws/shared/1-prepare.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" %}}
 
 ## Install
 
@@ -27,6 +27,6 @@ If generating the DaemonSet spec via the GUI wizard, specify the AWS environment
 
 {{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
 
-{{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
 
 {{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}

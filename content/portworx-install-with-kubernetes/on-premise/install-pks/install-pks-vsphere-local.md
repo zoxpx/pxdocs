@@ -36,7 +36,7 @@ On each ESXi host in the cluster, create a local datastore which is dedicated fo
 
 Once you have the spec, proceed below.
 
-{{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
 
 {{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
 
@@ -56,7 +56,7 @@ curl -fsL https://install.portworx.com/px-wipe | bash -s -- -T pks
 
 ### Secret for vSphere credentials
 
-{{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-secret.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-secret.md" %}}
 
 ### The Portworx spec
 

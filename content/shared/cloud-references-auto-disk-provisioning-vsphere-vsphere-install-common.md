@@ -32,7 +32,7 @@ If you create a custom role as above, make sure to select "Propagate to children
 
 ### Step 2: Create a Kubernetes secret with your vCenter user and password
 
-{{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-secret.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-secret.md" %}}
 
 ### Step 3: Generate rest of the specs
 

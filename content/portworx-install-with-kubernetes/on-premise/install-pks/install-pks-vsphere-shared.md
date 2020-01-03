@@ -13,7 +13,7 @@ disableprevnext: true
 
 ## Architecture
 
-{{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-shared-arch.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-shared-arch.md" %}}
 
 ## ESXi datastore preparation
 
@@ -21,7 +21,7 @@ Create one or more shared datastore(s) or datastore cluster(s) which is dedicate
 
 ## Portworx installation
 
-{{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-install-common.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-install-common.md" %}}
 
 #### Generating the spec if using secure etcd
 

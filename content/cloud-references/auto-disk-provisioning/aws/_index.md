@@ -13,7 +13,7 @@ Below guide explains how Portworx dynamic disk provisioning works on AWS and the
 
 ## AWS Requirements
 
-{{% content "portworx-install-with-kubernetes/cloud/aws/shared/1-prepare.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" %}}
 
 ## EBS volume template
 
@@ -61,9 +61,9 @@ Record the EBS volume ID (e.g. _vol-04e2283f1925ec9ee_), this will be passed in 
 
 ### Limiting storage nodes
 
-{{% content "cloud-references/auto-disk-provisioning/shared/asg-limit-storage-nodes.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-asg-limit-storage-nodes.md" %}}
 
-{{% content "cloud-references/auto-disk-provisioning/shared/asg-examples-aws.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-asg-examples-aws.md" %}}
 
 ## EC2 Instance types
 A Portworx cluster can be deployed with a heterogeneous makeup of EC2 instance types.  Some of your nodes can be used for converged compute and storage, some for compute only and some for storage only.
