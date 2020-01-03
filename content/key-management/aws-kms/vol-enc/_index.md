@@ -8,7 +8,7 @@ series: aws-secret-uses
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 ## Creating and using encrypted volumes
 
