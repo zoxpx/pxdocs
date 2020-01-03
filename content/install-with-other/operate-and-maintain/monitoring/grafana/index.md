@@ -28,7 +28,7 @@ This document presents the **non-Kubernetes** method of monitoring your Portworx
 
       ![Grafana data store File](/img/grafana_datastore.png "Grafana data store File")
 
-4. Import the Portworx provided [Cluster](https://github.com/portworx/pxdocs/blob/master/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Cluster_Dashboard_Jan_2019_No_AM.json), [Volume](https://github.com/portworx/pxdocs/blob/master/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Volume_Dashboard_Sep_2018.json ), and [Node](https://github.com/portworx/pxdocs/blob/master/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Node_Dashboard_Sep_2018_No_AM.json ) Grafana templates: From the dropdown on left in your Grafana dashboard, select **Dashboards** followed by **Import**, and add the cluster, volume, and node templates.
+4. Import the Portworx provided [Cluster](/samples/non-k8s/grafana/Portworx_Cluster_Dashboard_Jan_2019_No_AM.json), [Volume](/samples/non-k8s/grafana/Portworx_Volume_Dashboard_Sep_2018.json), and [Node](/samples/non-k8s/grafana/Portworx_Node_Dashboard_Sep_2018_No_AM.json ) Grafana templates: From the dropdown on left in your Grafana dashboard, select **Dashboards** followed by **Import**, and add the cluster, volume, and node templates.
 
       Once added, you can view your dashboards:
 
@@ -38,10 +38,12 @@ This document presents the **non-Kubernetes** method of monitoring your Portworx
 
       ![Grafana Node Status File](/img/grafanaVolumeStatus.png "Grafana Volume Status File")
 
-<!-- are these the same as what's linked through GitHub above? If so, we should probably just show them using one method or the other.
+<!--
+are these the same as what's linked through GitHub above? If so, we should probably just show them using one method or the other.
+[Andrei, 2019-12-17]: Don't know but I'm moving them under the `static` folder
 ## Cluster Template for Grafana
-Use [this template](Cluster_Template.json) to display Portworx cluster details in Grafana
+Use [this template](/samples/non-k8s/grafana/Cluster_Template.json) to display Portworx cluster details in Grafana
 
 ## Volume Template for Grafana
-Use [this template](Volume_Template.json) to display Portworx volume details in Grafana
+Use [this template](/samples/non-k8s/grafana/Volume_Template.json) to display Portworx volume details in Grafana
 -->

@@ -43,14 +43,14 @@ alerting:
       - "alert-manager-ip:9093"
 ```
 
-This file can be downloaded from [prometheus.yml](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/prometheus.yml)
+This file can be downloaded from [prometheus.yml](/samples/non-k8s/prometheus/prometheus.yml)
 
 Note: 'alert-manager-ip' is the IP address of the node where AlertManager is running. It is configured in the later steps.
 
 ### Prometheus alerts rules file
 
-Copy [px.rules](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/px.rules) file, and save it as ${PROMETHEUS_CONF}/px.rules.
-For Prometheus v2.0.0 and above, rules file is available [here](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/px.rules.yml).
+Copy [px.rules](/samples/non-k8s/prometheus/px.rules) file, and save it as ${PROMETHEUS_CONF}/px.rules.
+For Prometheus v2.0.0 and above, rules file is available [here](/samples/non-k8s/prometheus/px.rules.yml).
 
 ### Run Prometheus
 
@@ -105,7 +105,7 @@ receivers:
     auth_password: "<sender-email-password>"
 ```
 
-This file can be downloaded from [config.yml](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/config.yml)
+This file can be downloaded from [config.yml](/samples/non-k8s/prometheus/config.yml)
 
 ### Run AlertManager
 
