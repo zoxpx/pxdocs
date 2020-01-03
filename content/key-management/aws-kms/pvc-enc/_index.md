@@ -9,7 +9,7 @@ series2: k8s-pvc-enc
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 ### Encryption using per volume secrets
 
@@ -22,7 +22,7 @@ This is the recommended method for encrypting volumes when you want to take a cl
 
 #### Step 1: Create a Storage Class
 
-{{% content "key-management/shared/enc-storage-class-spec.md" %}}
+{{% content "shared/key-management-enc-storage-class-spec.md" %}}
 
 #### Step 2: Create a Persistent Volume Claim
 
@@ -76,7 +76,7 @@ Note the `px/secure: "true"` annotation on the PVC object.
 
 #### Step 2: Create a Storage Class
 
-{{% content "key-management/shared/enc-storage-class-spec.md" %}}
+{{% content "shared/key-management-enc-storage-class-spec.md" %}}
 
 #### Step 3: Create a Persistent Volume Claim
 

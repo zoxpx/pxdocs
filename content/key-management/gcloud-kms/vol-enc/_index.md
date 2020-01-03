@@ -8,7 +8,7 @@ series: gcloud-secret-uses
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 ## Creating and using encrypted volumes
 
@@ -43,7 +43,7 @@ secret name as `default` will use this cluster wide secret as a passphrase to en
 
 #### Step1: Create a cluster wide secret
 
-{{% content "key-management/shared/set-cluster-wide-passphrase.md" %}}
+{{% content "shared/key-management-set-cluster-wide-passphrase.md" %}}
 
 #### Step2: Use the cluster wide secret for encrypting volumes
 
@@ -68,7 +68,7 @@ docker run --rm -it -v secure=true,secret_key=default,name=enc_vol:/mnt busybox
 Note the `secret_key` is set to the value `default` to indicate Portworx to use the cluster-wide secret key
 
 {{<info>}}
-{{% content  "key-management/shared/shared-secret-warning-note.md" %}}
+{{% content  "shared/key-management-shared-secret-warning-note.md" %}}
 {{</info>}}
 
 ### Using named secrets
@@ -98,5 +98,5 @@ docker run --rm -it -v secure=true,secret_key=mysecret,name=enc_vol:/mnt busybox
 ```
 
 {{<info>}}
-{{% content  "key-management/shared/shared-secret-warning-note.md" %}}
+{{% content  "shared/key-management-shared-secret-warning-note.md" %}}
 {{</info>}}

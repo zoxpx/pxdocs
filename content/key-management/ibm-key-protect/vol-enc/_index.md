@@ -8,7 +8,7 @@ series: ibm-key-protect-uses
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 ## Creating and using encrypted volumes
 
@@ -70,5 +70,5 @@ docker run --rm -it -v secure=true,secret_key=default,name=enc_vol:/mnt busybox
 Note the `secret_key` is set to the value `default` to indicate Portworx to use the cluster-wide secret key
 
 {{<info>}}
-{{% content  "key-management/shared/shared-secret-warning-note.md" %}}
+{{% content  "shared/key-management-shared-secret-warning-note.md" %}}
 {{</info>}}

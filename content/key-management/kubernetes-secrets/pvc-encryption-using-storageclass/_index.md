@@ -9,7 +9,7 @@ series2: k8s-pvc-enc
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 Using a StorageClass parameter, you can tell Portworx to encrypt all PVCs created using that StorageClass. Portworx uses a cluster wide secret to encrypt all the volumes created using the secure StorageClass.
 
@@ -33,4 +33,4 @@ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl secrets set-cluster-ke
   --secret cluster-wide-secret-key
 ```
 
-{{% content "key-management/shared/storage-class-encryption.md" %}}
+{{% content "shared/key-management-storage-class-encryption.md" %}}

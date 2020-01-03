@@ -8,7 +8,7 @@ series: vault-secret-uses
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 
 ## Creating and using encrypted volumes
@@ -17,15 +17,15 @@ There are two ways in which Portworx volumes can be encrypted and are dependent 
 
 ### Using per volume secret keys
 
-{{% content "key-management/shared/per-volume-secret.md" %}}
+{{% content "shared/key-management-per-volume-secret.md" %}}
 
 __Important: Make sure secret `key1` exists in Vault__
 
 ### Using cluster wide secret key
 
 
-{{% content "key-management/shared/set-cluster-wide-secret.md" %}}
+{{% content "shared/key-management-set-cluster-wide-secret.md" %}}
 
-{{% content "key-management/shared/volume-cluster-wide-secret.md" %}}
+{{% content "shared/key-management-volume-cluster-wide-secret.md" %}}
 
 __Important: Make sure the cluster wide secret key is set when you are setting up Portworx with Vault__
