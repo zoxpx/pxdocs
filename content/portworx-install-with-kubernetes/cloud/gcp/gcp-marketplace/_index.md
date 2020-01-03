@@ -10,7 +10,7 @@ series: px-k8s-gcp
 
 ## Prerequisites
 
-{{% content "portworx-install-with-kubernetes/cloud/gcp/shared/prerequisites.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-cloud-gcp-prerequisites.md" %}}
 
 ## Permissions
 
@@ -93,7 +93,7 @@ NS=<namespace_where_you_installed_portworx>
 kubectl apply -n $NS license.yaml
 ```
 
-{{% content "portworx-install-with-kubernetes/cloud/gcp/shared/install-gke.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-cloud-gcp-install-gke.md" %}}
 
 ### Edit the Portworx DaemonSet
 

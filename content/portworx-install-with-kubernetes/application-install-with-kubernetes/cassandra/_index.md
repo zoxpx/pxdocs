@@ -627,4 +627,4 @@ For further reading on Cassandra:
 * [Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)
 * [Cassandra stress test with Portworx](/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra)
 
-{{% content "portworx-install-with-kubernetes/application-install-with-kubernetes/shared/discussion-forum.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}

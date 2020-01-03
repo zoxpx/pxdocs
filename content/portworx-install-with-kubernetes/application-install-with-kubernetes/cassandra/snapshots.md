@@ -18,4 +18,4 @@ It is recommended to use 3DSnaps for cassandra as they are application-consisten
 * [3DSnaps overview](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d)
 * [Cassandra example for 3DSnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d/#cassandra)
 
-{{% content "portworx-install-with-kubernetes/application-install-with-kubernetes/shared/discussion-forum.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}
