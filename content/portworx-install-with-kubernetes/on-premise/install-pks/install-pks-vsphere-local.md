@@ -38,7 +38,7 @@ Once you have the spec, proceed below.
 
 {{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
 
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
 
 ## Wipe Portworx installation
 

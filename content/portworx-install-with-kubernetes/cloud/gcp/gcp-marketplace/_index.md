@@ -111,7 +111,7 @@ REPORTING_SECRET: Name of the secret generated above
 REPORTING_SECRET_NAMESPACE: Namespace where you installed Portworx
 ```
 
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
 
 ## Upgrade
 

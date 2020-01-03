@@ -99,4 +99,4 @@ kubectl create clusterrolebinding myname-cluster-admin-binding \
 
 {{% content "portworx-install-with-kubernetes/cloud/gcp/shared/install-gke.md" %}}
 
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
