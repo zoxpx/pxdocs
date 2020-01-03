@@ -63,9 +63,10 @@ Consider the key sections in this spec.
 
 The `selector` determines what objects are acted on by the Autopilot rule by looking for PVCs with the `app: postgres` label. Similarly, the `namespaceSelector` filters PVCs by namespaces and only includes PVCs from namespaces that contain the `type: db` label. Hence, this rule applies only to PVCs running Postgres in the DB namespaces.
 
-The `conditions` section establishes threshold criteria dictating when the rule must perform its action. In this example, that criteria contains the following formula:
 
-* `100 * (px_volume_usage_bytes / px_volume_capacity_bytes)` gives the volume usage percentage and the `Gt` operator puts a condition that volume usage percentage has exceeded 50%.
+The `conditions` section determines the threshold criteria dictating when the rule has to perform its action. In this example, that criteria has the following formula:
+
+`100 * (px_volume_usage_bytes / px_volume_capacity_bytes)` gives the volume usage percentage and the `Gt` operator puts a condition that volume usage percentage has exceeded 50%.
 
 Conditions are combined using AND logic, requiring all conditions to be true for the rule to trigger.
 
