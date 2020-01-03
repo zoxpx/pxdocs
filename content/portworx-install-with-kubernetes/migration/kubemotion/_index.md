@@ -23,7 +23,7 @@ release. As future releases are made, the two clusters can have different PX-Ent
 * **Stork v2.0+** is required on the source cluster.
 
 * **Stork helper** : `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
 
 
 * **Secret Store** : Make sure you have configured a [secret store](/key-management) on both clusters. This will be used to store the credentials for the objectstore.
@@ -31,7 +31,7 @@ release. As future releases are made, the two clusters can have different PX-Ent
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be
 reachable by the source cluster.
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/cluster-pair.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-cluster-pair.md" %}}
 
 ```text
 apiVersion: stork.libopenstorage.org/v1alpha1
@@ -322,4 +322,4 @@ NAME            CLUSTERPAIR     STAGE     STATUS       VOLUMES   RESOURCES   CRE
 mysqlmigration  remotecluster   Final     Successful   1/1       3/3         26 Oct 18 20:04 UTC
 ```
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/migration-common.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-migration-common.md" %}}

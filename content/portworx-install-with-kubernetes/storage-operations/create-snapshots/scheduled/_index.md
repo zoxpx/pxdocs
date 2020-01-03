@@ -18,7 +18,7 @@ Stork version 2.2 or above is required.
 
 ### Storkctl
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
 
 ## Creating a schedule policy
 

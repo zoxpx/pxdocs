@@ -12,7 +12,7 @@ For reference,
 * **Source Cluster** is the Kubernetes cluster where your applications are running
 * **Destination Cluster** is the Kubernetes cluster where the applications will be failed over, in case of a disaster in the source cluster.
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/schedule-policy.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-schedule-policy.md" %}}
 
 ### Scheduling a migration
 

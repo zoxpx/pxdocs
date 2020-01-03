@@ -15,7 +15,7 @@ The goal of this document is to setup a single Portworx cluster that spans acros
 * **External Kvdb**: A kvdb like etcd or consul setup outside of the Kubernetes clusters.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
 * **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
 
 ## Installing Portworx 
 In this mode of operation, a single Portworx cluster will stretch across multiple Kubernetes clusters.
