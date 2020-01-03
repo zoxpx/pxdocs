@@ -23,7 +23,7 @@ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
 
 #### Command-line arguments
 
-{{% content "install-with-other/docker/shared/cmdargs.md" %}}
+{{% content "shared/install-with-other-docker-cmdargs.md" %}}
 
 #### Examples
 
@@ -43,4 +43,4 @@ px-runc install -k consul://70.0.2.65:8500 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s
 
 #### Modifying the Portworx configuration
 
-After the initial installation, you can modify the Portworx configuration file at `/etc/pwx/config.json` (see [details](/install-with-other/docker/shared/config-json)) and restart Portworx using `systemctl restart portworx`.
+After the initial installation, you can modify the Portworx configuration file at `/etc/pwx/config.json` (see [details](/shared/install-with-other-docker-config-json)) and restart Portworx using `systemctl restart portworx`.

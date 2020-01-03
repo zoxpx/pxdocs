@@ -48,17 +48,17 @@ On each swarm node, perform the following steps to install Portworx.
 
 ### Step 1: Install the Portworx OCI bundle
 
-{{% content "install-with-other/docker/shared/runc-install-bundle.md" %}}
+{{% content "shared/install-with-other-docker-shared-runc-install-bundle.md" %}}
 
 ### Step 2: Configure Portworx under runC
 
 {{<info>}}Specifiy `-x swarm` in the px-runc install command below to select Docker Swarm as your scheduler.{{</info>}}
 
-{{% content "install-with-other/docker/shared/runc-configure-portworx.md" %}}
+{{% content "shared/install-with-other-docker-runc-configure-portworx.md" %}}
 
 ### Step 3: Starting Portworx runC
 
-{{% content "install-with-other/docker/shared/runc-enable-portworx.md" %}}
+{{% content "shared/install-with-other-docker-shared-runc-enable-portworx.md" %}}
 
 
 ### Adding Nodes

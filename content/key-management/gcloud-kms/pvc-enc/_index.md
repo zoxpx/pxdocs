@@ -89,9 +89,9 @@ spec:
 
 ```
 
-{{% content "key-management/aws-kms/shared/px-secret-name-default.md" %}}
+{{% content "shared/key-management-aws-kms-px-secret-name-default.md" %}}
 
-{{% content "key-management/aws-kms/shared/secure-flag.md" %}}
+{{% content "shared/key-management-aws-kms-shared-secure-flag.md" %}}
 
 {{<info>}}
 {{% content  "shared/key-management-shared-secret-warning-note.md" %}}
@@ -129,13 +129,13 @@ spec:
 
 ```
 
-{{% content "key-management/aws-kms/shared/px-secret-name-mysecret.md" %}}
+{{% content "shared/key-management-aws-kms-shared-px-secret-name-mysecret.md" %}}
 
 {{<info>}}
 A single named secret can be used for encrypting multiple volumes.
 {{</info>}}
 
-{{% content "key-management/aws-kms/shared/secure-flag.md" %}}
+{{% content "shared/key-management-aws-kms-shared-secure-flag.md" %}}
 
 {{<info>}}
 {{% content  "shared/key-management-shared-secret-warning-note.md" %}}

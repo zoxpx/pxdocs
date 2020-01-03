@@ -20,5 +20,5 @@ Again, existing volumes created with cluster wide, will still work without provi
 
 
 {{<info>}}
-{{% content "key-management/aws-kms/shared/warning-note.md" %}}
+{{% content "shared/key-management-aws-kms-warning-note.md" %}}
 {{</info>}}
