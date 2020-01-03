@@ -9,11 +9,11 @@ series2: k8s-pvc-enc
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 ### Encryption using per volume secrets
 
-{{% content "key-management/aws-kms/shared/unique-passphrase.md" %}}
+{{% content "shared/key-management-aws-kms-unique-passphrase.md" %}}
 
 
 {{<info>}}
@@ -22,7 +22,7 @@ This is the recommended method for encrypting volumes when you want to take a cl
 
 #### Step 1: Create a Storage Class
 
-{{% content "key-management/shared/enc-storage-class-spec.md" %}}
+{{% content "shared/key-management-enc-storage-class-spec.md" %}}
 
 #### Step 2: Create a Persistent Volume Claim
 
@@ -67,16 +67,16 @@ Note the `px/secure: "true"` annotation on the PVC object.
 ### Encryption using named secrets
 
 {{<info>}}
-{{% content "key-management/aws-kms/shared/warning-note.md" %}}
+{{% content "shared/key-management-aws-kms-warning-note.md" %}}
 {{</info>}}
 
 #### Step 1: Creating Named Secrets {#creating-named-secrets}
 
-{{% content "key-management/aws-kms/shared/named-secrets.md" %}}
+{{% content "shared/key-management-aws-kms-named-secrets.md" %}}
 
 #### Step 2: Create a Storage Class
 
-{{% content "key-management/shared/enc-storage-class-spec.md" %}}
+{{% content "shared/key-management-enc-storage-class-spec.md" %}}
 
 #### Step 3: Create a Persistent Volume Claim
 
@@ -100,7 +100,7 @@ spec:
 
 ```
 
-{{% content "key-management/aws-kms/shared/px-secret-name-mysecret.md" %}}
+{{% content "shared/key-management-aws-kms-shared-px-secret-name-mysecret.md" %}}
 
 {{<info>}}
 A single named secret can be used for encrypting multiple volumes.
@@ -108,4 +108,4 @@ A single named secret can be used for encrypting multiple volumes.
 
 ### Encryption using cluster wide secret
 
-{{% content "key-management/aws-kms/shared/cluster-wide-intro.md" %}}
+{{% content "shared/key-management-aws-kms-cluster-wide-intro.md" %}}

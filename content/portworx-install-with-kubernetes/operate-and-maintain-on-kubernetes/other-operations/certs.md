@@ -21,7 +21,7 @@ kubectl -n kube-system create secret generic objectstore-cert --from-file=/opt/c
 kubectl -n kube-system describe secret objectstore-cert
 ```
 
- * Update the Portworx daemonset to add the mount secret and the environment variable:
+ * Update the Portworx DaemonSet to add the mount secret and the environment variable:
 
 ```text
 kubectl -n kube-system edit ds portworx

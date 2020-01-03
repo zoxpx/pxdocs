@@ -9,11 +9,15 @@ noicon: true
 hidden: true
 ---
 
-This section shows how to install _Portworx_ using a Nomad job.
+{{<info>}}
+This document presents the **Nomad** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
+
+This section shows how to install Portworx using a Nomad job.
 
 ## Prerequisites
 
-_Portworx_ OCI-monitor container needs to run in privileged mode, so you need to configure your Nomad clients to allow docker containers running on privileged mode.
+Portworx OCI-monitor container needs to run in privileged mode, so you need to configure your Nomad clients to allow docker containers running on privileged mode.
 
 Add the following lines in your Nomad client configuration files and restart your clients:
 
@@ -23,7 +27,7 @@ options {
 }
 ```
 
-## Install Portworx
+## Install Portworx 
 
 ### Create a Nomad job file
 
@@ -131,34 +135,34 @@ job "portworx" {
 }
 ```
 
-Note that our example installs _Portworx_ on a Nomad cluster with 3 clients.
+Note that our example installs Portworx on a Nomad cluster with 3 clients.
 
 Don't forget to update:
 
 - the `datacenters` on the file above to fit your environment,
-- the `count` to specify the number of nomad nodes you want _Portworx_ to be installed on and
+- the `count` to specify the number of nomad nodes you want Portworx to be installed on and
 - any constraints you may have.
 
 Also, you can update the arguments as well. Here are the valid arguments you can use:
 
 ```text
--c                        [REQUIRED] Specifies the cluster ID that this PX instance is to join
+-c                        [REQUIRED] Specifies the cluster ID that this Portworx instance will join
 -k                        [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
--s                        [REQUIRED unless -a is used] Specifies the various drives that PX should use for storing the data
+-s                        [REQUIRED unless -a is used] Specifies the various drives that Portworx should use for storing the data
 -e key=value              [OPTIONAL] Specify extra environment variables
 -v <dir:dir[:shared,ro]>  [OPTIONAL] Specify extra mounts
 -d <ethX>                 [OPTIONAL] Specify the data network interface
 -m <ethX>                 [OPTIONAL] Specify the management network interface
--z                        [OPTIONAL] Instructs PX to run in zero storage mode
--f                        [OPTIONAL] Instructs PX to use an unmounted drive even if it has a filesystem on it
--a                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives
--A                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
--j                        [OPTIONAL] Specifies a journal device for PX.  Specify a persistent drive like /dev/sdc or use auto (recommended)
+-z                        [OPTIONAL] Instructs Portworx to run in zero storage mode
+-f                        [OPTIONAL] Instructs Portworx to use an unmounted drive even if it has a filesystem on it
+-a                        [OPTIONAL] Instructs Portworx to use any available, unused and unmounted drives
+-A                        [OPTIONAL] Instructs Portworx to use any available, unused and unmounted drives or partitions
+-j                        [OPTIONAL] Specifies a journal device for Portworx.  Specify a persistent drive like /dev/sdc or use auto (recommended)
 -x <swarm|kubernetes>     [OPTIONAL] Specify scheduler being used in the environment
--r <portnumber>           [OPTIONAL] Specifies the portnumber from which PX will start consuming. Ex: 9001 means 9001-9020
+-r <portnumber>           [OPTIONAL] Specifies the portnumber from which Portworx will start consuming. Ex: 9001 means 9001-9020
 ```
 
-## Deploy Portworx
+## Deploy Portworx 
 
 Next, let's deploy `portworx.nomad` by running:
 
@@ -205,7 +209,7 @@ ID        Node ID   Task Group  Version  Desired  Status   Created   Modified
 c44ee856  6138409d  portworx    0        run      running  2m9s ago  10s ago
 ```
 
-You can also follow the logs to wait for _Portworx_ to be ready.
+You can also follow the logs to wait for Portworx to be ready.
 
 In the example below, I am using the first allocation ID, i.e. 20a20fd0:
 
@@ -253,6 +257,6 @@ Global Storage Pool
 
 ## Post-Install
 
-Once you have successfully installed _Portworx_ using a Nomad job, below sections are useful.
+Once you have successfully installed Portworx using a Nomad job, below sections are useful.
 
 {{<homelist series2="px-postinstall-nomad-job">}}

@@ -6,4 +6,4 @@ weight: 4
 series: k8s-op-maintain
 ---
 
-This topic explains how to install monitor Portworx on Kubernetes.
+This topic explains how to monitor Portworx on Kubernetes.

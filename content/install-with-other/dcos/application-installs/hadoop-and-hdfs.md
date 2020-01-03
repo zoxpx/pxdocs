@@ -5,7 +5,7 @@ description: Find out how to install and run Hadoop on Portworx with DCOS. Use P
 keywords: portworx, PX-Developer, Hadoop, HDFS, container, Mesos, Mesosphere, Marathon, storage, DCOS
 ---
 
-This guide will help you to install the Hadoop service on your DCOS cluster backed by PX volumes for persistent storage. It will create 3 Journal Nodes, 2 Name Nodes, 2 Nodes for the Zookeeper Failover Controller, 3 Data Nodes and 3 Yarn Nodes. The Data and Yarn nodes will be co-located on the same physical host.
+This guide will help you to install the Hadoop service on your DCOS cluster backed by Portworx volumes for persistent storage. It will create 3 Journal Nodes, 2 Name Nodes, 2 Nodes for the Zookeeper Failover Controller, 3 Data Nodes and 3 Yarn Nodes. The Data and Yarn nodes will be co-located on the same physical host.
 
 The number of Data and Yarn nodes can be set during install. They can also be updated after install to scale the service.
 
@@ -13,12 +13,12 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 
 {{<info>}}
 **Note:**
-This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+This framework is only supported directly by Portworx, Inc.. Please contact support@portworx.com directly for any support issues related with using this framework.
 {{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
 
-The Portworx-hadoop service can be found in the DC/OS catalog:
+The Portworx-Hadoop service can be found in the DC/OS catalog:
 
 ![Hadoop-PX in DCOS Universe](/img/dcos-hadoop-px-universe.png)
 

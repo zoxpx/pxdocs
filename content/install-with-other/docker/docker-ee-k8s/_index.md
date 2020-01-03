@@ -91,10 +91,10 @@ Now use kubectl to get nodes.
 kubectl get nodes -o wide
 ```
 
-## Install PX
+## Install Portworx 
 
-{{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-shared-1-generate-the-spec-footer.md" %}}
 
-{{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
 
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}

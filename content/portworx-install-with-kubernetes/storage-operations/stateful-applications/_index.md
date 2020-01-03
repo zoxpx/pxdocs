@@ -4,6 +4,7 @@ linkTitle: Stateful applications operations
 keywords: backup, restore, clone, stateful
 description: Backup, restore, and clone stateful applications
 hidden: false
+weight: 1
 ---
 
 With Portworx, you can backup and restore stateful applications and their volumes to an external object store. Specifically, you can perform the following operations:
@@ -227,9 +228,50 @@ Use the applicationBackup CRD to specify what namespaces have their applications
 
 ### Create an ApplicationBackupSchedule CRD
 
-The ApplicationBackupSchedule CRD associates a SchedulePolicy with an application backup, allowing you to schedule when application backups are performed.
+The ApplicationBackupSchedule CRD associates a SchedulePolicy with an application backup operation, allowing you to schedule when and how application backups are performed.
 
-1. Create an ApplicationBackupSchedule YAML file, specifying the following:
+1. Create a SchedulePolicy YAML file, specifying the following:
+
+  * **name:** the SchedulePolicy object's name
+  * **policy:**
+      * **interval:** For interval backups, how frequently Portworx will back the application up
+          * **intervalMinutes:** The interval, in minutes, after which Portworx starts the application backup
+          * **retain:** How many backups Portworx will retain.
+      * **daily:** For daily backups, Portworx will start the backup at the specified time every day
+          * **time:**
+          * **retain:** How many backups Portworx will retain.
+      * **weekly:** For weekly backups, Portworx will start the backup at the specified day and time every week
+          * **day:** The backup day, specified by string
+          * **time:** The backup time, specified in 12 hour AM/PM format
+          * **retain:** How many backups Portworx will retain.
+      * **monthly:** for monthly backups, Portworx will start the backup at the specified day and time every month
+          * **date:** The backup day, specified as an integer
+          * **time:** the backup time, specified in 12 hour AM/PM format
+          * **retain:** How many backups Portworx will retain.
+
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: SchedulePolicy
+    metadata:
+      name: backupSchedule
+    policy:
+      interval:
+        intervalMinutes: 60
+        retain: 5
+      daily:
+        time: "10:14PM"
+        retain: 5
+      weekly:
+        day: "Thursday"
+        time: "10:13PM"
+        retain: 5
+      monthly:
+        date: 14
+        time: "8:05PM"
+        retain: 5
+    ```
+
+2. Create an ApplicationBackupSchedule YAML file, specifying the following:
 
   * **name:** the applicationBackupSchedule object's name
   * **namespace:** the namespace the applicationBackupSchedule exists in
@@ -259,15 +301,28 @@ The ApplicationBackupSchedule CRD associates a SchedulePolicy with an applicatio
 
 ## Restore an application
 
-You restore an application by applying an ApplicationRestore object.
+You can restore an application by applying an ApplicationRestore object.
+
+{{<info>}}
+**NOTE:** If you're restoring an application across namespaces on OpenShift, you must modify your destination namespace to include the same supplemental group annotation values as your source namespace:
+
+```text
+annotations:
+  openshift.io/sa.scc.supplemental-groups: 1001990000/10000
+  openshift.io/sa.scc.uid-range: 1001990000/10000
+```
+
+{{</info>}}
 
 1. Create an ApplicationRestore YAML file, specifying the following:
 
   * **name:** the ApplicationRestore object's name
   * **namespace:** the ApplicationRestore object's namespace
   * **spec:**
-      * **backupName:** the name of the `applicationBackup` object to restore from.
+      * **backupName:** the name of the `applicationBackup` object to restore from
       * **backupLocation:** which backup location object to get application backups from
+      * **namespaceMapping:** a map of source and destination namespaces, allowing you to restore a backup to a different namespace
+      * **replacePolicy:** specifies whether you want to delete or retain any matching existing resource in the target namespace
 
     ```text
     apiVersion: stork.libopenstorage.org/v1alpha1
@@ -278,6 +333,9 @@ You restore an application by applying an ApplicationRestore object.
     spec:
       backupName: backup
       backupLocation: mysql
+      namespaceMapping:
+        mysql: mysql
+      replacePolicy: Delete
     ```
 
     {{<info>}}
@@ -312,7 +370,21 @@ mysql-6d69b99774-2bv4m   0/1     Pending   0          3s
 
 ## Clone an Application
 
-You can clone an application to a different namespace, or within the same namespace. You must create the `ApplicationClone` object in the **admin** namespace, which is `kube-system` by default.
+You can clone an application to a different namespace or within the same namespace. You must create the `ApplicationClone` object in the **admin** namespace, which is `kube-system` by default.
+
+{{<info>}}
+**NOTE:**
+
+* If you're cloning an application across namespaces on OpenShift, you must modify your destination namespace to include the same supplemental group annotation values as your source namespace:
+
+    ```text
+    annotations:
+      openshift.io/sa.scc.supplemental-groups: 1001990000/10000
+      openshift.io/sa.scc.uid-range: 1001990000/10000
+    ```
+
+* Distributed apps, such as Cassandra, may use the same node IDs on the destination namespace as their source, causing disruption when the new nodes join the source cluster.
+{{</info>}}
 
 1. Create a an ApplicationClone YAML file, specifying the following:
 

@@ -9,10 +9,10 @@ series2: k8s-pvc-enc
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 {{<info>}}
-**NOTE:** Supported from PX Enterprise 1.4 onwards
+**NOTE:** Supported from PX-Enterprise 1.4 onwards
 {{</info>}}
 
 [Encryption at Storage Class level](/key-management/kubernetes-secrets/pvc-encryption-using-storageclass) does not allow using different secret keys for different PVCs. It also does not provide a way to disable encryption for certain PVCs that are using the same secure storage class. Encryption at PVC level will override the encryption options from Storage Class.

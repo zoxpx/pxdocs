@@ -2,7 +2,7 @@
 layout: page
 title: "Portworx install on PKS on vSphere"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
-meta-description: "Find out how to install PX in a PKS Kubernetes cluster on vSphere and have PX provide highly available volumes to any application deployed via Kubernetes."
+meta-description: "Find out how to install Portworx in a PKS Kubernetes cluster on vSphere and have Portworx provide highly available volumes to any application deployed via Kubernetes."
 hidden: true
 disableprevnext: true
 ---

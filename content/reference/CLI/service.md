@@ -2,7 +2,7 @@
 title: Service operations using pxctl
 linkTitle: Service
 keywords: portworx, pxctl, command-line tool, cli, reference
-description: How to use PX CLI service.
+description: How to use the pxctl service command.
 weight: 16
 ---
 
@@ -77,7 +77,7 @@ Call home feature successfully enabled
 
 ### pxctl service diags
 
-When there is an operational failure, you can use pxctl service diags &lt;name-of-px-container&gt; to generate a complete diagnostics package. This package will be automatically uploaded to Portworx if `--upload` is specified. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /var/cores/diags.tgz inside the PX container.
+When there is an operational failure, you can use pxctl service diags &lt;name-of-px-container&gt; to generate a complete diagnostics package. This package will be automatically sent to Portworx, Inc. if the flag `--upload` is specified. Additionally, the service package can be mailed to Portworx, Inc. at support@portworx.com. The package will be available at /var/cores/diags.tgz inside the Portworx container.
 
 ```text
 pxctl service diags --help
@@ -216,34 +216,41 @@ OPTIONS:
    --help, -h  show help
 ```
 
-You can add drives to a server using the `/opt/pwx/bin/pxctl service drive add` command. To do so the server must be in maintenance mode.
+You can add drives to a server using the `/opt/pwx/bin/pxctl service drive add` command.
 
 ```text
 pxctl service drive add --help
 ```
 
 ```output
-NAME:
-   pxctl service drive add - Add storage
+Add storage
 
-USAGE:
-   pxctl service drive add [arguments...]
+Usage:
+  pxctl service drive add [flags]
+
+Flags:
+      --journal            Use this drive as a journal device.
+      --metadata           Use this drive as a system metadata device.
+  -d, --drive string       comma-separated source drives
+  -s, --spec string        Cloud drive spec in type=<>,size=<> format
+  -o, --operation string   start|status (Valid Values: [start status]) (default "start")
+      --cache int          Use this drive as a cache device for given pool. (default -1)
+  -h, --help               help for add
 ```
 
 ```text
-pxctl service drive add /dev/mapper/volume-3bfa72dd
+pxctl service drive add /dev/mapper/volume-3bfa72dd -o start
 ```
 
 ```output
+Adding drives may make storage offline for the duration of the operation.
+Are you sure you want to proceed ? (Y/N): y
 Adding device  /dev/mapper/volume-3bfa72dd ...
-Drive add  successful. Requires restart (Exit maintenance mode).
+Drive add  successful. Requires restart.
 ```
+<!-- need to test this full operation to confirm the syntax -->
 
 To rebalance the storage across the drives, use pxctl service drive rebalance. This is useful after prolonged operation of a node.
-
-#### Related topics
-
-* [PX-Cache]()
 
 ### pxctl service drive show
 
@@ -394,6 +401,36 @@ Flags:
   -h, --help                 help for update
 ```
 
+#### Understand the --labels flag behavior
+
+The `--labels` flag allows you to add, remove, and update labels for your storage pools.
+
+##### Add a new label
+
+Enter the `pxctl service pool update` command with the pool ID and the `--labels` flag with a comma separated list of labels you wish to add:
+
+```text
+pxctl service pool update 0 --labels  ioprofile=HIGH,media_type=SSD
+```
+
+##### Replace a label's value
+
+Enter the `pxctl service pool update` command with the pool ID and the `--labels` flag with a comma separated list of the labels you wish to replace:
+
+```text
+pxctl service pool update 0 --labels  media_type=NVME
+```
+
+Updating a single label does not affect the other labels' stored values.
+
+##### Delete a label's value
+
+Enter the `pxctl service pool update` command with the pool ID and the `--labels` flag with a comma separated list of the labels you wish to delete containing no value:
+
+```text
+pxctl service pool update 0 --labels  ioprofile=,media_type=
+```
+
 ### pxctl service pool show
 
 Show storage pool information
@@ -441,3 +478,50 @@ You can use the `pxct service pool cache command` command to:
 * Check if pool caching is enabled for a pool
 
 Refer to the [Pool caching](/concepts/pool-caching) section for more details.
+
+### pxctl service pool delete
+
+You can use the `pxctl service pool delete` command to delete storage pools which may be misconfigured or otherwise not functioning properly.
+
+```text
+pxctl service pool delete --help
+```
+```output
+Delete pool
+Usage:
+  pxctl service pool delete [flags]
+Flags:
+  -h, --help   help for delete
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+```
+
+Before you remove a pool, consider the following requirements:
+
+* Your target pool for deletion must be empty and contain no replicas
+* If your target pool for deletion is a metadata pool, it must be readable
+* You must have more pools on the node than just your target pool for deletion
+* You must place your node in maintenance mode to use this command
+
+The following example deletes a storage pool from a node containing 2 storage pools:
+
+```text
+pxctl service pool delete 0
+```
+```output
+This will permanently remove storage pool and cannot be undone.
+Are you sure you want to proceed ? (Y/N): y
+Pool 0 DELETED.
+```
+
+{{<info>}}
+**NOTE:** New pools created after a pool deletion increment from the last pool ID. A new pool created after this example would have a pool ID of 2
+{{</info>}}  

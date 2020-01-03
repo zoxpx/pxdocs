@@ -11,6 +11,7 @@ You can view all available output information using the `-j` option, which suppl
 This document provides instructions and examples for filtering pxctl's JSON output using jq for the following common use cases:
 
 * List volumes which have a replica on a node
+* List the nodes on which a volume is replicated
 * List volumes with HA-Level 1
 * List volumes which have a running HA-increase operation on a node
 * List pools with SSD labels
@@ -30,7 +31,8 @@ The cluster in this example comprises 3 worker nodes:
 ```output
 NODE					NODE STATUS	POOL	POOL STATUS	IO_PRIORITY	SIZE	AVAILABLE	USED	PROVISIONED	RESERVEFACTOR	ZONE	REGION	RACK
 598b4c37-459f-45f6-9fbe-14ea0fdd31df	Up		0	Online		LOW		30 GiB	26 GiB		3.5 GiB	7.0 GiB		0		default	default	default
-9a58c096-5085-4e9f-8094-8f341ebaab7a	Up		0	Online
+9a58c096-5085-4e9f-8094-8f341ebaab7a	Up		0	Online 		LOW		3.0 TiB	3.0 TiB		10 GiB	1.0 GiB		0		default	default	default
+4397b1d4-652a-4081-bdb6-994ce0e649d6	Up		0	Online		LOW		3.0 TiB	3.0 TiB		10 GiB	1.0 GiB		0		default	default	default
 ```
 
 The examples in this document use the first node: `598b4c37-459f-45f6-9fbe-14ea0fdd31df`
@@ -129,6 +131,26 @@ pxctl --json volume list | jq '.[] | select(.replica_sets[].nodes | tostring | c
   "fs_resize_required": false
 }
 ```
+
+## List the nodes on which a volume is replicated
+
+You can use `jq` to query for the nodes on which a volume is replicated. This is useful if you need to perform maintenance on your cluster and want to make sure at least one replica of the volume is available during this operation.
+
+To list the nodes on which a volume is replicated, enter the following `pxctl volume inspect` command, specifying the name of your volume, and pipe the output through `jq`:
+
+```text
+pxctl --json volume inspect v1 | jq  '.[] | .id, .replica_sets[].nodes'
+```
+
+```output
+"387822627247234229"
+[
+  "598b4c37-459f-45f6-9fbe-14ea0fdd31df",
+  "9a58c096-5085-4e9f-8094-8f341ebaab7a"
+]
+```
+
+In our example, the id of the `v1` volume is `387822627247234229` and the following nodes hold a replica of the `v1` volume - `598b4c37-459f-45f6-9fbe-14ea0fdd31df` and `9a58c096-5085-4e9f-8094-8f341ebaab7a`.
 
 ## List volumes with HA-Level 1
 

@@ -8,13 +8,13 @@ series: aws-secret-uses
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 ## Creating and using encrypted volumes
 
 ### Using per volume secret keys
 
-{{% content "key-management/aws-kms/shared/unique-passphrase.md" %}}
+{{% content "shared/key-management-aws-kms-unique-passphrase.md" %}}
 
 To create a volume through pxctl, run the following command:
 
@@ -41,12 +41,12 @@ Note that no `secret_key` argument needs to be passed in any of the commands.
 In this method, you will create an AWS Data Key and assign it a unique name. This data key will then be used for encrypting volumes.
 
 {{<info>}}
-{{% content "key-management/aws-kms/shared/warning-note.md" %}}
+{{% content "shared/key-management-aws-kms-warning-note.md" %}}
 {{</info>}}
 
 #### Step1: Create a Named Secret
 
-{{% content "key-management/aws-kms/shared/named-secrets.md" %}}
+{{% content "shared/key-management-aws-kms-named-secrets.md" %}}
 
 #### Step2: Use the Named Secrets for encrypting volumes
 
@@ -70,5 +70,5 @@ docker run --rm -it -v secure=true,secret_key=mysecret,name=enc_vol:/mnt busybox
 
 ### Using cluster-wide secret key
 
-{{% content "key-management/aws-kms/shared/cluster-wide-intro.md" %}}
+{{% content "shared/key-management-aws-kms-cluster-wide-intro.md" %}}
 

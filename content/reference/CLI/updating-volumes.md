@@ -5,7 +5,7 @@ description: Updating volumes is done simply with Portworx. Use the pxctl volume
 weight: 3
 ---
 
-This section will walk you through the commands for updating your _Portworx_ volumes.
+This section will walk you through the commands for updating your Portworx volumes.
 First, let's use the built-in help that to discover the available commands:
 
 ```text
@@ -29,7 +29,7 @@ Flags:
       --early_ack string    Reply to async write requests after it is copied to shared memory (Valid Values: [on off]) (default "off")
       --async_io string     Enable async IO to backing storage (Valid Values: [on off]) (default "off")
       --nodiscard string    Disable discard support for this volume (Valid Values: [on off]) (default "off")
-      --io_profile string   IO Profile (Valid Values: [sequential cms db]) (default "sequential")
+      --io_profile string   IO Profile (Valid Values: [sequential cms db db_remote sync_shared]) (default "sequential")
       --sharedv4 string     set sharedv4 setting (Valid Values: [on off]) (default "off")
       --queue_depth uint    block device queue depth (Valid Range: [1 256]) (default 128)
       --scale uint          New scale factor (Valid Range: [1 1024]) (default 1)
@@ -120,6 +120,10 @@ Volume	:  970758537931791410
 
 As shown above, the `shared` field is set to `yes` indicating that `clitest` is now a shared volume
 
+
+### Related topics
+
+* For more information about creating shared Portworx volumes through Kubernetes, refer to the [Create shared PVCs](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-shared-pvcs/) page.
 
 ## Changing a volume's sticky option
 
@@ -280,9 +284,13 @@ Volume	:  485002114762355071
 			Node 	 :  172.31.55.104
 ```
 
+### Related topics
+
+For more information about dynamically resizing a volume (PVC) using Kubernetes and Portworx, refer to the [Resize a Portworx PVC](/portworx-install-with-kubernetes/storage-operations/create-pvcs/resize-pvc/) page.
+
 ## Update a volume's replication factor
 
-`pxctl volume ha-update` can be used to increase or decrease the replication factor for a given _Portworx_ volume.
+`pxctl volume ha-update` can be used to increase or decrease the replication factor for a given Portworx volume.
 
 ### Increasing the replication factor
 

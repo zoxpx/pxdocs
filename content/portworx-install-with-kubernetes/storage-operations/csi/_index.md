@@ -15,6 +15,19 @@ Using Portworx with CSI, you can perform the following operations:
 * Take snapshots of CSI-enabled volumes
 * Create shared CSI-enabled volumes
 
+## Supported features
+
+The following table shows the features supported by the different versions of Kubernetes and Portworx:
+
+| Feature | Minimum Kubernetes version | Minimum Portworx version |
+| --- | --- | --- |
+| Provision, attach, and mount volumes | 1.13.12+ | 2.2 |
+| CSI Snapshots (alpha version) | You can use the `VolumeSnapshotDataSource` feature gate to enable CSI Snapshots on Kubernetes 1.13.12+. Refer to the [Take snapshots of CSI enabled volumes](#take-snapshots-of-csi-enabled-volumes) section for more details | 2.2 |
+| Stork [^1] | 1.13.12+ | 2.2 |
+| Resizer | You can use use the `ExpandCSIVolumes` feature gate to enable the alpha or the beta version of this feature. Refer to the [Kubernetes Feature Gates](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features) page for more details on the specific versions you can set on different Kubernetes versions. | 2.2 |
+
+[^1]: Note that only Stork 2.3.0 or later is supported with CSI.
+
 ## Prerequisites
 
 Before you install and use Portworx with CSI, ensure you meet the prerequisistes:
@@ -26,7 +39,7 @@ Before you install and use Portworx with CSI, ensure you meet the prerequisistes
 
 Enable CSI during Portworx installation. You can do this in one of two ways:
 
-* If you're generating specs using the Portworx Kubernetes spec generator, generate the Portworx specs with the Portworx Spec Generator in [PX-Central](https://central.portworx.com) appropriate for your cluster. In the **Customize** tab, under **Advanced Settings**, select **CSI**. This will add the CSI components to the Portworx DaemonSet.
+* If you're generating specs using the Portworx Kubernetes spec generator, generate the Portworx specs with the Portworx spec generator in [PX-Central](https://central.portworx.com) appropriate for your cluster. In the **Customize** tab, under **Advanced Settings**, select **CSI**. This will add the CSI components to the Portworx DaemonSet.
 
 * If you are using [cURL to fetch the Portworx spec](/portworx-install-with-kubernetes/px-k8s-spec-curl), add `csi=true` to the parameter list to include CSI specs in the generated file.
 
@@ -44,7 +57,7 @@ To enable CSI for a StorageClass, set the `provisioner` value to `pxd.portworx.c
 
 ```text
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
   name: portworx-csi-sc
 provisioner: pxd.portworx.com
@@ -71,11 +84,14 @@ spec:
 Once you've created a storage class and PVC, you can create a volume as part of a deployment by referencing the PVC. This example creates a MySQL deployment referencing the `px-mysql-pvc` PVC you created in the step above:
 
 ```text
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
 spec:
+  selector:
+    matchLabels:
+      app: mysql
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -112,7 +128,7 @@ You can secure your CSI-enabled volumes with token-based authorization. In using
 * Using hardcoded values
 * Using template values
 
-You can also mix these two methods to form your own hybrid approach.  
+You can also mix these two methods to form your own hybrid approach.
 
 ### Using hardcoded values
 
@@ -128,7 +144,7 @@ This example secures a storage class by specifying hardcoded values for the toke
 
     ```text
     kind: StorageClass
-    apiVersion: storage.k8s.io/v1beta1
+    apiVersion: storage.k8s.io/v1
     metadata:
       name: portworx-csi-sc
     provisioner: pxd.portworx.com
@@ -153,7 +169,7 @@ This example secures a storage class by hardcoding the token and namespace. User
 
     ```text
     kind: StorageClass
-    apiVersion: storage.k8s.io/v1beta1
+    apiVersion: storage.k8s.io/v1
     metadata:
       name: portworx-csi-sc
     provisioner: pxd.portworx.com
@@ -181,7 +197,7 @@ Hardcode the secret name, but use template values for the namespace to allow use
 
 ```text
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
   name: portworx-csi-sc
 provisioner: pxd.portworx.com
@@ -195,7 +211,7 @@ Hardcode the namespace but use template values for the secret to allow users to 
 
 ```text
 kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 metadata:
   name: portworx-csi-sc
 provisioner: pxd.portworx.com
@@ -255,10 +271,45 @@ In your PVC, if you use `ReadWriteMany`, Portworx defaults to a `Sharedv4` volum
 
 For information about how to encrypt PVCs on CSI using Kubernetes secrets, see the [Encrypting PVCs on CSI with Kubernetes Secrets](/key-management/kubernetes-secrets/pvc-encryption-using-csi/) section of the Portworx documentation.
 
+## Clone volumes with CSI
+
+You can clone CSI-enabled volumes, duplicating both the volume and content within it.
+
+1. Enable the `VolumePVCDataSource` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/):
+
+      ```text
+      --feature-gates=VolumePVCDataSource=true
+      ```
+
+2. Create a PVC that references the PVC you wish to clone, specifying the `dataSource` with the kind and name of the target PVC you wish to clone. The following spec creates a clone of the `px-mysql-pvc` PVC in a YAML file named `clonePVC.yaml`:
+
+      ```text
+      kind: PersistentVolumeClaim
+      apiVersion: v1
+      metadata:
+         name: clone-of-px-mysql-pvc
+      spec:
+         storageClassName: portworx-csi-sc
+         accessModes:
+           - ReadWriteOnce
+         resources:
+           requests:
+             storage: 2Gi
+         dataSource:
+          kind: PersistentVolumeClaim
+          name: px-mysql-pvc
+      ```
+
+3. Apply the `clonePVC.yaml` spec to create the clone:
+
+      ```text
+      kubectl apply -f clonePVC.yaml
+      ```
+
 ## Upgrade
 
 Currently upgrades are _not_ supported. You will need to deploy using CSI onto a new Kubernetes cluster. The Kubernetes community is working very hard to make this possible in the near future.
 
 ## Contribute
 
-Portworx welcomes contributions to our CSI implementation, which is open-source and repository is at [OpenStorage](https://github.com/libopenstorage/openstorage).
+Portworx, Inc. welcomes contributions to its CSI implementation, which is open-source and repository is at [OpenStorage](https://github.com/libopenstorage/openstorage).

@@ -1,5 +1,5 @@
 ---
-title: "Kubemotion with stork on Kubernetes"
+title: "Kubemotion with Stork on Kubernetes"
 linkTitle: "Kubemotion with stork"
 keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
 description: How to migrate stateful applications on Kubernetes
@@ -10,20 +10,20 @@ aliases:
   - /cloud-references/migration/migration-stork
 ---
 
-This document will walk you through how to migrate your _PX_ volumes between clusters with Stork on Kubernetes.
+This document will walk you through how to migrate your Portworx volumes between clusters with Stork on Kubernetes.
 
 
 ## Prerequisites
 
 Before we begin, please make sure the following prerequisites are met:
 
-* **Version**: The source AND destination clusters need _PX-Enterprise_ v2.0 or later
-release. As future releases are made, the two clusters can have different _PX-Enterprise_ versions (e.g. v2.1 and v2.3).
+* **Version**: The source AND destination clusters need PX-Enterprise v2.0 or later
+release. As future releases are made, the two clusters can have different PX-Enterprise versions (e.g. v2.1 and v2.3).
 
 * **Stork v2.0+** is required on the source cluster.
 
 * **Stork helper** : `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
 
 
 * **Secret Store** : Make sure you have configured a [secret store](/key-management) on both clusters. This will be used to store the credentials for the objectstore.
@@ -31,7 +31,7 @@ release. As future releases are made, the two clusters can have different _PX-En
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be
 reachable by the source cluster.
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/cluster-pair.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-cluster-pair.md" %}}
 
 ```text
 apiVersion: stork.libopenstorage.org/v1alpha1
@@ -77,10 +77,10 @@ pxctl cluster token show
 
 #### Update ClusterPair with storage options
 
-Next, let's edit the  **ClusterPair** spec. Under `spec.options`, add  the following _Portworx_ clusterpair information:
+Next, let's edit the  **ClusterPair** spec. Under `spec.options`, add  the following Portworx clusterpair information:
 
-   1. **ip**: the IP address of one of the _Portworx_ nodes on the destination cluster
-   2. **port**: the port on which the _Portworx_ API server is listening for requests.
+   1. **ip**: the IP address of one of the Portworx nodes on the destination cluster
+   2. **port**: the port on which the Portworx API server is listening for requests.
       Default is 9001 if not specified
    3. **token**: the cluster token generated in the [previous step](#get-cluster-token-from-destination-cluster)
 
@@ -143,7 +143,7 @@ kubectl apply -f clusterpair.yaml
 clusterpair.stork.libopenstorage.org/remotecluster created
 ```
 
-Note that, when the ClusterPair gets created, _Portworx_ also creates a 100 GiB volume called `ObjectstoreVolume`. If you plan to migrate volumes that are significanlty larger than 100GiB, make sure you check out first the [Migrating Large Volumes](#migrating-large-volumes) section.
+Note that, when the ClusterPair gets created, Portworx also creates a 100 GiB volume called `ObjectstoreVolume`. If you plan to migrate volumes that are significanlty larger than 100GiB, make sure you check out first the [Migrating Large Volumes](#migrating-large-volumes) section.
 
 #### Verifying the Pair status
 
@@ -182,7 +182,7 @@ Once the pairing is configured, applications can be migrated repeatedly to the d
 
 ### Migrating Large Volumes
 
-When the clusterpair gets created, _Portworx_ automatically creates a 100G volume named *ObjectstoreVolume*. If you attempt to migrate a volume significantly larger than 100G, you will find out that the ObjectStore volume doesn't provide sufficient disk space and the migration will fail.
+When the clusterpair gets created, Portworx automatically creates a 100G volume named *ObjectstoreVolume*. If you attempt to migrate a volume significantly larger than 100G, you will find out that the ObjectStore volume doesn't provide sufficient disk space and the migration will fail.
 
 As an example, say you want to migrate a 1 TB volume. If so, you would need to update the size of the *ObjectstoreVolume* by running:
 
@@ -322,4 +322,4 @@ NAME            CLUSTERPAIR     STAGE     STATUS       VOLUMES   RESOURCES   CRE
 mysqlmigration  remotecluster   Final     Successful   1/1       3/3         26 Oct 18 20:04 UTC
 ```
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/migration-common.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-migration-common.md" %}}

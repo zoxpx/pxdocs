@@ -63,7 +63,7 @@ Apply the configuration:
 kubectl apply -f px-storageclass.yml
 ```
 
-Create `cassandra-statefulset.yml` as shown below. This configuration creates a Statefulset for Cassandra with three replicas. It uses the stork scheduler to enable pods to be placed closer to where their data is located.
+Create `cassandra-statefulset.yml` as shown below. This configuration creates a Statefulset for Cassandra with three replicas. It uses the Stork scheduler to enable pods to be placed closer to where their data is located.
 
 ```text
 apiVersion: "apps/v1"
@@ -238,7 +238,7 @@ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.na
 }
 ```
 
-Verify that the portworx volume has 2 replicas created:
+Verify that the Portworx volume has 2 replicas created:
 
 ```text
 /opt/pwx/bin/pxctl volume inspect 651254593135168442 (This volume is up and attached to k8s-0)
@@ -271,7 +271,7 @@ Volume  :  651254593135168442
 
 ## Scaling {#scaling}
 
-Portworx runs as a Daemonset in Kubernetes. Hence when you add a node or a worker to your kuberentes cluster you do not need to explicitly run Portworx on it.
+Portworx runs as a DaemonSet in Kubernetes. Hence when you add a node or a worker to your Kuberentes cluster you do not need to explicitly run Portworx on it.
 
 If you did use the [Terraform scripts](https://github.com/portworx/terraporx) to create a kubernetes cluster, you would need to update the minion count and apply the changes via Terraform to add a new Node.
 
@@ -311,7 +311,7 @@ weave-net-tmbxh                      2/2       Running   0          2m
 weave-net-w4xgw                      2/2       Running   0          5h
 ```
 
-The portworx cluster automatically scales as you scale your kubernetes cluster.
+The Portworx cluster automatically scales as you scale your kubernetes cluster.
 
 ```text
 /opt/pwx/bin/pxctl status
@@ -627,4 +627,4 @@ For further reading on Cassandra:
 * [Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)
 * [Cassandra stress test with Portworx](/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra)
 
-{{% content "portworx-install-with-kubernetes/application-install-with-kubernetes/shared/discussion-forum.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}

@@ -2,7 +2,7 @@
 title: Create shared PVCs using CSI
 weight: 12
 keywords: portworx, container, kubernetes, storage, k8s, pv, persistent disk, pvc
-description: Learn how to use portworx shared volumes (ReadWriteMany) in your Kubernetes cluster using CSI
+description: Learn how to use Portworx shared volumes (ReadWriteMany) in your Kubernetes cluster using CSI
 hidden: true
 ---
 
@@ -10,28 +10,28 @@ This document describes how to create shared Portworx volumes using the [CSI](ht
 
 ### Prerequisite
 
-Ensure that your Portworx installation supports CSI. When [Generating the Portworx specs](https://central.portworx.com) select CSI under Customize->Advanced Settings. This will add the CSI components to the Portworx DaemonSet.
+Ensure that your Portworx installation supports CSI. When [Generating the Portworx specs](https://central.portworx.com) select CSI under **Customize**, then **Advanced Settings**. This will add the CSI components to the Portworx install spec.
 
 ### Step 1 : Create a CSI StorageClass
 
-Apply the below spec.
+Create and apply a `StorageClass` spec, specifying the **pxd.portworx.com** Portworx CSI provisioner:
 
 ```text
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
   name: portworx-csi-shared-sc
-provisioner: com.openstorage.pxd
+provisioner: pxd.portworx.com
 parameters:
   repl: "3"
   shared: "true"
 ```
 
-{{<info>}}Notice the **com.openstorage.pxd** provisioner above. This is the Portworx CSI provisioner.{{</info>}}
+
 
 ### Step 2 : Create a PVC
 
-Apply the below spec.
+Create and apply a `PersistentVolumeClaim` spec, specifying `storageClassName` with the CSI enabled StorageClass you created above:
 
 ```text
 kind: PersistentVolumeClaim

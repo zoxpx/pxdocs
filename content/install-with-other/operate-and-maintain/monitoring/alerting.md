@@ -4,7 +4,11 @@ keywords: portworx, prometheus, grafana, alertmanager, cluster, storage
 description: Learn how to configure Prometheus to enable you to visualize your Portworx cluster status within Grafana.
 ---
 
-This guide shows you how to configure prometheus to monitor your portworx node and visualize your cluster status and activities in Grafana. We will also configure AlertManager to send email alerts.
+{{<info>}}
+This document presents the **non-Kubernetes** method of monitoring your Portworx cluster with Prometheus and Grafana. Please refer to the [Prometheus and Grafana](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
+This guide shows you how to configure prometheus to monitor your Portworx node and visualize your cluster status and activities in Grafana. We will also configure AlertManager to send email alerts.
 
 ## Configure Prometheus
 
@@ -17,7 +21,7 @@ PROMETHEUS_CONF=/etc/prometheus
 
 ### Prometheus config file
 
-Modify the below configuration to include your PX nodes' IP addresses, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
+Modify the below configuration to include your Portworx nodes' IP addresses, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
 
 ```text
 global:
@@ -39,14 +43,14 @@ alerting:
       - "alert-manager-ip:9093"
 ```
 
-This file can be downloaded from [prometheus.yml](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/prometheus.yml)
+This file can be downloaded from [prometheus.yml](/samples/non-k8s/prometheus/prometheus.yml)
 
 Note: 'alert-manager-ip' is the IP address of the node where AlertManager is running. It is configured in the later steps.
 
 ### Prometheus alerts rules file
 
-Copy [px.rules](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/px.rules) file, and save it as ${PROMETHEUS_CONF}/px.rules.
-For Prometheus v2.0.0 and above, rules file is available [here](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/px.rules.yml).
+Copy [px.rules](/samples/non-k8s/prometheus/px.rules) file, and save it as ${PROMETHEUS_CONF}/px.rules.
+For Prometheus v2.0.0 and above, rules file is available [here](/samples/non-k8s/prometheus/px.rules.yml).
 
 ### Run Prometheus
 
@@ -101,7 +105,7 @@ receivers:
     auth_password: "<sender-email-password>"
 ```
 
-This file can be downloaded from [config.yml](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/config.yml)
+This file can be downloaded from [config.yml](/samples/non-k8s/prometheus/config.yml)
 
 ### Run AlertManager
 

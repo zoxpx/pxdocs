@@ -7,6 +7,10 @@ noicon: true
 series: px-docker-install
 ---
 
+{{<info>}}
+This document presents the **Docker** method of installing a Portworx cluster using Docker in swarm mode. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
+
 This section describes installing Portworx on Docker Swarm.
 
 ## Identify storage
@@ -34,32 +38,32 @@ lsblk
 
 Note that devices without the partition are shown under the **TYPE** column as **part**. This example has two non-root storage devices \(/dev/xvdb, /dev/xvdc\) that are candidates for storage devices.
 
-Identify the storage devices you will be allocating to PX. PX can run in a heterogeneous environment, so you can mix and match drives of different types. Different servers in the cluster can also have different drive configurations.
+Identify the storage devices you will be allocating to Portworx. Portworx can run in a heterogeneous environment, so you can mix and match drives of different types. Different servers in the cluster can also have different drive configurations.
 
 ## Install
 
-PX runs as a container directly via OCI runC. This ensures that there are no cyclical dependencies between Docker and PX.
+Portworx runs as a container directly via OCI runC. This ensures that there are no cyclical dependencies between Docker and Portworx.
 
-On each swarm node, perform the following steps to install PX.
+On each swarm node, perform the following steps to install Portworx.
 
-### Step 1: Install the PX OCI bundle
+### Step 1: Install the Portworx OCI bundle
 
-{{% content "install-with-other/docker/shared/runc-install-bundle.md" %}}
+{{% content "shared/install-with-other-docker-shared-runc-install-bundle.md" %}}
 
-### Step 2: Configure PX under runC
+### Step 2: Configure Portworx under runC
 
 {{<info>}}Specifiy `-x swarm` in the px-runc install command below to select Docker Swarm as your scheduler.{{</info>}}
 
-{{% content "install-with-other/docker/shared/runc-configure-portworx.md" %}}
+{{% content "shared/install-with-other-docker-runc-configure-portworx.md" %}}
 
-### Step 3: Starting PX runC
+### Step 3: Starting Portworx runC
 
-{{% content "install-with-other/docker/shared/runc-enable-portworx.md" %}}
+{{% content "shared/install-with-other-docker-shared-runc-enable-portworx.md" %}}
 
 
 ### Adding Nodes
 
-To add nodes to increase capacity and enable high availability, simply repeat these steps on other servers. As long as PX is started with the same cluster ID, they will form a cluster.
+To add nodes to increase capacity and enable high availability, simply repeat these steps on other servers. As long as Portworx is started with the same cluster ID, they will form a cluster.
 
 ### Access the pxctl CLI
 

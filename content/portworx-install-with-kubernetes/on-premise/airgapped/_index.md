@@ -1,66 +1,82 @@
 ---
-title: Airgapped clusters
-linkTitle: Airgapped clusters
+title: Air-gapped clusters
+linkTitle: Air-gapped clusters
 weight: 99
 logo: /logos/other.png
 keywords: portworx, container, kubernetes
-description: How to install Portworx in an airgapped Kubernetes cluster
+description: How to install Portworx in an air-gapped Kubernetes cluster
 noicon: true
 ---
 
-When installing Portworx in Kubernetes, a number of docker images are fetched from registries on the internet.
+This document walks you through the process of installing Portworx into an air-gapped environment. First, you must fetch the required Docker images from the public Internet registries. Then, you are required to load these images onto your nodes. Once you've loaded the Portworx images, you will continue with the standard installation procedure.
 
-This topic explains how to load these images onto your nodes when they don't have access to the standard registries on the internet.
+## Step 1: Fetch Portworx images
 
-## Step 1: Fetching Portworx images
-
-1. Export your Kubernetes version
+1. Export your Kubernetes version with:
 
     ```text
     export KBVER=$(kubectl version --short | awk -Fv '/Server Version: / {print $3}')
     ```
 
-    {{<info>}}If the current node doesn't have kubectl access, directly set the variable using `export KBVER=1.11.2`{{</info>}}
+    If the current node doesn't have `kubectl` installed, set the `KBVER` variable manually by running `export KBVER=<YOUR_KUBERNETES_VERSION>`.
 
-2. Pull all Portworx images
+    For example, if your Kubernetes version is `1.11.2`, run the following command:
 
     ```text
-    PX_IMGS="$(curl -fsSL "https://install.portworx.com/2.2/?kbver=$KBVER&type=oci&lh=true&ctl=true&stork=true" | awk '/image: /{print $2}' | sort -u)"
+    export KBVER=1.11.2
+    ```
+
+2. Pull the Portworx images by running:
+
+    ```text
+    PX_IMGS="$(curl -fsSL "https://install.portworx.com/2.3/?kbver=$KBVER&type=oci&lh=true&ctl=true&stork=true&csi=true" | awk '/image: /{print $2}' | sort -u)"
     PX_IMGS="$PX_IMGS portworx/talisman:latest portworx/px-node-wiper:2.0.3.6"
     PX_ENT=$(echo "$PX_IMGS" | sed 's|^portworx/oci-monitor:|portworx/px-enterprise:|p;d')
 
     echo $PX_IMGS $PX_ENT | xargs -n1 docker pull
     ```
-3. (Optional) Copy images to airgapped node
 
-    If none of your cluster nodes have internet access, you will first need to copy over the images to one of the nodes using a tarball. Below command uses ssh to load the images on a node called _intranet-host_. Change the hostname as per your environment.
+3. (Optional) Copy the Portworx images to the airgapped node:
 
     ```text
-    docker save $PX_IMGS $PX_ENT | ssh intranet-host docker load
+    docker save $PX_IMGS $PX_ENT | ssh <intranet-host> docker load
     ```
 
-## Step 2: Loading Portworx images on your nodes
+    For `<intranet-host>`, use the address of your node.
 
-If you have nodes which have access to a private registry, follow [Step 2a: Push to local registry server, accessible by air-gapped nodes](#step-2a-push-to-local-registry-server-accessible-by-air-gapped-nodes).
+{{<info>}}
+Note that the above command uses `ssh` to load the images on a node called `intranet-host`. If your cluster nodes don't have Internet access, you first need to copy over the images to one of the nodes using a tarball.
+{{</info>}}
 
-Otherwise, follow [Step 2b: Push directly to nodes using tarball](#step-2b-push-directly-to-nodes-using-tarball).
+## Step 2: Load Portworx images to your nodes
 
-### Step 2a: Push to local registry server, accessible by air-gapped nodes
+There are two ways in which you can load the Portworx images to your nodes:
 
-{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-local-reg.md" %}}
+- If your nodes have access to a private registry, follow [Step 2a: Push to a local registry server, accessible by air-gapped nodes](#step-2a-push-to-a-local-registry-server-accessible-by-the-air-gapped-nodes).
 
-Now that you have the images in your registry, continue with [Step 3: Installing Portworx](#step-3-installing-portworx).
+- Otherwise, follow [Step 2b: Push directly to nodes using tarball](#step-2b-push-directly-to-your-nodes-using-a-tarball).
 
-Since you are using your own custom registry, ensure that you specify it in the spec generator in **Registry And Image Settings** -> **Custom Container Registry Location**.
+### Step 2a: Push to a local registry server, accessible by the air-gapped nodes
 
-### Step 2b: Push directly to nodes using tarball
+{{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-local-reg.md" %}}
 
-{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-nodes-tarball.md" %}}
+{{<info>}}
+Since you are using your custom registry, ensure that you specify it in the spec generator in **Registry And Image Settings** -> **Custom Container Registry Location**.
+{{</info>}}
 
-{{<info>}}When using this method, specify Image Pull Policy as **IfNotPresent** on the "Registry and Image Settings" page when generating the Portworx spec.{{</info>}}
+Now that you have loaded the images into your registry, continue with [Step 3: Install Portworx](#step-3-install-portworx).
 
-## Step 3: Installing Portworx
 
-Once you have loaded Portworx images into your registry or nodes, continue with standard installation steps.
+### Step 2b: Push directly to your nodes using a tarball
+
+{{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-nodes-tarball.md" %}}
+
+{{<info>}}
+If you're using this method, specify `Image Pull Policy` as **IfNotPresent** on the "Registry and Image Settings" page when generating the Portworx spec.
+{{</info>}}
+
+## Step 3: Install Portworx
+
+Once you have loaded the Portworx images into your registry or nodes, continue with the standard installation procedure.
 
 {{<homelist series2="k8s-airgapped">}}

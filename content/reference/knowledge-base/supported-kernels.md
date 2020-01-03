@@ -7,7 +7,7 @@ linkTitle: Supported Kernels
 series: kb
 ---
 
-Portworx runs as a Docker or OCI container, available on the DockerHub. Portworx has a dependency on the kernel module, which must be installed on hosts.  Portworx is distributed with pre-built kernel modules for select Centos and Ubuntu Linux distributions. If your kernel version is not listed in the table below, Portworx attempts to download kernel headers to compile it’s kernel module. This can fail if the host sits behind a proxy.  If you already have the kernel-headers and kernel-devel packages installed the module will compile successfully.  If you do not have the packages you will need to first install them before restarting Portworx.  
+Portworx runs as a Docker or OCI container, available on the DockerHub. Portworx has a dependency on the kernel module, which must be installed on hosts. Portworx is distributed with pre-built kernel modules for select Centos and Ubuntu Linux distributions. If your kernel version is not listed in the table below, Portworx attempts to download kernel headers to compile it’s kernel module. This can fail if the host sits behind a proxy.  If you already have the kernel-headers and kernel-devel packages installed the module will compile successfully.  If you do not have the packages you will need to first install them before restarting Portworx.  
 
 To install the kernel headers and kernel development packages for kernels not listed in the table below.
 

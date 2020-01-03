@@ -12,12 +12,12 @@ weight: 2
 * **Secret Store** : Make sure you have configured a [secret store](/key-management) on both your clusters. This will be used to store the credentials for the objectstore.
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be reachable by the source cluster.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
-* **License**: You will need a DR enabled Portworx License at both the source and destination cluster to use this feature.
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
+* **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
 
 ## Overview
 
-With asynchronous DR, you can replicate Kubernetes applications and their data between two Kubernetes clusters. Here, a separate Portworx Enterprise cluster runs under each Kubernetes cluster.
+With asynchronous DR, you can replicate Kubernetes applications and their data between two Kubernetes clusters. Here, a separate PX-Enterprisecluster runs under each Kubernetes cluster.
 
 * The active Kubernetes cluster asynchronously backs-up apps, configuration and data to a standby Kubernetes cluster.
 * The standby Kubernetes cluster has running controllers, configuration and PVCs that map to a local volumes.
@@ -42,10 +42,10 @@ The following Kubernetes resources are supported as part of the Asynchronous DR 
 
 ## Enable load balancing on cloud clusters
 
-If you're running Kubernetes on the cloud, you must configure an External LoadBalancer (ELB) for the PX API service.
+If you're running Kubernetes on the cloud, you must configure an External LoadBalancer (ELB) for the Portworx API service.
 
 {{<info>}}
-**Warning:** Do not enable load balancing without authorization enabled on the PX cluster.
+**Warning:** Do not enable load balancing without authorization enabled on the Portworx cluster.
 {{</info>}}
 
 Enable load balancing by entering the `kubectl edit service` command and changing the service type value from `nodePort` to `loadBalancer`:
@@ -67,7 +67,7 @@ spec:
   type: loadBalancer
 ```
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/cluster-pair.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-cluster-pair.md" %}}
 
 ```text
 apiVersion: stork.libopenstorage.org/v1alpha1
@@ -144,7 +144,7 @@ status:
   storageStatus: ""
 ```
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/schedule-policy.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-schedule-policy.md" %}}
 
 ### Scheduling a migration
 
@@ -260,3 +260,22 @@ mysqlmigrationschedule-weekly-2019-02-14-221351 1d
 ```
 
 Once the MigrationSchedule object is deleted, all the associated Migration objects should be deleted as well.
+
+
+## Related videos 
+
+### Set up multi-cluster application failover with CockroachDB
+
+{{< youtube 9czMCF8MfXA >}}
+
+<br>
+
+### Set up multi-cloud and multi-cluster data movement with Portworx on Openshift
+
+{{< youtube 8aHuFTuByAM >}}
+
+<br>
+
+### Set up cross-cloud application migration from Google Cloud to Microsoft Azure with Portworx on OpenShift 4.2
+
+{{< youtube TV6WAUqdzFI >}}

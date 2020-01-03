@@ -22,7 +22,7 @@ Note that Portworx recommends the following:
 
 These metrics are recorded by [fio](https://github.com/axboe/fio).
 
-The following graphs show the results of running fio against the underlying baremetal hardware and comparing it to the performance of a Portworx volume that used the underlying hardware for storage provisioning.  The graphs show the overhead, or delta, between running the same test on the raw volume and on a PX volume.
+The following graphs show the results of running fio against the underlying baremetal hardware and comparing it to the performance of a Portworx volume that used the underlying hardware for storage provisioning.  The graphs show the overhead, or delta, between running the same test on the raw volume and on a Portworx volume.
 
 In this example, the following Intel server was used:
 Intel® Wildcat Pass R2312WTTYS 2U
@@ -50,10 +50,10 @@ from PCSD - Product Collaboration Systems Division
 
 ### Benchmarking HowTo
 
-* Step 1: Before installing PX, benchmark all the disk drives using hdparm or dd. This is the upper bound of all measurements from here on.
-* Step 2: Install PX and get a baseline run. Stop PX and mount the disk drive(s) on a mountpoint on the host. Run Fio benchmark using this mountpoint as the target.
+* Step 1: Before installing Portworx, benchmark all the disk drives using hdparm or dd. This is the upper bound of all measurements from here on.
+* Step 2: Install Portworx and get a baseline run. Stop Portworx and mount the disk drive(s) on a mountpoint on the host. Run Fio benchmark using this mountpoint as the target.
 * Step 3: Verify results. Make sure the IOs are hitting the disk by looking at iostat(1) command. Make sure there are no reads when running write test and vice versa. Compare with results from Step1.
-* Step 4: Start PX, create a volume. Run Fio benchmark with the same options as the baseline using the attached PX device as target.
+* Step 4: Start Portworx, create a volume. Run Fio benchmark with the same options as the baseline using the attached Portworx device as target.
 * Step 5: Verify results, repeat Step3. Also compare with results from Step2.
 
 Note the following Results:

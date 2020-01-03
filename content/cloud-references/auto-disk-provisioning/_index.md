@@ -13,10 +13,10 @@ Portworx fingerprints the disks and attaches them to an instance in the autoscal
 ## Why would I need this?
 
 * Users don't have to manage the lifecycle of disks. Instead, they just have to provide disks specs and Portworx manages the disk lifecycle.
-* When an instance terminates, the auto scaling group will automatically add a new instance to the cluster. Portworx gracefully handle this scenario by re-attaching the disks to it and give a new instance the old identity. This ensures that the instance’s data is retained with zero storage downtime.
+* When an instance terminates, the auto scaling group will automatically add a new instance to the cluster. Portworx gracefully handles this scenario by re-attaching the disks to it and give a new instance the old identity. This ensures that the instance’s data is retained with zero storage downtime.
 
 ## How do I set it up?
 
-On Kubernetes, when generating the spec using the Portworx Spec Generator in [PX-Central](https://central.portworx.com), the UI will prompt for the disk specs in the cloud section of the wizard.
+On Kubernetes, when generating the spec using the Portworx spec generator in [PX-Central](https://central.portworx.com), the UI will prompt for the disk specs in the cloud section of the wizard.
 
 Based on the cloud platform, you will need to provide access to Portworx to the cloud APIs. Continue to below sections for additional details.

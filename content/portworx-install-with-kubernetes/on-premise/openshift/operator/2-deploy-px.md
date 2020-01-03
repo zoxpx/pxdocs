@@ -1,7 +1,7 @@
 ---
 title: Deploy Portworx using the Operator
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
-description: Find out how to apply the spec for PX within a OpenShift cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
+description: Find out how to deploy Portworx using the Operator
 weight: 2
 ---
 
@@ -33,4 +33,4 @@ If you're not using the OpenShift console, you can create the StorageCluster obj
 
 {{% content "portworx-install-with-kubernetes/on-premise/openshift/shared/apply-the-spec-oc.md" %}}
 
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}

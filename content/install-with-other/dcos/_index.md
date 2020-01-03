@@ -7,7 +7,7 @@ hideSections: true
 series: px-other
 ---
 
-[Mesosphere DC/OS](https://mesosphere.com/product/) makes it easy to build and run modern distributed applications in production at scale, by pooling resources across an entire datacenter or
+[Mesosphere DC/OS](https://d2iq.com/solutions/mesosphere) makes it easy to build and run modern distributed applications in production at scale, by pooling resources across an entire datacenter or
 cloud.
 
 While the DC/OS platform works great for stateless applications, many enterprises who have tried to use DC/OS for stateful applications at scale have stumbled when it comes to using the platform for services like databases, queues and key-value stores.
@@ -23,7 +23,7 @@ Unlike the default DC/OS volume driver, Portworx lets you:
 * avoid fragile block device mount/unmount operations that block or delay failover operations
 * encrypt data at rest and in flight at the container level
 
-Read on for how to use Portworx to provide [persistent storage for Mesosphere DC/OS and marathon](https://portworx.com/use-case/persistent-storage-dcos/) and use it with [DC/OS Commons frameworks](https://docs.mesosphere.com/service-docs/) for some of the most popular stateful services.
+Read on for how to use Portworx to provide [persistent storage for Mesosphere DC/OS and marathon](https://portworx.com/use-case/persistent-storage-dcos/) and use it with [DC/OS Commons frameworks](https://docs.d2iq.com/mesosphere/dcos/services/) for some of the most popular stateful services.
 
 ## Installation
 

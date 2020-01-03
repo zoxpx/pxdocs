@@ -1,12 +1,16 @@
 ---
-title: "Adding storage to existing PX Cluster Nodes"
+title: "Adding storage to existing Portworx Cluster Nodes"
 keywords: scale-up
-description: Discover how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added.  Try it for yourself today.
+description: Discover how to add a new node to a Portworx cluster and how to add additional storage to the Portworx Cluster once a new node is added.  Try it for yourself today.
 ---
 
-## Adding Storage to exising PX Cluster Nodes
+{{<info>}}
+This document presents the **non-Kubernetes** method of scaling your Portworx cluster. Please refer to the [Scale or Restrict](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/scale-or-restrict/) page if you are running Portworx on Kubernetes.
+{{</info>}}
 
-This section illustrates how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added.
+## Adding Storage to exising Portworx Cluster Nodes
+
+This section illustrates how to add a new node to a Portworx cluster and how to add additional storage to the Portworx Cluster once a new node is added.
 
 ### Display current cluster status
 
@@ -41,7 +45,7 @@ The above cluster has three nodes and 520GiB of total capacity.
 
 ### Add a new node to cluster
 
-Below is an example of how to run PX in a new node so it joins an existing cluster. Note how docker run command is invoked with a cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID to which we want to add the new node.
+Below is an example of how to run Portworx in a new node so it joins an existing cluster. Note how docker run command is invoked with a cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID to which we want to add the new node.
 
 ```text
 docker run --restart=always --name px-enterprise -d --net=host --privileged=true -v /run/docker/plugins:/run/docker/plugins -v /var/lib/osd:/var/lib/osd:shared -v /dev:/dev -v /etc/pwx:/etc/pwx -v /opt/pwx/bin:/export_bin:shared -v /var/run/docker.sock:/var/run/docker.sock -v /mnt:/mnt:shared -v /var/cores:/var/cores -v /usr/src:/usr/src -e API_SERVER=http://lighthouse-new.portworx.com portworx/px-enterprise -t token-bb4bcf4b-d394-11e6-afae-0242ac110002 -m team0:0 -d team0

@@ -10,15 +10,15 @@ weight: 14
 
 {{% content "shared/encryption/intro.md" %}}
 
-To know more about the supported secret providers and how to configure them with _Portworx_, refer to the [Setup Secrets Provider](/key-management) page.
+To know more about the supported secret providers and how to configure them with Portworx, refer to the [Setup Secrets Provider](/key-management) page.
 
 ## Creating and using encrypted volumes
 
 ### Using a cluster-wide secret key
-A cluster-wide secret key is basically a key-value pair where the value part is the secret that _Portworx_ uses as a passphrase to encrypt all your volumes.
+A cluster-wide secret key is basically a key-value pair where the value part is the secret that Portworx uses as a passphrase to encrypt all your volumes.
 
 {{<info>}}
-Make sure the cluster-wide secret key is set when you are setting up _Portworx_ with one of the supported secret endpoints.
+Make sure the cluster-wide secret key is set when you are setting up Portworx with one of the supported secret endpoints.
 {{</info>}}
 
 Let's look at an example where we want to create and mount an encrypted volume that uses a cluster-wide secret key:
@@ -64,7 +64,7 @@ pxctl host mount encrypted_volume /mnt
 Volume encrypted_volume successfully mounted at /mnt
 ```
 
-So, if a cluster-wide secret key is set, _Portworx_ will use it as the default key for encryption.
+So, if a cluster-wide secret key is set, Portworx will use it as the default key for encryption.
 In the next section, you will learn how to specify per volume keys.
 
 
@@ -102,7 +102,7 @@ Before running the above commands, make sure the secret `key1` exists in the sec
 
 ## Encrypted Shared Volumes
 
-With _Portworx_, you can create encrypted shared volumes that can be accessed from multiple nodes.
+With Portworx, you can create encrypted shared volumes that can be accessed from multiple nodes.
 
 The `--shared` flag is used to indicate that we would want to share an encrypted volume:
 
@@ -150,4 +150,8 @@ You can enable or disable sharing during runtime by passing the `--shared on/off
 
 Note that volumes must be detached to toggle the `shared` flag during run-time.
 
-The _Portworx_ cluster must be authenticated to access the secret store for the encryption keys.
+The Portworx cluster must be authenticated to access the secret store for the encryption keys.
+
+## Related topics
+
+* For information about encrypting your Portworx volumes using Kubernetes secrets, refer to the [Using Kubernetes Secrets with Portworx](/key-management/kubernetes-secrets/#using-kubernetes-secrets-with-portworx) section.

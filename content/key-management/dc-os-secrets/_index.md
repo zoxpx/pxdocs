@@ -16,10 +16,10 @@ Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets,
 {{</info>}}
 
 {{<info>}}
-**Note:**  Supported from PX Enterprise 1.4 onwards
+**Note:**  Supported from PX-Enterprise 1.4 onwards
 {{</info>}}
 
-## Configuring DC/OS Secrets with Portworx {#configuring-dcos-secrets-with-portworx}
+## Configuring DC/OS Secrets with Portworx
 
 ### Configuring permissions for Secrets
 
@@ -29,7 +29,7 @@ To access secrets, Portworx needs credentials of a user. This user should have p
 dcos security org users grant <username> dcos:secrets:default:/pwx/secrets/* full
 ```
 
-### Enabling Secrets in Portworx package
+### Enabling Secrets in the Portworx package
 
 During installation or when updating an existing Portworx framework, enable the feature from Secrets section.
 
@@ -68,9 +68,9 @@ A cluster wide secret key is a common key that can be used to encrypt all your v
 
 This command needs to be run just once for the cluster. If you have added the cluster secret through the config.json, the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in _config.json_ will be ignored for the one set through the CLI.
 
-## \(Optional\) Authenticating with DC/OS Secrets using Portworx CLI
+## (Optional) Authenticating with DC/OS Secrets using Portworx CLI
 
-If you do not wish to pass the DC/OS credentials through the framework, you can authenticate Portworx with DC/OS Secrets using Portworx cli. Run the following command:
+If you do not wish to pass the DC/OS credentials through the framework, you can authenticate Portworx with DC/OS Secrets using the Portworx CLI. Run the following command:
 
 ```text
 /opt/pwx/bin/pxctl secrets dcos login \

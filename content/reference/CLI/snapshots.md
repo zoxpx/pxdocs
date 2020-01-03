@@ -207,6 +207,10 @@ To add a schedule policy later, just type:
 pxctl volume snap-interval-update --policy p1 vol1
 ```
 
+{{<info>}}
+Note that scheduled snapshots do not occur if the volume you are trying to snapshot is not attached to a container.
+{{</info>}}
+
 ### Listing schedule policies
 
 To list the schedule policies, run the following command:
@@ -421,3 +425,7 @@ Volume	:  1125771388930868153
 	Replication Status	 :  Up
 
 ```
+
+## Related topics
+
+For information about creating snapshots of your Portworx volumes, refer to the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page.

@@ -3,6 +3,7 @@ title: "Working with Autopilot Rules"
 linkTitle: "Working with Autopilot Rules"
 keywords: install, autopilot
 description: Shows useful information about working with Autopilot Rules
+weight: 200
 ---
 
 ## Understanding an AutopilotRule

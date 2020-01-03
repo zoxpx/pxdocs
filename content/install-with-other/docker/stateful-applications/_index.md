@@ -6,4 +6,8 @@ weight: 4
 series: px-docker-post-install
 ---
 
+{{<info>}}
+This document presents the **Docker** method of deploying stateful applications. Please refer to the [Stateful applications on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
 This topic explains how to install various applications for use with Portworx.

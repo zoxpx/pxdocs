@@ -9,24 +9,24 @@ series: support
 
 ### Useful commands
 
-* List PX pods:
+* List Portworx pods:
 
     ```text
     kubectl get pods -l name=portworx -n kube-system -o wide
     ```
-* Describe PX pods:
+* Describe Portworx pods:
 
     ```text
     kubectl describe pods -l name=portworx -n kube-system
     ```
-* Get PX cluster status:
+* Get Portworx cluster status:
 
       ```text
       PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
       kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl status
       ```
 
-* List PX volumes:
+* List Portworx volumes:
 
       ```text
       PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
@@ -50,7 +50,7 @@ series: support
     ```
   * This can be useful to understand why a particular pod is stuck in creating or terminating state on a node.
 
-### Collecting Logs from PX
+### Collecting Portworx logs 
 
 Please run the following commands on any one of the nodes running Portworx:
 
@@ -83,9 +83,9 @@ We are always available on Slack. Join us! [![Slack](/img/slack.png)](https://po
 ### Internal Kvdb
 * In an event of a disaster where, internal kvdb is in an unrecoverable error state follow this [doc](/concepts/internal-kvdb#backup) to recover your Portworx cluster
 
-### Portworx cluster
+### The Portworx cluster
 
-* Ports 9001 - 9022 must be open for internal network traffic between nodes running PX. Without this, px cluster nodes will not be able to communicate and cluster will be down.
+* Ports 9001 - 9022 must be open for internal network traffic between nodes running Portworx. Without this, px cluster nodes will not be able to communicate and cluster will be down.
 * If one of your nodes has a custom taint, the Portworx pod will not get scheduled on that node unless you add a toleration in the Portworx DaemonSet spec. Read [here](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature) for more information about taints and tolerations.
 * When the px container boots on a node for the first time, it attempts to download kernel headers to compile it’s kernel module. This can fail if the host sits behind a proxy. To workaround this, install the kernel headers on the host. For example on centos, this will be ```yum install kernel-headers-`uname -r``` and ``yum install kernel-devel-`uname -r```
 * If one of the px nodes is in maintenance mode, this could be because one or more of the drives has failed. In this mode, you can replace up to one failed drive. If there are multiple drive failures, a node can be decommissioned from the cluster. Once the node is decommissioned, the drives can be replaced and recommissioned into the cluster.
@@ -129,11 +129,11 @@ If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/servic
 
 ### Application pods
 
-* Ensure Portworx container is running on the node where the application pod is scheduled. This is required for Portworx to mount the volume into the pod.
+* Ensure that the Portworx container is running on the node where the application pod is scheduled. This is required for Portworx to mount the volume into the pod.
 * Ensure the PVC used by the application pod is in “Bound” state.
 * Ensure that [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) of pod and the PersistentVolumeClaim is the same.
 * Check if Portworx is in maintenance mode on the node where the pod is running. If so, that will cause existing pods to see a read-only filesystem after about 10 minutes. New pods using Portworx will fail to start on this node.
-  * Use `/opt/pwx/bin/pxctl status` to check Portworx cluster status.
+  * Use `/opt/pwx/bin/pxctl status` to check the status of your Portworx cluster.
 * If a pod is stuck in terminating state, observe `journalctl -lfu kubelet` on the node where the pod is trying to terminate for errors during the pod termination process. Reach out to us over slack with the specific errors.
 * If a pod is stuck in Creating state, describe the pod using `kubectl describe pod <pod-name>` look at errors in the events section which might be causing the failure.
 * If a pod is stuck in CrashLoopBackoff state, check the logs of the pod using `kubectl logs <pod-name> [<container-name>]` and look for the failure reason. It could be because of any of the following reasons
@@ -145,5 +145,5 @@ If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/servic
 **Kubernetes on CoreOS deployed through Tectonic**
 
 * This issue is fixed in Tectonic 1.6.7. So if are using a version equal or higher, this does not apply to you.
-* [Tectonic](https://coreos.com/tectonic/) is deploying the Kubernetes controller manager in the docker `none` network. As a result, when the controller manager invokes a call on `http://localhost:9001` to portworx to create a new volume, this results in the connection refused error since controller manager is not in the host network. This issue is observed when using dynamically provisioned Portworx volumes using a StorageClass. If you are using pre-provisioned volumes, you can ignore this issue.
+* [Tectonic](https://coreos.com/tectonic/) is deploying the Kubernetes controller manager in the docker `none` network. As a result, when the controller manager invokes a call on `http://localhost:9001` to Portworx to create a new volume, this results in the connection refused error since controller manager is not in the host network. This issue is observed when using dynamically provisioned Portworx volumes using a StorageClass. If you are using pre-provisioned volumes, you can ignore this issue.
 * To workaround this, you need to set `hostNetwork: true` in the spec file `modules/bootkube/resources/manifests/kube-controller-manager.yaml` and then run the tectonic installer to deploy kubernetes.

@@ -13,7 +13,7 @@ Below guide explains how Portworx dynamic disk provisioning works on AWS and the
 
 ## AWS Requirements
 
-{{% content "portworx-install-with-kubernetes/cloud/aws/shared/1-prepare.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" %}}
 
 ## EBS volume template
 
@@ -47,7 +47,7 @@ Examples
 
 ### 2. Using existing EBS volumes as templates
 
-You can also reference an existing EBS volume as a template.  Create at least one EBS volume using the AWS console or AWS CLI. This volume (or a set of volumes) will serve as a template EBS volume(s). On every node where PX is brought up as a storage node, a new EBS volume(s) identical to the template volume(s) will be created.
+You can also reference an existing EBS volume as a template.  Create at least one EBS volume using the AWS console or AWS CLI. This volume (or a set of volumes) will serve as a template EBS volume(s). On every node where Portworx is brought up as a storage node, a new EBS volume(s) identical to the template volume(s) will be created.
 
 For example, create two volumes as:
 ```
@@ -57,21 +57,21 @@ vol-0055e5913b79fb49d: 1000 GiB GP2
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group.
 
-Record the EBS volume ID (e.g. _vol-04e2283f1925ec9ee_), this will be passed in to PX as a parameter as a storage device.
+Record the EBS volume ID (e.g. _vol-04e2283f1925ec9ee_), this will be passed in to Portworx as a parameter as a storage device.
 
 ### Limiting storage nodes
 
-{{% content "cloud-references/auto-disk-provisioning/shared/asg-limit-storage-nodes.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-asg-limit-storage-nodes.md" %}}
 
-{{% content "cloud-references/auto-disk-provisioning/shared/asg-examples-aws.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-asg-examples-aws.md" %}}
 
 ## EC2 Instance types
-A PX cluster can be deployed with a heterogeneous makeup of EC2 instance types.  Some of your nodes can be used for converged compute and storage, some for compute only and some for storage only.
+A Portworx cluster can be deployed with a heterogeneous makeup of EC2 instance types.  Some of your nodes can be used for converged compute and storage, some for compute only and some for storage only.
 
-Follow this guide to select your appropriate [instance type](https://aws.amazon.com/ec2/instance-types/).  Once you create an AMI template for an instance type, you will create multiple instances from that AMI.  Make sure your AMIs are available in each region that you want to run the PX cluster in.
+Follow this guide to select your appropriate [instance type](https://aws.amazon.com/ec2/instance-types/).  Once you create an AMI template for an instance type, you will create multiple instances from that AMI.  Make sure your AMIs are available in each region that you want to run the Portworx cluster in.
 
-{{<info>}} Since PX is a replicated block device, you can also use instance local store volumes for maximum performance.  However you **must** have PX replication turned on.{{</info>}}
+{{<info>}} Since Portworx is a replicated block device, you can also use instance local store volumes for maximum performance.  However you **must** have Portworx replication turned on.{{</info>}}
 
 ## Multi Zone Availability
 
-Since PX is a replicated storage solution, we recommend using multiple availability zones when creating your EC2 based cluster.  Follow this site for more information on geographical availability of your instances: [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
+Since Portworx is a replicated storage solution, we recommend using multiple availability zones when creating your EC2 based cluster.  Follow this site for more information on geographical availability of your instances: [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)

@@ -3,6 +3,7 @@ title: "Autopilot Install and Setup"
 linkTitle: "Autopilot Install and Setup"
 keywords: install, autopilot
 description: Instructions on installation, configuration and upgrade of Autopilot
+weight: 100
 ---
 
 ## Installing Autopilot
@@ -88,7 +89,7 @@ roleRef:
   name: autopilot-role
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -100,6 +101,9 @@ metadata:
   initializers:
     pending: []
 spec:
+  selector:
+    matchLabels:
+      tier: control-plane
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -122,7 +126,7 @@ spec:
         - -log-level
         - debug
         imagePullPolicy: Always
-        image: portworx/autopilot:v0.6.0
+        image: portworx/autopilot:1.0.0
         resources:
           requests:
             cpu: '0.1'
@@ -155,10 +159,10 @@ spec:
 
 ## Upgrading Autopilot
 
-To upgrade Autopilot, change the image tag in the deployment with the `kubectl set image` command. The following example upgrades Autopilot to the v0.6.0 version:
+To upgrade Autopilot, change the image tag in the deployment with the `kubectl set image` command. The following example upgrades Autopilot to the 1.0.0 version:
 
 ```text
-kubectl set image deployment.v1.apps/autopilot -n kube-system autopilot=portworx/autopilot:v0.6.0
+kubectl set image deployment.v1.apps/autopilot -n kube-system autopilot=portworx/autopilot:1.0.0
 ```
 ```output
 deployment.apps/autopilot image updated

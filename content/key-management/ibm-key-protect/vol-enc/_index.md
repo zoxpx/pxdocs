@@ -8,13 +8,13 @@ series: ibm-key-protect-uses
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 ## Creating and using encrypted volumes
 
 ### Using per volume secret keys
 
-There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to PX. Portworx uses IBM Key Protect APIs to generate a unique 256 bit passphrase. This passphrase will be used during encryption and decryption.
+There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to Portworx. Portworx uses IBM Key Protect APIs to generate a unique 256 bit passphrase. This passphrase will be used during encryption and decryption.
 
 To create a volume through pxctl, run the following command
 
@@ -42,7 +42,7 @@ Note that no `secret_key` needs to be passed in any of the commands.
 
 ### Using cluster wide secret key
 
-In this method a default cluster wide secret will be set for the Portworx cluster. Such a secret will be referenced by the user and Portworx as **default** secret. Any PVC request referencing the
+In this method a default cluster wide secret will be set for the Portworx cluster. Such a secret will be referenced by the user and Portworx as the **default** secret. Any PVC request referencing the
 secret name as `default` will use this cluster wide secret as a passphrase to encrypt the volume.
 
 To create a volume using a cluster wide secret through pxctl, run the following command
@@ -67,8 +67,8 @@ To attach and mount an encrypted volume through docker, run the following comman
 docker run --rm -it -v secure=true,secret_key=default,name=enc_vol:/mnt busybox
 ```
 
-Note the `secret_key` is set to the value `default` to indicate PX to use the cluster-wide secret key
+Note the `secret_key` is set to the value `default` to indicate Portworx to use the cluster-wide secret key
 
 {{<info>}}
-{{% content  "key-management/shared/shared-secret-warning-note.md" %}}
+{{% content  "shared/key-management-shared-secret-warning-note.md" %}}
 {{</info>}}

@@ -9,8 +9,8 @@ weight: 12
 
 ## Overview
 
-This feature lets you manage the **storage policies** of the _PX_ cluster.
-Once defined, a **storage policy** ensures that the volumes being created on the _PX_ cluster follow the same set of specs/rules.
+This feature lets you manage the **storage policies** of the Portworx cluster.
+Once defined, a **storage policy** ensures that the volumes being created on the Portworx cluster follow the same set of specs/rules.
 
 To learn about the available commands, type:
 
@@ -92,7 +92,7 @@ qapol           HA="2,Minimum" Encrypted="true" Sticky="true"...
 
 If a storage policy is set as the default one, all volumes created afterward will follow the parameters defined by the said storage policy.
 
-Here is how to set `devpol` as the default storage policy in your PX cluster:
+Here is how to set `devpol` as the default storage policy in your Portworx cluster:
 
 ```text
 pxctl storage-policy set-default devpol
@@ -182,7 +182,7 @@ As expected, the volume was being created with the properties inherited from the
 
 ## Remove the Default Storage Policy
 
-To remove the default storage policy from a PX cluster use: `pxctl storage-policy unset-default`
+To remove the default storage policy from a Portworx cluster use: `pxctl storage-policy unset-default`
 
 Let's look at an example.
 

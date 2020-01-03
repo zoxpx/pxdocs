@@ -9,9 +9,8 @@ noicon: true
 
 This page provides instructions for deploying Apache Kafka and Zookeeper with Portworx on Kubernetes.
 
-## Portworx StorageClass for Volume Provisioning {#portworx-storageclass-for-volume-provisioning}
-
-Portworx provides volume\(s\) to Zookeeper as well as Kafka. Create `portworx-sc.yaml` with Portworx as the provisioner.
+## The Portworx StorageClass for volume provisioning
+Portworx provides volume(s) to Zookeeper as well as Kafka. Create `portworx-sc.yaml` with Portworx as the provisioner.
 
 ```text
 kind: StorageClass
@@ -311,7 +310,7 @@ numChildren = 0
 
 ```
 
-### Install Kafka {#install-kafka}
+## Install Kafka {#install-kafka}
 
 Obtain the Zookeeper node FQDN to be used in the configuration for Kafka.
 
@@ -686,11 +685,11 @@ Kafka says, I am just a messenger
 
 ## Scaling {#scaling}
 
-Portworx runs as a Daemonset in Kubernetes. Hence when you add a new node to your kuberentes cluster you do not need to explicitly run Portworx on it.
+Portworx runs as a DaemonSet in Kubernetes. Hence when you add a new node to your kuberentes cluster you do not need to explicitly run Portworx on it.
 
 If you did use the [Terraform scripts](https://github.com/portworx/terraporx) to create a kubernetes cluster, you would need to update the minion count and apply the changes via Terraform to add a new Node.
 
-Portworx Cluster before scaling the kubernetes nodes.
+The Portworx cluster before scaling the Kubernetes nodes.
 
 ```text
 /opt/pwx/bin/pxctl cluster list
@@ -816,7 +815,7 @@ numChildren = 0
 
 ### Pod Failover for Zookeeper {#pod-failover-for-zookeeper}
 
-Killing the zookeeper java process in the container terminates the pod. You could alternatively delete the pod as well. Portworx volumes provides durable storage to the Zookeeper pods which are run as a statefulset. Get the earlier inserted value from zookeeper to verify the same.
+Killing the Zookeeper Java process in the container terminates the pod. You could alternatively delete the pod as well. The Portworx volumes provide durable storage to the Zookeeper pods which are run as a StatefulSet. Get the earlier inserted value from Zookeeper to verify the same.
 
 ```text
 kubectl exec zk-0 -- pkill java
@@ -852,7 +851,7 @@ numChildren = 0
 
 ### Pod Failover for Kafka {#pod-failover-for-kafka}
 
-Find the hosts of the running kafka cluster, cordon a node so that pods are scheduled on it. Kill a kafka pod and notice that it is scheduled on a newer node, joining the cluster back again with durable storage which is backed by the PX volume.
+Find the hosts of the running kafka cluster, cordon a node so that pods are scheduled on it. Kill a kafka pod and notice that it is scheduled on a newer node, joining the cluster back again with durable storage which is backed by the Portworx volume.
 
 ```text
 kubectl get pods -n kafka -o wide
@@ -936,6 +935,6 @@ There is no way for kubernetes to know which of the case is it. Hence Kubernetes
 
 For further information : [Statefulset Pod Deletion](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/)
 
-Decomissioning a kubernetes node deletes the node object form the APIServer. Before that you would want to decomission your Portworx node from the cluster. Follow the steps mentioned in [Decommision a Portworx node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node) Once done, delete the kubernetes node if it requires to be deleted permanently.
+Decomissioning a kubernetes node deletes the node object form the APIServer. Before that you would want to decomission your Portworx node from the cluster. Follow the steps mentioned in [Decommision a Portworx node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node) Once done, delete the Kubernetes node if it requires to be deleted permanently.
 
-{{% content "portworx-install-with-kubernetes/application-install-with-kubernetes/shared/discussion-forum.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}

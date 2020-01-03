@@ -7,26 +7,26 @@ description: Shared content about Portworx installation in OpenShift
 
 ### Airgapped clusters
 
-If your nodes are airgapped and don't have access to common internet registries, first follow [Airgapped clusters](/portworx-install-with-kubernetes/on-premise/airgapped) to fetch _Portworx_ images.
+If your nodes are airgapped and don't have access to common internet registries, first follow [Airgapped clusters](/portworx-install-with-kubernetes/on-premise/airgapped) to fetch Portworx images.
 
 ### Select nodes where Portworx will installed
 
 OpenShift Container Platform 3.9 started restricting where pods can be installed (see [reference](https://docs.openshift.com/container-platform/3.9/dev_guide/daemonsets.html)),
 Portworx Operator will install pods only on nodes that have the label `node-role.kubernetes.io/compute=true`.
 
-If you want to install _Portworx_ on additional nodes, you have 2 options.
+If you want to install Portworx on additional nodes, you have 2 options.
 
-1. To allow _Portworx_ pods on all nodes in let's say `kube-system` namespace run:
+1. To allow Portworx pods on all nodes in let's say `kube-system` namespace run:
 ```text
 oc patch namespace kube-system -p '{"metadata": {"annotations": {"openshift.io/node-selector": ""}}}'
 ```
 
-2. Alternatively, add the following label to the individual nodes where you want _Portworx_ to run:
+2. Alternatively, add the following label to the individual nodes where you want Portworx to run:
 ```text
 oc label nodes mynode1 node-role.kubernetes.io/compute=true
 ```
 
-### Add Portworx service accounts to the privileged security context
+### Add the Portworx service accounts to the privileged security context
 
 Portworx runs as a privileged container. Hence you need to add the Portworx service accounts to the privileged security context.
 

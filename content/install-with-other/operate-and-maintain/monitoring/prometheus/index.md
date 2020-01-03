@@ -1,10 +1,14 @@
 ---
-title: Portworx integration with prometheus
+title: Portworx integration with Prometheus
 keywords: prometheus, graph, stats
-meta-description: Looking to integrate Portworx with Prometheus? Learn to integrate PX storage with Prometheus for monitoring today!
+meta-description: Looking to integrate Portworx with Prometheus? Learn to integrate Portworx storage with Prometheus for monitoring today!
 ---
+{{<info>}}
+This document presents the **non-Kubernetes** method of monitoring your Portworx cluster with Prometheus. Please refer to the [Prometheus and Grafana](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) page if you are running Portworx on Kubernetes.
+{{</info>}}
 
-PX storage and network stats can easily be integrated with [**prometheus**](https://prometheus.io) or similar applications.
+
+Portworx storage and network stats can easily be integrated with [**prometheus**](https://prometheus.io) or similar applications.
 These stats are exported at port 9001; your application can poll http://&lt;IP_ADDRESS&gt;:9001/metrics to get their runtime values.
 
 ## Integration with Prometheus
@@ -14,13 +18,13 @@ Add your px node as a target in Prometheus config file:
 
 ![Prometheus Config File](/img/prometheus-config.png "Prometheus Config File")
 
-In the example above, our node has IP address of 54.173.138.1, so Prometheus is watching 54.173.138.1:9001 as its target. This can be any node in the PX cluster.
+In the example above, our node has IP address of 54.173.138.1, so Prometheus is watching 54.173.138.1:9001 as its target. This can be any node in the Portworx cluster.
 
-### Step 2: PX metrics to watch and building graphs with Prometheus
+### Step 2: Portworx metrics to watch and building graphs with Prometheus
 
-Once Prometheus starts watching px node, you will be able to see new portworx related metrics added to Prometheus.
+Once Prometheus starts watching your Portworx node, you will be able to see new Portworx related metrics added to Prometheus.
 
-![PX Metrics in Prometheus](/img/px-metrics-in-prometheus.png "PX Metrics in Prometheus")
+![Portworx Metrics in Prometheus](/img/px-metrics-in-prometheus.png "PX Metrics in Prometheus")
 
 You can now build graphs:
 
@@ -37,7 +41,7 @@ A curl request on port 9001 also shows the stats:
 ### Cluster stats:
 
 ```text
-px_cluster_cpu_percent: average CPU usage for the PX cluster nodes in percentage
+px_cluster_cpu_percent: average CPU usage for the Portworx cluster nodes in percentage
 px_cluster_disk_available_bytes: available storage in px cluster in bytes
 px_cluster_disk_utilized_bytes: used storage in px cluster in bytes
 px_cluster_memory_utilized_percent: average memory usage for the px cluster nodes
@@ -68,20 +72,17 @@ px_node_stats_used_mem: total - free
 
 ```text
 px_volume_capacity_bytes: volume size
-px_volume_depth_io: number of i/o operations being served at once
 px_volume_halevel: volume HA level
 px_volume_iops: operations per second
 px_volume_read_bytes: total bytes read from volume
 px_volume_reads: number of read operations served by the volume
-px_volume_readthroughput: bytes read per second
 px_volume_writes: number of write operations served by the volume
-px_volume_writethroughput: bytes written per second
 px_volume_written_bytes: total bytes written to the volume
-px_volume_dev_depth_io: I/Os currently in progress as reported by block device
+px_volume_dev_depth_io: number of I/O operations being served at once
 px_volume_dev_read_latency_secs: read latency for block device (total time spent reading/ number of reads)
-px_volume_dev_readthroughput: read throughput for block device
+px_volume_dev_readthroughput: read throughput for block device in bytes read per second
 px_volume_dev_write_latency_secs: write latency for block device (total time spent writing/ number of writes)
-px_volume_dev_write_throughput: write througput for block device
+px_volume_dev_write_throughput: write througput for block device in bytes written per second
 px_volume_iopriority: configured volume io_priority (0 = low, 1 = medium, 2 = high)
 px_volume_fs_capacity_bytes_bytes: total size reported by filesystem
 px_volume_fs_usage_bytes_bytes: used capacity reported by filesystem
@@ -100,6 +101,6 @@ px_disk_stats_used_bytes: used bytes
 px_disk_stats_write_bytes: write bytes
 px_disk_stats_write_seconds: write seconds
 px_disk_stats_writes: writes
-px_disk_stats_read_latency_seconds: read latency for disk  (read ms / number of reads)
-px_disk_stats_write_latency_seconds: write latency for disk (write ms / number of writes)
+px_disk_stats_read_latency_seconds: read latency for disk in seconds (read seconds / number of reads)
+px_disk_stats_write_latency_seconds: write latency for disk in seconds (write seconds / number of writes)
 ```

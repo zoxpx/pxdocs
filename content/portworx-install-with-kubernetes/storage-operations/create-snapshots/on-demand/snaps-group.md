@@ -13,7 +13,7 @@ This document will show you how to create group snapshots of Portworx volumes an
 
 {{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-v2-prereqs.md" %}}
 
-### Portworx and Stork Version
+### Portworx and Stork version
 
 This page describes the steps for group snapshots for Portworx version 2.0.2 or above. The Stork version also needs to be above 2.0.2.
 
@@ -276,7 +276,7 @@ Events:                    <none>
 
 ## Deleting group snapshots
 
-To delete group snapshots, you need to delete the `GroupVolumeSnapshot` that was used to create the group snapshots. STORK will delete all other volumesnapshots that were created for this group snapshot.
+To delete group snapshots, you need to delete the `GroupVolumeSnapshot` that was used to create the group snapshots. Stork will delete all other volumesnapshots that were created for this group snapshot.
 
 ```text
 kubectl delete groupvolumesnapshot cassandra-group-snapshot
