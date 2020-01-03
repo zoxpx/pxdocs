@@ -79,6 +79,6 @@ Ensure that these disks are created in the same zone as the GCP node group.
 
 ### Limiting storage nodes
 
-{{% content "cloud-references/auto-disk-provisioning/shared/asg-limit-storage-nodes.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-asg-limit-storage-nodes.md" %}}
 
-{{% content "cloud-references/auto-disk-provisioning/shared/asg-examples-gcp.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-asg-examples-gcp.md" %}}
