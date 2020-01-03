@@ -285,4 +285,4 @@ docker exec -it cass-`hostname` cassandra-stress mixed n=10000000               
 
 Generally Cassandra stress test should be run on every Cassandra containers about the same time to increase the load. And using the same keyspace on the same test run, requires to use different `sequence` to separate between each containers operation on the same keyspace `(e.g. 1..10000 and 10001..20000 and so on)`.
 
-{{% content "portworx-install-with-kubernetes/application-install-with-kubernetes/shared/discussion-forum.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}

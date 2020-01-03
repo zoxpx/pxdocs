@@ -1078,4 +1078,4 @@ Before that you would want to decomission your Portworx node from the cluster.
 Follow the steps mentioned in [Decommision a Portworx node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node)
 Once done, delete the kubernetes node if it requires to be deleted permanently.
 
-{{% content "portworx-install-with-kubernetes/application-install-with-kubernetes/shared/discussion-forum.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}
