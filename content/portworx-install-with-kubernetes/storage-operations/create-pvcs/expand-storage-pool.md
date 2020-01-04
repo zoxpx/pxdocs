@@ -16,7 +16,11 @@ You can expand your storage pools horizontally by adding drives or vertically by
 
 If you're operating on the cloud, you may choose to expand your pools to avoid potentially disruptive restriping operations associated with adding drives. If you're operating on-premises, you may not be able to increase the size of your disks if you don't have any remaining physical capacity.
 
-Once you've considered your options and chosen the best approach for your cluster, perform the resizing operation:
+Once you've considered your options and chosen the best approach for your cluster, you're ready to perform the resizing operation.
+
+{{<info>}}
+**NOTE:** Use caution when expanding pools on nodes containing repl1 volumes. If the target pool contains a repl1 volume, the volume becomes inaccessible. If the target pool contains metadata, all repl1 volumes on the node become inaccessible. 
+{{</info>}}
 
 ## Expand a pool automatically on the cloud
 
@@ -26,16 +30,18 @@ When you enter the `pxctl service pool expand` command, Portworx uses your cloud
 
 You can control the pool expand operation by specifying which operation you want to use: `resize-disk` or `add-disk`, or you can specify `auto` to let Portworx determine the best way to resize your storage pools based on your cloud provider.
 
-Perform the following steps expand a pool using the `pxctl service pool expand` command:
+##### Prerequisites
 
-### Prerequisites
+You must be running Portworx on one of the following cloud providers:
 
-* You must be running Portworx on one of the following cloud providers:
   * AWS
   * Azure
   * GCP
 
-To expand a pool  the `pxctl service pool expand` command with the following options:
+##### Expand a cloud-based pool automatically
+
+Expand a cloud-based pool by entering the `pxctl service pool expand` command with the following options:
+
 * The `--operation` option with the operation you wish to perform
 * The `--size` option with the minimum new size of the pool in GiB
 * The `--uid` option with the ID of the pool you wish to resize
