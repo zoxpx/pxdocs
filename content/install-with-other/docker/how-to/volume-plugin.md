@@ -37,24 +37,15 @@ Docker looks in its cache before sending the request to create to Portworx. For 
 
 #### Use of options in docker volume create
 
-```text
-Options:
-    --opt shared                        make this a globally shared namespace volume
-    --opt secure                        encrypt this volume using AES-256
-    --opt secret_key=value              secret_key to use to fetch secret_data for the PBKDF2 function
-    --opt size=value                    volume size in GB (default: 1)
-    --opt fs=value                      filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-    --opt block_size=value              block size in Kbytes (default: 32)
-    --opt repl=value                    replication factor [1..3] (default: 1)
-    --opt scale=value                   auto scale to max number [1..1024] (default: 1)
-    --opt io_priority=value             IO Priority: [high|medium|low] (default: "low")
-    --opt sticky                        sticky volumes cannot be deleted until the flag is disabled [on | off]
-    --opt snap_interval=value           snapshot interval in minutes, 0 disables snaps (default: 0)
-    --opt snap_schedule=value           snapshot schedule specification. PX 1.3 and higher. (See "Scheduled snapshots" below)
-    --opt aggregation_level=value       aggregation level: [1..3 or auto] (default: "1")
-    --opt nodes="value"                 semicolon-separated Node Id(s)
+You can include any desired volume options with the `volume create` command:
 
+```text
+--opt io_priority=high
 ```
+
+The following table lists what options you can include:
+
+{{% content "portworx-install-with-kubernetes/shared/volume-options.md" %}}
 
 #### Replicaset
 
