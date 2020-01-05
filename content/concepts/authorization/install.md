@@ -1,12 +1,16 @@
 ---
-title: Enabling Authorization
-description: Explains how to enable authorization in Portworx
+title: Enabling PX-Security
+description: Explains how to enable PX-Security in Portworx
 keywords: portworx, security, ownership, tls, rbac, claims, jwt, oidc
 weight: 30
 series: authorization
 ---
 
-This page will give an overview of how to enable authorization in Portworx. For specific details on how to enable authorization in Portworx for a given container orchestration system, please refer to the appropriate installation instructions in this site.
+This page provides guidance for enabling PX-Security in Portworx. 
+
+For specific details on enabling PX-Security in Portworx for a specific container
+orchestration system, refer to the relevant installation instructions on this
+site for the given orchestration system.
 
 ## Requirements
 To enable authorization in Portworx, administrators must provide the following
@@ -22,44 +26,55 @@ information:
         1. JWT issuer
         1. JWT shared secret or JWT public key
 
-## Setup
-The information above must be provided to Portworx configuration. Sensitive information like shared secrets can only be provided as environment variables.
-These variables can then be filled in automatically by _Secrets_ coming from your container orchestration system.
+## Setup Parameters
+
+The parameters above are required and must be provided to Portworx to enable
+PX-Security.
+
+Sensitive information like shared secrets can only be provided as environment
+variables.  These variables can be provided by _secrets_ through your container
+orchestration system.
+
 
 ### Environment variables
-The following environment variables can be provided to enable authorization:
 
-| Environment Variable | Required | Description |
-| -------------------- | -------- | ----------- |
+The following environment variables may be provided to enable PX-Security:
+
+| Environment Variable | Required? | Description |
+| -------------------- | --------- | ----------- |
 | `PORTWORX_AUTH_SYSTEM_KEY` | Yes | Shared secret used by Portworx to generate tokens for cluster communications |
 | `PORTWORX_AUTH_STORK_KEY` | Yes when using Stork | Share secret used by Stork to generate tokens to communicate with Portworx. The shared secret must match the value of `PX_SHARED_SECRET` environment variable in Stork. |
 | `PORTWORX_AUTH_JWT_SHAREDSECRET` | Optional | Self-generated token shared secret, if any |
 
 ### Configuration
-All other non-sensitive information can be provided to `px-runc` using the
-following command line arguments:
+
+All other non-sensitive information can be provided to `px-runc` as command-line 
+parameters with the following arguments:
 
 | Name | Description |
 | ---- | ----------- |
-| `oidc_issuer   <URL>` | Location of OIDC service (e.g. `https://accounts.google.com`). This must match the `iss` value in the claims of the tokens. |
-| `oidc_client_id <id>` | Client id provided by the OIDC |
-| `oidc_custom_claim_namespace <namespace>` | OIDC namespace for custom claims |
-| `jwt_issuer <issuer>` | JSON Web Token issuer (e.g. openstorage.io). This is the token issuer for your self-signed tokens. It must match the `iss` value in the claims of the tokens. |
-| `jwt_rsa_pubkey_file <file path>` | JSON Web Token RSA Public file path |
-| `jwt_ecds_pubkey_file <file path>` | JSON Web Token ECDS Public file path |
-| `username_claim <claim>` | Claim key from the token to use as the unique id of the user (<claim> is sub, email or name, default: sub) |
+| `-oidc_issuer <URL>` | Location of OIDC service (e.g. `https://accounts.google.com`). This *must* match the `iss` value in token claims |
+| `-oidc_client_id <id>` | Client ID provided by the OIDC |
+| `-oidc_custom_claim_namespace <namespace>` | OIDC namespace for custom claims |
+| `-jwt_issuer <issuer>` | JSON Web Token issuer (e.g. openstorage.io). This is the token issuer for your self-signed tokens. It must match the `iss` value in token claims |
+| `-jwt_rsa_pubkey_file <file path>` | JSON Web Token RSA Public file path |
+| `-jwt_ecds_pubkey_file <file path>` | JSON Web Token ECDS Public file path |
+| `-username_claim <claim>` | Name of the claim in the token to be used as the unique ID of the user (<claim> can be `sub`, `email` or `name`, default: `sub`) |
 
-## Upgrading from non-auth to auth
-A few steps must be taken to upgrade a cluster from non-auth to auth:
+## Enabling PX-Security on an existing Portworx cluster
 
-1. Make sure to add auth configurations as documented above.
-2. If you plan to pair and migrate your clusters, then you must generate a new cluster token. You can do this by executing 
-   
+The following steps are required to enable PX-Security an existing Portworx cluster that has not had PX-Security setup:
+
+1. Make sure to add the configuration setup as documented above on each node
+2. Ensure that *all* nodes participating in the Portworx cluster have PX-Security
+enabled. Mixing nodes with it enabled and disabled will prevent the cluster from
+being fully secure.
+3. If you plan to pair and migrate your clusters, then you must also generate a new
+cluster token. You can do this by executing 
+
     ```text
     pxctl cluster token reset
     ```
-    
-3. Ensure that all nodes are configured as auth-enabled. Mixed clusters of auth and non-auth nodes will allow for security vulnerabilities.
 
 ## Related videos 
 
