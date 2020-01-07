@@ -5,6 +5,6 @@ keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent 
 description: Find out how to prepare Portworx within a OpenShift cluster and have Portworx provide highly available volumes to any application deployed via Kubernetes.
 ---
 
-{{% content "portworx-install-with-kubernetes/on-premise/openshift/shared/support-notice.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-on-premise-openshift-support-notice.md" %}}
 
-{{% content "portworx-install-with-kubernetes/on-premise/openshift/shared/1-prepare.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-on-premise-openshift-1-prepare.md" %}}

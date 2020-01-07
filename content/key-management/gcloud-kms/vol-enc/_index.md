@@ -75,7 +75,7 @@ Note the `secret_key` is set to the value `default` to indicate Portworx to use 
 
 #### Step1: Create a Named Secret
 
-{{% content "key-management/gcloud-kms/shared/named-secrets.md" %}}
+{{% content "shared/key-management-gcloud-kms-named-secrets.md" %}}
 
 #### Step2: Use the Named Secret for encrypting volumes
 

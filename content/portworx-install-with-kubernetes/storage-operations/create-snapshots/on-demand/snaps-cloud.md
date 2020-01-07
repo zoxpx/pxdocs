@@ -20,7 +20,7 @@ Kubernetes cluster. If you fetched the Portworx specs from the Portworx spec gen
 Cloud snapshots using below method is supported in Portworx version 1.4 and above.
 Cloud snapshots (for aggregated volumes) using below method is supported in Portworx version 2.0 and above.
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-cloud-snap-creds-prereq.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-cloud-snap-creds-prereq.md" %}}
 
 ## Creating cloud snapshots
 
@@ -30,7 +30,7 @@ With cloud snapshots, you can either snapshot individual PVCs one by one or snap
 
 ## Creating PVCs from  cloud snapshots
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-restore-pvc-from-snap.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-restore-pvc-from-snap.md" %}}
 
 ## References
 

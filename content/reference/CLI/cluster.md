@@ -174,7 +174,7 @@ OPTIONS:
 
 ## Enabling optimized restores
 
-{{% content "reference/CLI/shared/optimized-restores-definition.md" %}}
+{{% content "shared/reference-CLI-optimized-restores-definition.md" %}}
 
 First, let's take a look at the available subcommands and flags:
 

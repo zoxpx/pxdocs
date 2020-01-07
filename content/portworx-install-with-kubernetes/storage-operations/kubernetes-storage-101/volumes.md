@@ -47,7 +47,7 @@ Some fields like `allowVolumeExpansion` cannot be added after the storage class 
 
 Let's take a look at an example.
 
-{{% content "portworx-install-with-kubernetes/shared/resize-portworx-pvc.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-resize-portworx-pvc.md" %}}
 
 ## PersistentVolumeClaim (PVC)
 

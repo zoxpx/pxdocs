@@ -45,7 +45,7 @@ You can include any desired volume options with the `volume create` command:
 
 The following table lists what options you can include:
 
-{{% content "portworx-install-with-kubernetes/shared/volume-options.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-volume-options.md" %}}
 
 #### Replicaset
 

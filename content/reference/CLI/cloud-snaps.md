@@ -676,7 +676,7 @@ If the restore command fails, it shows the reason why it failed.
 Note that the restored volume will not be attached or mounted automatically.
 
 {{<info>}}
-{{% content "reference/CLI/shared/optimized-restores-definition.md" %}}
+{{% content "shared/reference-CLI-optimized-restores-definition.md" %}}
 For more details about optimized restores, visit the [Enabling optimized restores](/reference/cli/cluster/#enabling-optimized-restores) section.
 {{</info>}}
 

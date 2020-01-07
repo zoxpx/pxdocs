@@ -27,4 +27,4 @@ With local snapshots, you can either snapshot individual PVCs one by one or snap
 
 ## Creating PVCs from snapshots
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-restore-pvc-from-snap.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-restore-pvc-from-snap.md" %}}

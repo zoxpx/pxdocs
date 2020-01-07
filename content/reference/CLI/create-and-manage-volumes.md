@@ -541,9 +541,9 @@ In this example, the volume is mounted in two containers via the `/directory1` a
 
 ## Volume snapshots
 
-{{% content "reference/CLI/shared/intro-snapshots.md" %}}
+{{% content "shared/reference-CLI-intro-snapshots.md" %}}
 
-{{% content "reference/CLI/shared/creating-snapshots.md" %}}
+{{% content "shared/reference-CLI-creating-snapshots.md" %}}
 
 Snapshots are read-only. To restore a volume from a snapshot, use the `pxctl volume restore` command.
 
@@ -610,7 +610,7 @@ Volume clone successful: 55898055774694370
 
 ## Volume Restore
 
-{{% content "reference/CLI/shared/restore-volume-from-snapshot.md" %}}
+{{% content "shared/reference-CLI-restore-volume-from-snapshot.md" %}}
 
 
 ### Related topics

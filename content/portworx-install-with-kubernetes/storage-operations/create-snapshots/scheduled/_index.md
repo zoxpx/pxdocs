@@ -14,7 +14,7 @@ series: k8s-storage-snapshots
 
 Stork version 2.2 or above is required.
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-cloud-snap-creds-prereq.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-cloud-snap-creds-prereq.md" %}}
 
 ### Storkctl
 

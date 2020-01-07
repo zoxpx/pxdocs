@@ -103,7 +103,7 @@ In this method Portworx will use the named secret created by you for encrypting 
 
 #### Step 1: Create a Named Secret
 
-{{% content "key-management/gcloud-kms/shared/named-secrets.md" %}}
+{{% content "shared/key-management-gcloud-kms-named-secrets.md" %}}
 
 #### Step 2: Create a Storage Class
 

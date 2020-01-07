@@ -6,11 +6,11 @@ description: Learn how to manage snapshots using pxctl
 weight: 4
 ---
 
-{{% content "reference/CLI/shared/intro-snapshots.md" %}}
+{{% content "shared/reference-CLI-intro-snapshots.md" %}}
 
 ## Creating snapshots
 
-{{% content "reference/CLI/shared/creating-snapshots.md" %}}
+{{% content "shared/reference-CLI-creating-snapshots.md" %}}
 
 ## Listing Snapshots
 
@@ -143,7 +143,7 @@ Only detached snapshots can be deleted.
 
 ## Restoring snapshots
 
-{{% content "reference/CLI/shared/restore-volume-from-snapshot.md" %}}
+{{% content "shared/reference-CLI-restore-volume-from-snapshot.md" %}}
 
 ## Schedule policies
 
