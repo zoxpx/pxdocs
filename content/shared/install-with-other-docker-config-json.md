@@ -1,6 +1,7 @@
 ---
 title: Reference for the Portworx config.json configuration file
 description: Reference for the Portworx config.json configuration file
+keywords: Install, docker, configuration file
 hidden: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Storage on demand
 linkTitle: Storage on demand
-keywords: portworx, container, Nomad, storage,
+keywords: nomad, inline volume creation, storage on demand
 description: Learn how to use Portworx in order to enable applications to have storage provisioned on demand rathern than pre-provisioned.
 weight: 3
 series: px-nomad-useful-information

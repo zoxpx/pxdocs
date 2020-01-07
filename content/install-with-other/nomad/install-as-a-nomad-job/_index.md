@@ -1,7 +1,7 @@
 ---
 title: Install Portworx as a Nomad job
 linkTitle: Install as a Nomad job
-keywords: portworx, container, Nomad, storage
+keywords: Install, nomad job
 description: Learn how to install Portworx using Nomad job.
 weight: 1
 series: px-as-a-nomad-job

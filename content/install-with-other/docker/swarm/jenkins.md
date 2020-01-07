@@ -1,6 +1,6 @@
 ---
 title: Deploy Jenkins on Swarm with Portworx
-keywords: portworx, jenkins
+keywords: Install, jenkins, swarm, docker
 description: Use Portworx to simplify the deployment of Jenkins running as a container. Check out our example to see for yourself!
 weight: 3
 linkTitle: Jenkins on Swarm with Portworx

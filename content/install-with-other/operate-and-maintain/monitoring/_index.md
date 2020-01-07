@@ -1,6 +1,6 @@
 ---
 title: "Monitoring your cluster"
-keywords: portworx, node_exporter, cadvisor prometheus, grafana, alertmanager, cluster, storage
+keywords: monitoring, prometheus, alert manager, grafana, datadog
 description: How to monitor your Portworx cluster.
 weight: 2
 ---

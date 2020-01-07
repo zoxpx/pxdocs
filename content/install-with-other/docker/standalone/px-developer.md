@@ -1,6 +1,6 @@
 ---
 title: Run Portworx Developer Edition with Docker
-keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
+keywords: px developer edition, docker
 description: Learn how to run Portworx Developer Edition for use with the Docker command line
 hidden: true
 ---

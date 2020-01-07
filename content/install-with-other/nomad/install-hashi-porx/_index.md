@@ -1,7 +1,7 @@
 ---
 title: Hashi-porx
 linkTitle: Full-stack deployment through Hashi-porx
-keywords: portworx, container, Nomad, storage, consul, aws
+keywords: Install, Hashi-Porx, Nomad, full-stack, consul, nomad, vault, Hashi UI, Portworx
 description: Use Hashi-porx for a full-stack deployment of consul, nomad, vault, the Hashi UI, and Portworx.
 weight: 3
 series: px-install-on-nomad-with-others

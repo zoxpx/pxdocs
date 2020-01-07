@@ -1,11 +1,10 @@
 ---
 title: Microsoft SQL Server
-keywords: portworx, px-developer, microsoft sql server, database, cluster, storage
+keywords: install, microsoft sql server, ms-sql, docker
 description: Follow this guide to learn how use Microsoft SQL Server with Portworx.
 weight: 2
 noicon: true
 ---
-
 
 This page provides instructions for deploying Microsoft SQL Server \(MS-SQL\) with Portworx on Kubernetes.
 

@@ -1,7 +1,7 @@
 ---
 title: Install Portworx with Ansible
 linkTitle: Install with Ansible
-keywords: portworx, container, Nomad, storage, Ansible
+keywords: Install, Nomad, Ansible
 description: Instructions for installing Portworx on Nomad with Ansible.
 weight: 1
 series: px-install-on-nomad-with-others

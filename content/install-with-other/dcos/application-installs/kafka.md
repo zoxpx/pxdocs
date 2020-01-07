@@ -1,7 +1,7 @@
 ---
 title: Kafka
 description: Portworx can enable persistent data streams for kafka clusters. To learn how with these steps and tips, try it for yourself today!
-keywords: portworx, px-developer, cassandra, database, cluster, storage
+keywords: Install, Kafka, DCOS, DC/OS
 ---
 
 {{<info>}}

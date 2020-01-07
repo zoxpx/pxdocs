@@ -1,14 +1,13 @@
 ---
 title: Install Portworx Universe on DC/OS for air-gapped clusters
 description: Find out how to deploy Portworx Universe on DC/OS for air-gapped clusters
-keywords: portworx, mesos, mesosphere, air-gapped, local, universe, DCOS, DC/OS
+keywords: Install, air gapped, DCOS, DC/OS, Mesosphere, local universe
 linkTitle: Install Portworx Local Universe
 weight: 3
 noicon: true
 ---
 
-This guide will help you install the Portworx Universe for DC/OS which contains the Portworx service as well as other services
-inlcuding Hadoop, Cassandra, Elastic Search, Kafka, etc which can utilize Portworx Volumes.
+This guide will help you install the Portworx Universe for DC/OS which contains the Portworx service as well as other services inlcuding Hadoop, Cassandra, Elastic Search, Kafka, etc which can utilize Portworx Volumes.
 
 This guide is based on the [DC/OS guide](https://docs.mesosphere.com/1.12/administering-clusters/deploying-a-local-dcos-universe) to install a local universe.
 

@@ -1,7 +1,7 @@
 ---
 title: Migrate Portworx installed using Docker to OCI/runc
 description: Learn how to migrate Portworx installed using Docker to OCI/runc
-keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
+keywords: Migrate, Docker, OCI, runc
 hidden: true
 ---
 

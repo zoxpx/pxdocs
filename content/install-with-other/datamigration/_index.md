@@ -1,7 +1,7 @@
 ---
 title: Data Migration
 linkTitle: Data Migration
-keywords: cloud, backup, restore, snapshot, DR, migration, Data migration
+keywords: px-motion, migration, migrate volumes, migrate across clusters, cloud, backup, restore, snapshot, DR
 description: How to migrate volumes across clusters when running Portworx on other orchestrators.
 series: datamigration
 weight: 12

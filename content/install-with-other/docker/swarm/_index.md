@@ -1,6 +1,6 @@
 ---
 title: Install on Docker Swarm
-keywords: portworx, container, storage, Docker, swarm
+keywords: Install, Docker, Swarm
 description: Learn how to use Portworx to provide storage for your stateful services running on Docker Swarm.
 weight: 2
 noicon: true

@@ -1,14 +1,13 @@
 ---
 title: Constraining Applications to Portworx nodes
 description: Learn how to use constraints on your DCOS cluster to control where Mesos schedules your stateful applications. Read our guide today!
-keywords: portworx, PX-Developer, container, Mesos, Mesosphere, constraints
+keywords: constraints, constraining applications, DCOS, DC/OS, Mesos, Mesosphere, 
 weight: 3
 linkTitle: Constraining Applications to Portworx nodes
 ---
 
 Whenever possible, Portworx should be deployed on all nodes within a Mesos/Mesosphere/DCOS cluster.
-Portworx clusters can scale up to 1000 nodes. Portworx clusters can also include nodes that contribute no storage,
-but operate as "head-only" nodes to facilitate [auto-scaling groups](/portworx-install-with-kubernetes/cloud/aws/aws-asg).
+Portworx clusters can scale up to 1000 nodes. Portworx clusters can also include nodes that contribute no storage, but operates as "head-only" nodes to facilitate [auto-scaling groups](/portworx-install-with-kubernetes/cloud/aws/aws-asg).
 
 However, when Portworx cannot be installed on all nodes, Mesos 'constraints' should be used
 to ensure that services depending on Portworx will only get scheduled on nodes

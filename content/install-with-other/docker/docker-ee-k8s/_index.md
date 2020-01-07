@@ -1,6 +1,6 @@
 ---
 title: Install on Kubernetes with Docker EE
-keywords: portworx, container, storage, Docker, kubernetes, k8s
+keywords: Install, Docker EE, kubernetes, k8s
 description: Learn how to use Portworx to provide storage for your stateful services running on Kubernetes with Docker EE.
 weight: 2
 noicon: true
@@ -39,7 +39,7 @@ docker image pull docker/ucp:3.1.2
 docker container run --rm -it --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:3.1.2 install --host-address <node-ip> --interactive
 ```
 
-{{<info>}}NOTE: Do not init swarm, UCP with do that for you.{{</info>}}
+{{<info>}}Do not init swarm, UCP with do that for you.{{</info>}}
 
 #### Login to UCP
 

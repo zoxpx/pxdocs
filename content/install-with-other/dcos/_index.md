@@ -1,7 +1,7 @@
 ---
 title: DCOS
 description: Documentation on using Portworx in Mesosphere DC/OS environments
-keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storage, DCOS
+keywords: Install, Mesosphere DC/OS, DCOS, Mesos, Mesosphere, Marathon
 weight: 1
 hideSections: true
 series: px-other
