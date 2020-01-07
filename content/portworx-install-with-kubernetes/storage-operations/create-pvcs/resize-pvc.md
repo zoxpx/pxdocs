@@ -17,4 +17,4 @@ This document describes how to dynamically resize a volume (PVC) using Kubernete
 
 ## Example
 
-{{% content "portworx-install-with-kubernetes/shared/resize-portworx-pvc.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-resize-portworx-pvc.md" %}}

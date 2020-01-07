@@ -31,6 +31,6 @@ To install Portworx with OpenShift, you will first generate `StorageCluster` spe
 
 If you're not using the OpenShift console, you can create the StorageCluster object using the `oc` command:
 
-{{% content "portworx-install-with-kubernetes/on-premise/openshift/shared/apply-the-spec-oc.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-on-premise-openshift-apply-the-spec-oc.md" %}}
 
 {{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}

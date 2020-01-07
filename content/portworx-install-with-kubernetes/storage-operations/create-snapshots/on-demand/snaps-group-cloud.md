@@ -10,9 +10,9 @@ This document will show you how to create group cloud snapshots of Portworx volu
 
 ## Pre-requisites
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-v2-prereqs.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-group-snap-v2-prereqs.md" %}}
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-cloud-snap-creds-prereq.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-cloud-snap-creds-prereq.md" %}}
 
 ### Portworx and Stork version
 
@@ -152,7 +152,7 @@ spec:
 
 ## Restoring from group cloud snapshots
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-restore.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-group-snap-restore.md" %}}
 
 ## Examples
 
@@ -160,7 +160,7 @@ spec:
 
 In below example, we will take a group snapshot for all PVCs in the *default* namespace and that have labels *app: cassandra* and back it up to the configured cloud S3 endpoint in the Portworx cluster.
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-cassandra-step-1-2.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-group-snap-cassandra-step-1-2.md" %}}
 
 #### Step 3: Take the group cloud snapshot
 
