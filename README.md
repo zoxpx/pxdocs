@@ -25,7 +25,9 @@ Following is a table that maps each version in the dropdown to the git branch in
 
 | Git branch | Portworx version                    |
 |------------|-------------------------------------|
-| master     | 2.2.x                               |
+| master     | 2.4.x                               |
+| 2.3        | 2.3.x                               |
+| 2.2        | 2.2.x                               |
 | 2.1        | 2.1.x                               |
 | 2.0.3      | 2.0.3.x                             |
 | 2.0        | 2.0.1, 2.0.2                        |
