@@ -1,20 +1,20 @@
 ---
 title: Measuring Performance
 description: Learn how to measure the performance of Cassandra with Portworx.
-keywords: portworx, containers, cassandra, storage
+keywords: cassandra, measuring performance, stress testing, kubernetes, k8s
 ---
 
-## About this Guide {#about-this-guide}
+## About this Guide
 
-This guide is to measure the performance of running Cassandra with PX volumes. We use Docker directly on EC2 instances. You may chose to use a different way of starting Cassandra and creating Portworx volumes depending on your orchestration environment \(Kubernetes, Mesosphere or Swarm\). Running [Cassandra in Docker containers](https://portworx.com/use-case/cassandra-docker-container/) is one of the most common uses of Portworx.
+This guide is to measure the performance of running Cassandra with Portworx volumes. We use Docker directly on EC2 instances. You may chose to use a different way of starting Cassandra and creating Portworx volumes depending on your orchestration environment \(Kubernetes, Mesosphere or Swarm\). Running [Cassandra in Docker containers](https://portworx.com/use-case/cassandra-docker-container/) is one of the most common uses of Portworx.
 
-## Testing Cassandra on PX {#testing-cassandra-on-px}
+## Testing Cassandra on Portworx
 
-Below are the instructions to test and verify Cassandra’s Performance with PX volumes in a Docker environment without a scheduler. We will create three Cassandra docker containers on three machines and each Cassandra container will expose its ports. The test is conducted in AWS, using three r4.2xlarge instance and each with 60GB Ram and 128GB disk for the PX cluster.
+Below are the instructions to test and verify Cassandra’s Performance with Portworx volumes in a Docker environment without a scheduler. We will create three Cassandra docker containers on three machines and each Cassandra container will expose its ports. The test is conducted in AWS, using three r4.2xlarge instance and each with 60GB Ram and 128GB disk for the Portworx cluster.
 
-### Setup for the test {#setup-for-the-test}
+### Setup for the test
 
-In each of the AWS instance launch PX container and specify the etcd IP e.g. `172.31.45.219` and disk volume e.g.`/dev/xvdb`
+In each of the AWS instance launch the Portworx container and specify the etcd IP e.g. `172.31.45.219` and disk volume e.g.`/dev/xvdb`
 
 ```text
 docker run --restart=always --name px -d --net=host      \
@@ -31,23 +31,26 @@ docker run --restart=always --name px -d --net=host      \
              portworx/px-enterprise -daemon -k etcd://172.31.45.219:4001 -c PXCassTest001 -s /dev/xvdb
 ```
 
-Once the PX cluster is created, create three PX volumes with `size=60GB` that is local to each node. On each of the AWS instance run the following `pxctl` command:
+Once the Portworx cluster is created, create three Portworx volumes with `size=60GB` that is local to each node. On each of the AWS instance run the following `pxctl` command:
 
 ```text
-/opt/pwx/bin/pxctl volume create CVOL-`hostname` --size 60 --nodes LocalNode
+pxctl volume create CVOL-`hostname` --size 60 --nodes LocalNode
 ```
 
-Verify the created PX volumes:
+Verify the new Portworx volumes:
 
 ```text
-/opt/pwx/bin/pxctl volume list
+pxctl volume list
+```
+
+```output
 ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 999260470129557090      CVOL-ip-172-31-32-188   60 GiB  1       no      no              LOW             1       up - detached
 973892635505817385      CVOL-ip-172-31-45-219   60 GiB  1       no      no              LOW             1       up - detached
 446982770798983273      CVOL-ip-172-31-47-121   60 GiB  1       no      no              LOW             1       up - detached
 ```
 
-Create Cassandra container\(s\) using the created PX volumes. In our test case; we have three AWS instances.
+Create Cassandra container(s) using the new Portworx volumes. In our test case; we have three AWS instances.
 
 Set IP addresse variables of the three nodes on each instance:
 
@@ -59,7 +62,7 @@ NODE_3_IP=172.31.47.121
 
 {{<info>}}
 **Note:**
-Download [the `cassandra_conf.tar` file](https://s3.amazonaws.com/rlui-dcos-hadoop/cassandra_conf.tar) which includes cassandra.yaml file which is using TCP port 17000 instead of 7000. The reason to use custom cassandra.yaml file is because as of this writing, PX is occupying the port 7000, and the default Cassandra data and storage port is also on port 7000. Use this custom cassandra configuration to avoid this conflict. Download the cassandra\_conf.tar file and extract it on `/etc` folder. This step is not required if you are running with Kubernets or Mesosphere.
+Download [the `cassandra_conf.tar` file](https://s3.amazonaws.com/rlui-dcos-hadoop/cassandra_conf.tar) which includes cassandra.yaml file which is using TCP port 17000 instead of 7000. The reason to use custom cassandra.yaml file is because as of this writing, Portworx is occupying the port 7000, and the default Cassandra data and storage port is also on port 7000. Use this custom cassandra configuration to avoid this conflict. Download the cassandra\_conf.tar file and extract it on `/etc` folder. This step is not required if you are running with Kubernets or Mesosphere.
 {{</info>}}
 
 For each AWS instance do a docker run and launch the Cassandra latest version Docker container.
@@ -99,7 +102,10 @@ docker run  --name cass-`hostname` -e CASSANDRA_BROADCAST_ADDRESS=`hostname -i` 
 After all three Cassandra containers started, verify the status from one of the nodes by running `nodetool status`
 
 ```text
-$ docker exec -it cass-ip-172-31-32-188 sh -c 'nodetool status'
+docker exec -it cass-ip-172-31-32-188 sh -c 'nodetool status'
+```
+
+```output
      Datacenter: datacenter1
      =======================
      Status=Up/Down
@@ -110,7 +116,7 @@ $ docker exec -it cass-ip-172-31-32-188 sh -c 'nodetool status'
      UN  172.31.47.121  108.29 KiB  256          68.3%             26ffac02-2975-4921-b5d0-54f3274bfe84  rack1
 ```
 
-#### Running the test {#running-the-test}
+#### Running the test
 
 Run Cassandra stress `write` testing with 10K inserts into the target keyspace `TestKEYSPACE` and 4 threads `-rate threads=4`. On each node, start the Cassandra stress test about the same time. Below each node’s Cassandra container is inserting object into the same keyspace but at different sequence `e.g. 1 .. 10000`.
 
@@ -285,4 +291,4 @@ docker exec -it cass-`hostname` cassandra-stress mixed n=10000000               
 
 Generally Cassandra stress test should be run on every Cassandra containers about the same time to increase the load. And using the same keyspace on the same test run, requires to use different `sequence` to separate between each containers operation on the same keyspace `(e.g. 1..10000 and 10001..20000 and so on)`.
 
-{{% content "portworx-install-with-kubernetes/application-install-with-kubernetes/shared/discussion-forum.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}

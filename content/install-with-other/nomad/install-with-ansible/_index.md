@@ -1,7 +1,7 @@
 ---
 title: Install Portworx with Ansible
 linkTitle: Install with Ansible
-keywords: portworx, container, Nomad, storage, Ansible
+keywords: Install, Nomad, Ansible
 description: Instructions for installing Portworx on Nomad with Ansible.
 weight: 1
 series: px-install-on-nomad-with-others
@@ -9,13 +9,18 @@ noicon: true
 hidden: true
 ---
 
+{{<info>}}
+This document presents a **non-Kubernetes** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
+
+
 ## Installing
 
 To install with **Ansible**, please use the [Ansible Galaxy Role](https://galaxy.ansible.com/portworx/portworx-defaults/)
 
 ## Upgrading
 
-If you have installed Portworx with Ansible, _Portworx_ needs to be upgraded through the CLI on a node-by-node basis. Please see the [upgrade instructions](/install-with-other/operate-and-maintain)
+If you have installed Portworx with Ansible, Portworx needs to be upgraded through the CLI on a node-by-node basis. Please see the [upgrade instructions](/install-with-other/operate-and-maintain)
 
 ## Scaling
 

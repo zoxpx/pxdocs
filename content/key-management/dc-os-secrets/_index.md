@@ -1,7 +1,7 @@
 ---
 title: DC/OS Secrets
 logo: /logos/dcos.png
-keywords: Portworx, containers, storage, dcos
+keywords: DC/OS Secrets, DCOS, Volume Encryption, Cloud Credentials, Auth Tokens
 description: Instructions on using DCOS secrets key management with Portworx
 weight: 3
 disableprevnext: true
@@ -12,14 +12,14 @@ noicon: true
 Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets, credentials, and auth tokens. This guide will help you configure Portworx to connect to DC/OS Secrets. DC/OS Secrets can then be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
 
 {{<info>}}
-**Note:**  Secrets is an DC/OS Enterprise only feature
+Secrets is an DC/OS Enterprise only feature
 {{</info>}}
 
 {{<info>}}
-**Note:**  Supported from PX Enterprise 1.4 onwards
+**Note:**  Supported from PX-Enterprise 1.4 onwards
 {{</info>}}
 
-## Configuring DC/OS Secrets with Portworx {#configuring-dcos-secrets-with-portworx}
+## Configuring DC/OS Secrets with Portworx
 
 ### Configuring permissions for Secrets
 
@@ -29,7 +29,7 @@ To access secrets, Portworx needs credentials of a user. This user should have p
 dcos security org users grant <username> dcos:secrets:default:/pwx/secrets/* full
 ```
 
-### Enabling Secrets in Portworx package
+### Enabling Secrets in the Portworx package
 
 During installation or when updating an existing Portworx framework, enable the feature from Secrets section.
 
@@ -41,11 +41,10 @@ The `dcos username secret` and `dcos password secret` are the paths to secrets, 
 
 
 {{<info>}}
-**Note:**
 If you want Portworx framework to access the username and password secrets path, the path should have prefix same as Portworx service name \(default service name is `portworx`\). Refer [DC/OS docs to know more](https://docs.mesosphere.com/1.12/security/ent/#spaces-for-secrets).
 {{</info>}}
 
-## Key generation with DC/OS {#key-generation-with-dcos}
+## Key generation with DC/OS
 
 The following sections describe the key generation process with Portworx and DC/OS which can be used for encrypting volumes. For more information about encrypted volumes, [click here](/reference/cli/encrypted-volumes).
 
@@ -68,9 +67,9 @@ A cluster wide secret key is a common key that can be used to encrypt all your v
 
 This command needs to be run just once for the cluster. If you have added the cluster secret through the config.json, the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in _config.json_ will be ignored for the one set through the CLI.
 
-## \(Optional\) Authenticating with DC/OS Secrets using Portworx CLI
+## (Optional) Authenticating with DC/OS Secrets using Portworx CLI
 
-If you do not wish to pass the DC/OS credentials through the framework, you can authenticate Portworx with DC/OS Secrets using Portworx cli. Run the following command:
+If you do not wish to pass the DC/OS credentials through the framework, you can authenticate Portworx with DC/OS Secrets using the Portworx CLI. Run the following command:
 
 ```text
 /opt/pwx/bin/pxctl secrets dcos login \

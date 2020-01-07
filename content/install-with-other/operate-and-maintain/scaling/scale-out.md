@@ -1,12 +1,17 @@
 ---
-title: "Scaling out an existing PX Cluster"
-keywords: scale-up, storage, add new nodes
-description: This document illustrates how to add a new node with attached storage to a PX cluster.  Scale out your cluster today!
+title: "Scaling out an existing Portworx Cluster"
+keywords: scale out, scaling
+description: This document illustrates how to add a new node with attached storage to a Portworx cluster.  Scale out your cluster today!
 ---
 
-## Scaling out an existing PX Cluster
+{{<info>}}
+This document presents the **non-Kubernetes** method of scaling your Portworx cluster. Please refer to the [Scale or Restrict](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/scale-or-restrict/) page if you are running Portworx on Kubernetes.
+{{</info>}}
 
-This document illustrates how to add a new node with attached storage to a PX cluster
+
+## Scaling out an existing Portworx Cluster
+
+This document illustrates how to add a new node with attached storage to a Portworx cluster
 
 ### Display current cluster status
 
@@ -59,12 +64,12 @@ size=100G features='0' hwhandler='1 alua' wp=rw
 
 The storage is available at `/dev/dm-1`.
 
-### Add this node to the PX Cluster
+### Add this node to the Portworx Cluster
 
-Below is an example of how to run PX in a new node so it joins an existing cluster.
+Below is an example of how to run Portworx in a new node so it joins an existing cluster.
 * Follow the instructions in the Installing
-  [PX as OCI](/install-with-other/docker/standalone)
-  page on starting PX in a new node
+  [Portworx as OCI](/install-with-other/docker/standalone)
+  page on starting Portworx in a new node
 * Provide cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID
   to which we want to add the new node
 * Use the same CLUSTER_ID as the ID of the cluster which you want the node to join for the -c parameter

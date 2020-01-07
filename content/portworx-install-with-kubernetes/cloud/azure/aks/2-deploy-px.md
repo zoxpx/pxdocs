@@ -1,6 +1,6 @@
 ---
 title: 2. Deploy Portworx on AKS
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, aks, Azure
+keywords: on cloud, AKS, Azure Kubernetes Service, Microsoft, Kubernetes, k8s
 description: Learn about applying the spec with Portwork on Azure Kubernetes Service.
 weight: 2
 ---
@@ -22,8 +22,8 @@ secret/px-azure created
 
 When you generate the spec in the next step, the Portworx pod will fetch the Azure environment variables from this secret.
 
-{{% content "portworx-install-with-kubernetes/shared/1-generate-the-spec-footer.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-shared-1-generate-the-spec-footer.md" %}}
 
-{{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
 
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}

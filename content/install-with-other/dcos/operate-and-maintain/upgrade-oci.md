@@ -1,10 +1,14 @@
 ---
 title: Upgrade Portworx on DCOS
 meta-description: This guide will help upgrading Portworx in DC/OS using the Portworx framework
-keywords: portworx, container, dcos, storage, Docker, mesos, upgrade
+keywords: Upgrade, dcos, dc/os, mesosphere
 weight: 2
 linkTitle: Upgrade
 ---
+
+{{<info>}}
+This document presents the **DC/OS** method of upgrading Portworx. Please refer to the [Upgrade Portworx on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/) page if you are running Portworx on Kubernetes.
+{{</info>}}
 
 This guide walks through upgrading Portworx deployed on DCOS through the framework available in the DCOS catalog. If you are using a Portworx framework version older than 1.2*, refer to [this guide](/install-with-other/dcos/operate-and-maintain/upgrade) to upgrade Portworx.
 

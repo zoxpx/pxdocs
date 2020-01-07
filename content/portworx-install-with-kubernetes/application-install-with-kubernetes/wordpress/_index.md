@@ -1,14 +1,14 @@
 ---
 title: How to run WordPress and MySQL on Kubernetes on Portworx
 linkTitle: Wordpress
-keywords: portworx, Wordpress, container, Kubernetes, storage
+keywords: Wordpress, install, kubernetes, k8s, MySQL
 description: Learn how to deploy a Wordpress site with MySQL using Kubernetes
 noicon: true
 ---
 
 ## Summary
 
-This document explains about how to deploy a WordPress site and a MySQL database using Kubernetes. Portworx solves two critical issues for WordPress running in containers.  Running a high performance, HA MySQL database and using shared volumes for file uploads.
+This document explains about how to deploy a WordPress site and a MySQL database using Kubernetes. Portworx solves two critical issues for WordPress running in containers. Running a high performance, HA MySQL database and using shared volumes for file uploads.
 
 By combining these two features of Portworx with a Kubernetes cluster we get a WordPress instance with the following abilities:
 
@@ -22,7 +22,7 @@ A PersistentVolume (PV) is a piece of storage in the cluster that has been provi
 
 `Note:` The spec files provided in this tutorial are using beta Deployment APIs and are specific to Kubernetes version 1.8 and above. If you wish to use this tutorial with an earlier version of Kubernetes, please update the beta API appropriately, or reference earlier versions of kubernetes.
 
-### Create Portworx PersistentVolume
+### Create a Portworx PersistentVolume
 
 Kubernetes supports many different types of PersistentVolumes, this step covers Portworx volumes. Both WordPress and MySQL will use Portworx as PersistentVolumes and PersistentVolumeClaims to store data.
 
@@ -99,10 +99,10 @@ A Secret is an object that stores a piece of sensitive data like a password or k
 `kubectl get secrets`
 
 
-### Deploy MySQL with Portworx
+### Deploy MySQL with Portworx 
 
 The following manifest describes a single-instance MySQL Deployment. The MySQL container mounts the Portworx PersistentVolume at /var/lib/mysql. The MYSQL_ROOT_PASSWORD environment variable sets the database password from the Secret.
-The deployment uses stork as the scheduler to enable the pods to be placed closer to where their data is located.
+The deployment uses Stork as the scheduler to enable the pods to be placed closer to where their data is located.
 
 #### Deploy MySQL from the mysql.yaml file:
 
@@ -123,13 +123,16 @@ spec:
     tier: mysql
   clusterIP: None
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress-mysql
   labels:
     app: wordpress
 spec:
+  selector:
+    matchLabels:
+      app: wordpress
   strategy:
     type: Recreate
   template:
@@ -138,7 +141,7 @@ spec:
         app: wordpress
         tier: mysql
     spec:
-      # Use the stork scheduler to enable more efficient placement of the pods
+      # Use the Stork scheduler to enable more efficient placement of the pods
       schedulerName: stork
       containers:
       - image: mysql:5.6
@@ -168,7 +171,7 @@ spec:
 ### Deploy WordPress
 
 The following manifest describes a three-instance WordPress Deployment and Service. It uses many of the same features like a Portworx PVC for persistent storage and a Secret for the password. But it also uses a different setting: type: NodePort. This setting exposes WordPress to traffic from outside of the cluster
-This deployment also uses stork as the scheduler to enable the pods to be placed closer to where their data is located.
+This deployment also uses Stork as the scheduler to enable the pods to be placed closer to where their data is located.
 
 #### Deploy WordPress from the wordpress.yaml file:
 
@@ -190,13 +193,16 @@ spec:
     tier: frontend
   type: NodePort
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress
   labels:
     app: wordpress
 spec:
+  selector:
+    matchLabels:
+      app: wordpress
   replicas: 3
   strategy:
     type: Recreate
@@ -206,7 +212,7 @@ spec:
         app: wordpress
         tier: frontend
     spec:
-      # Use the stork scheduler to enable more efficient placement of the pods
+      # Use the Stork scheduler to enable more efficient placement of the pods
       schedulerName: stork
       containers:
       - image: wordpress:4.8-apache
@@ -259,4 +265,4 @@ spec:
 
 `Note:` Portworx PersistentVolume would allow you to recreate the Deployments and Services at this point without losing data, but hostPath loses the data as soon as the Pod stops running...
 
-{{% content "portworx-install-with-kubernetes/application-install-with-kubernetes/shared/discussion-forum.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}

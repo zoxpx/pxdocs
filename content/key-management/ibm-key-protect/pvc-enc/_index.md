@@ -1,7 +1,7 @@
 ---
 title: Encrypting Kubernetes PVCs with IBM Key Protect
 weight: 1
-keywords: Portworx, IBM, IBM Key Protect, containers, storage, encryption
+keywords:  IBM Key Protect, encrypt Kubernetes PVC, k8s
 description: Instructions on using IBM Key Protect with Portworx for encrypting PVCs in Kubernetes
 noicon: true
 disableprevnext: true
@@ -10,7 +10,7 @@ series2: k8s-pvc-enc
 hidden: true
 ---
 
-{{% content "key-management/shared/intro.md" %}}
+{{% content "shared/key-management-intro.md" %}}
 
 
 ### Encryption using per volume secrets
@@ -19,7 +19,7 @@ In this method each volume will use its own unique passphrase to encrypt the vol
 
 #### Step 1: Create a Storage Class
 
-{{% content "key-management/shared/enc-storage-class-spec.md" %}}
+{{% content "shared/key-management-enc-storage-class-spec.md" %}}
 
 #### Step 2: Create a Persistent Volume Claim
 
@@ -66,11 +66,11 @@ In this method a default cluster wide secret will be set for the Portworx cluste
 
 #### Step 1: Set the cluster wide secret key
 
-{{% content "key-management/shared/set-cluster-wide-passphrase.md" %}}
+{{% content "shared/key-management-set-cluster-wide-passphrase.md" %}}
 
 #### Step 2: Create a Storage Class
 
-{{% content "key-management/shared/enc-storage-class-spec.md" %}}
+{{% content "shared/key-management-enc-storage-class-spec.md" %}}
 
 #### Step 3: Create a Persistent Volume Claim
 
@@ -97,5 +97,5 @@ Take a note of the annotation `px/secret-name: default`. This specific annotatio
 Again, if your Storage Class does not have the `secure` flag set, but you want to encrypt the PVC using the same Storage Class, then add the annotation `px/secure: "true"` to the above PVC.
 
 {{<info>}}
-{{% content  "key-management/shared/shared-secret-warning-note.md" %}}
+{{% content  "shared/key-management-shared-secret-warning-note.md" %}}
 {{</info>}}

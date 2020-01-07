@@ -1,16 +1,16 @@
 ---
 title: Snapshots operations using pxctl
 linkTitle: Snapshots
-keywords: portworx, pxctl, snapshot, reference
+keywords: pxctl, command-line tool, cli, reference, snapshot, create snapshot, list snapshots, delete snapshot, schedule policies, snapshot schedule
 description: Learn how to manage snapshots using pxctl
 weight: 4
 ---
 
-{{% content "reference/CLI/shared/intro-snapshots.md" %}}
+{{% content "shared/reference-CLI-intro-snapshots.md" %}}
 
 ## Creating snapshots
 
-{{% content "reference/CLI/shared/creating-snapshots.md" %}}
+{{% content "shared/reference-CLI-creating-snapshots.md" %}}
 
 ## Listing Snapshots
 
@@ -143,7 +143,7 @@ Only detached snapshots can be deleted.
 
 ## Restoring snapshots
 
-{{% content "reference/CLI/shared/restore-volume-from-snapshot.md" %}}
+{{% content "shared/reference-CLI-restore-volume-from-snapshot.md" %}}
 
 ## Schedule policies
 
@@ -206,6 +206,10 @@ To add a schedule policy later, just type:
 ```text
 pxctl volume snap-interval-update --policy p1 vol1
 ```
+
+{{<info>}}
+Note that scheduled snapshots do not occur if the volume you are trying to snapshot is not attached to a container.
+{{</info>}}
 
 ### Listing schedule policies
 
@@ -421,3 +425,7 @@ Volume	:  1125771388930868153
 	Replication Status	 :  Up
 
 ```
+
+## Related topics
+
+For information about creating snapshots of your Portworx volumes, refer to the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page.

@@ -1,7 +1,7 @@
 ---
 title: Disk Provisioning on Google Cloud Platform (GCP)
 description: This page describes how to setup a production ready Portworx cluster in a Google Cloud Platform (GCP).
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
+keywords: Automatic Disk Provisioning, Dynamic Disk Provisioning, GCP, Google Cloud Platform
 weight: 2
 linkTitle: GCP
 noicon: true
@@ -15,7 +15,7 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 
 **Key-value store**
 
-Portworx uses a key-value store for it's clustering metadata. Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
+Portworx uses a key-value store for its clustering metadata. Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
 
 **Firewall**
 
@@ -37,11 +37,11 @@ This json file needs to be made available on any GCP instance that will run Port
 
 ## Install
 
-If you used an account file above, you will have to configure the PX installation arguments to access this file by way of it's environmnet variables.  In the installation arguments for PX, pass in the location of this file via the environment variable `GOOGLE_APPLICATION_CREDENTIALS`. For example, use `-e GOOGLE_APPLICATION_CREDENTIALS=/etc/pwx/gcp.json`.
+If you used an account file above, you will have to configure the Portworx installation arguments to access this file by way of it's environmnet variables.  In the installation arguments for Portworx, pass in the location of this file via the environment variable `GOOGLE_APPLICATION_CREDENTIALS`. For example, use `-e GOOGLE_APPLICATION_CREDENTIALS=/etc/pwx/gcp.json`.
 
 If you installing on Kuberenetes, you can use a secret to mount `/etc/pwx/gcp.json` into the Portworx Daemonset and then expose `GOOGLE_APPLICATION_CREDENTIALS` as an env in the Daemonset.
 
-Follow [these instructions](./) to install Portworx based on your container orchestration environment.
+Follow [these instructions](/) to install Portworx based on your container orchestration environment.
 
 ### Disk template
 
@@ -71,14 +71,14 @@ Examples:
 
 **2. Using existing GCP disks as templates**
 
-You can also reference an existing GCP disk as a template. On every node where PX is brought up as a storage node, a new GCP disk(s) identical to the template will be created.
+You can also reference an existing GCP disk as a template. On every node where Portworx is brought up as a storage node, a new GCP disk(s) identical to the template will be created.
 
-For example, if you created a template GCP disk called _px-disk-template-1_, you can pass this in to PX as a parameter as a storage device.
+For example, if you created a template GCP disk called _px-disk-template-1_, you can pass this in to Portworx as a parameter as a storage device.
 
 Ensure that these disks are created in the same zone as the GCP node group.
 
 ### Limiting storage nodes
 
-{{% content "cloud-references/auto-disk-provisioning/shared/asg-limit-storage-nodes.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-asg-limit-storage-nodes.md" %}}
 
-{{% content "cloud-references/auto-disk-provisioning/shared/asg-examples-gcp.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-asg-examples-gcp.md" %}}

@@ -1,16 +1,16 @@
 ---
 title: Using Pre-provisioned Volumes
 weight: 10
-keywords: portworx, pre-provisioned volumes, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
+keywords: pre-provisioned volumes, Kubernetes, k8s
 description: Learn how to use a pre-provisioned Portworx volume in Kubernetes
 series: k8s-vol
 ---
 
 This document describes how to use a pre-provisioned volume in your Kubernetes cluster.
 
-### Creating Portworx volume using pxctl {#creating-portworx-volume-using-pxctl}
+### Creating a Portworx volume using pxctl
 
-First create a volume using Portworx CLI. On one of the nodes with Portworx installed run the following command:
+First create a volume using the Portworx CLI. On one of the nodes with Portworx installed run the following command:
 
 ```text
 /opt/pwx/bin/pxctl volume create testvol --size 2
@@ -20,11 +20,11 @@ For more details on creating volumes using pxctl, [click here](/concepts).
 
 Alternatively, you can also use snapshots that you created previously. To learn more, [click here](/reference/cli/snapshots/).
 
-### Using the Portworx volume {#using-the-portworx-volume}
+### Using the Portworx volume
 
 Once you have a Portworx volume, you can use it in 2 different ways:
 
-#### 1. Using the Portworx volume directly in a pod {#1-using-the-portworx-volume-directly-in-a-pod}
+#### 1. Using the Portworx volume directly in a pod
 
 You can create a pod that directly uses a Portworx volume as follows:
 
@@ -49,7 +49,7 @@ spec:
 
 {{<info>}}The _name_ and _volumeID_ above must be the same and should be the name of the Portworx volume created using pxctl.{{</info>}}
 
-#### 2. Using the Portworx volume by creating a PersistentVolume & PersistentVolumeClaim {#2-using-the-portworx-volume-by-creating-a-persistentvolume--persistentvolumeclaim}
+#### 2. Using the Portworx volume by creating a PersistentVolume & PersistentVolumeClaim
 
 **Creating PersistentVolume**
 

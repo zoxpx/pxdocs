@@ -1,20 +1,21 @@
 ---
 title: Creating a PVC from a snapshot
 hidden: true
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones, pvc
+keywords: create pvc from snapshot, snapshots, annotations, kubernetes, k8s
 description: Learn to take a snapshot of a volume from a Kubernetes persistent volume claim (PVC) using annotations and use that snapshot as the volume for a new pod.
 ---
 
 This document will show you how to take a snapshot of a volume using Portworx and use that snapshot as the volume for a new pod.
 
 {{<info>}}
-The suggested way to manage snapshots on Kuberenetes is now to use STORK. Instructions for using STORK to manage snapshots can be found
+The suggested way to manage snapshots on Kuberenetes is now to use Stork. Instructions for using Stork to manage snapshots can be found
 [here](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
 {{</info>}}
 
 ## Managing snapshots through kubectl
 
 ### Taking periodic snapshots on a running POD
+
 When you create the Storage Class, you can specify a snapshot schedule on the volume as specified below:
 
 ```text
@@ -57,10 +58,10 @@ spec:
 Note the format of the _name_ field  - `ns.<namespace_of_source_pvc>-name.<name_of_the_snapshot>`. The above example takes a snapshot with the name _px-snap-1_ of the source PVC _px-vol-1_ in the _prod_ namespace.
 
 {{<info>}}
-**Note:** Annotations support is available from PX Version 1.2.11.6
+**Note:** Annotations support is available from Portworx version 1.2.11.6
 {{</info>}}
 
-For using annotations Portworx daemon set requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
+For using annotations Portworx DaemonSet requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
 
 ```text
 - apiGroups: [""]
@@ -104,11 +105,13 @@ If you do not wish to use annotations you can take a snapshot by providing the s
 ```text
 kind: PersistentVolumeClaim
 apiVersion: v1
-  metadata:
-    name: name.snap001-source.pvc001
-    annotations:
-      volume.beta.kubernetes.io/storage-class: px-sc
+metadata:
+  name: name.snap001-source.pvc001
+  annotations:
+    volume.beta.kubernetes.io/storage-class: px-sc
 spec:
+  accessModes:
+     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
@@ -128,6 +131,8 @@ metadata:
   annotations:
     volume.beta.kubernetes.io/storage-class: px-sc
 spec:
+  accessModes:
+     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
@@ -157,7 +162,7 @@ To restore a pod to use the created snapshot, use the pvc `name.snap001-source.p
 
 ## Managing snapshots through pxctl
 
-To demonstrate the capabilities of the SAN like functionality offered by portworx, try creating a snapshot of your mysql volume.
+To demonstrate the capabilities of the SAN like functionality offered by Portworx, try creating a snapshot of your mysql volume.
 
 First create a database and a demo table in your mysql container.
 
@@ -202,7 +207,7 @@ Bye
 First use pxctl volume list to see what volume you want to snapshot
 
 ```text
-bin/pxctl v l
+bin/pxctl volume list
 ```
 
 ```output

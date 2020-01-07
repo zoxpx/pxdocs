@@ -1,17 +1,17 @@
 ---
 title: GKE
 weight: 1
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
+keywords: Install, GKE, Google Kubernetes Engine, k8s, gcloud
 description: Install Portworx with Google Kubernetes Engine (GKE).
 noicon: true
 series: px-k8s-gcp
 ---
 
-This document shows how to install _Portworx_ with Google Kubernetes Engine (GKE).
+This document shows how to install Portworx with Google Kubernetes Engine (GKE).
 
 ### Prerequisites
 
-{{% content "portworx-install-with-kubernetes/cloud/gcp/shared/prerequisites.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-cloud-gcp-prerequisites.md" %}}
 
 ## Create a GKE cluster
 
@@ -86,9 +86,9 @@ Next, we need to open access to the Compute API. Run the following command:
 gcloud services enable compute.googleapis.com
 ```
 
-### Provide permissions to Portworx
+### Provide permissions to Portworx 
 
-_Portworx_ requires a ClusterRoleBinding for your user to deploy the specs. You can do this using:
+Portworx requires a ClusterRoleBinding for your user to deploy the specs. You can do this using:
 
 ```text
 kubectl create clusterrolebinding myname-cluster-admin-binding \
@@ -97,6 +97,6 @@ kubectl create clusterrolebinding myname-cluster-admin-binding \
 
 ## Install
 
-{{% content "portworx-install-with-kubernetes/cloud/gcp/shared/install-gke.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-cloud-gcp-install-gke.md" %}}
 
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}

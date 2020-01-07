@@ -1,12 +1,16 @@
 ---
 title: Amazon ECS with Portworx
 description: Find out how to deploy Portworx on Amazon Elastic Container Service (ECS)
-keywords: portworx, amazon, docker, aws, ecs, cloud
+keywords: Install, docker, aws, ecs, elastic container service, cloud
 weight: 3
 linkTitle: Amazon ECS
 noicon: true
 series: px-other
 ---
+
+{{<info>}}
+This document presents the **non-Kubernetes** method of installing Portworx on Amazon ECS. Please refer to the [AWS](/portworx-install-with-kubernetes/cloud/aws/) page for details on installing Portworx with Kubernetes on AWS.
+{{</info>}}
 
 This guide shows you how you can easily deploy Portworx on Amazon Elastic Container Service [**ECS**](https://aws.amazon.com/ecs/)
 
@@ -15,7 +19,7 @@ In this example, we create an ECS cluster called `ecs-demo1` using default AWS A
 
 
 As of this guide is written, the default ECS AMI uses Docker 1.12.6.
-Note that Portworx recommends a minimum cluster size of 3 nodes.
+Note that Portworx, Inc. recommends a minimum cluster size of 3 nodes.
 
 #### Create the cluster in the console
 Log into the ECS console and create an ecs cluster called "ecs-demo1".
@@ -66,20 +70,20 @@ This section explains how to provision storage for these EC2 instances by creati
 Note that there is no need to format the EBS volumes once they are created and attached to the EC2 instance. Portworx will pick up the available unformatted drives (if you use the -a option as show below in the next step) or you can point to the appropriate block device for the Portworx to pick up by using the -s option when you launch Portworx with the docker run command.
 
 
-### Step 2: Deploy Portworx
+### Step 2: Deploy Portworx 
 
-Install PX on each ECS instance. Portworx will use the EBS volumes you provisioned in step 4.
+Install Portworx on each ECS instance. Portworx will use the EBS volumes you provisioned in step 4.
 
-The installation and setup of PX OCI bundle is a 4-step process:
+The installation and setup of Portworx OCI bundle is a 4-step process:
 
-  1. Install the PX OCI bundle
-  2. Configure PX under runC
-  3. Download and Activate the Portworx service
+  1. Install the Portworx OCI bundle
+  2. Configure Portworx under runC
+  3. Download and activate the Portworx service
   4. Enable log rotation
 
-#### Step 2.1: Install the PX OCI bundle
+#### Step 2.1: Install the Portworx OCI bundle
 
-Portworx provides a Docker based installation utility to help deploy the PX OCI
+Portworx provides a Docker based installation utility to help deploy the Portworx OCI
 bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
@@ -92,9 +96,9 @@ sudo docker run --entrypoint /runc-entry-point.sh \
     $latest_stable
 ```
 
-#### Step 2.2: Configure PX under runC
+#### Step 2.2: Configure Portworx under runC
 
-Now that the PX OCI bundle has been deployed, we have to configure it by running the following:
+Now that the Portworx OCI bundle has been deployed, we have to configure it by running the following:
 
 ```text
 # Basic installation
@@ -103,12 +107,12 @@ sudo /opt/pwx/bin/px-runc install -sysd /dev/null -c MY_CLUSTER_ID \
   -s /dev/xvdb -s /dev/xvdc {{ include.sched-flags }}
 ```
 
-#### Step 2.3: Download and Activate the Portworx service
+#### Step 2.3: Download and activate the Portworx service
 
 Since the Amazon ECS systems do not have the `systemd` service available, we will need to start Portworx service via the custom init-script:
 
 ```text
-sudo curl https://docs.portworx.com/install-with-other/ecs/portworx-sysvinit.sh -o /etc/rc.d/init.d/portworx
+sudo curl https://docs.portworx.com/samples/ecs/portworx-sysvinit.sh -o /etc/rc.d/init.d/portworx
 sudo chmod 755 /etc/rc.d/init.d/portworx
 sudo chkconfig --add portworx
 sudo service portworx start
@@ -135,7 +139,7 @@ cat > /etc/logrotate.d/portworx << _EOF
 _EOF
 ```
 
-### Step 3: Setup ECS task with PX volume from ECS CLI workstation
+### Step 3: Setup ECS task with Portworx volume from ECS CLI workstation
 From your linux workstation download and setup AWS ECS CLI utilities
 
   1. Download and install ECS CLI ([detail instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html))
@@ -153,7 +157,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
     ecs-cli configure --region us-east-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo1
     ```
 
-  3. Create a 1GB PX volume using the Docker CLI.  ssh into one of the ECS instances and create this PX volumes.
+  3. Create a 1GB Portworx volume using the Docker CLI.  ssh into one of the ECS instances and create this Portworx volumes.
 
     ```text
     ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
@@ -174,7 +178,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
     ```
 
 
-  4. From your ECS CLI workstation, which has the ecs-cli command, setup and launch the ECS task definition with previously created PX volume. Create a task definition file "redis.yml" which will launch two containers: redis based on redis image, and web based on binocarlos/moby-counter. Then, use the ecs-cli command to post this task definition and launch it.
+  4. From your ECS CLI workstation, which has the ecs-cli command, setup and launch the ECS task definition with previously created Portworx volume. Create a task definition file "redis.yml" which will launch two containers: redis based on redis image, and web based on binocarlos/moby-counter. Then, use the ecs-cli command to post this task definition and launch it.
 
     ```text
     cat redis.yml
@@ -220,7 +224,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
 
   6. On the above ECS console, Clusters -> pick your cluster `ecs-demo1` and click on the `Container Instance` ID that corresponding to the running task. This will display the containers' information including where are these containers deployed, into which EC2 instance. Below, we find that the task defined containers are deployed on EC2 instance with public IP address `52.91.191.220`.
   ![task](/img/aws-ecs-setup_withPX_003z.PNG "ecs3z")
-  7. From above, ssh into the EC2 instance `52.91.191.220` and verify PX volume is attached to running container.
+  7. From above, ssh into the EC2 instance `52.91.191.220` and verify Portworx volume is attached to running container.
 
     ```text
     sudo docker ps -a
@@ -233,7 +237,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
     ```
 
     ```text
-    pxctl v l
+    pxctl volume list
     ```
 
     ```output
@@ -257,12 +261,12 @@ From your linux workstation download and setup AWS ECS CLI utilities
   ```
 
 
-### Step 4: Setup ECS task with PX volume via AWS ECS console
+### Step 4: Setup ECS task with Portworx volume via AWS ECS console
 #### Optional: the same process of step3 but do it on AWS GUI
 
-Create a ECS tasks definition directly via the ECS console (GUI) and using PX volume.
+Create a ECS tasks definition directly via the ECS console (GUI) and using Portworx volume.
 
-  1. ssh into one of the EC2 instance and create a new PX volume using Docker CLI.
+  1. ssh into one of the EC2 instance and create a new Portworx volume using Docker CLI.
 
     ```text
     docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
@@ -272,7 +276,7 @@ Create a ECS tasks definition directly via the ECS console (GUI) and using PX vo
    ![task](/img/aws-ecs-setup_withPX_005y.PNG)
   3. From the new task definition screen, enter the task definition name `redis-demo` and click `Add volume` near the bottom of the page.
   ![task](/img/aws-ecs-setup_withPX_005yy.PNG)
-  4. Enter the `Name` in the Add volume screen, that is just the name for your volume defined in this task definition and no need to be the same as the PX volume name. Then enter the `Source path`, and this is the PX volume name `demovol`.
+  4. Enter the `Name` in the Add volume screen, that is just the name for your volume defined in this task definition and no need to be the same as the Portworx volume name. Then enter the `Source path`, and this is the Portworx volume name `demovol`.
   ![task](/img/aws-ecs-setup_withPX_005yyx.PNG)
   5. After added the volume, click `Add container` button to define your containers specification.
   ![task](/img/aws-ecs-setup_withPX_006y.PNG)

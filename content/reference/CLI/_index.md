@@ -1,7 +1,7 @@
 ---
 title: CLI
 description: CLI reference for pxctl commands
-keywords: portworx, containers, storage, volumes, CLI
+keywords: pxctl, CLI, command line, command line tool, reference
 weight: 1
 series: reference
 ---

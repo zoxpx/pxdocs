@@ -1,7 +1,7 @@
 ---
 title: Kafka with Zookeeper on Portworx
 linkTitle: Kafka with Zookeeper
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, kafka, zookeeper
+keywords: apache kafka, zookeeper, install, kubernetes, k8s, scaling, failover
 description: See how you can deploy Apache Kafka with Zookeeper on Kubernetes with state using Portworx.
 weight: 2
 noicon: true
@@ -9,9 +9,8 @@ noicon: true
 
 This page provides instructions for deploying Apache Kafka and Zookeeper with Portworx on Kubernetes.
 
-## Portworx StorageClass for Volume Provisioning {#portworx-storageclass-for-volume-provisioning}
-
-Portworx provides volume\(s\) to Zookeeper as well as Kafka. Create `portworx-sc.yaml` with Portworx as the provisioner.
+## The Portworx StorageClass for volume provisioning
+Portworx provides volume(s) to Zookeeper as well as Kafka. Create `portworx-sc.yaml` with Portworx as the provisioner.
 
 ```text
 kind: StorageClass
@@ -45,7 +44,7 @@ Then apply the configuration:
 kubectl apply -f portworx-sc.yaml
 ```
 
-## Install Zookeeper {#install-zookeeper}
+## Install Zookeeper
 
 A statefulset in Kubernetes requires a headless service to provide network identity to the pods it creates. A headless service is also needed when Kafka is deployed  A headless service does not use a cluster IP. For information on headless services, read this [article](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
 
@@ -96,11 +95,14 @@ spec:
       app: zk
   minAvailable: 2
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: zk
 spec:
+  selector:
+    matchLabels:
+      app: zk
   serviceName: zk-headless
   replicas: 3
   template:
@@ -231,29 +233,46 @@ Apply this configuration
 kubectl apply -f zookeeper-all.yaml
 ```
 
-### Post Install Status - Zookeeper {#post-install-status---zookeeper}
+### Post Install Status - Zookeeper
 
 Verify that the zookeeper pods are running with provisioned Portworx volumes.
 
 ```text
 kubectl get pods
+```
+
+```output
 NAME      READY     STATUS    RESTARTS   AGE
 zk-0      1/1       Running   0          23h
 zk-1      1/1       Running   0          23h
 zk-2      1/1       Running   0          23h
+```
 
+```text
 kubectl get pvc
+```
+
+```output
 NAME        STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS   AGE
 data-zk-0   Bound     pvc-b79e96e9-7b79-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc    23h
 data-zk-1   Bound     pvc-faaedef8-7b7a-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc    23h
 data-zk-2   Bound     pvc-0e7a636d-7b7b-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc    23h
+```
 
+```text
 kubectl get sts
+```
+
+```output
 NAME      DESIRED   CURRENT   AGE
 zk        3         3         1d
+```
 
-/opt/pwx/bin/pxctl v i pvc-b79e96e9-7b79-11e7-a940-42010a8c0002
+```text
+pxctl volume inspect pvc-b79e96e9-7b79-11e7-a940-42010a8c0002
+```
 
+```output
 Volume  :  816480848884203913
         Name                     :  pvc-b79e96e9-7b79-11e7-a940-42010a8c0002
         Size                     :  3.0 GiB
@@ -284,13 +303,19 @@ Verify that the Zookeeper ensemble is working.
 
 ```text
 kubectl exec zk-0 -- /opt/zookeeper/bin/zkCli.sh create /foo bar
+```
 
+```output
 WATCHER::
 WatchedEvent state:SyncConnected type:None path:null
 Created /foo
+```
 
+```text
 kubectl exec zk-2 -- /opt/zookeeper/bin/zkCli.sh get /foo
+```
 
+```output
 WATCHER::
 WatchedEvent state:SyncConnected type:None path:null
 cZxid = 0x10000004d
@@ -308,22 +333,24 @@ numChildren = 0
 
 ```
 
-### Install Kafka {#install-kafka}
+### Install Kafka
 
 Obtain the Zookeeper node FQDN to be used in the configuration for Kafka.
 
 ```text
 for i in 0 1 2; do kubectl exec zk-$i -- hostname -f; done
+```
 
+```output
 zk-0.zk-headless.default.svc.cluster.local
 zk-1.zk-headless.default.svc.cluster.local
 zk-2.zk-headless.default.svc.cluster.local
 ```
 
+
 Create `kafka-all.yaml` with the following contents. Note the property `zookeeper.connect`. This points to the zookeeper nodes’ FQDN obtained earlier.
 
 ```text
-
 ---
 apiVersion: v1
 kind: Namespace
@@ -460,12 +487,15 @@ spec:
   selector:
     app: kafka
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: kafka
   namespace: kafka
 spec:
+  selector:
+    matchLabels:
+      app: kafka
   serviceName: "broker"
   replicas: 3
   template:
@@ -550,7 +580,6 @@ spec:
         requests:
           storage: 3Gi
 ---
-
 ```
 
 Apply the manifest
@@ -559,12 +588,15 @@ Apply the manifest
 kubectl apply -f kafka-all.yaml
 ```
 
-### Post Install Status - Kafka {#post-install-status---kafka}
+### Post Install Status - Kafka
 
 Verify Kafka resources created on the cluster.
 
 ```text
 kubectl get pods -l "app=kafka" -n kafka -w
+```
+
+```output
 NAME      READY     STATUS     RESTARTS   AGE
 kafka-0   1/1       Running    0          17s
 kafka-1   0/1       Init:0/1   0          3s
@@ -580,15 +612,24 @@ kafka-2   0/1       Init:0/1   0         6s
 kafka-2   0/1       PodInitializing   0         8s
 kafka-2   0/1       Running   0         9s
 kafka-2   1/1       Running   0         15s
+```
 
+```text
 kubectl get pvc -n kafka
+```
+
+```output
 NAME           STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS       AGE
 data-kafka-0   Bound     pvc-c405b033-7c4b-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc-rep2   1m
 data-kafka-1   Bound     pvc-cc70447a-7c4b-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc-rep2   57s
 data-kafka-2   Bound     pvc-d2388861-7c4b-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc-rep2   48s
+```
 
-/opt/pwx/bin/pxctl v l
+```text
+pxctl volume list
+```
 
+```output
 ID                      NAME                                            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 523341158152507227      pvc-0e7a636d-7b7b-11e7-a940-42010a8c0002        3 GiB   1       no      no              LOW             0       up - attached on 10.140.0.4
 816480848884203913      pvc-b79e96e9-7b79-11e7-a940-42010a8c0002        3 GiB   1       no      no              LOW             0       up - attached on 10.140.0.5
@@ -596,9 +637,13 @@ ID                      NAME                                            SIZE    
 733731201475618092      pvc-cc70447a-7c4b-11e7-a940-42010a8c0002        3 GiB   2       no      no              LOW             0       up - attached on 10.140.0.5
 360663112422496357      pvc-d2388861-7c4b-11e7-a940-42010a8c0002        3 GiB   2       no      no              LOW             0       up - attached on 10.140.0.4
 168733173797215691      pvc-faaedef8-7b7a-11e7-a940-42010a8c0002        3 GiB   1       no      no              LOW             0       up - attached on 10.140.0.3
+```
 
-/opt/pwx/bin/pxctl v i pvc-c405b033-7c4b-11e7-a940-42010a8c0002
+```text
+pxctl volume inspect pvc-c405b033-7c4b-11e7-a940-42010a8c0002
+```
 
+```output
 Volume  :  262949240358217536
         Name                     :  pvc-c405b033-7c4b-11e7-a940-42010a8c0002
         Size                     :  3.0 GiB
@@ -632,7 +677,9 @@ Find the Kafka brokers
 
 ```text
 for i in 0 1 2; do kubectl exec -n kafka kafka-$i -- hostname -f; done
+```
 
+```output
 kafka-0.broker.kafka.svc.cluster.local
 kafka-1.broker.kafka.svc.cluster.local
 kafka-2.broker.kafka.svc.cluster.local
@@ -642,54 +689,75 @@ Create a topic with 3 partitions and which has a replication factor of 3
 
 ```text
 kubectl exec -n kafka -it kafka-0 -- bash
+```
 
+```text
 bin/kafka-topics.sh --zookeeper zk-headless.default.svc.cluster.local:2181 --create --if-not-exists --topic px-kafka-topic --partitions 3 --replication-factor 3
+```
 
+```output
 Created topic "px-kafka-topic".
+```
 
+```text
 bin/kafka-topics.sh --list --zookeeper zk-headless.default.svc.cluster.local:2181
-px-kafka-topic
+```
 
-bin/kafka-topics.sh --describe --zookeeper zk-headless.default.svc.cluster.local:2181 --topic px-kafka-topic
+```output
+px-kafka-topic
+```
+
+```text
+bin/kafka-topics.sh --describe --zookeeper
+```
+
+```output
+zk-headless.default.svc.cluster.local:2181 --topic px-kafka-topic
 
 Topic:px-kafka-topic    PartitionCount:3        ReplicationFactor:3     Configs:
 Topic: px-kafka-topic   Partition: 0    Leader: 0       Replicas: 0,1,2 Isr: 0,1,2
 Topic: px-kafka-topic   Partition: 1    Leader: 1       Replicas: 1,2,0 Isr: 1,2,0
 Topic: px-kafka-topic   Partition: 2    Leader: 2       Replicas: 2,0,1 Isr: 2,0,1
-
 ```
 
 Publish messages on the topic
 
 ```text
 bin/kafka-console-producer.sh --broker-list kafka-0.broker.kafka.svc.cluster.local:9092,kafka-1.broker.kafka.svc.cluster.local:9092,kafka-2.broker.kafka.svc.cluster.local:9092 --topic px-kafka-topic
+```
 
+
+```output
 >Hello Kubernetes!
 >This is Portworx saying hello
 >Kafka says, I am just a messenger
-
 ```
 
 Consume messages from the topic
 
 ```text
 bin/kafka-console-consumer.sh --zookeeper zk-headless.default.svc.cluster.local:2181 —topic px-kafka-topic --from-beginning
+```
 
+```output
 This is Portworx saying hello
 Hello Kubernetes!
 Kafka says, I am just a messenger
 ```
 
-## Scaling {#scaling}
+## Scaling
 
-Portworx runs as a Daemonset in Kubernetes. Hence when you add a new node to your kuberentes cluster you do not need to explicitly run Portworx on it.
+Portworx runs as a DaemonSet in Kubernetes. Hence when you add a new node to your kuberentes cluster you do not need to explicitly run Portworx on it.
 
 If you did use the [Terraform scripts](https://github.com/portworx/terraporx) to create a kubernetes cluster, you would need to update the minion count and apply the changes via Terraform to add a new Node.
 
-Portworx Cluster before scaling the kubernetes nodes.
+The Portworx cluster before scaling the Kubernetes nodes.
 
 ```text
-/opt/pwx/bin/pxctl c l
+pxctl cluster list
+```
+
+```output
 Cluster ID: px-kafka-cluster
 Cluster UUID: 99c0fa42-03f5-4d05-a2fe-52d914ff39d2
 Status: OK
@@ -704,6 +772,9 @@ k8s-2   10.140.0.4      9.5             3.9 GB          2.2 GB          N/A     
 
 ```text
 kubectl get nodes -o wide
+```
+
+```output
 NAME         STATUS    AGE       VERSION   EXTERNAL-IP   OS-IMAGE       KERNEL-VERSION
 k8s-0        Ready     2d        v1.7.0    <none>        Ubuntu 16.10   4.8.0-56-generic
 k8s-1        Ready     2d        v1.7.0    <none>        Ubuntu 16.10   4.8.0-56-generic
@@ -715,7 +786,10 @@ k8s-master   Ready     2d        v1.7.0    <none>        Ubuntu 16.10   4.8.0-56
 Portworx scales along with your cluster.
 
 ```text
-/opt/pwx/bin/pxctl status
+pxctl status
+```
+
+```output
 Status: PX is operational
 License: Trial (expires in 28 days)
 Node ID: k8s-1
@@ -738,8 +812,13 @@ Cluster Summary
 Global Storage Pool
         Total Used      :  2.1 GiB
         Total Capacity  :  40 GiB
+```
 
-/opt/pwx/bin/pxctl c l
+```text
+pxctl cluster list
+```
+
+```output
 Cluster ID: px-kafka-cluster
 Cluster UUID: 99c0fa42-03f5-4d05-a2fe-52d914ff39d2
 Status: OK
@@ -756,9 +835,18 @@ Scale the Kafka cluster.
 
 ```text
 kubectl scale -n kafka sts kafka --replicas=4
-statefulset "kafka" scaled
+```
 
+```output
+statefulset "kafka" scaled
+```
+
+
+```text
 kubectl get pods -n kafka -l "app=kafka" -w
+```
+
+```output
 NAME      READY     STATUS            RESTARTS   AGE
 kafka-0   1/1       Running           0          3h
 kafka-1   1/1       Running           0          3h
@@ -766,8 +854,13 @@ kafka-2   1/1       Running           0          3h
 kafka-3   0/1       PodInitializing   0          24s
 kafka-3   0/1       Running           0          32s
 kafka-3   1/1       Running           0          34s
+```
 
+```text
 kubectl get pvc -n kafka
+```
+
+```output
 NAME           STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS       AGE
 data-kafka-0   Bound     pvc-c405b033-7c4b-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc-rep2   3h
 data-kafka-1   Bound     pvc-cc70447a-7c4b-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc-rep2   3h
@@ -780,19 +873,41 @@ Verify that the newly created kafka broker is part of the cluster.
 
 ```text
 kubectl exec -n kafka -it kafka-0 -- bash
+```
 
->zkCli.sh
+```text
+zkCli.sh
+```
 
-[zk: localhost:2181(CONNECTED) 0] ls /brokers/ids
+You'll see a prompt similar to this:
 
+```
+[zk: localhost:2181(CONNECTED) 0]
+```
+
+Next, type:
+
+```text
+ls /brokers/ids
+```
+
+```output
 [0, 1, 2, 3]
+```
 
-[zk: localhost:2181(CONNECTED) 1] ls /brokers/topics
+```text
+ls /brokers/topics
+```
 
+```output
 [px-kafka-topic]
+```
 
-[zk: localhost:2181(CONNECTED) 2] get /brokers/ids/3
+```text
+get /brokers/ids/3
+```
 
+```output
 {"listener_security_protocol_map":{"PLAINTEXT":"PLAINTEXT"},"endpoints":["PLAINTEXT://kafka-3.broker.kafka.svc.cluster.local:9092"],"jmx_port":-1,"host":"kafka-3.broker.kafka.svc.cluster.local","timestamp":"1502217586002","port":9092,"version":4}
 cZxid = 0x1000000e9
 ctime = Tue Aug 08 18:39:46 UTC 2017
@@ -808,16 +923,21 @@ numChildren = 0
 
 ```
 
-## Failover {#failover}
+## Failover
 
-### Pod Failover for Zookeeper {#pod-failover-for-zookeeper}
+### Pod Failover for Zookeeper
 
-Killing the zookeeper java process in the container terminates the pod. You could alternatively delete the pod as well. Portworx volumes provides durable storage to the Zookeeper pods which are run as a statefulset. Get the earlier inserted value from zookeeper to verify the same.
+Killing the Zookeeper Java process in the container terminates the pod. You could alternatively delete the pod as well. The Portworx volumes provide durable storage to the Zookeeper pods which are run as a StatefulSet. Get the earlier inserted value from Zookeeper to verify the same.
 
 ```text
 kubectl exec zk-0 -- pkill java
+```
 
+```text
 kubectl get pod -w -l "app=zk"
+```
+
+```output
 NAME      READY     STATUS    RESTARTS   AGE
 zk-0      1/1       Running   0          1d
 zk-1      1/1       Running   0          1d
@@ -825,9 +945,13 @@ zk-2      1/1       Running   0          1d
 zk-0      0/1       Error     0          1d
 zk-0      0/1       Running   1          1d
 zk-0      1/1       Running   1          1d
+```
 
+```text
 kubectl exec zk-0 -- zkCli.sh get /foo
+```
 
+```output
 WATCHER::
 WatchedEvent state:SyncConnected type:None path:null
 bar
@@ -843,53 +967,91 @@ ephemeralOwner = 0x0
 dataLength = 3
 numChildren = 0
 
-
 ```
 
-### Pod Failover for Kafka {#pod-failover-for-kafka}
+### Pod Failover for Kafka
 
-Find the hosts of the running kafka cluster, cordon a node so that pods are scheduled on it. Kill a kafka pod and notice that it is scheduled on a newer node, joining the cluster back again with durable storage which is backed by the PX volume.
+Find the hosts of the running kafka cluster, cordon a node so that pods are scheduled on it. Kill a kafka pod and notice that it is scheduled on a newer node, joining the cluster back again with durable storage which is backed by the Portworx volume.
 
 ```text
 kubectl get pods -n kafka -o wide
+```
+
+```output
 NAME      READY     STATUS    RESTARTS   AGE       IP           NODE
 kafka-0   1/1       Running   0          21h       10.0.160.3   k8s-2
 kafka-1   1/1       Running   0          21h       10.0.192.3   k8s-0
 kafka-2   1/1       Running   0          21h       10.0.64.4    k8s-1
 kafka-3   1/1       Running   0          18h       10.0.112.1   k8s-3
+```
 
+```text
 kubectl cordon k8s-0
-node "k8s-0" cordoned
+```
 
+```output
+node "k8s-0" cordoned
+```
+
+```text
 kubectl get nodes
+```
+
+```output
 NAME         STATUS                     AGE       VERSION
 k8s-0        Ready,SchedulingDisabled   2d        v1.7.0
 k8s-1        Ready                      2d        v1.7.0
 k8s-2        Ready                      2d        v1.7.0
 k8s-3        Ready                      19h       v1.7.0
 k8s-master   Ready                      2d        v1.7.0
+```
 
+```text
 kubectl get pvc -n kafka | grep data-kafka-1
+```
+
+```output
 data-kafka-1   Bound     pvc-cc70447a-7c4b-11e7-a940-42010a8c0002   3Gi        RWO           portworx-sc-rep2   22h
+```
 
-/opt/pwx/bin/pxctl v l | grep pvc-cc70447a-7c4b-11e7-a940-42010a8c0002
+```text
+/opt/pwx/bin/pxctl volume list | grep pvc-cc70447a-7c4b-11e7-a940-42010a8c0002
 733731201475618092      pvc-cc70447a-7c4b-11e7-a940-42010a8c0002        3 GiB   2       no      no              LOW             0       up - attached on 10.140.0.5
+```
 
+```output
+733731201475618092      pvc-cc70447a-7c4b-11e7-a940-42010a8c0002        3 GiB   2       no      no              LOW             0       up - attached on 10.140.0.5
+```
 
+```text
 kubectl exec -n kafka -it kafka-0 -- bash
+```
 
+```text
 bin/kafka-topics.sh --describe --zookeeper zk-headless.default.svc.cluster.local:2181 --topic px-kafka-topic
+```
 
+```output
 Topic:px-kafka-topic    PartitionCount:3        ReplicationFactor:3     Configs:
         Topic: px-kafka-topic   Partition: 0    Leader: 0       Replicas: 0,1,2 Isr: 0,1,2
         Topic: px-kafka-topic   Partition: 1    Leader: 1       Replicas: 1,2,0 Isr: 1,2,0
         Topic: px-kafka-topic   Partition: 2    Leader: 2       Replicas: 2,0,1 Isr: 2,0,1
+```
 
-
+```text
 kubectl delete po/kafka-1 -n kafka
-pod "kafka-1" deleted
+```
 
+```output
+pod "kafka-1" deleted
+```
+
+```text
 kubectl get pods -n kafka -w
+```
+
+
+```output
 NAME      READY     STATUS        RESTARTS   AGE
 kafka-0   1/1       Running           0         22h
 kafka-1   0/1       Terminating       0         22h
@@ -904,24 +1066,33 @@ kafka-1   0/1       Init:0/1          0         2s
 kafka-1   0/1       PodInitializing   0         3s
 kafka-1   0/1       Running           0         5s
 kafka-1   1/1       Running           0         11s
+```
 
+```text
 kubectl get pods -n kafka -o wide
+```
+
+
+```output
 NAME      READY     STATUS    RESTARTS   AGE       IP           NODE
 kafka-0   1/1       Running   0          22h       10.0.160.3   k8s-2
 kafka-1   1/1       Running   0          1m        10.0.112.2   k8s-3
 kafka-2   1/1       Running   0          22h       10.0.64.4    k8s-1
 kafka-3   1/1       Running   0          18h       10.0.112.1   k8s-3
+```
 
+```text
 bin/kafka-topics.sh --describe --zookeeper zk-headless.default.svc.cluster.local:2181 --topic px-kafka-topic
+```
 
+```output
 Topic:px-kafka-topic    PartitionCount:3        ReplicationFactor:3     Configs:
 Topic: px-kafka-topic   Partition: 0    Leader: 0       Replicas: 0,1,2 Isr: 0,2,1
 Topic: px-kafka-topic   Partition: 1    Leader: 1       Replicas: 1,2,0 Isr: 2,0,1
 Topic: px-kafka-topic   Partition: 2    Leader: 2       Replicas: 2,0,1 Isr: 2,0,1
-
 ```
 
-### Node Failover {#node-failover}
+### Node Failover
 
 In the case of a statefulset if the node is unreachable, which could happen in either of two cases
 
@@ -932,6 +1103,6 @@ There is no way for kubernetes to know which of the case is it. Hence Kubernetes
 
 For further information : [Statefulset Pod Deletion](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/)
 
-Decomissioning a kubernetes node deletes the node object form the APIServer. Before that you would want to decomission your Portworx node from the cluster. Follow the steps mentioned in [Decommision a Portworx node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node) Once done, delete the kubernetes node if it requires to be deleted permanently.
+Decomissioning a kubernetes node deletes the node object form the APIServer. Before that you would want to decomission your Portworx node from the cluster. Follow the steps mentioned in [Decommision a Portworx node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node) Once done, delete the Kubernetes node if it requires to be deleted permanently.
 
-{{% content "portworx-install-with-kubernetes/application-install-with-kubernetes/shared/discussion-forum.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}

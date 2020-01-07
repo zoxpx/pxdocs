@@ -1,14 +1,14 @@
 ---
 title: Run Portworx with Kubernetes on Mesosphere DC/OS
 description: Find out how to deploy Portworx with Kubernetes on DC/OS.
-keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage, kubernetes, DCOS, DC/OS
+keywords: Install, kubernetes, k8s, DCOS, DC/OS, Mesosphere
 linkTitle: Install on Kubernetes on DC/OS
 weight: 2
 noicon: true
 ---
 
 {{<info>}}
-**Note:**<br/> Kubernetes on DC/OS with Portworx is only supported from PX version 1.4 onwards
+**Note:**<br/> Kubernetes on DC/OS with Portworx is only supported from Portworx version 1.4 onwards
 {{</info>}}
 
 Please make sure you have installed [Portworx on DC/OS](/install-with-other/dcos/install) before proceeding further.

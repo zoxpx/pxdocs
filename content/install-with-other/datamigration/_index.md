@@ -1,7 +1,7 @@
 ---
 title: Data Migration
 linkTitle: Data Migration
-keywords: cloud, backup, restore, snapshot, DR, migration, Data migration
+keywords: px-motion, migration, migrate volumes, migrate across clusters, cloud, backup, restore, snapshot, DR
 description: How to migrate volumes across clusters when running Portworx on other orchestrators.
 series: datamigration
 weight: 12
@@ -9,6 +9,10 @@ aliases:
   - /cloud-references/migration/migration-pxctl.html
   - /cloud-references/migration/migration-pxctl
 ---
+
+{{<info>}}
+This document presents the **non-Kubernetes** method of migrating volumes between two Portworx clusters. Please refer to the [Kubemotion with Stork](/portworx-install-with-kubernetes/migration/kubemotion) page if you are running Portworx on Kubernetes.
+{{</info>}}
 
 ## Overview
 
@@ -57,6 +61,10 @@ CLUSTER-ID                                       NAME            ENDPOINT       
 ## Migrating Volumes
 
 Once you have created cluster pairs you can migrate volumes to it.
+
+{{<info>}}
+**NOTE:** If your cluster has a DR license applied to it, you can only perform migrations in DR mode; this includes operations involving the `pxctl cluster migrate` command.
+{{</info>}}
 
 ### Start migration
 

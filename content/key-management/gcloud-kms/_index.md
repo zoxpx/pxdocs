@@ -2,7 +2,7 @@
 title: Google Cloud KMS
 logo: /logos/google-kms.png
 weight: 6
-keywords: Portworx, Google, Google Cloud, KMS, containers, storage, encryption
+keywords: Google Cloud KMS, Key Management Service, gcloud, secrets, Volume Encryption, Cloud Credentials
 description: Instructions on using Google Cloud KMS with Portworx
 disableprevnext: true
 noicon: true
@@ -11,10 +11,10 @@ series: key-management
 
 
 {{<info>}}
-**NOTE:** Supported from PX Enterprise 2.0.2 onwards
+**NOTE:** Supported from PX-Enterprise 2.0.2 onwards
 {{</info>}}
 
-Portworx integrates with Google Cloud KMS to store  Portworx secrets for Volume Encryption and Cloud Credentials. This guide will help configure Portworx with Google Cloud KMS.
+Portworx integrates with Google Cloud KMS to store your Portworx secrets for Volume Encryption and Cloud Credentials. This guide will help configure Portworx with Google Cloud KMS.
 
 Portworx requires the following Google Cloud credentials to use its APIs
 
@@ -72,19 +72,19 @@ Create a kubernetes secret with the following command
 
 Make sure to replace the `Project ID`, `Key Ring Name` and `Asymmetric Key Name` in the above command.
 
-#### Step 3: Update the Portworx daemon set
+#### Step 3: Update the Portworx DaemonSet
 
 - **New installation**
 
-When generating the [Portworx Kubernetes spec file](https://install.portworx.com/2.1), select `Google Cloud KMS` from the "Secrets type" list.
+When generating the Portworx Kubernetes spec file on the Portworx spec generator page in [PX-Central](https://central.portworx.com)), select `Google Cloud KMS` from the "Secrets type" list.
 
 - **Existing installation**
 
 For an existing Portworx cluster follow these steps:
 
-##### Step 3a: Update Portworx daemon set to use Google KMS secret store
+##### Step 3a: Update the Portworx DaemonSet to use the Google KMS secret store
 
-Edit the Portworx daemonset `secret_type` field to `gcloud-kms`, so that all the new Portworx nodes will also start using Google Cloud KMS.
+Edit the Portworx DaemonSet's `secret_type` field to `gcloud-kms`, so that all the new Portworx nodes will also start using Google Cloud KMS.
 
 ```text
 kubectl edit daemonset portworx -n kube-system
@@ -106,7 +106,7 @@ containers:
     name: portworx
 ```
 
-##### Step 3b: Patch Portworx daemon set
+##### Step 3b: Patch the Portworx DaemonSet
 
 Use the following command to patch the daemon set, so that it has access to the secret created Step 2
 
@@ -148,7 +148,7 @@ kubectl -n kube-system patch ds portworx --patch "$(cat patch.yaml)" --type=stra
 
 ## Other users
 
-### Step 1: Provide Google Cloud credentials to Portworx.
+### Step 1: Provide Google Cloud credentials to Portworx
 
 Provide the following Google Cloud credentials (key value pairs) as environment variables to Portworx
 
@@ -170,6 +170,6 @@ While installing Portworx set the input argument `-secret_type` to `gcloud-kms`.
 
 Based on your installation method provide the `-secret_type gcloud-kms` input argument and restart Portworx on all the nodes.
 
-## Using Google Cloud KMS with Portworx
+## Using Google Cloud KMS with Portworx 
 
 {{<homelist series="gcloud-secret-uses">}}

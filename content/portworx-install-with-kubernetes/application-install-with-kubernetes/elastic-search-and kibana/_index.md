@@ -1,7 +1,7 @@
 ---
 title: Elastic Search and Kibana on Kubernetes on Portworx
 linkTitle: Elastic Search and Kibana
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, elastic, elastic stack, elastic search, kibana
+keywords: install, elasticsearch, kibana, kubernetes, k8s, scaling, failover
 description: Find out how to easily deploy Elasticsearch and Kibana on Kubernetes using Portworx to preserve state!
 weight: 2
 noicon: true
@@ -22,14 +22,14 @@ An Elasticsearch cluster node can have one or more purposes:
 
 ## Prerequisites
 -    A running Kubernetes cluster with v 1.6+
--    [Deploy Portworx on your kubernetes cluster](/portworx-install-with-kubernetes/). PX runs on each node of your kubernetes cluster as a DaemonSet.
+-    [Deploy Portworx on your kubernetes cluster](/portworx-install-with-kubernetes/). Portworx runs on each node of your Kubernetes cluster as a DaemonSet.
 
 ## Install
 
 ### Portworx StorageClass for Volume Provisioning
 
 Portworx provides volume(s) to the elastic search data and master nodes.
-Create `portworx-sc.yaml` with Portworx as the provisioner and apply the configuration. These storage classes create Portworx volumes with 2 replicas when referenced via a PersistentVolumeClaim.
+Create `portworx-sc.yaml` with Portworx as the provisioner and apply the configuration. These storage classes create the Portworx volumes with 2 replicas when referenced via a PersistentVolumeClaim.
 
 ```text
 kind: StorageClass
@@ -68,7 +68,7 @@ In this section we will create an ES cluster with the following:
 -    3 data nodes using a Kubernetes `StatefulSet` backed by Portworx volumes
 -    2 coordinator nodes using a Kubernetes `Deployment`
 
-All pods will use the stork scheduler to enable them to be placed closer to where their data is located.
+All pods will use the Stork scheduler to enable them to be placed closer to where their data is located.
 
 Create `es-master-svc.yaml` with the following content
 
@@ -93,7 +93,7 @@ spec:
 Create `es-master-sts.yaml` with the following content:
 
 ```text
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch-master
@@ -102,6 +102,9 @@ metadata:
     role: master
 spec:
   serviceName: elasticsearch-master
+  selector:
+    matchLabels:
+     component: elasticsearch
   replicas: 3
   template:
     metadata:
@@ -228,7 +231,7 @@ spec:
 Create `es-coordinator-deployment.yaml` with the following content:
 
 ```text
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: elasticsearch-coordinator
@@ -236,6 +239,9 @@ metadata:
     component: elasticsearch
     role: coordinator
 spec:
+  selector:
+    matchLabels:
+      component: elasticsearch
   replicas: 2
   template:
     metadata:
@@ -357,7 +363,7 @@ spec:
 Create `es-data-sts.yaml` with the following content:
 
 ```text
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch-data
@@ -365,6 +371,9 @@ metadata:
     component: elasticsearch
     role: data
 spec:
+  selector:
+    matchLabels:
+      component: elasticsearch
   serviceName: elasticsearch-data
   replicas: 3
   template:
@@ -503,7 +512,7 @@ rs/elasticsearch-coordinator-2193029848   2         2         2         2m
 
 ### Verify Elastic Search installation.
 
-- Verify that Portworx Volumes are used for the elasticsearch cluster.
+- Verify that Portworx volumes are used for the elasticsearch cluster.
 - Verify the cluster state by inserting and querying indexes.
 
 Portworx volumes are created with 2 replicas for storing Indexes and Documents for Elasticsearch. This is based on the Storageclass definition.
@@ -682,7 +691,7 @@ green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          0            0   
 kubectl exec -it elasticsearch-master-0 curl -- -XPUT 'http://elasticsearch.default.svc:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
 {
 "name": "Daenerys Targaryen"
-}
+}'
 ```
 
 ```output
@@ -744,7 +753,7 @@ spec:
 Create `kibana-deployment.yaml` with the following content:
 
 ```text
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana
@@ -879,7 +888,7 @@ Bank Index with its documents
 
 ## Scaling
 
-Portworx runs as a DaemonSet in Kubernetes. Hence when you add a new node to your kuberentes cluster you do not need to explicitly run Portworx on it.
+Portworx runs as a DaemonSet in Kubernetes. Hence when you add a new node to your Kuberentes cluster you do not need to explicitly run Portworx on it.
 
 If you did use the [Terraform scripts](https://github.com/portworx/terraporx) to create a kubernetes cluster, you would need to update the minion count and apply the changes via Terraform to add a new Node.
 
@@ -966,7 +975,7 @@ ID                    NAME                                        SIZE      HA  
 
 ### Pod Failover for Elastic search.
 Portworx provides durable storage for the Elastic search pods.
-Cordon a node so that pods do not get scheduled on it, delete a pod manually to simulate a failure scenario and watch the pod get scheduled on another node. However the StatefulSet with PX as the volume would reattach the
+Cordon a node so that pods do not get scheduled on it, delete a pod manually to simulate a failure scenario and watch the pod get scheduled on another node. However the StatefulSet with Portworx as the volume would reattach the
 
 ```text
 kubectl get pods -l "component=elasticsearch, role=data"  -o wide
@@ -1069,4 +1078,4 @@ Before that you would want to decomission your Portworx node from the cluster.
 Follow the steps mentioned in [Decommision a Portworx node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node)
 Once done, delete the kubernetes node if it requires to be deleted permanently.
 
-{{% content "portworx-install-with-kubernetes/application-install-with-kubernetes/shared/discussion-forum.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}

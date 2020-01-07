@@ -1,17 +1,18 @@
 ---
-title: "Portworx Alerts"
-keywords: portworx, container, storage, alerts, alarms, warnings, notifications
+title: Portworx Alerts
+keywords: portworx, alerts, alarms, warnings, notifications
 description: How to monitor alerts with Portworx.
 ---
 
 ## Portworx Alerts
 
-PX provides a way to monitor your cluster using alerts. It has a predefined set of alerts which are listed below. The alerts are broadly classified into the following types based on the Resource on which it is raised
+Portworx provides a way to monitor your cluster using alerts. It has a predefined set of alerts which are listed below. The alerts are broadly classified into the following types based on the Resource on which it is raised
 
 1. Cluster
 2. Nodes
 3. Disks
 4. Volumes
+5. Pools
 
 Each alert has a severity from one of the following levels:
 
@@ -32,24 +33,24 @@ Each alert has a severity from one of the following levels:
 6|VolGroupOperationFailure|ALARM|CLUSTER|Triggered when a volume group operation fails.
 7|VolGroupOperationSuccess|NOTIFY|CLUSTER|Triggered when a volume group operation succeeds.
 8|VolGroupStateChange|WARN|CLUSTER|Triggered when a volume group's state changes.
-9|NodeStartFailure|ALARM|CLUSTER|Triggered when a node in the PX cluster fails to start.
-10|NodeStartSuccess|NOTIFY|CLUSTER|Triggered when a node in the PX cluster successfully initializes.
-11|&gt;Internal PX Alert&lt;|-|-|Alert code used for internal PX bookkeeping.
+9|NodeStartFailure|ALARM|CLUSTER|Triggered when a node in the Portworx cluster fails to start.
+10|NodeStartSuccess|NOTIFY|CLUSTER|Triggered when a node in the Portworx cluster successfully initializes.
+11|&gt;Internal PX Alert&lt;|-|-|Alert code used for internal Portworx bookkeeping.
 12|NodeJournalHighUsage|ALARM|CLUSTER|Triggered when a node's timestamp journal usage is not within limits.
 13|IOOperation|ALARM|VOLUME|Triggered when an IO operation such as Block Read/Block Write fails.
-14-16|&gt;Internal PX Alerts&lt;|-|-|Alert codes used for internal PX bookkeeping.
-17|PXInitFailure|ALARM|NODE|Triggered when PX fails to initialize on a node.
-18|PXInitSuccess|NOTIFY|NODE|Triggered when PX successfully initializes on a node.
-19|PXStateChange|WARN|NODE|Triggered when the PX daemon shuts down in error.
+14-16|&gt;Internal PX Alerts&lt;|-|-|Alert codes used for internal Portworx bookkeeping.
+17|PXInitFailure|ALARM|NODE|Triggered when Portworx fails to initialize on a node.
+18|PXInitSuccess|NOTIFY|NODE|Triggered when Portworx successfully initializes on a node.
+19|PXStateChange|WARN|NODE|Triggered when the Portworx daemon shuts down in error.
 20|VolumeOperationFailureWarn|WARN|VOLUME|Triggered when a volume operation fails. Volume operations could be resize, cloudsnap, etc. The alert message will give more info about the specific error case.
-21|StorageVolumeMountDegraded|ALARM|NODE|Triggered when PX storage enters degraded mode on a node.
-22|ClusterManagerFailure|ALARM|NODE|Triggered when Cluster manager on a PX node fails to start. The alert message will give more info about the specific error case.
-23|KernelDriverFailure|ALARM|NODE|Triggered when an incorrect PX kernel module is detected. Indicates that PX is started with an incorrect version of the kernel module.
-24|NodeDecommissionSuccess|NOTIFY|CLUSTER|Triggered when a node is successfully decommissioned from PX cluster.
-25|NodeDecommissionFailure|ALARM|CLUSTER|Triggered when a node could not be decommissioned from PX cluster.
+21|StorageVolumeMountDegraded|ALARM|NODE|Triggered when Portworx storage enters degraded mode on a node.
+22|ClusterManagerFailure|ALARM|NODE|Triggered when Cluster manager on a Portworx node fails to start. The alert message will give more info about the specific error case.
+23|KernelDriverFailure|ALARM|NODE|Triggered when an incorrect Portworx kernel module is detected. Indicates that Portworx is started with an incorrect version of the kernel module.
+24|NodeDecommissionSuccess|NOTIFY|CLUSTER|Triggered when a node is successfully decommissioned from Portworx cluster.
+25|NodeDecommissionFailure|ALARM|CLUSTER|Triggered when a node could not be decommissioned from Portworx cluster.
 26|NodeDecommissionPending|WARN|CLUSTER|Triggered when a node decommission is kept in pending state as it has data which is not replicated on other nodes.
-27|NodeInitFailure|ALARM|CLUSTER|Triggered when PX fails to initialize on a node.
-28|&gt;Internal PX Alert&lt;|-|-|Alert code used for internal PX bookkeeping.
+27|NodeInitFailure|ALARM|CLUSTER|Triggered when Portworx fails to initialize on a node.
+28|&gt;Internal PX Alert&lt;|-|-|Alert code used for internal Portworx bookkeeping.
 29|NodeScanCompletion|NOTIFY|NODE|Triggered when node media scan completes without error.
 30|VolumeSpaceLow|ALARM|VOLUME|Triggered when the free space available in a volume goes below a threshold.
 31|ReplAddVersionMismatch|WARN|VOLUME|Triggered when a volume HA update fails with version mismatch.
@@ -57,7 +58,7 @@ Each alert has a severity from one of the following levels:
 33|CloudsnapOperationUpdate|NOTIFY|VOLUME|Triggered if a cloudsnap schedule is changed successfully.
 34|CloudsnapOperationFailure|ALARM|VOLUME|Triggered when a cloudsnap operation fails.
 35|CloudsnapOperationSuccess|NOTIFY|VOLUME|Triggered when a cloudsnap operation succeeds.
-36|NodeMarkedDown|WARN|CLUSTER|Triggered when a PX node marks another node down as it is unable to connect to it.
+36|NodeMarkedDown|WARN|CLUSTER|Triggered when a Portworx node marks another node down as it is unable to connect to it.
 37|VolumeCreateSuccess|NOTIFY|VOLUME|Triggered when a volume is successfully created.
 38|VolumeCreateFailure|ALARM|VOLUME|Triggered when a volume creation fails.
 39|VolumeDeleteSuccess|NOTIFY|VOLUME|Triggered when a volume is successfully deleted.
@@ -74,8 +75,8 @@ Each alert has a severity from one of the following levels:
 50|SnapshotRestoreFailure|ALARM|VOLUME|Triggered when the operation of restoring a snapshot fails.
 51|SnapshotIntervalUpdateFailure|ALARM|VOLUME|Triggered when an update of the snapshot interval for a volume fails.
 52|SnapshotIntervalUpdateSuccess|NOTIFY|VOLUME|Triggered when a snapshot interval of a volume is successfully updated.
-53|PXReady|NOTIFY|NODE|Triggered when PX is ready on a node.
-54|StorageFailure|ALARM|NODE|Triggered when the provided storage drives could not be mounted by PX.
+53|PXReady|NOTIFY|NODE|Triggered when Portworx is ready on a node.
+54|StorageFailure|ALARM|NODE|Triggered when the provided storage drives could not be mounted by Portworx.
 55|ObjectstoreFailure|ALARM|NODE|Triggered when an object store error is detected.
 56|ObjectstoreSuccess|NOTIFY|NODE|Triggered upon a successful object store operation.
 57|ObjectstoreStateChange|NOTIFY|NODE|Triggered in response to a state change.
@@ -98,3 +99,7 @@ Each alert has a severity from one of the following levels:
 74|ClusterDomainDeactivated|NOTIFY|CLUSTER|Triggered when a cluster domain is deactivated.
 75|MeteringAgentWarning|WARN|CLUSTER|Triggered when the metering agent encounters a non-critical problem.
 76|MeteringAgentCritical|ALARM|CLUSTER|Triggered when the metering agent encounters a critical problem.
+77|CloudsnapOperationWarning|WARN|VOLUME|Triggered when a cloud snap operation encounters a problem.|
+78|PoolExpandInProgress|NOTIFY|POOL|Triggered when a pool expand operation starts.|
+79|PoolExpandSuccessful|NOTIFY|POOL|Triggered when a pool expand operation succeeds.|
+80|PoolExpandFailed|ALARM|POOL|Triggered when a pool expand operation fails.|

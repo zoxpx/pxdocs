@@ -3,7 +3,7 @@ title: Install on cloud
 logoList: true
 weight: 1
 description: Learn how to install Portworx with Kubernetes clusters on cloud
-keywords: Portworx, Kubernetes, Cloud
+keywords: Install, cloud, kubernetes, k8s
 series: k8s-install
 ---
 

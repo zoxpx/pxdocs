@@ -1,20 +1,20 @@
 ---
-title: "Production Readiness"
+title: Production Readiness
 hidden: true
-keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
+keywords: production ready, operations guide, run book, kubernetes, k8s
 description: Are you ready for production?
 ---
 
 ### Initial Software Setup for Production
 
 * Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - Refer to the install instructions [page](./)
-  * Ensure PX container is deployed as [OCI container](/install-with-other/docker/standalone)
+  * Ensure the Portworx container is deployed as [OCI container](/install-with-other/docker/standalone)
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
   * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the container orchestrator to ensure maximum stability. Refer to the following [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) on how to install etcd and also configure it for maximum stability.
 
 ### Configuring the Server or the Compute Infrastructure
 
-* Ensure that at the minimum 4 cores and 4GB of RAM are allocated for Portworx
+* Ensure that at the minimum 4 cores and 4GB of RAM are allocated for Portworx 
 * Ensure the base operating system of the server supports linux kernel 3.10+
 * Ensure the shared mount propagation is enabled
 
@@ -26,7 +26,7 @@ description: Are you ready for production?
 
 ### Configuring and Provisioning Underlying Storage
 
-* Disks - If this is a on-prem installation, ensure there is enough storage available per node for PX storage pools.
+* Disks - If this is a on-prem installation, ensure there is enough storage available per node for Portworx storage pools.
   If it is a cloud deployment, ensure you have enough cloud disks attached.
 
   * For AWS ASG, Portworx supports automatic management of EBS volumes.
@@ -46,10 +46,10 @@ description: Are you ready for production?
 
 ### Alerts and Monitoring for Production
 
-  * Here is how Prometheus can be setup to monitor Portworx [Prometheus](/install-with-other/operate-and-maintain/monitoring/prometheus)
+  * Refer to the [Portworx Integration with Prometheus](/install-with-other/operate-and-maintain/monitoring/prometheus) for details about setting up Portworx with Prometheus.
   * Configure Grafana via this [template](/install-with-other/operate-and-maintain/monitoring/grafana)
   * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/install-with-other/operate-and-maintain/monitoring/alerting)
-  * List of Portworx Alerts are documented [here](/install-with-other/operate-and-maintain/monitoring/alerting)
+  * See the [Alerting with Porworx](/install-with-other/operate-and-maintain/monitoring/alerting) page for details about monitorig your Portworx cluster through alerts.
 
 ### Hardware Replacements and Upgrades
 
@@ -61,7 +61,7 @@ description: Are you ready for production?
 
 ### Software Upgrades
 
-* Portworx Software Upgrades - Work with Portworx Support before planning major upgrades. Ensure all volumes have the
+* Portworx Software Upgrades - Work with the Portworx, Inc. support team before planning major upgrades. Ensure all volumes have the
   latest snapshot and cloudsnap before performing upgrades
 
 * Container Orchestrator upgrades - Ensure all volumes are cloud-snapped before performing scheduler upgrades

@@ -6046,14 +6046,17 @@ spec:
   selector:
     app: grafana
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grafana
+  name: grafana-deployment
   namespace: kube-system
   labels:
     app: grafana
 spec:
+  selector:
+    matchLabels:
+      app: grafana
   replicas: 1
   template:
     metadata:

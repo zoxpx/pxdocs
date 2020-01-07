@@ -1,11 +1,11 @@
 ---
 title: 1. Prepare Your AKS Platform
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, aks, Azure
+keywords: on cloud, AKS, Azure Kubernetes Service, Microsoft, Kubernetes, k8s
 description: Learn about preparing Portwork on Azure Kubernetes Service.
 weight: 1
 ---
 
-To set up the Azure Kubernetes Service \(AKS\) to use Portworx, follow the steps below. For more information on AKS, see this [article](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes).
+To set up the Azure Kubernetes Service (AKS) to use Portworx, follow the steps below. For more information on AKS, see this [article](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes).
 
 ### Install the Azure CLI
 
@@ -41,7 +41,7 @@ az group create –name <resource-group-name> –location <location>
 ```
 
 ### Create a Service Principal in Azure AD
-This Service Principal will be used to grant _Portworx_ permissions to manage the disks used in the cluster. Store the `password` which acts as the client secret and the `appId` will is the client ID.
+This Service Principal will be used to grant Portworx permissions to manage the disks used in the cluster. Store the `password` which acts as the client secret and the `appId` will is the client ID.
 ```text
 az ad sp create-for-rbac \
    --role="Contributor" \

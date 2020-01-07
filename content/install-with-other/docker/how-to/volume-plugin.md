@@ -1,12 +1,12 @@
 ---
 title: Docker interaction with Portworx
 description: Learn how Portworx Volumes work with Docker
-keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
+keywords: Portworx volumes, Docker, integration, how to
 weight: 1
 linkTitle: How Portworx Volumes work with Docker
 ---
 
-## Docker interaction with Portworx
+## Docker interaction with Portworx 
 
 Portworx implements the [Docker Volume Plugin Specification](https://docs.docker.com/engine/extend/plugins_volume/).
 
@@ -37,24 +37,15 @@ Docker looks in its cache before sending the request to create to Portworx. For 
 
 #### Use of options in docker volume create
 
-```text
-Options:
-    --opt shared                        make this a globally shared namespace volume
-    --opt secure                        encrypt this volume using AES-256
-    --opt secret_key=value              secret_key to use to fetch secret_data for the PBKDF2 function
-    --opt size=value                    volume size in GB (default: 1)
-    --opt fs=value                      filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-    --opt block_size=value              block size in Kbytes (default: 32)
-    --opt repl=value                    replication factor [1..3] (default: 1)
-    --opt scale=value                   auto scale to max number [1..1024] (default: 1)
-    --opt io_priority=value             IO Priority: [high|medium|low] (default: "low")
-    --opt sticky                        sticky volumes cannot be deleted until the flag is disabled [on | off]
-    --opt snap_interval=value           snapshot interval in minutes, 0 disables snaps (default: 0)
-    --opt snap_schedule=value           snapshot schedule specification. PX 1.3 and higher. (See "Scheduled snapshots" below)
-    --opt aggregation_level=value       aggregation level: [1..3 or auto] (default: "1")
-    --opt nodes="value"                 semicolon-separated Node Id(s)
+You can include any desired volume options with the `volume create` command:
 
+```text
+--opt io_priority=high
 ```
+
+The following table lists what options you can include:
+
+{{% content "shared/portworx-install-with-kubernetes-volume-options.md" %}}
 
 #### Replicaset
 
@@ -91,6 +82,9 @@ Some examples of snapshots schedules are:
 * snap_schedule="weekly=sunday@12:00,2"
 * snap_schedule="monthly=15@12:00"
 
+{{<info>}}
+Note that scheduled snapshots do not occur if the volume you are trying to snapshot is not attached to a container.
+{{</info>}}
 
 **On-demand snapshots**
 
@@ -114,7 +108,7 @@ Mount operation mounts the Portworx volume in the propagated mount location. If 
 
 The docker plugin API does not have an Attach call. The Attach call is called internally via Mount on the first mount call for the volume.
 
-Portworx exports virtual block devices in the host namespace. This is done via the Portworx Container running on the system and does *not* rely on an external protocol such as iSCSI or NBD. Portworx virtual block devices only exist in host kernel memory. Two interesting consequences of this architecture are:
+Portworx exports virtual block devices in the host namespace. This is done via the Portworx container running on the system and does *not* rely on an external protocol such as iSCSI or NBD. Portworx virtual block devices only exist in host kernel memory. Two interesting consequences of this architecture are:
 1) volumes can be unmounted from dead/disconnected nodes
 2) IOs on porworx can survive a Portworx restart.
 

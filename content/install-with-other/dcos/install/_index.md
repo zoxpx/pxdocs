@@ -1,11 +1,15 @@
 ---
 title: Run Portworx with Mesosphere DC/OS
 description: Find out how to deploy Portworx and manage the Portworx cluster using DCOS.
-keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage
+keywords: Install, DCOS, DC/OS, Mesosphere, etcd, lighthouse
 weight: 1
 linkTitle: Install on DCOS
 noicon: true
 ---
+
+{{<info>}}
+This document presents the **non-Kubernetes** method of installing Portworx with Mesosphere DC/OS. Please refer to the [Run Portworx with Kubernetes on Mesosphere DC/OS](/install-with-other/dcos/install-dcos-k8s/) page if you want to install Portworx with Kubernetes on Mesosphere DC/OS.
+{{</info>}}
 
 This DCOS service will deploy Portworx as well as all the dependencies and additional services to manage the Portworx
 cluster. This includes a highly available etcd cluster and the Lighthouse service, which is the Web UI for Portworx.

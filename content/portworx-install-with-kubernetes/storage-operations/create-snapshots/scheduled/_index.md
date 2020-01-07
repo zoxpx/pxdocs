@@ -3,7 +3,7 @@ title: Scheduled snapshots
 weight: 2
 hidesections: true
 linkTitle: Scheduled snapshots
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+keywords: scheduled snapshots, stork, kubernetes, k8s
 description: Learn how to create scheduled consistent snapshots/backups and restore them.
 series: k8s-storage-snapshots
 ---
@@ -14,11 +14,11 @@ series: k8s-storage-snapshots
 
 Stork version 2.2 or above is required.
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-cloud-snap-creds-prereq.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-cloud-snap-creds-prereq.md" %}}
 
 ### Storkctl
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
 
 ## Creating a schedule policy
 
@@ -28,6 +28,10 @@ Schedule policies can be used to specify when a specific action has to be trigge
 * **Daily:** the time at which the action should be triggered every day
 * **Weekly:** the day of the week and the time in that day when the action should be triggered
 * **Monthly:** the date of the month and the time on that date when the action should be triggered.
+
+{{<info>}}
+Note that scheduled snapshots do not occur if the volume you are trying to snapshot is not attached to a container.
+{{</info>}}
 
 Let's look at an example of how we could create a daily and weekly policy.
 
@@ -82,7 +86,54 @@ daily     N/A                10:14PM   N/A                N/A
 weekly    N/A                N/A       Thursday@10:13PM   N/A
 ```
 
-## Creating a storage class
+## Associate a schedule policy with a StorageClass or a Volume
+
+Once you've defined a schedule policy, you can create and associate `StorageClass` and `Volume` specs with it. Perform one of the following steps, depending on whether you want to schedule snapshots for multiple PVCs or a single volume:
+
+### Create a VolumeSnapshotSchedule
+
+You can create VolumeSnapshotSchedules to backup specific volumes according to a schedule you define.
+
+Create a `VolumeSnapshotSchedule`, specifying:
+  * **metadata:**
+    * **name:** with the name of this VolumeSnapshotSchedule policy
+    * **namespace:** the namespace in which this policy will exist
+    * **annotations:**
+      * **portworx/snapshot-type:** with the `cloud` or `local` value, depending on what environment you want store your snapshots in
+      * **portworx/cloud-cred-id:** with your cloud environment credentials
+      * **stork/snapshot-restore-namespaces:** with other namespaces snapshots taken with this policy can restore to
+  * **spec:**
+    * **schedulePolicyName:** with the name of the schedule policy you defined in the steps above
+    * **suspend:** with a boolean value specifying if the schedule should be in a suspended state
+    * **preExecRule:** with the name of a rule to run before taking the snapshot
+    * **postExecRule:** with the name of a rule to run after taking the snapshot
+    * **reclaimPolicy:** with `retain` or `delete`, indicating what Portworx should do with the snapshots that were created using the schedule. Specifying the `delete` value deletes the snapshots created by this schedule when the schedule is deleted.
+    * **template:**
+      * **spec:**
+        * **persistentVolumeClaimName:** with the PVC you want this policy to apply to
+
+```text
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: VolumeSnapshotSchedule
+metadata:
+  name: mysql-snapshot-schedule
+  namespace: mysql
+  annotations:
+    portworx/snapshot-type: cloud
+    portworx/cloud-cred-id: <cred_id>
+    stork/snapshot-restore-namespaces: otherNamespace
+spec:
+  schedulePolicyName: testpolicy
+  suspend: false
+  reclaimPolicy: Delete
+  preExecRule: testRule
+  postExecRule: otherTestRule
+  template:
+    spec:
+      persistentVolumeClaimName: mysql-data
+```
+
+### Create a storage class
 
 Now that we've defined a schedule policy let's create a new `StorageClass` spec. By adding the new annotations, it'll automatically create a schedule for the newly created PVCs.
 

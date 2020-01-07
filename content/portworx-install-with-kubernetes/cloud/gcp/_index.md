@@ -2,7 +2,7 @@
 title: GCP
 logo: /logos/gcp.png
 weight: 1
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
+keywords: Install, GCP, Google Cloud Platform, Kubernetes, k8s, gcloud
 description: Setup a production ready Portworx cluster Google Cloud Platform (GCP).
 noicon: true
 hidesections: true

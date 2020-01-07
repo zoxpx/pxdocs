@@ -1,7 +1,7 @@
 ---
 title: Stateful applications
 weight: 3
-keywords: portworx, kubernetes, PVCs
+keywords: stateful applications, concepts, kubernetes, k8s
 description: Learn essential concepts about running stateful applications using persistent volumes on Kubernetes
 series: k8s-101
 ---
@@ -22,8 +22,13 @@ Let's take an example.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: postgres-deployment
+  labels:
+    app: postgres
 spec:
+  selector:
+    matchLabels:
+      app: postgres
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -94,6 +99,9 @@ kind: StatefulSet
 metadata:
   name: cassandra
 spec:
+  selector:
+    matchLabels:
+      app: cassandra
   serviceName: cassandra
   replicas: 3
   template:
@@ -184,7 +192,7 @@ spec:
 In the above spec,
 
 * **replicas: 3** declares that you want 3 replicas for your cassandra cluster.
-* **schedulerName: stork** enables to use [STORK](https://github.com/libopenstorage/stork) scheduler to enable more efficient placement of the pods and faster recovery for failed nodes.
+* **schedulerName: stork** enables to use [Stork](https://github.com/libopenstorage/stork) scheduler to enable more efficient placement of the pods and faster recovery for failed nodes.
 * **volumeClaimTemplates** declares the template to use for the PVC that will be created for each replica pod. The names of the dynamically created PVCs will be cassandra-data-cassandra-0, cassandra-data-cassandra-1 and cassandra-data-cassandra-2.
 
 {{<info>}}[The Cassandra on Kubernetes

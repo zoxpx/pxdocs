@@ -1,7 +1,7 @@
 ---
 title: Snapshot group of PVCs
 hidden: true
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+keywords: snapshots, group of PVCs, stork, kubernetes, k8s
 description: Instructions on taking snapshots of a group of PVCs and restoring PVCs from the snapshots
 series: k8s-local-snap
 weight: 9
@@ -11,9 +11,9 @@ This document will show you how to create group snapshots of Portworx volumes an
 
 ## Pre-requisites
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-v2-prereqs.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-group-snap-v2-prereqs.md" %}}
 
-### Portworx and Stork Version
+### Portworx and Stork version
 
 This page describes the steps for group snapshots for Portworx version 2.0.2 or above. The Stork version also needs to be above 2.0.2.
 
@@ -131,7 +131,7 @@ spec:
 
 ## Restoring from group snapshots
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-restore.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-group-snap-restore.md" %}}
 
 ## Examples
 
@@ -139,7 +139,7 @@ spec:
 
 In below example, we will take a group snapshot for all PVCs in the *default* namespace and that have labels *app: cassandra*.
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-cassandra-step-1-2.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-group-snap-cassandra-step-1-2.md" %}}
 
 #### Step 3: Take the group snapshot
 
@@ -276,7 +276,7 @@ Events:                    <none>
 
 ## Deleting group snapshots
 
-To delete group snapshots, you need to delete the `GroupVolumeSnapshot` that was used to create the group snapshots. STORK will delete all other volumesnapshots that were created for this group snapshot.
+To delete group snapshots, you need to delete the `GroupVolumeSnapshot` that was used to create the group snapshots. Stork will delete all other volumesnapshots that were created for this group snapshot.
 
 ```text
 kubectl delete groupvolumesnapshot cassandra-group-snapshot

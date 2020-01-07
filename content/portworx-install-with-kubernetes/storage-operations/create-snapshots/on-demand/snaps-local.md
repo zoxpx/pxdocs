@@ -1,23 +1,23 @@
 ---
 title: Create and use local snapshots
 weight: 1
-linkTitle: "Local snapshots"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+linkTitle: Local snapshots
+keywords: local snapshots, stork, kubernetes, k8s
 description: Learn to take a snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod.
 ---
 
 This document will show you how to create snapshots of Portworx volumes and how you can clone those snapshots to use them in pods.
 
 {{<info>}}
-The suggested way to manage snapshots on Kuberenetes is to use STORK. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-annotations).
+The suggested way to manage snapshots on Kuberenetes is to use Stork. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-annotations).
 {{</info>}}
 
 ## Pre-requisites
 
-**Installing STORK**
+**Installing Stork**
 
-This requires that you already have [STORK](/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
-Kubernetes cluster. If you fetched the Portworx specs from [https://install.portworx.com](https://install.portworx.com) and used the default options, STORK is already installed.
+This requires that you already have [Stork](/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
+Kubernetes cluster. If you fetched the Portworx specs from the Portworx spec generator in [PX-Central](https://central.portworx.com) and used the default options, Stork is already installed.
 
 ## Creating snapshots
 
@@ -27,4 +27,4 @@ With local snapshots, you can either snapshot individual PVCs one by one or snap
 
 ## Creating PVCs from snapshots
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-restore-pvc-from-snap.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-restore-pvc-from-snap.md" %}}

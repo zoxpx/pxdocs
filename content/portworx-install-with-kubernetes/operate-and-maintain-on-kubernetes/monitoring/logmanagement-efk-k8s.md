@@ -1,30 +1,31 @@
 ---
 title: Logging Portworx on Kubernetes
 linkTitle: Logging
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, elastic, fluentd, elastic search, kibana, cluster logging, log management
-description: PX Logs management on Kubernetes using Elastic Search, Kibana, and Fluentd.
+keywords: logging, log management, Kubernetes, k8s, Elastic Search, Kibana, Fluentd
+description: Portworx logs management on Kubernetes using Elastic Search, Kibana, and Fluentd.
 ---
 
-PX Logs management on Kubernetes using Elastic search, Kibana and Fluentd.
+Portworx logs management on Kubernetes using Elastic search, Kibana and Fluentd.
 
-## PX Logs on Kubernetes
-PX runs as a deamonset on the Kubernetes cluster which ensures that it runs on each node as part of the Kubernetes cluster. To allow access to the logs of a failed node, pod or a container in kubernetes we would have to adopt a complete logging solution. The need to access or view logs of failed container workloads means that we would need to enable storage and the logs should have a seperate lifecycle than that of the container that creates it.
+## Portworx logs on Kubernetes
+Portworx runs as a DaemonSet on the Kubernetes cluster which ensures that it runs on each node as part of the Kubernetes cluster. To allow access to the logs of a failed node, pod or a container in kubernetes we would have to adopt a complete logging solution. The need to access or view logs of failed container workloads means that we would need to enable storage and the logs should have a seperate lifecycle than that of the container that creates it.
 
-Elastic Search, FluentD and Kibana allow us to setup a complete logging solution for accessing logs of the PX pods scheduled on the kubernetes cluster.
+Elastic Search, FluentD and Kibana allow us to setup a complete logging solution for accessing logs of the Portworx pods scheduled on the Kubernetes cluster.
 
-Setup Elastic Search and Kibana on your kubernetes cluster by following the the steps mentioned in the document here
+Setup Elastic Search and Kibana on your Kubernetes cluster by following the steps mentioned in the document here
 [Elastic Search and Kibana on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana)
 
 ## Log Collection
 Fluentd is a log collector which enables you to log everything in a unified manner. Fluentd uses JSON as the log collection format.
 
-### Install fluentd on your kubernetes cluster.
-fluentd runs as a deamonset on the kubernetes cluster thus allows it to collect logs from all the PX pods placed on each node.
+### Install fluentd on your Kubernetes cluster.
+fluentd runs as a deamonset on the Kubernetes cluster thus allows it to collect logs from all the Portworx pods placed on each node.
 If the need is to also enable the entire kubernetes cluster level logging, then please add `@include kubernetes.conf` and add a relevant `match` directive in the `ConfigMap`
 
 Create a file named ```fluentd-spec.yaml``` and apply the configuration using `kubectl`:
 
 ```text
+
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -33,7 +34,7 @@ metadata:
   namespace: kube-system
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: fluentd
@@ -52,7 +53,7 @@ rules:
 
 ---
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: fluentd
 roleRef:
@@ -105,7 +106,7 @@ data:
        num_threads 8
     </match>
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluentd
@@ -115,12 +116,16 @@ metadata:
     version: v1
     kubernetes.io/cluster-service: "true"
 spec:
+  selector:
+    matchLabels:
+      name: fluentd
   template:
     metadata:
       labels:
-        k8s-app: fluentd-logging
+        k8s-app: fluentd
         version: v1
         kubernetes.io/cluster-service: "true"
+        name: fluentd
     spec:
       serviceAccount: fluentd
       serviceAccountName: fluentd

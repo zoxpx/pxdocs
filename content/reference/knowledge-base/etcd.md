@@ -1,7 +1,6 @@
 ---
-layout: page
-title: "Etcd for Portworx"
-keywords: etcd, portworx, maintenance, kvdb
+title: Etcd for Portworx
+keywords: Install, etcd, portworx, kvdb
 description: Instructions on installing and configuring an external ETCD cluster for Portworx
 linkTitle: Etcd for Portworx
 series: kb
@@ -16,7 +15,7 @@ This page list various approaches for installing an external ETCD cluster and pr
 
 ### Requirements
 
-For production Portworx clusters we recommend the following configuration of an etcd cluster:
+For production Portworx clusters, Portworx, Inc. recommends the following configuration of an etcd cluster:
 
 1. Etcd Version > 3.1.x
 2. Minimum 3 nodes
@@ -49,7 +48,7 @@ Etcd provides multiple knobs to fine tune the cluster based on your needs. We re
 #### Compaction
 
 etcd keeps an exact history of its keyspace, this history should be periodically compacted to avoid performance degradation and eventual storage space exhaustion. Regular compaction ensures that the memory usage of the etcd process is under check.
-The keyspace can be compacted automatically with etcd's time windowed history retention policy, or manually with ``etcd``
+The keyspace can be compacted automatically with etcd's time windowed history retention policy, or manually with `etcd`.
 
 We recommend keeping history for last 3 hours. While setting up etcd you can specify the retention policy in the following way:
 
@@ -115,4 +114,4 @@ etcd.crt:  1680 bytes
 etcd.key:  414  bytes
 ```
 
-Use the [spec generator](https://install.portworx.com/), selecting "Certificate Auth" under the etcd section, ensuring the filenames match those specified.
+Use the Portworx spec generator in [PX-Central](https://central.portworx.com), selecting "Certificate Auth" under the etcd section, ensuring the filenames match those specified.

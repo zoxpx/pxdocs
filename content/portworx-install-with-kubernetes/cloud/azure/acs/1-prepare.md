@@ -1,6 +1,6 @@
 ---
 title: 1. Prepare Your ACS Platform
-keywords: portworx, acs-engine, azure, Kubernetes, microsoft, azure
+keywords: Install, on cloud, ACS, Azure Container Service, Microsoft, Kubernetes, k8s
 description: Learn about preparing Portworx on Kubernetes with ACS.
 weight: 1
 ---
@@ -9,7 +9,9 @@ weight: 1
 
 The ACS Engine binary files are located [here](https://github.com/Azure/acs-engine/releases). To install the ACS Engine on Linux, run this command:
 
-`curl -L https://aka.ms/InstallAzureCli | bash`
+```text
+curl -L https://aka.ms/InstallAzureCli | bash
+```
 
 ### Install the Azure CLI
 

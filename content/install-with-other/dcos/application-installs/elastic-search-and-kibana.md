@@ -1,16 +1,20 @@
 ---
 title: Elastic Search and Kibana
 description: Find out how to install the ElasticSearch service on your DCOS cluster. Follow our step-by-step guide to running stateful services on DCOS today!
-keywords: portworx, container, Mesos, Mesosphere, DCOS, Elasticsearch
+keywords: Install, elasticsearch, kibana, DCOS, DC/OS
 ---
 
-This guide will help you to install the Elasticsearch service on your DCOS cluster backed by PX volumes for persistent storage.
+{{<info>}}
+This document presents the **DC/OS** method of installing Elastic Search and Kibana with Portworx. Please refer to the [Elastic Search and Kibana with Portworx on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
+This guide will help you to install the Elasticsearch service on your DCOS cluster backed by Portworx volumes for persistent storage.
 
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 {{<info>}}
 **Note:**
-This framework is only supported directly by Portworx. Please contact support@portworx.com directly for any support issues related with using this framework.
+This framework is only supported directly by Portworx, Inc.. Please contact support@portworx.com directly for any support issues related with using this framework.
 {{</info>}}
 
 Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
@@ -95,16 +99,16 @@ When the last elasticsearch component with ID `portworx-elastic.XXXX` that is th
 
 ![Elasticsearch service running](/img/elasticsearch-px-universe-007.PNG)
 
-#### Check PX volumes
+#### Check Portworx volumes
 
-The PX volumes for all elasticsearch task components are automatically created, and you can check that from one of the mesos private agent node
+The Portworx volumes for all elasticsearch task components are automatically created, and you can check that from one of the mesos private agent node
 
 ```text
-dcos node ssh --master-proxy --mesos-id=41474f9b-6b81-44ba-ad2c-184f71efbb26-S1 '/opt/pwx/bin/pxctl v l'
+dcos node ssh --master-proxy --mesos-id=41474f9b-6b81-44ba-ad2c-184f71efbb26-S1 '/opt/pwx/bin/pxctl volume list'
 ```
 
 ```output
-  Running `ssh -A -t core@34.203.197.47 ssh -A -t core@10.0.0.236 /opt/pwx/bin/pxctl v l`
+  Running `ssh -A -t core@34.203.197.47 ssh -A -t core@10.0.0.236 /opt/pwx/bin/pxctl volume list`
   ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
   471143287909897714      CoordinatorNodeVolume-0 1 GiB   1       no      no              LOW             0       up - attached on 10.0.0.236
   473886186773881112      DataNodeVolume-0        10 GiB  1       no      no              LOW             0       up - attached on 10.0.2.96

@@ -1,14 +1,14 @@
 ---
 title: Decommission a Node
 weight: 4
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+keywords: Uninstall, decomission a node, Kubernetes, k8s
 description: Steps to decommission a Portworx node in your Kubernetes clusters.
 series: k8s-uninstall
 ---
 
 This guide describes a recommended workflow for decommissioning a Portworx node in your Kubernetes cluster.
 
-## Step 1. Migrate application pods using portworx volumes that are running on this node
+## Step 1. Migrate application pods using Portworx volumes that are running on this node
 
 If you plan to remove Portworx from a node, applications running on that node using Portworx need to be migrated. If Portworx is not running, existing application containers will end up with read-only volumes and new ones will fail to start.
 
@@ -30,7 +30,7 @@ You have 2 options for migrating applications.
     kubectl cordon <node>
     ```
 
-2. Delete the application pods using portworx volumes using:
+2. Delete the application pods using Portworx volumes using:
 
     ```text
     kubectl delete pod <pod-name>
@@ -38,7 +38,7 @@ You have 2 options for migrating applications.
 
    * Since application pods are expected to be managed by a controller like `Deployement` or `StatefulSet`, Kubernetes will spin up a new replacement pod on another node.
 
-## Step 2. Decommission Portworx
+## Step 2. Decommission Portworx 
 
 To decommission Portworx, perform the following steps:
 
@@ -63,19 +63,25 @@ If the plan is to decommission this node altogether from the Kubernetes cluster,
 
 ## Step 3. Ensure application pods using Portworx don’t run on this node
 
-If you need to continue using the Kubernetes node without Portworx, you will need to ensure your application pods using Porworx volumes don’t get scheduled here.
+If you need to continue using the Kubernetes node without Portworx, you will need to ensure your application pods using Portworx volumes don’t get scheduled here.
 
-One way to achieve is this to use [inter-pod affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)
+You can ensure this by adding the `schedulerName: stork` field to your application specs (Deployment, Statefulset, etc). Stork is a scheduler extension that will schedule pods using Portworx PVCs only on nodes that have Portworx running. Refer to the [Using scheduler convergence]
+(/portworx-install-with-kubernetes/storage-operations/hyperconvergence/#using-scheduler-convergence) article for more information.
+
+Another way to achieve this is to use [inter-pod affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)
 
 * Basically we will define a pod affinity rule in your applications that ensure that application pods get scheduled only on nodes where the Portworx pod is running.
 * Consider below nginx example:
 
   ```text
-  apiVersion: apps/v1beta1
-  kind: Deployment
-  metadata:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: nginx-deployment
-  spec:
+spec:
+  selector:
+    matchLabels:
+      app: nginx
   replicas: 1
   template:
     metadata:
@@ -115,4 +121,8 @@ One way to achieve is this to use [inter-pod affinity](https://kubernetes.io/doc
 
 You can now uncordon the node using: `kubectl uncordon <node>`
 
-If you want to have Portworx start on this node at a later point in time and join as a new node, follow the [node rejoin steps](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/k8s-node-rejoin).
+If you want to permanently decommision the node, you can skip **Step 5. (Optional) Rejoin node to the cluster**.
+
+## Step 5. (Optional) Rejoin node to the cluster
+
+If you want {<productName>} to start again on this node and join as a new node, follow the [node rejoin steps](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/k8s-node-rejoin).

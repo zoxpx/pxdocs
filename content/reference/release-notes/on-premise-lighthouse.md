@@ -1,14 +1,30 @@
 ---
 title: "On-Prem Lighthouse Release Notes"
-keywords: portworx, px-enterprise, px-lighthouse, release notes
+keywords: Release notes, On-Prem Lighthouse, PX-Lighthouse, PX-Enterprise
 meta-description: "Release notes for Lighthouse, the Portworx UI."
+description: "Release notes for Lighthouse, the Portworx UI."
+series: release-notes
+weight: 300
 ---
+
+## Lighthouse 2.0.6 Release notes
+
+### Key Fixes
+
+* LD-507 - Swapped from using nodelabels to using the Kubernetes constant value for a master node to determine what node we should contact for cluster information. Previously, nodes could not have master labels and that would cause Lighthouse to fail the /config call.
+* LD-503 - Addressed security vulnerabilities found during scanning.
+
+## Lighthouse 2.0.5 Release notes
+
+### Key Fixes
+
+* LD-435 - Lighthouse indicates when a drive is a cache drive
 
 ## Lighthouse 2.0.4 Release notes
 
 ### Key Fixes
 
-* LD-430 - Security and vulnerability scan fixes 
+* LD-430 - Security and vulnerability scan fixes
 
 ## Lighthouse 2.0.3 Release notes
 
@@ -24,7 +40,7 @@ meta-description: "Release notes for Lighthouse, the Portworx UI."
 
 ## Lighthouse 2.0.1 Release notes
 
-* Adds Cluster Migration to Kubernetes clusters for PX Clusters with version 2.0.1+
+* Adds Cluster Migration to Kubernetes clusters for Portworx clusters with version 2.0.1+
 Note: Requires kubeconfig upload and cannot migrate to non Kubernetes clusters
 
 Fixes:
@@ -32,7 +48,7 @@ Fixes:
 
 ## Lighthouse 2.0 Release notes
 
-* Adds Cluster Migration to non Kubernetes clusters for PX Clusters with version 2.0+ 
+* Adds Cluster Migration to non Kubernetes clusters for Portworx clusters with version 2.0+
 Note: Cannot migrate to Kubernetes Clusters
 
 Fixes:
@@ -41,13 +57,13 @@ Fixes:
 
 ## Lighthouse 1.5 Release notes
 
-* Adds a volume analyzer feature for Portworx 1.5.0 and above. 
-  Note: It won't show files which are 0.00033% of the total storage. 
-* In k8s, now service DNS name can also be given as cluster endpoint 
+* Adds a volume analyzer feature for Portworx 1.5.0 and above.
+  Note: It won't show files which are 0.00033% of the total storage.
+* In k8s, now service DNS name can also be given as cluster endpoint
 
 ## Lighthouse 1.4 Release notes
 
-Lighthouse 1.4 is a new GUI refresh for lighthouse. Follow this [link](/reference/lighthouse) to install Lighthouse in your environment. Please note that Lighthouse 1.4 only works with PX 1.4 and above.
+Lighthouse 1.4 is a new GUI refresh for lighthouse. Follow this [link](/reference/lighthouse) to install Lighthouse in your environment. Please note that Lighthouse 1.4 only works with Portworx 1.4 and above.
 
 To get access to Portworx PX-Lighthouse docker repository, contact us at support@portworx.com from your company email address.
 
@@ -72,7 +88,7 @@ To get access to Portworx PX-Lighthouse docker repository, contact us at support
 
 * Added in support for the latest Openstorage api's and made Lighthouse work with these.
 * Added creation of the influx px_stats database if not present.
-* Added kubernetes commands for spinning up a px node/cluster
+* Added kubernetes commands for spinning up a Portworx node/cluster
 * Added feature where the user can specify admin email and company.
 * Added feature where the user can specify which port Lighthouse would be running on.
 
@@ -93,7 +109,7 @@ To get access to Portworx PX-Lighthouse docker repository, contact us at support
 
 ## Lighthouse 1.1.3 Release notes
 
-In order to use Lighthouse 1.1.3 with authentication, please download and install PX-Enterprise 1.1.2 as well. 
+In order to use Lighthouse 1.1.3 with authentication, please download and install PX-Enterprise 1.1.2 as well.
 
 ### Key Features
 
@@ -119,4 +135,3 @@ In order to use Lighthouse 1.1.3 with authentication, please download and instal
 ### Known issues
 
 * This version does not support clear alerts. This will be fixed in the upcoming 1.1.3 release along with the addition of "Clear All Alerts" capability.
-

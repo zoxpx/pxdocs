@@ -1,6 +1,6 @@
 ---
-title: "Kubemotion with stork on GKE"
-keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion, gke
+title: "Kubemotion with Stork on GKE"
+keywords: migration, migrate, PX-Motion, GKE, Google Kubernetes Engine, k8s, gcloud, Stork, cloud
 description: How to migrate stateful appliations to GKE
 hidden: true
 ---
@@ -28,8 +28,8 @@ kubectl create secret  generic --from-file=gcs-key.json -n kube-system gke-creds
 secret/gke-creds created
 ```
 
-## Pass the Secret to stork
-Mount the secret created above in the stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates:
+## Pass the Secret to Stork
+Mount the secret created above in the Stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates:
 
 * Add the following under spec.template.spec:
 
@@ -57,7 +57,7 @@ env:
   value: /root/.gke/gcs-key.json
 ```
 
-Save the changes and wait for all the stork pods to be in running state after applying the
+Save the changes and wait for all the Stork pods to be in running state after applying the
 changes:
 
 ```text

@@ -1,12 +1,12 @@
 ---
 title: Group Snaps using pxctl
-keywords: portworx, pxctl, command-line tool, cli, reference
+keywords: pxctl, command-line tool, cli, reference, group snapshots 
 description: Explore the CLI reference guide for taking group snapshots of container data volumes using Portworx. Try it today!
 linkTitle: Group Snaps
 weight: 5
 ---
 
-This document explains how to take group snapshots of your container data with _Portworx_.
+This document explains how to take group snapshots of your container data with Portworx.
 
 First, let's get an overview of the available flags before diving in:
 
@@ -63,3 +63,6 @@ Volume 83958335106174418 : Snapshot 362408823552094597
 Volume 874802361339616936 : Snapshot 895516478416742770
 ```
 
+## Related topics
+
+* For more information about creating group snapshots of Portworx volumes through Kubernetes, refer to the [Snapshot group of PVCs](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group/) page.

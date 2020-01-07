@@ -2,7 +2,7 @@
 title: Kubernetes Persistent volumes
 linkTitle: Persistent volumes
 weight: 2
-keywords: portworx, kubernetes, PVCs
+keywords: persistent volumes, concepts, kubernetes, k8s
 description: Learn essential concepts about creating persistent volumes on Kubernetes
 series: k8s-101
 ---
@@ -47,7 +47,7 @@ Some fields like `allowVolumeExpansion` cannot be added after the storage class 
 
 Let's take a look at an example.
 
-{{% content "portworx-install-with-kubernetes/shared/resize-portworx-pvc.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-resize-portworx-pvc.md" %}}
 
 ## PersistentVolumeClaim (PVC)
 
@@ -108,3 +108,9 @@ A PVC can be
 * [Interactive tutorial - Using Portworx Shared Volumes](https://www.katacoda.com/portworx/scenarios/px-k8s-vol-shared)
 * [Interactive tutorial - Encrypting volumes on Kubernetes](https://www.katacoda.com/portworx/scenarios/px-k8s-encryption)
 * [Kubernetes Storage documentation](https://kubernetes.io/docs/concepts/storage/volumes/)
+
+## Related videos
+
+### Backup and restore persistent volumes with Google Cloud Storage
+
+{{< youtube 3doFk56drxw >}}

@@ -1,6 +1,6 @@
 ---
 title: Create and manage volumes using pxctl
-keywords: portworx, pxctl, command-line tool, cli, reference
+keywords: pxctl, command-line tool, cli, reference, create volume, manage volumes, import volume, inspect volume, list volumes, locate volume, restore volume, clone volume, snapshot volume
 description: This guide shows you how to create and manage volumes with pxctl.
 linkTitle: Create and Manage Volumes
 weight: 2
@@ -66,7 +66,7 @@ In the next sections, we will take a look at these commands individually.
 
 ## Creating volumes with pxctl
 
-_Portworx_ creates volumes from the global capacity of a cluster. You can expand the capacity and throughput by adding new nodes to the cluster. _Portworx_ protects storage volumes from hardware and node failures through automatic replication.
+Portworx creates volumes from the global capacity of a cluster. You can expand the capacity and throughput by adding new nodes to the cluster. Portworx protects storage volumes from hardware and node failures through automatic replication.
 
 Things to consider when creating a new volume with `pxctl`:
 
@@ -225,7 +225,7 @@ The replicas are visible in the _"Replica sets on nodes"_ section.
 
 ### Creating volumes with Docker
 
-All `docker volume` commands are reflected in _Portworx_. For example, a `docker volume create` command provisions a storage volume in a _Portworx_ storage cluster.
+All `docker volume` commands are reflected in Portworx. For example, a `docker volume create` command provisions a storage volume in a Portworx storage cluster.
 
 The following `docker volume` command creates a volume named `testVol`:
 
@@ -237,7 +237,7 @@ docker volume create -d pxd --name testVol
 testVol
 ```
 
-Just to make sure the command is reflected into _Portworx_, try running this command:
+Just to make sure the command is reflected into Portworx, try running this command:
 
 
 ```text
@@ -251,7 +251,7 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS		SNAP-ENABLED
 
 ### The --opt flag
 
-As part of the `docker volume` command, you can add optional parameters through the `--opt` flag. The parameters are the same, whether you use _Portworx_ storage through the Docker volume or the `pxctl` command.
+As part of the `docker volume` command, you can add optional parameters through the `--opt` flag. The parameters are the same, whether you use Portworx storage through the Docker volume or the `pxctl` command.
 
 The command below uses the `--opt` flag to set the container's filesystem and volume size:
 
@@ -276,11 +276,16 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS		SNAP-ENABLED
 
 We're all set.
 
+
+### Related topics
+
+* For information about creating Portworx volumes through Kubernetes, refer to the [Kubernetes Persistent volumes](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/volumes/) page.
+
 ## Inline volume spec
 
-_PX_ supports passing the volume spec inline along with the volume name. This is useful if you want to create a volume with your scheduler application template inline and do not want to create volumes beforehand.
+Portworx supports passing the volume spec inline along with the volume name. This is useful if you want to create a volume with your scheduler application template inline and do not want to create volumes beforehand.
 
-For example, a _PX_ inline spec looks like this:
+For example, a Portworx inline spec looks like this:
 
 ```text
 docker volume create -d pxd io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume
@@ -325,9 +330,15 @@ The inline specs can be passed in through the scheduler application template. Fo
 	}],
 ```
 
-## Global Namespace \(Shared Volumes\)
+## Global Namespace (Shared Volumes)
 
-{{% content "concepts/shared/shared-volumes.md" %}}
+{{% content "shared/concepts-shared-volumes.md" %}}
+
+
+### Related topics
+
+* For information about creating shared Portworx volumes through Kubernetes, refer to the [ReadWriteMany and ReadWriteOnce](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/volumes/#readwritemany-and-readwriteonce) section.
+
 
 ## Deleting volumes
 
@@ -395,13 +406,16 @@ Volume	:  970758537931791410
 ```
 
 {{<info>}}
-You can also inspect multiple volumes in one command.
+**NOTE:** <ul>
+<li>You can inspect multiple volumes in one command.</li>
+<li>The `Bytes used` value only represents the application data held by the volume. This amount may be smaller than the value reported by `pxctl volume usage` due to metadata inclusion and fragmentation.</li>
+</ul>
 {{</info>}}
 
-To inspect the volume in `json` format, run `pxctl volume inspect` with the `-j` flag:
+To inspect the volume in `json` format, run `pxctl volume inspect` with the `--json` flag:
 
 ```text
-pxctl -j volume inspect 486256711004992211
+pxctl --json volume inspect 486256711004992211
 ```
 
 ```output
@@ -493,10 +507,6 @@ pxctl -j volume inspect 486256711004992211
 }]
 ```
 
-{{<info>}}
-The above command can be abbreviated as `pxctl -j volume inspect 486256711004992211`
-{{</info>}}
-
 ## Listing volumes
 
 To list all volumes within a cluster, use this command:
@@ -531,11 +541,16 @@ In this example, the volume is mounted in two containers via the `/directory1` a
 
 ## Volume snapshots
 
-{{% content "reference/CLI/shared/intro-snapshots.md" %}}
+{{% content "shared/reference-CLI-intro-snapshots.md" %}}
 
-{{% content "reference/CLI/shared/creating-snapshots.md" %}}
+{{% content "shared/reference-CLI-creating-snapshots.md" %}}
 
 Snapshots are read-only. To restore a volume from a snapshot, use the `pxctl volume restore` command.
+
+
+### Related topics
+
+* For information about creating snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page.
 
 ## Volume Clone
 
@@ -589,13 +604,27 @@ pxctl volume clone -name myvol_clone myvol
 Volume clone successful: 55898055774694370
 ```
 
+### Related topics
+
+* For information about creating a clone from a snapshot through Kubernetes, refer to the [On-demand snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/) page.
+
 ## Volume Restore
 
-{{% content "reference/CLI/shared/restore-volume-from-snapshot.md" %}}
+{{% content "shared/reference-CLI-restore-volume-from-snapshot.md" %}}
+
+
+### Related topics
+
+* For information about restoring a Portworx volume with data from a snapshot through Kubernetes, refer to the [Restore snapshots](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/snapshots/#restore-snapshots) page.
+
 
 ## Update the snap interval of a volume
 
 Please see the documentation for [snapshots] (/reference/cli/snapshots) for more details.
+
+### Related topics
+
+* For information about creating scheduled snapshots of a Portworx volume through Kubernetes, refer to the [Scheduled snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/scheduled/) page.
 
 ## Volume stats
 

@@ -1,7 +1,7 @@
 ---
-title: "Disaster Recovery (DR) for Kubernetes"
-linkTitle: "Disaster Recovery (DR)"
-keywords: cloud, backup, restore, snapshot, DR, PX-DR, migration
+title: Disaster Recovery (DR) for Kubernetes
+linkTitle: Disaster Recovery (DR)
+keywords: DR, Disaster Recovery, Kubernetes, k8s, cloud, backup, restore, snapshot, migration
 hidesections: true
 ---
 

@@ -2,7 +2,7 @@
 title: Kubernetes Snapshots and Backups
 linkTitle: Snapshots and Backups
 weight: 5
-keywords: portworx, kubernetes, PVCs
+keywords: snapshots, backups, concepts, kubernetes, k8s, PVC
 description: Learn essential concepts about snaphots and backups of volumes on Kubernetes
 series: k8s-101
 ---
@@ -58,6 +58,41 @@ For each of the snapshot types, Portworx supports specifying pre and post rules 
 
 Read [Configuring 3DSnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d) for further details on 3DSnaps.
 
+## Restore snapshots
+
+You can restore both single and group volume snapshots by creating a VolumeSnapshotRestore spec.
+
+1. Create a VolumeSnapshotRestore YAML file, specifying the following:
+
+  * **name** The name of this VolumeSnapshotRestore object
+  * **namespace** The namespace this VolumeSnapshotRestore object will be located in
+  * **spec**
+    * **groupSnapshot** Specifies whether or not the source is a group snapshot
+    * **sourceName** The name of the VolumeSnapshot or groupVolumeSnapshot object you want to restore
+    * **sourceNamespace** The namespace the source VolumeSnapshot or groupVolumeSnapshot object exists in
+
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: VolumeSnapshotRestore
+    metadata:
+      name: mysql-snap-inrestore
+      namespace: default
+    spec:
+      groupSnapshot: true
+      sourceName: mysql-snapshot
+      sourceNamespace: mysql-snap-restore-splocal
+    ```
+
+2. Apply the YAML file:
+
+    ```text
+    kubectl apply -f volSnap.yaml
+    ```
+
+{{<info>}}
+**Note:** Volume snapshot restore does not currently support CloudSnap.
+{{</info>}}
+
 ## Migration
 
 Migration is reffered to the operation of transferring application workloads (e.g Deployments, Statefulsets, Jobs, ConfigMaps etc) and their data (PVCs) across Kubernetes clusters.
@@ -70,4 +105,26 @@ Common use cases for this would be:
 * Lift/Shift: Move applications and data from an on-prem cluster to a hosted AWS EKS or Google GKE. The reverse is also supported to repatriate, move applications on-prem.
 * Maintenance: Decommission a cluster in order to perform hardware-level upgrades.
 
-Portworx uses [STORK](https://github.com/libopenstorage/stork) for migration. The [Migration](/concepts/migration) page detailed documentation on this.
+Portworx uses [Stork](https://github.com/libopenstorage/stork) for migration. The [Migration](/concepts/migration) page detailed documentation on this.
+
+## Related topics
+
+* [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/)
+
+## Related videos 
+
+### Create a local snapshot of a running MongoDB cluster on GKE and restore it to a new POD
+
+{{< youtube t3H1kM8zED0 >}}
+
+<br>
+
+### Create a cloud snapshot of a running MongoDB cluster on GKE and restore it to a new POD
+
+{{< youtube x2mcOImnyvI >}}
+
+<br>
+
+### Create group snapshots of multiple volumes with Portworx on OpenShift
+
+{{< youtube 4U79__zmAL4 >}}

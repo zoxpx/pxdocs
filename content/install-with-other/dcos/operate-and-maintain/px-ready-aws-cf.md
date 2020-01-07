@@ -1,7 +1,7 @@
 ---
 title: Deploy 'Portworx-ready' Mesosphere DCOS cluster on AWS
 description: Learn how to deploy Portworx ready Mesosphere DCOS clusters on AWS
-keywords: portworx, mesos, mesosphere, dcos, aws, cloudformation
+keywords: portworx ready, dcos, dc/os, aws, cloudformation, mesos, mesosphere
 hidden: true
 ---
 

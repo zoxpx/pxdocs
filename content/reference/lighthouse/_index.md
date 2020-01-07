@@ -1,6 +1,6 @@
 ---
 title: Install Lighthouse
-keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse
+keywords: Install, Lighthouse, Manage Portworx, GUI dashboard, monitor Portworx cluster, add Portworx cluster to Lighthouse, Reference
 description: Documentation on using Lighthouse to manage Portworx clusters
 weight: 8
 linkTitle: Lighthouse
@@ -25,17 +25,17 @@ sudo docker run --restart=always                            \
 
 Visit *http://{IP_ADDRESS}:login* in the browser and login with `admin/Password1`
 
-## Adding a PX cluster
+## Adding a Portworx cluster
 
-To add a PX cluster to Lighthouse, you will need the IP address of any one of the nodes in that cluster.  Lighthouse will connect to that node and configure itself to monitor that cluster.
+To add a Portworx cluster to Lighthouse, you will need the IP address of any one of the nodes in that cluster.  Lighthouse will connect to that node and configure itself to monitor that cluster.
 
 After your first login, go to 'click here to add a Cluster to Light House' -> Add cluster endpoint -> Verify. This should automatically fill in the cluster name and UUID.  Once verified, click on attach.
 
-**NOTE:** For the cluster endpoint, please provide the loadbalancer IP or the IP address of one of the nodes in the PX Cluster.
+**NOTE:** For the cluster endpoint, please provide the loadbalancer IP or the IP address of one of the nodes in the Portworx Cluster.
 
 ![Lighthouse add new cluster](/img/lh-new-add-cluster.png)
 
-### Deleting a PX cluster
+### Deleting a Portworx cluster
 Under the settings icon, click on Manage Clusters.
 
 ![Lighthouse menu](/img/lh-new-menu.png)

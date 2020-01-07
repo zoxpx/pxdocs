@@ -2,7 +2,7 @@
 title: Cloud backups for single PVCs
 weight: 2
 hidden: true
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones, cloud, cloudsnap
+keywords: cloud backup, single PVC, stork, cloudsnaps, kubernetes, k8s
 description: Instructions for backing up a PVC with consistency to cloud and restore PVCs from the backup
 series: k8s-cloud-snap
 ---
@@ -11,17 +11,17 @@ This document will show you how to create cloud snapshots of Portworx volumes an
 
 ## Pre-requisites
 
-### Installing STORK
+### Installing Stork
 
-This requires that you already have [STORK] (/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
-Kubernetes cluster. If you fetched the Portworx specs from [https://install.portworx.com](https://install.portworx.com) and used the default options, STORK is already installed.
+This requires that you already have [Stork] (/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
+Kubernetes cluster. If you fetched the Portworx specs from the Portworx spec generator in [PX-Central](https://central.portworx.com) and used the default options, Stork is already installed.
 
-### PX Version
+### Portworx version
 
 Cloud snapshots using below method is supported in Portworx version 1.4 and above.
 Cloud snapshots (for aggregated volumes) using below method is supported in Portworx version 2.0 and above.
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-cloud-snap-creds-prereq.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-cloud-snap-creds-prereq.md" %}}
 
 ## Creating cloud snapshots
 
@@ -109,7 +109,7 @@ Events:                    <none>
 
 ## Creating PVCs from cloud snapshots
 
-When you install STORK, it also creates a storage class called _stork-snapshot-sc_. This storage class can be used to create PVCs from snapshots.
+When you install Stork, it also creates a storage class called _stork-snapshot-sc_. This storage class can be used to create PVCs from snapshots.
 
 To create a PVC from a snapshot, you would add the `snapshot.alpha.kubernetes.io/snapshot` annotation to refer to the snapshot
 name.
@@ -132,7 +132,7 @@ spec:
       storage: 2Gi
 ```
 
-Once you apply the above spec you will see a PVC created by STORK. This PVC will be backed by a Portworx volume clone of the snapshot created above.
+Once you apply the above spec you will see a PVC created by Stork. This PVC will be backed by a Portworx volume clone of the snapshot created above.
 
 ```text
 kubectl get pvc

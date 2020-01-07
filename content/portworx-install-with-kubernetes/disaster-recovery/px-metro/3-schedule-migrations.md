@@ -1,7 +1,7 @@
 ---
-title: "3. Synchronize your Clusters"
+title: 3. Synchronize your Clusters
 weight: 3
-keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
+keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: Find out how to synchronize your cluster by scheduling periodic migrations between them
 ---
 
@@ -12,11 +12,15 @@ For reference,
 * **Source Cluster** is the Kubernetes cluster where your applications are running
 * **Destination Cluster** is the Kubernetes cluster where the applications will be failed over, in case of a disaster in the source cluster.
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/schedule-policy.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-schedule-policy.md" %}}
 
 ### Scheduling a migration
 
 Once a policy has been created, you can use it to schedule a migration. The MigrationSchedule object is namespaced.
+
+{{<info>}}
+**NOTE:** If your cluster has a DR license applied to it, you can only perform migrations in DR mode; this includes operations involving the `pxctl cluster migrate` command.
+{{</info>}}
 
 Continuing our previous example with `testpolicy`, here is how to create a `MigrationSchedule` object that schedules a migration:
 

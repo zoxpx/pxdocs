@@ -83,7 +83,7 @@ EOF
 
 cat <<EOF | kubectl create -f -
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: etcd-operator
@@ -129,7 +129,7 @@ metadata:
   name: etcd-operator
   namespace: default
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: etcd-operator
@@ -142,11 +142,14 @@ subjects:
   name: etcd-operator
   namespace: default
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: etcd-operator
 spec:
+  selector:
+    matchLabels:
+      name: etcd-operator
   replicas: 1
   template:
     metadata:
@@ -216,7 +219,7 @@ ETCD_IP=`kubectl get svc etcd-px-client -o yaml | grep clusterIP | awk '{print $
 
 cat <<EOF | kubectl apply -f -
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
@@ -224,6 +227,9 @@ metadata:
     service: px-lighthouse
   name: px-lighthouse
 spec:
+  selector:
+    matchLabels:
+      io.kompose.service: px-lighthouse
   replicas: 1
   strategy:
     type: Recreate
@@ -304,8 +310,8 @@ metadata:
   name: px-account
   namespace: kube-system
 ---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1alpha1
 metadata:
    name: node-get-put-list-role
 rules:
@@ -316,13 +322,12 @@ rules:
   resources: ["pods"]
   verbs: ["get", "list"]
 ---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1alpha1
 metadata:
   name: node-role-binding
 subjects:
-- apiVersion: v1
-  kind: ServiceAccount
+- kind: ServiceAccount
   name: px-account
   namespace: kube-system
 roleRef:
@@ -344,12 +349,15 @@ spec:
       port: 9001
       targetPort: 9001
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: portworx
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+      name: portworx
   minReadySeconds: 0
   updateStrategy:
     type: OnDelete
@@ -367,7 +375,7 @@ spec:
                 operator: NotIn
                 values:
                 - "false"
-              
+
               - key: node-role.kubernetes.io/master
                 operator: DoesNotExist
       hostNetwork: true
@@ -503,7 +511,7 @@ spec:
 status: {}
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
@@ -511,6 +519,9 @@ metadata:
     service: influx-px
   name: influx-px
 spec:
+  selector:
+    matchLabels:
+      service: influx-px
   replicas: 1
   strategy:
     type: Recreate

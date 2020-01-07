@@ -5,7 +5,7 @@ weight: 2
 hidesections: true
 icon: /img/banner__kubernetes.png
 description: Learn how to deploy on AWS with Kubernetes.
-keywords: Portworx, AWS, Kubernetes
+keywords: Install, on cloud, AWS, Amazon Web Services, Kubernetes, k8s
 ---
 
 This page describes using Portworx with Kubernetes on AWS.

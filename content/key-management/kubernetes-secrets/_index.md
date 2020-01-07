@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Secrets
 logo: /logos/other.png
-keywords: portworx, containers, storage, kubernetes
+keywords: Kubernetes Secrets, k8s, encryption keys, secrets, Volume Encryption, Cloud Credentials, secret store
 description: Instructions on using Kubernetes secrets with Portworx
 weight: 4
 disableprevnext: true
@@ -11,11 +11,11 @@ noicon: true
 
 Portworx can integrate with Kubernetes Secrets to store your encryption keys/secrets and credentials. This guide will help configure Portworx with Kubernetes Secrets. Kubernetes Secrets can then be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
 
-## Configuring Kubernetes Secrets with Portworx {#configuring-kubernetes-secrets-with-portworx}
+## Configuring Kubernetes Secrets with Portworx
 
 ### New installation
 
-When generating the [Portworx Kubernetes spec file](https://install.portworx.com/), select `Kubernetes` from the `Secrets Store Type` list under `Advanced Settings`. For more details on how to generate Portworx spec for Kubernetes, [click here](/portworx-install-with-kubernetes).
+When generating the Portworx Kubernetes spec file on the Portworxspec generator page in [PX-Central](https://central.portworx.com), select `Kubernetes` from the `Secrets Store Type` list under `Advanced Settings`. For more details on how to generate the Portworx spec for Kubernetes, [click here](/portworx-install-with-kubernetes).
 
 ### Existing installation
 
@@ -59,9 +59,9 @@ roleRef:
 EOF
 ```
 
-#### Edit the Portworx Daemonset
+#### Edit the Portworx DaemonSet
 
-You will have to edit the Portworx daemonset to use Kubernetes secrets, so that all the new Portworx nodes will start using Kubernetes secrets.
+You will have to edit the Portworx DaemonSet to use Kubernetes secrets, so that all the new Portworx nodes will start using Kubernetes secrets.
 
 ```text
 kubectl edit daemonset portworx -n kube-system
@@ -85,7 +85,7 @@ Add the `"-secret_type", "k8s"` arguments to the `portworx` container in the dae
 
 Editing the daemonset will also restart all the Portworx pods.
 
-## Creating secrets with Kubernetes {#creating-secrets-with-kubernetes}
+## Creating secrets with Kubernetes
 
 The following section describes the key generation process with Portworx and Kubernetes which can be used for encrypting volumes.
 
@@ -110,9 +110,9 @@ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl secrets set-cluster-ke
 
 This command needs to be run just once for the cluster. If you have added the cluster secret key through _config.json_, the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in _config.json_ will be ignored for the one set through the CLI.
 
-### \(Optional\) Authenticating with Kubernetes Secrets using Portworx CLI
+### (Optional) Authenticating with Kubernetes Secrets using the Portworx CLI
 
-If you wish to quickly try Kubernetes secrets, you can authenticate Portworx with Kubernetes Secrets using Portworx CLI. Run the following command:
+If you wish to quickly try Kubernetes secrets, you can authenticate Portworx with Kubernetes Secrets using the Portworx CLI. Run the following command:
 
 ```text
 PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
@@ -120,10 +120,10 @@ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl secrets k8s login
 ```
 {{<info>}}
 **Important:**
-You need to run this command on all Portworx nodes, so that you could create and mount encrypted volumes on all nodes.
+You need to run this command on all your Portworx nodes, so that you could create and mount encrypted volumes on all nodes.
 {{</info>}}
 
-If the CLI is used to authenticate with Kubernetes Secrets, for every restart of Portworx container it needs to be re-authenticated with Kubernetes Secrets by running the `k8s login` command on that node.
+If the CLI is used to authenticate with Kubernetes Secrets, for every restart of the Portworx container it needs to be re-authenticated with Kubernetes Secrets by running the `k8s login` command on that node.
 
 
 ## Using Kubernetes Secrets with Portworx

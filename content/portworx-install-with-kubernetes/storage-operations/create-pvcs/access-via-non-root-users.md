@@ -1,13 +1,13 @@
 ---
 title: Access via Non-Root Users
 weight: 6
-keywords: portworx, pre-provisioned volumes, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
+keywords: access a portworx volume, non-root user, pre-provisioned volumes, PV, PVC, Kubernetes, k8s
 description: Find out how to access a Portworx volume (PVC/PV) with a non-root user
 ---
 
-This document describes how to access a Portworx Volume \(PVC/PV\) as a non-root user. In Kubernetes, by default all the Persistent Volumes are accessible only by the root user. However you can modify the application pod spec to allow a specific set of users to access the Persistent Volume as explained below.
+This document describes how to access a Portworx Volume (PVC/PV) as a non-root user. In Kubernetes, by default all the Persistent Volumes are accessible only by the root user. However you can modify the application pod spec to allow a specific set of users to access the Persistent Volume as explained below.
 
-#### Modify the application POD spec {#modify-the-application-pod-spec}
+#### Modify the application POD spec
 
 You can modify the PodSecurityContext section of a Pod to include an `fsGroup` field. Here is a snippet of a pod spec file
 

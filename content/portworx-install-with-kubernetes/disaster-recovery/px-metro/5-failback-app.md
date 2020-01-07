@@ -1,7 +1,7 @@
 ---
-title: "5. Failback an application"
+title: 5. Failback an application
 weight: 5
-keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
+keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: Find out how to failback an application from the backup Kubernetes cluster to the original one.
 ---
 
@@ -47,7 +47,7 @@ If you wish to use `kubectl` instead of `storkctl`, you can create a `ClusterDom
 Start by creating a new file named `clusterdomainupdate.yaml`. In this file, let's specify an object called a ClusterDomainUpdate and designate the cluster domain of the source cluster as active:
 
  ```text
- apiVersion: stork.libopenstorage.org/v1alpha1
+apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterDomainUpdate
 metadata:
  name: activate-us-east-1a
@@ -142,5 +142,5 @@ storkctl get migrationschedule -n migrationnamespace
 
 ```output
 NAME                        POLICYNAME   CLUSTERPAIR      SUSPEND   LAST-SUCCESS-TIME     LAST-SUCCESS-DURATION
-mysqlmigrationschedule      testpolcy    remotecluster    false      17 Apr 19 17:16 PDT   2m0s
+mysqlmigrationschedule      testpolicy    remotecluster    false      17 Apr 19 17:16 PDT   2m0s
 ```

@@ -1,6 +1,6 @@
 ---
 title: Prometheus and Grafana
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, monitoring, prometheus, alertmanager, servicemonitor, grafana
+keywords: monitoring, prometheus, alertmanager, servicemonitor, grafana, Kubernetes, k8s
 description: How to use Prometheus and Grafana for monitoring Portworx on Kubernetes
 ---
 
@@ -11,7 +11,7 @@ Prometheus is an opensource monitoring and alerting toolkit. Prometheus consists
 - An alertmanager for handling alerts.
 - Multiple integrations for graphing and dashboarding.
 
-In this document we would explore the monitoring of Portworx via Prometheus. The integration is natively supported by Portworx since portworx stands up metrics on a REST endpoint which can readily be scraped by Prometheus.
+This document walks you through the steps required to monitor your Portworx cluster with Prometheus and Grafana. Portworx natively supports Prometheus since it exposes the metrics on a REST endpoint. Then, Prometheus can scrape this endpoint.
 
 The following instructions allows you to monitor Portworx via Prometheus and allow the Alertmanager to provide alerts based on configured rules.
 
@@ -194,7 +194,7 @@ First get the node port that grafana is using
   kubectl get svc -n kube-system grafana
   ```
 
-Access the Grafana dashboard by navigating to `http://<master_ip>:<service_nodeport>`. You would need to create a datasource for the Portworx grafana dashboard metrics to be populated.
+Access the Grafana dashboard by navigating to `http://<master_ip>:<service_nodeport>`. You would need to create a datasource for the Portworx Grafana dashboard metrics to be populated.
 Navigate to Configurations --> Datasources.
 Create a datasource named `prometheus`. Enter the Prometheus endpoint as obtained in the install verification step for Prometheus from the above section.
 

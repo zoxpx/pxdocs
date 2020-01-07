@@ -1,11 +1,15 @@
 ---
 title: ACS-Engine with DCOS and Portworx
 description: Working with ACS-Engine with Mesophere DC/OS and Portworx.
-keywords: portworx, acs-engine, azure, DCOS, Mesosphere, microsoft, azure
-linkTitle: Install on   DCOS on Azure
+keywords: Install, ACS-engine, Azure Container Service Engine, DCOS, DC/OS, Mesosphere, Microsoft
+linkTitle: Install on DCOS on Azure
 weight: 3
 noicon: true
 ---
+
+{{<info>}}
+This document presents the **DC/OS** method of installing Portworx on the Azure Container Service Engine (ACS). Please refer to the [Azure Container Service (ACS)](/portworx-install-with-kubernetes/cloud/azure/acs/) page if you want to install Portworx with Kubernetes on the Azure Container Service Engine (ACS).
+{{</info>}}
 
 ### Overview
 The [Azure Container Service Engine](https://github.com/Azure/acs-engine) (acs-engine) generates ARM (Azure Resource Manager) templates for Docker enabled clusters on Microsoft Azure with your choice of DC/OS, Kubernetes, Swarm Mode, or Swarm orchestrators. The input to the tool is a cluster definition. The cluster definition is very similar to (in many cases the same as) the ARM template syntax used to deploy a Microsoft Azure Container Service cluster.
@@ -139,9 +143,9 @@ where `your-private.key` is the private key that corresponds to `keyData` in the
 
 Once the DCOS GUI is accessible, then install the DCOS CLI on your local machine
 
-### Install Portworx
+### Install Portworx 
 
-Use the [standard Portworx doc guide](/install-with-other/dcos/install) for
+Use the [Run Portworx with Mesosphere DC/OS](/install-with-other/dcos/install) for
 installing the Portworx Frameworks on DCOS.
 
 Once Portworx is installed, then the [Portworx Stateful Service Frameworks](/install-with-other/dcos/application-installs) can be easily deployed as per the reference documentation.

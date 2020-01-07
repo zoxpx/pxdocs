@@ -1,13 +1,13 @@
 ---
-title: Using PX Central
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, monitoring, prometheus, alertmanager, servicemonitor, grafana, lighthouse, px-central, px-kvdb
+title: Using PX-Central
+keywords: monitoring, management, Kubernetes, k8s prometheus, alertmanager, servicemonitor, grafana, lighthouse, px-central, px-kvdb
 description: How to deploy and control Portworx using PX-Central
 ---
 
 ## Overview
-With PX-Enterprise 2.0, Portworx just released PX-Central to simplify management, monitoring and metadata services for one or more Portworx Clusters on Kubernetes. Using this single pane of glass, enterprises can easily manage the state of their hybrid- and multi-cloud Kubernetes applications with embedded monitoring and metrics directly in the Portworx user interface.
+With PX-Enterprise 2.0, Portworx, Inc. just released PX-Central to simplify management, monitoring and metadata services for one or more Portworx clusters on Kubernetes. Using this single pane of glass, enterprises can easily manage the state of their hybrid- and multi-cloud Kubernetes applications with embedded monitoring and metrics directly in the Portworx user interface.
 
-Portworx Clusters needs to be updated to PX-Enterprise 2.0 before using PX-Central. In the first release, PX-Central includes the following components:
+A Portworx cluster needs to be updated to PX-Enterprise 2.0 before using PX-Central. In the first release, PX-Central includes the following components:
 
 ### Key features
 
@@ -28,25 +28,25 @@ Portworx Clusters needs to be updated to PX-Enterprise 2.0 before using PX-Centr
 
 ## Deployment Scenarios
 
-### Using PX-Central with a single Portworx Cluster
+### Using PX-Central with a single Portworx cluster
 
 In this scenario, all the components are running alongside PX-Enterprise in the same cluster. The deployment links the clusterID for the Portworx cluster to the individual services within PX-Central. Use this scenario if you are installing for the first time, cluster size is small and you don’t plan to setup multiple clusters initially.
 
 ![singlelclustermodel](/img/PXCSingleCluster.png)
 
-### Using PX-Central (dedicated mode) with multiple PX-Cluster
+### Using PX-Central (dedicated mode) with multiple Portworx clusters 
 
 In this scenario, all the components are running on a dedicated set of nodes outside of the PX-Enterprise clusters. The deployment links the clusterID for the Portworx cluster(s) to the individual services within PX-Central. Use this scenario if you are installing larger clusters, plan to scale deployment by adding additional clusters in future cluster size is small and want centralized control.
 
 ![multiclustermodeded](/img/PXCMultiClusterDedicated.png)
 
-### Using PX-Central (shared mode) with multiple PX-Clusters
+### Using PX-Central (shared mode) with multiple Portworx clusters
 
-In this scenario, all the components are running on one of the PX-Enterprise clusters and connected to others. The deployment links the clusterID for the Portworx cluster(s) to the individual services within PX-Central. Use this scenario only if you have a larger first cluster and are not sure when you will add additional clusters.
+In this scenario, all the components are running on one of the PX-Enterprise clusters and connected to others. The deployment links the Portworx cluster(s) to the individual services within PX-Central. Use this scenario only if you have a larger first cluster and are not sure when you will add additional clusters.
 
 ![multiclustermodesha](/img/PXCMultiClusterShared.png)
 
-## Setting up PX-Central
+## Setting up PX-Central 
 
 PX-Central can be setup for any of the above deployment scenarios by following a few steps. Note that Portworx will also be installed as a part of this process for new installations.
 
@@ -66,15 +66,13 @@ PX-Central can be setup for any of the above deployment scenarios by following a
 
   For more information on how to configure the alertmanager settings please visit: https://prometheus.io/docs/alerting/configuration/
 
-### PX-Central for new PX installations
+### PX-Central for new Portworx installations
 
-   Go to https://install.portworx.com/2.1 and follow the steps.
-
-   To enable PX-Central, make sure that in `Advanced Settings` Lighthouse and Monitoring have been ticked.
+In the Portworx spec generator page on [PX-Central](https://central.portworx.com), enable PX-Central by ticking `Lighthouse and Monitoring` in `Advanced Settings`.
 
 ### Multi-Cluster requirements
 
-  If your cluster has more than 20 nodes or is resource intensive we recommend using this installation to create a dedicated monitoring cluster, and let this cluster monitor the others. If not consider using the single cluster installation (above). The steps below will help you setup PX-Central and first PX-Enterprise Cluster.
+  If your cluster has more than 20 nodes or is resource intensive we recommend using this installation to create a dedicated monitoring cluster, and let this cluster monitor the others. If not consider using the single cluster installation (above). The steps below will help you setup PX-Central and first PX-Enterprise cluster.
 
   Since this is going to be the cluster that monitors the other clusters we need the `Prometheus` installation to watch the other clusters' `Prometheus` instances. To do this we are going to use `Federation` and we'll need the below secret for this.
 
@@ -148,7 +146,7 @@ Once all the pods are up and running, you can verify different components of PX-
 Quick way to Identify nodes running px-kvdb is by running the pxctl command below on one of the cluster nodes
 
 ```text
-pxctl sv kvdb members
+pxctl service kvdb members
 ```
 
 ```output
@@ -177,17 +175,17 @@ Next step is to make sure you are able to view the built-in dashboards for Portw
 
 ![kvdbdashboard](/img/KvdbDashboard.png)
 
-## PX-Central for existing PX-installation
+## PX-Central for an existing Portworx installation
 
 For customers with existing Portworx deployment, it will require the following steps to add PX-Central:
 
 - Identify set of nodes (minimum 3) with the required specifications to deploy PX-Central components.
 
-- First, install the monitoring components (Prometheus, Alertmanager and Grafana) on these nodes to validate you can connect to existing PX clusters.
+- First, install the monitoring components (Prometheus, Alertmanager and Grafana) on these nodes to validate you can connect to existing Portworx clusters.
 
 - Install Lighthouse. Add all the clusters to Lighthouse.
 
-- Follow the process to migrate etcd from the existing to the new one installed as part of PX-Central. PX-kvdb needs underlying PX installation to complete before migration starts.
+- Follow the process to migrate etcd from the existing to the new one installed as part of PX-Central. PX-kvdb needs underlying Portworx installation to complete before migration starts.
 
 ## Limitations
 **Issue** | **Description** | **Mitigation**|

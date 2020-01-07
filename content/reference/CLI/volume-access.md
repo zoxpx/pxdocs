@@ -1,13 +1,13 @@
 ---
 title: Volume access using pxctl
 linkTitle: Volume Access
-keywords: portworx, container, Kubernetes, storage, role, roles, authorization, authentication, volume, access
-description: Learn to update volume access in your px cluster
+keywords: portworx, pxctl, command-line tool, cli, reference, volume access rules, read access, write access, admin access, show volume access, add volume access, remove volume access, update volume access, volume ownership
+description: Learn to update volume access in your Portworx cluster
 weight: 16
 ---
 
 ## Overview
-This document outlines how to manage your volume access rules. _PX_ allows you to change access permissions per volume. There are two ways to provide access, one is by adding a group and the other is by adding a specific user as a collaborator. When adding a collaborator, you must use the unique id of the user. Please consult with your admin on how to obtain the unique id of the user.
+This document outlines how to manage your volume access rules. Portworx allows you to change access permissions per volume. There are two ways to provide access, one is by adding a group and the other is by adding a specific user as a collaborator. When adding a collaborator, you must use the unique id of the user. Please consult with your admin on how to obtain the unique id of the user.
 
 ## Access types
 When adding a group or collaborator, an access type must also be given, which can be either Read, Write, or Admin:
@@ -25,36 +25,38 @@ To set access types, add one of the following suffixes to the group or collabora
 * __a__ - For Admin access type
 
 ## Volume access commands
-_Pxctl_ supports the following commands for updating volume access permissions.
+The `pxctl` command-line utility supports the following commands for updating volume access permissions.
 
 #### Add volume access for a single group or collaborator ####
 
 ```text
-pxctl v access add <volume> --collaborator user1:a
+pxctl volume access add <volume> --collaborator user1:a
 ```
 
 #### Remove volume access from a group or collaborator ####
 
 ```text
-pxctl v access remove <volume> --collaborator user1
+pxctl volume access remove <volume> --collaborator user1
 ```
 
 #### Show volume access ####
 
 ```text
-pxctl v access show <volume>
+pxctl volume access show <volume>
 ```
 
 #### Update full volume access spec ####
 
 ```text
-pxctl v access update <volume> --groups group1:r,group2:w --collaborators user1:a
+pxctl volume access update <volume> --groups group1:r,group2:w --collaborators user1:a
 ```
 
 #### Updating volume ownership ####
 
 ```text
-pxctl v access update <volume> --owner <username>
+pxctl volume access update <volume> --owner <username>
 ```
 
-__Note:__ The volume owner can only be a single username. In addition, volume ownership updates can only be performed by administrators.
+{{<info>}}
+The volume owner can only be a single username. In addition, volume ownership updates can only be performed by administrators.
+{{</info>}}

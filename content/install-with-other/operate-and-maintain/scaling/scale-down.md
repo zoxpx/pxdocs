@@ -1,8 +1,14 @@
 ---
-title: "Scale Down Nodes"
-keywords: scale-down
+title: Scale Down Nodes
+keywords: scale down, scaling
 description: Find out how to remove an offline node from a cluster with this document from Portworx. Discover how to scale-down nodes today!
 ---
+
+
+{{<info>}}
+This document presents the **non-Kubernetes** method of removing a node. Please refer to the [Decommission a Node ](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/) page if you are running Portworx on Kubernetes.
+{{</info>}}
+
 
 ## Removing offline Nodes
 
@@ -170,7 +176,7 @@ Global Storage Pool
 
 ```
 ## Removing a functional node from a cluster
-A functional PX node may need to be removed from the cluster. In this section, we'll demonstrate:
+A functional Portworx node may need to be removed from the cluster. In this section, we'll demonstrate:
  1- the removal of a node by running commands on itself and
  2- the removal of a node from another node.
 The below output from a pxctl status command clarifies the state of the cluster and the different node IPs and node IDs.
@@ -269,4 +275,4 @@ Once completely replicated onto another node, then re-attempt the node decommiss
 
  * Storage less nodes that are initialized and added to the cluster may not be needed once they complete their tasks (for ex in a scheduler workflow). If they are taken offline/destroyed, the cluster will still retain the nodes and mark them as offline.
  * If eventually a majority of such nodes exist, the cluster won't have quorum nodes that are online. The solution is to run cluster delete commands and remove such nodes. This gets more laborious with more such nodes or frequency of such nodes added and taken down.
- * To help with this, PX waits until a grace period of 48 hours. After this period offline nodes with no storage will be removed from the cluster. There is no CLI command needed to turn on or trigger this feature.
+ * To help with this, Portworx waits until a grace period of 48 hours. After this period offline nodes with no storage will be removed from the cluster. There is no CLI command needed to turn on or trigger this feature.

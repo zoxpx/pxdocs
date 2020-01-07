@@ -1,12 +1,12 @@
 ---
-title: Objectstore on PX Cluster using pxctl
+title: Objectstore on a Portworx cluster using pxctl
 linkTitle: Objectstore
-keywords: cloud, objectstore, pxctl
+keywords: pxctl, command-line tool, cli, reference, cloud, objectstore
 description: Learn how to deploy highly available S3 compliant object storage on Docker with Portworx
 hidden: true
 ---
 
-This document explains how to expose a highly available S3 compliant Objectstore from a _PX_ Cluster.
+This document explains how to expose a highly available S3 compliant Objectstore from a Portworx cluster.
 
 The Objectstore module has the following commands:
 

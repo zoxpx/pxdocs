@@ -1,7 +1,7 @@
 ---
-title: "Maintenance Commands"
+title: Maintenance Commands
 hidden: true
-keywords: service, maintenance, drive removal, drive replacement, pool list, pool priority
+keywords: service, maintenance, drive removal, drive replacement, pool list, pool priority, kubernetes, k8s
 description: Explore commands needed for maintenance operations using Portworx.  Try today!
 ---
 
@@ -22,12 +22,12 @@ pxctl service maintenance --enter
 
 This takes Portworx out of an "Operational" state for a given node.  Perform whatever physical maintenance is needed.
 
-### Restart Portworx
+### RestartPortworx 
 Run **"docker restart px-enterprise"**.
 This restarts the Portworx fabric on a given node.
 
 ### Exit Maintenance Mode
-Run ``pxctl service maintenance --exit``.
+Run `pxctl service maintenance --exit`.
 This puts Portworx back in to "Operational" state for a given node.
 
 ### Drive management example
@@ -97,7 +97,7 @@ Entering maintenance mode...
 
 ### Step 2: Add drive to the system
 
-For e.g., Add drive /dev/sdb to PX cluster
+For e.g., Add drive /dev/sdb to the Portworx cluster
 
 ```text
 pxctl service drive add --drive /dev/sdb --operation start
@@ -115,7 +115,7 @@ Adding device  /dev/sdb ...
 Check the rebalance status and wait for completion.
 
 ```text
-pxctl sv drive add --drive /dev/sdb --operation status
+pxctl service drive add --drive /dev/sdb --operation status
 ```
 
 ```output
@@ -123,7 +123,7 @@ pxctl sv drive add --drive /dev/sdb --operation status
 ```
 
 ```text
-pxctl sv drive add --drive /dev/sdb --operation status
+pxctl service drive add --drive /dev/sdb --operation status
 ```
 
 ```output
@@ -187,7 +187,7 @@ Pool ID: 1
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
 ```
 
-## Replace a drive that is already part of the Portworx Cluster
+## Replace a drive that is already part of the Portworx cluster
 
 ### Step 1: Enter Maintenance mode
 

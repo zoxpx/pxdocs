@@ -1,7 +1,7 @@
 ---
 title: Wipe Portworx in an airgapped cluster
 weight: 3
-keywords: portworx, container, Kubernetes, storage, k8s
+keywords: Uninstall, air gapped, wiper script, Kubernetes, k8s
 meta-description: Steps to wipe Portworx in an airgapped cluster
 description: Steps to wipe Portworx in an airgapped cluster
 hidden: true
@@ -14,12 +14,12 @@ This topic explains how to load these images onto your nodes when they don't hav
 
 ## Step 1: Download the wiper script
 
-Click [Download wiper script](https://install.portworx.com/2.1/px-wipe) and save it any node which has kubectl access to your cluster.
+Click [Download wiper script](https://install.portworx.com/2.3/px-wipe) and save it any node which has kubectl access to your cluster.
 
 Alternately, you can also use `wget`.
 
 ```text
-wget -O px-wipe.sh https://install.portworx.com/2.1/px-wipe
+wget -O px-wipe.sh https://install.portworx.com/2.3/px-wipe
 ```
 
 ## Step 2: Download the images that the wiper script will use
@@ -35,13 +35,13 @@ echo $PX_IMGS | xargs -n1 docker pull
 
 This steps assumes your cluster nodes have access to a custom/private registry.
 
-{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-local-reg.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-local-reg.md" %}}
 
 Now that you have the images in your registry, continue with [Step 4: Run the wiper script](#step-3-run-the-wiper-script).
 
 ## Step 4: Run the wiper script
 
-First let's figure out the image names and tags for our private registry. 
+First let's figure out the image names and tags for our private registry.
 
 Below we are simply prefixing the actual image names with the custom/private registry.
 

@@ -1,9 +1,14 @@
 ---
 title: Application Installs
 description: Application installation with Mesosphere DC/OS.
-keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storage, DCOS
+keywords: Install applications, DC/OS, DCOS, Mesosphere
 weight: 4
 ---
+
+{{<info>}}
+This document presents the **DC/OS** method of installing stateful applications with Portworx. Please refer to the [Stateful applications on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/) page if you want to install stateful applications with Portworx on Kubernetes.
+{{</info>}}
+
 
 Since the stateful services in the DCOS universe do not support external volumes, you will need to add additional packages available here in order to use Portworx with these services.
 
@@ -31,7 +36,7 @@ Typically, an application has different types of containers that constiture the 
 
 #### Data availability across failures
 
-In the event of a software or physical failure of a host, the framework will re-deploy the failed components of this application onto other hosts, and re-attach the portworx volume maintaining application level high availability.
+In the event of a software or physical failure of a host, the framework will re-deploy the failed components of this application onto other hosts, and re-attach the Portworx volume maintaining application level high availability.
 
 #### Ensuring application aware data placement
 

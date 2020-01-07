@@ -1,14 +1,14 @@
 ---
-title: Run PX-Developer with Docker
-keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
-description: Learn how to run Portworx Developer edition for use with the Docker command line
+title: Run Portworx Developer Edition with Docker
+keywords: px developer edition, docker
+description: Learn how to run Portworx Developer Edition for use with the Docker command line
 hidden: true
 ---
 
-To install and configure _PX Developer Edition_ via the _Docker_ CLI, use the command-line steps described in this section.
+To install and configure Portworx Developer Edition via the _Docker_ CLI, use the command-line steps described in this section.
 
 {{<info>}}
-**Important:** PX stores configuration metadata in a KVDB (key/value store), such as _Etcd_ or _Consul_. We recommend setting up a dedicated kvdb for PX to use. If you want to set one up, see the [etcd example](/reference/knowledge-base/etcd) for PX.
+**Important:** Portworx stores configuration metadata in a KVDB (key/value store), such as _Etcd_ or _Consul_. We recommend setting up a dedicated kvdb for Portworx to use. If you want to set one up, see the [etcd example](/reference/knowledge-base/etcd) for Portworx.
 {{</info>}}
 
 ### Install and configure Docker
@@ -17,7 +17,7 @@ Follow the [Docker install](https://docs.docker.com/engine/installation/) guide 
 
 ### Specify storage
 
-_Portworx_ pools the storage devices on your server and creates a global capacity for containers. The following example uses the two non-root storage devices (/dev/xvdb, /dev/xvdc).
+Portworx pools the storage devices on your server and creates a global capacity for containers. The following example uses the two non-root storage devices (/dev/xvdb, /dev/xvdc).
 
 {{<info>}}
 **Important:**
@@ -42,11 +42,11 @@ lsblk
 Note that devices formatted with a partition are shown under the **TYPE** column as **part**.
 {{</info>}}
 
-Next, identify the storage devices you will be allocating to PX. PX can run in a heterogeneous environment, so you can mix and match drives of different types.  Different servers in the cluster can also have different drive configurations.
+Next, identify the storage devices you will be allocating to Portworx. Portworx can run in a heterogeneous environment, so you can mix and match drives of different types.  Different servers in the cluster can also have different drive configurations.
 
-### Run PX
+### Run Portworx 
 
-You can now run PX via the _Docker_ CLI as follows:
+You can now run Portworx via the _Docker_ CLI as follows:
 
 ```text
 if `uname -r | grep -i coreos > /dev/null`; \
@@ -65,11 +65,11 @@ sudo docker run --restart=always --name px -d --net=host       \
                 portworx/px-dev -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
-### PX daemon arguments
+### Portworx daemon arguments
 
-The following arguments are provided to the PX daemon:
+The following arguments are provided to the Portworx daemon:
 
-{{% content "install-with-other/docker/shared/cmdargs.md" %}}
+{{% content "shared/install-with-other-docker-cmdargs.md" %}}
 
 ### Docker runtime command options
 
@@ -77,19 +77,19 @@ The relevant _Docker_ runtime command options are explained below:
 
 ```
 --privileged
-    > Sets PX to be a privileged container. Required to export block device and for other functions.
+    > Sets Portworx to be a privileged container. Required to export block device and for other functions.
 
 --net=host
-    > Sets communication to be on the host IP address over ports 9001 -9003. Future versions will support separate IP addressing for PX.
+    > Sets communication to be on the host IP address over ports 9001 -9003. Future versions will support separate IP addressing for Portworx.
 
 --shm-size=384M
-    > PX advertises support for asynchronous I/O. It uses shared memory to sync across process restarts
+    > Portworx advertises support for asynchronous I/O. It uses shared memory to sync across process restarts
 
 -v /run/docker/plugins
     > Specifies that the volume driver interface is enabled.
 
 -v /dev
-    > Specifies which host drives PX can see. Note that PX only uses drives specified in config.json. This volume flag is an alternate to --device=\[\].
+    > Specifies which host drives Portworx can access. Note that Portworx only uses drives specified in config.json. This volume flag is an alternate to --device=\[\].
 
 -v /etc/pwx/config.json:/etc/pwx/config.json
     > the configuration file location.
@@ -101,12 +101,12 @@ The relevant _Docker_ runtime command options are explained below:
     > Location of the exported container mounts. This must be a shared mount.
 
 -v /opt/pwx/bin:/export_bin
-    > Exports the PX command line (**pxctl**) tool from the container to the host.
+    > Exports the Portworx command line (**pxctl**) tool from the container to the host.
 ```
 
 ### Optional - running with config.json
 
-You can also provide the runtime parameters to PX via a configuration file called `config.json`.  When this is present, you do not need to pass the runtime parameters via the command line.  This may be useful if you are using tools like _Chef_ or _Puppet_ to provision your host machines.
+You can also provide the runtime parameters to Portworx via a configuration file called `config.json`.  When this is present, you do not need to pass the runtime parameters via the command line.  This may be useful if you are using tools like _Chef_ or _Puppet_ to provision your host machines.
 
 1.  Download the sample `config.json` file:
 https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
@@ -156,7 +156,7 @@ If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, om
 
 Please also ensure "loggingurl:" is specified in `config.json`. It should either point to a valid lighthouse install endpoint or a dummy endpoint as shown above. This will enable all the stats to be published to monitoring frameworks like _Prometheus_:
 
-You can now start the _Portworx_ container with the following command:
+You can now start the Portworx container with the following command:
 
 ```text
 if `uname -r | grep -i coreos > /dev/null`; \
@@ -175,7 +175,7 @@ sudo docker run --restart=always --name px -d --net=host       \
                 portworx/px-dev
 ```
 
-At this point, _Portworx_ should be running on your system. To verify, type:
+At this point, Portworx should be running on your system. To verify, type:
 
 ```text
 docker ps
@@ -215,7 +215,7 @@ Alternatively, you could specify and explicit username and password as follows:
 
 ### Access the pxctl CLI
 
-Once _Portworx_ is running, you can create and delete storage volumes through the _Docker_ volume commands or the **pxctl** command line tool. With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes.
+Once Portworx is running, you can create and delete storage volumes through the _Docker_ volume commands or the **pxctl** command line tool. With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes.
 
 To view all **pxctl** options, run:
 
@@ -225,7 +225,7 @@ pxctl help
 
 For more information on using **pxctl**, see the [CLI Reference](/reference/cli).
 
-Now, you have successfully setup _Portworx_ on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers.
+Now, you have successfully setup Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers.
 
 To view the cluster status, run:
 
@@ -235,8 +235,8 @@ pxctl status
 
 ### Adding Nodes
 
-To add nodes in order to increase capacity and enable high availability, simply repeat these steps on other servers. As long as PX is started with the same cluster ID, they will form a cluster.
+To add nodes in order to increase capacity and enable high availability, simply repeat these steps on other servers. As long as Portworx is started with the same cluster ID, they will form a cluster.
 
 ### Application Examples
 
-Then, to continue with other examples of running stateful applications and databases with _Docker_ and PX, see [this link](/install-with-other/docker/stateful-applications/).
+Then, to continue with other examples of running stateful applications and databases with _Docker_ and Portworx, see [this link](/install-with-other/docker/stateful-applications/).

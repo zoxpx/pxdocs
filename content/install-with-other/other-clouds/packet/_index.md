@@ -1,11 +1,15 @@
 ---
 title: Portworx on the Packet.net Hosted Platform
-keywords: portworx, packet.net, PaaS, IaaS, docker, converged, bare metal
+keywords: Install, packet.net, Terraporx, bare metal
 description: Portworx can help you run stateful workloads with Docker. Find out how to deploy upon Packet.net servers!
 weight: 3
 linkTitle: Packet.net
 noicon: true
 ---
+
+{{<info>}}
+This document presents a **non-Kubernetes** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
 
 This guide shows you how you can easily deploy Portworx on the [**packet.net** hosting service](https://www.packet.com/)
 
@@ -17,7 +21,7 @@ Other supported bare metal cloud providers are
 
 
 {{<info>}}
-**NB:**<br/> For quick/easy deployment of Portworx on Packet.net, please refer to the [Terraporx Repo](https://github.com/portworx/terraporx/tree/master/packet) of Terraform deployment scripts.
+For quick/easy deployment of Portworx on Packet.net, please refer to the [Terraporx Repo](https://github.com/portworx/terraporx/tree/master/packet) of Terraform deployment scripts.
 {{</info>}}
 
 ### Step 1: Provision Server
@@ -62,9 +66,9 @@ For Ubuntu16, your likely public interface will be "bond0" and private interface
 
 Use the docker run command to launch PX-Enterprise, substituting the appropriate multipath devices and network interfaces, as identified from the previous steps.
 
-Alternatively, you can either run the 'px_bootstrap' script from curl, or construct your own [config.json](/install-with-other/docker/shared/config-json) file.
+Alternatively, you can either run the 'px_bootstrap' script from curl, or construct your own [config.json](/shared/install-with-other-docker-config-json) file.
 
-From the server node running px-enterprise container, you should see the following status:
+From the server node running PX-Enterprise container, you should see the following status:
 ![PX-Cluster on Packet](/img/px-cluster-on-packet.png "PX-Cluster on Packet")
 
 

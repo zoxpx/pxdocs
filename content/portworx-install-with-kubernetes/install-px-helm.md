@@ -1,13 +1,13 @@
 ---
-title: "Install Portworx on kubernetes via Helm"
+title: "Install Portworx on Kubernetes via Helm"
 linkTitle: Helm
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
-description: "Find out how to install PX on Kubernetes via the Portworx Helm chart"
+keywords: install, portworx, kubernetes, k8s, helm, uninstall
+description: "Find out how to install Portworx on Kubernetes via the Portworx Helm chart"
 weight: 2
 hidden: true
 ---
 
-The helm chart (portworx) deploys Portworx and [Stork](https://docs.portworx.com/scheduler/kubernetes/stork.html) in your Kubernetes cluster.
+The Portworx Helm chart deploys Portworx and [Stork](https://docs.portworx.com/scheduler/kubernetes/stork.html) in your Kubernetes cluster.
 
 ## Pre-requisites
 
@@ -19,7 +19,7 @@ The helm chart (portworx) deploys Portworx and [Stork](https://docs.portworx.com
 
 To install Portworx via the chart with the release name `my-release` run the following commands.
 
-First clone the Portworx helm chart repo.
+First clone the Portworx Helm chart repo.
 
 ```text
 git clone https://github.com/portworx/helm.git

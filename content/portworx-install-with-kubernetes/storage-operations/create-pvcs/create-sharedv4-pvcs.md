@@ -1,16 +1,16 @@
 ---
 title: Create sharedv4 PVCs
 weight: 3
-keywords: portworx, container, kubernetes, storage, k8s, pv, persistent disk, pvc
-description: Learn how to use portworx sharedv4 volumes (ReadWriteMany) in your Kubernetes cluster.
+keywords: sharedv4 volumes, ReadWriteMany, PVC, kubernetes, k8s
+description: Learn how to use Portworx sharedv4 volumes (ReadWriteMany) in your Kubernetes cluster.
 series: k8s-vol
 ---
 
-This document describes how to use portworx **sharedv4** (ReadWriteMany) volumes in your Kubernetes cluster.
+This document describes how to use Portworx **sharedv4** (ReadWriteMany) volumes in your Kubernetes cluster.
 
 #### Pre-requisites
 
-In order to use Portworx sharedv4 volumes, you need to pass the following environment variable to the Portworx daemon set.
+In order to use Portworx sharedv4 volumes, you need to pass the following environment variable to the Portworx DaemonSet.
 
 ```text
   env:
@@ -43,7 +43,7 @@ kubectl -n kube-system patch ds portworx --patch "$(cat patch.yaml)" --type=stra
 
 After updating the daemon set, all the Portworx pods will restart. Once all the Portworx pods are restarted then you can start using sharedv4 volumes.
 
-#### Provision a Sharedv4 Volume {#provision-a-shared-volume}
+#### Provision a Sharedv4 Volume
 
 Sharedv4 volumes are useful when you want multiple PODs to access the same PVC \(volume\) at the same time. They can use the same volume even if they are running on different hosts. They provide a global namespace and the semantics are POSIX compliant.
 

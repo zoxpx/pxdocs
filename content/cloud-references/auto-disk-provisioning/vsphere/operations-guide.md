@@ -17,11 +17,11 @@ The [Portworx VMware installation](/cloud-references/auto-disk-provisioning/vsph
 
 ## Monitoring
 
-### Listing disks created by Portworx
+### Listing disks created by Portworx 
 
 Portworx ships with the [pxctl](/reference/cli/) CLI out of the box that users can use to perform management operations.
 
-{{<info>}} Where are Portworx VMDKs located?
+{{<info>}} Where are the Portworx VMDKs located?
 
 _Portworx creates disks in a folder called *osd-provisioned-disks* in the ESXi datastore. The names of the VMDK created by Portworx will have a prefix *PX-DO-NOT-DELETE-*._{{</info>}}
 
@@ -80,28 +80,28 @@ To expand the storage capacity of a single node, you have 2 options
     ```
 
     Wait for about 2 minutes until `pxctl status` says *PX is in maintenance Mode*.
-5. List Portworx pools and save the output.
+5. List the Portworx pools and save the output.
 
     ```text
-    pxctl sv pool show
+    pxctl service pool show
     ```
 6. Use pxctl to add a new disk. This command will provision a new VMDK as per the given spec. Below example creates a 20GB VMDK of type eagerzeroedthick. Change the size as per your needs. It is recommended to use a size that's same as the current disks in your storage pools. This will allow us to expand the existing storage pool.
 
     ```text
-    pxctl sv drive add --spec size=20,type=eagerzeroedthick
+    pxctl service drive add --spec size=20,type=eagerzeroedthick
     ```
     ```output
     Drive add done: Storage rebalance is in progress
     ```
-7. List Portworx pools again and you will see one of the pools now has a new drive added.
+7. List the Portworx pools again and you will see one of the pools now has a new drive added.
 
     ```text
-    pxctl sv pool show
+    pxctl service pool show
     ```
 8. Resize the pool to account for this newly added disk. `<pool-id>` here is the ID of the pool where you see the newly added disk in the previous step.
 
     ```text
-    pxctl sv pool update --resize <pool-id>
+    pxctl service pool update --resize <pool-id>
     ```
 9. Exit maintenance mode.
 
@@ -110,10 +110,10 @@ To expand the storage capacity of a single node, you have 2 options
     ```
 
     Wait for about 2 minutes until `pxctl status` says *PX is operational*.
-10. List Portworx pools again and you will now see the pool has the expanded size.
+10. List the Portworx pools again and you will now see the pool has the expanded size.
 
     ```text
-    pxctl sv pool show
+    pxctl service pool show
     ```
 11. Uncordon the node from Kubernetes.
 
@@ -133,22 +133,22 @@ To expand the storage capacity of a single node, you have 2 options
 5. Using vSphere web client, expand the VMDK on the VM for the above node.
 6. Drain all apps using Portworx volumes from this node. You can either use `kubectl drain` or `kubectl cordon` and `kubectl delete pod` for this.
 7. SSH to the Portworx node identified in step 3.
-8. Enter Portworx maintenance mode.
+8. Enter maintenance mode.
 
     ```text
     pxctl service maintenance --enter
     ```
 
     Wait for about 2 minutes until `pxctl status` says *PX is in maintenance Mode*.
-9. List Portworx pools and find the pool that’s affected by the expanded VMDK. If a pool has multiple disks, all of the disks need to have the same size. So make sure to resize them to the same size.
+9. List the Portworx pools and find the pool that’s affected by the expanded VMDK. If a pool has multiple disks, all of the disks need to have the same size. So make sure to resize them to the same size.
 
     ```text
-    pxctl sv pool show
+    pxctl service pool show
     ```
 10. Resize the pool to account for the expanded VMDK.
 
     ```text
-    pxctl sv pool update --resize <pool-id>
+    pxctl service pool update --resize <pool-id>
     ```
 11. Exit maintenance mode.
 
@@ -157,10 +157,10 @@ To expand the storage capacity of a single node, you have 2 options
     ```
 
     Wait for about 2 minutes until `pxctl status` says *PX is operational*.
-12. List Portworx pools again and you will now see the pool has the expanded size.
+12. List the Portworx pools again and you will now see the pool has the expanded size.
 
     ```text
-    pxctl sv pool show
+    pxctl service pool show
     ```
 13. Uncordon the node from Kubernetes.
 

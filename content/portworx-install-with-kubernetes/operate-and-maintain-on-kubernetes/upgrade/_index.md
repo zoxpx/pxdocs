@@ -1,9 +1,9 @@
 ---
-title: Upgrade on Kubernetes
+title: Upgrade Portworx on Kubernetes
 linkTitle: Upgrade
 weight: 2
 hidesections: true
-keywords: portworx, container, Kubernetes, upgrade, update, storage, Docker, k8s, flexvol, pv, persistent disk
+keywords: Upgrade, upgrading, OCI, talisman, Kubernetes, k8s
 description: Steps on how to upgrade Portworx on Kubernetes
 noicon: true
 series: k8s-op-maintain
@@ -11,12 +11,13 @@ series: k8s-op-maintain
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
-## Upgrading Portworx
+## Upgrade Portworx
 
-To upgrade to the **2.1.2** release (the latest stable at the time of this writing), run the following command:
+To upgrade to the **2.3** release (the latest stable at the time of this writing), run the following command:
 
 ```text
-curl -fsL https://install.portworx.com/2.1.2/upgrade | bash -s
+PXVER='2.3'
+curl -fsL https://install.portworx.com/${PXVER}/upgrade | bash -s
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
@@ -26,31 +27,62 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
 {{% content "shared/upgrade/upgrade-to-2-1-2.md" %}}
 
-## Upgrading Stork
+## Upgrade Stork
 
-Fetch the latest Stork specs using the following curl command. Run these commands on any machine that has kubectl access to your cluster.
+1.  On a machine that has kubectl access to your cluster, enter the following commands to download the latest Stork specs:
 
-{{<info>}}If you are using your own private/custom registry for container images, add `&reg=<your-registry-url>` to the below curl command. e.g `&reg=artifactory.company.org:6555` {{</info>}}
+      ```text
+      KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+      PXVER='2.3'
+      curl -fsL -o stork-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=stork"
+      ```
 
-```text
-KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-curl -fsL -o stork-spec.yaml "https://install.portworx.com/2.1?kbver=$KBVER&comp=stork"
-```
 
-Next, apply it in your cluster.
+    If you are using your own private or custom registry for your container images, add `&reg=<your-registry-url>` to the URL. Example:
 
-```text
-kubectl apply -f stork-spec.yaml
-```
+      ```text
+      KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+      PXVER='2.3'
+      curl -fsL -o stork-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=stork&reg=artifactory.company.org:6555"
+      ```
+2. Next, apply the spec with:
 
-## Customizing the upgrade process
+      ```text
+      kubectl apply -f stork-spec.yaml
+      ```
+
+## Upgrade Lighthouse
+
+1. On a machine that has kubectl access to your cluster, enter the following commands to download the latest Lighthouse specs:
+
+      ```text
+      KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+      PXVER='2.3'
+      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=lighthouse"
+      ```
+
+    If you are using your own private or custom registry for your container images, add `&reg=<your-registry-url>` to the URL. Example:
+
+    ```text
+    KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+    PXVER='2.3'
+    curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=lighthouse&reg=artifactory.company.org:6555"
+    ```
+2. Apply the spec by running:
+
+      ```text
+      kubectl apply -f lighthouse-spec.yaml
+      ```
+
+## Customize the upgrade process
 
 #### Specify a different Portworx upgrade image
 
 You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.0.3.4_ image.
 
 ```text
-curl -fsL https://install.portworx.com/2.1/upgrade | bash -s -- -t 2.0.3.4
+PXVER='2.3'
+curl -fsL https://install.portworx.com/${PXVER}/upgrade | bash -s -- -t 2.0.3.4
 ```
 
 ## Airgapped clusters
@@ -64,9 +96,9 @@ The below sections outline the exact steps for this.
 If you want to upgrade to the latest 2.1 stable release, skip the below export. If you wish to upgrade to a specific 2.1 release, set the `PX_VER` variable as below to the desired version.
 
 ```text
-# To determine the latest minor 2.1 release currently available, please use the curl-expression below
+# To determine the latest minor 2.3 release currently available, please use the curl-expression below
 # Alternatively, you can specify the version yourself, e.g.: PX_VER=2.0.2.3
-export PX_VER=$(curl -fs https://install.portworx.com/2.1/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
+export PX_VER=$(curl -fs https://install.portworx.com/2.3/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
 ```
 
 Now pull the required Portworx images.
@@ -85,13 +117,13 @@ Otherwise, follow [Step 2b: Push directly to nodes using tarball](#step-2b-push-
 
 #### Step 2a: Push to local registry server, accessible by air-gapped nodes
 
-{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-local-reg.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-local-reg.md" %}}
 
 Now that you have the images in your registry, continue with [Step 3: Start the upgrade](#step-3-start-the-upgrade).
 
 #### Step 2b: Push directly to nodes using tarball
 
-{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-nodes-tarball.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-nodes-tarball.md" %}}
 
 ### Step 3: Start the upgrade
 
@@ -117,14 +149,14 @@ fi
 
 [[ -z "$PX_VER" ]] || ARG_PX_VER="-t $PX_VER"
 
-curl -fsL https://install.portworx.com/2.1/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
+curl -fsL https://install.portworx.com/2.3/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
 ```
 
-## Troubleshooting {#troubleshooting}
+## Troubleshooting
 
-#### Find out status of Portworx pods {#find-out-status-of-portworx-pods}
+#### Find out status of Portworx pods
 
-To get more information about the status of Portworx daemonset across the nodes, run:
+To get more information about the status of Portworx DaemonSet across the nodes, run:
 
 ```text
 kubectl get pods -o wide -n kube-system -l name=portworx
@@ -140,10 +172,10 @@ As we can see in the example output above:
 * looking at the STATUS and READY, we can tell that the rollout-upgrade is currently creating the container on the “minion2” node
 * looking at AGE, we can tell that:
   * “minion4” and “minion5” have Portworx up for 16 days \(likely still on old version, and to be upgraded\), while the
-  * “minion3” has Portworx up for only 5 minutes \(likely just finished upgrade and restarted Portworx\)
+  * “minion3” has Portworx up for only 5 minutes (likely just finished upgrade and restarted Portworx)
 * if we keep on monitoring, we will observe that the upgrade will not switch to the “next” node until STATUS is “Running” and the READY is 1/1 \(meaning, the “readynessProbe” reports Portworx service is operational\).
 
-#### Find out version of all nodes in Portworx cluster {#find-out-version-of-all-nodes-in-portworx-cluster}
+#### Find out version of all nodes in the Portworx cluster
 
 One can run the following command to inspect the Portworx cluster:
 

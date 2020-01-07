@@ -11,7 +11,7 @@ aliases:
 
 Heptio Ark is a utility for managing disaster recovery, specifically for your
 Kubernetes cluster resources and persistent volumes. To take snapshots of
-Portworx volumes through Ark you need to install and configure the Portworx
+Portworx volumes through Ark you need to install and configure the Portworx 
 plugin.
 
 {{<info>}}These instructions are for ark v0.10 and higher. For older versions, please [click here.](../ark-pre-0.10) {{</info>}}
@@ -23,7 +23,7 @@ Run the following command to install the Portworx plugin for Ark:
 ark plugin add portworx/ark-plugin:0.5
 ```
 
-{{<info>}}For PX-Enterprise pre v2.0, use `portworx/ark-plugin:0.4` {{</info>}}
+{{<info>}}For PX-Enterprisepre v2.0, use `portworx/ark-plugin:0.4` {{</info>}}
 
 This should add an init container to your Ark deployment to install the
 plugin.

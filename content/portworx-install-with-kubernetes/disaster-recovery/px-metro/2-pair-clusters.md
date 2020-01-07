@@ -1,22 +1,23 @@
 ---
-title: "2. Pair Clusters"
+title: 2. Pair Clusters
 weight: 2
-keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
+keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: Find out how to pair your clusters
 ---
 
-## Pairing clusters
-In order to failover an application running on one Kubernetes cluster to another Kubernetes cluster, we need to migrate the resources between them.
+## Understand cluster pairing
+
+In order to failover an application running on one Kubernetes cluster to another Kubernetes cluster, you need to migrate the resources between them.
 On Kubernetes you will define a trust object required to communicate with the other Kubernetes cluster called a ClusterPair. This creates a pairing between the scheduler (Kubernetes) so that all the Kubernetes resources can be migrated between them.
 Throughout this section, the notion of source and destination clusters apply only at the Kubernetes level and does not apply to Storage, as you have a single Portworx storage fabric running on both the clusters.
 As Portworx is stretched across them, the volumes do not need to be migrated.
 
-For reference,
+For reference:
 
-* **Source Cluster** is the Kubernetes cluster where your applications are running
+* **Source Cluster** is the Kubernetes cluster where your applications are running.
 * **Destination Cluster** is the Kubernetes cluster where the applications will be failed over, in case of a disaster in the source cluster.
 
-{{% content "portworx-install-with-kubernetes/disaster-recovery/shared/cluster-pair.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-cluster-pair.md" %}}
 
 ```text
 apiVersion: stork.libopenstorage.org/v1alpha1

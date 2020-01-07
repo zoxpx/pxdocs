@@ -1,6 +1,6 @@
 ---
 title: Managing cloud credentials using pxctl
-keywords: portworx, pxctl, command-line tool, cli, reference
+keywords: pxctl, command-line tool, cli, reference, cloud credentials, manage credentials, create credentials, list credentials, validate credentials, delete credentials
 description: Trying to create, list, validate or delete credentials for cloud providers? Follow this step-by-step tutorial from Portworx!
 weight: 6
 linkTitle: Cloud Credentials
@@ -10,11 +10,11 @@ linkTitle: Cloud Credentials
 
 In this document, we are going to show how to manage your cloud credentials using `pxctl`.
 
-The cloud provider credentials are stored in an external secret store. Before you use the commands from below, you should configure a secret provider of your choice with _Portworx_. For more information, head over to the [Key Management](/key-management) page.
+The cloud provider credentials are stored in an external secret store. Before you use the commands from below, you should configure a secret provider of your choice with Portworx. For more information, head over to the [Key Management](/key-management) page.
 
 ## Overview
 
-You can use the `pxctl credentials` command to create, list, validate, or delete your cloud credentials. Then, _Portworx_ will use these credentials, for example, to back up your volumes to the cloud.
+You can use the `pxctl credentials` command to create, list, validate, or delete your cloud credentials. Then, Portworx will use these credentials, for example, to back up your volumes to the cloud.
 
 To get a glimpse of the available commands, run:
 
@@ -91,7 +91,7 @@ Credentials created successfully
 ```
 
 {{<info>}}
-**Note:** This command will create a bucket with the _Portworx_ cluster ID to use for the backups.
+**Note:** This command will create a bucket with the Portworx cluster ID to use for the backups.
 {{</info>}}
 
 ## Delete existing credentials
@@ -127,3 +127,7 @@ Credential validated successfully
 {{<info>}}
 Don't forget to replace `<uuid or name>` with the actual `uuid` or `name` of the credentials you want to delete.
 {{</info>}}
+
+## Related topics
+
+* For information about integrating Portworx with Kubernetes Secrets, refer to the [Kubernetes Secrets](/key-management/kubernetes-secrets/) page.

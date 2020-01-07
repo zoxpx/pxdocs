@@ -1,7 +1,7 @@
 ---
 title: Cloud backups for group of PVCs
 hidden: true
-keywords: portworx, container, Kubernetes, storage, k8s, pv, persistent disk, snapshots, stork, clones, cloud
+keywords: cloud backup, group of PVC, stork, kubernetes, k8s
 description: Instructions for backing up a group of PVCs with consistency to cloud and restore PVCs from the backups
 series: k8s-cloud-snap
 ---
@@ -10,11 +10,11 @@ This document will show you how to create group cloud snapshots of Portworx volu
 
 ## Pre-requisites
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-v2-prereqs.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-group-snap-v2-prereqs.md" %}}
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-cloud-snap-creds-prereq.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-cloud-snap-creds-prereq.md" %}}
 
-### Portworx and Stork Version
+### Portworx and Stork version
 
 Group cloud snapshots using Stork are supported in Portworx and Stork 2.0.2 and above. If you are running a lower version, refer to [Upgrade on Kubernetes
 ](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade) to upgrade Portworx to 2.0.2 or above.
@@ -152,7 +152,7 @@ spec:
 
 ## Restoring from group cloud snapshots
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-restore.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-group-snap-restore.md" %}}
 
 ## Examples
 
@@ -160,7 +160,7 @@ spec:
 
 In below example, we will take a group snapshot for all PVCs in the *default* namespace and that have labels *app: cassandra* and back it up to the configured cloud S3 endpoint in the Portworx cluster.
 
-{{% content "portworx-install-with-kubernetes/storage-operations/create-snapshots/shared/k8s-group-snap-cassandra-step-1-2.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-group-snap-cassandra-step-1-2.md" %}}
 
 #### Step 3: Take the group cloud snapshot
 
@@ -303,7 +303,7 @@ Events:                    <none>
 
 ## Deleting group snapshots
 
-To delete group snapshots, you need to delete the `GroupVolumeSnapshot` that was used to create the group snapshots. STORK will delete all other volumesnapshots that were created for this group snapshot.
+To delete group snapshots, you need to delete the `GroupVolumeSnapshot` that was used to create the group snapshots. Stork will delete all other volumesnapshots that were created for this group snapshot.
 
 ```text
 kubectl delete groupvolumesnapshot cassandra-group-cloudsnapshot

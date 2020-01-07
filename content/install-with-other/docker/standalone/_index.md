@@ -1,11 +1,15 @@
 ---
 title: Install on Docker Standalone
 description: Learn how to run Porworx as a runC container.
-keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
+keywords: Install, docker, standalone, runc container
 noicon: true
 weight: 1
 series: px-docker-install
 ---
+
+{{<info>}}
+This document presents the **Docker** method of installing a Portworx cluster using `runC` containers. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
 
 ## Why OCI
 
@@ -17,31 +21,31 @@ Running Portworx as a runC container eliminates any cyclical dependencies betwee
 
 * _SYSTEMD_: The installation below assumes the [systemd](https://en.wikipedia.org/wiki/Systemd) package is installed on your system \(i.e. _systemctl_ command works\).
   * Note, if you are running Ubuntu 16.04, CentoOS 7 or CoreOS v94 \(or newer\) the “systemd” is already installed and no actions will be required.
-* _SCHEDULERS_: If you are installing PX into **Kubernetes** or **Mesosphere DC/OS** cluster, we recommend to install the scheduler-specific Portworx package, which provides tighter integration, and better overall user experience.
+* _SCHEDULERS_: If you are installing Portworx into **Kubernetes** or **Mesosphere DC/OS** cluster, we recommend to install the scheduler-specific Portworx package, which provides tighter integration, and better overall user experience.
 * _FIREWALL_: Ensure ports 9001-9022 are open between the cluster nodes that will run Portworx.
-* _NTP_: Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.
+* _NTP_: Ensure all nodes running Portworx are time-synchronized, and NTP service is configured and running.
 * _KVDB_: Please have a clustered key-value database \(etcd or consul\) installed and ready. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
-* _STORAGE_: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.  Also please note that storage devices explicitly given to Portworx \(ie. `px-runc ... -s /dev/sdb -s /dev/sdc3`\) will be automatically formatted by PX.
+* _STORAGE_: At least one of the Portworx nodes should have extra storage available, in a form of unformatted partition or a disk-drive.  Also please note that storage devices explicitly given to Portworx \(ie. `px-runc ... -s /dev/sdb -s /dev/sdc3`\) will be automatically formatted by Portworx.
 
-The installation and setup of PX OCI bundle is a 3-step process:
+The installation and setup of Portworx OCI bundle is a 3-step process:
 
-1. Install PX OCI bits
-2. Configure PX OCI
-3. Enable and start Portworx service
+1. Install Portworx OCI bits
+2. Configure Portworx OCI
+3. Enable and start the Portworx service
 
-### Step 1: Install the PX OCI bundle
+### Step 1: Install the Portworx OCI bundle
 
-{{% content "install-with-other/docker/shared/runc-install-bundle.md" %}}
+{{% content "shared/install-with-other-docker-shared-runc-install-bundle.md" %}}
 
-### Step 2: Configure PX under runC
+### Step 2: Configure Portworx under runC
 
-{{% content "install-with-other/docker/shared/runc-configure-portworx.md" %}}
+{{% content "shared/install-with-other-docker-runc-configure-portworx.md" %}}
 
-### Step 3: Starting PX runC
+### Step 3: Starting Portworx runC
 
-{{% content "install-with-other/docker/shared/runc-enable-portworx.md" %}}
+{{% content "shared/install-with-other-docker-shared-runc-enable-portworx.md" %}}
 
-## Upgrading the PX OCI bundle {#upgrading-the-px-oci-bundle}
+## Upgrading the Portworx OCI bundle {#upgrading-the-px-oci-bundle}
 
 To upgrade the OCI bundle, simply re-run the [installation Step 1](/install-with-other/docker/standalone#step-1-install-the-px-oci-bundle) with the `--upgrade` option. After the upgrade, you will need to restart the Portworx service.
 
@@ -56,9 +60,9 @@ sudo docker run --entrypoint /runc-entry-point.sh \
 sudo systemctl restart portworx
 ```
 
-## Uninstalling the PX OCI bundle
+## Uninstalling the Portworx OCI bundle
 
-To uninstall the PX OCI bundle, please run the following:
+To uninstall the Portworx OCI bundle, please run the following:
 
 ```text
 # 1: Remove systemd service (if any)
@@ -122,7 +126,7 @@ sudo pkill -HUP syslogd
 
 **Advanced usage: Interactive/Foreground mode**
 
-Alternatively, one might prefer to first start the PX interactively \(for example, to verify the configuration parameters were OK and the startup was successful\), and then install it as a service:
+Alternatively, one might prefer to first start the Portworx interactively (for example, to verify the configuration parameters were OK and the startup was successful), and then install it as a service:
 
 ```text
 # Invoke PX interactively, abort with CTRL-C when confirmed it's running:
@@ -140,4 +144,4 @@ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
 [ hit Ctrl-C ]
 ```
 
-{{<info>}}**Migrating from PX-Containers to PX-OCI**: If you already had PX running as a Docker container (Portworx 1.2.10 and lower) and now want to upgrade to runC, follow the instructions at [Migrate Portworx installed using Docker to OCI/runc](/install-with-other/docker/standalone/migrate-docker-to-oci). {{</info>}}
+{{<info>}}**Migrating from Portworx containers to Portworx OCI**: If you already had Portworx running as a Docker container (Portworx 1.2.10 and lower) and now want to upgrade to runC, follow the instructions at [Migrate Portworx installed using Docker to OCI/runc](/install-with-other/docker/standalone/migrate-docker-to-oci). {{</info>}}

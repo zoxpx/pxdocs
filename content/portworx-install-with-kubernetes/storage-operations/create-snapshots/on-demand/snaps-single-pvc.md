@@ -1,7 +1,7 @@
 ---
 title: Snapshot single PVCs
 hidden: true
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+keywords: snapshots, sinple PVC, kubernetes, k8s
 description: Instructions on taking snapshots of single PVCs and restoring PVCs from the snapshots
 series: k8s-local-snap
 weight: 8

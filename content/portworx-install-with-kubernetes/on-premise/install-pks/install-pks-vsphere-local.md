@@ -1,8 +1,8 @@
 ---
 layout: page
 title: "Portworx install on PKS on vSphere using local datastores"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
-meta-description: "Find out how to install PX in a PKS Kubernetes cluster on vSphere and have PX provide highly available volumes to any application deployed via Kubernetes."
+keywords: Install, on-premise, PKS, Pivotal Container Service, vsphere, kubernetes, k8s, air gapped
+meta-description: "Find out how to install Portworx in a PKS Kubernetes cluster on vSphere and have Portworx provide highly available volumes to any application deployed via Kubernetes."
 hidden: true
 disableprevnext: true
 ---
@@ -36,9 +36,9 @@ On each ESXi host in the cluster, create a local datastore which is dedicated fo
 
 Once you have the spec, proceed below.
 
-{{% content "portworx-install-with-kubernetes/shared/4-apply-the-spec.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
 
-{{% content "portworx-install-with-kubernetes/shared/post-install.md" %}}
+{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
 
 ## Wipe Portworx installation
 
@@ -56,9 +56,9 @@ curl -fsL https://install.portworx.com/px-wipe | bash -s -- -T pks
 
 ### Secret for vSphere credentials
 
-{{% content "cloud-references/auto-disk-provisioning/vsphere/vsphere-secret.md" %}}
+{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-secret.md" %}}
 
-### Portworx spec
+### The Portworx spec
 
 Things to replace in the below spec to match your environment:
 
@@ -128,12 +128,15 @@ spec:
       port: 9001
       targetPort: 9001
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: portworx
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+      name: portworx
   minReadySeconds: 0
   updateStrategy:
     type: RollingUpdate
@@ -299,7 +302,7 @@ roleRef:
   name: portworx-pvc-controller-role
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -309,6 +312,9 @@ metadata:
   name: portworx-pvc-controller
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+      name: portworx-pvc-controller
   replicas: 3
   strategy:
     rollingUpdate:
@@ -467,7 +473,7 @@ spec:
       port: 8099
       targetPort: 8099
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -477,6 +483,9 @@ metadata:
   name: stork
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+        name: stork
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -593,7 +602,7 @@ roleRef:
   name: stork-scheduler-role
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -603,6 +612,9 @@ metadata:
   name: stork-scheduler
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+      component: scheduler
   replicas: 3
   template:
     metadata:
@@ -650,4 +662,4 @@ spec:
 
 ## Limitations
 
-If a PX storage node goes down and cluster is still in quorum, a storage less node will not automatically replace the storage node.
+If a Portworx storage node goes down and cluster is still in quorum, a storage less node will not automatically replace the storage node.

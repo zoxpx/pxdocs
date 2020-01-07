@@ -1,7 +1,7 @@
 ---
-title: "Network requirements for Portworx on Kubernetes"
-linkTitle: "Network requirements"
-keywords: network, portworx, ports, firewall
+title: Network requirements for Portworx on Kubernetes
+linkTitle: Network requirements
+keywords: Network, Communication ports, Firewall, Troubleshooting
 description: Description on networking ports Portworx requires on Kubernetes for a functioning cluster
 series: kb
 weight: 5

@@ -1,7 +1,7 @@
 ---
 title: Adding journal device to existing PX Nodes
 hidden: true
-keywords: journal device, kubernetes, portworx
+keywords: journal device, kubernetes, k8s
 description: Discover how to add a journal device  to a PX node to increase performace.
 ---
 
@@ -56,7 +56,7 @@ AlertID	Resource	ResourceID				Timestamp	Severity	AlertType		Description
 A journal device is recommended to be an SSD/NVME:
 
 ```text
-pxctl service drive add -d /dev/nvme01 --journal
+pxctl service drive add --drive /dev/nvme01 --journal
 ```
 
 ```output

@@ -1,14 +1,13 @@
 ---
-title: Constraining Applications to PX nodes
+title: Constraining Applications to Portworx nodes
 description: Learn how to use constraints on your DCOS cluster to control where Mesos schedules your stateful applications. Read our guide today!
-keywords: portworx, PX-Developer, container, Mesos, Mesosphere, constraints
+keywords: constraints, constraining applications, DCOS, DC/OS, Mesos, Mesosphere, 
 weight: 3
-linkTitle: Constraining Applications to PX nodes
+linkTitle: Constraining Applications to Portworx nodes
 ---
 
 Whenever possible, Portworx should be deployed on all nodes within a Mesos/Mesosphere/DCOS cluster.
-Portworx clusters can scale up to 1000 nodes. Portworx clusters can also include nodes that contribute no storage,
-but operate as "head-only" nodes to facilitate [auto-scaling groups](/portworx-install-with-kubernetes/cloud/aws/aws-asg).
+Portworx clusters can scale up to 1000 nodes. Portworx clusters can also include nodes that contribute no storage, but operates as "head-only" nodes to facilitate [auto-scaling groups](/portworx-install-with-kubernetes/cloud/aws/aws-asg).
 
 However, when Portworx cannot be installed on all nodes, Mesos 'constraints' should be used
 to ensure that services depending on Portworx will only get scheduled on nodes
@@ -25,11 +24,11 @@ If the size of your Mesos cluster is larger than the maximum number of nodes sup
 or if it is not possible to install Portworx on all nodes in the Mesos cluster,
 then you will need to use Mesos "constraints", in order to restrict/constrain jobs that use Portworx volumes to only run
 on Mesos-slave nodes where Portworx is running.   (Please check the Portworx release notes for maximum Portworx cluster size).
-Otherwise, Portworx recommends simply deploying Portworx on all nodes in a Mesos cluster, thereby avoiding the need to use "constraints".
+Otherwise, Portworx, Inc. recommends simply deploying Portworx on all nodes in a Mesos cluster, thereby avoiding the need to use "constraints".
 
 The following steps are required only for configuring and using "constraints".
 
-For each Mesosphere Agent node or Mesos-slave that is participating in the PX cluster,
+For each Mesosphere Agent node or Mesos-slave that is participating in the Portworx cluster,
 specify Mesos attributes that allow for affinity of tasks to nodes that are part of the Portworx cluster.
 
 If using Mesosphere/DCOS:

@@ -1,13 +1,14 @@
 ---
 title: Etcd certificates using Kubernetes Secrets
 hidden: true
-keywords: portworx, container, kubernetes, storage, k8s, etcd, secrets, certificates
+keywords: kubernetes secrets, k8s, etcd certificates
 description: This guide is a step-by-step tutorial on how to use Kubernetes secrets to give etcd certificates to Portworx.
 ---
 
 This page will guide you on how to give your etcd certificates to Portworx using Kubernetes Secrets. This is the recommended way of providing etcd certificates, as the certificates will be automatically available to the new nodes joining the cluster.
 
 #### Create Kubernetes secret
+
 Copy all your etcd certificates and key in a directory `etcd-secrets/` to create a Kubernetes secret from it.
 
 ```text
@@ -47,11 +48,11 @@ etcd.crt:  1680 bytes
 etcd.key:  414  bytes
 ```
 
-#### Edit Portworx spec
+#### Edit the Portworx spec file
 
 Once the secret is created we need to edit the Portworx spec file to consume the certificates from the secret.
 
-To mount the certificates under `/etc/pwx/etcdcerts` inside the portworx container, add the following under the _volumeMounts_ in Portworx DaemonSet.
+To mount the certificates under `/etc/pwx/etcdcerts` inside the Portworx container, add the following under the _volumeMounts_ in the Portworx DaemonSet.
 
 ```text
   volumeMounts:
@@ -59,7 +60,7 @@ To mount the certificates under `/etc/pwx/etcdcerts` inside the portworx contain
     name: etcdcerts
 ```
 
-Now, we use the keys from the secret that we created and mount it under paths that portworx will use to talk to the etcd server. In the `items` below, the `key` is the key from the `px-etcd-certs` secret and the `path` is the relative path from `/etc/pwx/etcdcerts` where Kubernetes will mount the certificates. Put the following under the _volumes_ section of Portworx DaemonSet.
+Now, we use the keys from the secret that we created and mount it under paths that Portworx will use to talk to the etcd server. In the `items` below, the `key` is the key from the `px-etcd-certs` secret and the `path` is the relative path from `/etc/pwx/etcdcerts` where Kubernetes will mount the certificates. Put the following under the _volumes_ section of the Portworx DaemonSet.
 
 ```text
   volumes:
@@ -75,7 +76,7 @@ Now, we use the keys from the secret that we created and mount it under paths th
         path: etcd.key
 ```
 
-Now that the certificates are mounted at `/etc/pwx/etcdcerts` and the sub-paths that we specified in the _volumes_ section, change the portworx container args to use the correct certificate paths:
+Now that the certificates are mounted at `/etc/pwx/etcdcerts` and the sub-paths that we specified in the _volumes_ section, change the Portworx container args to use the correct certificate paths:
 
 ```text
   containers:

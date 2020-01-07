@@ -1,16 +1,16 @@
 ---
 title: Role management using pxctl
 linkTitle: Role
-keywords: portworx, container, Kubernetes, storage, role, roles, authorization, authentication, login, token, context, generate, security, role, system.user, system.admin, system.view
+keywords: pxctl, command-line tool, cli, reference, roles, authorization, authentication, login, token, OIDC, self-signed token, context, generate, security, system.user, system.admin, system.view, custom role
 description: Learn to enable auth in your px cluster
 weight: 20
 ---
 
 ## Overview
-This document outlines how to manage your own custom roles for fine-grained access control within your _PX_ clusters.
+This document outlines how to manage your own custom roles for fine-grained access control within your Portworx clusters.
 
 ## Default Roles
-_PX_ comes with a few standard roles that you can use when issuing tokens to users:
+Portworx comes with a few standard roles that you can use when issuing tokens to users:
 
 *   __system.admin:__ can run any command
 *   __system.view:__ can only run read-only commands
@@ -24,7 +24,7 @@ pxctl role --help
 ```
 
 ```output
-Portworx pxctl authorization role commands.  Roles define permission rules for users capabilities.
+Portworx pxctl authorization role commands. Roles define permission rules for users capabilities.
 
 Usage:
   pxctl role [flags]
@@ -158,7 +158,8 @@ To see all services and APIs you can use within your custom roles, see our [API 
 ## Using your custom roles
 Once you've created your custom roles, you can simply add the role names during token generation/user management.
 
-* For OIDC, see your provider documentation on how to add the `roles` identifier to your tokens. __Note:__ Some OIDC providers have differently scoped roles at the system or user level. Please ensure that you've added the roles at the base level of the token.
+* For OIDC, see your provider documentation on how to add the `roles` identifier to your tokens.
+ {{<info>}}Some OIDC providers have differently scoped roles at the system or user level. Please ensure that you've added the roles at the base level of the token.{{</info>}}
 * For self-signed tokens, add the custom role in your auth-config during token creation:
 
 ```

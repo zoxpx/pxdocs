@@ -1,14 +1,14 @@
 ---
 title: Cloud Drives (ASG) using pxctl
 description: General reference for CLI Cloud Drives on ASG.
-keywords: portworx, containers, storage, volumes, CLI, ASG
+keywords: pxctl, command-line tool, cli, reference, cloud drives, ASG, auto-scaling group
 weight: 10
 linkTitle: Cloud Drives (ASG)
 ---
 
 ## Cloud Drive operations
 
-If you run _Portworx_ in ASG mode, the CLI provides a set of commands that display the information about the EBS volumes.
+If you run Portworx in ASG mode, the CLI provides a set of commands that display the information about the EBS volumes.
 
 ### Cloud Drive Help
 
@@ -33,7 +33,7 @@ OPTIONS:
 
 ### Listing all Cloud Drives
 
-To display all the cloud drives being used by _Portworx_, type:
+To display all the cloud drives being used by Portworx, type:
 
 ```text
 pxctl clouddrive list

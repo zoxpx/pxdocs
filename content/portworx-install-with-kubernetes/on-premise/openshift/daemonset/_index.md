@@ -5,4 +5,4 @@ description: How to install Portworx with OpenShift as DaemonSet
 weight: 1
 ---
 
-This topic explains how to install _Portworx_ as DaemonSet with Kubernetes on OpenShift. Follow the steps in this topic in order.
+This topic explains how to install Portworx as DaemonSet with Kubernetes on OpenShift. Follow the steps in this topic in order.

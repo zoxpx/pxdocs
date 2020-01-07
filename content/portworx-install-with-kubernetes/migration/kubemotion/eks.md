@@ -1,5 +1,5 @@
 ---
-title: "Kubemotion with stork on EKS"
+title: "Kubemotion with Stork on EKS"
 keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion, eks
 description: How to migrate stateful appliations to EKS
 hidden: true
@@ -20,8 +20,8 @@ kubectl create secret generic --from-file=$HOME/.aws/credentials -n  kube-system
 secret/aws-creds created
 ```
 
-## Pass the Secret to stork
-Mount the secret created above in the stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates:
+## Pass the Secret to Stork
+Mount the secret created above in the Stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates:
 
 * Add the following under spec.template.spec:
 
@@ -41,7 +41,7 @@ volumeMounts:
   readOnly: true
 ```
 
-Save the changes and wait for all the stork pods to be in running state after applying the
+Save the changes and wait for all the Stork pods to be in running state after applying the
 changes:
 
 ```text

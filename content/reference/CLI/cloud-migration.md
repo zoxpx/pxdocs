@@ -1,24 +1,21 @@
 ---
 title: Cloud migrations using pxctl
 linkTitle: Cloud Migrations
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, cloud, DR, disaster recovery, cluster, migration
+keywords: pxctl, command-line tool, cli, reference, cloud migration, migrate volumes, DR, disaster recovery, cluster pairing
 description: Learn to migrate volumes between clusters using pxctl
 weight: 12
 ---
 
-This document explains how to migrate _PX_ volumes between clusters. In order to do this, we'll first have to pair up 2 clusters and then issue the migration command to _Portworx_.
+This document explains how to migrate Portworx volumes between clusters. In order to do this, we'll first have to pair up 2 clusters and then issue the migration command to Portworx.
 
 {{<info>}}
 The pairing is **uni-directional**. Say there are two clusters- C1 and C2. If you pair C1 with C2 you can only migrate volumes from C1 to C2.
 {{</info>}}
 
-With _Portworx_, there are two ways of migrating volumes between clusters:
+With Portworx, there are two ways of migrating volumes between clusters:
 
 * using `pxctl` or
 * using `Stork` on `Kubernetes`
-
-This document will cover the steps required to migrate _PX_ volumes between clusters using `pxctl`. If you want to migrate your volumes using `Stork` on `Kubernetes`, head over to the [Kubemotion](/portworx-install-with-kubernetes/migration/kubemotion/) page.
-
 
 ## Prerequisites
 
@@ -30,7 +27,7 @@ Before we begin, make sure you have configured a [secret store] (/key-management
 
 The installation may take a while, depending on your Intenet connection. Once the installation is finished we're going to want to pair our clusters.
 
-First, let's get the cluster token of the destination cluster. Run the following command from one of the _Portworx_ nodes in the **destination cluster**:
+First, let's get the cluster token of the destination cluster. Run the following command from one of the Portworx nodes in the **destination cluster**:
 
 
 ```text
@@ -142,10 +139,10 @@ As the above output shows, you can either migrate all volumes or just one.
 
 ### Migrating all volumes
 
-To migrate all volumes, run `pxctl cloudmigrate start` with the `-a` and `-c` flags:
+To migrate all volumes, run `pxctl cloudmigrate start` with the `--all` and `--cluster_id` flags:
 
 ```text
-pxctl cloudmigrate start -a -c <cluster_id>
+pxctl cloudmigrate start --all --cluster_id <cluster_id>
 ```
 
 ### Migrating a particular volume
@@ -153,12 +150,12 @@ pxctl cloudmigrate start -a -c <cluster_id>
 To migrate a particualr volume, try using:
 
 ```text
-pxctl cloudmigrate start -v <volumeId> -c <cluster_id>
+pxctl cloudmigrate start --volume_id <volumeId> --cluster_id <cluster_id>
 ```
 
 ### Checking the migration status
 
-While _Portworx_ migrates your volume(s), you can check the status by running the following command:
+While Portworx migrates your volume(s), you can check the status by running the following command:
 
 ```text
 pxctl cloudmigrate status
@@ -180,3 +177,7 @@ VolumeId            VolumeName                                  Stage   Status  
 The stages of a particular migration will progress from Backup→ Restore→ Done. If any stage fails the status will be marked as Failed.
 
 If the migration is successful, you should see the volume(s) with the same name created on the destination cluster.
+
+## Related topics
+
+For information about migrating Portworx volumes between clusters using Stork and Kubernetes, refer to the [Kubemotion](/portworx-install-with-kubernetes/migration/kubemotion/) page.

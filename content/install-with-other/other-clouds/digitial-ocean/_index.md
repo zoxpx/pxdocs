@@ -1,11 +1,15 @@
 ---
 title: Portworx on the DigitalOcean Cloud Platform
 description: Find out how to use Protworx on DigitalOcean today!
-keywords: portworx, digital ocean, PaaS, IaaS, docker, converged
+keywords: Install, digital ocean, terraform, terraporx, bare metal
 weight: 4
 linkTitle: DigitalOcean
 noicon: true
 ---
+
+{{<info>}}
+This document presents a **non-Kubernetes** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+{{</info>}}
 
 This guide shows you how you can easily deploy Portworx on the [**digitalocean.com** cloud platform](http://digitalocean.com)
 using [Terraform](http://terraform.io) infrastructure automation.

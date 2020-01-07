@@ -1,7 +1,7 @@
 ---
 title: Volume Scaling with DCOS
 description: Learn how to implement and use volume scaling with DCOS. Try it today!
-keywords: portworx, jenkins
+keywords: volume scaling, stateful applications, dc/os, dcos, mesosphere
 weight: 5
 linkTitle: Scaling Stateful Applications
 ---
@@ -18,7 +18,7 @@ When a `volume-set` is requested to be attached, an attempt is made to attach a 
 created using the volume spec of the scaled volume as a template.  An error is returned if a free volume in the set is not found and no more volumes can be created as per the `volume-set` `scale` limit.
 
 {{<info>}}
-**Important:**<br/>You **must** use DCOS constraints when using PX volume sets:
+**Important:**<br/>You **must** use DCOS constraints when using Portworx volume sets:
 
 ```text
 "constraints": [["hostname", "UNIQUE"]]
