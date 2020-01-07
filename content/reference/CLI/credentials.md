@@ -1,6 +1,6 @@
 ---
 title: Managing cloud credentials using pxctl
-keywords: portworx, pxctl, command-line tool, cli, reference
+keywords: pxctl, command-line tool, cli, reference, cloud credentials, manage credentials, create credentials, list credentials, validate credentials, delete credentials
 description: Trying to create, list, validate or delete credentials for cloud providers? Follow this step-by-step tutorial from Portworx!
 weight: 6
 linkTitle: Cloud Credentials

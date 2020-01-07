@@ -1,6 +1,6 @@
 ---
 title: Portworx SDK
-keywords: portworx, REST, SDK, OpenStorage SDK, API
+keywords: OpenStorage SDK, API, gRPC, REST, monitoring, management, programmatic control
 description: Details on using the Portworx SDK for programmatic control
 weight: 3
 linkTitle: Developer SDK
@@ -13,10 +13,7 @@ Portworx data services can be managed and monitored through the [OpenStorage SDK
 
 ### OpenStorage SDK Ports
 
-When you connect your OpenStorage SDK client to Portworx you can use either the
-default gRPC port 9020 or the default REST Gateway port of 9021. If the port
-range has been configured to another location during installation, you will
-find the OpenStorage SDK ports by grepping for SDK in the Portworx container logs.
+When you connect your OpenStorage SDK client to Portworx you can use either the default gRPC port 9020 or the default REST Gateway port of 9021. If the port range has been configured to another location during installation, you will find the OpenStorage SDK ports by grepping for SDK in the Portworx container logs.
 
 ### OpenStorage versions
 

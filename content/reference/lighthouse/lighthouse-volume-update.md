@@ -1,6 +1,6 @@
 ---
 title: Lighthouse Volume Update
-keywords: lighthouse
+keywords: Lighthouse, update volume replication
 description: Update volume replication.
 weight: 1
 linkTitle: Update Volume

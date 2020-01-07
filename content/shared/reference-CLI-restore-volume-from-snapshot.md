@@ -1,7 +1,7 @@
 ---
 title: Restoring Volumes from Snapshots
 hidden: true
-keywords: portworx, kubernetes
+keywords: portworx, pxctl, command-line tool, cli, reference, snapshot, restore volume
 description: Learn how to restore volumes from snapshots
 ---
 

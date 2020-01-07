@@ -1,7 +1,7 @@
 ---
 title: Optimized Restores- Definition
 hidden: true
-keywords: portworx, pxctl, restore
+keywords: portworx, pxctl, command-line tool, cli, reference, optimized restores
 description: Explains what is an optimized restore
 ---
 

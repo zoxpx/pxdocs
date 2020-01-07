@@ -1,6 +1,6 @@
 ---
 title: "On-Prem Lighthouse Release Notes"
-keywords: portworx, px-enterprise, px-lighthouse, release notes
+keywords: Release notes, On-Prem Lighthouse, PX-Lighthouse, PX-Enterprise
 meta-description: "Release notes for Lighthouse, the Portworx UI."
 description: "Release notes for Lighthouse, the Portworx UI."
 series: release-notes

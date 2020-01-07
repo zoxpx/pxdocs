@@ -1,6 +1,6 @@
 ---
 title: Knowledge Base
-keywords: portworx, knowledge base
+keywords: Knowledge base, reference
 meta-description: Portworx knowledge base.
 description: Portworx knowledge base articles
 weight: 9

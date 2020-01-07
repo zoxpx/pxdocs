@@ -1,6 +1,6 @@
 ---
 title: Lighthouse Create Credentials
-keywords: lighthouse
+keywords: Install, Lighthouse, create credentials, Microsoft Azure, Amazon S3, Google Cloud
 description: Create Credentials lighthouse.
 weight: 2
 linkTitle: Create Cloud Credentials

@@ -1,7 +1,7 @@
 ---
 title: Service operations using pxctl
 linkTitle: Service
-keywords: portworx, pxctl, command-line tool, cli, reference
+keywords: pxctl, command-line tool, cli, reference, service, troubleshooting, diagnostics, call-home, maintenance mode
 description: How to use the pxctl service command.
 weight: 16
 ---

@@ -1,6 +1,6 @@
 ---
 title: Version 1.2
-keywords: portworx, pxctl, command-line tool, cli, reference
+keywords: portworx, pxctl, command-line tool, cli, reference, version 1.2
 description: Version 1.2 information.
 hidden: true
 ---

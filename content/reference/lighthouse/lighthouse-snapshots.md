@@ -1,6 +1,6 @@
 ---
 title: Lighthouse volume snapshots
-keywords: lighthouse
+keywords: Lighthouse, volume snapshot, cloud snapshot, local snapshot
 description: Volume snaphots from lighthouse.
 weight: 3
 linkTitle: Create Volume Snapshots
@@ -20,7 +20,7 @@ Click ![Lighthouse group snapshot](/img/lh-new-archive-icon.png) on the right ba
 
 ![Lighthouse group snapshot](/img/lighthouse-new-volume-local-snap.png)
 
-### Cloudsnap shot
+### Cloud snapshot
 
 When you want to snapshot to a cloud select cloud and a credential.
 

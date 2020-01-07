@@ -1,7 +1,7 @@
 ---
 title: Cloud migrations using pxctl
 linkTitle: Cloud Migrations
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, cloud, DR, disaster recovery, cluster, migration
+keywords: pxctl, command-line tool, cli, reference, cloud migration, migrate volumes, DR, disaster recovery, cluster pairing
 description: Learn to migrate volumes between clusters using pxctl
 weight: 12
 ---
