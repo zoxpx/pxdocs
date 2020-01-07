@@ -1,7 +1,7 @@
 ---
 title: Internal Kvdb
 description: Explanation on internal kvdb used by Portworx
-keywords: portworx, kvdb
+keywords: internal kvdb, built-in kvdb, Kubernetes, k8s, Mesos, DCOS, DC/OS, help, how to, explanation
 weight: 300
 series: concepts
 ---

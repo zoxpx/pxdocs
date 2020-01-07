@@ -1,7 +1,7 @@
 ---
 title: Security Overview
 description: Security concepts and features available within Portworx
-keywords: portworx, security, ownership, tls, rbac, claims, jwt, oidc
+keywords: security, ownership, RBAC, Role Based Access Control, claims, JWT, JSON Web Token, OIDC, OpenID Connect, self generated, overview, how to, administrator role, explanation
 weight: 10
 series: authorization
 ---

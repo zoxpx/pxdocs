@@ -1,7 +1,7 @@
 ---
 title: Topology awareness
 description: Learn how to inform your Portworx nodes where they are placed in order to influence replication decisions and performance.
-keywords: portworx, pxctl, command-line tool, cli, reference, geography, locality, rack, zone, region
+keywords: cluster topology awareness, geography, locality, rack awareness, zone awareness, region awareness
 weight: 600
 series: concepts
 ---
