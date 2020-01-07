@@ -2,7 +2,7 @@
 title: Google Cloud KMS
 logo: /logos/google-kms.png
 weight: 6
-keywords: Portworx, Google, Google Cloud, KMS, containers, storage, encryption
+keywords: Google Cloud KMS, Key Management Service, gcloud, secrets, Volume Encryption, Cloud Credentials
 description: Instructions on using Google Cloud KMS with Portworx
 disableprevnext: true
 noicon: true

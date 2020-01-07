@@ -1,4 +1,7 @@
 ---
+title: Shared content for all Kubernetes secrets docs - volume cluster-wide secret
+keywords: Kubernetes Secrets, k8s
+description: Shared content for all Kubernetes secret docs - volume cluster-wide secret
 hidden: true
 ---
 

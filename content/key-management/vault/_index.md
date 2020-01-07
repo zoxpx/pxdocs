@@ -1,7 +1,7 @@
 ---
 title: Vault
 logo: /logos/hashicorp-vault.png
-keywords: portworx, containers, storage, vault
+keywords: Vault Key Management, Hashicorp, encryption keys, secrets, Volume Encryption, Cloud Credentials, secret store, passwords
 description: Instructions on using Vault key management with Portworx
 weight: 5
 disableprevnext: true
@@ -11,7 +11,7 @@ noicon: true
 
 Portworx can integrate with Vault to store your encryption keys/secrets, credentials or passwords. This guide will get a Portworx cluster connected to a Vault endpoint. The vault endpoint could be used to store secrets that will be used for encrypting volumes.
 
-## Setting up Vault {#setting-up-vault}
+## Setting up Vault
 
 Peruse [this section](https://www.vaultproject.io/docs/install) for help on setting up Vault in your setup. This includes installation, setting up policies and configuring secrets.
 
@@ -58,7 +58,7 @@ Portworx requires the following Vault credentials to use its APIs
     Name to use as the SNI host when connecting via TLS.
 
 
-## Kubernetes users {#kubernetes-users}
+## Kubernetes users
 
 ### Step 1: Provide Vault credentials to Portworx
 
@@ -242,7 +242,7 @@ If Vault is configured strictly with policies then the Vault Token provided to P
 All the above Vault related fields as well as the cluster secret key can be set using the Portworx CLI which is explained in the next section.
 
 
-## Key generation with Vault {#key-generation-with-vault}
+## Key generation with Vault
 
 The following sections describe the key generation process with Portworx and Vault which can be used for encrypting volumes. More info about encrypted volumes [here](/reference/cli/encrypted-volumes)
 

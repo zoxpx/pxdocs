@@ -1,7 +1,7 @@
 ---
 title: Encrypting Kubernetes PVCs with AWS KMS
 weight: 1
-keywords: Portworx, Amazon, AWS KMS, containers, storage, encryption, Kubernetes
+keywords: encryption, Kubernetes PVCs, k8s, AWS KMS, Amazon Web Services, Key Management Service
 description: Instructions on using AWS KMS with Portworx for encrypting PVCs
 noicon: true
 series: aws-secret-uses
@@ -14,7 +14,6 @@ hidden: true
 ### Encryption using per volume secrets
 
 {{% content "shared/key-management-aws-kms-unique-passphrase.md" %}}
-
 
 {{<info>}}
 This is the recommended method for encrypting volumes when you want to take a cloud backup of an encrypted volume or migrate encrypted volumes between multiple clusters.

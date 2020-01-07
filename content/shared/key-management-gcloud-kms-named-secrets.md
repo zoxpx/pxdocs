@@ -1,4 +1,11 @@
 ---
+title: Shared content for all gcloud - named secrets
+keywords: Google Cloud KMS, Key Management Service, gcloud
+description: Shared content for all gcloud - named secrets
+hidden: true
+---
+
+
 hidden: true
 ---
 

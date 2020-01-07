@@ -1,4 +1,7 @@
 ---
+title: Shared content for all AWS-KMS secret docs - secure flag
+keywords: AWS, KMS, Amazon Web Services, Key Management Service, encryption
+description: Shared content for all AWS-KMS secret docs - secure flag
 hidden: true
 ---
 

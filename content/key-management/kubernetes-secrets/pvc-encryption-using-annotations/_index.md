@@ -1,7 +1,7 @@
 ---
 title: Encrypting PVCs using annotations with Kubernetes Secrets
 weight: 1
-keywords: Portworx, Kubernetes, Kubernetes Secrets, containers, storage, encryption
+keywords: Encrypt PVC, annotations, kubernetes, k8s
 description: Instructions on using Kubernetes Secrets with Portworx for encrypting PVCs using annotations
 noicon: true
 series: kubernetes-secret-uses
@@ -70,7 +70,7 @@ As there is no `px/secret-name` annotation specified, Portworx will default to t
 Similar to the above example, if you want to use a Storage Class with `secure` parameter set, but do not want to encrypt a certain PVC, then set the `px/secure` annotation to `false`.
 
 {{<info>}}
-**NOTE** If you are running Kubernetes version older than 1.9.4 (or < 1.8.9 in Kubernetes 1.8), then the PVC name has to be in `ns.<namespace_of_pvc>-name.<identifier_for_pvc>` format to use the PVC-level encryption feature.
+If you are running Kubernetes version older than 1.9.4 (or < 1.8.9 in Kubernetes 1.8), then the PVC name has to be in `ns.<namespace_of_pvc>-name.<identifier_for_pvc>` format to use the PVC-level encryption feature.
 {{</info>}}
 
 

@@ -2,13 +2,12 @@
 title: IBM Key Protect
 logo: /logos/ibm.png
 weight: 1
-keywords: Portworx, ibm, kp, containers, storage, encryption
+keywords: IBM Key Protect, encryption keys, secrets, Volume Encryption, Cloud Credentials
 description: Instructions on using IBM Key Protect with Portworx
 disableprevnext: true
 noicon: true
 series: key-management
 ---
-
 
 {{<info>}}
 **NOTE:** Supported from PX-Enterprise 1.7 onwards

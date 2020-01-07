@@ -1,4 +1,7 @@
 ---
+title: Shared content for all Kubernetes secrets docs - set cluster-wide passphrase
+keywords: Kubernetes Secrets, k8s
+description: Shared content for all Kubernetes secret docs - set cluster-wide passphrase
 hidden: true
 ---
 
