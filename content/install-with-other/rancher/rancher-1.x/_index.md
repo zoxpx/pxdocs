@@ -1,8 +1,8 @@
 ---
 title: Portworx on Rancher 1.x
 linkTitle: Rancher 1.x
-keywords: portworx, PX-Developer, container, Rancher, storage
-description: Instructions on installing Portworx using docker-compose and rancher-compose on Rancher 1.x by cattle scheduler 
+keywords: Install, Rancher 1.x, Cattle
+description: Instructions on installing Portworx using docker-compose and rancher-compose on Rancher 1.x by cattle scheduler
 weight: 6
 series: px-rancher
 noicon: true
@@ -36,7 +36,7 @@ When configuring the Rancher hosts using the provided AMI:
 * The root size should be min\(128\)
 * The ‘ssh’ user should be “ubuntu”
 
-## Step 3: Launch an ‘etcd’ stack {#step-3-launch-an-etcd-stack}
+## Step 3: Launch an ‘etcd’ stack
 
 Launch an instance of the ‘etcd’ stack. Set “Enable Backups” and “Debug” to False. Look through the logs to note the published client URL, and make note of that. The client URL will have the following form:
 

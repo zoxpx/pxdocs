@@ -1,7 +1,7 @@
 ---
 title: Zookeeper
 description: For help installing and running Zookeeper on DCOS, use the guide from Portworx! Achieve more with Portworx backing your cluster.
-keywords: portworx, container, Mesos, Mesosphere, DCOS, Zookeeper
+keywords: Install, Zookeeper, HDFS, DCOS, DC/OS
 ---
 
 {{<info>}}

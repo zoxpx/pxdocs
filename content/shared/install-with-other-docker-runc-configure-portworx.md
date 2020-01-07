@@ -1,7 +1,7 @@
 ---
 title: Configure on Docker (shared)
 description: Learn how to configure Porworx as a runC container
-keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
+keywords: Install, docker, px-runc
 hidden: true
 ---
 

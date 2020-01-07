@@ -1,7 +1,7 @@
 ---
 title: Running Portworx in Production with DC/OS
 description: Operations guide for running Portworx in Production with DC/OS
-keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
+keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure, DCOS, DC/OS, Mesosphere
 weight: 1
 linkTitle: Running Portworx in Production with DC/OS
 ---

@@ -1,6 +1,6 @@
 ---
 title: Deploy stateful applications with Docker Swarm
-keywords: portworx, container, storage, Docker, swarm
+keywords: Install, stateful appications, Docker Swarm
 description: You can use Portworx to provide storage for your stateful services running on Docker Swarm.  Follow the step-by-step tutorial today!
 weight: 1
 linkTitle: Use Portworx with Swarm

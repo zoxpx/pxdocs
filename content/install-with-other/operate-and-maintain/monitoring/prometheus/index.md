@@ -1,6 +1,6 @@
 ---
 title: Portworx integration with Prometheus
-keywords: prometheus, graph, stats
+keywords: monitoring, prometheus, graph, stats
 meta-description: Looking to integrate Portworx with Prometheus? Learn to integrate Portworx storage with Prometheus for monitoring today!
 ---
 {{<info>}}

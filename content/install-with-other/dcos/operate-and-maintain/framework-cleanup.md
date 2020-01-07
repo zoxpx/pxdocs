@@ -1,7 +1,7 @@
 ---
 title: Cleaning up frameworks on DC/OS
 description: Follow these two steps to clean up the resources in DC/OS after destroying a service. We're cleaning a portworx-cassandra service in this example.
-keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
+keywords: clean up, destroy a service, Mesos, Mesosphere, DCOS, DC/OS, Cassandra
 weight: 6
 linkTitle: Cleaning up frameworks
 ---

@@ -1,7 +1,7 @@
 ---
 title: Cassandra using Portworx in DCOS
 description: Read our production ops guide to running Cassandra in Docker containers today! Failover faster, improve density and simplify operations.
-keywords: portworx, px-developer, cassandra, database, cluster, storage
+keywords: Install, Cassandra, DCOS, DC/OS
 linkTitle: Cassandra
 ---
 

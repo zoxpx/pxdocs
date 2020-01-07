@@ -1,6 +1,6 @@
 ---
 title: Docker
-keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
+keywords: Install, Docker, Swarm
 description: Learn how to deploy Portworx with Docker Swarm or just Docker without any orchestrator
 weight: 3
 series: px-other

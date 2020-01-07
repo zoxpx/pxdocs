@@ -1,7 +1,7 @@
 ---
 title: Install Portworx on Kubernetes using Rancher 2.x
 linkTitle: Rancher 2.x
-keywords: portworx, PX-Developer, container, Rancher, storage
+keywords: Install, Rancher 2.x, Helm
 description: Install Portworx on Kubernetes using Rancher 2.x with a public catalog (Helm Chart)
 weight: 6
 series: px-rancher

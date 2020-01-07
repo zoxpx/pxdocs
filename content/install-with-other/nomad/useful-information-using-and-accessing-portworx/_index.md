@@ -1,7 +1,7 @@
 ---
 title: Using and accessing Portworx on Nomad
 linkTitle: Using and accessing
-keywords: portworx, container, Nomad, storage,
+keywords: nomad, access volumes, pxd
 description: Learn how to use and access Portworx on Nomad.
 weight: 1
 series: px-nomad-useful-information

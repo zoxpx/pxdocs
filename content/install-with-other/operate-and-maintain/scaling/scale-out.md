@@ -1,6 +1,6 @@
 ---
 title: "Scaling out an existing Portworx Cluster"
-keywords: scale-up, storage, add new nodes
+keywords: scale out, scaling
 description: This document illustrates how to add a new node with attached storage to a Portworx cluster.  Scale out your cluster today!
 ---
 

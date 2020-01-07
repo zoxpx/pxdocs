@@ -1,7 +1,7 @@
 ---
 title: Portworx on the DigitalOcean Cloud Platform
 description: Find out how to use Protworx on DigitalOcean today!
-keywords: portworx, digital ocean, PaaS, IaaS, docker, converged
+keywords: Install, digital ocean, terraform, terraporx, bare metal
 weight: 4
 linkTitle: DigitalOcean
 noicon: true

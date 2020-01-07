@@ -1,7 +1,7 @@
 ---
 title: Dynamic volume creation through DCOS
 description: Read the overview on how volumes can be created dynamically through DCOS. Gain a better understanding of dynamic volumes here!
-keywords: portworx, px-enterprise, storage, volume, create volume, clone volume, inline, dynamic volumes
+keywords: inline volume spec, dynamic volumes, DCOS, DC/OS, Mesosphere, Marathon
 hidden: 4
 linkTitle: Dynamically Creating Volumes
 ---

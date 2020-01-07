@@ -1,6 +1,6 @@
 ---
 title: Portworx on the Packet.net Hosted Platform
-keywords: portworx, packet.net, PaaS, IaaS, docker, converged, bare metal
+keywords: Install, packet.net, Terraporx, bare metal
 description: Portworx can help you run stateful workloads with Docker. Find out how to deploy upon Packet.net servers!
 weight: 3
 linkTitle: Packet.net
@@ -21,7 +21,7 @@ Other supported bare metal cloud providers are
 
 
 {{<info>}}
-**NB:**<br/> For quick/easy deployment of Portworx on Packet.net, please refer to the [Terraporx Repo](https://github.com/portworx/terraporx/tree/master/packet) of Terraform deployment scripts.
+For quick/easy deployment of Portworx on Packet.net, please refer to the [Terraporx Repo](https://github.com/portworx/terraporx/tree/master/packet) of Terraform deployment scripts.
 {{</info>}}
 
 ### Step 1: Provision Server

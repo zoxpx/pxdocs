@@ -1,13 +1,12 @@
 ---
 title: Redis
-keywords: portworx, px-developer, redis, database, cluster, storage
+keywords: install, redis, docker
 description: Follow this guide to learn how to use Redis with Portworx.
 weight: 2
 noicon: true
 ---
 
-
- This page provides instructions for deploying Redis with Portworx on Kubernetes.
+This page provides instructions for deploying Redis with Portworx on Kubernetes.
 
 ### Create a storage volume for Redis
 

@@ -1,7 +1,7 @@
 ---
 title: Nomad and consul
 linkTitle: Nomad and consul
-keywords: portworx, container, Nomad, storage, consul
+keywords: Install, nomad, consul, useful information
 description: Nomad and consul.
 weight: 2
 series: px-nomad-useful-information

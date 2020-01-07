@@ -1,6 +1,6 @@
 ---
 title: Hadoop and HDFS
-keywords: portworx, px-developer, hadoop, yarn, database, cluster, storage
+keywords: install, hadoop, hdfs, docker
 description: Follow this guide to learn how to reliably deploy Hadoop containers using Portworx.
 weight: 2
 noicon: true

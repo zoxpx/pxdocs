@@ -1,6 +1,6 @@
 ---
 title: "Adding storage to existing Portworx Cluster Nodes"
-keywords: scale-up
+keywords: scale up, scaling
 description: Discover how to add a new node to a Portworx cluster and how to add additional storage to the Portworx Cluster once a new node is added.  Try it for yourself today.
 ---
 
