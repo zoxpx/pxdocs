@@ -1,7 +1,6 @@
 ---
-layout: page
-title: "Etcd for Portworx"
-keywords: etcd, portworx, maintenance, kvdb
+title: Etcd for Portworx
+keywords: Install, etcd, portworx, kvdb
 description: Instructions on installing and configuring an external ETCD cluster for Portworx
 linkTitle: Etcd for Portworx
 series: kb
@@ -49,7 +48,7 @@ Etcd provides multiple knobs to fine tune the cluster based on your needs. We re
 #### Compaction
 
 etcd keeps an exact history of its keyspace, this history should be periodically compacted to avoid performance degradation and eventual storage space exhaustion. Regular compaction ensures that the memory usage of the etcd process is under check.
-The keyspace can be compacted automatically with etcd's time windowed history retention policy, or manually with ``etcd``
+The keyspace can be compacted automatically with etcd's time windowed history retention policy, or manually with `etcd`.
 
 We recommend keeping history for last 3 hours. While setting up etcd you can specify the retention policy in the following way:
 

@@ -1,6 +1,6 @@
 ---
 title: Create and manage volumes using pxctl
-keywords: portworx, pxctl, command-line tool, cli, reference
+keywords: pxctl, command-line tool, cli, reference, create volume, manage volumes, import volume, inspect volume, list volumes, locate volume, restore volume, clone volume, snapshot volume
 description: This guide shows you how to create and manage volumes with pxctl.
 linkTitle: Create and Manage Volumes
 weight: 2

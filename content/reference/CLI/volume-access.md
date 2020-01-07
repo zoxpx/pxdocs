@@ -1,7 +1,7 @@
 ---
 title: Volume access using pxctl
 linkTitle: Volume Access
-keywords: portworx, container, Kubernetes, storage, role, roles, authorization, authentication, volume, access
+keywords: portworx, pxctl, command-line tool, cli, reference, volume access rules, read access, write access, admin access, show volume access, add volume access, remove volume access, update volume access, volume ownership
 description: Learn to update volume access in your Portworx cluster
 weight: 16
 ---
@@ -57,4 +57,6 @@ pxctl volume access update <volume> --groups group1:r,group2:w --collaborators u
 pxctl volume access update <volume> --owner <username>
 ```
 
-__Note:__ The volume owner can only be a single username. In addition, volume ownership updates can only be performed by administrators.
+{{<info>}}
+The volume owner can only be a single username. In addition, volume ownership updates can only be performed by administrators.
+{{</info>}}

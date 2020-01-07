@@ -1,7 +1,7 @@
 ---
 title: Creating Snapshots
 hidden: true
-keywords: portworx, pxctl, snapshot, reference
+keywords: portworx, pxctl, command-line tool, cli, reference, create snapsohts
 description: Learn how to create snapshots with pxctl
 ---
 

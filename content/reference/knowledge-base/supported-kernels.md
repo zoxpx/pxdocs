@@ -1,6 +1,6 @@
 ---
 title: Supported Kernels
-keywords: portworx, install, configure, prerequisites, kernel, kernels
+keywords: Supported kernels, Install, Configure, Prerequisites
 description: Various kernels that are supported by Portworx and steps to install headers
 weight: 5
 linkTitle: Supported Kernels
@@ -14,7 +14,7 @@ To install the kernel headers and kernel development packages for kernels not li
 #### CentOS
 
 ```text
-yum install kernel-headers-`uname -r`  
+yum install kernel-headers-`uname -r`
 yum install kernel-devel-`uname -r`
 
 ```
@@ -22,7 +22,7 @@ yum install kernel-devel-`uname -r`
 #### Ubuntu
 
 ```text
-apt install linux-headers-$(uname -r)  
+apt install linux-headers-$(uname -r)
 
 ```
 

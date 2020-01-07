@@ -1,6 +1,6 @@
 ---
 title: Encrypted volumes using pxctl
-keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, encryption
+keywords: pxctl, command-line tool, cli, reference, encrypted volumes, cluster-wide secret key, per-volume secret key, encrypted shared volumes
 description: This guide will give you an overview of how to use the Encryption feature for Portworx volumes.
 linkTitle: Encrypted Volumes
 weight: 14

@@ -1,7 +1,6 @@
 ---
-layout: page
-title: "Etcd Quick Setup"
-keywords: etcd, portworx, maintenance, kvdb
+title: Etcd Quick Setup
+keywords: etcd, quick setup, install, maintenance, kvdb
 hidden: true
 disableprevnext: true
 ---
@@ -46,7 +45,7 @@ Repeat the above steps on all the 3 nodes before moving forward.
 
 #### Step2: Setup systemd unit files
 
-Create a systemd environment file __/etc/etcd.conf__ which has the IPs of all the nodes.
+Create a systemd environment file `/etc/etcd.conf` which has the IPs of all the nodes.
 
 ```text
 cat /etc/etcd.conf
@@ -63,7 +62,7 @@ NODE_2_IP=70.0.40.154
 NODE_3_IP=70.0.40.155
 ```
 
-You can copy the above contents in your __/etc/etcd.conf__ and replace the IPs with the IPs of your 3 nodes.
+You can copy the above contents in your `/etc/etcd.conf` and replace the IPs with the IPs of your 3 nodes.
 
 Create a copy of the above file on all the 3 nodes. The contents of the file will remain same except for the __SELF_IP__ which will correspond to the node's IP where the file resides.
 
@@ -93,7 +92,7 @@ ExecStart=/bin/sh -c "/usr/local/bin/etcd --name etcd-${SELF_IP} --data-dir /var
 WantedBy=multi-user.target
 ```
 
-You can copy the above contents in your __/etc/systemd/system/etcd3.service__ . This configuration file has all the etcd configuration parameters set to the recommended values. No further changes are required in this file as it reads the IPs from the custom EnvironmentFile __/etc/etcd.conf__
+You can copy the above contents in your `/etc/systemd/system/etcd3.service`. This configuration file has all the etcd configuration parameters set to the recommended values. No further changes are required in this file as it reads the IPs from the custom EnvironmentFile `/etc/etcd.conf`
 
 Create a copy of the above file on all the 3 nodes. The contents of the file will remain same on all the nodes.
 
@@ -124,4 +123,4 @@ member 8ff90a5cbffc52d4 is healthy: got healthy result from http://70.0.40.153:2
 cluster is healthy
 ```
 
-Make sure the IPs are displayed correctly and the cluster health is reported __healthy__
+Make sure the IPs are displayed correctly and the cluster health is reported `healthy`.

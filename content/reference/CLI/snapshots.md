@@ -1,7 +1,7 @@
 ---
 title: Snapshots operations using pxctl
 linkTitle: Snapshots
-keywords: portworx, pxctl, snapshot, reference
+keywords: pxctl, command-line tool, cli, reference, snapshot, create snapshot, list snapshots, delete snapshot, schedule policies, snapshot schedule
 description: Learn how to manage snapshots using pxctl
 weight: 4
 ---

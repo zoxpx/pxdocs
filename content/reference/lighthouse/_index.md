@@ -1,6 +1,6 @@
 ---
 title: Install Lighthouse
-keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse
+keywords: Install, Lighthouse, Manage Portworx, GUI dashboard, monitor Portworx cluster, add Portworx cluster to Lighthouse, Reference
 description: Documentation on using Lighthouse to manage Portworx clusters
 weight: 8
 linkTitle: Lighthouse

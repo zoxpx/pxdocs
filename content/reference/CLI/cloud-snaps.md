@@ -1,7 +1,7 @@
 ---
 title: Cloud Snapshots and Recovery using pxctl
 linkTitle: Cloud Snaps
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones, cloud, cloudsnap
+keywords: pxctl, command-line tool, cli, reference, cloud snapshots, volume backups, cloud storage, persistent disk, backup database
 description: Learn to take a cloud snapshot of a Portworx volume using pxctl and use that snapshot
 weight: 8
 ---

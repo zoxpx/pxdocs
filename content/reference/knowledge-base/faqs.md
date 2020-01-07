@@ -1,14 +1,14 @@
 ---
 title: Frequently Asked Questions
-keywords: portworx, faqs
+keywords: FAQs, Frequently Asked Questions, help, operations, maintenance
 description: Find answers to all the most frequently asked questions about Portworx.
 weight: 2
 linkTitle: FAQs
 series: kb
 ---
 
-### Can Portworx run in the cloud?   On premise?   Both?
-Portworx clusters can run in the cloud or on premise.  The volume format is the same, regardless of running in the cloud or on-prem.  When running in the cloud, Portworx aggregates and virtualizes the various underlying cloud volumes.
+### Can Portworx run in the cloud? On premise? Both?
+Portworx clusters can run in the cloud or on premise. The volume format is the same, regardless of running in the cloud or on-prem.  When running in the cloud, Portworx aggregates and virtualizes the various underlying cloud volumes.
 
 ### Is there a Hardware/Software compatibility list?
 Hardware : No. But there are minimum resource recommendation listed [here](/start-here-installation/#installation-prerequisites)
@@ -50,7 +50,7 @@ Devices of different performance classes (i.e flash or spinning drives) will be 
 Portworx also supports storageless mode, where a node participates in a cluster, but contributes no storage to the fabric.
 
 ### Are read operations parallelized?
-Yes, if replication is > 1, then different blocks will be read from different servers.   We multi-source the read operations across nodes for high-performance.
+Yes, if replication is > 1, then different blocks will be read from different servers. We multi-source the read operations across nodes for high-performance.
 
 ### Can one server participate in multiple (different) Portworx clusters?
 No.  Currently only one instance of Portworx per server is allowed.

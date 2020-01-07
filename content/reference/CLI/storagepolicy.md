@@ -1,7 +1,7 @@
 ---
 title: Storage policy using pxctl
 description: Manage Portworx storage policies
-keywords: portworx, storage policy, volume
+keywords: pxctl, command-line tool, cli, reference, create storage policy, update storage policy, list storage policies, delete storage policy, set default storage policy, remove default storage policy, access control, ACL
 series: concepts
 linkTitle: Storage Policy
 weight: 12
