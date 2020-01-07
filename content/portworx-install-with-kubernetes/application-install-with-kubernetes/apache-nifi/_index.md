@@ -7,7 +7,6 @@ weight: 9
 noicon: true
 ---
 
-Apache NiFi is built to automate the flow of data between systems. While the term 'dataflow' is used in a variety of contexts, we use it here to mean the automated and managed flow of information between systems. This problem space has been around ever since enterprises had more than one system, where some of the systems created data and some of the systems consumed data. 
 
 Portworx is a software-defined storage overlay that allows you to run highly-available stateful applications. 
 
@@ -194,4 +193,3 @@ provenancerepository-nifi-2   Bound     pvc-c01aec6b-4710-11e9-b1b0-42010a800055
     ```text
     http://<ANY_WORKER_NODE_IP>:<NIFI_HTTP_NODE_PORT>/nifi/
     ```
-
