@@ -1,7 +1,7 @@
 ---
 title: Cloud Config Reference
 description: Cloud configuration reference
-keywords: portworx, cloud-config, yaml, config.json, reference
+keywords: Cloud configuration, Reference, how to
 hidden: true
 hidesections: true
 disableprevnext: true
@@ -36,10 +36,10 @@ portworx:
 
 **loggingurl**: Endpoint used communicating to PX-Enterprise control (aka "Lighthouse").  Primary use is system statistics.   Ex:  "http://lighthouse.portworx.com/api/stats/listen"
 
-**kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.   
+**kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.
 
 ```yaml
- Ex:  
+ Ex:
     kvdb:
     - etcd:http://etcd0.yourdomain.com:4001
     - etcd:http://etcd1.yourdomain.com:4001

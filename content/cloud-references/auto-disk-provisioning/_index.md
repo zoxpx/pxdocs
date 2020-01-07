@@ -1,7 +1,7 @@
 ---
 title: Automatic disk provisioning
 description: Understand how Portworx provisions disks automatically on various cloud platforms
-keywords: cloud,asg,aws,gcp,vsphere,disks
+keywords: Automatic Disk Provisioning, Dynamic Disk Provision, Cloud
 weight: 2
 series: arch-references
 ---

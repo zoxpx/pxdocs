@@ -1,7 +1,7 @@
 ---
 title: Portworx vSphere generic spec generation 
 description: Portworx vSphere generic spec generation
-keywords: portworx, VMware, vSphere ASG
+keywords: vSphere installation, Automatic Disk Provisioning, Dynamic Disk Provisioning, VMWare, vSphere ASG, Kubernetes, k8s
 hidden: true
 ---
 
@@ -68,4 +68,3 @@ The template follows the following format:
 ```
 - __type__: Supported types are _thin_, _zeroedthick_ , _eagerzeroedthick_
 - __size__: This is the size of the VMDK in GiB
-

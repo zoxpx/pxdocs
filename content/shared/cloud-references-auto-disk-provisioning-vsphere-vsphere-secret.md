@@ -1,7 +1,7 @@
 ---
 title: Kubernetes secret for VMware
 description: Kubernetes secret for VMware
-keywords: portworx, VMware, vSphere ASG
+keywords: Kubernetes secrets, Automatic Disk Provisioning, Dynamic Disk Provisioning, VMWare, vSphere ASG, Kubernetes, k8s
 hidden: true
 ---
 

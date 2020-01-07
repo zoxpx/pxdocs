@@ -2,7 +2,7 @@
 title: Deployment architectures for Portworx
 linkTitle: Deployment architectures
 description: Understand various deployment architectures for Portworx
-keywords: cloud,asg,aws,gcp,vsphere,disks
+keywords: Deployment architecture, disaggregated architecture, converged architecture, Hyperconverged, AWS, Amazon Web Services, GCP Google Cloud Platform, VMWare vSphere 
 weight: 1
 series: arch-references
 ---

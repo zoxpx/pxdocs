@@ -1,7 +1,7 @@
 ---
 title: Disk Provisioning on AWS
 description: Learn to scale a Portworx cluster up or down on AWS with Auto Scaling. Use our tips and tricks to make it simple!
-keywords: portworx, AWS, ASG
+keywords: Automatic Disk Provisioning, Dynamic Disk Provisioning, AWS, Amazon Web Services, ASG, Auto Scaling Group
 linkTitle: AWS
 weight: 1
 noicon: true
