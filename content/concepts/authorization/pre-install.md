@@ -1,7 +1,7 @@
 ---
 title: Preparing To Enhance Security
 description: Explains what information is needed when enabling PX-Security
-keywords: portworx, security, ownership, tls, rbac, claims, jwt, oidc
+keywords: installation, setup security, RBAC, Role Based Access Control, claims, JWT, JSON Web Token, OIDC, OpenID Connect, self generated
 weight: 20
 series: authorization
 ---
@@ -18,8 +18,7 @@ which are then be provided to Portworx for verification. Portworx needs to
 connect to your OIDC provider to automatically download the public key. This
 public key is used to verify that the signature of the JWT is valid.
 
-To connect Portworx to an OIDC you will need the following information from your
-provider:
+To connect Portworx to an OIDC you will need the following information from your provider:
 
 * OIDC client-id: This is the client name that has been setup for Portworx at the
   OIDC.
@@ -91,8 +90,7 @@ provide a shared secret for the system.
 
 {{<info>}}
 This may be replaced by the installer for your container orchestrator.
-Please see your container orchestrator authorization installation instructions
-for more information
+Please see your container orchestrator authorization installation instructions for more information.
 {{</info>}}
 
 ## Verification of a token authority
@@ -100,9 +98,7 @@ for more information
 To confirm that a token has the correct information, after creating the token using
 your preferred method, copy this token and paste it in [jwt.io](https://jwt.io).
 Note the _payload_ section has all the necessary claims to provide the
-appropriate permissions. Also note that the `iss`(Issuer), is correct. Portworx
-will use the value of `iss` to determine if the token comes from a trusted token
-authority.
+appropriate permissions. Also note that the `iss`(Issuer), is correct. Portworx will use the value of `iss` to determine if the token comes from a trusted token authority.
 
 Second, you can try out the token on a running Portworx system which has
 PX-Security enabled. There are multiple ways to do this. One is to use

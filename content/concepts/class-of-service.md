@@ -1,7 +1,7 @@
 ---
 title: Class of Service
 description: Explanation on class of service for Portworx volumes
-keywords: portworx, cos, class of service, production
+keywords: cos, class of service, production, IOPS optimization, IOPS throughput, read performance, write performance, help, how to, explanation
 weight: 200
 series: concepts
 ---
