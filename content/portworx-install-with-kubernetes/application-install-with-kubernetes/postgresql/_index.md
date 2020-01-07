@@ -1,7 +1,7 @@
 ---
 title: Postgresql on Portworx
 linkTitle: Postgresql
-keywords: portworx, postgres, postgresql
+keywords: Postgresql, Postgres, install, kubernetes, k8s
 description: Use this guide to install and run PostgreSQL using Kubernetes
 weight: 2
 noicon: true
@@ -28,7 +28,9 @@ parameters:
 
 Then run this command:
 
-`kubectl apply -f px-postgres-sc.yaml`
+```text
+kubectl apply -f px-postgres-sc.yaml
+```
 
 ## Create a PostgreSQL Portworx PersistentVolumeClaim
 
@@ -54,7 +56,9 @@ spec:
 
 Then run this command:
 
-`kubectl apply -f px-postgres-vol.yaml`
+```
+kubectl apply -f px-postgres-vol.yaml
+```
 
 ## Deploy PostgreSQL using Kubernetes Deployment
 

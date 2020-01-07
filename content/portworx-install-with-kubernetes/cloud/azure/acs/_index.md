@@ -1,6 +1,6 @@
 ---
 title: Azure Container Service (ACS)
-keywords: portworx, acs-engine, azure, Kubernetes, microsoft, azure
+keywords: Install, on cloud, ACS, Azure Container Service, Microsoft, Kubernetes, k8s
 description: Learn about installing Portworx with Kubernetes on Azure Container Service Engine.
 weight: 1
 ---

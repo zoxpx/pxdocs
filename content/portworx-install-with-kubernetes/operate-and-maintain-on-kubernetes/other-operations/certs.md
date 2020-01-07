@@ -1,6 +1,6 @@
 ---
 title: "Certificates as Kubernetes Secrets"
-keywords: certificates, certs, portworx, kubernetes
+keywords: SSL certificates, certs, kubernetes secrets, k8s
 description: Certificates as Kubernetes secrets.
 ---
 

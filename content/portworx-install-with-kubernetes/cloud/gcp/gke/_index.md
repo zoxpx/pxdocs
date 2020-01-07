@@ -1,7 +1,7 @@
 ---
 title: GKE
 weight: 1
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
+keywords: Install, GKE, Google Kubernetes Engine, k8s, gcloud
 description: Install Portworx with Google Kubernetes Engine (GKE).
 noicon: true
 series: px-k8s-gcp

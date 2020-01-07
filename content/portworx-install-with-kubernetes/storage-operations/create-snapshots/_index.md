@@ -2,7 +2,7 @@
 title: Create and use snapshots
 weight: 2
 hidesections: true
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+keywords: snapshots, on-demand, scheduled, 3DSnaps, consistent snapshots, kubernetes, k8s
 description: Learn how to create application consistent snapshots/backups and restore them.
 series: k8s-storage
 ---

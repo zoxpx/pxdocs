@@ -1,17 +1,17 @@
 ---
 title: Run Hyper Converged
 weight: 2
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk
+keywords: hyper-convergence, kubernetes, k8s
 description: Learn how to run your applications hyperconverged with their data
 noicon: true
 series: k8s-storage
 ---
 
-### Hyper-convergence {#hyper-convergence}
+### Hyper-convergence
 
 When a pod runs on the same host as its volume, it is known as convergence or hyper-convergence. Because this configuration reduces the network overhead of an application, performance is typically better.
 
-### Using scheduler convergence {#using-scheduler-convergence}
+### Using scheduler convergence
 
 The recommended method to run your pods hyperconverged is to use [Stork](/portworx-install-with-kubernetes/storage-operations/stork).
 

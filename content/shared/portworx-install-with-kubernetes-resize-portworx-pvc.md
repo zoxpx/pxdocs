@@ -1,8 +1,8 @@
 ---
-title: Resize 
+title: Shared content for install Portworx with Kubernetes - resize a Portworx PVC
 hidden: true
-keywords: portworx, kubernetes
-description: Learn how to resize a Portworx PVC
+keywords: Install, resize Portworx PVC, kubernetes, k8s
+description: Shared content for install Portworx with Kubernetes - resize a Portworx PVC
 ---
 
 To resize a Portworx PVC, you can simply edit the PVC spec and update the size. Let's take an example of resizing a MySQL PVC.

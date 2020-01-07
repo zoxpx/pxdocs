@@ -1,4 +1,7 @@
 ---
+title: Kubernetes disaster recovery and migration docs - scheduling migrations
+description: Kubernetes disaster recovery and migration docs - scheduling migrations
+keywords: Disaster recovery, Migration, kubernetes, k8s
 hidden: true
 ---
 

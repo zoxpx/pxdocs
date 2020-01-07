@@ -2,7 +2,7 @@
 title: OpenShift
 weight: 1
 logo: /logos/open-shift.png
-keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
+keywords: Install, on-premise, OpenShift, kubernetes, k8s, air gapped
 description: How to install Portworx with OpenShift
 linkTitle: OpenShift
 series2: k8s-airgapped

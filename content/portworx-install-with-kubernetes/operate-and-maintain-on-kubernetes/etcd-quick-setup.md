@@ -1,11 +1,11 @@
 ---
-title: "Etcd Quick Setup"
+title: Etcd Quick Setup
 hidden: true
-keywords: etcd, portworx, maintenance, kvdb
+keywords: etcd cluster, setup, kubernetes, k8s
 description: Guide to setup etcd clusers.
 ---
 
-Following guide will setup a 3 node etcd cluster. Etcd will be running as a systemd services on the nodes.
+Following guide will setup a 3 node etcd cluster. Etcd will be running as a systemd service on the nodes.
 
 ### Requirements
 

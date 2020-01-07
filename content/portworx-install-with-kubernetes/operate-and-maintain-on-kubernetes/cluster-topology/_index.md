@@ -1,7 +1,7 @@
 ---
 title: Cluster Topology awareness
 weight: 4
-keywords: portworx, pxctl, command-line tool, cli, reference, kubernetes, geography, locality, rack, zone, region
+keywords: cluster topology awarness, kubernetes k8s, geography, locality, rack, zone, region
 description: Learn how Portworx nodes can detect where they are placed in the Kubernetes cluster to influence replicas and performance.
 noicon: true
 series: k8s-op-maintain

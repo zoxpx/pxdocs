@@ -3,7 +3,7 @@ title: Portworx on Anthos
 linkTitle: Anthos
 weight: 4
 hidden: true
-keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, anthos
+keywords: Install, on-premise, anthos, kubernetes, k8s, air gapped
 description: How to install Portworx on Anthos
 ---
 

@@ -1,4 +1,7 @@
 ---
+title: Shared content for Kubernetes snapshots - configuring cloud secrets
+description: Shared content for Kubernetes snapshots - configuring cloud secrets
+keywords: snapshots, cloud secrets, kubernetes, k8s
 hidden: true
 ---
 

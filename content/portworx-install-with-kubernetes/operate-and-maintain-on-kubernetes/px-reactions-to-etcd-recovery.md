@@ -1,5 +1,6 @@
 ---
 title: Reactions to etcd recovery
+keywords: Troubleshooting, debuggong, etcd disaster recovery, kubernetes, k8s
 hidden: true
 ---
 

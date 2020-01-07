@@ -1,7 +1,7 @@
 ---
 title: Create shared PVCs using CSI
 weight: 12
-keywords: portworx, container, kubernetes, storage, k8s, pv, persistent disk, pvc
+keywords: shared pvc, kubernetes, k8s, csi, container storage interface, portworx specs
 description: Learn how to use Portworx shared volumes (ReadWriteMany) in your Kubernetes cluster using CSI
 hidden: true
 ---

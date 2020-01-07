@@ -1,7 +1,7 @@
 ---
 title: Decommission a Node
 weight: 4
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+keywords: Uninstall, decomission a node, Kubernetes, k8s
 description: Steps to decommission a Portworx node in your Kubernetes clusters.
 series: k8s-uninstall
 ---

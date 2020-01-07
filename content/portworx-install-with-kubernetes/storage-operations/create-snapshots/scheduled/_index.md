@@ -3,7 +3,7 @@ title: Scheduled snapshots
 weight: 2
 hidesections: true
 linkTitle: Scheduled snapshots
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+keywords: scheduled snapshots, stork, kubernetes, k8s
 description: Learn how to create scheduled consistent snapshots/backups and restore them.
 series: k8s-storage-snapshots
 ---

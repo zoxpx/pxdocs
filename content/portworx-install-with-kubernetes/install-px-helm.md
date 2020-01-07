@@ -1,7 +1,7 @@
 ---
 title: "Install Portworx on Kubernetes via Helm"
 linkTitle: Helm
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+keywords: install, portworx, kubernetes, k8s, helm, uninstall
 description: "Find out how to install Portworx on Kubernetes via the Portworx Helm chart"
 weight: 2
 hidden: true

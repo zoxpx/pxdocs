@@ -4,7 +4,7 @@ description: Manage Portworx authoriztion in Kubernetes
 hidesections: true
 weight: 100
 series: k8s-op-maintain
-keywords: portworx, kubernetes, security, authorization, jwt, shared secret
+keywords: authorization, security, kubernetes, k8s
 ---
 
 This section describes how to enable and manage Portworx authorization in

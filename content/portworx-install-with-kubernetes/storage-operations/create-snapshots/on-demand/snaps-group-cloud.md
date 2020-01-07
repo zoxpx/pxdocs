@@ -1,7 +1,7 @@
 ---
 title: Cloud backups for group of PVCs
 hidden: true
-keywords: portworx, container, Kubernetes, storage, k8s, pv, persistent disk, snapshots, stork, clones, cloud
+keywords: cloud backup, group of PVC, stork, kubernetes, k8s
 description: Instructions for backing up a group of PVCs with consistency to cloud and restore PVCs from the backups
 series: k8s-cloud-snap
 ---

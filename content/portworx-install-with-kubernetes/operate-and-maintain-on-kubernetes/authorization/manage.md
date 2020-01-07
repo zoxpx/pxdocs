@@ -1,7 +1,7 @@
 ---
 title: PVCs and Stork with Authorization
 description: Manage PVC and Stork requests with authorization
-keywords: pvc, stork, portworx, kubernetes, security, authorization, jwt, shared secret
+keywords: authorization, security, kubernetes, k8s
 weight: 200
 series: k8s-op-maintain-auth
 ---

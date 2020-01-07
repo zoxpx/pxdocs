@@ -36,4 +36,3 @@ changes:
 ```text
 kubectl get pods -n kube-system -l name=stork
 ```
-

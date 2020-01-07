@@ -1,22 +1,22 @@
 ---
 title: Running in Production
-keywords: portworx, Kubernetes
+keywords: production, operations, guide, data recovery, scaling out, alerts, monitoring, disaster recovery, upgrade, Kubernetes, k8s
 description: Production operations guide for Portworx on Kubernetes
 weight: 4
 noicon: true
 series: k8s-op-maintain
 ---
 
-### DAY 1 Operations {#day-1-operations}
+### DAY 1 Operations
 
-#### Initial Software Setup for Production {#initial-software-setup-for-production}
+#### Initial Software Setup for Production
 
 * Follow the instructions in the [k8s install](/portworx-install-with-kubernetes) page in the docs.
 * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will form the Portworx cluster
 * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
 * etcd - Setup etcd as a 3-node etcd cluster _outside_ the container orchestrator to ensure maximum stability. Refer to the following [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) on how to install etcd and also configure it for maximum stability.
 
-#### Configuring the Server or the Compute Infrastructure {#configuring-the-server-or-the-compute-infrastructure}
+#### Configuring the Server or the Compute Infrastructure
 
 * Check and ensure a _minimum_ 2 cores and 4GB of RAM are allocated for Portworx.
 * The base operating system of the server supports linux kernel 3.10+ . Newer 4.x linux kernels have many performance and stability related fixes and is recommended.
@@ -29,14 +29,14 @@ uname -r
 3.10.0-327.22.2.el7.x86_64
 ```
 
-#### Configuring the Networking Infrastructure {#configuring-the-networking-infrastructure}
+#### Configuring the Networking Infrastructure
 
 * Make sure the following ports are open in all the servers. 9001-9022
 * Configure separate networks for Data and Management networks to isolate the traffic
   * Data network is specified giving the ‘-d’ switch and Management networks with the ‘-m’ switch. Refer to [scheduler guides](/portworx-install-with-kubernetes) for specifics to enable it in your scheduler.
   * With multiple NICs, create a bonded ethernet port for data interface for improved availability and performance.
 
-#### Configuring and Provisioning Underlying Storage {#configuring-and-provisioning-underlying-storage}
+#### Configuring and Provisioning Underlying Storage
 
 **Selecting drives for an installation**
 
@@ -62,7 +62,7 @@ Portworx supports automatic management of EBS volumes. If you are using AWS ASG 
 
 Portworx replicated volumes distributes data across failure domains. For on-premise installations, this ensures that a power failure to a rack does not result in data unavailability. For cloud deployments this ensures data availability across zones.
 
-#### Topology in cloud environments {#topology-in-cloud-environments}
+#### Topology in cloud environments
 
 Portworx auto-detects availabilty zones and regions and provisions replicas across different zones. For e.g., see below for the partial output of `pxctl status`
 
@@ -85,11 +85,11 @@ POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
 
 This node is in us-east-1. If Portworx is started in other zones, then when a volume with greater than 1 replication factor is created, it will have the replicas automatically created in other nodes in other zones.
 
-#### Topology in on-premise deployments: {#topology-in-on-premise-deployments}
+#### Topology in on-premise deployments:
 
 Failure domains in terms of RACK information can be passed in as described [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology)
 
-#### Volume Management Best Practices {#volume-management-best-practices}
+#### Volume Management Best Practices
 
 * Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. Monitor for for Volume Space Low alerts
 
@@ -188,7 +188,7 @@ This [page](/concepts) gives more details on different volume types, how to crea
 
 * In order to ensure hyper-convergence, ensure you have Stork installed and running in the cluster. See the install instructions in the previous section
 
-#### Data Protection for Containers {#data-protection-for-containers}
+#### Data Protection for Containers
 
 * Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures.
 * Portworx support 64 snapshots per volume.
@@ -253,7 +253,7 @@ kubectl edit clusterrole node-get-put-list-role
 * For DR, It is recommended to setup cloudsnaps as well which is covered in detail in the Day 3 - Cloudsnaps section
 
 
-#### Alerts and Monitoring for Production {#alerts-and-monitoring-for-production}
+#### Alerts and Monitoring for Production
 
 Portworx, Inc. recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
 
@@ -270,9 +270,9 @@ While Prometheus can be deployed as a container within the container orchestrato
 * List of Portworx Alerts are documented [here](/install-with-other/operate-and-maintain/monitoring/portworx-alerts)
 
 
-### Day 2 Operations {#day-2-operations}
+### Day 2 Operations
 
-#### Hung Node Recovery {#hung-node-recovery}
+#### Hung Node Recovery
 
 * A Portworx node may hang or appear to hang because of any of the following reasons
   * Underlying media being too slow to respond and thus Portworx trying to error recovery of the media
@@ -284,12 +284,12 @@ While Prometheus can be deployed as a container within the container orchestrato
 * If Portworx appears to not respond, a restart of the Portworx OCI container via `systemctl` would help.
 * Any Portworx restart within 10 mins will ensure that applications continue to run without experiencing volume unmounts/outage
 
-#### Stuck Volume Detection and Resolution {#stuck-volume-detection-and-resolution}
+#### Stuck Volume Detection and Resolution
 
 * With K8s, it is possible that even after the application container terminates, a volume is left attached. This volume is still available for use in any other node. Portworx makes sure that if a volume is not in use by an application, it can be attached to any other node in the system
 * With this attach operation, the Portworx will automatically manage the volume attach status with no user intervention required and continue to serve the volume I/Os even a container attaches to the same volume from a different node.
 
-#### Scaling out a cluster nodes in the Cloud and On-Prem {#scaling-out-a-cluster-nodes-in-the-cloud-and-on-prem}
+#### Scaling out a cluster nodes in the Cloud and On-Prem
 
 **Scaling out a cluster in cloud**
 
@@ -305,7 +305,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 * The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/install-with-other/operate-and-maintain/scaling/scale-out) shows how to scale up a existing cluster by adding more nodes.
 * In Kubernetes, Portworx is deployed as a Daemonset. This enables Portworx to automatically scale as the cluster scales. So there is no specific action needed from the user to scale Portworx along with the cluster scaling
 
-#### Cluster Capacity Expansion {#cluster-capacity-expansion}
+#### Cluster Capacity Expansion
 
 * Cluster storage capacity can be expanded by adding more drives each node.
 * Drives with similar capacity \(within 1GB capacity difference\) will be grouped together as a same pool
@@ -316,7 +316,7 @@ While Prometheus can be deployed as a container within the container orchestrato
   * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
 * Follow the instructions in this [page](/install-with-other/operate-and-maintain/scaling/scale-up) to add storage each node.
 
-#### Server and Networking Replacements and Upgrades {#server-and-networking-replacements-and-upgrades}
+#### Server and Networking Replacements and Upgrades
 
 * Servers running Portworx can be replaced by performing decommissioning of the server to safely remove them from the cluster
 * Ensure that all the volumes in the cluster are replicated before decommissioning the node so that the data is still available for the containers mounting the volumes after the node is decommisioned
@@ -327,7 +327,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 * The server can be replaced as well
 * Once the replacement is done, the node can be joined back to the cluster by going through the steps described in the scaling-out the cluster section
 
-#### Software Upgrades {#software-upgrades}
+#### Software Upgrades
 
 **Portworx Upgrades**
 
@@ -348,7 +348,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 * Ensure kernel-devel packages are installed after a OS migration
 * If Portworx is run as a OCI container, Docker Upgrades and Restarts do not impact Portworx runtime. So recommend running Portworx as a OCI container
 
-### Day 3 Operations {#day-3-operations}
+### Day 3 Operations
 
 #### Handling Lost or Stale Nodes on the Cloud and On-Prem {#handling-lost-or-stale-nodes-on-the-cloud-and-on-prem}
 
@@ -356,9 +356,9 @@ While Prometheus can be deployed as a container within the container orchestrato
 * The command used to remove a node is `pxctl cluster delete --force`
 * For e.g., if a specific node is offline but it no longer exists, use \` pxctl cluster delete --force node-id\` to remove the node from the cluster
 
-#### Volume Data Recovery {#volume-data-recovery}
+#### Volume Data Recovery
 
-#### Disaster Recovery with Cloudsnaps {#disaster-recovery-with-cloudsnaps}
+#### Disaster Recovery with Cloudsnaps
 
 * It is recommended to setup cloudsnaps for volume backup and recovery to handle DR scenarios
 * Cloudsnaps are also good way to perform cluster to cluster data migration
@@ -369,7 +369,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 * Cloudsnaps can also be scheduled to happen at a particular time. It is recommended to schedule cloudsnaps at a time when the application data traffic is light to ensure faster back ups.
 * Follow [DR best practices](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/dr-best-practices) and setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
 
-#### Drive Replacements {#drive-replacements}
+#### Drive Replacements
 
 * Any drive in a given node can be replaced by another drive in the same node
 * In order to perform a drive replacement, the Portworx node must be put into `maintenance mode`

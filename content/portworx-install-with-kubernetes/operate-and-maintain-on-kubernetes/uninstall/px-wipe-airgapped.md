@@ -1,7 +1,7 @@
 ---
 title: Wipe Portworx in an airgapped cluster
 weight: 3
-keywords: portworx, container, Kubernetes, storage, k8s
+keywords: Uninstall, air gapped, wiper script, Kubernetes, k8s
 meta-description: Steps to wipe Portworx in an airgapped cluster
 description: Steps to wipe Portworx in an airgapped cluster
 hidden: true

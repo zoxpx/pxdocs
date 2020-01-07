@@ -3,7 +3,7 @@ title: Upgrade Portworx on Kubernetes
 linkTitle: Upgrade
 weight: 2
 hidesections: true
-keywords: portworx, container, Kubernetes, upgrade, update, storage, Docker, k8s, flexvol, pv, persistent disk
+keywords: Upgrade, upgrading, OCI, talisman, Kubernetes, k8s
 description: Steps on how to upgrade Portworx on Kubernetes
 noicon: true
 series: k8s-op-maintain
@@ -152,7 +152,7 @@ fi
 curl -fsL https://install.portworx.com/2.3/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
 ```
 
-## Troubleshooting {#troubleshooting}
+## Troubleshooting
 
 #### Find out status of Portworx pods
 

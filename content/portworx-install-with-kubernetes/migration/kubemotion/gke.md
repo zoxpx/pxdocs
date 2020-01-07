@@ -1,6 +1,6 @@
 ---
 title: "Kubemotion with Stork on GKE"
-keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion, gke
+keywords: migration, migrate, PX-Motion, GKE, Google Kubernetes Engine, k8s, gcloud, Stork, cloud
 description: How to migrate stateful appliations to GKE
 hidden: true
 ---

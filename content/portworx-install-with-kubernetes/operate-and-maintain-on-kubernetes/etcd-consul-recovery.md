@@ -1,7 +1,7 @@
 ---
-title: "Etcd/Consul Recovery"
+title: Etcd/Consul Recovery
 hidden: true
-keywords: disaster recovery, disaster proof, site failure, node failure, power failure, etcd failure
+keywords: etcd, consul, disaster recovery, disaster proof, site failure, node failure, power failure, kubernetes, k8s
 description: Etcd Disaster Recovery
 ---
 

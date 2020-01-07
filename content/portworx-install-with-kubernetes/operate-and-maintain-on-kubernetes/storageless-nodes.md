@@ -1,7 +1,7 @@
 ---
 title: "Storageless nodes with Portworx Enterprise"
 hidden: true
-keywords: zero storage
+keywords: zero storage, storage-less, kubernetes, k8s
 description: Run PX-Enterprise so the storage in a Portworx cluster is consumed by apps running on nodes without storage. Learn how to add a new node with no storage today!
 ---
 

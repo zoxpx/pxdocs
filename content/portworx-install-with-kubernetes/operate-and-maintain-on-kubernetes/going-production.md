@@ -1,7 +1,7 @@
 ---
-title: "Production Readiness"
+title: Production Readiness
 hidden: true
-keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
+keywords: production ready, operations guide, run book, kubernetes, k8s
 description: Are you ready for production?
 ---
 

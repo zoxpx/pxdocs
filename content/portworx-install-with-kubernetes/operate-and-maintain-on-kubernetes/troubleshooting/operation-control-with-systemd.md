@@ -1,6 +1,6 @@
 ---
 title: Operation control with systemd
-keywords: portworx, kubernetes, systemd
+keywords: Troubleshoot, debugging, systemctl, Kubernetes, k8s, systemd
 description: How to perform systemctl operations using Portworx systemd service.
 weight: 9
 ---

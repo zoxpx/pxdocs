@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Operations (KOPS)
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, KOPS, pv, persistent disk, aws, EBS
+keywords: Install, on cloud, KOPS, Kubernetes Operations, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on a Kubernetes KOPS cluster running on AWS.
 weight: 3
 noicon: true

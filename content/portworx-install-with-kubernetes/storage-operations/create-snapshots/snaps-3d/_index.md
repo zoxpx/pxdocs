@@ -1,7 +1,7 @@
 ---
 title: Configuring 3DSnaps
 weight: 3
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+keywords: 3dsnaps, snapshots, stork, kubernetes, k8s,
 description: Learn to take a 3DSnaps of a volume.
 ---
 

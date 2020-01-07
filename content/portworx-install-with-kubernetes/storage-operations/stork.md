@@ -1,7 +1,7 @@
 ---
-title: "Using Stork with Portworx"
+title: Using Stork with Portworx
 hidden: true
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, hci, hyperconvergence, snapshot
+keywords: stork, kubernets, k8s
 description: How to use Portwork's Stork for storage scheduling in Kubernetes.
 ---
 
@@ -13,6 +13,7 @@ easier to create and restore snapshots of Portworx volumes
 Stork consists of 2 components, the Stork scheduler and an extender. Both of these componenets run in HA mode with 3 replicas by default.
 
 ## Install
+
 ### Install using the Portworx spec generator
 When installing Portworx through the Portworx spec generator page in [PX-Central](https://central.portworx.com),
 you can select Stork to be installed along with Portworx.
