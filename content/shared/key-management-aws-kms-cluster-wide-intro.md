@@ -1,4 +1,7 @@
 ---
+title: Shared content for all AWS-KMS secret docs - cluster wide intro
+keywords: AWS, KMS, Amazon Web Services, Key Management Service, encryption
+description: Shared content for all AWS-KMS secret docs - cluster wide intro
 hidden: true
 ---
 
@@ -15,7 +18,7 @@ To create new volumes using that same secret you will need to follow the previou
 Again, existing volumes created with cluster wide, will still work without providing `portworx_secret`.
 
 {{<info>}}
-**NOTE**: For newer volumes if you do not provide any secret key, they will use per volume encryption and will **NOT** default to using cluster wide secret
+For newer volumes if you do not provide any secret key, they will use per volume encryption and will **NOT** default to using cluster wide secret
 {{</info>}}
 
 

@@ -1,4 +1,7 @@
 ---
+title: Shared content for all Kubernetes secrets docs - encrypted storage class spec
+keywords: Kubernetes Secrets, k8s
+description: Shared content for all Kubernetes secret docs - encrypted storage class spec
 hidden: true
 ---
 

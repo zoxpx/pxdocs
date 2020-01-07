@@ -1,7 +1,7 @@
 ---
 title: Secret Store management
 logoList: true
-keywords: Portworx, containers, storage
+keywords: Portworx, containers, storage, secret store provider, supported secret providers, cloud snapshots, encryption,
 description: Learn about secret store management.
 weight: 8
 disableprevnext: true

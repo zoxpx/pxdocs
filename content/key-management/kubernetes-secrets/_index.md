@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Secrets
 logo: /logos/other.png
-keywords: portworx, containers, storage, kubernetes
+keywords: Kubernetes Secrets, k8s, encryption keys, secrets, Volume Encryption, Cloud Credentials, secret store
 description: Instructions on using Kubernetes secrets with Portworx
 weight: 4
 disableprevnext: true
@@ -85,7 +85,7 @@ Add the `"-secret_type", "k8s"` arguments to the `portworx` container in the dae
 
 Editing the daemonset will also restart all the Portworx pods.
 
-## Creating secrets with Kubernetes {#creating-secrets-with-kubernetes}
+## Creating secrets with Kubernetes
 
 The following section describes the key generation process with Portworx and Kubernetes which can be used for encrypting volumes.
 

@@ -1,7 +1,7 @@
 ---
 title: (Other Schedulers) Encrypting Portworx Volumes using IBM Key Protect
 weight: 2
-keywords: Portworx, IBM, IBM Key Protect, containers, storage, encryption
+keywords: IBM Key Protect, encrypt volume, other schedulers, non-kubernetes
 description: Instructions on using IBM Key Protect with Portworx for encrypting Portworx Volumes
 noicon: true
 series: ibm-key-protect-uses

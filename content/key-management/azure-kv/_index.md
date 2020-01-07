@@ -1,7 +1,7 @@
 ---
 title: Azure Key Vault
 logo: /logos/azure-log.png
-keywords: portworx, containers, storage, vault
+keywords: Key Vault Secrets, Microsoft Azure Secrets, Volume Encryption, Cloud Credentials, passwords
 description: Instructions on using Azure key vault(Secrets) with Portworx
 weight: 7
 disableprevnext: true
@@ -11,7 +11,7 @@ noicon: true
 
 Portworx can integrate with Azure Key Vault [Secrets](https://docs.microsoft.com/en-us/azure/key-vault/about-keys-secrets-and-certificates#key-vault-secrets) to store your encryption secrets, credentials or passwords. This guide will get a Portworx cluster connected to a Azure Key Vault. The Azure Key Vault could be used to store secrets that will be used for encrypting volumes.
 
-## Setting up Azure Key Vault {#setting-up-azure-kv}
+## Setting up Azure Key Vault
 
 Peruse [this section](https://docs.microsoft.com/en-us/azure/key-vault/quick-create-portal) for help on setting up Azure Key Vault in your setup.
 You will also require to register and authenticate application with Azure Key Vault.
@@ -39,7 +39,7 @@ If you are installing Portworx on Kubernetes, when generating the Portworx Kuber
 To generate Portworx spec for Kubernetes, refer instructions, [click here](/portworx-install-with-kubernetes).
 
 
-### Other users {#other-users}
+### Other users
 
 #### New installation
 
@@ -56,7 +56,7 @@ Based on your installation method provide the `-secret_type azure-kv` input argu
 **Note**:
 <br>
 Portworx supports only the [Azure KeyVault Secrets](https://docs.microsoft.com/en-us/azure/key-vault/about-keys-secrets-and-certificates#key-vault-secrets)
-<br>
+
 Portworx does not support [Azure KeyVault Keys soft/hard](https://docs.microsoft.com/en-us/azure/key-vault/about-keys-secrets-and-certificates#key-vault-keys)
 {{</info>}}
 
