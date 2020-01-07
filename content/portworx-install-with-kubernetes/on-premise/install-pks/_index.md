@@ -2,7 +2,7 @@
 title: PKS
 logo: /logos/pks.png
 weight: 2
-description: Install PKS environment correctly.
+description: Install, on-premise, PKS, Pivotal Container Service, kubernetes, k8s, air gapped
 keywords: portworx, PKS, kubernetes
 noicon: true
 ---

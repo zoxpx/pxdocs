@@ -2,7 +2,7 @@
 title: Kubernetes Snapshots and Backups
 linkTitle: Snapshots and Backups
 weight: 5
-keywords: portworx, kubernetes, PVCs
+keywords: snapshots, backups, concepts, kubernetes, k8s, PVC
 description: Learn essential concepts about snaphots and backups of volumes on Kubernetes
 series: k8s-101
 ---

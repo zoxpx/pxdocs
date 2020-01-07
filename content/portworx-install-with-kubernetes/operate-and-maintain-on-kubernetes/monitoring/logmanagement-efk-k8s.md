@@ -1,7 +1,7 @@
 ---
 title: Logging Portworx on Kubernetes
 linkTitle: Logging
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, elastic, fluentd, elastic search, kibana, cluster logging, log management
+keywords: logging, log management, Kubernetes, k8s, Elastic Search, Kibana, Fluentd
 description: Portworx logs management on Kubernetes using Elastic Search, Kibana, and Fluentd.
 ---
 

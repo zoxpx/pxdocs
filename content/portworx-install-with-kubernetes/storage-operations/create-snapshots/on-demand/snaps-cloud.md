@@ -1,8 +1,8 @@
 ---
 title: Create and use cloud snapshots
 weight: 2
-linkTitle: "Cloud snapshots"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones, cloud, cloudsnap
+linkTitle: Cloud snapshots
+keywords: cloud snapshots, cloud snaps, stork, kubernetes, k8s
 description: Learn to take a cloud snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod. Try today!
 ---
 

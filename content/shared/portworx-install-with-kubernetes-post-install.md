@@ -1,8 +1,8 @@
 ---
-title: Shared
+title: Shared content for install Portworx with Kubernetes - post install
 hidden: true
-description: Learn how to install Portworx with Kubenetes
-keywords: portworx, kubernetes
+description: Shared content for install Portworx with Kubernetes - post install
+keywords: Post install, kubernetes, k8s
 ---
 
 ## Post-Install

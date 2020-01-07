@@ -3,7 +3,7 @@ title: Air-gapped clusters
 linkTitle: Air-gapped clusters
 weight: 99
 logo: /logos/other.png
-keywords: portworx, container, kubernetes
+keywords: Install, on-premise, kubernetes, k8s, air gapped
 description: How to install Portworx in an air-gapped Kubernetes cluster
 noicon: true
 ---

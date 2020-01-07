@@ -2,7 +2,7 @@
 title: Cloud backups for single PVCs
 weight: 2
 hidden: true
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones, cloud, cloudsnap
+keywords: cloud backup, single PVC, stork, cloudsnaps, kubernetes, k8s
 description: Instructions for backing up a PVC with consistency to cloud and restore PVCs from the backup
 series: k8s-cloud-snap
 ---

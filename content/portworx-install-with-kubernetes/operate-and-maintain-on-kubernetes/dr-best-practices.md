@@ -1,7 +1,7 @@
 ---
 title: Portworx Disaster Recovery
 hidden: true
-keywords: disaster recovery, disaster proof, site failure, node failure, power failure
+keywords: disaster recovery, disaster proof, site failure, node failure, power failure, application error, kubernetes, k8s
 description: Disaster Recovery Best Practices for Production Deployments.
 ---
 

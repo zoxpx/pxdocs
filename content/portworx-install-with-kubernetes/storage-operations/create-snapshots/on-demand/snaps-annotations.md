@@ -1,7 +1,7 @@
 ---
 title: Creating a PVC from a snapshot
 hidden: true
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones, pvc
+keywords: create pvc from snapshot, snapshots, annotations, kubernetes, k8s
 description: Learn to take a snapshot of a volume from a Kubernetes persistent volume claim (PVC) using annotations and use that snapshot as the volume for a new pod.
 ---
 
@@ -15,6 +15,7 @@ The suggested way to manage snapshots on Kuberenetes is now to use Stork. Instru
 ## Managing snapshots through kubectl
 
 ### Taking periodic snapshots on a running POD
+
 When you create the Storage Class, you can specify a snapshot schedule on the volume as specified below:
 
 ```text

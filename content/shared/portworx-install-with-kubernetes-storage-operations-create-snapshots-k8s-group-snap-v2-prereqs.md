@@ -1,4 +1,7 @@
 ---
+title: Shared content for Kubernetes snapshots - group snaps v2
+description: Shared content for Kubernetes snapshots - group snaps v2
+keywords: snapshots, kubernetes, k8s
 hidden: true
 ---
 

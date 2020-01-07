@@ -1,7 +1,7 @@
 ---
 title: Auto-Scaling Groups (ASG)
 weight: 1
-keywords: portworx, AWS, CloudFormation, ASG, Auto Scaling, Kubernetes
+keywords: Install, on cloud, ASG, Auto-Scaling Groups, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on an AWS cluster which uses autoscaling groups (ASG).
 noicon: true
 series: px-k8s

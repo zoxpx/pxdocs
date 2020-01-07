@@ -1,7 +1,7 @@
 ---
 title: Uninstall from Kubernetes cluster
 weight: 2
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+keywords: Uninstall, air gapped, Kubernetes, k8s
 meta-description: Steps to uninstall Portworx from a Kubernetes cluster
 description: Steps to uninstall Portworx from the entire Kubernetes cluster
 series: k8s-uninstall
@@ -39,7 +39,7 @@ Before running the above wipe job, ensure that the Portworx spec is applied on y
 If you are wiping off the cluster to re-use the nodes for installing a brand new Portworx cluster, make sure you use a different ClusterID in the DaemonSet spec file \(ie. `-c myUpdatedClusterID`\).
 {{</info>}}
 
-### Uninstall {#uninstall}
+### Uninstall
 
 {{<info>}}Uninstalling or deleting the Portworx daemonset only removes the Portworx containers from the nodes. As the configurations files which Portworx use are persisted on the nodes the storage devices and the data volumes are still intact. These Portworx volumes can be used again if the Portworx containers are started with the same configuration files.{{</info>}}
 

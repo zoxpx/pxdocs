@@ -1,4 +1,7 @@
 ---
+title: Shared content for Kubernetes snapshots - restore PVC from snap
+description: Shared content for Kubernetes snapshots - restore PVC from snap
+keywords: snapshots kubernetes, k8s
 hidden: true
 ---
 

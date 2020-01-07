@@ -1,7 +1,7 @@
 ---
-title: "Etcd"
+title: Etcd
 hidden: true
-keywords: etcd, portworx, maintenance, kvdb
+keywords: etcd configuration, high availability, kubernetes, k8s
 description: ETCD configuration for Portworx.
 ---
 
@@ -41,7 +41,7 @@ Etcd provides multiple knobs to fine tune the cluster based on your needs. We re
 #### Compaction
 
 etcd keeps an exact history of its keyspace, this history should be periodically compacted to avoid performance degradation and eventual storage space exhaustion. Regular compaction ensures that the memory usage of the etcd process is under check.
-The keyspace can be compacted automatically with etcd's time windowed history retention policy, or manually with ``etcd``
+The keyspace can be compacted automatically with etcd's time windowed history retention policy, or manually with `etcd`.
 
 We recommend keeping history for last 3 hours. While setting up etcd you can specify the retention policy in the following way:
 

@@ -1,7 +1,7 @@
 ---
-title: "Manage Users"
+title: Manage Users
 hidden: true
-keywords: portworx, px-enterprise, users, user admin
+keywords: user management, administration, kubernetes, k8s
 description: Want to create a new user or manage an existing one in Portworx Lighthouse? Follow these steps today.
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: Create and use local snapshots
 weight: 1
-linkTitle: "Local snapshots"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+linkTitle: Local snapshots
+keywords: local snapshots, stork, kubernetes, k8s
 description: Learn to take a snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod.
 ---
 

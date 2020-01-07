@@ -1,7 +1,7 @@
 ---
 title: Uninstall Portworx using a Nomad job
 linkTitle: Uninstall Portworx using a Nomad job
-keywords: portworx, container, Nomad, storage,
+keywords: Uninstall, Nomad, kubernetes, k8s
 description: Learn how to uninstall Portworx using a Nomad job.
 weight: 2
 series: px-as-a-nomad-job
@@ -24,7 +24,7 @@ There are two steps to completely uninstall Portworx from Nomad:
 
 To remove the Portworx job, run the following command:
 
-```
+```text
 nomad job stop -purge portworx
 ```
 

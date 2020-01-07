@@ -2,7 +2,7 @@
 title: PKS (cloud)
 linkTitle: PKS
 logo: /logos/pks.png
-keywords: portworx, kubernetes, PKS
+keywords: Install, PKS, Pivotal Container Service, Kubernetes, k8s, Bosh Director
 description: How to install and manage PKS
 weight: 4
 noicon: true

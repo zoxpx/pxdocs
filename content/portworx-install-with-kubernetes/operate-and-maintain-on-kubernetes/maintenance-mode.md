@@ -1,7 +1,7 @@
 ---
-title: "Maintenance Commands"
+title: Maintenance Commands
 hidden: true
-keywords: service, maintenance, drive removal, drive replacement, pool list, pool priority
+keywords: service, maintenance, drive removal, drive replacement, pool list, pool priority, kubernetes, k8s
 description: Explore commands needed for maintenance operations using Portworx.  Try today!
 ---
 

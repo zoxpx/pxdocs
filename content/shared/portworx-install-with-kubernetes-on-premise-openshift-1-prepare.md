@@ -1,7 +1,7 @@
 ---
 title: Shared
 hidden: true
-keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
+keywords: Install, on-premise, OpenShift, kubernetes, k8s, air gapped
 description: Shared content about Portworx installation in OpenShift
 ---
 

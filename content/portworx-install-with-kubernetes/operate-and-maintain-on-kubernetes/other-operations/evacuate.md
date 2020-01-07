@@ -1,6 +1,6 @@
 ---
-title: "Evacuating a Portworx node"
-keywords: evacuate, evacuation, drain, portworx, kubernetes
+title: Evacuating a Portworx node
+keywords: evacuate, evacuation, drain, kubernetes, k8s
 description: Evacuating a Portworx node.
 ---
 
@@ -36,4 +36,3 @@ pxctl volume ha-update --repl 3 <volume> --node <newNodeID>
 kubectl get pods -o wide | grep <node>
 kubectl delete pod <pod>
 ```
-

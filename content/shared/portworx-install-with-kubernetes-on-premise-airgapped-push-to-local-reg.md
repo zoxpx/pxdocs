@@ -1,4 +1,7 @@
 ---
+title: Air gapped installs - push to local
+keywords: Install, on-premise, kubernetes, k8s, air gapped
+description: Air gapped installs - push to local
 hidden: true
 ---
 

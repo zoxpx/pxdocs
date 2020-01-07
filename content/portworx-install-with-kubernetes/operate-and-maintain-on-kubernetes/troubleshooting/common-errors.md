@@ -1,11 +1,11 @@
 ---
 title: Common errors
 weight: 2
-keywords: portworx, troubleshoot, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, debug
+keywords: Troubleshoot, common errors, Kubernetes, k8s
 description: Common errors
 ---
 
-### Common errors {#common-errors}
+### Common errors
 
 * Failed DNS resolution:
   * If you encounter the following error:

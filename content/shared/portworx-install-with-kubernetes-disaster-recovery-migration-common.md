@@ -1,4 +1,7 @@
 ---
+title: Kubernetes disaster recovery and migration docs - migration common
+description: Kubernetes disaster recovery and migration docs - migration common
+keywords: Disaster recovery, Migration, kubernetes, k8s
 hidden: true
 ---
 

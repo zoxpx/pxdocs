@@ -3,7 +3,7 @@ title: All other
 linkTitle: All other
 weight: 3
 logo: /logos/other.png
-keywords: portworx, container, kubernetes
+keywords: Install, on-premise, kubernetes, k8s, air gapped
 description: How to install Portworx with Kubernetes
 noicon: true
 series2: k8s-airgapped

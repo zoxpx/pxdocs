@@ -3,7 +3,7 @@ title: On-demand snapshots
 weight: 2
 hidesections: true
 linkTitle: On-demand snapshots
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+keywords: on-demand snapshots, local snapshots, cloud snapshots, stork, kubernetes, k8s
 description: Learn how to create on-demand consistent snapshots/backups and restore them.
 series: k8s-storage-snapshots
 ---

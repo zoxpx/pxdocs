@@ -1,7 +1,7 @@
 ---
 title: Synchronous DR for Kubernetes
 linkTitle: Metro DR
-keywords: cloud, backup, restore, snapshot, DR, migration, px-metro
+keywords: Synchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: How to achieve DR across two Kubernetes clusters spanning a Metropolitan Area Network (MAN)
 weight: 1
 ---

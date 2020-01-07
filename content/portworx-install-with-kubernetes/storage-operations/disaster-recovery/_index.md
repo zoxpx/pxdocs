@@ -1,6 +1,6 @@
 ---
-title: "Using Velero with Portworx"
-keywords: portworx, container, Kubernetes, storage, k8s, pv, persistent disk, snapshot, velero, ark
+title: Using Velero with Portworx
+keywords: velero, disaster recovery, snapshots, persisten volumes, kubernetes, k8s, heptio ark,
 description: Learn how the Portworx plugin for Velero can help with disaster recovery in your Kubernetes clusters
 weight: 7
 noicon: true

@@ -1,4 +1,7 @@
 ---
+title: Shared content for Kubernetes snapshots - cassandra steps 1 & 2
+description: Shared content for Kubernetes snapshots - cassandra steps 1 & 2
+keywords: snapshots, cassandra, kubernetes, k8s
 hidden: true
 ---
 

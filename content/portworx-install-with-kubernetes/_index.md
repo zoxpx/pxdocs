@@ -5,7 +5,7 @@ hidesections: true
 description: Documentation on using Portworx in Kubernetes environments
 series: top
 icon: /img/banner__kubernetes.png
-keywords: portworx, kubernetes, container, storage
+keywords: portworx, kubernetes, k8s, container, storage
 ---
 
 ## Try without installing

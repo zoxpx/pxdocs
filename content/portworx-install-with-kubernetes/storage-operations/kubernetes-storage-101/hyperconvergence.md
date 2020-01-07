@@ -1,7 +1,7 @@
 ---
 title: Hyperconvergence
 weight: 4
-keywords: portworx, kubernetes, PVCs
+keywords: Hyperconvergence, concepts, kubernetes, k8s
 description: Learn essential concepts about keeping your applications hyperconverged with their data
 series: k8s-101
 ---

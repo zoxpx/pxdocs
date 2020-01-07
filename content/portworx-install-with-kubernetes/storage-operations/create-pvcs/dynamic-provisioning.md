@@ -2,7 +2,7 @@
 title: Dynamic Provisioning of PVCs
 weight: 1
 linkTitle: Dynamic Provisioning of PVCs
-keywords: portworx, storage class, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk,StatefulSets
+keywords: dynamic provisioning, PVC, storage class, StatefulSets, Kubernetes, k8s
 description: Learn how to use dynamically provisioned Portworx volumes with Kubernetes
 series: k8s-vol
 ---
