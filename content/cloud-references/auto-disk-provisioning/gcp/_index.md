@@ -1,7 +1,7 @@
 ---
 title: Disk Provisioning on Google Cloud Platform (GCP)
 description: This page describes how to setup a production ready Portworx cluster in a Google Cloud Platform (GCP).
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
+keywords: Automatic Disk Provisioning, Dynamic Disk Provisioning, GCP, Google Cloud Platform
 weight: 2
 linkTitle: GCP
 noicon: true
@@ -15,7 +15,7 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 
 **Key-value store**
 
-Portworx uses a key-value store for it's clustering metadata. Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
+Portworx uses a key-value store for its clustering metadata. Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
 
 **Firewall**
 
@@ -41,7 +41,7 @@ If you used an account file above, you will have to configure the Portworx insta
 
 If you installing on Kuberenetes, you can use a secret to mount `/etc/pwx/gcp.json` into the Portworx Daemonset and then expose `GOOGLE_APPLICATION_CREDENTIALS` as an env in the Daemonset.
 
-Follow [these instructions](./) to install Portworx based on your container orchestration environment.
+Follow [these instructions](/) to install Portworx based on your container orchestration environment.
 
 ### Disk template
 

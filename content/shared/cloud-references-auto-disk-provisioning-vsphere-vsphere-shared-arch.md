@@ -1,7 +1,7 @@
 ---
 title: Portworx VMware shared architecture
 description: Portworx VMware shared architecture
-keywords: portworx, VMware, vSphere ASG
+keywords: Shared datastore, Automatic Disk Provisioning, Dynamic Disk Provisioning, VMWare, vSphere ASG, Kubernetes, k8s
 hidden: true
 ---
 
