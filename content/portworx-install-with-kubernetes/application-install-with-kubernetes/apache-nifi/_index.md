@@ -7,7 +7,7 @@ weight: 9
 noicon: true
 ---
 
-This article shows how you can create and run an Apache NiFi production ready cluster on Kubernetes, which stores data on Portworx volumes.
+This article shows how you can create and run an Apache NiFi production-ready cluster, which stores data on Portworx volumes, on Kubernetes with Zookeeper.
 
 ## Prerequisites
 
@@ -59,9 +59,9 @@ ip-70-0-15-200.brbnca.spcsdns.net   Ready    <none>   9d    v1.14.1   70.0.15.20
     chmod +x /usr/local/bin/vortex
     ```
 
-## Install Apache Nifi
+## Install Apache NiFi
 
-1. Clone the repository, which contains all the required specs:
+Clone the repository, which contains all the required specs:
 
     ```text
     git clone https://github.com/portworx/pxdocs.git
@@ -70,7 +70,6 @@ ip-70-0-15-200.brbnca.spcsdns.net   Ready    <none>   9d    v1.14.1   70.0.15.20
     ```text
     cd pxdocs/static/samples/k8s/apache-nifi
     ```
-    <!-- why are we changing directories? should this have happened *before* we cloned? or are we changing directories for the next step? -->
 
 ## Deploy Zookeeper
 
@@ -81,7 +80,7 @@ ip-70-0-15-200.brbnca.spcsdns.net   Ready    <none>   9d    v1.14.1   70.0.15.20
     kubectl create -f deployment/
     ```
 
-2. Check the Zookeeper pods' status:
+2. Check the Zookeeper pods' status by entering the following `kubectl get` command:
 
     ```text
 kubectl get pod -n zk
@@ -93,7 +92,7 @@ pod/zk-1   1/1     Running   0          58m
 pod/zk-2   1/1     Running   0          58m
     ```
 
-3. Check Zookeeper services status:
+3. Check the Zookeeper service status by entering the folling `kubectl get` command:
 
     ```text
 kubectl get service -n zk
@@ -104,11 +103,11 @@ service/zk-cs   ClusterIP   10.104.1.184   <none>        2181/TCP            58m
 service/zk-hs   ClusterIP   None           <none>        2888/TCP,3888/TCP   58m    
     ```
 
-    Check Zookeeper pvc's are provisioned from `portworx-nifi-sc` storage class:
+4. Verify that the Zookeeper PVCs are provisioned from the `portworx-nifi-sc` storage class by entering the following `kubectl get` command:
+
     ```text
 kubectl get pvc -n zk
     ```
-
     ```output
 NAME           STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS       AGE
 datadir-zk-0   Bound    pvc-933111a7-86f2-11e9-916b-000c29a48cb7   10Gi       RWO            portworx-nifi-sc   63m
@@ -116,7 +115,7 @@ datadir-zk-1   Bound    pvc-9332cd05-86f2-11e9-916b-000c29a48cb7   10Gi       RW
 datadir-zk-2   Bound    pvc-9335766d-86f2-11e9-916b-000c29a48cb7   10Gi       RWO            portworx-nifi-sc   63m
     ```
 
-    Check Zookeeper is operational:
+5. Verify that Zookeeper is operational by entering the following `kubectl exec` commands:
 
     ```text
 kubectl exec zk-0 cat /opt/zookeeper/conf/zoo.cfg --namespace=zk
@@ -124,28 +123,31 @@ kubectl exec zk-0 zkCli.sh create /hello tushar  --namespace=zk
 kubectl exec zk-0 zkCli.sh get /hello  --namespace=zk
     ```
 
-3. Deploy Nifi cluster
+## Deploy your NiFi cluster
 
-    From the apache-nifi directory run:
+1. From the apache-nifi directory run:
+
     ```text
     ./build_environment.sh default
     ```
 
-    Create the nifi namespace:
+2. Create the NiFi namespace:
+
     ```text
     kubectl create namespace nifi
     ```
 
-    Apply the specs which creates pods, services and pvc's:
+3. Apply the specs to create pods, services, and pvc's:
+
     ```text
     kubectl create -f deployment/ -n nifi
     ```
 
-    Check the nifi pods,service and pvc status:
+4. Check the NiFi pods, service, and pvc statuses:
+
     ```text
     kubectl get pods -n nifi
     ```
-
     ```output
 NAME      READY     STATUS    RESTARTS   AGE
 nifi-0    1/1       Running   0          25m
@@ -156,7 +158,6 @@ nifi-2    1/1       Running   0          25m
     ```text
 kubectl get service -n nifi                
     ```
-
     ```output
 NAME        TYPE           CLUSTER-IP     EXTERNAL-IP                          PORT(S)                      AGE
 nifi        ClusterIP      None           <none>                               8081/TCP,2881/TCP,2882/TCP   52m
@@ -168,11 +169,11 @@ nifi-4      ExternalName   <none>         nifi-4.nifi.nifi.svc.cluster.local   <
 nifi-http   NodePort       10.107.71.85   <none>                               8080:31638/TCP               52m
     ```
 
-    Check all the pods of nifi cluster are using pvc's provisioned from `portworx-nifi-sc` storage class.
+    Check all the pods of NiFi cluster are using pvc's provisioned from `portworx-nifi-sc` storage class.
+
     ```text
 kubectl get pvc -n nifi
     ```
-
     ```output
 NAME                          STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 contentrepository-nifi-0      Bound     pvc-c00b39d5-4710-11e9-b1b0-42010a800055   5Gi        RWO            portworx-nifi-sc       1d
@@ -189,7 +190,7 @@ provenancerepository-nifi-1   Bound     pvc-c0132c86-4710-11e9-b1b0-42010a800055
 provenancerepository-nifi-2   Bound     pvc-c01aec6b-4710-11e9-b1b0-42010a800055   5Gi        RWO            portworx-nifi-sc       1d
     ```
 
-4. Once the everything is up and running NiFi user interface is accessible here:
+5. Once the everything is up and running, you can access the NiFi user interface at the following URL:
 
     ```text
     http://<ANY_WORKER_NODE_IP>:<NIFI_HTTP_NODE_PORT>/nifi/
