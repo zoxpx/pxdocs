@@ -1,15 +1,17 @@
 ---
-title: Role management using pxctl
-linkTitle: Role
-keywords: pxctl, command-line tool, cli, reference, roles, authorization, authentication, login, token, OIDC, self-signed token, context, generate, security, system.user, system.admin, system.view, custom role
-description: Learn to enable auth in your px cluster
+title: RBAC role management using pxctl
+linkTitle: RBAC Roles
+keywords: portworx, container, Kubernetes, storage, role, roles, rbac authorization, authentication, login, token, context, generate, security, role, system.user, system.admin, system.view
+description: RBAC role management using pxctl
 weight: 20
 ---
 
 ## Overview
-This document outlines how to manage your own custom roles for fine-grained access control within your Portworx clusters.
+
+Starting with version 2.1, Portworx introduced support for RBAC. This document outlines how to manage your own custom roles for fine-grained access control within your Portworx clusters.
 
 ## Default Roles
+
 Portworx comes with a few standard roles that you can use when issuing tokens to users:
 
 *   __system.admin:__ can run any command
@@ -17,6 +19,7 @@ Portworx comes with a few standard roles that you can use when issuing tokens to
 *   __system.user:__ can only access volume lifecycle commands
 
 ## Custom Roles
+
 `pxctl role` gives you more fine-grained control over what users can do within your clusters. Let’s get a feel of the available commands by running:
 
 ```text
@@ -24,7 +27,7 @@ pxctl role --help
 ```
 
 ```output
-Portworx pxctl authorization role commands. Roles define permission rules for users capabilities.
+Portworx pxctl authorization role commands.  Roles define permission rules for users capabilities.
 
 Usage:
   pxctl role [flags]
@@ -54,6 +57,7 @@ Use "pxctl role [command] --help" for more information about a command.
 ```
 
 ### Creating a custom role from a JSON file
+
 To define a custom role, you should first create a `JSON` file that describes that role. Say you've created a file named `role.json`. Then, to create the custom role, you will have to run this command:
 
 ```text
@@ -115,6 +119,7 @@ Global Flags:
 ```
 
 #### Role configuration
+
 A role configuration is comprised of a name and a list of rules. Each rule has the following:
 
 * __Services:__ Which services you want to provide access to.
@@ -158,8 +163,7 @@ To see all services and APIs you can use within your custom roles, see our [API 
 ## Using your custom roles
 Once you've created your custom roles, you can simply add the role names during token generation/user management.
 
-* For OIDC, see your provider documentation on how to add the `roles` identifier to your tokens.
- {{<info>}}Some OIDC providers have differently scoped roles at the system or user level. Please ensure that you've added the roles at the base level of the token.{{</info>}}
+* For OIDC, see your provider documentation on how to add the `roles` identifier to your tokens. __Note:__ Some OIDC providers have differently scoped roles at the system or user level. Please ensure that you've added the roles at the base level of the token.
 * For self-signed tokens, add the custom role in your auth-config during token creation:
 
 ```
