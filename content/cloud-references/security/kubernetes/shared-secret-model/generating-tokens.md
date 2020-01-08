@@ -7,14 +7,12 @@ series: ra-shared-secrets-model
 
 Now that the system is up and running you can create tokens.
 
-<!-- This should probably just be in a task:
-You will need to ssh to one of the nodes to use `pxctl` to generate tokens.
--->
-
 {{<info>}}
 If you want to create your own application to generate tokens, you
 can base it on the `libopenstorage` open source golang example application [openstorage-sdk-auth](https://github.com/libopenstorage/openstorage-sdk-auth).
 {{</info>}}
+
+SSH to one of your nodes and follow the steps below to use `pxctl` to generate tokens:
 
 ## Create user files
 
