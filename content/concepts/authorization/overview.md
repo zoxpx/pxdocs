@@ -80,7 +80,7 @@ which must contain the name of an existing role, either a default (built-in) rol
 custom role registered in the Portworx system.
 
 A role is the name given to a set of RBAC rules which enable access to certain SDK
-calls. Custom roles can be created using `pxctl` or through the [OpenStorage SDK](https://libopenstorage.github.io/w/release-6.1.generated-api.html#serviceopenstorageapiopenstoragerole).
+calls. Custom roles can be created using `pxctl` or through the [OpenStorage SDK](https://libopenstorage.github.io/w/release-6.3.generated-api.html#serviceopenstorageapiopenstoragerole).
 
 See also [Role management using pxctl](/reference/cli/role)
 
