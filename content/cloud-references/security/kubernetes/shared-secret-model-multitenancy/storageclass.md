@@ -7,7 +7,7 @@ weight: 40
 # StorageClass for CSI
 
 The following CSI StorageClass enables your tenants to create volumes
-using their token stored in a secret in the their namespace.
+using their token stored in a secret in their namespace.
 
 When using CSI, the storage class references the secret for the three types of supported
 operations:
@@ -34,4 +34,4 @@ allowVolumeExpansion: true
 ```
 
 Note the value `${pvc.namespace}`. This will ensure that the CSI controller
-gets appropriate token which is tied to the namespace of the PVC.
+gets the appropriate token, which is tied to the namespace of the PVC.

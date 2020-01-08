@@ -48,7 +48,7 @@ used for `pxctl` to manage Portworx
 
 2. Create a token for the storage administrator using `admin.yaml`. In the example below:
 
-    * The issuer matches the setting in the Portworx manifest of `portworx.com` as set the value for `-jwt-issuer`.
+    * The issuer matches the setting in the Portworx manifest of `portworx.com` as the set value for `-jwt-issuer`.
     * The example sets the duration of the token to one year -- You may want to adjust it to a much shorter duration if you plan on refreshing the token often.
 
     ```text
@@ -114,7 +114,7 @@ You can find more information on the rules of each of the value on the
       generic px-k8s-user --from-literal=auth-token=$TENANT_TOKEN
     ```
 
-Kubernetes storage classes can now be setup to use this secret to
+Kubernetes storage classes can now be set up to use this secret to
 get access to the token to communicate with Portworx.
 
 Once you have completed the steps in this section, continue to the **Set up the StorageClass**
