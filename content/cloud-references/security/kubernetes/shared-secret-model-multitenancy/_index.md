@@ -17,7 +17,9 @@ The following reference architecture provides a model where volume access
 is authenticated using tokens stored in the secret of the namespace of the
 tenant.
 
-This solution is currently supported in **CSI** only.
+{{<info>}}
+**NOTE:** This solution is currently supported in **CSI** only.
+{{</info>}}
 
 # Prerequisites
 

@@ -1,16 +1,20 @@
 ---
-title: StorageClass setup
+title: "Step 4: Set up the StorageClass"
 keywords: storageclass, csi, security, authorization
 weight: 40
 ---
 
 # StorageClass for CSI
 
-The following CSI StorageClass will enable your tenants to create volumes
-using their token stored in a secret in the their namespace. When using CSI,
-the storage class references the secret for the three types of supported
-operations: _provision_, _node-publish_ (mount/unmount), and
-_controller-expand_.
+The following CSI StorageClass enables your tenants to create volumes
+using their token stored in a secret in the their namespace.
+
+When using CSI, the storage class references the secret for the three types of supported
+operations:
+
+* _provision_
+* _node-publish_ (mount/unmount)
+* _controller-expand_
 
 ```text
 apiVersion: storage.k8s.io/v1
@@ -31,6 +35,3 @@ allowVolumeExpansion: true
 
 Note the value `${pvc.namespace}`. This will ensure that the CSI controller
 gets appropriate token which is tied to the namespace of the PVC.
-
-Once you have completed the steps in this section continue to the next
-section.
