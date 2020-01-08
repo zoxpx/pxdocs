@@ -1,22 +1,25 @@
 ---
-title: Role management using pxctl
-linkTitle: Role
-keywords: portworx, container, Kubernetes, storage, role, roles, authorization, authentication, login, token, context, generate, security, role, system.user, system.admin, system.view
-description: Learn to enable auth in your px cluster
+title: RBAC role management using pxctl
+linkTitle: RBAC Roles
+keywords: portworx, container, Kubernetes, storage, role, roles, rbac authorization, authentication, login, token, context, generate, security, role, system.user, system.admin, system.view
+description: RBAC role management using pxctl
 weight: 20
 ---
 
 ## Overview
-This document outlines how to manage your own custom roles for fine-grained access control within your _PX_ clusters.
+
+Starting with version 2.1, Portworx introduced support for RBAC. This document outlines how to manage your own custom roles for fine-grained access control within your Portworx clusters.
 
 ## Default Roles
-_PX_ comes with a few standard roles that you can use when issuing tokens to users:
+
+Portworx comes with a few standard roles that you can use when issuing tokens to users:
 
 *   __system.admin:__ can run any command
 *   __system.view:__ can only run read-only commands
 *   __system.user:__ can only access volume lifecycle commands
 
 ## Custom Roles
+
 `pxctl role` gives you more fine-grained control over what users can do within your clusters. Let’s get a feel of the available commands by running:
 
 ```text
@@ -54,6 +57,7 @@ Use "pxctl role [command] --help" for more information about a command.
 ```
 
 ### Creating a custom role from a JSON file
+
 To define a custom role, you should first create a `JSON` file that describes that role. Say you've created a file named `role.json`. Then, to create the custom role, you will have to run this command:
 
 ```text
@@ -115,6 +119,7 @@ Global Flags:
 ```
 
 #### Role configuration
+
 A role configuration is comprised of a name and a list of rules. Each rule has the following:
 
 * __Services:__ Which services you want to provide access to.

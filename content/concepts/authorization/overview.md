@@ -1,14 +1,18 @@
 ---
-title: Overview
-description: Explanation on the security model used in Portworx
+title: RBAC Overview
+description: Explanation on the RBAC security model used by Portworx
 keywords: portworx, security, ownership, tls, rbac, claims, jwt, oidc
 weight: 10
 series: authorization
 ---
 
-From version 2.1, Portworx has support for security. This document provides a high-level overview of the different components used to secure Portworx.
+Portworx has always provided support for volume encryption in order to keep data secure. Starting with version 2.1, Portworx introduced support for RBAC. Thus, the platform provides namespace-granular, role-based authentication, authorization, and ownership in addition to encryption.
 
-Portworx security centers around the obiquitous JWT based authentication and
+This document walks you through the different components used to secure _Portworx_ through RBAC.
+
+## General Considerations
+
+Portworx RBAC centers around the ubiquitous JWT based authentication and
 authorization model. This technology is currently used by most major internet
 systems, providing a proven secure model for user and account identification.
 
@@ -33,11 +37,8 @@ The token contains a section called _claims_ which not only identifies the user 
 | token | A JSON Web Token which is signed by a token authority identifying the owner of the request |
 | token authority | Application used to generate and sign an identification token |
 
-
-## Security Models
-Portworx security is composed of three models:
-
 ## Security Tokens
+
 Portworx security supports two types of token generation models: _OIDC_ and
 _self-generated_ tokens. OpenID Connect (or OIDC) is a standard model for user authentication and management and is a great solution for enterprise customers due to its integration with SAML 2.0, Active Directory, and/or LDAP. The second model is a self-generated token, where the administrator would generate a token using their own TA application. For convenience, Portworx provides a method of generating tokens using `pxctl`.
 
@@ -50,6 +51,7 @@ For Portworx to verify the tokens are valid, they must be signed with either a:
 Also, Portworx must be configured with the same shared secret or pair of keys.
 
 ### Required JWT claims
+
 Portworx requires a set of claims to be provided in order to authorize the user. The following table lists the set of required claims:
 
 | Claim | Type | Description |
@@ -64,32 +66,38 @@ Portworx requires a set of claims to be provided in order to authorize the user.
 | groups | string array | (custom claim) List of groups the user is part of, used determine access control of resources |
 
 ### Self-Generated Tokens
+
 Token generation can be done by any JWT compliant application which sets the claims required by Portworx. For convenience, administrators can generate user tokens using `pxctl`. See [Generating Tokens](/reference/cli/authorization/#generate_tokens).
 
 ### OpenID Connect (OIDC)
+
 Due to its ability to manage thousands of users, it is highly recommended that enterprise customers deploy an OIDC service. There are multiple public and private OIDC providers. Customers could use public providers such as Okta.com, Auth0.com, etc, or private providers such as Keycloak, CloudFoundry UAA, Dex, or Tremolo Security OpenUnison.
 
 In the case where the claims required by Portworx security do not match with those provided by the customer, most OIDCs have a mapping feature. This feature allows the OIDC system to return a token to Portworx where the claims have the appropriate information. Some OIDCs may namespace custom claims. This is supported by Portworx, but the namespace value must be provided to the system during initialization.
 
-## Security Models
-Portworx security is composed of three models:
+## Portworx RBAC Security Models
+
+Portworx RBAC security is composed of three models:
 
 1. **Authentication**: A model for verifying the token is correct and generated from
    a trusted issuer.
-1. **Authorization**: A model for verifying access to a particular request type
+2. **Authorization**: A model for verifying access to a particular request type
    according to the role or roles applied to the user.
-1. **Ownership**: A model for determining access to resources.
+3. **Ownership**: A model for determining access to resources.
 
 
-### Authentication
-Portworx will determine the validity of a user through a token-based model. The token will be created by the TA and will contain information about the user in the _claims_ section. When Portworx receives a request from the user, it will check the token validity by verifying its signature, using either a shared secret or public key provided during configuration.
+### 1. Authentication
 
-### Authorization
+Authentication is based on Role Based Access Control for all clients in the stack and an ownership model that is much like the familiar unix style permissions. Portworx will determine the validity of a user through a token-based model. The token will be created by the TA and will contain information about the user in the _claims_ section. When Portworx receives a request from the user, it will check the token validity by verifying its signature, using either a shared secret or public key provided during configuration.
+
+### 2. Authorization
+
 Once the token has been determined to be valid, Portworx then checks if the user is authorized to make the request. The _roles_ claim in the token must contain the name of an existing default or customer registered role in the Portworx system. A role is the name given to a set of RBAC rules which enable access to certain SDK calls. Custom roles can be created using `pxctl` or through the [OpenStorage SDK](https://libopenstorage.github.io/w/release-6.1.generated-api.html#serviceopenstorageapiopenstoragerole).
 
-See also [Role management using pxctl](/reference/cli/role)
+See also [Role management using pxctl](/reference/cli/role).
 
-### Ownership
+### 3.Ownership
+
 Ownership is the model used for resource control. The model is composed of the owner and a list of groups and collaborators with access to the resource. Groups and collaborators can also have their access to a resource constrained by their access type. The following table defines the three access types supported:
 
 | Type | Description |
@@ -101,7 +109,8 @@ Ownership is the model used for resource control. The model is composed of the o
 For example, `user1` could create a volume and give _Read_ access to `group1`. This means that only `user1` can mount the volume. However, `group1` can clone the volume. When a volume is cloned, it is owned by the user who made the request.
 
 ## The Administrator Role
-Similar to the `root` user in a Linux system, Portworx has the concept of a system  dministrator. This role is not constrained by RBAC and participates in every group. The built-in RBAC role for system administrators is called `system.admin` and gives the caller access to every API call. To have access to every resource, a user must be in group `*`, which means they are part of every group. Their token claims would then look like this:
+
+Similar to the `root` user in a Linux system, Portworx has the concept of a system administrator. This role is not constrained by RBAC and participates in every group. The built-in RBAC role for system administrators is called `system.admin` and gives the caller access to every API call. To have access to every resource, a user must be in group `*`, which means they are part of every group. Their token claims would then look like this:
 
 ```json
 {
@@ -111,6 +120,7 @@ Similar to the `root` user in a Linux system, Portworx has the concept of a syst
 ```
 
 ## References
+
 For more inforamtion, see also:
 
 * [OpenID Connect](https://openid.net)
