@@ -92,7 +92,7 @@ Authentication is based on Role Based Access Control for all clients in the stac
 
 ### 2. Authorization
 
-Once the token has been determined to be valid, Portworx then checks if the user is authorized to make the request. The _roles_ claim in the token must contain the name of an existing default or customer registered role in the Portworx system. A role is the name given to a set of RBAC rules which enable access to certain SDK calls. Custom roles can be created using `pxctl` or through the [OpenStorage SDK](https://libopenstorage.github.io/w/release-6.1.generated-api.html#serviceopenstorageapiopenstoragerole).
+Once the token has been determined to be valid, Portworx then checks if the user is authorized to make the request. The _roles_ claim in the token must contain the name of an existing default or customer registered role in the Portworx system. A role is the name given to a set of RBAC rules which enable access to certain SDK calls. Custom roles can be created using `pxctl` or through the [OpenStorage SDK](https://libopenstorage.github.io/w/release-6.3.generated-api.html#serviceopenstorageapiopenstoragerole).
 
 See also [Role management using pxctl](/reference/cli/role).
 
