@@ -6,7 +6,19 @@ description: How to use the pxctl service command.
 weight: 16
 ---
 
-This document provides details for using the service mode utilities accessible through the `pxctl service` command. First, let's get a glimpse of the available subcommands:
+The Portworx `pxctl` CLI tool allows you to run the following service operations:
+
+- Perform a node audit
+- Manage the call home feature
+- Generate diagnostics package
+- Get the version of the installed software
+- Configure kvdb
+- Place Portworx in maintenance mode
+- Manage the physical storage drives
+
+These commands are helpful when you want do debug issues related to your _Portworx_ cluster.
+
+You can see an overview of the available service operations by running:
 
 ```text
 /opt/pwx/bin/pxctl service --help
@@ -36,9 +48,9 @@ OPTIONS:
    --help, -h  show help
 ```
 
-### pxctl service audit
+## Perform a node audit
 
-Audit the PX node
+You can audit the node with:
 
 ```text
 pxctl service audit
@@ -51,21 +63,9 @@ kvdb-limits	none	KV limits audit not yet available
 kvdb-response	none	KV response audit not yet available
 ```
 
-### pxctl service call-home
+## Manage the call home feature
 
-You can use this command to enable and disable the call home feature
-
-```text
-pxctl service call-home --help
-```
-
-```output
-NAME:
-   pxctl service call-home - Enable or disable the call home feature
-
-USAGE:
-   pxctl service call-home [arguments...]
-```
+With `pxctl`, you can enable and disable the call home feature:
 
 ```text
 pxctl service call-home enable
@@ -75,9 +75,19 @@ pxctl service call-home enable
 Call home feature successfully enabled
 ```
 
-### pxctl service diags
+If you want to disable this feature, just run:
 
-When there is an operational failure, you can use pxctl service diags &lt;name-of-px-container&gt; to generate a complete diagnostics package. This package will be automatically sent to Portworx, Inc. if the flag `--upload` is specified. Additionally, the service package can be mailed to Portworx, Inc. at support@portworx.com. The package will be available at /var/cores/diags.tgz inside the Portworx container.
+```text
+pxctl service call-home disable
+```
+
+```output
+Call home feature successfully disabled
+```
+
+## Generate a complete diagnostics package
+
+When there is an operational failure, you can use the `pxctl service diags <name-of-px-container>` command to generate a complete diagnostics package. This package will be automatically uploaded to Portworx if `--upload` is specified. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /var/cores/diags.tgz inside the Portworx container.
 
 ```text
 pxctl service diags --help
@@ -103,6 +113,8 @@ OPTIONS:
    -n, --node string         generate diags for a specific remote node with the provided NodeIp or NodeID.
 ```
 
+As an example, here's how to generate the diagnostics package for a container called `px-enterprise`:
+
 ```text
 pxctl service diags --container px-enterprise
 ```
@@ -114,9 +126,9 @@ Getting diags files...
 Generated diags: /tmp/diags.tar.gz
 ```
 
-### pxctl service info
+## Get the version of the installed software
 
-Displays all Version info
+The following command displays the version of the installed software:
 
 ```text
 pxctl service info
@@ -128,9 +140,9 @@ PX (OCI) Build Version:  1d83ac2baeb27451222edcd543249dd2c2f941e4
 PX Kernel Module Version:  72D3C244593F45167A6B49D
 ```
 
-### pxctl service kvdb
+## Configure KVDB
 
-kvdb command is used for confguring kvdb
+You can configure the KVDB with the `pxctl service kvdb` command. To get an overview of the available subcommands, run:
 
 ```text
 pxctl service kvdb --help
@@ -149,7 +161,7 @@ OPTIONS:
    restore      Restore keys and values into kvdb from a kvdb.dump file
 ```
 
-### pxctl service maintenance
+## Place Portworx in maintenance mode
 
 Use the `service maintenance` command to enter or exit maintenance mode. Once the node is in maintenance mode, you can add or replace drives, add memory, and so on.
 
@@ -183,19 +195,18 @@ This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 ```
 
-Exit maintenance mode by running:
+Once you're done adding or replacing drives, or adding memory, you can exit maintenance mode by running:
 
 ```text
 pxctl service maintenance --exit
 ```
 
+## Manage the physical storage drives
 
-### pxctl service drive
-
-You can manage the physical storage drives on a node using the pxctl service drive sub menu.
+You can manage the physical storage drives on a node using the `pxctl service drive` command:
 
 ```text
-pxctl service drive
+pxctl service drive --help
 ```
 
 ```output
@@ -216,10 +227,12 @@ OPTIONS:
    --help, -h  show help
 ```
 
-You can add drives to a server using the `/opt/pwx/bin/pxctl service drive add` command.
+### Add a physical drive to a server
+
+Use the `pxctl sv drive add` command to add a physical drive to a server. To see an overview of the available flags, run:
 
 ```text
-pxctl service drive add --help
+pxctl sv drive add --help
 ```
 
 ```output
@@ -234,9 +247,21 @@ Flags:
   -d, --drive string       comma-separated source drives
   -s, --spec string        Cloud drive spec in type=<>,size=<> format
   -o, --operation string   start|status (Valid Values: [start status]) (default "start")
-      --cache int          Use this drive as a cache device for given pool. (default -1)
   -h, --help               help for add
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
 ```
+
+You can add physical drives to a server using the `pxctl service drive add` command. The following example shows how to add a physical drive:
 
 ```text
 pxctl service drive add /dev/mapper/volume-3bfa72dd -o start
@@ -250,11 +275,15 @@ Drive add  successful. Requires restart.
 ```
 <!-- need to test this full operation to confirm the syntax -->
 
-To rebalance the storage across the drives, use pxctl service drive rebalance. This is useful after prolonged operation of a node.
+{{<info>}}
+To add physical drives, you must place the server in [maintenance mode](#place-portworx-in-maintenance-mode) first.
+{{</info>}}
 
-### pxctl service drive show
+To rebalance the storage across the drives, use the `pxctl service drive rebalance`. This is useful after prolonged operation of a node.
 
-You can use the `pxctl service drive show` command to display a node's drive information.
+## Display drive information
+
+You can use the `pxctl service drive show` command to display drive information on the server:
 
 ```text
 pxctl service drive show
@@ -272,9 +301,9 @@ Pool ID: 0
 ```
 <!-- need example output that includes caching -->
 
-### pxctl service email
+## Configure the email settings for alerts
 
-Email setting commands
+You can use the `pxctl service email` command to list the available subcommands:
 
 ```text
 pxctl service email
@@ -292,9 +321,9 @@ COMMANDS:
      set       Configure email settings for alerts.
 ```
 
-### pxctl service scan
+## Scan for bad blocks
 
-You can use pxctl service scan to scan for bad blocks on a drive
+You can use `pxctl service scan` to scan for bad blocks on a drive:
 
 ```text
 pxctl service scan
@@ -317,12 +346,12 @@ COMMANDS:
 
 ```
 
-### pxctl service node-wipe
+## Delete all Portworx related data
 
-pxctl service node-wipe deletes all data related to Portworx from the node. It will also wipe the storage device that was provided to Portworx. This command can be run only when Portworx is stopped on the node. Run this command if a node needs to be re-initialized.
+With `pxctl service node-wipe`, you can delete all data related to Portworx from the node. It will also wipe the storage device that was provided to Portworx. This command can be run only when Portworx is stopped on the node. Run this command if a node needs to be re-initialized.
 
 {{<info>}}
-**Note:** This is a disruptive command and could lead to data loss. Please use caution.
+This is a disruptive command and could lead to data loss. Please use caution.
 {{</info>}}
 
 ```text
@@ -360,9 +389,14 @@ Removed PX footprint from device /dev/sdb.
 Wiped node successfully.
 ```
 
-### pxctl service pool
+## Perform pool maintenance tasks
 
-Pool maintenance
+The `pxctl service pool` command allows you to run the following pool maintenance related tasks:
+
+- list the available pools
+- update the properties of a pool
+
+You can list the available subcommands with:
 
 ```text
 pxctl service pool
@@ -380,9 +414,15 @@ COMMANDS:
    update    Update pool properties
 ```
 
-### pxctl service pool update
+## Update pool properties
 
-Updates the pool properties
+You can use the `pxctl service pool update` command to perform the following operations:
+
+- Resize a pool
+- Set the IO priority
+- Add labels
+
+To see the list of the available subcommands, run:
 
 ```text
 pxctl service pool update --help
