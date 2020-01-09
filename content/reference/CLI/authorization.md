@@ -2,23 +2,35 @@
 title: Authorization using pxctl
 linkTitle: Authorization
 keywords: pxctl, command-line tool, cli, reference, authorization, auth-enabled, token, OIDC, self-signed, JWT, shared-secret, security
-description: Learn how to enable auth in your Portorx cluster
+description: Learn to interact with your authorization-enabled Portworx cluster using pxctl
 weight: 18
 ---
 
 ## Overview
 
-This document outlines how to interact with an auth-enabled Portworx cluster. The main way to do it is by using the `pxctl context` commands. In addition, you can integrate with an __OIDC provided token__ or __generate self-signed tokens__ through `pxctl`.
+This document outlines how to interact with an authorization-enabled Portworx cluster. The main way to do it is by using the `pxctl context` command. Also, you can integrate with an __OIDC provided token__ or __generate self-signed tokens__ through `pxctl`. See the [generate self-signed tokens](/reference/cli/self-signed-tokens) page for more details.
 
-## Context
+## Contexts
 
-`pxctl` allows you to store contexts and associated clusters, privileges, and tokens local to your home directory. This way, you can easily switch between these configurations with a few commands.
+Portworx stores the following locally to your home directory, allowing you to switch between configurations with a few commands:
+
+ - contexts
+ - associated clusters
+ - privileges
+ - tokens
+
+- contexts,
+- associated clusters,
+- privileges, and
+- tokens
+
+local to your home directory. This allows you to switch between these configurations with a few commands.
 
 {{<info>}}
-Since `pxctl context` is stored locally per node, you will need to create your context on the node you're working on.
+Since Portworx stores the context locally on each node, you must create your context on the node you're working on.
 {{</info>}}
 
-To find out the available commands, type:
+Run the `pxctl context` command with the `--help` flag to list the available subcommands and flags:
 
 ```text
 /opt/pwx/bin/pxctl context --help
@@ -40,25 +52,31 @@ Available Commands:
 
 ```
 
-### Context management
+### Create a context
 
-You can easily create and delete contexts with the following commands:
+You can create a new context by running the `pxctl context create` command and passing it the following arguments:
 
-__Creating or updating a context:__
+- the name of the context
+- `--token` with the token Portworx must use for this context
+- `--endpoint` with the endpoint for this conext
+
+Here's an example of how you can create a new context:
 
 ```text
 pxctl context create <context> --token <token> --endpoint <endpoint>
 ```
 
-__Deleting a context:__
+### Delete a context
+
+To delete a context, run the `pxctl context delete` command with the name of the context as in the following example:
 
 ```text
 pxctl context delete <context>
 ```
 
-__Listing your contexts:__
+### List your contexts
 
-Your contexts live in `~/.pxctl/contextconfig`. You can easily view them with the `list` subcommand:
+Portworx stores your contexts in the `~/.pxctl/contextconfig` directory. Use the `pxctl context list` command to view them:
 
 ```text
 pxctl context list
@@ -77,81 +95,63 @@ contextconfig:
     endpoint: http://localhost:9001
 ```
 
+### Select the current context
 
-### Current context
+Once you've created your contexts, use the `pxctl context` command to switch between them. Under the hood, Portworx reads your current context and then uses the associated token for all commands.
 
-Now that you've created your contexts, you can easily switch between them with the commands below. `pxctl` will automatically read your currently set context and use the associated token for all commands.
-
+{{<info>}}
 Alternatively, you can use the global `--context` flag to run a single command with a given context.
+{{</info>}}
 
-__Setting current context:__
+Use the following command to set the current context:
 
 ```text
 pxctl context set <context>
 ```
 
-__Unsetting current context:__
+Unset the current context with:
 
 ```text
 pxctl context unset
 ```
 
-## Generating tokens {#generate_tokens}
-Portworx supports two methods of authorization: OIDC and self-signed.
+## Generate tokens
 
-For generating a token through your OIDC provider, see your provider's
-documentation on generating bearer tokens. The following are some of the
-supported OIDCs:
+Portworx supports two methods of authorization:
 
-* [Keycloak](https://www.keycloak.org/docs/latest/server_development/index.html#admin-rest-api)
-* [Auth0](https://auth0.com/docs/api/authentication#get-token)
-* [Okta](https://developer.okta.com/docs/api/getting_started/getting_a_token/#token-expiration)
+- OIDC and
+- self-signed.
 
-For self-signed, you can use your own JWT compliant application, or for
-convenience, `pxctl` has a command for generating tokens.
+To generate a token through your OIDC provider, see the documentation on generating bearer tokens on the website of the provider. The following links direct you to the most commonly used OIDC providers:
 
-__Generating self-signed tokens:__
+- [Keycloak](https://www.keycloak.org/docs/latest/server_development/index.html#admin-rest-api)
+- [Auth0](https://auth0.com/docs/api/authentication#get-token)
+- [Okta](https://developer.okta.com/docs/api/getting_started/getting_a_token/#token-expiration)
 
-`pxctl` allows you to generate self-signed tokens in a few different ways:
-ECDSA, RSA, and Shared-Secret. In addition to these parameters, you must pass an
-issuer and `authconfig.yaml`. See below for an example with configuration
-`authconfig.yaml`.
+Note that, for self-signed tokens, you can use your own JWT compliant application. Furthermore, for convenience, the `pxctl` CLI tool provides a command for generating tokens. See the [self-signed tokens](/reference/cli/self-signed-tokens) page for more details.
 
-```text
-pxctl auth token generate --auth-config=<authconfig.yaml> --issuer <issuer> \
-    --ecdsa-private-keyfile <ecdsa key file> OR \
-    --rsa-private-keyfile <rsa key file> OR \
-    --shared-secret <secret>
-```
+## How to debug token issues
 
-__Sample configuration (authconfig.yaml):__
-
-```text
-name: Jim Stevens
-email: jstevens@portworx.com
-sub: jstevens@portworx.com/jstevens
-roles: ["system.user"]
-groups: ["*"]
-```
-
-## Debugging token issues
+This section explains how to debug common token issues.
 
 ### Permission denied issues
-You may have gotten an unexpected `"Permission denied"` or other auth-related error. To take a look into your token permissions, you can always decode it with a JWT token decoding tool such as [jwt.io](https://jwt.io/)
+
+**Problem symptom**: You see an unexpected `Permission denied` or other auth-related error.
+
+**Find the root cause**: Take a look into your token permissions. Decode and verify your token with a JWT token decoding tool such as [jwt.io](https://jwt.io/)
 
 {{<info>}}
-[jwt.io](https://jwt.io/) does client-side validation and debugging. It does not store your token anywhere.
+The [jwt.io](https://jwt.io/) debugger does client-side validation and debugging. It does not store your token anywhere.
 {{</info>}}
 
-
 ### Protocol error
-If you're seeing the below error:
 
-`rpc error: code = Internal desc = stream terminated by RST_STREAM with error code: PROTOCOL_ERROR`
+**Problem symptom**: you see an error message similar to `rpc error: code = Internal desc = stream terminated by RST_STREAM with error code: PROTOCOL_ERROR`.
 
-Make sure that your token does not accidentally contain a newline character. This is due to gRPC/http2 not allowing newline characters.
-
+**Find the root cause**: Make sure your token doesn't contain a newline character. The `gRPC/http2` protocol doesn't allow newline characters.
+that your token does not accidentally contain a newline character. This is due to gRPC/http2 not allowing newline characters.
 
 ## Related topics
 
 * For information about enabling and managing Portworx authorization through Kubernetes, refer to the [Authorization](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/) page.
+
