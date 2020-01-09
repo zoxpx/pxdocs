@@ -257,44 +257,9 @@ UUID                        NAME            ACCOUNT NAME        ENCRYPTION      
 
 `pxctl credentials list` only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed. The credentials will be stored as part of the secret endpoint given to Portworx for persisting authentication across reboots.
 
-For more information, run:
+{{% content "shared/reference-CLI-secrets-definition.md" %}}
 
-```text
-pxctl secrets help
-```
-
-```output
-Manage Secrets. Supported secret stores AWS KMS | Vault | DCOS Secrets | IBM Key Protect | Kubernetes Secrets | Google Cloud KMS
-
-Usage:
-  pxctl secrets [flags]
-  pxctl secrets [command]
-
-Available Commands:
-  aws             AWS secret-endpoint commands
-  gcloud          Google Cloud KMS commands
-  ibm             IBM Key Protect commands
-  kvdb            kvdb secret-endpoint commands
-  set-cluster-key Sets an existing secret as a cluster-wide (default) secret to be used for volume encryption
-
-Flags:
-  -h, --help   help for secrets
-
-Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
-
-Use "pxctl secrets [command] --help" for more information about a command.
-```
-
-You can find more details by checking out the [Credentials](/reference/cli/credentials) page.
+You can find more details on how to manage your cloud credentials with `pxctl` by checking out the [Credentials](/reference/cli/credentials) page.
 
 ### Perform cloud backups of single volumes
 

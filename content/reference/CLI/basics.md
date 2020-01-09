@@ -196,12 +196,7 @@ Finally, a success message will be displayed:
 Successfully authenticated with AWS.
 ```
 
-### Related topics
-
-* For information about enabling and managing Portworx authorization through Kubernetes secrets, refer to the [Authorization](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/) page.
-
-
-## EULA
+### EULA
 
 You can get a link to our EULA by running:
 
