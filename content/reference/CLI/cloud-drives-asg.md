@@ -8,9 +8,11 @@ linkTitle: Cloud Drives (ASG)
 
 ## Cloud Drive operations
 
-If you run Portworx in ASG mode, the CLI provides a set of commands that display the information about the EBS volumes.
+If Portworx is managing your cloud drives, the CLI provides a set of commands that display information about your EBS volumes.
 
 ### Cloud Drive Help
+
+Run the `pxctl clouddrive` command with the `--help` flag to display the list of the available subcommands and flags.
 
 ```text
 pxctl clouddrive --help
@@ -33,7 +35,7 @@ OPTIONS:
 
 ### Listing all Cloud Drives
 
-To display all the cloud drives being used by Portworx, type:
+Enter the following command to display all the cloud drives used by Portworx:
 
 ```text
 pxctl clouddrive list
@@ -55,7 +57,8 @@ Drive Set List
 
 ### Inspecting Cloud Drives
 
-Run the following command to display more detailed information about the drives attached to a node:
+To display more detailed information about the drives attached to a node, run the `pxctl clouddrive inspect` with the `--nodeid` id flag and pass it the id of the node.
+
 
 ```text
 pxctl clouddrive inspect --nodeid ip-172-20-53-168.ec2.internal
