@@ -1,15 +1,16 @@
 ---
-title: Lightboard Sessions
+title: Portworx instructional videos
 keywords: portworx, learning, lightboard
-description: Learn about Portworx by watching informational Lightboard sessions. 
+description: Learn about Portworx by watching informational Lightboard sessions.
 weight: 2
-linkTitle: Lightboard Sessions
+linkTitle: Portworx instructional videos
 series: kb
+noicon: true
+aliases:
+  - /reference/knowledge-base/lightboard-sessions/
 ---
 
-
 The following is a series of easy to digest lectures about Portworx. Videos are produced with a lightboard which offers a unique and clear perspective for users to learn about Portworx.
-
 
 ## Why Portworx
 
@@ -55,7 +56,7 @@ Portworx deploys it’s full stack of software in a linux container. In this sho
  - [Deployment Architectures Docs](https://docs.portworx.com/cloud-references/deployment-arch)
  - [Hyperconvergence Docs](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/)
 
-## Deploying Portworx On Kubernetes 
+## Deploying Portworx on Kubernetes
 
 In this video, learn how Portworx runs on any distribution of Kubernetes and what components are involved.
 
@@ -65,7 +66,7 @@ In this video, learn how Portworx runs on any distribution of Kubernetes and wha
 
  - [Install with Kubernetes](https://docs.portworx.com/portworx-install-with-kubernetes/)
  - [Try Installing Portworx on Kubernetes yourself](https://www.katacoda.com/portworx/scenarios/deploy-px-k8s)
- - [Access Kubernetes Spec Generator in PX Central](https://central.portworx.com/)
+ - [Access Kubernetes Spec Generator in PX-Central](https://central.portworx.com/)
 
 ## Understanding Volume Replication
 
@@ -140,5 +141,24 @@ Capacity management is a key aspect for application development and in complex m
  - [Portworx Capacity Management Reference](https://docs.portworx.com/portworx-install-with-kubernetes/autopilot/reference/)
  - [CockroachDB Demo](https://www.youtube.com/watch?v=vCnUczaSXDA)
 
+## Introduction to Portworx on Red Hat Openshift
 
-More Lightboard sessions coming soon.
+In this lightboard session viewers will learn the basics of running Potworx on OpenShift. Viewers will learn what resources Portworx consumes and requires as well as how to get started with container-granular dynamic provisioning for databases. Stay tuned for a follow up on Day 2 operations such as auto-scaling PVCs, Storage Pools, Backup & Restore and Disaster Recovery for Openshift.
+
+{{< youtube  Bngko7corc0 >}}
+
+#### Resources
+
+ - [Install Portworx on OpenShift](https://docs.portworx.com/portworx-install-with-kubernetes/on-premise/openshift/)
+ - [Red Hat Blog: Disaster Recovery Strategies for Red Hat OpenShift](https://blog.openshift.com/disaster-recovery-strategies-for-red-hat-openshift/)
+
+## Data Locality with Stork (Storage Orchestrator for Kubernetes)
+
+Stork is the Portworx’s storage scheduler for Kubernetes that helps achieve even tighter integration of Portworx with Kubernetes. It allows users to co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes. In this video, we’ll explore how stork enables colocation of pods and their data.
+
+{{< youtube  hoS6HUQMnB0 >}}
+
+#### Resources
+
+ - [Introducing STORK: Intelligent Storage Orchestration for Kubernetes](https://portworx.com/stork-storage-orchestration-kubernetes/)
+ - [Using Stork with Portworx](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/)
