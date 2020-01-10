@@ -3,7 +3,7 @@ title: Postgresql on Portworx
 linkTitle: Postgresql
 keywords: Postgresql, Postgres, install, kubernetes, k8s
 description: Use this guide to install and run PostgreSQL using Kubernetes
-weight: 2
+weight: 3
 noicon: true
 ---
 
