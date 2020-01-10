@@ -33,7 +33,7 @@ kubectl create secret generic mysecret \
     valueFrom:
       secretKeyRef:
         name: mysecret
-        key: system-key
+        key: system-secret
 ...
 ```
 
@@ -66,7 +66,7 @@ kubectl create secret generic mysecret \
 ...
   name: portworx
   args:
-  [..."--jwt-issuer", "myissuer", ...]
+  [..."-jwt_issuer", "myissuer", ...]
   env:
     - name: "PORTWORX_AUTH_JWT_SHAREDSECRET"
       valueFrom:
@@ -77,7 +77,7 @@ kubectl create secret generic mysecret \
       valueFrom:
         secretKeyRef:
           name: mysecret
-          key: system-key
+          key: system-secret
     - name: "PORTWORX_AUTH_STORK_KEY"
       valueFrom:
         secretKeyRef:
