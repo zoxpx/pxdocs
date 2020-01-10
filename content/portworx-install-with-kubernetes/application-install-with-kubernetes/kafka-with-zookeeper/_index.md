@@ -3,7 +3,7 @@ title: Kafka with Zookeeper on Portworx
 linkTitle: Kafka with Zookeeper
 keywords: apache kafka, zookeeper, install, kubernetes, k8s, scaling, failover
 description: See how you can deploy Apache Kafka with Zookeeper on Kubernetes with state using Portworx.
-weight: 2
+weight: 3
 noicon: true
 ---
 
