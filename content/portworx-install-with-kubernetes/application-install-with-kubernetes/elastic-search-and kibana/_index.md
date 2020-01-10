@@ -3,7 +3,7 @@ title: Elastic Search and Kibana on Kubernetes on Portworx
 linkTitle: Elastic Search and Kibana
 keywords: install, elasticsearch, kibana, kubernetes, k8s, scaling, failover
 description: Find out how to easily deploy Elasticsearch and Kibana on Kubernetes using Portworx to preserve state!
-weight: 2
+weight: 3
 noicon: true
 ---
 
