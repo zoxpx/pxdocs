@@ -4,11 +4,12 @@ keywords: pxctl, command-line tool, cli, reference, create volume, manage volume
 description: This guide shows you how to create and manage volumes with pxctl.
 linkTitle: Create and Manage Volumes
 weight: 2
+hidesections: true
 ---
 
-In this section, we are going to focus on creating and managing volumes with `pxctl`. You can use the created volumes directly in Docker with the `-v` option.
+In this document, we are going to show you how to create and manage volumes with the `pxctl` command-line tool. Note that you can use the new volumes directly in Docker with the `-v` option.
 
-To view a list of the available commands, run the following:
+To view a list of the available commands, run the following command:
 
 ```text
 /opt/pwx/bin/pxctl volume -h
@@ -64,48 +65,47 @@ Use "pxctl volume [command] --help" for more information about a command.
 
 In the next sections, we will take a look at these commands individually.
 
-## Creating volumes with pxctl
+## Create volumes
 
-Portworx creates volumes from the global capacity of a cluster. You can expand the capacity and throughput by adding new nodes to the cluster. Portworx protects storage volumes from hardware and node failures through automatic replication.
+Portworx creates volumes from the global capacity of a cluster. You can expand the capacity and throughput of your cluster by adding new nodes to the cluster. Portworx protects your volumes from hardware and node failures through automatic replication.
 
-Things to consider when creating a new volume with `pxctl`:
+Here are a few things you should consider when creating a new volume with the `pxctl` command-line tool:
 
-* Durability: Set the replication level through policy, using the High Availability setting.
-* Each write is synchronously replicated to a quorum set of nodes.
-* Any hardware failure means that the replicated volume has the latest acknowledged writes.
-* Elastic: Add capacity and throughput at each layer, at any time.
-* Volumes are thinly provisioned, only using capacity as needed by the container.
-* You can expand and contract the volume’s maximum size, even after data has been written to the volume.
+* Durability: Set the replication level through policy, using the `High Availability` setting. See the [storage policy](/reference/cli/storagepolicy) page for more details.
+* Portworx synchronously replicates each write operation to a quorum set of nodes.
+* Portworx uses an elastic architecture. This allows you to add capacity and throughput at every layer, at any time.
+* Volumes are thinly provisioned. They only use as much storage as needed by the container.
+* You can expand and contract the maximum size of a volume, even after you write data to the volume.
 
-A volume can be created before being used by its container or by the container directly at runtime. Creating a volume returns the volume’s ID. The same volume ID shown by `pxctl` is returned by Docker commands \(such as `Docker volume ls`\).
+You can create a volume before being used by its container. Also, the container can create the volume at runtime. When you create a volume, the `pxctl` command-line tool returns the ID of the volume. You can see the same volume if ID if you run a Docker command such as `docker volume ls`.
 
 
-To create a volume named `myVol`, type:
+To create a volume, run the `pxctl volume create` and pass it the name of the volume. The following example creates a volume called `myVol`:
 
 ```text
 pxctl volume create myVol
 ```
 
-`pxctl` will create the volume and will print its `id`:
-
 ```output
 3903386035533561360
 ```
 
-Throughput is controlled per container and can be shared. Volumes have fine-grained control, set through policy.
+{{<info>}}
+Portworx controls the throughput at per-container level and can be shared. Volumes have fine-grained control, set through policy.
+{{</info>}}
 
 Before you move on, take a bit of time to make sure you understand the following points:
 
 * Throughput is set by the IO Priority setting. Throughput capacity is pooled.
-* Adding a node to the cluster expands the available throughput for reads and writes.
-* The best node is selected to service reads, whether that read is from local storage devices or another node’s storage devices.
+* If you add a node to the cluster, you expand the available throughput for read and write operations.
+* Portworx selects the best node to service read operations, no matter that the operation is from local storage devices or the storage devices attached to another node.
 * Read throughput is aggregated, where multiple nodes can service one read request in parallel streams.
 * Fine-grained controls: Policies are specified per volume and give full control to storage.
 * Policies enforce how the volume is replicated across the cluster, IOPs priority, filesystem, blocksize, and additional parameters described below.
 * Policies are specified at create time and can be applied to existing volumes.
 
 
-`pxctl` provides a multitude of options for setting the policies on a volume. Let’s get a feel for the available options by running:
+The `pxctl` command-line utility provides a multitude of options for setting the policies on a volume. Let’s get a feel for the available options by running the `pxctl volume create ` with the `-h` flag:
 
 ```text
 pxctl volume create -h
@@ -169,16 +169,15 @@ Global Flags:
       --ssl              ssl enabled for portworx
 ```
 
-{{<info>}}These options can also be passed in through the scheduler or using the inline volume spec. See the section [Inline volume spec] (#inline-volume-spec) below for more details.
+{{<info>}}
+These options can also be passed in through the scheduler or using the inline volume spec. See the [inline volume spec] (#inline-volume-spec) section below for more details.
 {{</info>}}
 
-### Using the --nodes Argument
+### Place a replica on a specific volume
 
-Adding the `--nodes=LocalNode` argument while creating a volume with `pxctl` will place at least one replica of the volume on the node where the command is run.
+Use the `--nodes=LocalNode` flag to create a volume and place at least one replica of the volume on the node where the command is run. This is useful when you use a script to create a volume locally on a node.
 
-This is useful when using a script to create a volume locally on a node.
-
-Let's look at a simple example. Say you want to create a volume named `localVolume` and place a replica of the volume on the local node. If so, you should run something like the following:
+As an example, here's how you can create a volume named `localVolume` and place a replica of the volume on the local node:
 
 ```text
 pxctl volume create --nodes=LocalNode localVolume
@@ -188,7 +187,7 @@ pxctl volume create --nodes=LocalNode localVolume
 Volume successfully created: 756818650657204847
 ```
 
-Now, let's quickly check that the volume's replica is on the node where the command was run:
+Now, you can check that the replica of the volume is on the node where the command was run:
 
 ```text
 pxctl volume inspect localVolume
@@ -220,14 +219,14 @@ Volume  :  756818650657204847
 ```
 
 {{<info>}}
-The replicas are visible in the _"Replica sets on nodes"_ section.
+The replicas are visible in the `Replica sets on nodes` section.
 {{</info>}}
 
-### Creating volumes with Docker
+### Create volumes with Docker
 
 All `docker volume` commands are reflected in Portworx. For example, a `docker volume create` command provisions a storage volume in a Portworx storage cluster.
 
-The following `docker volume` command creates a volume named `testVol`:
+Use the following command to create a volume named `testVol`:
 
 ```text
 docker volume create -d pxd --name testVol
@@ -237,8 +236,7 @@ docker volume create -d pxd --name testVol
 testVol
 ```
 
-Just to make sure the command is reflected into Portworx, try running this command:
-
+To make sure the command is reflected into Portworx, run:
 
 ```text
 pxctl volume list --name testVol
@@ -249,11 +247,11 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS		SNAP-ENABLED
 426544812542612832	testVol	1 GiB	1	no	no		LOW		up - detached	no
 ```
 
-### The --opt flag
+### Add optional parameters with the --opt flag
 
 As part of the `docker volume` command, you can add optional parameters through the `--opt` flag. The parameters are the same, whether you use Portworx storage through the Docker volume or the `pxctl` command.
 
-The command below uses the `--opt` flag to set the container's filesystem and volume size:
+The following command uses the `--opt` flag to specify the filesystem of the container and the size of the volume:
 
 ```text
 docker volume create -d pxd --name opt_example --opt fs=ext4 --opt size=1G
@@ -263,9 +261,9 @@ docker volume create -d pxd --name opt_example --opt fs=ext4 --opt size=1G
 opt_example
 ```
 
-Now, let's check by running this command:
+Now, let's check the setting of our newly created volume. Run the `pxctl volume list` command and pass it the `--name` flag with the name of the volume:
 
-```
+```text
 pxctl volume list --name opt_example
 ```
 
@@ -274,36 +272,32 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS		SNAP-ENABLED
 282820401509248281	opt_example	1 GiB	1	no	no		LOW		up - detached	no
 ```
 
-We're all set.
-
-
-### Related topics
-
-* For information about creating Portworx volumes through Kubernetes, refer to the [Kubernetes Persistent volumes](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/volumes/) page.
-
 ## Inline volume spec
 
-Portworx supports passing the volume spec inline along with the volume name. This is useful if you want to create a volume with your scheduler application template inline and do not want to create volumes beforehand.
+With Portworx, you can pass the volume spec inline along with the volume name. This is useful if you want to create a volume with your scheduler application template inline instead of creating it beforehand.
 
-For example, a Portworx inline spec looks like this:
+For example, the following command creates volume called `demovolume` with:
+
+- IO priority level = high
+- initial size = 10G
+- replication factor = 3
+- periodic and daily snapshots
 
 ```text
 docker volume create -d pxd io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume
 ```
 
-Let's look at another example that uses `docker run` to create a volume dynamically:
+You can make it so that Docker starts a specific container dynamically. Use the following command to create a volume dynamically and start the `busybox` container:
 
 ```text
 docker run --volume-driver pxd -it -v io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume:/data busybox sh
 ```
 
-The above command will create a volume called `demovolume` with an initial size of 10G, HA factor of 3, snap schedule with periodic and daily snapshot creation, and a high IO priority level. Next, it will start the busybox container dynamically.
-
 {{<info>}}
 The spec keys must be comma separated.
 {{</info>}}
 
-`pxctl` provides support for the following key value pairs:
+The `pxctl` command-line utility provides support for the following key-value pairs:
 
 ```
 IO priority      - io_priority=[high|medium|low]
@@ -330,7 +324,7 @@ The inline specs can be passed in through the scheduler application template. Fo
 	}],
 ```
 
-## Global Namespace (Shared Volumes)
+## The global namespace
 
 {{% content "shared/concepts-shared-volumes.md" %}}
 
@@ -340,9 +334,9 @@ The inline specs can be passed in through the scheduler application template. Fo
 * For information about creating shared Portworx volumes through Kubernetes, refer to the [ReadWriteMany and ReadWriteOnce](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/volumes/#readwritemany-and-readwriteonce) section.
 
 
-## Deleting volumes
+## Delete volumes
 
-Volumes can be deleted like so:
+You can delete a volume by running the `pxctl volume delete ` with the name of the volume you want to delete:
 
 ```text
 pxctl volume delete myOldVol
@@ -353,12 +347,11 @@ Delete volume 'myOldVol', proceed ? (Y/N): y
 Volume myOldVol successfully deleted.
 ```
 
-## Importing volumes
+## Import volumes
 
-Files can be imported from a directory into an existing volume. Files already existing on the volume will be retained or overwritten.
+You can import files from a directory into an existing volume. Files already existing on the volume will be retained or overwritten.
 
-As an example, you can import files from `/path/to/files` into `myVol` with the following:
-
+As an example, to import the files from `/path/to/files` into `myVol`, run the `pxctl volume import` and pass it the `--src` flag as in the following example:
 
 ```text
 pxctl volume import --src /path/to/files myVol
@@ -372,142 +365,13 @@ Imported Files :   0% [>--------------------------------------------------------
 Volume imported successfully
 ```
 
-## Inspecting volumes
+## Inspect volumes
 
-To find out more information about a volume's settings and its usage, run:
+Click on the section below for instructions on how to inspect your Portworx volumes.
 
-```text
-pxctl volume inspect clitest
-```
+{{< widelink url="/reference/cli/create-and-manage-volumes/inspect-volumes" >}}Inspect volumes{{</widelink>}}
 
-```output
-Volume	:  970758537931791410
-	Name            	 :  clitest
-	Size            	 :  1.0 GiB
-	Format          	 :  ext4
-	HA              	 :  1
-	IO Priority     	 :  LOW
-	Creation time   	 :  Feb 26 16:29:53 UTC 2019
-	Shared          	 :  no
-	Status          	 :  up
-	State           	 :  detached
-	Reads           	 :  0
-	Reads MS        	 :  0
-	Bytes Read      	 :  0
-	Writes          	 :  0
-	Writes MS       	 :  0
-	Bytes Written   	 :  0
-	IOs in progress 	 :  0
-	Bytes used      	 :  33 MiB
-	Replica sets on nodes:
-		Set  0
-			Node 	 :  10.99.117.133
-	Replication Status	 :  Detached
-```
-
-{{<info>}}
-**NOTE:** <ul>
-<li>You can inspect multiple volumes in one command.</li>
-<li>The `Bytes used` value only represents the application data held by the volume. This amount may be smaller than the value reported by `pxctl volume usage` due to metadata inclusion and fragmentation.</li>
-</ul>
-{{</info>}}
-
-To inspect the volume in `json` format, run `pxctl volume inspect` with the `--json` flag:
-
-```text
-pxctl --json volume inspect 486256711004992211
-```
-
-```output
-[{
- "id": "486256711004992211",
- "source": {
-  "parent": "",
-  "seed": ""
- },
- "readonly": false,
- "locator": {
-  "name": "pvc-2910e5ab-1b5e-11e8-97a3-0269077ba1bd",
-  "volume_labels": {
-   "namespace": "default",
-   "pvc": "px-nginx-shared-pvc"
-  }
- },
- "ctime": "2018-02-27T01:33:16Z",
- "spec": {
-  "ephemeral": false,
-  "size": "1073741824",
-  "format": "ext4",
-  "block_size": "65536",
-  "ha_level": "2",
-  "cos": "low",
-  "io_profile": "sequential",
-  "dedupe": false,
-  "snapshot_interval": 0,
-  "volume_labels": {
-   "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"PersistentVolumeClaim\",\"metadata\":{\"annotations\":{\"volume.beta.kubernetes.io/storage-class\":\"px-nginx-shared-sc\"},\"name\":\"px-nginx-shared-pvc\",\"namespace\":\"default\"},\"spec\":{\"accessModes\":[\"ReadWriteOnce\"],\"resources\":{\"requests\":{\"storage\":\"1Gi\"}}}}\n",
-   "repl": "2",
-   "shared": "true",
-   "volume.beta.kubernetes.io/storage-class": "px-nginx-shared-sc",
-   "volume.beta.kubernetes.io/storage-provisioner": "kubernetes.io/portworx-volume"
-  },
-  "shared": true,
-  "aggregation_level": 1,
-  "encrypted": false,
-  "passphrase": "",
-  "snapshot_schedule": "",
-  "scale": 0,
-  "sticky": false,
-  "group_enforced": false,
-  "compressed": false,
-  "cascaded": false,
-  "journal": false,
-  "nfs": false
- },
- "usage": "33964032",
- "last_scan": "2018-02-27T01:33:16Z",
- "format": "ext4",
- "status": "up",
- "state": "detached",
- "attached_on": "",
- "attached_state": "ATTACH_STATE_INTERNAL_SWITCH",
- "device_path": "",
- "secure_device_path": "",
- "replica_sets": [
-  {
-   "nodes": [
-    "k2n3",
-    "k2n1"
-   ]
-  }
- ],
- "runtime_state": [
-  {
-   "runtime_state": {
-    "FullResyncBlocks": "[{0 0} {1 0} {-1 0} {-1 0} {-1 0}]",
-    "ID": "0",
-    "ReadQuorum": "1",
-    "ReadSet": "[0 1]",
-    "ReplNodePools": "1,1",
-    "ReplRemoveMids": "",
-    "ReplicaSetCurr": "[0 1]",
-    "ReplicaSetCurrMid": "k2n3,k2n1",
-    "ReplicaSetNext": "[0 1]",
-    "ReplicaSetNextMid": "k2n3,k2n1",
-    "ResyncBlocks": "[{0 0} {1 0} {-1 0} {-1 0} {-1 0}]",
-    "RuntimeState": "clean",
-    "TimestampBlocksPerNode": "[0 0 0 0 0]",
-    "TimestampBlocksTotal": "0",
-    "WriteQuorum": "2",
-    "WriteSet": "[0 1]"
-   }
-  }
- ],
- "error": ""
-}]
-```
-
-## Listing volumes
+## List volumes
 
 To list all volumes within a cluster, use this command:
 
@@ -523,9 +387,9 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS				SNAP-ENABLED
 800735594334174869	testvol3	1 GiB	1	no	no		LOW		up - detached			no
 ```
 
-## Locating volumes
+## Locate volumes
 
-`pxctl` shows where a given volume is mounted in the containers running on the node:
+The `pxctl volume locate` command shows where a given volume is mounted in the containers running on the node:
 
 ```text
 pxctl volume locate 794896567744466024
@@ -539,7 +403,7 @@ host mounted:
 
 In this example, the volume is mounted in two containers via the `/directory1` and `/directory2` mount points.
 
-## Volume snapshots
+## Create volume snapshots
 
 {{% content "shared/reference-CLI-intro-snapshots.md" %}}
 
@@ -552,11 +416,9 @@ Snapshots are read-only. To restore a volume from a snapshot, use the `pxctl vol
 
 * For information about creating snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page.
 
-## Volume Clone
+## Clone volumes
 
-In order to create a volume clone from a volume or snapshot, use the `pxctl volume clone` command.
-
-Let's first refer to the in-built help, which can be accessed by giving the `--help` argument:
+Use the `pxctl volume clone` command to create a volume clone from a volume or snapshot. You can refer to the in-built help, by running the `pxctl volume clone` command with  the `--help` flag:
 
 
 ```text
@@ -593,7 +455,7 @@ Global Flags:
 ```
 
 
-As an example, if we want to make a clone named `myvol_clone` from the parent volume `myvol`, we can run:
+As an example, here's how you can make a clone named `myvol_clone` from the parent volume `myvol:
 
 
 ```text
@@ -608,7 +470,7 @@ Volume clone successful: 55898055774694370
 
 * For information about creating a clone from a snapshot through Kubernetes, refer to the [On-demand snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/) page.
 
-## Volume Restore
+## Restore a volume
 
 {{% content "shared/reference-CLI-restore-volume-from-snapshot.md" %}}
 
@@ -626,9 +488,9 @@ Please see the documentation for [snapshots] (/reference/cli/snapshots) for more
 
 * For information about creating scheduled snapshots of a Portworx volume through Kubernetes, refer to the [Scheduled snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/scheduled/) page.
 
-## Volume stats
+## Show volume stats
 
-`pxctl` shows the realtime read/write IO throughput:
+The `pxctl volume stat` command shows the real-time read/write IO throughput:
 
 ```text
 pxctl volume stats mvVol
@@ -638,3 +500,37 @@ pxctl volume stats mvVol
 TS			Bytes Read	Num Reads	Bytes Written	Num Writes	IOPS		IODepth		Read Tput	Write Tput	Read Lat(usec)	Write Lat(usec)
 2019-3-4:11 Hrs		0 B		0		0 B		0		0		0		0 B/s		0 B/s		0		0
 ```
+
+## Manage volume access rules
+
+With `pxctl`, you can manage your volume access rules. See the [volume access](/reference/cli/volume-access) page for more details.
+
+## Update the replication factor of a volume
+
+You can use the `pxctl volume ha-update` to increase or decrease the replication factor of a Portworx volume. Consult the [update volumes](/reference/cli/updating-volumes#update-a-volume-s-replication-factor) page for more details.
+
+## Volume pending requests
+
+Run the following command to show all pending requests:
+
+```text
+pxctl volume requests
+```
+
+```output
+Only support getting requests for all volumes.
+Active requests for all volumes: count = 0
+```
+
+## Update the settings of a volume
+
+With the `pxctl volume update` command, you can update the settings of your Portworx volumes. Consult the [updating volumes](/reference/cli/updating-volumes) page for additional details.
+
+## Volume usage
+
+To get extended info about the usage of your Portworx volumes, run the `pxctl volume usage` command with the name or the ID of your volume:
+
+```text
+pxctl volume usage 13417687767517527
+```
+
