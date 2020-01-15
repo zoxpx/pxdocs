@@ -1,6 +1,6 @@
 ---
 title: Storage operations
-weight: 3
+weight: 4
 keywords: storage operations, kubernetes, k8s
 description: Learn how to perform various storage operations using Portworx on Kubernetes
 series2: k8s-postinstall

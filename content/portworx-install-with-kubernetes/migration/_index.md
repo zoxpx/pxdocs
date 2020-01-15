@@ -6,4 +6,5 @@ description: How to migrate stateful applications on Kubernetes
 aliases:
   - /cloud-references/migration/migration-stork.html
   - /cloud-references/migration/migration-stork
+weight: 9
 ---

@@ -4,6 +4,7 @@ linkTitle: "Autopilot"
 keywords: autopilot
 description: Rule based engine to manage your Kubernetes cluster
 hidesections: true
+weight: 8
 ---
 
 Autopilot is a rule-based engine that responds to changes from a monitoring source. Autopilot allows you to specify monitoring conditions along with actions it should take when those conditions occur.

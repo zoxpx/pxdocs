@@ -5,8 +5,6 @@ description: Learn about preparing AWS Kubernetes.
 hidden: true
 ---
 
-#### Granting Portworx the needed AWS permissions
-
 Portworx creates and attaches EBS volumes. As such, it needs the AWS permissions to do so. Below is a sample policy describing these permissions:
 
 ```text

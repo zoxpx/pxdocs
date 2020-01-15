@@ -3,6 +3,8 @@ title: Portworx Operator
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift, operator
 description: How to install Portworx with OpenShift using Operator
 weight: 2
+aliases:
+  - /portworx-install-with-kubernetes/on-premise/openshift/operator/
 ---
 
 The Portworx Operator manages the complete lifecycle of a Portworx cluster. Using the Operator, you can install, configure, and update Portworx.

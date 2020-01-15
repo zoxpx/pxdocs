@@ -13,6 +13,8 @@ For more information on using Auto-Scaling groups, go [here](https://docs.aws.am
 
 ## Prepare
 
+#### Granting Portworx the needed AWS permissions
+
 {{% content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" %}}
 
 ## Install
