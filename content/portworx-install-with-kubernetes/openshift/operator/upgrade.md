@@ -3,6 +3,8 @@ title: Upgrade Portworx using the Operator
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
 description: Find out how to upgrade Portworx on OpenShift using Operator.
 weight: 3
+aliases:
+  - /portworx-install-with-kubernetes/on-premise/openshift/operator/upgrade/
 ---
 
 If you're using the Portworx Operator, you can upgrade or change your Portworx version at any time by modifying the `StorageCluster` spec.

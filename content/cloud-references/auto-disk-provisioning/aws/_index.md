@@ -13,6 +13,8 @@ Below guide explains how Portworx dynamic disk provisioning works on AWS and the
 
 ## AWS Requirements
 
+#### Granting Portworx the needed AWS permissions
+
 {{% content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" %}}
 
 ## EBS volume template

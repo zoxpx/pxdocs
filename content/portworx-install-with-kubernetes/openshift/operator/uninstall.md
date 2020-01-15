@@ -3,6 +3,8 @@ title: Uninstall Portworx using the Operator
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
 description: Learn how to uninstall Portworx on Openshift using the Operator.
 weight: 5
+aliases:
+  - /portworx-install-with-kubernetes/on-premise/openshift/operator/uninstall/
 ---
 
 If you're using the Portworx Operator, you can uninstall Portworx by adding a delete strategy to your `StorageCluster` object, then deleting it. When uninstalling, you may choose to either keep the the data on your drives, or wipe them completely.

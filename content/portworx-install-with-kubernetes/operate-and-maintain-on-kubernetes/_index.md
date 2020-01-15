@@ -1,7 +1,7 @@
 ---
 title: Operate and Maintain
 linkTitle: Operate and Maintain
-weight: 5
+weight: 6
 keywords: operate, maintain, kubernetes, k8s
 description: Operations guide for running Portworx in Production with Kubernetes
 series: top

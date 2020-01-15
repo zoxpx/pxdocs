@@ -3,11 +3,33 @@ title: Deploy Portworx using the Operator
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
 description: Find out how to deploy Portworx using the Operator
 weight: 2
+aliases:
+  - /portworx-install-with-kubernetes/on-premise/openshift/operator/2-deploy-px/
 ---
 
 The Portworx Enterprise Operator takes a custom Kubernetes resource called `StorageCluster` as input. The `StorageCluster` is a representation of your Portworx cluster configuration. Once the `StorageCluster` object is created, the Operator will deploy a Portworx cluster corresponding to the specification in the `StorageCluster` object. The Operator will watch for changes on the `StorageCluster` and update your cluster according to the latest specifications.
 
 For more information about the `StorageCluster` object and how the Operator manages changes, refer to the [StorageCluster](/reference/crd/storage-cluster) article.
+
+## Grant the required cloud permissions
+
+{{<info>}}
+**NOTE:** If you're installing Portworx on OpenShift on-premises, you may skip this section and go straight to the [install](#install-portworx-using-the-openshift-console) section.
+{{</info>}}
+
+If you're installing Portworx on OpenShift on a cloud environment, Portworx requires different user and service permissions from OpenShift. Grant the appropriate permissions for your cloud environment:
+
+### OpenShift on AWS
+
+{{% content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" %}}
+
+### OpenShift on GCP
+
+{{% content "shared/portworx-install-with-kubernetes-cloud-gcp-service-account.md" %}}
+
+### OpenShift on Azure
+
+{{% content "shared/azure-cloud-user-requirements.md" %}}
 
 ## Install Portworx using the OpenShift console
 

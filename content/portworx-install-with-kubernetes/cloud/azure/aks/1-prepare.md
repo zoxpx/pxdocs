@@ -40,20 +40,9 @@ Create a Resource Group by specifying its name and location in which you will be
 az group create –name <resource-group-name> –location <location>
 ```
 
-### Create a Service Principal in Azure AD
-This Service Principal will be used to grant Portworx permissions to manage the disks used in the cluster. Store the `password` which acts as the client secret and the `appId` will is the client ID.
-```text
-az ad sp create-for-rbac \
-   --role="Contributor" \
-   --scopes="/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9/resourceGroups/<resource-group-name>"
-{
-  "appId": "1311e5f6-xxxx-xxxx-xxxx-ede45a6b2bde",
-  "displayName": "azure-cli-2017-10-27-07-37-41",
-  "name": "http://azure-cli-2017-10-27-07-37-41",
-  "password": "ac49a307-xxxx-xxxx-xxxx-fa551e221170",
-  "tenant": "ca9700ce-xxxx-xxxx-xxxx-09c48f71d0ce"
-}
-```
+### Create a Service Principal and secret in Azure AD
+
+{{% content "shared/azure-cloud-user-requirements.md" %}}
 
 ### Create the AKS cluster
 

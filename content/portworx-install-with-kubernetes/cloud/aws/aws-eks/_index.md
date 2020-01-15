@@ -11,6 +11,8 @@ This topic explains how to install Portworx with EKS (Elastic Kubernetes Service
 
 ## Prepare
 
+#### Granting Portworx the needed AWS permissions
+
 {{% content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" %}}
 
 ## Install
