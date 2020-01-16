@@ -1,6 +1,6 @@
 ---
-title: "Automatically expand every Portworx storage pool in your cluster"
-linkTitle: "Automatically expand storage pools"
+title: "Expand every Portworx storage pool in your cluster"
+linkTitle: "Expand all storage pools"
 keywords: autopilot, storage pool
 description: "Auto-expand storage pools"
 weight: 200
