@@ -1,6 +1,6 @@
 ---
 title: "Automatically expand Portworx storage pools"
-linkTitle: "Automatically expand storage pools"
+linkTitle: "Automatically expand storage pools by usage"
 keywords: autopilot, storage pool
 description: "Auto-expand storage pools"
 weight: 200
@@ -12,6 +12,7 @@ Autopilot uses Portworx APIs to expand storage pools, and these APIs currently s
 
 * Azure
 * AWS
+* VMware vSphere
 
 ## Prerequisites
 
