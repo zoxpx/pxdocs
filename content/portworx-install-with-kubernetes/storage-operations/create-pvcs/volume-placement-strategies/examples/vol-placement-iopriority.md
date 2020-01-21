@@ -82,7 +82,7 @@ spec:
 
 ### Step 2: Reference the VolumePlacementStrategy in your StorageClass
 
-Now reference the VolumePlacementStrategy in your StorageClass using the key `placement_strategy` in the parameters section. 
+Reference the VolumePlacementStrategy in your StorageClass using the key `placement_strategy` in the parameters section. 
 Alternately, you can also use the same key in the PVC annotations.
 
 ```text
@@ -97,7 +97,7 @@ parameters:
 
 ### Step 3: Create PVC using the StorageClass
 
-Now create the PVC that references the StorageClass. When creating the volume, Portworx will fetch the VolumePlacementStrategy spec that's referenced in the StorageClass and use that to pick storage pools for the volume.
+Create the PVC that references the StorageClass. When creating the volume, Portworx will fetch the VolumePlacementStrategy spec that's referenced in the StorageClass and use that to pick storage pools for the volume.
 
 ```text
 kind: PersistentVolumeClaim
