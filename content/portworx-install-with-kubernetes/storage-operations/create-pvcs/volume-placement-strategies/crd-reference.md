@@ -1,5 +1,6 @@
 ---
 title: VolumePlacementStrategy CRD reference
+weight: 2
 keywords: portworx, storage class, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk,StatefulSets, volume placement
 description: Reference material for the VolumePlacementStrategy CRD.
 ---

@@ -1,7 +1,7 @@
 ---
 title: Placing volumes based on IO priority or latency
 linkTitle: Using IO priority, latency or IOPS
-weight: 1
+weight: 3
 keywords: portworx, storage class, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk,StatefulSets, volume placement
 description: Learn how to use Portworx Volume Placement Strategies to control how volumes are placed across your cluster
 series: k8s-vol
