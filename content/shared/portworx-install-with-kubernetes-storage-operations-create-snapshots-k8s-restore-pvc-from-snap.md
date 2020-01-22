@@ -7,14 +7,11 @@ hidden: true
 
 When you install Stork, it also creates a storage class called _stork-snapshot-sc_. This storage class can be used to create PVCs from snapshots.
 
-To create a PVC from a snapshot, you would add the `snapshot.alpha.kubernetes.io/snapshot` annotation to refer to the snapshot
-name.
-
-If the snapshot exists in another namespace, the snapshot namespace should be specified with `stork/snapshot-source-namespace` annotation in the PVC.
+To create a PVC from a snapshot, you would add the `snapshot.alpha.kubernetes.io/snapshot` annotation to refer to the snapshot name. If the snapshot exists in another namespace, the snapshot namespace should be specified with the `stork.libopenstorage.org/snapshot-source-namespace` annotation in the PVC.
 
 Note that the storageClassName needs to be the Stork StorageClass `stork-snapshot-sc` as in the example below.
 
-For the above snapshot, the spec would like this:
+The following spec restores a PVC from the snapshot in the example above:
 
 ```text
 apiVersion: v1

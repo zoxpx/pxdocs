@@ -12,19 +12,27 @@ This document will show you how to create snapshots of Portworx volumes and how 
 The suggested way to manage snapshots on Kuberenetes is to use Stork. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-annotations).
 {{</info>}}
 
-## Pre-requisites
+## Prerequisites
 
-**Installing Stork**
+**Install Stork**
 
 This requires that you already have [Stork](/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
 Kubernetes cluster. If you fetched the Portworx specs from the Portworx spec generator in [PX-Central](https://central.portworx.com) and used the default options, Stork is already installed.
 
-## Creating snapshots
+## Create snapshots
 
 With local snapshots, you can either snapshot individual PVCs one by one or snapshot a group of PVCs by using a label selector.
 
 {{<homelist series="k8s-local-snap">}}
 
-## Creating PVCs from snapshots
+## Restore snapshots
+
+Once you've created a snapshot, you can restore it to a new PVC or the original PVC.
+
+### Restore a local snapshot to a new PVC
 
 {{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-restore-pvc-from-snap.md" %}}
+
+### Restore a local snapshot to the original PVC
+
+{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-in-place-restore-pvc-from-snap.md" %}}
