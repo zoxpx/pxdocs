@@ -7,17 +7,15 @@ description: Find out how to install a single stretch Portworx cluster across mu
 
 The goal of this document is to setup a single Portworx cluster that spans across multiple Kubernetes clusters.
 
-## Pre-requisites
+## Prerequisites
 
-* **Kubernetes Clusters**: You should have at least two Kubernetes clusters which are part of the same metropolitan area network with a maximum network latency of 10ms between them.
-* **Version**: A single Portworx cluster of v2.1 or later release needs to be installed on both clusters. This also requires Stork v2.2+ on both the clusters.
-* **Network Connectivity**: Ports between 9001 and 9020 should be open between the two Kubernetes clusters.
-* **External Kvdb**: A kvdb like etcd or consul setup outside of the Kubernetes clusters.
-* **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
-* **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
-{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
+* **Kubernetes Clusters**: At least two Kubernetes clusters which are part of the same metropolitan area network with a maximum network latency of 10ms between them
+* **Version**: A single Portworx cluster of v2.1 or later installed on across Kubernetes clusters and Stork v2.2.4 or later on both clusters
+* **Network Connectivity**: Ports 9001 to 9020 open between the two Kubernetes clusters
+* **External Kvdb**: A kvdb like etcd or consul setup outside of the Kubernetes clusters
+* **License**: A DR enabled PX-Enterprise license on both the source and destination clusters to use this feature
 
-## Installing Portworx 
+## Installing Portworx
 In this mode of operation, a single Portworx cluster will stretch across multiple Kubernetes clusters.
 
 ### New Installation
@@ -69,7 +67,8 @@ Otherwise you can always generate a new spec using the Portworx spec generator i
 **Note**: If your existing Kubernetes cluster uses internal kvdb, then you cannot stretch your Portworx clusters across multiple Kubernetes cluster. This mode of deployments requires an external kvdb running outside your Kubernetes cluster
 {{</info>}}
 
-### Specifying cluster domain
+### Specifying cluster domains
+
 A cluster domain identifies a subset of nodes from the stretch Portworx cluster that are a part of the same failure domain. In this case, your Kubernetes clusters are separated across a metropolitan area network and we wish to achieve DR across them. So each Kubernetes cluster and its nodes are one cluster domain. This cluster domain
 information needs to be explicitly specified to Portworx through the `-cluster_domain` install argument.
 
@@ -164,6 +163,12 @@ Global Storage Pool
         Total Used      :  0 B
         Total Capacity  :  900 GiB
 ```
+
+### Install storkctl
+
+`storkctl` is a command-line tool for interacting with a set of scheduler extensions.
+
+{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
 
 ### Cluster Domains Status
 
