@@ -8,12 +8,12 @@ series: px-docker-install
 ---
 
 {{<info>}}
-This document presents the **Docker** method of installing a Portworx cluster using `runC` containers. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+This document presents the **Docker** (or podman) method of installing a Portworx cluster using `runC` containers. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
 {{</info>}}
 
 ## Why OCI
 
-Running Portworx as a runC container eliminates any cyclical dependencies between a Docker container consuming storage from the Portworx container. It also enables you to run your Linux containers without a Docker daemon completely, while still getting all of the advantages of a Linux container and cloud native storage from Portworx.
+Running Portworx as a runC container eliminates any cyclical dependencies between the container runtime consuming storage, and the Portworx container. It also enables one to run Linux containers without a Docker daemon completely, while still getting all of the advantages of Linux containers and cloud native storage from Portworx.
 
 ## Install
 
@@ -59,6 +59,11 @@ sudo docker run --entrypoint /runc-entry-point.sh \
     $latest_stable --upgrade
 sudo systemctl restart portworx
 ```
+
+{{<info>}}
+If you are installing Portworx on RedHat Linux or RedHat CoreOS with [CRI-O container runtime](https://www.redhat.com/en/blog/introducing-cri-o-10), you don't have to install Docker in order to install Portworx.
+Instead, simply replace `docker` command with `podman` (e.g. `sudo podman run --entrypoint...`).
+{{</info>}}
 
 ## Uninstalling the Portworx OCI bundle
 
