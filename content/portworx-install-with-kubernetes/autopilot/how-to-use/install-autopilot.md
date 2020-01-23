@@ -155,6 +155,22 @@ spec:
             items:
             - key: config.yaml
               path: config.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: autopilot
+  namespace: kube-system
+  labels:
+    name: autopilot-service
+spec:
+  ports:
+    - name: autopilot
+      protocol: TCP
+      port: 9628
+  selector:
+    name: autopilot
+    tier: control-plane
 ```
 
 ## Upgrading Autopilot
