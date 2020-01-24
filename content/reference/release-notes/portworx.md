@@ -6,6 +6,28 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.3.3
+
+January 23, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Number**|**Improvement Description**|
+|----|----|
+| PWX-10819 | `replica anti-affinity` rules have been deprecated. <br/><br/>**User impact:** Volume creation may fail if using replica anti-affinity volume placement strategy or when restoring volume using cloud backup configured with such a policy. <br/><br/>**Recommendation:** Remove anti-affinity rules and use affinity rules with NotIn, NotEqual operators to achieve the same effect. |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10400 | In some situations, a busy volume remained attached even after a pod is terminated in Kubernetes.<br/><br/>**User impact:** Upgrades or other operations relying on the `kubectl drain` command got stuck on a node with these attached volumes.<br/><br/>**Resolution:** Portworx now detaches these busy volumes from terminated Kubernetes pods. |
+| PWX-10809 | Portworx ignored the `max_drive_set_count` field when deployed in disaggregated mode on cloud deployments.<br/><br/>**User Impact:** If an existing node was terminated and replaced without releasing its storage devices, Portworx sometimes brought a new node online as a storage node, exceeding the `max_drive_set_count` field value.<br/><br/>**Resolution:** Portworx now correctly enforces the `max_drive_set_count` field values. |
+| PWX-10627 | Portworx processes license expiration dates based on a combination of PX-Enterprise and AddOn licenses. If these licenses expired at different times, Portworx would not accurately report when they would expire. <br/><br/>**User Impact:** Users with these licenses may have had their cluster's node capacity reduced unexpectedly and may not have been able to start their cluster if it exceeded the remaining available license capacity.<br/><br/>**Resolution:** Portworx now aligns the license expiration dates and accurately reports when they expire. |
+
 ## 2.3.2
 
 December 18, 2019
