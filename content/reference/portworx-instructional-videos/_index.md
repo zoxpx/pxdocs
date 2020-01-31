@@ -162,3 +162,34 @@ Stork is the Portworx’s storage scheduler for Kubernetes that helps achieve ev
 
  - [Introducing STORK: Intelligent Storage Orchestration for Kubernetes](https://portworx.com/stork-storage-orchestration-kubernetes/)
  - [Using Stork with Portworx](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/)
+
+## Application Aware Snapshots using Pre and Post Rules
+
+Portworx supports specifying pre and post rules that are run on the application pods using the volumes being snapshotted. This allows users to quiesce the applications before the snapshot is taken and resume I/O after the snapshot is taken. We’ll walk through this workflow for configuring 3DSnaps involving creating rules and referencing the rules when creating the snapshots.
+
+{{< youtube  ARB2cMDqoKQ >}}
+
+#### Resources
+
+ - [Create Pre and Post Rules for Snapshots](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d/#step-1-create-rules)
+
+## Understand how PX-Autopilot can be used to automatically add disks to your storage pool
+
+Users use an Autopilot Rule which a CRD within Kubernetes to tell Autopilot which objects to monitor such as the amount of available storage space left for PVCs. Then, based on these objects and their conditions, trigger corresponding actions to perform when conditions occur. We’ll walk through the general flow and architecture of how this works in this session.
+
+{{< youtube  Jd1Teas-nAU >}}
+
+#### Resources
+
+ - [Working with AutoPilot Rules](https://docs.portworx.com/portworx-install-with-kubernetes/autopilot/how-to-use/working-with-rules/)
+
+## Learn about Volume Placement Strategies like Volume Affinity and Anti-Affinity
+
+When you provision volumes, Portworx places them throughout the cluster and across configured failure domains to provide fault tolerance. While this default manner of operation works well in many scenarios, you may wish to control how Portworx handles volume and replica provisioning more explicitly. You can do this by creating Volume Placement Strategies. In this session, we will talk about a series of rules which control volume and volume replica provisioning on nodes and pools in the cluster based on the labels they have.
+
+{{< youtube  S9j3aJ5lQw0 >}}
+
+#### Resources
+
+ - [VolumePlacementStratefy CRD](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/#the-volumeplacementstrategy-crd)
+ - [Kubernetes StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
