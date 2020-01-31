@@ -224,32 +224,78 @@ parameters:
 
 ## Take snapshots of CSI-enabled volumes
 
-CSI volume snapshotting is still in alpha as of Kubernetes 1.16. In order to take snapshots of CSI-enabled volumes, you must enable the `VolumeSnapshotDataSource` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/):
+For Kubernetes 1.17+, CSI Snapshotting is in beta is supported by the Portworx CSI Driver.
+
+Given you already have a [CSI PVC and StorageClass](/portworx-install-with-kubernetes/storage-operations/csi/#create-and-use-persistent-volumes), complete the following steps to create and restore a CSI VolumeSnapshot.
+
+1. Create a VolumeSnapshotClass, specifying the following: 
+    * The `snapshot.storage.kubernetes.io/is-default-class: "true"` annotation
+    * The `csi.storage.k8s.io/snapshotter-secret-name` parameter with your encryption and/or authorization secret
+    * The `csi.storage.k8s.io/snapshotter-secret-namespace` parameter with the namespace your secret is in
+
+      ```text
+      apiVersion: snapshot.storage.k8s.io/v1beta1
+      kind: VolumeSnapshotClass
+      metadata:
+        name: px-csi-snapclass
+        annotations:
+          snapshot.storage.kubernetes.io/is-default-class: "true"
+      driver: pxd.portworx.com
+      deletionPolicy: Delete
+      parameters:
+        csi.storage.k8s.io/snapshotter-secret-name: px-secret
+        csi.storage.k8s.io/snapshotter-secret-namespace: portworx
+      ```
+
+2. Create a VolumeSnapshot:
+
+      ```text  
+      apiVersion: snapshot.storage.k8s.io/v1beta1
+      kind: VolumeSnapshot
+      metadata:
+        name: px-csi-snapshot
+      spec:
+        volumeSnapshotClassName: px-csi-snapclass
+        source:
+          persistentVolumeClaimName: px-mysql-pvc
+      ```
+
+3. Restore from a VolumeSnapshot:
+
+      ```text
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: px-csi-pvc-restored 
+      spec:
+        storageClassName: portworx-csi-sc
+        dataSource:
+          name: px-csi-snapshot
+          kind: VolumeSnapshot
+          apiGroup: snapshot.storage.k8s.io
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+      ```
+
+
+See the [Kubernetes-CSI snapshotting documentation](https://kubernetes-csi.github.io/docs/snapshot-restore-feature.html) for more examples and documentation. 
+
+### Snapshotting alpha
+
+CSI volume snapshotting is alpha from Kubernetes 1.12 until 1.16. In order to take snapshots of CSI-enabled volumes for these versions, you must enable the `VolumeSnapshotDataSource` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/):
 
   ```text
   --feature-gates=VolumeSnapshotDataSource=true
   ```
 
-### Create a VolumeSnapshotClass
+In addition, you must use a [1.x release of the external snapshotter](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v1.2.2) that will create and understand the nessesary alpha APIs. 
 
-Create a `VolumeSnapshotClass`, specifying the following:
-
-* The `snapshot.storage.kubernetes.io/is-default-class: "true"` annotation
-* The `csi.storage.k8s.io/snapshotter-secret-name` parameter with your encryption secret
-* The `csi.storage.k8s.io/snapshotter-secret-namespace` parameter with the namespace your secret is in
-
-```text
-apiVersion: snapshot.storage.k8s.io/v1alpha1
-kind: VolumeSnapshotClass
-metadata:
-  name: csi-hostpath-snapclass
-  annotations:
-    snapshot.storage.kubernetes.io/is-default-class: "true"
-snapshotter: csi-hostpath
-parameters:
-  csi.storage.k8s.io/snapshotter-secret-name: px-secret
-  csi.storage.k8s.io/snapshotter-secret-namespace: portworx
-```
+{{<info>}}
+**WARNING:** Portworx, Inc. recommends that you do __NOT__ use CSI alpha, as there are significant API and reliability changes introduced in the Kubernetes 1.17 with snapshotting beta. Migrating any alpha CSI snapshotting objects to beta will require significant extra work. 
+{{</info>}}
 
 ## Create shared CSI-enabled volumes
 
