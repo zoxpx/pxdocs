@@ -20,3 +20,7 @@ This topic explains how to install Portworx with Kubernetes.
 {{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
 
 {{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
+
+## Related topics
+
+* Refer to the [Advanced installation parameters](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/other-operations/advanced-installation-parameters/) page for details about how to specify advanced installation parameters.
