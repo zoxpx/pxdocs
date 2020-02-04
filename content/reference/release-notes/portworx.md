@@ -25,7 +25,7 @@ The following issues have been fixed:
 |**Issue Number**|**Issue Description**|
 |----|----|
 | PWX-10974 | In version 2.3.3, Portworx erroneously showed multi-part licenses as "expired" when the license with the earliest expiration date expired. Despite this incorrect reporting, multi-part licenses did not expire and the cluster continued functioning normally. <br/><br/>**User Impact:** Users may have seen multi-part licenses erroneously marked "expired". <br/><br/>**Resolution:** Portworx now correctly displays multi-part license expiration dates. |
-| PWX-10967 | PX-Migrate erroneously indicated success when migrating between clusters with the same internal IP addresses. <br/><br/>**User Impact:** Migrations under these circumstances failed, but users saw Portworx indicate success. <br/><br/>**Resolution:** Px-migrate now successfully migrates between clusters with the same internal IP addresses. |
+| PWX-10967 | PX-Migrate erroneously indicated success when migrating volumes between clusters with the same internal IP addresses. <br/><br/>**User Impact:** Migrations under these circumstances failed, but users saw Portworx indicate success. <br/><br/>**Resolution:** Px-Migrate now successfully migrates volumes between clusters with the same internal IP addresses. |
 
 
 ## 2.3.3
