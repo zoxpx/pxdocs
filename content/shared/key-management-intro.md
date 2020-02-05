@@ -7,8 +7,6 @@ hidden: true
 
 ## Portworx Encrypted Volumes
 
-{{% content "shared/key-management-intro.md" %}}
-
 Portworx has two different kinds of encrypted volumes:
 
 - **Encrypted Volumes**
