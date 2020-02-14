@@ -98,8 +98,6 @@ metadata:
     tier: control-plane
   name: autopilot
   namespace: kube-system
-  initializers:
-    pending: []
 spec:
   selector:
     matchLabels:
