@@ -124,7 +124,7 @@ spec:
         - -log-level
         - debug
         imagePullPolicy: Always
-        image: portworx/autopilot:1.0.0
+        image: portworx/autopilot:1.1.0
         resources:
           requests:
             cpu: '0.1'
@@ -153,6 +153,22 @@ spec:
             items:
             - key: config.yaml
               path: config.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: autopilot
+  namespace: kube-system
+  labels:
+    name: autopilot-service
+spec:
+  ports:
+    - name: autopilot
+      protocol: TCP
+      port: 9628
+  selector:
+    name: autopilot
+    tier: control-plane
 ```
 
 ## Upgrading Autopilot
@@ -160,7 +176,7 @@ spec:
 To upgrade Autopilot, change the image tag in the deployment with the `kubectl set image` command. The following example upgrades Autopilot to the 1.0.0 version:
 
 ```text
-kubectl set image deployment.v1.apps/autopilot -n kube-system autopilot=portworx/autopilot:1.0.0
+kubectl set image deployment.v1.apps/autopilot -n kube-system autopilot=portworx/autopilot:1.1.0
 ```
 ```output
 deployment.apps/autopilot image updated
