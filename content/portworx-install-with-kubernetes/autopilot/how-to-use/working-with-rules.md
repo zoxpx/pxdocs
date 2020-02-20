@@ -36,25 +36,11 @@ The subsequent sections describe common operations for managing these rules.
 
 ## Updating an AutopilotRule
 
-Autopilot currently does not support modifying an existing rule. Instead, delete the existing rule and create a new one with the modified spec.
+You can update an autopilot rule in-place with the `kubectl edit` command:
 
-1. Delete the rule you intend to modify by entering the `kubectl delete autpilotrule` command, specifying the rule you want to delete:
-
-	```text
-    kubectl delete autopilotrule volume-resize
-	```
-	```output
-	autopilotrule.autopilot.libopenstorage.org "volume-resize" deleted
-	```
-
-2. Apply the modified spec in your cluster.
-
-	```text
-    kubectl apply -f volume-resize-autopilotrule.yaml
-	```
-	```output
-	autopilotrule.autopilot.libopenstorage.org/volume-resize created
-	```
+```text
+kubectl edit autopilotrule volume-resize
+```
 
 ## Deleting an AutopilotRule
 
