@@ -114,3 +114,32 @@ Expand the pool by 50% of current size by adding disks
       scalepercentage: "50"
       scaletype: "add-disk"
 ```
+
+## Autopilot Events
+
+You can view the actions Autopilot takes by querying Autopilot events. These events provide insight into how your Autopilot rules are functioning, what actions they may be taking, and what actions they have taken in the past.
+
+| **Autopilot rule event** | **Description** |
+| ---- | ---- |
+| Initializing | The rule's initial startup state where monitoring has not yet begun. |
+| Normal | Autopilot is monitoring the rule as expected. |
+| Triggered | The rule has its activation conditions met. |
+| ActiveActionsPending | The rule's activation conditions have been met, but the actions are not yet being performed. |
+| ActiveActionsTaken | Autopilot has performed the rule's actions, but still hasn't moved out of the active status. |
+| ActionsDeclined | Autopilot has intentionally declined to perform a rule's action, for example when a PVC reaches a maximum user-defined size. |
+| ActiveActionsInProgress | The rule is active and had its conditions met and there is an ongoing action on the object. |
+
+You can query events from Kubernetes by entering the following `kubectl get events` command:
+
+```text
+kubectl get events --field-selector involvedObject.kind=AutopilotRule
+```
+```output
+LAST SEEN   FIRST SEEN   COUNT   NAME                                   KIND            SUBOBJECT   TYPE      REASON           SOURCE      MESSAGE
+41m         41m          1       pvc-total-size-15gi.15f13fcf9664716d   AutopilotRule               Normal    Transition       autopilot   rule: pvc-total-size-15gi:pvc-8c20c7bb-49fa-11ea-a206-000c29fda8e7 transition from Initializing => Normal
+41m         41m          1       pvc-total-size-15gi.15f13fcf96a75e4f   AutopilotRule               Normal    Transition       autopilot   rule: pvc-total-size-15gi:pvc-8c292b08-49fa-11ea-a206-000c29fda8e7 transition from Initializing => Normal
+36m         38m          2       pvc-total-size-15gi.15f14003ff20f5ec   AutopilotRule               Normal    Transition       autopilot   rule: pvc-total-size-15gi:pvc-8c20c7bb-49fa-11ea-a206-000c29fda8e7 transition from ActiveActionsInProgress => ActiveActionsTaken
+35m         37m          2       pvc-total-size-15gi.15f140126cc4021c   AutopilotRule               Normal    Transition       autopilot   rule: pvc-total-size-15gi:pvc-8c20c7bb-49fa-11ea-a206-000c29fda8e7 transition from ActiveActionsTaken => Normal
+35m         38m          3       pvc-total-size-15gi.15f13ff9ae4cc963   AutopilotRule               Normal    Transition       autopilot   rule: pvc-total-size-15gi:pvc-8c20c7bb-49fa-11ea-a206-000c29fda8e7 transition from Normal => Triggered
+34m         34m          2       pvc-total-size-15gi.15f14032de7660a7   AutopilotRule               Normal    Transition       autopilot   rule: pvc-total-size-15gi:pvc-8c20c7bb-49fa-11ea-a206-000c29fda8e7 transition from ActiveActionsInProgress => ActionsDeclined
+```
