@@ -6,6 +6,29 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.3.5
+
+February 19, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Number**|**Improvement Description**|
+|----|----|
+|PWX-11000| Portworx now features a Disaster Recovery plan in the IBM Cloud Marketplace. |
+|PWX-11122| Portworx now supports dynamic port range change |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+|PWX-11101| If nodes were decommissioned with pending snapshots, those snapshots contained references to the decommissioned node.<br/><br/>**User impact:** New nodes sometimes failed to come up.<br/><br/>**Resolution:** When a node is now decommissioned, Portworx removes any pending snapshots which had references on the decommissioned node. |
+|PWX-10441| Due to a race condition in the logic which handles volume attachments during a Portworx restart, sharedv4 volumes could be  tagged as attached when they were not. <br/><br/>**User impact:** This caused stale entries in `/etc/exports`, which led NFS to error out.<br/><br/>**Resolution:** Portworx no longer experiences a race condition at restart, and no longer creates stale entries in `/etc/exports`. |
+
+
 ## 2.3.4
 
 February 3, 2020
