@@ -7,6 +7,10 @@ aliases:
   - /portworx-install-with-kubernetes/on-premise/openshift/operator/upgrade/
 ---
 
+{{<info>}}
+**WARNING:** If you're upgrading OpenShift to 4.3, you must change Portworx before you can do so. See the [Preparing Portworx to upgrade to OpenShift 4.3](/portworx-install-with-kubernetes/openshift/operator/openshift-upgrade) page for details.
+{{</info>}}
+
 If you're using the Portworx Operator, you can upgrade or change your Portworx version at any time by modifying the `StorageCluster` spec.
 
 ## Prerequisites
