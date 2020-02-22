@@ -9,7 +9,7 @@ series: release-notes
 
 ## 1.1.0
 
-February 19, 2010
+February 19, 2020
 
 ### Improvements
 
