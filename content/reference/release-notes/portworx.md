@@ -1154,7 +1154,7 @@ July 21, 2018
 
 ### Key Features and Enhancements
 
-* Use http://install.portworx.com/1.4/ for K8S spec generation.
+* Use [PX-Central](https://central.portworx.com) for K8S spec generation.
 
 ### Key Fixes
 
@@ -1171,10 +1171,6 @@ If you are on any of the 1.4 RC builds, you will need to do a fresh install. Ple
 All customers on 1.3.x release will be able to upgrade to 1.4
 
 All customers on 1.2.x release will be able to upgrade to 1.4 but in a few specific cases might need a node reboot after the upgrade. Please reach out to support for help with an upgrade or if there are any questions if you are running 1.2.x in production.
-
-### Notes
-
-* The kubernetes spec generator for 1.4 can be accessed [here](http://install.portworx.com/1.4/)
 
 ### Key Features and Enhancements
 
