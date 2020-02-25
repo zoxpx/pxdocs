@@ -1,8 +1,8 @@
 ---
 title: Basics operations using pxctl
 description: General reference for CLI, Volumes and other resources.
-keywords: pxctl, command-line tool, cli, basics, reference 
-weight: 1
+keywords: pxctl, command-line tool, cli, basics, reference
+weight: 2
 linkTitle: Basics
 ---
 

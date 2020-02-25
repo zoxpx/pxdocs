@@ -3,6 +3,7 @@ title: Storage pool caching
 keywords: storage pool, pool caching
 description: Perform pool caching operations.
 series: concepts
+weight: 2
 ---
 
 PX-Cache improves storage pool performance by using a cache drive and attaching it to the storage pool. The additional cache drive can improve both the latency and IOPS of the pool to which it's attached. The cache drive must be either an SSD or NVMe drive, and the storage pool must be composed of magnetic drives.
