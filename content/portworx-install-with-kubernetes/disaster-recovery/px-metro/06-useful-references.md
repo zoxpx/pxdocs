@@ -7,6 +7,12 @@ description: Useful references, video tutorials
 
 ## Related videos 
 
+### Set up multi-cluster application failover with CockroachDB
+
+{{< youtube 9czMCF8MfXA >}}
+
+<br>
+
 ### Achieve zero RPO for disaster recovery using PX-DR on Openshift
 
 {{< youtube xxVuQPevLhs >}}
@@ -16,9 +22,3 @@ description: Useful references, video tutorials
 ### Achieve zero RPO across Kubernetes clusters with Portworx on AWS
 
 {{< youtube wO-eZoXP4Xg >}}
-
-<br>
-
-### Set up multi-cloud disaster recovery with Rancher Kubernetes Engine and Portworx
-
-{{< youtube JClxvmc31j0 >}}
