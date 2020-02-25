@@ -264,9 +264,21 @@ Once the MigrationSchedule object is deleted, all the associated Migration objec
 
 ## Related videos 
 
-### Set up multi-cluster application failover with CockroachDB
+### Set up cross-cloud application migration from Google Cloud to Microsoft Azure with Portworx on OpenShift 4.2
 
-{{< youtube 9czMCF8MfXA >}}
+{{< youtube TV6WAUqdzFI >}}
+
+<br>
+
+### Set up multi-cloud disaster recovery with Rancher Kubernetes Engine and Portworx
+
+{{< youtube JClxvmc31j0 >}}
+
+<br>
+
+### Asynchronous DR for Postgres on Rancher Kubernetes Engine
+
+{{< youtube id="4nV_A82VuwY" time="425" >}}
 
 <br>
 
@@ -274,8 +286,3 @@ Once the MigrationSchedule object is deleted, all the associated Migration objec
 
 {{< youtube 8aHuFTuByAM >}}
 
-<br>
-
-### Set up cross-cloud application migration from Google Cloud to Microsoft Azure with Portworx on OpenShift 4.2
-
-{{< youtube TV6WAUqdzFI >}}
