@@ -8,41 +8,6 @@ series: k8s-vol
 
 This document describes how to use Portworx **sharedv4** (ReadWriteMany) volumes in your Kubernetes cluster.
 
-#### Pre-requisites
-
-In order to use Portworx sharedv4 volumes, you need to pass the following environment variable to the Portworx DaemonSet.
-
-```text
-  env:
-    - name: "ENABLE_SHARED_AND_SHARED_v4"
-      value: "true"
-```
-
-To edit an existing Portworx installation run the following commands:
-
-Create a patch file
-
-```text
-cat <<EOF> patch.yaml
-spec:
-  template:
-    spec:
-      containers:
-      - name: portworx
-        env:
-          - name: ENABLE_SHARED_AND_SHARED_v4
-            value: "true"
-EOF
-```
-
-Patch the daemon set
-
-```text
-kubectl -n kube-system patch ds portworx --patch "$(cat patch.yaml)" --type=strategic
-```
-
-After updating the daemon set, all the Portworx pods will restart. Once all the Portworx pods are restarted then you can start using sharedv4 volumes.
-
 #### Provision a Sharedv4 Volume
 
 Sharedv4 volumes are useful when you want multiple PODs to access the same PVC \(volume\) at the same time. They can use the same volume even if they are running on different hosts. They provide a global namespace and the semantics are POSIX compliant.
