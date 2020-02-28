@@ -16,7 +16,7 @@ In order to use Sysdig with Portworx, you must deploy both products onto your Ku
 
 ## Deploy Sysdig on Kubernetes with Portworx
 
-1. Follow the [Kubernetes Agent Installation Steps](https://sysdigdocs.atlassian.net/wiki/spaces/Platform/pages/256475253/Kubernetes+Installation+Steps) in the Sysdig documentation to deploy the following YAML files:
+1. Follow the [Kubernetes Agent Installation Steps](https://docs.sysdig.com/en/kubernetes-agent-installation-steps.html) in the Sysdig documentation to deploy the following YAML files:
 
     * sysdig-agent-clusterrole.yaml
     * sysdig-agent-configmap.yaml
@@ -29,7 +29,7 @@ In order to use Sysdig with Portworx, you must deploy both products onto your Ku
       prometheus:
         enabled: true
         interval: 1
-        process_filter:  
+        process_filter:
           - include:
               process.cmdline: "px"
               conf:
@@ -40,4 +40,4 @@ In order to use Sysdig with Portworx, you must deploy both products onto your Ku
 
 ## Save and restore Dashboards
 
-You can save and restore your Sysdig dashboards on your Portworx cluster. Follow the steps in the [Save and Restore Dashboards with Scripts](https://sysdigdocs.atlassian.net/wiki/spaces/Monitor/pages/205488166/Dashboards#Dashboards-SaveandRestoreDashboardswithScripts) section of the Sysdig documentation to download the scripts and review instructions for running them.
+You can save and restore your Sysdig dashboards on your Portworx cluster. Follow the steps in the [Save and Restore Dashboards with Scripts](https://docs.sysdig.com/en/save-and-restore-dashboards-with-scripts.html) section of the Sysdig documentation to download the scripts and review instructions for running them.
