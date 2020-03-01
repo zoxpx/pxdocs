@@ -104,9 +104,14 @@ status:
   storageStatus: ""
 ```
 
-## Enable DR mode
+## Enable disaster recovery mode
 
-By default, every 7th migration will be a full migration. For DR though, we want every migration to be incremental. This can be enabled by setting the mode for the clusterPair to DisasterRecovery. For example, for the clusterPair below, we can add the mode under spec.options:
+You can enable disaster recovery mode by specifying the following fields in the `options` section of your `ClusterPair`:
+
+* `ip`, with the IP address of the remote Portworx node
+* `port`, with the port of the remote Portworx node
+* `token`, with the token of the destination cluster. To retrieve the token, run the `pxctl cluster token show` command on a node in the destination cluster. Refer to the [Show your destination cluster token](https://docs.portworx.com/portworx-install-with-kubernetes/migration/kubemotion/#show-your-destination-cluster-token) section from the [Kubemotion with Stork on Kubernetes](https://docs.portworx.com/portworx-install-with-kubernetes/migration/kubemotion/) page for details.
+* `mode`: by default, every seventh migration is a full migration. If you specify `mode: DisasterRecovery`, then every migration is incremental.
 
 ```text
 apiVersion: stork.libopenstorage.org/v1alpha1
