@@ -52,6 +52,8 @@ Every Portworx cluster must be connected to a key-value store to store Portworx 
 
 In order for your Portworx cluster to be highly available, you must ensure that the Portworx key-value store is set up to be highly available. By using an instance of [Databases for etcd](https://cloud.ibm.com/docs/containers?topic=containers-portworx#portworx_database), you can set up a highly available key-value store for your Portworx cluster. Each service instance contains three etcd data members that are added to a cluster. The etcd data members are spread across zones in an IBM Cloud location and data is replicated across all etcd data members.
 
+Alternatively, if you want to get up and running quickly, and don't need your key-value store to be highly available, you can select an internal KVBD from the `Portworx metadata key-value store` option on the deployment page. If you choose to install Portworx with the internal KVDB, then you can skip the steps that ask for the endpoints and the secret. 
+
 ## Step 4: Set up volume encryption with IBM Key Protect
 
 By default, data that you store on a Portworx volume is not encrypted at rest or during transit. To protect your data from being accessed by unauthorized users, you can choose to protect your volumes with [IBM Key Protect](https://cloud.ibm.com/docs/services/key-protect?topic=key-protect-about#about). IBM Key Protect helps you to provision encrypted keys that are secured by FIPS 140-2 Level 2 certified cloud-based hardware security modules (HSMs).
