@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.3.6
+
+February 29, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| 11377 | Adding support for the 4.18.0-147.5.1.el8_1.x86_64 kernel. |
+
 ## 2.3.5
 
 February 19, 2020
