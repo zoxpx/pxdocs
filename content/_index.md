@@ -7,6 +7,9 @@ hidesections: true
 disableprevnext: true
 scrollspy-container: false
 ---
+{{<info>}}
+**ADVISORY:** Looking to upgrade to OpenShift 4.3? See the [Preparing Portworx to upgrade to OpenShift 4.3 using the Operator](/portworx-install-with-kubernetes/openshift/operator/openshift-upgrade/) article for instructions.
+{{</info>}}
 
 Portworx is a software defined storage overlay that allows you to
 
