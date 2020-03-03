@@ -6,6 +6,33 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.4
+
+March 3, 2020
+
+<!-- ### New Features
+
+* Introducing PX-Central on-premises: Deploy a one-stop dashboard for managing your Portworx clusters and licenses on your own internal and air-gapped infrastructure.
+* Introducing the Portworx license server -->
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-10852 | Improved prometheus metrics for Portworx |
+
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10939| A difference between how Portworx calculates license expiration dates using time-zones and how Flexera calculates expiration dates without time-zones caused Portworx to occasionally consider new licenses "expired" on their first day.<br/><br/>**User Impact:** Users with multi-part licenses may have been unable to use their multi-part licenses on the first day they activated them.<br/><br/>**Resolution:** Licenses once again work on the first day they're applied and license expiration dates for multi-part licenses display accurately.|
+
+
 ## 2.3.6
 
 February 29, 2020
