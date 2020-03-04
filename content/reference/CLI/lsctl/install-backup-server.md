@@ -3,7 +3,6 @@ title: Install a backup license server
 description: CLI reference for lsctl commands
 keywords: lsctl, CLI, command line, command line tool, reference
 weight: 3
-series: reference
 hidden: true
 ---
 
