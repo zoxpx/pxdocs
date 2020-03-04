@@ -20,10 +20,10 @@ After you've created your license server, but before you add licenses, you can c
 {{<info>}}
 **NOTE:** If you downloaded the Portworx license server docker image directly to your license server, pull the Portworx license server from portworx onto a computer that can access the internet and send it to your air-gapped cluster. The following example sends the docker image to the air-gapped cluster over ssh:
 
-    ```text
-    sudo docker pull portworx/px-base-els:latest
-    sudo docker save portworx/px-base-els:latest | ssh root@<air-gapped-address> docker load
-    ```
+```text
+sudo docker pull portworx/px-base-els:latest
+sudo docker save portworx/px-base-els:latest | ssh root@<air-gapped-address> docker load
+```
 {{</info>}}
 
 1.  Create and start the following `docker-compose.yml` file, specifying the following:
@@ -87,7 +87,7 @@ After you've created your license server, but before you add licenses, you can c
     ```output
     WARN[0000] Changed main URL from http://<host>:7070 to http://192.0.2.0:7070/fne/bin/capability
     WARN[0000] Changed backup URL from <host> to http://192.0.2.1:7070/fne/bin/capability
-    INFO[0000] Backup license server updated                
+    INFO[0000] Backup license server updated
     INFO[0000] Main license server updated (restarting in 15 seconds)
     > Restarting Main license server: .....................
     INFO[0048] Successfully set up Main/Backup license servers for HA
