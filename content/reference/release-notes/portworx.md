@@ -10,10 +10,9 @@ series: release-notes
 
 March 3, 2020
 
-<!-- ### New Features
+### New Features
 
-* Introducing PX-Central on-premises: Deploy a one-stop dashboard for managing your Portworx clusters and licenses on your own internal and air-gapped infrastructure.
-* Introducing the Portworx license server -->
+* Introducing the Portworx license server: Add and manage licenses for multiple Portworx clusters from an on-premises license server. UI integration coming soon.
 
 ### Improvements
 
