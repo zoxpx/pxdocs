@@ -18,28 +18,28 @@ Perform the steps in this topic to manually install a Portworx license server.
 
 1. Pull the license server from Portworx:
 
-        ```text
-        docker pull portworx/px-base-els:latest
-        ```
+    ```text
+    docker pull portworx/px-base-els:latest
+    ```
 
-        {{<info>}}
-**NOTE:** If your cluster is air-gapped, you must first pull the Portworx license server Docker images to either your docker registry, or the server itself:     
+    {{<info>}}
+**NOTE:** If your cluster is air-gapped, you must first pull the Portworx license server Docker images to either your docker registry, or the server itself:
 
   * If you have a company-wide docker-registry server, pull the Portworx license server from Portworx:
 
-        ```text
-        sudo docker pull portworx/px-els:latest
-        sudo docker tag portworx/px-els:latest <company-registry-hostname>:5000/portworx/px-els:latest
-        sudo docker push <company-registry-hostname>:5000/portworx/px-els:latest
-        ```
+    ```text
+    sudo docker pull portworx/px-els:latest
+    sudo docker tag portworx/px-els:latest <company-registry-hostname>:5000/portworx/px-els:latest
+    sudo docker push <company-registry-hostname>:5000/portworx/px-els:latest
+    ```
 
   * If you do not have a company-wide docker-registry server, pull the Portworx license server from portworx onto a computer that can access the internet and send it to your air-gapped cluster. The following example sends the docker image to the air-gapped cluster over ssh:
 
-        ```text
-        sudo docker pull portworx/px-base-els:latest
-        sudo docker save portworx/px-base-els:latest | ssh root@<air-gapped-address> docker load
-        ```
-        {{</info>}}
+    ```text
+    sudo docker pull portworx/px-base-els:latest
+    sudo docker save portworx/px-base-els:latest | ssh root@<air-gapped-address> docker load
+    ```
+    {{</info>}}
 
 2. Create and start the following `docker-compose.yml` file, adding any options to the following **services.px-els-main.command:** line:
 
