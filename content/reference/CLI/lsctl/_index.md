@@ -4,6 +4,7 @@ description: CLI reference for lsctl commands
 keywords: lsctl, CLI, command line, command line tool, reference
 weight: 1
 series: reference
+hidden: true
 ---
 
 `lsctl` is the license server command-line interface that allows you to control the Portworx license server independently from PX-Central. This cli is intended for advanced operations staff which may require custom license server implementations not achievable through the PX-Central UI and offers more options and provides more granular control of your Portworx license server than the PX-Central UI. You may need to use `lsctl` to perform certain actions that you cannot perform from the PX-Central UI.
