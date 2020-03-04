@@ -4,7 +4,6 @@ linkTitle: Add licenses using lsctl
 description: CLI reference for lsctl commands
 keywords: lsctl, CLI, command line, command line tool, reference
 weight: 5
-series: reference
 hidden: true
 ---
 
@@ -12,7 +11,7 @@ The Portworx license server initially contains no licenses. You must add license
 
 ## Prerequisites
 
-License server must be installed before you can add licenses to it. 
+License server must be installed before you can add licenses to it.
 
 ## Add licenses to a license server using lsctl
 

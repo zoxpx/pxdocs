@@ -3,7 +3,6 @@ title: Lsctl command reference
 description: CLI reference for lsctl commands
 keywords: lsctl, CLI, command line, command line tool, reference
 weight: 9
-series: reference
 hidden: true
 ---
 
