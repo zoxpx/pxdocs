@@ -321,6 +321,46 @@ COMMANDS:
      set       Configure email settings for alerts.
 ```
 
+#### pxctl service email set
+
+```text
+pxctl service email set
+```
+```output
+--password string    Password to authenticate with smtp-server (if required)
+-r, --recipient string   Recipient of alert emails.
+-s, --server string      IP or DNS name for smtp server
+--severity string    Minimum severity for email trigger, (warning|critical) (default "critical")
+-p, --smtp-port string   IP or DNS name for smtp server
+-u, --username string    Username to authenticate with smtp-server (if required)
+```
+
+Receive Warning and Critical alerts:
+
+```text
+/opt/pwx/bin/pxctl service email set --server=smtp.gmail.com --smtp-port=587 --username=me@portworx.com --password='IncrediblySecretPassword' --recipient=me@portworx.com --severity warning
+```
+
+Receive Only Critical alerts:
+
+```text
+/opt/pwx/bin/pxctl service email set --server=smtp.gmail.com --smtp-port=587 --username=me@portworx.com --password='IncrediblySecretPassword' --recipient=me@portworx.com
+```
+
+{{<info>}}
+**NOTE:** You must add single quotes around the password.
+{{</info>}}
+
+<!--
+
+Opt-out of Portworx Support receiving critical alerts:
+
+`/opt/pwx/bin/pxctl service email set --server=smtp.gmail.com --smtp-port=587 --username=me@portworx.com --password='IncrediblySecretPassword' --recipient=me@portworx.com --notify=false`
+
+--notify false is a hidden command
+
+-->
+
 ## Scan for bad blocks
 
 You can use `pxctl service scan` to scan for bad blocks on a drive:
