@@ -31,6 +31,10 @@ If you're installing Portworx on OpenShift on a cloud environment, Portworx requ
 
 {{% content "shared/azure-cloud-user-requirements.md" %}}
 
+## Open ports for worker nodes
+
+Ensure ports 17001-17020 on worker nodes are reachable from master and other worker nodes.
+
 ## Install Portworx using the OpenShift console
 
 To install Portworx with OpenShift, you will first generate `StorageCluster` spec that you will deploy in your cluster.
