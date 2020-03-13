@@ -131,7 +131,7 @@ To install Portworx with Kubernetes, you must first generate Kubernetes manifest
 
     * On the **Storage** tab, specify **AWS** and configure your storage devices based on your needs
     * On the **Customize** tab, select the **Amazon Elastic Container Service for Kubernetes (EKS)** option
-    * On the **Environment Variables** tab, Add **ENABLE_ASG_STORAGE_PARTITIONING** for variable name and **true** for variable value.
+    * Under the **Environment Variables** dropdown on the **Customize** tab, create an environment variable named `ENABLE_ASG_STORAGE_PARTITIONING` with a value of **true**
 
 {{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
 
