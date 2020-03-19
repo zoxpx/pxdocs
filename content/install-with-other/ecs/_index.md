@@ -88,7 +88,7 @@ bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
 ```text
-latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
+latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false&aut=false' | awk '/image: / {print $2}')
 # Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
 sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \

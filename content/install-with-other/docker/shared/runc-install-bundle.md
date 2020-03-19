@@ -14,7 +14,7 @@ on your host system:
 REL="/2.2"       # 2.2 portworx release
 #REL="/2.3"     # 2.3 portworx release
 
-latest_stable=$(curl -fsSL "https://install.portworx.com$REL/?type=dock&stork=false" | awk '/image: / {print $2}')
+latest_stable=$(curl -fsSL "https://install.portworx.com$REL/?type=dock&stork=false&aut=false" | awk '/image: / {print $2}')
 
 # Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
 sudo docker run --entrypoint /runc-entry-point.sh \
