@@ -2,7 +2,7 @@
 title: Deployment architectures for Portworx
 linkTitle: Deployment architectures
 description: Understand various deployment architectures for Portworx
-keywords: Deployment architecture, disaggregated architecture, converged architecture, Hyperconverged, AWS, Amazon Web Services, GCP Google Cloud Platform, VMWare vSphere 
+keywords: Deployment architecture, disaggregated architecture, converged architecture, Hyperconverged, AWS, Amazon Web Services, GCP Google Cloud Platform, VMWare vSphere
 weight: 1
 series: arch-references
 ---
@@ -37,7 +37,15 @@ You would chose this option if you have a very dynamic compute environment, wher
 
 Separating storage and compute clusters mean such scaling & management operations on the storage cluster don't interfere with the compute cluster, and vice versa.
 
-{{<info>}}Portworx recommends this approach in autoscaling cloud environments.{{</info>}}
+{{<info>}}
+**NOTE:**
+Portworx Inc. recommends this approach in autoscaling cloud environments.
+{{</info>}}
+
+{{<info>}}
+**NOTE:**
+There is a hard limit of 128 remote connections for remote connections from storageless nodes.
+{{</info>}}
 
 ## Approach B: Hyperconverged Storage and Compute clusters
 
