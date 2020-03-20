@@ -5,14 +5,12 @@ keywords: Install, Docker, PX OCI
 hidden: true
 ---
 
-Portworx provides a Docker based installation utility to help deploy the Portworx OCI
-bundle. This bundle can be installed by running the following Docker container
-on your host system:
+Portworx provides a Docker-based installation utility to help deploy the Portworx OCI bundle. You can install this bundle by running the following Docker container on your host system:
 
 ```text
 # Uncomment appropriate `REL` below to select desired Portworx release
-REL="/2.3"     # 2.3 portworx release
-#REL="/2.2"       # 2.2 portworx release
+REL="/2.4"  # 2.4 Portworx v2.4 release
+#REL="/2.3" # 2.2 Portworx v2.3 release
 
 latest_stable=$(curl -fsSL "https://install.portworx.com$REL/?type=dock&stork=false&aut=false" | awk '/image: / {print $2}')
 
@@ -22,5 +20,3 @@ sudo docker run --entrypoint /runc-entry-point.sh \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
     $latest_stable
 ```
-
-{{<info>}}Running the Portworx OCI bundle does not require Docker, but Docker will still be required to _install_ the Portworx OCI bundle.  If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.{{</info>}}

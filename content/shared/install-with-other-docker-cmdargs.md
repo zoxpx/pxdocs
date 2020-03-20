@@ -1,9 +1,11 @@
 ---
-title: Portworx commandline arguments
+title: Portworx command line arguments
 description: Command line arguments to the Portworx daemon
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
 hidden: true
 ---
+
+Below is the list of arguments you can pass to `px-runc`:
 
 ##### General options
 
@@ -15,7 +17,7 @@ hidden: true
 -T <type>                 Specify backend storage type (<type> is dmthin, btrfs, mdraid or lvm)
 -cache <device path>      Specify storage devices that PX should use for caching
 -dedicated_cache          Constrain cache drive assignment from given -cache drives only
--j <device path>          Specify a journal device for PX, or "auto" (recommended) 
+-j <device path>          Specify a journal device for PX, or "auto" (recommended)
 -metadata <device path>   Specify storage device that PX should use for storing the system meta data
 -e key=value              Specify extra environment variables
 -v <dir:dir[:shared,ro]>  Specify extra mounts
@@ -93,7 +95,9 @@ hidden: true
 -cluster_domain <name>    Cluster Domain Name for this cluster
 ```
 
-{{<info>}}NOTE: The `-raid <0|10>` option is different than the volume replication factor.  For example, px-nodes using `-raid 10` and hosting volumes with replication factor 3 will keep 6 copies of the data.{{</info>}}
+{{<info>}}
+The `-raid <0|10>` option is different than the volume replication factor.  For example, Portworx nodes using `-raid 10` and hosting volumes with a replication factor of 3, will keep 6 copies of the data.
+{{</info>}}
 
 <a name="env-variables"></a>
 
@@ -105,9 +109,11 @@ PX_HTTPS_PROXY         If running behind an HTTPS proxy, set the PX_HTTPS_PROXY 
 PX_ENABLE_CACHE_FLUSH  To enable cache flush daemon, set PX_ENABLE_CACHE_FLUSH=true.
 ```
 
-{{<info>}} Setting environment variables can be done using the `-e` option{{</info>}}
+{{<info>}}
+You can set the environment variables using the `-e` option.
+{{</info>}}
 
-Below is an example install command with extra "PX_ENABLE_CACHE_FLUSH" environment variable:
+For example, to set the `PX_ENABLE_CACHE_FLUSH` environment variable to `true`, run the following command:
 
 ```text
 sudo /opt/pwx/bin/px-runc install -e PX_ENABLE_CACHE_FLUSH=yes \
