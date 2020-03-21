@@ -102,6 +102,11 @@ This action is to perform expansion on Portworx Storage Pools.
 * **scaletype**: Specifies the type of operation to be performed to expand the pool. Supported values are:
     * *add-disk*: Portworx will add new disk(s) to the existing storage pool
     * *resize-disk*: Portworx will resize existing disks in the storage pool
+* **scalesize**: Specifies the amount, in Gi or Ti, by which Autopilot should expand a storage pool.
+
+{{<info>}}
+**NOTE:** You cannot combine the **scalepercentage** and **scalesize** parameters; use only one of them in an Autopilot rule.
+{{</info>}}
 
 ##### Examples
 
@@ -113,6 +118,16 @@ Expand the pool by 50% of current size by adding disks
     params:
       scalepercentage: "50"
       scaletype: "add-disk"
+```
+
+Expand the pool by 100Gi by resizing disks
+
+```text
+  actions:
+  - name: openstorage.io.action.storagepool/expand
+    params:
+      scalesize: "100Gi"
+      scaletype: "resize-disk"
 ```
 
 ## Autopilot Events
@@ -128,6 +143,7 @@ You can view the actions Autopilot takes by querying Autopilot events. These eve
 | ActiveActionsTaken | Autopilot has performed the rule's actions, but still hasn't moved out of the active status. |
 | ActionsDeclined | Autopilot has intentionally declined to perform a rule's action, for example when a PVC reaches a maximum user-defined size. |
 | ActiveActionsInProgress | The rule is active and had its conditions met and there is an ongoing action on the object. |
+| ActionNotLicensed | The action Autopilot is trying to perform is not permitted due to license restrictions |
 
 You can query events from Kubernetes by entering the following `kubectl get events` command:
 
