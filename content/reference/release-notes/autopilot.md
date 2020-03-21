@@ -7,6 +7,20 @@ weight: 350
 series: release-notes
 ---
 
+## 1.2.0
+
+March 20, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Description**|
+|----|
+| Added support for a new parameter, `scalesize`, under the storage pool expand action that allows you to increase storage pool capacity by a fixed amount. See details on all action parameters [here](/portworx-install-with-kubernetes/autopilot/reference/#openstorage-io-action-storagepool-expand). |
+| Added validation for the AutopilotRule CRD |
+| Added an alert event that occurs when Autopilot detects an action that cannot be performed due to license restrictions. See the [list of alerts](/portworx-install-with-kubernetes/autopilot/reference/#autopilot-events) for more information. |
+
 ## 1.1.0
 
 February 19, 2020
