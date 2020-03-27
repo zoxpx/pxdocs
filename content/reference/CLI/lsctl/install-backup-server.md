@@ -20,8 +20,8 @@ After you've created your license server, but before you add licenses, you can c
 **NOTE:** If you downloaded the Portworx license server docker image directly to your license server, pull the Portworx license server from portworx onto a computer that can access the internet and send it to your air-gapped cluster. The following example sends the docker image to the air-gapped cluster over ssh:
 
 ```text
-sudo docker pull portworx/px-base-els:latest
-sudo docker save portworx/px-base-els:latest | ssh root@<air-gapped-address> docker load
+sudo docker pull portworx/px-els:1.0.0
+sudo docker save portworx/px-els:1.0.0 | ssh root@<air-gapped-address> docker load
 ```
 {{</info>}}
 
@@ -34,8 +34,8 @@ sudo docker save portworx/px-base-els:latest | ssh root@<air-gapped-address> doc
     services:
       px-els-main:
         container_name: px-els-backup
-        image: portworx/px-els:latest
-        command:
+        image: portworx/px-els:1.0.0
+        # command: -nic eth0 -extl-port 7070
         privileged: true
         network_mode: host
         restart: always
@@ -43,7 +43,6 @@ sudo docker save portworx/px-base-els:latest | ssh root@<air-gapped-address> doc
           - /opt/pwx-ls/bin:/export_bin
           - /etc/pwx-ls:/data
           - /proc:/hostproc
-          #- /opt/pwx-ls/ssl:/ssl
         healthcheck:
             test: ["CMD", "curl", "-fI", "http://127.0.0.1:7069/api/1.0/instances/~/health"]
             interval: 2m30s

@@ -18,7 +18,7 @@ Perform the steps in this topic to manually install a Portworx license server.
 1. Pull the license server from Portworx:
 
     ```text
-    docker pull portworx/px-base-els:latest
+    docker pull portworx/px-els:1.0.0
     ```
 
     {{<info>}}
@@ -27,16 +27,16 @@ Perform the steps in this topic to manually install a Portworx license server.
   * If you have a company-wide docker-registry server, pull the Portworx license server from Portworx:
 
     ```text
-    sudo docker pull portworx/px-els:latest
-    sudo docker tag portworx/px-els:latest <company-registry-hostname>:5000/portworx/px-els:latest
-    sudo docker push <company-registry-hostname>:5000/portworx/px-els:latest
+    sudo docker pull portworx/px-els:1.0.0
+    sudo docker tag portworx/px-els:1.0.0 <company-registry-hostname>:5000/portworx/px-els:1.0.0
+    sudo docker push <company-registry-hostname>:5000/portworx/px-els:1.0.0
     ```
 
   * If you do not have a company-wide docker-registry server, pull the Portworx license server from portworx onto a computer that can access the internet and send it to your air-gapped cluster. The following example sends the docker image to the air-gapped cluster over ssh:
 
     ```text
-    sudo docker pull portworx/px-base-els:latest
-    sudo docker save portworx/px-base-els:latest | ssh root@<air-gapped-address> docker load
+    sudo docker pull portworx/px-els:1.0.0
+    sudo docker save portworx/px-els:1.0.0 | ssh root@<air-gapped-address> docker load
     ```
     {{</info>}}
 
@@ -50,8 +50,8 @@ Perform the steps in this topic to manually install a Portworx license server.
     services:
       px-els-main:
         container_name: px-els
-        image: portworx/px-base-els:latest
-        command:
+        image: portworx/px-els:1.0.0
+        # command: -nic eth0 -extl-port 7070
         privileged: true
         network_mode: host
         restart: always
@@ -59,7 +59,6 @@ Perform the steps in this topic to manually install a Portworx license server.
           - /opt/pwx-ls/bin:/export_bin
           - /etc/pwx-ls:/data
           - /proc:/hostproc
-          #- /opt/pwx-ls/ssl:/ssl
         healthcheck:
             test: ["CMD", "curl", "-fI", "http://127.0.0.1:7069/api/1.0/instances/~/health"]
             interval: 2m30s
@@ -114,7 +113,7 @@ Perform the steps in this topic to manually install a Portworx license server.
     Successfully set license server.
     ```
 
-7. (Optional) [Create a backup server and enable high availability](/reference/cli/lsctl/install-backup-server/).
+7. (Recommended) [Create a backup server and enable high availability](/reference/cli/lsctl/install-backup-server/).
 
     {{<info>}}
 **IMPORTANT:** You cannot enable high availability after adding your licenses.

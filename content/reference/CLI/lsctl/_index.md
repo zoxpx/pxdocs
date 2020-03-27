@@ -13,5 +13,5 @@ hidden: true
 If you want to install the license server and administer it manually using the command line, follow the articles below in order:
 
 1. [Manually install a Portworx license server](/reference/cli/lsctl/manual-install)
-2. [(Optional) Install a backup license server](/reference/cli/lsctl/install-backup-server)
+2. [(Recommended) Install a backup license server](/reference/cli/lsctl/install-backup-server)
 3. [Add licenses to a license server using `lsctl`](/reference/cli/lsctl/add-licenses)
