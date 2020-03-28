@@ -11,7 +11,11 @@ This topic explains how to install Portworx with Kubernetes on AWS (KOPS). Follo
 
 ## Prepare
 
-For information on using KOPS, go [here](https://aws.amazon.com/blogs/compute/kubernetes-clusters-aws-kops/) and [here](https://github.com/kubernetes/KOPS/blob/master/docs/aws.md).
+This article assumes that you are familiar with KOPS. For information about using KOPS, see one of the following pages:
+
+* [Manage Kubernetes Clusters on AWS Using KOPS](https://aws.amazon.com/blogs/compute/kubernetes-clusters-aws-kops/)
+
+* [Getting Started with KOPS on AWS](https://github.com/kubernetes/kops/blob/master/docs/getting_started/aws.md)
 
 #### Granting Portworx the needed AWS permissions
 
