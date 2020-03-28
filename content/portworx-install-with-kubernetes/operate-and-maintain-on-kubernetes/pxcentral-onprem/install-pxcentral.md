@@ -83,10 +83,10 @@ How you pull the Portworx license server and associated images depends on your a
 
 Install PX-Central by downloading and running a script which deploys both Portworx and PX-Central:
 
-1. Download and the PX-Central install script:
+1. Download the PX-Central install script and make it executable:
 
     ```text
-    curl -o px-central-install.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.0/install.sh'
+    curl -o install.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.0/install.sh' && chmod +x install.sh
     ```
 
 2. Run the script with any of [the options](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/install-script-reference/) required to configure PX-Central according to your needs; note that the `--license-password` option is required:
