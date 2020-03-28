@@ -53,11 +53,23 @@ status:
   storageStatus: ""
 ```
 
-In the generated **ClusterPair** spec, you will need to do the following modifications:
+Make the following changes in the `options` section of your `ClusterPair`:
 
-  * You will see an unpopulated *options* section. It expects options that are required to pair Storage. However, as we have a single storage fabric, this section is not needed. You should delete the line `<insert_storage_options_here>`.
+* This example uses a single storage fabric. Thus, you must delete the `<insert_storage_options_here>: ""` line.
+* By default, every seventh migration is a full migration. To make every migration incremental, specify `mode: DisasterRecovery` as follows:
 
-Once the modifications are done, save it into a file `clusterpair.yaml`
+      ```
+      options:
+         mode: DisasterRecovery
+      ```
+
+Once you've made the changes, save the resulting spec to a file named `clusterpair.yaml`.
+
+{{<info>}}
+**NOTE:**
+For an example that uses more than one storage fabric, see the [Asynchronous DR](/portworx-install-with-kubernetes/disaster-recovery/async-dr/#enable-disaster-recovery-mode) page.
+{{</info>}}
+
 
 #### Apply the generated ClusterPair on the source cluster
 
