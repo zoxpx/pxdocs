@@ -24,6 +24,7 @@ the service account json created in the previous step:
 ```text
 kubectl create secret  generic --from-file=gcs-key.json -n kube-system gke-creds
 ```
+
 ```output
 secret/gke-creds created
 ```
