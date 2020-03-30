@@ -7,6 +7,12 @@ series: release-notes
 weight: 300
 ---
 
+## Lighthouse 2.0.7 Release notes
+
+### Key Fixes
+
+* PWX-11673 - Improved security by hiding the Apache version from outputs. 
+
 ## Lighthouse 2.0.6 Release notes
 
 ### Key Fixes
