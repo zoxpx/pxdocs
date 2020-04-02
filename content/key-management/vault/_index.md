@@ -26,7 +26,7 @@ Portworx requires the following Vault credentials to use its APIs
 
 - **Vault Token [VAULT_TOKEN]**
 
-   Vault authentication token. Follow [this](https://www.vaultproject.io/docs/concepts/tokens.html) doc for more information about Vault Tokens.
+   Vault authentication token. Follow [this](https://www.vaultproject.io/docs/concepts/tokens) doc for more information about Vault Tokens.
 
 - **Vault Base Path [VAULT_BASE_PATH]**
 
@@ -85,7 +85,7 @@ data:
 
 Portworx is going to look for this secret with name `px-vault` under the `portworx` namespace. While installing Portworx it creates a kubernetes role binding which grants access to reading kubernetes secrets only from the `portworx` namespace.
 
-### Step 2: Setup Vault as the secrets provider for Portworx 
+### Step 2: Setup Vault as the secrets provider for Portworx
 
 #### New Installation
 
@@ -164,7 +164,7 @@ Editing the DaemonSet will restart all the Portworx pods.
 
 ### Step 1: Provide Vault credentials to Portworx.
 
-Provide the following Vault credentials (key value pairs) as environment variables to Portworx 
+Provide the following Vault credentials (key value pairs) as environment variables to Portworx
 
 
 - [Required] VAULT_ADDR=<vault endpoint address>
@@ -279,6 +279,6 @@ Make sure that the secret key has been created in Vault.
 If the CLI is used to authenticate with Vault, for every restart of the Portworx container it needs to be re-authenticated with Vault by running the `vault login` command.
 
 
-## Using Vault with Portworx 
+## Using Vault with Portworx
 
 {{<homelist series="vault-secret-uses">}}

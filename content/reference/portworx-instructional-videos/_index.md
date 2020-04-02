@@ -150,7 +150,6 @@ In this lightboard session viewers will learn the basics of running Potworx on O
 #### Resources
 
  - [Install Portworx on OpenShift](/portworx-install-with-kubernetes/on-premise/openshift/)
- - [Red Hat Blog: Disaster Recovery Strategies for Red Hat OpenShift](https://blog.openshift.com/disaster-recovery-strategies-for-red-hat-openshift/)
 
 ## Data Locality with Stork (Storage Orchestrator for Kubernetes)
 
