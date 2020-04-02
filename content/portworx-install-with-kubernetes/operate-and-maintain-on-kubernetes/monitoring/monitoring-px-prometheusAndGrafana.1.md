@@ -85,8 +85,13 @@ kubectl apply -f <service-monitor.yaml>
 ```
 
 ### Install the Alertmanager
-Create a file named `alertmanager.yaml` with the following contents and create a secret from it.
+Create a file named `alertmanager.yaml`.
+Here are some sample `alertmanager.yaml` files to choose from.
+
+#### Send alerts to e-mail
+
 Make sure you add the relevant email addresses in the below config.
+
 ```text
 global:
   # The smarthost and SMTP sender used for mail notifications.
@@ -109,6 +114,71 @@ receivers:
     auth_password: "<sender-email-password>"
 ## Edit the file and create a secret with it using the following command
 ```
+
+#### Send alerts to Slack
+```text
+global:
+  # Global variables
+route:
+  group_by: [Alertname]
+  # Send all notifications to slack.
+  receiver: slack
+receivers:
+# Refer to the following:
+# https://www.robustperception.io/using-slack-with-the-alertmanager
+# https://medium.com/quiq-blog/better-slack-alerts-from-prometheus-49125c8c672b
+# https://github.com/prometheus/alertmanager/issues/307#issuecomment-428754169
+- name: slack
+  slack_configs:
+  # Refer to https://api.slack.com/messaging/webhooks#create_a_webhook
+  - api_url: 'https://hooks.slack.com/services/XXXXX/XXXXX/XXXXXXXX'
+    channel: '#mychannel'
+    text: |-
+      {{ range .Alerts }}
+         *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
+        *Description:* {{ .Annotations.description }}
+        *Details:*
+        {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+        {{ end }}
+      {{ end }}
+```
+
+#### Send alerts to Slack and e-mail
+```text
+global:
+  # The smarthost and SMTP sender used for mail notifications.
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: '<sender-email-address>'
+  smtp_auth_username: "<sender-email-address>"
+  smtp_auth_password: '<sender-email-password>'
+route:
+  group_by: [Alertname]
+  # Send all notifications to me.
+  receiver: email_and_slack
+receivers:
+- name: email_and_slack
+  email_configs:
+  - to: <sender-email-address>
+    from: <sender-email-address>
+    smarthost: smtp.gmail.com:587
+    auth_username: "<sender-email-address>"
+    auth_identity: "<sender-email-address>"
+    auth_password: "XXXXXXX"
+  slack_configs:
+  # Refer to: https://api.slack.com/messaging/webhooks#create_a_webhook
+  - api_url: 'https://hooks.slack.com/services/XXXXX/XXXXX/XXXXXXXX'
+    channel: '#mychannel'
+    text: |-
+      {{ range .Alerts }}
+         *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
+        *Description:* {{ .Annotations.description }}
+        *Details:*
+        {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+        {{ end }}
+      {{ end }}
+```
+
+Choose one of the `alertmanager.yaml` examples above.  Create a Kubernetes secret:
 
 ```text
 kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system
