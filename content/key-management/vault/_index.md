@@ -26,7 +26,7 @@ Portworx requires the following Vault credentials to use its APIs
 
 - **Vault Token [VAULT_TOKEN]**
 
-   Vault authentication token. Follow [this](https://www.vaultproject.io/docs/concepts/tokens.html) doc for more information about Vault Tokens.
+   Vault authentication token. Follow [this](https://www.vaultproject.io/docs/concepts/tokens) doc for more information about Vault Tokens.
 
 - **Vault Base Path [VAULT_BASE_PATH]**
 

@@ -16,7 +16,7 @@ In order to use Sysdig with Portworx, you must deploy both products onto your Ku
 
 ## Deploy Sysdig on Kubernetes with Portworx
 
-1. Follow the [Kubernetes Agent Installation Steps](https://docs.sysdig.com/en/kubernetes-agent-installation-steps.html) in the Sysdig documentation to deploy the following YAML files:
+1. Follow the [Kubernetes Agent Installation Steps](https://docs.sysdig.com/en/steps-for-kubernetes--vanilla-.html) in the Sysdig documentation to deploy the following YAML files:
 
     * sysdig-agent-clusterrole.yaml
     * sysdig-agent-configmap.yaml
