@@ -21,20 +21,20 @@ etcd.crt
 etcd.key
 ```
 
-Use `kubectl` to create the secret named `px-etcd-certs` from the above files:
+Use `kubectl` to create the secret named `px-kvdb-auth` from the above files:
 
 ```text
-kubectl -n kube-system create secret generic px-etcd-certs --from-file=etcd-secrets/
+kubectl -n kube-system create secret generic px-kvdb-auth --from-file=etcd-secrets/
 ```
 
 Notice that the secret has 3 keys `etcd-ca.crt`, `etcd.crt` and `etcd.key`, corresponding to file names in the `etcd-secrets` folder. We will use these keys in the Portworx spec file to reference the certificates.
 
 ```text
-kubectl -n kube-system describe secret px-etcd-certs
+kubectl -n kube-system describe secret px-kvdb-auth
 ```
 
 ```output
-Name:         px-etcd-certs
+Name:         px-kvdb-auth
 Namespace:    kube-system
 Labels:       <none>
 Annotations:  <none>
@@ -60,13 +60,13 @@ To mount the certificates under `/etc/pwx/etcdcerts` inside the Portworx contain
     name: etcdcerts
 ```
 
-Now, we use the keys from the secret that we created and mount it under paths that Portworx will use to talk to the etcd server. In the `items` below, the `key` is the key from the `px-etcd-certs` secret and the `path` is the relative path from `/etc/pwx/etcdcerts` where Kubernetes will mount the certificates. Put the following under the _volumes_ section of the Portworx DaemonSet.
+Now, we use the keys from the secret that we created and mount it under paths that Portworx will use to talk to the etcd server. In the `items` below, the `key` is the key from the `px-kvdb-auth` secret and the `path` is the relative path from `/etc/pwx/etcdcerts` where Kubernetes will mount the certificates. Put the following under the _volumes_ section of the Portworx DaemonSet.
 
 ```text
   volumes:
   - name: etcdcerts
     secret:
-      secretName: px-etcd-certs
+      secretName: px-kvdb-auth
       items:
       - key: etcd-ca.crt
         path: etcd-ca.crt
