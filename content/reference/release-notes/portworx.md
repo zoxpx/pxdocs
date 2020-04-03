@@ -6,6 +6,49 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.5
+
+March 20, 2020
+
+### New features
+
+* Introducing [PX-Central on-premises](https://2.5.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/): Deploy your own PX-Central dashboard with Portworx on your own cluster.
+* Introducing [PX Essentials](https://2.5.docs.portworx.com/concepts/portworx-essentials/): A free Portworx license for prototyping and small production clusters.
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-11777 | Added support to the `pxctl volume list` command, allowing you to list snapshots by node IDs: `pxctl volume list -s --node <node-id>`. |
+| PWX-11515 | CLI command flags now use `--node` instead of `--node_id` or `--node-id`.<br/><br/>The following commands were modified:<ul><li>pxctl clouddrive inspect --node</li><li>pxctl clouddrive update-labels --node</li><li>pxctl clouddrive delete --node</li><li>pxctl volume list --node</li></ul> |
+| PWX-11464 | Portworx now allows non-root user access to sharedv4 volumes by default. To restrict sharedv4 volume access to the root user, set the `allow_others` label to `false`:<br/><br/>`allow_others=false` |
+| PWX-11418 | All cluster and node level alerts will now be raised as Kubernetes events. <br/><br/>NODE alerts: <ul><li>Daemonset model: Events are  raised on the Portworx pod running on that node.</li><li>Operator model: Events are raised on the `StorageNode` object created by the Operator for that node.</li></ul>CLUSTER alerts: <ul><li>Daemonset model: Events are raised on an arbitrary object called `Portworx`</li><li>Operator model: Events are raised on the `StorageCluster` object defined in Kubernetes.</li></ul> |
+| PWX-10783 | When Portworx restarts, storageless Portworx nodes will automatically detect any new available storage devices and transition themselves into a storage node. |
+| PWX-10756 | When running an internal KVDB without a dedicated drive, `pxctl status` now reports a warning saying that such a configuration is not recommended for a production cluster. |
+| PWX-10724 | In cloud, you can now add drives to storageless nodes using the `pxctl` CLI. |
+| PWX-10371 | `pxctl status` now reports last known failures if Portworx fails to startup on the node. |
+| PWX-9834 | An internal KVDB can now run on storageless nodes. In order to run on storageless nodes, you must provide a `-kvdb_dev` in on-prem clusters, while on cloud PX will provision a drive to be used by kvdb. |
+| PWX-11774 | A new `pxctl clouddrive listdrives` command allows you to list all the drives in cloud drivesets. On VSphere, this command also lists the datastore for a VMDK in the labels column.
+
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10400 | In some situations, a busy volume remained attached even after a pod is terminated in Kubernetes.<br/><br/>**User impact:** Upgrades or other operations relying on the `kubectl drain` command got stuck on a node with these attached volumes.<br/><br/>**Resolution:** Portworx now detaches these busy volumes from terminated Kubernetes pods. |
+| PWX-11753 | Portworx sent the nodeID with cluster-level license alerts: `LicenseExpiring` and `LicenseExpired`. <br/><br/>**User impact:** Customers saw the nodeID associated with license alerts when the clusterID would have been more helpful. <br/><br/>**Resolution:** Portworx now reports the ClusterID instead of NodeID with the `LicenseExpiring` and `LicenseExpired` license alerts. |
+| PWX-11722 | Portworx raised alerts at the `CLUSTER` level that are more appropriately raised at the `NODE` level. <br/><br/> **User impact:** Users may have seen these alerts at a level they did not expect. <br/><br/> **Resolution:** Portworx now raises the following alerts as `NODE` instead of `CLUSTER` level:<ul><li>NodeStartFailure:</li><li>NodeStartSuccess:</li><li> NodeStateChange:</li><li>NodeJournalHighUsage:</li><li>NodeTimestampFailure:</li><li>NodeJournalFailure:</li><li>NodeDecommissionSuccess:</li><li>NodeDecommissionFailure:</li><li>NodeDecommissionPending:</li><li> NodeInitFailure:</li><li>NodeMarkedDown:</li></ul> |
+| PWX-11637 | Cloudsnaps did not work with some AWS S3 endpoints when bucket name being uploaded to had uppercase letters in the name. <br/><br/>**Customer impact:** Snapshot restore operations involving buckets with uppercase letters failed. <br/><br/>**Resolution:** Portworx now supports uppercase letters in bucket names when used with S3 endpoints. |
+| PWX-11365 | Portworx only checked the health of the NFS service on the default port: 2049. However, as this port is configurable, these checks failed if the NFS port changed. <br/><br/>**User impact:** Users who configured their NFS to use a port other than the default encountered errors.<br/><br/>**Resolution:** Portworx now checks the health of the NFS service regardless of the port it's running on, and will raise an alert if determines the NFS server is unhealthy. |
+| PWX-11280 | Portworx did not update the cloud drive in-progress state after performing a pool expand operation using `resize-disk`. <br/><br/>**User impact:** Users could have seen a misleading output indicating pool expansion was still in-progress from the `pxctl cloud list` command output, even though the operation completed.<br/><br/>**Resoultion:** Portworx now correctly reports the cloud drive status after a `resize-disk` operation. |
+| PWX-10749 | If all nodes in a cluster were storageless, Portworx failed to properly install. <br/><br/>**User impact:** Users attempting to install Portworx on a cluster with only storageless nodes would be left with an out-of-quorum cluster, and would have to wipe the whole installation and redo it with storage nodes.<br/><br/>**Resolution:** Portworx will no longer form a cluster if it cannot find any storage nodes, and will keep reporting an error until a storage node is added to the cluster. |
+| PWX-10711 | On slower systems, Portworx occasionally received an `access denied` error from the NFS, and failed to mount sharedv4 volumes. <br/><br/>**User impact:** Users experiencing this issue had to manually retry the sharedv4 mount operation.<br/><br/>**Resolution:** Portworx now retries mounting a sharedv4 volume if it gets an access denied error. |
+| PWX-11643 | Intermittent vCenter API failures occasionally caused Portworx to fail to find its already attached cloud drives.<br/><br/>**User Impact:** Disk operations reliant on the the vCenter API would fail.<br/><br/>**Resolution:** Portworx now automatically retries operations involving the vCenter API before reporting an error. |
+
 ## 2.4
 
 March 3, 2020
