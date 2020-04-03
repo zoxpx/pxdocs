@@ -106,3 +106,35 @@ data:
           description: 'Portworx cluster member(s) has(have) been down for
             more than 5 minutes.'
           summary: Portworx cluster member(s) is(are) down.
+      - alert: PortworxLicenseLeaseExpired
+        expr: px_alerts_license_lease_has_expired_total > 0
+        labels:
+          issue: Portworx license lease has expired.
+          severity: critical
+        annotations:
+          description: 'Portworx license lease for {{$labels.instance}} has expired.'
+          summary: 'Portworx license lease has expired on {{$labels.instance}}. Please check licenses on license server.'
+        - alert: PortworxLicenseServerUnreachable
+          expr: px_alerts_node_could_not_contact_license_server_total > 0
+          labels:
+            issue: Portworx license server is unreachable
+            severity: critical
+          annotations:
+            description: 'Portworx instance {{$labels.instance}} is not able to reach the license server.'
+            summary: 'Portworx license server is unreachable. Please check license server health and connection to license server.'
+        - alert: PortworxLicenseLeaseExpiring
+          expr: px_alerts_license_leases_expiring_total > 0
+          labels:
+            issue: Portworx license lease is expiring
+            severity: critical
+          annotations:
+            description: 'Portworx license lease for {{$labels.instance}} is expiring.'
+            summary: 'Portworx license lease is about to expire on {{$labels.instance}}. Please check licenses on license server.'
+        - alert: PXFloatingLicenseSetupError
+          expr: px_alerts_floating_license_setup_error > 0
+          labels:
+            issue: 'Error setting up Portworx license server on the cluster'
+            severity: critical
+          annotations:
+            description: 'Error getting Portworx license on {{$labels.instance}}. Please check licenses on license server.'
+            summary: 'Failed to acquire Portworx license on {{$labels.instance}}.'

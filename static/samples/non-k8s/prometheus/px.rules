@@ -108,3 +108,47 @@ Alert PortworxMemberDown
     summary = "Portworx cluster member(s) is(are) down.",
     description = "{{$value}} Portworx cluster member(s) has(have) been down for more than 5 minutes.",
   }
+
+Alert PortworxLicenseLeaseExpired
+  IF px_alerts_license_lease_has_expired_total > 0
+  LABELS {
+    severity = "critical",
+    issue="Portworx license lease has expired",
+    }
+  ANNOTATIONS {
+    summary = "Portworx license lease has expired on {{$labels.instance}}. Please check licenses on license server.",
+    description = "Portworx license lease for {{$labels.instance}} has expired."
+  }
+
+Alert PortworxLicenseServerUnreachable
+  IF px_alerts_node_could_not_contact_license_server_total > 0
+    LABELS {
+      severity = "critical",
+      issue="Portworx license server is unreachable",
+      }
+    ANNOTATIONS {
+      summary = "Portworx license server is unreachable. Please check license server health and connection to license server.",
+      description = "Portworx instance {{$labels.instance}} is not able to reach the license server.."
+    }
+
+Alert PortworxLicenseLeaseExpiring
+  IF px_alerts_license_leases_expiring_total > 0
+  LABELS {
+    severity = "critical",
+    issue="Portworx license lease is expiring",
+    }
+  ANNOTATIONS {
+    summary = "Portworx license lease is about to expire on {{$labels.instance}}. Please check licenses on license server.",
+    description = "Portworx license lease for {{$labels.instance}} is expiring."
+  }
+
+Alert PXFloatingLicenseSetupError
+  IF px_alerts_floating_license_setup_error > 0
+  LABELS {
+    severity = "critical",
+    issue="Error setting up Portworx license server on the cluster",
+    }
+  ANNOTATIONS {
+    summary = "Failed to acquire Portworx license on {{$labels.instance}}.",
+    description = "Error getting Portworx license on {{$labels.instance}}. Please check licenses on license server."
+  }
