@@ -89,19 +89,19 @@ For a more detailed setup, maintenance and tuning information refer the followin
 SSL certificates for etcd can be stored as Kubernetes secrets. Three files are required - in this example, the CA certificate is `etcd-ca.crt`, the etcd certificate `etcd.crt` and the etcd key `etcd.key`. These files should be copied to a directory on the Kubernetes master (`etcd-secrets`). Next, create a secret from these files:
 
 ```text
-kubectl -n kube-system create secret generic px-kvdb-auth --from-file=etcd-secrets/
+kubectl -n kube-system create secret generic px-etcd-certs --from-file=etcd-secrets/
 ```
 
 ```output
-secret/px-kvdb-auth created
+secret/px-etcd-certs created
 ```
 
 ```text
-kubectl -n kube-system describe secret px-kvdb-auth
+kubectl -n kube-system describe secret px-etcd-certs
 ```
 
 ```output
-Name:         px-kvdb-auth
+Name:         px-etcd-certs
 Namespace:    kube-system
 Labels:       <none>
 Annotations:  <none>
