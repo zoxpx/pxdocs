@@ -137,7 +137,7 @@ spec:
 
 Now that we've defined a schedule policy let's create a new `StorageClass` spec. By adding the new annotations, it'll automatically create a schedule for the newly created PVCs.
 
-Create a new file called `sc-with-snap-schedule.ymal` and paste into it the content from below:
+Create a new file called `sc-with-snap-schedule.yaml` and paste into it the content from below:
 
 ```text
 kind: StorageClass
@@ -177,7 +177,7 @@ The above command will output the credentials required to authenticate/access th
 Next, let's apply our newly created storage class:
 
 ```text
-kubectl apply -f sc-with-snap-schedule.ymal
+kubectl apply -f sc-with-snap-schedule.yaml
 ```
 
 ```output
