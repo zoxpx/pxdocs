@@ -10,11 +10,6 @@ series: release-notes
 
 March 20, 2020
 
-### New features
-
-* Introducing [PX-Central on-premises](docs.portworx.com): Deploy your own PX-Central dashboard with Portworx on your own cluster.
-* Introducing [PX Essentials](docs.portworx.com): A free Portworx license for prototyping and small production clusters.
-
 ### Improvements
 
 Portworx has upgraded or enhanced functionality in the following areas:
