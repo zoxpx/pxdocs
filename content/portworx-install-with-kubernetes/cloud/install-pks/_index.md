@@ -78,13 +78,13 @@ Follow [Installing Etcd using CFCR etcd release](/portworx-install-with-kubernet
 After the above steps, you should have all the etcd certs in the *etcd-certs* directory. These need to put in a Kubernetes secret so that Portworx can consume it.
 
 ```text
-kubectl -n kube-system create secret generic px-etcd-certs --from-file=etcd-certs/
-kubectl -n kube-system describe secret px-etcd-certs
+kubectl -n kube-system create secret generic px-kvdb-auth --from-file=etcd-certs/
+kubectl -n kube-system describe secret px-kvdb-auth
 ```
 
 This should output the below and shows the etcd certs are present in the secret.
 ```
-Name:         px-etcd-certs
+Name:         px-kvdb-auth
 Namespace:    kube-system
 Labels:       <none>
 Annotations:  <none>
