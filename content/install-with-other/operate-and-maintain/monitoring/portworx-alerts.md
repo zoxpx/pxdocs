@@ -103,3 +103,31 @@ Each alert has a severity from one of the following levels:
 78|PoolExpandInProgress|NOTIFY|POOL|Triggered when a pool expand operation starts.|
 79|PoolExpandSuccessful|NOTIFY|POOL|Triggered when a pool expand operation succeeds.|
 80|PoolExpandFailed|ALARM|POOL|Triggered when a pool expand operation fails.|
+86|StoragelessToStorageNodeTransitionFailure|ALARM|NODE|Triggered when a node fails to transition from a storageless type to a storage type.|
+87|StoragelessToStorageNodeTransitionSuccess|NOTIFY|NODE|Triggered when a node transitions from a storageless type to a storage type successfully.|
+89|ClusterLicenseUpdated|NOTIFY|CLUSTER|Triggered when a license is updated for a cluster.|
+90|LicenseExpired|ALARM|CLUSTER|Triggered when the cluster license expires.|
+91|LicenseLeaseExpiring|WARNING|CLUSTER|Triggered when the license lease is about to expire since the last lease refresh failed.|
+92|LicenseLeaseExpired|ALARM|CLUSTER|Triggered when the license lease has expired since the last lease refresh failed.|
+93|LicenseServerDown|WARNING|NODE|Triggered when a node is unable to reach the license server.|
+94|FloatingLicenseSetupError|ALARM|NODE|Triggered when a node fails to setup a floating license.|
+95|NFSServerUnhealthy|WARNING|NODE|Triggered when the NFS server on this node is unhealthy.|
+96|FileSystemDependency|ALARM|NODE|Triggered during Portworx installation if there's a filesystem dependency failure. |
+97|RebootRequired|ALARM|NODE| Triggered when a node requires a reboot.|
+98|TempFileSystemInitialization|ALARM|NODE|Triggered during Portworx installation if a node fails to initialize a temporary filesystem.|
+99|UnsupportedKernel|ALARM|NODE|Triggered during a Portworx installation if the node contains a kernel that is not supported by Portworx.|
+100| InvalidDevice|ALARM|NODE|Triggered during Portworx installation if an invalid device is provided to Portworx as a storage device.|
+101| NfsDependencyInstallFailure|ALARM|NODE|Triggered during Portworx installation if Portworx cannot install the NFS service.|
+102| NfsDependencyNotEnabled|ALARM|NODE|Triggered during Portworx installation if Portworx cannot enable the NFS service.|
+103| LicenseCheckFailed|ALARM|NODE|Triggered if a node fails a license check.|
+104| PortworxStoppedOnNode|WARNING|NODE|Triggered if Portworx is stopped on a node.|
+105| KvdbConnectionFailed|ALARM|NODE|Triggered if Portworx fails to connect to the KVDB.|
+106| InternalKvdbSetupFailed|ALARM|NODE|Triggered if Portworx fails to setup Internal KVDB on a node.|
+107| PortworxMonitorImagePullFailed|ALARM|NODE|Triggered if Portworx fails to pull Portworx images during installation.|
+108| PortworxMonitorPrePostExecutionFailed|ALARM|NODE|Triggered if Portworx fails to execute pre or post installation tasks.|
+109| PortworxMonitorMountValidationFailed|ALARM|NODE|Triggered if Portworx fails to validate mounts provided to Portworx container during installation. |
+110| PortworxMonitorSchedulerInitializationFailed|ALARM|NODE|Triggered if Portworx fails to initialize connection with scheduler during installation. |
+111| PortworxMonitorServiceControlsInitializationFailed|ALARM|NODE|Triggered if Portworx fails to initialize the service controls during installation.|
+112| PortworxMonitorInstallFailed|ALARM|NODE|Triggered if Portworx installation fails.|
+113| MissingInputArgument|ALARM|NODE|Triggered if there's a missing input install argument.|
+114|PortworxMonitorImagePullInProgress|NOTIFY|NODE|Triggered when Portworx is pulling and extracting images during installation or upgrade.|
