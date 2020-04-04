@@ -8,7 +8,12 @@ series: release-notes
 
 ## 2.5
 
-March 20, 2020
+April 3, 2020
+
+### New features
+
+ * Introducing [PX-Central on-premises](https://2.5.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/): Deploy your own PX-Central dashboard with Portworx on your own cluster.
+ * Introducing [PX Essentials](https://2.5.docs.portworx.com/concepts/portworx-essentials/): A free Portworx license for prototyping and small production clusters.
 
 ### Improvements
 
