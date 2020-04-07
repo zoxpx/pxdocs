@@ -18,7 +18,7 @@ This guide provides instructions for installing Portworx on Kubernetes using Ran
 ## Prerequisites
 
 * You must have a Kubernetes cluster imported into Rancher
-* Your cluster must meet the [requirements](https://github.com/start-here-installation/) for installing a Portworx cluster
+* Your cluster must meet the [requirements](/start-here-installation/) for installing a Portworx cluster
 
 ## Install Portworx on Kubernetes using Rancher 2.x
 
