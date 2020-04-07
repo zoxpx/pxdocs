@@ -2,7 +2,7 @@
 title: Portworx on Rancher 2.x
 linkTitle: Rancher 2.x
 keywords: portworx, PX-Developer, container, Rancher, storage
-description: Instructions on installing Portworx using public catalog (Helm Chart) on Rancher 2.x 
+description: Instructions on installing Portworx using public catalog (Helm Chart) on Rancher 2.x
 weight: 6
 series: px-rancher
 noicon: true
@@ -14,22 +14,23 @@ This section covers information on installing Portworx using public catalog (Hel
 
 Follow the instructions for installing [Rancher 2.x](https://rancher.com/docs/rancher/v2.x/en/installation/).
 
-## Step 2: Prerequisites - Choosing the right worker node flavor for your Rancher 2.x Kubernetes cluster for Portworx
+* You must have a Kubernetes cluster imported into Rancher
+* Your cluster must meet the [requirements](/start-here-installation/) for installing a Portworx cluster
 
 Portworx is a highly available software-defined storage solution that you can use to manage persistent storage for your containerized databases or other stateful apps in your Rancher 2.x Kubernetes cluster. To make sure that your cluster is set up with the compute resources that are required for Portworx, review the FAQs in this step.
 
 Portworx pre-requisites [here](/start-here-installation/#installation-prerequisites)
 
 **NOTE:** </br>
- 
+
 {{<info>}}
 
-* Currently `RancherOS` distro is not supported for Portworx. 
+* Currently `RancherOS` distro is not supported for Portworx.
 
 * Portworx requires that Rancher hosts have at least one non-root disk or partition to contribute.{{</info>}}
 
 **How can I make sure that my data is stored highly available?** </br>
-You need at least 3 worker nodes in your Portworx cluster so that Portworx can replicate your data across nodes. By replicating your data across worker nodes, Portworx can ensure that your stateful app can be rescheduled to a different worker node in case of a failure without losing data. 
+You need at least 3 worker nodes in your Portworx cluster so that Portworx can replicate your data across nodes. By replicating your data across worker nodes, Portworx can ensure that your stateful app can be rescheduled to a different worker node in case of a failure without losing data.
 
 ## Step 3: Creating or preparing your cluster for Portworx
 
@@ -46,10 +47,10 @@ Portworx provides a helm chart for Rancher 2.x that is available in the public c
 ![Get K8S Version](/img/px-rancher-1.png)
 
 ### Key Value Store Parameters
-From version 2.0, Portworx can be installed with built-in internal kvdb. By selecting the internal kvdb option true, It removes the requirement of an external kvdb such as etcd or consul to be installed along side of Portworx. Portworx will automatically deploy an internal kvdb cluster on a set of 3 nodes within the Portworx cluster. 
+From version 2.0, Portworx can be installed with built-in internal kvdb. By selecting the internal kvdb option true, It removes the requirement of an external kvdb such as etcd or consul to be installed along side of Portworx. Portworx will automatically deploy an internal kvdb cluster on a set of 3 nodes within the Portworx cluster.
 
-If you plan to use the external kvdb option, Under kvdb configuration enter your Etcd information.  This is a list separated by semicolons ie: For example 
-`etcd://myetc1.company.com:2379;etcd://myetc2.company.com:2379;etcd://myetc3.company.com:2379`  
+If you plan to use the external kvdb option, Under kvdb configuration enter your Etcd information.  This is a list separated by semicolons ie: For example
+`etcd://myetc1.company.com:2379;etcd://myetc2.company.com:2379;etcd://myetc3.company.com:2379`
 
 ![Get K8S Version](/img/px-rancher-2.png)
 
@@ -64,7 +65,7 @@ In your environment, you will put the interface dedicated to Portworx traffic in
 Set the Install Stork and Lighthouse fields to true.  Define a Portworx Cluster Name that is relevant to your environment.  Set the following version information:
 
 * Stork version: 2.1.0
-* Lighthouse version:	2.0.2 
+* Lighthouse version:	2.0.2
 * Portworx version:	2.0.3.1
 
 Once completed with the form select Launch.  Depending on your Internet speed and the performance of your systems it will take 5-20 minutes to install.  Once completed all process for Portworx will be green.
