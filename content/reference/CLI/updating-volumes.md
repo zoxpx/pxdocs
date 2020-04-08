@@ -211,7 +211,14 @@ Volume	:  485002114762355071
 
 The volume `clitest` shown in the previous example is a volume with replication factor set to 1.
 
-Here are the nodes in the cluster.
+{{% content "shared/max-replication-factor.md" %}}
+
+### Increasing the replication factor
+
+Say there was a volume named `clitest` with the replication factor set to 1. Let's look at how to increase it.
+
+
+Start by listing the nodes in the cluster:
 
 ```text
 sudo /opt/pwx/bin/pxctl cluster list
