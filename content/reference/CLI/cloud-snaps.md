@@ -92,7 +92,7 @@ By default, Portworx creates a bucket (ID same as cluster UUID) to upload clouds
 
 With user specified bucket (applicable only from 1.5.0 onwards):
 ```text
-# pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com --bucket bucket-id
+pxctl credentials create mycreds --provider=s3 --s3-disable-ssl --s3-region=us-east-1 --s3-access-key=<S3-ACCESS_KEY> --s3-secret-key=<S3-SECRET_KEY> --s3-endpoint=mys3-enpoint.com --disable-path-style --bucket=mybucket
 ```
 User created/specified bucket at minimum must have following permissions: Replace `<bucket-name>` with name of your user-provided bucket.
 ```json
@@ -126,11 +126,32 @@ Without user specified bucket:
 # pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
 ```
 
-For Google Cloud:
+#### Google Cloud
 
-```text
-# pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json
-```
+1. Make sure the user or service account used by Portworx has the following roles:
+
+   * Editor
+   * Storage
+   * Object Admin
+   * Storage Object Viewer
+
+    For more information about roles and permissions within GCP, see the [Granting, changing, and revoking access to resources](https://cloud.google.com/iam/docs/granting-changing-revoking-access) section of the GCP documentation.
+
+2. Enter the `pxctl credentials create` command  specifying:
+
+   * The `provider` flag with the name of the provider (`google`)
+   * The `--google-project-id` flag with your Google project ID
+   * The `--google-json-key-file` flag with the name of the JSON file containing your key
+   * The name of your cloud credentials
+
+    Example:
+
+    ```text
+    pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json my-google-cred
+    ```
+
+#### Configure credentials
+
 `pxctl credentials create` enables the user to configure the credentials for each supported cloud provider.
 
 An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore to be able to decrypt the data succesfuly.
@@ -202,7 +223,90 @@ ID			NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 980081626967128253	evol	2 GiB	1	no	no		LOW		1	up - detached
 ```
 
-* List the configured credentials
+```output
+pxctl cloudsnap list --help
+List snapshot in cloud
+
+Usage:
+  pxctl cloudsnap list [flags]
+
+Aliases:
+  list, l
+
+Flags:
+  -m, --migration             Optional, lists migration related cloudbackups
+  -a, --all                   List cloud backups of all clusters in cloud
+  -s, --src string            Optional source volume to list cloud backups
+      --cred-id string        Cloud credentials ID to be used for the backup
+  -c, --cluster string        Optional cluster id to list cloud backups. Current cluster-id is default
+  -t, --status string         Optional backup status(failed. aborted, stopped) to list cloud backups; Defaults to Done
+      --label pairs           Optional list of comma-separated name=value pairs to match with cloudsnap metadata
+  -i, --cloudsnap-id string   Optional cloudsnap id to list(lists a single entry)
+  -x, --max uint              Optional number to limit display of backups in each page
+  -h, --help                  help for list
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+```
+
+### Inspect a cloud snapshot
+
+The `pxctl cloudsnap list` command displays all the cloud snapshots for a given credential, source volume, or type of cloud snapshot. To view more details about a particular cloud snapshot, you must specify the `-i` flag with the ID of the cloud snapshot you want to inspect.
+
+Example:
+
+1. Start by listing your cloud snapshots with:
+
+      ```text
+      pxctl cloudsnap list
+      ```
+
+      ```output
+      SOURCEVOLUME            SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
+      agg-cs_journal_1        10769800556491614        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325        Thu, 24 Oct 2019 19:02:08 UTC        Manual        Done
+      agg-cs_0            365276421799434338        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/365276421799434338-461608030527675278        Thu, 24 Oct 2019 19:02:47 UTC        Manual        Done
+```
+
+
+2. To inspect the first cloud snapshot (`fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325`) and print the output in JSON format, enter the following command:
+
+      ```text
+      pxctl -j cloudsnap list --cloudsnap-id fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325
+      ```
+
+      ```output
+      [
+      {
+        "ID": "fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325",
+        "SrcVolumeID": "10769800556491614",
+        "SrcVolumeName": "agg-cs_journal_1",
+        "Timestamp": "2019-10-24T19:02:08Z",
+        "Metadata": {
+        "cloudsnapType": "Manual",
+        "compression": "lz77",
+        "sizeBytes": "2152751104",
+        "starttime": "Thu, 24 Oct 2019 19:02:08 UTC",
+        "status": "Done",
+        "updatetime": "Thu, 24 Oct 2019 19:06:12 UTC",
+        "version": "V2.00",
+        "volume": "{\"DevSpec\":{\"size\":137438953472,\"format\":2,\"block_size\":4096,\"ha_level\":1,\"cos\":3,\"volume_labels\":{\"best_effort_location_provisioning\":\"true\",\"name\":\"vContainer\"},\"replica_set\":{},\"aggregation_level\":1,\"scale\":1,\"journal\":true,\"queue_depth\":128,\"force_unsupported_fs_type\":true,\"io_strategy\":{}},\"UsedSize\":0,\"PoolId\":0,\"ClusterId\":\"PX-INT-C0-BVT-MN-NS-BRANCH_476_24_Oct_19_04_49_UTC\",\"PublicSecretData\":null,\"Labels\":null}",
+        "volumename": "agg-cs_journal_1"
+        },
+        "Status": "Done"
+      }
+      ```
+
+### Perform cloud backup of a group of volumes
+
+Portworx 2.0.3 and higher supports backing up multiple volumes to cloud at the same consistency point. To see the available command line options, run:
 
 ```text
 # pxctl cloudsnap credentials list
