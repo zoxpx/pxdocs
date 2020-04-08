@@ -171,7 +171,7 @@ createCred: error validating credential during create: SecondLevelDomainForbidde
 In this case, you should specify the `--disable-path-style` parameter while creating credentials as follows:
 
 ```text
-pxctl credentials create mycreds --provider=s3 --s3-disable-ssl --s3-region=us-east-1 --s3-access-key=<S3-ACCESS_KEY> --s3-secret-key=<S3-SECRET_KEY> --s3-endpoint=mys3-enpoint.com --disable-path-style --bucket=mybucket 
+pxctl credentials create mycreds --provider=s3 --s3-disable-ssl --s3-region=us-east-1 --s3-access-key=<S3-ACCESS_KEY> --s3-secret-key=<S3-SECRET_KEY> --s3-endpoint=mys3-enpoint.com --disable-path-style --bucket=mybucket
 ```
 
 ```output
@@ -219,11 +219,27 @@ pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-
 
 #### Google Cloud
 
-Here's how you can create the credentials for _Google Cloud_:
+1. Make sure the user or service account used by Portworx has the following roles:
 
-```text
-pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json my-google-cred
-```
+   * Editor
+   * Storage
+   * Object Admin
+   * Storage Object Viewer
+
+    For more information about roles and permissions within GCP, see the [Granting, changing, and revoking access to resources](https://cloud.google.com/iam/docs/granting-changing-revoking-access) section of the GCP documentation.
+
+2. Enter the `pxctl credentials create` command  specifying:
+
+   * The `provider` flag with the name of the provider (`google`)
+   * The `--google-project-id` flag with your Google project ID
+   * The `--google-json-key-file` flag with the name of the JSON file containing your key
+   * The name of your cloud credentials
+
+    Example:
+
+    ```text
+    pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json my-google-cred
+    ```
 
 #### Configure credentials
 
@@ -465,7 +481,7 @@ Example:
       ```output
       SOURCEVOLUME            SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
       agg-cs_journal_1        10769800556491614        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325        Thu, 24 Oct 2019 19:02:08 UTC        Manual        Done
-      agg-cs_0            365276421799434338        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/365276421799434338-461608030527675278        Thu, 24 Oct 2019 19:02:47 UTC        Manual        Done 
+      agg-cs_0            365276421799434338        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/365276421799434338-461608030527675278        Thu, 24 Oct 2019 19:02:47 UTC        Manual        Done
 ```
 
 
