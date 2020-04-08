@@ -98,48 +98,6 @@ size=100G features='0' hwhandler='1 alua' wp=rw
 
 ```
 
-### Enter Maintenance Mode
-
-In order to add more storage to a node, that node must be put in maintenance mode:
-
-```text
-pxctl service maintenance --enter
-```
-
-```output
-This is a disruptive operation, PX will restart in maintenance mode.
-Are you sure you want to proceed ? (Y/N): Y
-```
-
-Check if the node is in maintenance mode
-
-```text
-pxctl status
-```
-
-```output
-PX is in maintenance mode.  Use the service mode option to exit maintenance mode.
-Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
-	IP: 147.75.104.185
- 	Local Storage Pool: 0 pool
-	Pool	IO_Priority	Size	Used	Status	Zone	Region
-	No storage pool
-	Local Storage Devices: 0 device
-	Device	Path	Media Type	Size		Last-Scan
-	No storage device
-	total		-	0 B
-Cluster Summary
-	Cluster ID: bb4bcf13-d394-11e6-afae-0242ac110002
-	Node IP: 147.75.104.185 - Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668 In Maintenance
-Global Storage Pool
-	Total Used    	:  0 B
-	Total Capacity	:  0 B
-
-AlertID	Resource	ResourceID				Timestamp	Severity	AlertType		Description
-39	CLUSTER		a56a4821-6f17-474d-b2c0-3e2b01cd0bc3	Jan 8 06:01:22 UTC 2017	ALARM		Node state change	Node a56a4821-6f17-474d-b2c0-3e2b01cd0bc3 has an Operational Status: Down
-48	NODE		a0b87836-f115-4aa2-adbb-c9d0eb597668	Jan 8 21:45:25 UTC 2017	ALARM		Cluster manager failure	Cluster Manager Failure: Entering Maintenance Mode because of Storage Maintenance Mode
-```
-
 ### Add the new drive to cluster to increase the storage
 
 ```text
@@ -194,16 +152,6 @@ pxctl service drive rebalance --poolID 0 --operation status
 
 ```output
 Done: "Pool 0: Balance is not running"
-```
-
-### Exit Maintenance Mode
-
-```text
-pxctl service maintenance --exit
-```
-
-```output
-PX is now operational.
 ```
 
 ### Check cluster status
