@@ -171,7 +171,7 @@ createCred: error validating credential during create: SecondLevelDomainForbidde
 In this case, you should specify the `--disable-path-style` parameter while creating credentials as follows:
 
 ```text
-pxctl credentials create mycreds --provider=s3 --s3-disable-ssl --s3-region=us-east-1 --s3-access-key=<S3-ACCESS_KEY> --s3-secret-key=<S3-SECRET_KEY> --s3-endpoint=mys3-enpoint.com --disable-path-style --bucket=mybucket 
+pxctl credentials create mycreds --provider=s3 --s3-disable-ssl --s3-region=us-east-1 --s3-access-key=<S3-ACCESS_KEY> --s3-secret-key=<S3-SECRET_KEY> --s3-endpoint=mys3-enpoint.com --disable-path-style --bucket=mybucket
 ```
 
 ```output
@@ -219,11 +219,27 @@ pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-
 
 #### Google Cloud
 
-Here's how you can create the credentials for _Google Cloud_:
+1. Make sure the user or service account used by Portworx has the following roles:
 
-```text
-pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json my-google-cred
-```
+   * Editor
+   * Storage
+   * Object Admin
+   * Storage Object Viewer
+
+    For more information about roles and permissions within GCP, see the [Granting, changing, and revoking access to resources](https://cloud.google.com/iam/docs/granting-changing-revoking-access) section of the GCP documentation.
+
+2. Enter the `pxctl credentials create` command  specifying:
+
+   * The `provider` flag with the name of the provider (`google`)
+   * The `--google-project-id` flag with your Google project ID
+   * The `--google-json-key-file` flag with the name of the JSON file containing your key
+   * The name of your cloud credentials
+
+    Example:
+
+    ```text
+    pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json my-google-cred
+    ```
 
 #### Configure credentials
 
@@ -392,9 +408,89 @@ Next, we’re going to focus on the steps to perform a successful cloud backup:
 
 * List the backups in the cloud
 
- ```text
- pxctl cloudsnap list
- ```
+### List your cloud backups
+
+Use the `pxctl cloudsnap list` command to list your cloud backups:
+
+```text
+pxctl cloudsnap list
+```
+
+```output
+SOURCEVOLUME                    SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
+volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719        Wed, 16 Jan 2019 21:51:53 UTC        Manual        Done
+volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr        Wed, 16 Jan 2019 22:27:13 UTC        Manual        Done
+NewVol                        56706279008755778        2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463        Thu, 17 Jan 2019 00:03:59 UTC        Manual        Done
+```
+
+{{<info>}}
+**Note:** This command assumes that all your credentials are properly set up. If that is not the case, the cloud backups won't show up.
+{{</info>}}
+
+If you enter the `pxctl cloudsnap list` command followed by the `--help` flag, you'll see the avaiable options:
+
+```text
+pxctl cloudsnap list
+```
+
+```output
+pxctl cloudsnap list --help
+List snapshot in cloud
+
+Usage:
+  pxctl cloudsnap list [flags]
+
+Aliases:
+  list, l
+
+Flags:
+  -m, --migration             Optional, lists migration related cloudbackups
+  -a, --all                   List cloud backups of all clusters in cloud
+  -s, --src string            Optional source volume to list cloud backups
+      --cred-id string        Cloud credentials ID to be used for the backup
+  -c, --cluster string        Optional cluster id to list cloud backups. Current cluster-id is default
+  -t, --status string         Optional backup status(failed. aborted, stopped) to list cloud backups; Defaults to Done
+      --label pairs           Optional list of comma-separated name=value pairs to match with cloudsnap metadata
+  -i, --cloudsnap-id string   Optional cloudsnap id to list(lists a single entry)
+  -x, --max uint              Optional number to limit display of backups in each page
+  -h, --help                  help for list
+
+Global Flags:
+      --ca string        path to root certificate for ssl usage
+      --cert string      path to client certificate for ssl usage
+      --color            output with color coding
+      --config string    config file (default is $HOME/.pxctl.yaml)
+      --context string   context name that overrides the current auth context
+  -j, --json             output in json
+      --key string       path to client key for ssl usage
+      --raw              raw CLI output for instrumentation
+      --ssl              ssl enabled for portworx
+```
+
+### Inspect a cloud snapshot
+
+The `pxctl cloudsnap list` command displays all the cloud snapshots for a given credential, source volume, or type of cloud snapshot. To view more details about a particular cloud snapshot, you must specify the `-i` flag with the ID of the cloud snapshot you want to inspect.
+
+Example:
+
+1. Start by listing your cloud snapshots with:
+
+      ```text
+      pxctl cloudsnap list
+      ```
+
+      ```output
+      SOURCEVOLUME            SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
+      agg-cs_journal_1        10769800556491614        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325        Thu, 24 Oct 2019 19:02:08 UTC        Manual        Done
+      agg-cs_0            365276421799434338        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/365276421799434338-461608030527675278        Thu, 24 Oct 2019 19:02:47 UTC        Manual        Done
+```
+
+
+2. To inspect the first cloud snapshot (`fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325`) and print the output in JSON format, enter the following command:
+
+      ```text
+      pxctl -j cloudsnap list --cloudsnap-id fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325
+      ```
 
  ```output
  SOURCEVOLUME                    SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
