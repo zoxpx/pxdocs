@@ -142,10 +142,11 @@ Note we used used the existing snapshot name in the source part of the inline sp
 ### Using snapshots
 
 #### Listing snapshots
-To list snapshots taken by Portworx, use the `/opt/pwx/bin/pxctl volume snapshot list` command. For example:
+
+To list your snapshots, use the `pxctl volume list --snapshot` command as follows:
 
 ```text
-pxctl volume snapshot list
+pxctl volume list --snapshot
 ```
 
 ```output
