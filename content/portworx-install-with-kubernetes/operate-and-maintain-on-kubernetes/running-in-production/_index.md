@@ -21,13 +21,13 @@ series: k8s-op-maintain
 * Check and ensure a _minimum_ 2 cores and 4GB of RAM are allocated for Portworx.
 * The base operating system of the server supports linux kernel 3.10+ . Newer 4.x linux kernels have many performance and stability related fixes and is recommended.
 
-```text
-uname -r
-```
+      ```text
+      uname -r
+      ```
 
-```output
-3.10.0-327.22.2.el7.x86_64
-```
+      ```output
+      3.10.0-327.22.2.el7.x86_64
+      ```
 
 #### Configuring the Networking Infrastructure {#configuring-the-networking-infrastructure}
 
@@ -40,15 +40,15 @@ uname -r
 
 **Selecting drives for an installation**
 
-* Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the ‘-s’ flag as a runtime parameter. It can also be provided implicity by passing in the ‘-a’ flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with ‘-f’, Portworx will pick up drives even if they have a filesystem on them \(mounted drives are still excluded\). Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the ‘-z’ switch.
+* Storage can be provided to Portworx explicitly by passing in a list of block devices. The `lsblk -a` command displays a list of devices on the system. This is accomplished by the ‘-s’ flag as a runtime parameter. It can also be provided implicitly by passing in the ‘-a’ flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with ‘-f’, Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded). Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the ‘-z’ switch.
 
-This can be specificed in the args section of the px-spec.yaml used for installing PX as a daemonset.
+    The following example uses the `args` section of the Portworx `DaemonSet` to specify the `-a` and `-f` flags:
 
-```text
-          args:
-            ["-k", "etcd://example.etcd.server:2379", "-d", "eth0", "-m", "eth1",  "-c", "testcluster", "-a", "-f",
-             "-x", "kubernetes"]
-```
+      ```text
+      args:
+        ["-k", "etcd://example.etcd.server:2379", "-d", "eth0", "-m", "eth1",  "-c", "testcluster", "-a", "-f",
+        "-x", "kubernetes"]
+      ```
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID \(if available\) and give the block device from a HW RAID volume for Portworx to manage.
 * PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` \(or `priority_io` in kubernetes px spec\) and they offer the levels `high`, `medium` and `low`
@@ -93,96 +93,98 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 * Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. Monitor for for Volume Space Low alerts
 
-  ```
-  30|VolumeSpaceLow|ALARM|VOLUME|Triggered when the free space available in a volume goes below a threshold.
-  ```
+      ```
+      30|VolumeSpaceLow|ALARM|VOLUME|Triggered when the free space available in a volume goes below a threshold.
+      ```
 
-* For applications needing node level availability and read parallelism across nodes, it is recommended to set the volumes with replication factor 2 or replication factor 3
+* For applications needing node level availability and read parallelism across nodes, you should use a replication factor of 2 or 3.
 
-  Following storeclass shows how to create a SC for a PVC with replication factor of 3.
+    {{% content "shared/max-replication-factor.md" %}}
 
-  ```text
-   kind: StorageClass
-   apiVersion: storage.k8s.io/v1
-   metadata:
-   name: portworx-sc
-   provisioner: kubernetes.io/portworx-volume
-   parameters:
-   repl: "3"
-  ```
+    The following example creates a StorageClass for a PVC with a replication factor of 3:
+
+      ```text
+      kind: StorageClass
+      apiVersion: storage.k8s.io/v1
+      metadata:
+      name: portworx-sc
+      provisioner: kubernetes.io/portworx-volume
+      parameters:
+      repl: "3"
+      ```
 
 * PX makes best effort to distribute volumes evenly across all nodes and based on the `iopriority` that is requested. When PX cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to create the volume with the next available `iopriority` level.
 
-```text
- kind: StorageClass
- apiVersion: storage.k8s.io/v1
- metadata:
-   name: portworx-sc
- provisioner: kubernetes.io/portworx-volume
- parameters:
-   repl: "3"
-   priority_io: "high"
-```
+      ```text
+      kind: StorageClass
+      apiVersion: storage.k8s.io/v1
+      metadata:
+        name: portworx-sc
+      provisioner: kubernetes.io/portworx-volume
+      parameters:
+        repl: "3"
+        priority_io: "high"
+      ```
 
 * Volumes can be created in different availability zones by using the `--zones` option in the `pxctl volume create` command
 
-For e.g., for PX cluster running on AWS,
+    The following example `StorageClass` creates 3 replicas in the `us-east-1a` zone:
 
-```text
- kind: StorageClass
- apiVersion: storage.k8s.io/v1
- metadata:
-   name: portworx-sc
- provisioner: kubernetes.io/portworx-volume
- parameters:
-   repl: "3"
-   priority_io: "high"
-   zones: "us-east-1a"
-```
+      ```text
+      kind: StorageClass
+      apiVersion: storage.k8s.io/v1
+      metadata:
+        name: portworx-sc
+      provisioner: kubernetes.io/portworx-volume
+      parameters:
+        repl: "3"
+        priority_io: "high"
+        zones: "us-east-1a"
+      ```
 
 * Volumes can be created in different racks using `--racks` option and passing the rack labels when creating the volume
 
-```text
- kind: StorageClass
- apiVersion: storage.k8s.io/v1
- metadata:
-   name: portworx-sc
- provisioner: kubernetes.io/portworx-volume
- parameters:
-   repl: "3"
-   priority_io: "high"
-   racks: "rack1"
-```
+      ```text
+      kind: StorageClass
+      apiVersion: storage.k8s.io/v1
+      metadata:
+        name: portworx-sc
+      provisioner: kubernetes.io/portworx-volume
+      parameters:
+        repl: "3"
+        priority_io: "high"
+        racks: "rack1"
+      ```
 
 * If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, then the volumes need to enabled with `--sticky` flag
 
-```text
- kind: StorageClass
- apiVersion: storage.k8s.io/v1
- metadata:
-   name: portworx-sc
- provisioner: kubernetes.io/portworx-volume
- parameters:
-   repl: "3"
-   priority_io: "high"
-   racks: "rack1"
-   sticky: "true"
-```
+      ```text
+      kind: StorageClass
+      apiVersion: storage.k8s.io/v1
+      metadata:
+        name: portworx-sc
+      provisioner: kubernetes.io/portworx-volume
+      parameters:
+        repl: "3"
+        priority_io: "high"
+        racks: "rack1"
+        sticky: "true"
+      ```
 
 * For applications that require shared access from multiple containers running in different hosts, Portworx recommends running shared volumes. Shared volumes can be configured as follows by adding `shared: "true"` to the storage class:
 
-```text
- kind: StorageClass
- apiVersion: storage.k8s.io/v1
- metadata:
-   name: portworx-sc
- provisioner: kubernetes.io/portworx-volume
- parameters:
-   repl: "3"
-   priority_io: "high"
-   racks: "rack1"
-   shared: "true"
-```
+      ```text
+      kind: StorageClass
+      apiVersion: storage.k8s.io/v1
+      metadata:
+        name: portworx-sc
+      provisioner: kubernetes.io/portworx-volume
+      parameters:
+        repl: "3"
+        priority_io: "high"
+        racks: "rack1"
+        shared: "true"
+      ```
 
 This [page](/concepts) gives more details on different volume types, how to create them and update the configuration for the volumes
 
@@ -195,58 +197,57 @@ This [page](/concepts) gives more details on different volume types, how to crea
 * Refer to this [document](/reference/cli/snapshots) for a brief overview on how to manage snapshots via `pxctl`. In Kubernetes, most snapshot functionality can be handled via kubernetes command line.
 * Periodic scheduled snapshots can be setup by defining the `snap_interval` in the Portworx StorageClass. An example is shown below.
 
-```text
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: portworx-repl-1-snap-internal
-provisioner: kubernetes.io/portworx-volume
-parameters:
-  repl: "1"
-  snap_interval: "240"
-```
+      ```text
+      kind: StorageClass
+      apiVersion: storage.k8s.io/v1
+      metadata:
+        name: portworx-repl-1-snap-internal
+      provisioner: kubernetes.io/portworx-volume
+      parameters:
+        repl: "1"
+        snap_interval: "240"
+      ```
 
 * You can use annotations in Kubernetes to perform on-demand snapshot operations from within Kubernetes.
 
-Portworx uses a special annotation `px/snapshot-source-pvc` which can be used to identify the name of the source PVC whose snapshot needs to be taken.
+    Portworx uses a special annotation `px/snapshot-source-pvc` which can be used to identify the name of the source PVC whose snapshot needs to be taken.
 
-```text
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  namespace: prod
-  name: ns.prod-name.px-snap-1
-  annotations:
-    volume.beta.kubernetes.io/storage-class: px-sc
-    px/snapshot-source-pvc: px-vol-1
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 6Gi
-```
+      ```text
+      kind: PersistentVolumeClaim
+      apiVersion: v1
+      metadata:
+        namespace: prod
+        name: ns.prod-name.px-snap-1
+        annotations:
+          volume.beta.kubernetes.io/storage-class: px-sc
+          px/snapshot-source-pvc: px-vol-1
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 6Gi
+      ```
 
-Note the format of the `name` field - `ns.<namespace_of_source_pvc>-name.<name_of_the_snapshot>`. The above example takes a snapshot with the name “px-snap-1” of the source PVC “px-vol-1” in the “prod” namespace.
+    Note the format of the `name` field - `ns.<namespace_of_source_pvc>-name.<name_of_the_snapshot>`. The above example takes a snapshot with the name “px-snap-1” of the source PVC “px-vol-1” in the “prod” namespace.
 
-{{<info>}}
-**Note:**
-Annotations support is available from PX Version 1.2.11.6
-{{</info>}}
+    {{<info>}}
+**Note:**  Support for annotations is available starting with version 1.2.11.6.
+    {{</info>}}
 
-For using annotations Portworx daemon set requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
+    For using annotations Portworx DaemonSet requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section:
 
-```text
-- apiGroups: [""]
-  resources: ["persistentvolumeclaims"]
-  verbs: ["get", "list"]
-```
+      ```text
+        - apiGroups: [""]
+          resources: ["persistentvolumeclaims"]
+          verbs: ["get", "list"]
+      ```
 
-You can run the following command to edit your existing Portworx ClusterRole
+    You can run the following command to edit your existing Portworx ClusterRole
 
-```text
-kubectl edit clusterrole node-get-put-list-role
-```
+      ```text
+      kubectl edit clusterrole node-get-put-list-role
+      ```
 
 * Refer to the [Snapshots document](/reference/cli/snapshots) in the Kubernetes section of the docs for more up to date information on snapshots.
 * If you have installed Stork, the snapshot operations can be executed via Stork. Follow the [link](https://github.com/libopenstorage/stork/tree/master#creating-snapshots) to see how snapshots can be done with Stork.
