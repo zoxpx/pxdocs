@@ -20,7 +20,7 @@ sudo docker run --restart=always                            \
        --name px-lighthouse -d                              \
        -p 80:80 -p 443:443                                  \
        -v /etc/pwxlh:/config                                \
-       portworx/px-lighthouse:1.4.0
+       portworx/px-lighthouse:latest
 ```
 
 Visit *http://{IP_ADDRESS}:login* in the browser and login with `admin/Password1`
