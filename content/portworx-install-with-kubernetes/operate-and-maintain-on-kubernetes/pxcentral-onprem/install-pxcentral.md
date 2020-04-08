@@ -13,10 +13,17 @@ A dedicated Kubernetes cluster consisting of the following:
 
 * 3 worker nodes
 * 50GB available `/root` disk size
-* 4 cpu cores
+* 4 CPU cores
 * 8GB of memory
 * A minimum of 1 disk with 100 GB, ideally 2 disks on each node with at least 100 GB each
 * Kubernetes version 1.14.x, 1.15.x, or 1.16.x
+
+For internet-connected clusters, the following ports must be open:
+
+| Port | Component | Purpose | Incoming/Outgoing |
+| :---: |:---:|:---:|:---:|
+| 31234 | PX-Central | Access from outside | Incoming |
+| 7070 | License server | License validation | Outgoing |
 
 {{<info>}}
 **NOTE:** You must use a dedicated Kubernetes cluster with no existing Portworx installations.
@@ -24,7 +31,7 @@ A dedicated Kubernetes cluster consisting of the following:
 
 ## Prepare air-gapped environments
 
-If your cluster is internet connected, skip this section. If your cluster is air-gapped, you must pull the Portworx license server and related Docker images to either your docker registry, or your server.
+If your cluster is internet-connected, skip this section. If your cluster is air-gapped, you must pull the Portworx license server and related Docker images to either your docker registry, or your server.
 
 Pull the following required docker images onto your air-gapped environment:
 
