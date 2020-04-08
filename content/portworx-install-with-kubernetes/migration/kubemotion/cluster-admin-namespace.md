@@ -19,15 +19,15 @@ Run the following command to edit the Stork deployment:
 kubectl edit deployment -n kube-system stork
 ```
 
-If `admin-namespace` is your admin namespace, in the editor, update the arguments to the Stork container to specify the cluster admin namespace using the `--migration-admin-namespace` parameter:
+If `admin-namespace` is your admin namespace, in the editor, update the arguments to the Stork container to specify the cluster admin namespace using the `--admin-namespace` parameter:
 
 ```text
-      - command:
-        - /stork
-        - --driver=pxd
-        - --verbose
-        - --leader-elect=true
-        - --migration-admin-namespace=admin-namespace
+- command:
+  - /stork
+  - --driver=pxd
+  - --verbose
+  - --leader-elect=true
+  - --admin-namespace=admin-namespace
 ```
 
 Save the changes and wait for all the Stork pods to be in running state after applying the
@@ -37,3 +37,16 @@ changes:
 kubectl get pods -n kube-system -l name=stork
 ```
 
+{{<info>}}
+**NOTE:** If you're running a version of Stork older than 2.3.2, use  `--migration-admin-namespace` to specify your cluster admin namespace.
+
+Example:
+```text
+- command:
+  - /stork
+  - --driver=pxd
+  - --verbose
+  - --leader-elect=true
+  - --migration-admin-namespace=admin-namespace
+```
+{{</info>}}
