@@ -9,7 +9,7 @@ keywords: Portworx, containers, storage
 
 ## Installation Prerequisites
 
-Prior to installing Portworx, your system needs to meet the hardware, software and network requirements listed below.
+The minimum supported size for a Portworx cluster is three nodes. Each node must meet the following hardware, software, and network requirements:
 
 |**Hardware** ||
 |-------------------------|------------|
