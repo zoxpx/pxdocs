@@ -167,7 +167,7 @@ Successfully authenticated with Vault.
 ```
 
 {{<info>}}
-To install and configure Vault, peruse [this link](https://www.vaultproject.io/docs/install/index.html)
+To install and configure Vault, peruse [this link](https://www.vaultproject.io/docs/install)
 {{</info>}}
 
 ### AWS KMS example
