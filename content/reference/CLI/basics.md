@@ -144,7 +144,13 @@ sudo /opt/pwx/bin/pxctl secrets vault login --vault-address http://myvault.myorg
 Successfully authenticated with Vault.
 ```
 
-AWS KMS example
+{{<info>}}
+To install and configure Vault, peruse [this link](https://www.vaultproject.io/docs/install)
+{{</info>}}
+
+### AWS KMS example
+
+To configure Portworx with Amazon KMS, type the following command:
 
 ```text
 sudo /opt/pwx/bin/pxctl secrets aws login
