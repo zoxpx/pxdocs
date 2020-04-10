@@ -95,6 +95,7 @@ Once you've defined a schedule policy, you can create and associate `StorageClas
 You can create VolumeSnapshotSchedules to backup specific volumes according to a schedule you define.
 
 Create a `VolumeSnapshotSchedule`, specifying:
+
   * **metadata:**
     * **name:** with the name of this VolumeSnapshotSchedule policy
     * **namespace:** the namespace in which this policy will exist
