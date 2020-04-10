@@ -94,7 +94,7 @@ To find out how to configure Portworx with Kubernetes Secrets, see the [Kubernet
 ## Vault
 
 {{<info>}}
-To install and configure Vault, see the [Vault install](https://www.vaultproject.io/docs/install/index.html) page.
+To install and configure Vault, see the [Vault install](https://www.vaultproject.io/docs/install) page.
 {{</info>}}
 
 For a step-by-step guide on how you can connect your Portworx cluster to a Vault endpoint and then use the Vault endpoint to store secrets, see the[Vault](/key-management/vault) page.
