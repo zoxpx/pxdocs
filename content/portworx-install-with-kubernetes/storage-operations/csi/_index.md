@@ -17,14 +17,17 @@ Using Portworx with CSI, you can perform the following operations:
 
 ## Supported features
 
-The following table shows the features supported by the different versions of Kubernetes and Portworx:
+The following table shows the core features supported by CSI and which minimum versions of Portworx and Kubernetes they require.
 
-| Feature | Minimum Kubernetes version | Minimum Portworx version |
-| --- | --- | --- |
-| Provision, attach, and mount volumes | 1.13.12+ | 2.2 |
-| CSI Snapshots (alpha version) | You can use the `VolumeSnapshotDataSource` feature gate to enable CSI Snapshots on Kubernetes 1.13.12+. Refer to the [Take snapshots of CSI enabled volumes](#take-snapshots-of-csi-enabled-volumes) section for more details | 2.2 |
-| Stork [^1] | 1.13.12+ | 2.2 |
-| Resizer | You can use use the `ExpandCSIVolumes` feature gate to enable the alpha or the beta version of this feature. Refer to the [Kubernetes Feature Gates](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features) page for more details on the specific versions you can set on different Kubernetes versions. | 2.2 |
+| Feature | Portworx version | Supported Kubernetes version | Alpha Kubernetes version |
+| --- | --- | --- | --- |
+| [Provision, attach, and mount volumes](/portworx-install-with-kubernetes/storage-operations/csi/#create-and-use-persistent-volumes) | 2.2 | 1.13.12 |  |
+| [CSI Snapshots](/portworx-install-with-kubernetes/storage-operations/csi/#take-snapshots-of-csi-enabled-volumes) | 2.2 | 1.16 | 1.13.12 |
+| Stork [^1] | 2.2 | 1.13 |  |
+| Volume Expansion (resizing) | 2.2 | 1.16 | 1.14 |
+| [Ephemeral Inline Volumes](/portworx-install-with-kubernetes/storage-operations/csi/#ephemeral-inline-volumes-with-csi) | 2.5 | 1.16 | 1.15 |
+
+Portworx, Inc. does not recommend that you use alpha Kubernetes features in production as the API and core functionality are not finalized. Users that adopt alpha features in production may need to perform costly manual upgrades.
 
 [^1]: Note that only Stork 2.3.0 or later is supported with CSI.
 
@@ -351,6 +354,40 @@ You can clone CSI-enabled volumes, duplicating both the volume and content withi
       ```text
       kubectl apply -f clonePVC.yaml
       ```
+
+## Ephemeral Inline Volumes with CSI
+You can create ephemeral inline volumes with CSI. These volumes are created during pod creation and deleted upon pod teardown.
+
+1. Create a pod spec that uses the Portworx CSI driver, declaring the inline volume as seen below in a YAML file named `ephemeral-volume-pod.yaml`
+
+      ```text
+      kind: Pod
+      apiVersion: v1
+      metadata:
+        name: csi-inline-volume-app
+      spec:
+        containers:
+          - name: my-frontend
+            image: busybox
+            volumeMounts:
+            - mountPath: "/data"
+              name: my-csi-volume
+            command: [ "sleep", "1000000" ]
+        volumes:
+          - name: my-csi-volume
+            csi:
+              driver: pxd.portworx.com
+              volumeAttributes:
+                size: "2Gi"
+      ```
+
+2. Apply the `ephemeral-volume-pod.yaml`  spec to create the pod with an ephemeral inline volume:
+
+      ```text
+      kubectl apply -f ephemeral-volume-pod.yaml
+      ```
+
+You may also use ephemeral inline volumes with deployments and other application types. See this [Kubernetes blog](https://kubernetes.io/blog/2020/01/21/csi-ephemeral-inline-volumes/) for more information and example use cases.
 
 ## Upgrade
 
