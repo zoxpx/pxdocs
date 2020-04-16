@@ -13,6 +13,7 @@ This document describes how to dynamically provision a volume using Kubernetes a
 Using Dynamic Provisioning and Storage Classes you don't need to create Portworx volumes out of band and they will be created automatically.
 Using Storage Classes objects an admin can define the different classes of Portworx Volumes that are offered in a cluster. Following are the different parameters that can be used to define a Portworx Storage Class
 
+<<<<<<< HEAD
 | Name              	| Description                                                                                                                                                                                                                                                            	| Example                	|
 |-------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|------------------------	|
 | fs                	| Filesystem to be laid out: xfs\|ext4                                                                                                                                                                                                                               	| fs: "ext4"               	|
@@ -30,6 +31,19 @@ Using Storage Classes objects an admin can define the different classes of Portw
 | snap_interval     	| Snapshot interval in minutes. 0 disables snaps. Minimum value: 60. It is recommended to use snap_schedule above.                                                                                                                                                                      	| snap_interval: "120"     	|
 | sticky     	| Flag to create sticky volumes that cannot be deleted until the flag is disabled                                                                                                                                                                                                      	| sticky: "true"     	|
 | journal     	| (Portworx 1.3 and higher) Flag to indicate if you want to use journal device for the volume's data. This will use the journal device that you used when installing Portworx. This is useful to absorb frequent syncs from short bursty workloads. Default: false                                                                                                                                                                                             	| journal: "true"     	|
+||||||| parent of 10ce939... PD-224 Update the Dynamic provisioning of PVCs page (#773)
+{{% content "shared/portworx-install-with-kubernetes-volume-options.md" %}}
+
+{{<info>}}
+**NOTE:** For the list of Kubernetes-specific parameters that you can use with a Portworx Storage class, see the [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/) page.
+{{</info>}}
+=======
+{{% content "shared/portworx-install-with-kubernetes-volume-options.md" %}}
+
+{{<info>}}
+**NOTE:** For the list of Kubernetes-specific parameters that you can use with a Portworx Storage class, see the [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/) page of the Kubernetes documentation.
+{{</info>}}
+>>>>>>> 10ce939... PD-224 Update the Dynamic provisioning of PVCs page (#773)
 
 ### Provision volumes
 #### Step 1: Create Storage Class.
