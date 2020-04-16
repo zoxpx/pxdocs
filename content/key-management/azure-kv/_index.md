@@ -9,14 +9,14 @@ series: key-management
 noicon: true
 ---
 
-Portworx can integrate with Azure Key Vault [Secrets](https://docs.microsoft.com/en-us/azure/key-vault/about-keys-secrets-and-certificates#key-vault-secrets) to store your encryption secrets, credentials or passwords. This guide will get a Portworx cluster connected to a Azure Key Vault. The Azure Key Vault could be used to store secrets that will be used for encrypting volumes.
+Portworx can integrate with Azure Key Vault [Secrets](https://docs.microsoft.com/en-us/azure/key-vault/secrets/) to store your encryption secrets, credentials or passwords. This guide will get a Portworx cluster connected to a Azure Key Vault. The Azure Key Vault could be used to store secrets that will be used for encrypting volumes.
 
 ## Setting up Azure Key Vault {#setting-up-azure-kv}
 
 Peruse [this section](https://docs.microsoft.com/en-us/azure/key-vault/quick-create-portal) for help on setting up Azure Key Vault in your setup.
 You will also require to register and authenticate application with Azure Key Vault.
 
-- Please follow [doc] (https://docs.microsoft.com/en-us/azure/key-vault/key-vault-manage-with-cli2#registering-an-application-with-azure-active-directory) to register application with azure active directory
+- Please follow [doc](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-manage-with-cli2#registering-an-application-with-azure-active-directory) to register application with azure active directory
 - Please follow [doc](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-manage-with-cli2#authorizing-an-application-to-use-a-key-or-secret) to grant Azure Key Vault permission to your registered app.
 
 Portworx will need application that has Azure Key Vault `set/get/list/delete` secrets permissions.
@@ -55,9 +55,9 @@ Based on your installation method provide the `-secret_type azure-kv` input argu
 {{<info>}}
 **Note**:
 <br>
-Portworx supports only the [Azure KeyVault Secrets](https://docs.microsoft.com/en-us/azure/key-vault/about-keys-secrets-and-certificates#key-vault-secrets)
-<br>
-Portworx does not support [Azure KeyVault Keys soft/hard](https://docs.microsoft.com/en-us/azure/key-vault/about-keys-secrets-and-certificates#key-vault-keys)
+Portworx supports only the [Azure KeyVault Secrets](https://docs.microsoft.com/en-us/azure/key-vault/secrets/)
+
+Portworx does not support Azure KeyVault Keys soft/hard.
 {{</info>}}
 
 ### Setting cluster wide secret key
@@ -72,5 +72,5 @@ This command needs to be run just once for the cluster. If you have added the cl
 
 {{<info>}}
 **Important:**
-Make sure that the secret key has been created in Azure Key Vault [Secrets](https://docs.microsoft.com/en-us/azure/key-vault/about-keys-secrets-and-certificates#key-vault-secrets).
+Make sure that the secret key has been created in Azure Key Vault [Secrets](https://docs.microsoft.com/en-us/azure/key-vault/secrets/).
 {{</info>}}
