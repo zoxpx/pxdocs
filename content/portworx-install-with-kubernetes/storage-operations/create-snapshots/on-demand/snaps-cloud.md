@@ -8,7 +8,16 @@ description: Learn to take a cloud snapshot of a volume from a Kubernetes persis
 
 This document will show you how to create cloud snapshots of Portworx volumes and how you can clone those snapshots to use them in pods.
 
-## Prerequisites
+{{<info>}}
+**NOTE:** You cannot use an older version of Portworx to restore a cloud snapshot created with a newer one. For example, if you're running Portworx 2.1, you can't restore a cloud snapshot created with Portworx 2.2.
+{{</info>}}
+
+
+## Back up a volume and restore it to the same Portworx cluster
+
+This section shows how you can back up a volume and restore it to the same Portworx cluster.
+
+### Prerequisites
 
 * This requires that you already have [Stork](/portworx-install-with-kubernetes/storage-operations/stork) installed and running on your
 Kubernetes cluster. If you fetched the Portworx specs from the Portworx spec generator in [PX-Central](https://central.portworx.com) and used the default options, Stork is already installed.
