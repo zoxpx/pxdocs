@@ -16,7 +16,7 @@ Using Storage Classes objects an admin can define the different classes of Portw
 {{% content "shared/portworx-install-with-kubernetes-volume-options.md" %}}
 
 {{<info>}}
-**NOTE:** For the list of Kubernetes-specific parameters that you can use with a Portworx Storage class, see the [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/) page.
+**NOTE:** For the list of Kubernetes-specific parameters that you can use with a Portworx Storage class, see the [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/) page of the Kubernetes documentation.
 {{</info>}}
 
 ### Provision volumes
