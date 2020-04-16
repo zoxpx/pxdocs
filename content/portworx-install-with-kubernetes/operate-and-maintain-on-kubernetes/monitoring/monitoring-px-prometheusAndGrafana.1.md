@@ -266,6 +266,3 @@ Create a datasource named `prometheus`. Enter the Prometheus endpoint as obtaine
 Select the Portworx volume metrics dashboard on Grafana to view the Portworx metrics.
 ![grafanadashboard](/img/grafana-portworx-dashboard.png)
 
-## Related topics
-
-For information on the available Portworx metrics, refer to the [Portworx metrics for monitoring reference](/reference/metrics/) page.
