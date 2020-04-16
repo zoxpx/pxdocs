@@ -5,7 +5,8 @@ description: How to use Prometheus and Grafana for monitoring Portworx on Kubern
 ---
 
 ## About Prometheus
-Prometheus is an opensource monitoring and alerting toolkit. Prometheus consists of several components some of which are listed below.
+Prometheus is an opensource monitoring and alerting toolkit. Prometheus consists of several components some of which are listed below:
+
 - The Prometheus server which scrapes(collects) and stores time series data based on a pull mechanism.
 - A rules engine which allows generation of Alerts based on the scraped metrices.
 - An alertmanager for handling alerts.
@@ -17,11 +18,10 @@ The following instructions allows you to monitor Portworx via Prometheus and all
 
 The Prometheus [Operator](https://coreos.com/operators/prometheus/docs/latest/user-guides/getting-started.html) creates, configures and manages a prometheus cluster.
 
-The prometheus operator manages 3 customer resource definitions namely:
+The Prometheus operator manages 3 customer resource definitions namely:
+
 - Prometheus: The Prometheus CRD defines a Prometheus setup to be run on a Kubernetes cluster. The Operator creates a Statefulset for each definition of the Prometheus resource.
-
 - ServiceMonitor: The ServiceMonitor CRD allows the definition of how Kubernetes services could be monitored based on label selectors. The Service abstraction allows Prometheus to in turn monitor underlying Pods.
-
 - Alertmanager: The Alertmanager CRD allows the definition of an Alertmanager instance within the Kubernetes cluster. The alertmanager expects a valid configuration in the form of a `secret` called `alertmanager-name`.
 
 ## About Grafana
@@ -68,82 +68,127 @@ Next, apply the spec:
 kubectl apply -f <service-monitor.yaml>
 ```
 
-### Install the Alertmanager
-Create a file named `alertmanager.yaml` with the following contents and create a secret from it.
-Make sure you add the relevant email addresses in the below config.
-```text
-global:
-  # The smarthost and SMTP sender used for mail notifications.
-  smtp_smarthost: 'smtp.gmail.com:587'
-  smtp_from: '<sender-email-address>'
-  smtp_auth_username: "<sender-email-address>"
-  smtp_auth_password: '<sender-email-password>'
-route:
-  group_by: [Alertname]
-  # Send all notifications to me.
-  receiver: email-me
-receivers:
-- name: email-me
-  email_configs:
-  - to: <receiver-email-address>
-    from: <sender-email-address>
-    smarthost: smtp.gmail.com:587
-    auth_username: "<sender-email-address>"
-    auth_identity: "<sender-email-address>"
-    auth_password: "<sender-email-password>"
-## Edit the file and create a secret with it using the following command
-```
+### Install and configure Prometheus Alertmanager
 
-```text
-kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system
-```
+1. Specify your alerting rules. Create a file named `alertmanager.yaml`, specifying your configuration options for the following:
+
+    * **email_configs:**
+      * **to:** with the address of the recipient
+      * **from:** with the address of the sender
+      * **smarthost:** with the address of your SMTP server
+      * **auth_username:** with your STMP username
+      * **auth_identity:** with the address of the sender
+      * **auth_password:** with your SMTP password.
+      * **text:**  with the  text the notification
+    * **slack_configs:**
+      * **api_url:** with your Slack API URL. To retrieve your Slack API URL, you must follow the steps in the [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks) page of the Slack documentation.
+      * **channel:** with the Slack channel you want to send notifications to.
+      * **text:** with the text of the notification
+
+    ```text
+    global:
+      # Global variables
+    route:
+      group_by: [Alertname]
+      receiver: email_and_slack
+    receivers:
+    - name: email_and_slack
+      email_configs:
+      - to:
+        from:
+        smarthost:
+        auth_username:
+        auth_identity:
+        auth_password:
+        text: |-
+          {{ range .Alerts }}
+            *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
+            *Description:* {{ .Annotations.description }}
+            *Details:*
+            {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+            {{ end }}
+          {{ end }}
+      slack_configs:
+      - api_url:
+        channel:
+        text: |-
+          {{ range .Alerts }}
+            *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
+            *Description:* {{ .Annotations.description }}
+            *Details:*
+            {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+            {{ end }}
+          {{ end }}
+    ```
+
+    {{<info>}}
+For a description of the properties in this schema, see the [Configuration file](https://prometheus.io/docs/alerting/configuration/#configuration-file) section of the Prometheus documentation.
+    {{</info>}}
+
+2. Create a secret from the `alertmanager.yaml` file:
+
+    ```text
+    kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system
+    ```
+
+    ```
+    secret/alertmanager-portworx created
+    ```
 
 
-Create a file named `alertmanager-cluster.yaml` with the below contents:
+3. Create a file named `alertmanager-cluster.yaml`, and copy in the following spec:
 
-```text
-apiVersion: monitoring.coreos.com/v1
-kind: Alertmanager
-metadata:
-  name: portworx #This name is important since the Alertmanager pods wont start unless a secret named alertmanager-${ALERTMANAGER_NAME} is created. in this case if would expect alertmanager-portworx secret in the kube-system namespace
-  namespace: kube-system
-  labels:
-    alertmanager: portworx
-spec:
-  replicas: 3
-```
-
-Now, apply the spec on your cluster:
-
-```text
-kubectl apply -f alertmanager-cluster.yaml
-```
+    ```text
+    apiVersion: monitoring.coreos.com/v1
+    kind: Alertmanager
+    metadata:
+      name: portworx #This name is important since the Alertmanager pods wont start unless a secret named alertmanager-${ALERTMANAGER_NAME} is created. in this case if would expect alertmanager-portworx secret in the kube-system namespace
+      namespace: kube-system
+      labels:
+        alertmanager: portworx
+    spec:
+      replicas: 3
+    ```
 
 
-Create a file named `alertmanager-service.yaml` with the following contents:
+4. Apply the spec by entering the following command:
 
-```text
-apiVersion: v1
-kind: Service
-metadata:
-  name: alertmanager-portworx
-  namespace: kube-system
-spec:
-  type: NodePort
-  ports:
-  - name: web
-    port: 9093
-    protocol: TCP
-    targetPort: web
-  selector:
-    alertmanager: portworx
-```
+    ```text
+    kubectl apply -f alertmanager-cluster.yaml
+    ```
 
-Apply the spec:
+    ```
+    alertmanager.monitoring.coreos.com/portworx created
+    ```
 
-```text
-kubectl apply -f alertmanager-service.yaml
-```
+5. Create a file named `alertmanager-service.yaml` with the following content:
+
+    ```text
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: alertmanager-portworx
+      namespace: kube-system
+    spec:
+      type: NodePort
+      ports:
+      - name: web
+        port: 9093
+        protocol: TCP
+        targetPort: web
+      selector:
+        alertmanager: portworx
+    ```
+
+6. Apply the spec by entering the following command:
+
+    ```text
+    kubectl apply -f alertmanager-service.yaml
+    ```
+
+    ```
+    service/alertmanager-portworx created
+    ```
 
 ### Install Prometheus
 
@@ -204,3 +249,7 @@ Create a datasource named `prometheus`. Enter the Prometheus endpoint as obtaine
 
 Select the Portworx volume metrics dashboard on Grafana to view the Portworx metrics.
 ![grafanadashboard](/img/grafana-portworx-dashboard.png)
+
+## Related topics
+
+For information on the available Portworx metrics, refer to the [Portworx metrics for monitoring reference](/reference/metrics/) page.
