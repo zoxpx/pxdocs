@@ -8,6 +8,11 @@ description: Learn to take a cloud snapshot of a volume from a Kubernetes persis
 
 This document shows how you can create cloud snapshots of Portworx volumes and how you can clone those snapshots to use them in pods.
 
+{{<info>}}
+**NOTE:** You cannot use an older version of Portworx to restore a cloud snapshot created with a newer one. For example, if you're running Portworx 2.1, you can't restore a cloud snapshot created with Portworx 2.2.
+{{</info>}}
+
+
 ## Back up a volume and restore it to the same Portworx cluster
 
 This section shows how you can back up a volume and restore it to the same Portworx cluster.
