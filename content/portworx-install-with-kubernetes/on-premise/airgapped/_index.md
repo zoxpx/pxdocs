@@ -63,7 +63,11 @@ There are two ways in which you can load the Portworx images to your nodes:
 
 ### Step 2a: Push to a local registry server, accessible by the air-gapped nodes
 
-{{% content "portworx-install-with-kubernetes/on-premise/airgapped/shared/push-to-local-reg.md" %}}
+{{<info>}}
+For details about how you can use a private registry, see the  [Using a Private Registry](https://kubernetes.io/docs/concepts/containers/images/#using-a-private-registry) section of the Kubernetes documentation.
+{{</info>}}
+
+{{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-local-reg.md" %}}
 
 {{<info>}}
 Since you are using your custom registry, ensure that you specify it in the spec generator in **Registry And Image Settings** -> **Custom Container Registry Location**.
