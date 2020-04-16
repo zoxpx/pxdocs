@@ -65,8 +65,11 @@ For details about how you can use a private registry, see the  [Using a Private 
 {{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-local-reg.md" %}}
 
 {{<info>}}
-Since you are using your custom registry, ensure that you specify it in the spec generator in **Registry And Image Settings** -> **Custom Container Registry Location**.
+**NOTE:** You must specify your custom registry in the **Customize** section of the <a href="https://central.portworx.com" target="tab">spec generator</a>:
+
+![Screenshot showing the customize section](/img/spec-generator-customize-section.png)
 {{</info>}}
+
 
 Now that you have loaded the images into your registry, continue with [Step 3: Install Portworx](#step-3-install-portworx).
 
