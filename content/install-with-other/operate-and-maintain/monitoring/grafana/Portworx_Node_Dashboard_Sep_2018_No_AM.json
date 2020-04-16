@@ -96,11 +96,11 @@
       "interval": null,
       "links": [
         {
-          "dashUri": "db/prashant-cluster-dashboard",
-          "dashboard": "Prashant Cluster Dashboard",
+          "dashUri": "db/portworx-cluster-dashboard-copy-no-am",
+          "dashboard": "Portworx Cluster Dashboard Copy (no AM)",
           "includeVars": true,
           "keepTime": true,
-          "title": "Prashant Cluster Dashboard",
+          "title": "Portworx Cluster Dashboard Copy (no AM)",
           "type": "dashboard"
         }
       ],
