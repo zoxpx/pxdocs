@@ -40,4 +40,4 @@ In order to use Sysdig with Portworx, you must deploy both products onto your Ku
 
 ## Save and restore Dashboards
 
-You can save and restore your Sysdig dashboards on your Portworx cluster. Follow the steps in the [Save and Restore Dashboards with Scripts](https://sysdigdocs.atlassian.net/wiki/spaces/Monitor/pages/205488166/Dashboards#Dashboards-SaveandRestoreDashboardswithScripts) section of the Sysdig documentation to download the scripts and review instructions for running them.
+You can save and restore your Sysdig dashboards on your Portworx cluster. Follow the steps in the [Save and Restore Dashboards with Scripts](https://docs.sysdig.com/en/save-and-restore-dashboards-with-scripts.html) section of the Sysdig documentation to download the scripts and review instructions for running them.
