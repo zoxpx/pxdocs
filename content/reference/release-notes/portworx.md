@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.5.0.1
+
+April 21, 2020
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-12322 | Portworx failed to start if NFS was in an errored state. <br/><br/> **User Impact:** Users could not start Portworx if NFS was errored. <br/><br/> **Resolution:** Users can now start Portworx if NFS is errored, and Portworx will now raise an alert instead. |
+
 ## 2.5
 
 April 3, 2020
