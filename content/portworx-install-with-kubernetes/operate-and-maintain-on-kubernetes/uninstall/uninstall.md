@@ -13,7 +13,7 @@ When uninstalling Portworx from your cluster, you have 2 choices:
 1. Stop Portworx and remove the Kubernetes specs and completely wipe the data. If this is what you want, continue to [Delete/Wipe Portworx](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall/#delete-wipe-px-cluster-configuration).
 2. Stop Portworx and remove the Kubernetes specs without wiping the data. If this is what you want, continue to [Uninstall](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall/#uninstall).
 
-### Delete/Wipe Portworx cluster configuration
+## Delete/Wipe Portworx cluster configuration
 
 {{<info>}}The commands used in this section are DISRUPTIVE and will lead to loss of all your data volumes. Proceed with CAUTION.{{</info>}}
 
@@ -39,7 +39,7 @@ Before running the above wipe job, ensure that the Portworx spec is applied on y
 If you are wiping off the cluster to re-use the nodes for installing a brand new Portworx cluster, make sure you use a different ClusterID in the DaemonSet spec file \(ie. `-c myUpdatedClusterID`\).
 {{</info>}}
 
-### Uninstall
+## Uninstall
 
 {{<info>}}Uninstalling or deleting the Portworx daemonset only removes the Portworx containers from the nodes. As the configurations files which Portworx use are persisted on the nodes the storage devices and the data volumes are still intact. These Portworx volumes can be used again if the Portworx containers are started with the same configuration files.{{</info>}}
 
@@ -69,3 +69,8 @@ You can uninstall Portworx from the cluster using the following steps:
 {{<info>}}
 During uninstall, the Portworx configuration files under `/etc/pwx/` directory are preserved, and will not be deleted.
 {{</info>}}
+
+
+## Related topics
+
+* [Unlink a Portworx Essentials cluster](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/unlink-a-portworx-essentials-cluster/)
