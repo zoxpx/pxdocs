@@ -13,10 +13,10 @@ This guide describes the procedure to upgrade Portworx running as OCI container 
 
 ## Upgrade Portworx
 
-To upgrade to the **2.5** release (the latest stable at the time of this writing), run the following command:
+To upgrade to the **{{% currentVersion %}}** release, run the following command:
 
 ```text
-PXVER='2.5'
+PXVER='{{% currentVersion %}}'
 curl -fsL https://install.portworx.com/${PXVER}/upgrade | bash -s
 ```
 
@@ -33,7 +33,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      PXVER='2.5'
+      PXVER='{{% currentVersion %}}'
       curl -fsL -o stork-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=stork"
       ```
 
@@ -42,7 +42,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      PXVER='2.5'
+      PXVER='{{% currentVersion %}}'
       curl -fsL -o stork-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=stork&reg=artifactory.company.org:6555"
       ```
 2. Next, apply the spec with:
@@ -57,7 +57,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      PXVER='2.5'
+      PXVER='{{% currentVersion %}}'
       curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=lighthouse"
       ```
 
@@ -65,7 +65,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
     ```text
     KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-    PXVER='2.5'
+    PXVER='{{% currentVersion %}}'
     curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=lighthouse&reg=artifactory.company.org:6555"
     ```
 2. Apply the spec by running:
@@ -81,7 +81,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.0.3.4_ image.
 
 ```text
-PXVER='2.5'
+PXVER='{{% currentVersion %}}'
 curl -fsL https://install.portworx.com/${PXVER}/upgrade | bash -s -- -t 2.0.3.4
 ```
 
@@ -93,21 +93,26 @@ The below sections outline the exact steps for this.
 
 ### Step 1: Pull the required images
 
-If you want to upgrade to the latest 2.5 stable release, skip the below export. If you wish to upgrade to a specific 2.5 release, set the `PX_VER` variable as below to the desired version.
+1. If you want to upgrade to the latest {{% currentVersion %}} stable release, set the `PX_VER` environment variable to the following value:
+
+    ```text
+    export PX_VER=$(curl -fs https://install.portworx.com/{{% currentVersion %}}/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
+    ```
+    {{<info>}}
+**NOTE:** To upgrade to a specific release, you can manually set the `PX_VER` environment variable to the desired value. Example:
 
 ```text
-# To determine the latest minor 2.5 release currently available, please use the curl-expression below
-# Alternatively, you can specify the version yourself, e.g.: PX_VER=2.5
-export PX_VER=$(curl -fs https://install.portworx.com/2.5/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
+export PX_VER=2.3.6
 ```
+    {{</info>}}
 
-Now pull the required Portworx images.
+2. Pull the Portworx images:
 
-```text
-export PX_IMGS="portworx/oci-monitor:$PX_VER portworx/px-enterprise:$PX_VER portworx/talisman:latest"
+    ```text
+    export PX_IMGS="portworx/oci-monitor:$PX_VER portworx/px-enterprise:$PX_VER portworx/talisman:latest"
 
-echo $PX_IMGS | xargs -n1 docker pull
-```
+    echo $PX_IMGS | xargs -n1 docker pull
+    ```
 
 ### Step 2: Loading Portworx images on your nodes
 
@@ -149,7 +154,7 @@ fi
 
 [[ -z "$PX_VER" ]] || ARG_PX_VER="-t $PX_VER"
 
-curl -fsL https://install.portworx.com/2.5/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
+curl -fsL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
 ```
 
 ## Troubleshooting

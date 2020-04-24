@@ -27,7 +27,7 @@ Now generate the spec with the following curl command.
 
 ```text
 export VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-curl -fsL -o px-spec.yaml "https://install.portworx.com/2.5?kbver=$VER&csida=true&c=portworx-demo-cluster&b=true&st=k8s&csi=true&vsp=true&ds=$VSPHERE_DATASTORE_PREFIX&vc=$VSPHERE_VCENTER&s=%22$VSPHERE_DISK_TEMPLATE%22"
+curl -fsL -o px-spec.yaml "https://install.portworx.com/{{% currentVersion %}}?kbver=$VER&csida=true&c=portworx-demo-cluster&b=true&st=k8s&csi=true&vsp=true&ds=$VSPHERE_DATASTORE_PREFIX&vc=$VSPHERE_VCENTER&s=%22$VSPHERE_DISK_TEMPLATE%22"
 ```
 
 {{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
