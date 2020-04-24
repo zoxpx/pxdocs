@@ -8,7 +8,11 @@ series: k8s-uninstall
 
 This guide describes a recommended workflow for decommissioning a Portworx node in your Kubernetes cluster.
 
-## Step 1. Migrate application pods using portworx volumes that are running on this node
+{{<info>}}
+**NOTE:** The following steps don't apply if you're using an auto-scaling group (ASG) to manage your Portworx nodes. For details about how you can change the size of your auto-scaling group, see the [Scaling the Size of Your Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/scaling_plan.html) page of the AWS documentation.
+{{</info>}}
+
+## Step 1. Migrate application pods using Portworx volumes that are running on this node
 
 If you plan to remove Portworx from a node, applications running on that node using Portworx need to be migrated. If Portworx is not running, existing application containers will end up with read-only volumes and new ones will fail to start.
 
