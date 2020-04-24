@@ -17,7 +17,7 @@ The goal of this document is to setup a single Portworx cluster that spans acros
 * **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
 {{% content "portworx-install-with-kubernetes/disaster-recovery/shared/stork-helper.md" %}}
 
-## Installing Portworx 
+## Installing Portworx
 In this mode of operation, a single Portworx cluster will stretch across multiple Kubernetes clusters.
 
 ### New Installation
@@ -52,7 +52,7 @@ metadata:
   labels:
     k8s-app: fluentd-logging
   annotations:
-    portworx.com/install-source: "https://install.portworx.com/2.2?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
+    portworx.com/install-source: "https://install.portworx.com/{{% currentVersion %}}?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
 spec:
   selector:
     matchLabels:
