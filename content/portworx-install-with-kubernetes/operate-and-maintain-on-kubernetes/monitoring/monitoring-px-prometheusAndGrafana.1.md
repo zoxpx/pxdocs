@@ -179,22 +179,22 @@ For a description of the properties in this schema, see the [Configuration file]
 
 5. Create a file named `alertmanager-service.yaml` with the following content:
 
-    ```text
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: alertmanager-portworx
-      namespace: kube-system
-    spec:
-      type: NodePort
-      ports:
-      - name: web
-        port: 9093
-        protocol: TCP
-        targetPort: web
-      selector:
-        alertmanager: portworx
-    ```
+      ```text
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: alertmanager-portworx
+        namespace: kube-system
+      spec:
+        type: NodePort
+        ports:
+        - name: web
+          port: 9093
+          protocol: TCP
+          targetPort: web
+        selector:
+          alertmanager: portworx
+      ```
 
 6. Apply the spec by entering the following command:
 
