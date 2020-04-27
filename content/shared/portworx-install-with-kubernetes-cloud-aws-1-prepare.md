@@ -27,7 +27,8 @@ Portworx creates and attaches EBS volumes. As such, it needs the AWS permissions
                 "ec2:DescribeVolumesModifications",
                 "ec2:DescribeVolumeStatus",
                 "ec2:DescribeVolumes",
-                "ec2:DescribeInstances"
+                "ec2:DescribeInstances",
+                "autoscaling:DescribeAutoScalingGroups"
             ],
             "Resource": [
                 "*"
