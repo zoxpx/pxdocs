@@ -78,11 +78,11 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
 #### Specify a different Portworx upgrade image
 
-You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.0.3.4_ image.
+You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.5.0_ image.
 
 ```text
 PXVER='{{% currentVersion %}}'
-curl -fsL https://install.portworx.com/${PXVER}/upgrade | bash -s -- -t 2.0.3.4
+curl -fsL https://install.portworx.com/${PXVER}/upgrade | bash -s -- -t 2.5.0
 ```
 
 ## Airgapped clusters
@@ -109,8 +109,7 @@ export PX_VER=2.3.6
 2. Pull the Portworx images:
 
     ```text
-    export PX_IMGS="portworx/oci-monitor:$PX_VER portworx/px-enterprise:$PX_VER portworx/talisman:latest"
-
+    export PX_IMGS="portworx/oci-monitor:$PX_VER portworx/px-enterprise:$PX_VER portworx/talisman:1.1.0"
     echo $PX_IMGS | xargs -n1 docker pull
     ```
 
