@@ -27,7 +27,7 @@ wget -O px-wipe.sh https://install.portworx.com/{{% currentVersion %}}/px-wipe
 First let's pull all the images required for the wipe process.
 
 ```text
-PX_IMGS="$PX_IMGS portworx/talisman:latest portworx/px-node-wiper:2.0.3.6"
+PX_IMGS="$PX_IMGS portworx/talisman:1.1.0 portworx/px-node-wiper:2.5.0"
 echo $PX_IMGS | xargs -n1 docker pull
 ```
 
