@@ -22,7 +22,7 @@ The minimum supported size for a Portworx cluster is three nodes. Each node must
 
 |**Network** ||
 |--- | ---|
-|Open needed ports | TCP ports 9001-9022 and UDP port 9002 on all Portworx nodes. Also open the KVDB port. \(As an example, `etcd` typically runs on port 2379\)|
+|Open needed ports | TCP ports 9001-9022 and UDP port 9002 on all Portworx nodes. Also open the KVDB port. \(As an example, `etcd` typically runs on port 2379\). If you intend to use Portworx with sharedV4 volumes, you may need to [open your NFS ports](/portworx-install-with-kubernetes/storage-operations/create-pvcs/open-nfs-ports).|
 | Lighthouse | If installing the Portworx Lighthouse management UI please open ports 32678 and 32679 |
 
 |**Software** ||

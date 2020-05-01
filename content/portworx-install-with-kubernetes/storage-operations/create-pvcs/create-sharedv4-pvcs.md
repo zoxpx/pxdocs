@@ -8,7 +8,11 @@ series: k8s-vol
 
 This document describes how to use Portworx **sharedv4** (ReadWriteMany) volumes in your Kubernetes cluster.
 
-#### Provision a Sharedv4 Volume
+## Prerequisites
+
+* NFS ports between nodes [must be open](/portworx-install-with-kubernetes/storage-operations/create-pvcs/open-nfs-ports/)
+
+## Provision a Sharedv4 Volume
 
 Sharedv4 volumes are useful when you want multiple PODs to access the same PVC \(volume\) at the same time. They can use the same volume even if they are running on different hosts. They provide a global namespace and the semantics are POSIX compliant.
 
@@ -155,7 +159,7 @@ pod1      1/1       Running   0          2m
 pod2      1/1       Running   0          1m
 ```
 
-#### Updating a shared volume to sharedv4 volume
+## Updating a shared volume to sharedv4 volume
 
 You can update an existing shared volume to use the new v4 protocol and convert it into a sharedv4 volume. Run the following pxctl command to update the volume setting
 
