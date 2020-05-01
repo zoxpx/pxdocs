@@ -93,7 +93,7 @@ Install PX-Central by downloading and running a script which deploys both Portwo
 1. Download the PX-Central install script and make it executable:
 
     ```text
-    curl -o install.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.0/install.sh' && chmod +x install.sh
+    curl -o install.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.1/install.sh' && chmod +x install.sh
     ```
 
 2. Run the script with any of [the options](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/install-script-reference/) required to configure PX-Central according to your needs; note that the `--license-password` option is required:
@@ -107,7 +107,7 @@ Install PX-Central by downloading and running a script which deploys both Portwo
     * The following example deploys PX-Central with OIDC:
 
         ```text
-        ./install.sh --oidc-clientid test --oidc-secret abc0123d-9876-zyxw-m1n2-i1j2k345678l --oidc-endpoint 192.0.2.0:12345 --license-password 'Adm1n!Ur'
+        ./install.sh --oidc-clientid test --oidc-secret abc0123d-9876-zyxw-m1n2-i1j2k345678l --oidc-endpoint 192.0.2.0:12345 --license-password 'examplePassword'
         ```
 
     * The following example deploys PX-Central on an air-gapped environment:
@@ -119,7 +119,7 @@ Install PX-Central by downloading and running a script which deploys both Portwo
     * The following example deploys PX-Central on an air-gapped environment with OIDC:
 
         ```text
-        ./install.sh  --license-password 'examplePassword' --oidc-clientid test --oidc-secret abc0123d-9876-zyxw-m1n2-i1j2k345678l  --oidc-endpoint X.X.X.X:Y --custom-registry test.ecr.us-east-1.amazonaws.com --image-repo-name pxcentral-onprem --image-pull-secret docregistry-secret
+        ./install.sh  --license-password 'examplePassword' --oidc-clientid test --oidc-secret abc0123d-9876-zyxw-m1n2-i1j2k345678l  --oidc-endpoint 192.0.2.0:12345 --custom-registry test.ecr.us-east-1.amazonaws.com --image-repo-name pxcentral-onprem --image-pull-secret docregistry-secret
         ```
 
     The install process may take several minutes to complete.
