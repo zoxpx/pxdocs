@@ -84,6 +84,11 @@ spec:
             - "false"
           - key: node-role.kubernetes.io/master
             operator: DoesNotExist
+    tolerations:
+    - key: infra/node
+      operator: Equal
+      value: "true"
+      effect: NoExecute
 ```
 
 * Portworx with custom image registry, network interfaces, and miscellaneous options
@@ -199,6 +204,7 @@ This section explains the fields used to configure Portworx with cloud storage. 
 | spec.<br>cloudStorage.<br>deviceSpecs[] | A list of the specs for your cloud storage devices. Portworx creates a cloud disk for every device. | `[]string` | None |
 | spec.<br>cloudStorage.<br>journalDeviceSpec | Specifies the cloud device Portworx uses for journaling. | `string` | None |
 | spec.<br>cloudStorage.<br>systemMetadataDeviceSpec | Indicates the cloud device Portworx uses for metadata. For performance, specify a system metadata device when using Portworx with the internal KVdb. | `string` | None |
+| spec.<br>cloudStorage.<br>kvdbDeviceSpec | Indicates the cloud device Portworx uses for internal KVdb. | `string` | None |
 | spec.<br>cloudStorage.<br>maxStorageNodesPerZone | Indicates the maximum number of storage nodes per zone. If this number is reached, and a new node is added to the zone, Portworx doesn't provision drives for the new node. Instead, Portworx starts the node as a compute-only node. | `uint32` | None |
 | spec.<br>cloudStorage.<br>maxStorageNodes | Specifies the maximum number of storage nodes. If this number is reached, and a new node is added, Portworx doesn't provision drives for the new node. Instead, Portworx starts the node as a compute-only node. As a best practice, it is recommended to use the `maxStorageNodesPerZone` field. | `uint32` | None |
 
@@ -219,6 +225,7 @@ You can use the placement rules to specify where Portworx should be deployed. By
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
 | spec.<br>placement.<br>nodeAffinity | Use this field to restrict Portwox on certain nodes. It works similarly to the [Kubernetes node affinity](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L2692) feature. | `object` | None |
+| spec.<br>placement.<br>tolerations[] | List of tolerations that will be applied to Portworx pods so that they can run on nodes with matching taints.| `[]object` | None |
 
 
 ### Update strategy
@@ -244,7 +251,8 @@ This section provides details on how to enable monitoring for Portworx.
 
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
-| spec.<br>monitoring.<br>enableMetrics | Expose the Portworx metrics to an external Prometheus. | `boolean` | `false` |
+| spec.<br>monitoring.<br>prometheus.<br>enabled | Enables or disables a Prometheus cluster. | `boolean` | `false` |
+| spec.<br>monitoring.<br>prometheus.<br>exportMetrics | Expose the Portworx metrics to an external or operator deployed Prometheus. | `boolean` | `false` |
 
 ### Stork configuration
 
