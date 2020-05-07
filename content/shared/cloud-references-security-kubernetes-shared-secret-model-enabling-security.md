@@ -15,11 +15,7 @@ created in the Generate shared secrets section.
 
 * If you do not already have a manifest, visit [PX-Central](https://central.portworx.com)
 to generate and download a deployment YAML for your configuration.
-* You must have a value for the [token
-issuer](/concepts/authorization/install/#configuration). The issuer is a
-string value which must identify the token generator. This value will be used
-by Portworx to identify the token generator. In the examples below the issuer
-is set to `portworx.com`, but you are encouraged to change it.
+* You must have a value for the [token issuer](/concepts/authorization/install/#configuration). The issuer is a string value which must identify the token generator. This value will be used by Portworx to identify the token generator. In the examples below the issuer is set to `portworx.com`, but you are encouraged to change it.
 
 Perform the following steps to enable security in Portworx by editing the Portworx YAML manifest and making the following additions:
 

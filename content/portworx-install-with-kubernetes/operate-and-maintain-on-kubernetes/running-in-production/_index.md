@@ -265,7 +265,7 @@ Please remember to setup cadvisor and nodexporter properly so they mount the ‘
 
 While Prometheus can be deployed as a container within the container orchestrator, many of Portworx, Inc.’s production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
-* Here is how Prometheus can be setup to monitor Portworx [Prometheus] (/install-with-other/operate-and-maintain/monitoring/prometheus)
+* Here is how Prometheus can be setup to monitor Portworx [Prometheus](/install-with-other/operate-and-maintain/monitoring/prometheus)
 * Configure Grafana via this [template](/install-with-other/operate-and-maintain/monitoring/grafana)
 * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/install-with-other/operate-and-maintain/monitoring/alerting)
 * List of Portworx Alerts are documented [here](/install-with-other/operate-and-maintain/monitoring/portworx-alerts)

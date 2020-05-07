@@ -16,8 +16,7 @@ This document will show you how to create group cloud snapshots of Portworx volu
 
 ### Portworx and Stork version
 
-Group cloud snapshots using Stork are supported in Portworx and Stork 2.0.2 and above. If you are running a lower version, refer to [Upgrade on Kubernetes
-](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade) to upgrade Portworx to 2.0.2 or above.
+Group cloud snapshots using Stork are supported in Portworx and Stork 2.0.2 and above. If you are running a lower version, refer to [Upgrade on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade) to upgrade Portworx to 2.0.2 or above.
 
 ## Creating group cloud snapshots
 

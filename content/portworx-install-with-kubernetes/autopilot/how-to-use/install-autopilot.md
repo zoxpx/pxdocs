@@ -12,8 +12,7 @@ weight: 100
 
 #### Prometheus
 
-Autopilot requires a running Prometheus instance in your cluster. If you don't have Prometheus configured in your cluster, refer to the [Prometheus and Grafana
-](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) to set it up.
+Autopilot requires a running Prometheus instance in your cluster. If you don't have Prometheus configured in your cluster, refer to the [Prometheus and Grafana](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) to set it up.
 
 Once you have it installed, find the Prometheus service endpoint in your cluster. Depending on how you installed Prometheus, the precise steps to find this may vary. In most clusters, you can find a service named Prometheus:
 

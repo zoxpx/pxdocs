@@ -69,8 +69,7 @@ If the plan is to decommission this node altogether from the Kubernetes cluster,
 
 If you need to continue using the Kubernetes node without Portworx, you will need to ensure your application pods using Portworx volumes don’t get scheduled here.
 
-You can ensure this by adding the `schedulerName: stork` field to your application specs (Deployment, Statefulset, etc). Stork is a scheduler extension that will schedule pods using Portworx PVCs only on nodes that have Portworx running. Refer to the [Using scheduler convergence]
-(/portworx-install-with-kubernetes/storage-operations/hyperconvergence/#using-scheduler-convergence) article for more information.
+You can ensure this by adding the `schedulerName: stork` field to your application specs (Deployment, Statefulset, etc). Stork is a scheduler extension that will schedule pods using Portworx PVCs only on nodes that have Portworx running. Refer to the [Using scheduler convergence](/portworx-install-with-kubernetes/storage-operations/hyperconvergence/#using-scheduler-convergence) article for more information.
 
 Another way to achieve this is to use [inter-pod affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)
 
