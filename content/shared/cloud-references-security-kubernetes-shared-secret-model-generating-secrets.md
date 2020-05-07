@@ -3,10 +3,7 @@ title: "Generate shared secrets"
 keywords: portworx, sharedsecret, generate, secret
 ---
 
-This guide uses a model based on [shared
-secrets](/concepts/authorization/overview/#security-tokens) as the method to
-create and verify tokens. The goal is to store the shared secrets in a secure
-Kubernetes Secret object to then provide to Portworx.
+This guide uses a model based on [shared secrets](/concepts/authorization/overview/#security-tokens) as the method to create and verify tokens. The goal is to store the shared secrets in a secure Kubernetes Secret object to then provide to Portworx.
 
 1. Generate [secure secrets](/concepts/authorization/pre-install/#self-signing-tokens)
 and save the values in [environment variables](/concepts/authorization/install/#environment-variables):
