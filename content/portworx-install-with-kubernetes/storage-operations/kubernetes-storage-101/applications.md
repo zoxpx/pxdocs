@@ -10,7 +10,7 @@ When working on stateful applications on Kubernetes, users typically deal with D
 
 ## Deployments
 
-A [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)) is the most common controller provides declarative way to manage your pods.
+A [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) is the most common controller provides declarative way to manage your pods.
 
 You describe a desired state in a Deployment object, and the Deployment controller changes the actual state to the desired state at a controlled rate.
 
@@ -195,8 +195,9 @@ In the above spec,
 * **schedulerName: stork** enables to use [Stork](https://github.com/libopenstorage/stork) scheduler to enable more efficient placement of the pods and faster recovery for failed nodes.
 * **volumeClaimTemplates** declares the template to use for the PVC that will be created for each replica pod. The names of the dynamically created PVCs will be cassandra-data-cassandra-0, cassandra-data-cassandra-1 and cassandra-data-cassandra-2.
 
-{{<info>}}[The Cassandra on Kubernetes
-page](/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra) has a detailed end-to-end example.{{</info>}}
+{{<info>}}
+**NOTE**: See the [Cassandra on Kubernetes page](/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra) for an end-to-end example.
+{{</info>}}
 
 ## Useful References
 
