@@ -14,7 +14,7 @@ You can reset the administrator password you specified during installation by do
 1. Download and the PX-Central password reset script:
 
     ```text
-    curl -o px-central-password-reset.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.0/reset-password.sh'
+    curl -o px-central-password-reset.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.1/reset-password.sh'
     ```
 
 2. Run the script, specifying the `--admin-password` option with your desired new password:
@@ -34,7 +34,7 @@ Uninstall PX-Central by downloading and running a script which cleans up both Po
 1. Download and the PX-Central install script:
 
     ```text
-    curl -o px-central-cleanup.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.0/cleanup.sh'
+    curl -o px-central-cleanup.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.1/cleanup.sh'
     ```
 
 2. Run the script to clean up Portworx and PX-Central:
