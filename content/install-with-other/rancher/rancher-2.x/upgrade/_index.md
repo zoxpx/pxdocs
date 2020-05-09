@@ -12,7 +12,7 @@ This guide provides instructions for upgrading Portworx on Kubernetes using Ranc
 
 ## Upgrading Portworx
 
-Perform the following steps to upgrade Portworx to version `2.3.1`:
+Perform the following steps to upgrade Portworx:
 
 1. From the top navigation bar, select **Apps**:
 
@@ -23,7 +23,7 @@ Perform the following steps to upgrade Portworx to version `2.3.1`:
     ![Rancher upgrade](/img/rancher-ve-upgrade.png)
 
 
-3. Go to the **Advanced Settings** section and change the value of the **Portworx version to be deployed** input field to `2.3.1`:
+3. Go to the **Advanced Settings** section and change the value of the **Portworx version to be deployed** input field (for e.g `2.5.1`):
 
     ![Rancher change PX version](/img/rancher-change-px-version.png)
 

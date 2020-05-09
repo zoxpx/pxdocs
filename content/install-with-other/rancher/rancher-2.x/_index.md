@@ -51,6 +51,10 @@ Perform the following steps to install Portworx:
      * In the **Storage Parameters** section, specify whether your cluster is located on-prem or on a cloud provider, and choose your disk configuration.
 
         ![Screenshot showing the Storage Parameters section of the Helm chart form](/img/rancherStorageParameters.png)
+       
+     * In the **Portworx version to be deployed.** field, select the Portworx version you want to deploy. Currently recommended version is **2.5.1**
+        
+        ![Screenshot showing the PX Version section of the Helm chart form](/img/rancherPXVersion.png)
 
 
 4. Select the **Launch** button to deploy Portworx to your cluster:
