@@ -23,6 +23,7 @@ For internet-connected clusters, the following ports must be open:
 | Port | Component | Purpose | Incoming/Outgoing |
 | :---: |:---:|:---:|:---:|
 | 31234 | PX-Central | Access from outside | Incoming |
+| 31241 | PX-Central-Keycloak | Access user auth token | Incoming | 
 | 7070 | License server | License validation | Outgoing |
 
 {{<info>}}
@@ -35,39 +36,21 @@ If your cluster is internet-connected, skip this section. If your cluster is air
 
 Pull the following required docker images onto your air-gapped environment:
 
-  * quay.io/cortexproject/cortex:v0.4.0
-  * cassandra:3.0
-  * postgres:9.6
-  * nginx:1.17.8
-  * consul:0.7.1
-  * memcached:1.4.25
-  * pwxbuild/go-dnsmasq:release-1.0.7
-  * grafana/grafana:6.5.2
-  * metallb/speaker:v0.8.2
-  * mysql:5.7.22
-  * quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1
-  * quay.io/coreos/configmap-reload:v0.0.1
-  * quay.io/prometheus/prometheus:v2.7.1
-  * quay.io/coreos/prometheus-config-reloader:v0.35.0
-  * quay.io/coreos/prometheus-config-reloader:v0.34.0
-  * quay.io/coreos/prometheus-operator:v0.35.0
-  * quay.io/coreos/prometheus-operator:v0.34.0
-  * gcr.io/google_containers/kube-scheduler-amd64:v1.16.7
-  * openstorage/stork:2.3.1
-  * k8s.gcr.io/pause:3.1
-  * portworx/pxcentral-onprem-ui-backend:1.0.0
-  * portworx/pxcentral-onprem-ui-frontend:1.0.0
-  * portworx/pxcentral-onprem-ui-lhbackend:1.0.0
-  * portworx/pxcentral-onprem-els-ha-setup:1.0.0
-  * portworx/pxcentral-onprem-post-setup:1.0.0
-  * portworx/pxcentral-onprem-pre-setup:1.0.0
-  * portworx/px-operator:1.2.1
-  * portworx/oci-monitor:2.4.0
-  * portworx/px-dev:2.4.0
-  * portworx/pxcentral-onprem-operator:1.0.0
-  * portworx/pxcentral-onprem-api:1.0.0
-  * portworx/px-els:1.0.0
-  * portworx/px-node-wiper:2.1.4
+* portworx/pxcentral-onprem-ui-backend:1.1.0
+* portworx/pxcentral-onprem-ui-frontend:1.1.0
+* portworx/pxcentral-onprem-ui-lhbackend:1.1.0
+* portworx/pxcentral-onprem-els-ha-setup:1.0.1
+* portworx/pxcentral-onprem-post-setup:1.0.1
+* portworx/pxcentral-onprem-pre-setup:1.0.1
+* portworx/px-operator:1.3.0
+* portworx/pxcentral-onprem-operator:1.0.1
+* portworx/pxcentral-onprem-api:1.0.1
+* pwxbuild/pxc-macaddress-config:1.0.1
+* openstorage/stork:2.3.2
+* docker.io/bitnami/postgresql:11.7.0-debian-10-r9
+* busybox:1.31
+* jboss/keycloak:9.0.2
+* docker.io/bitnami/etcd:3.4.7-debian-10-r14
 
 How you pull the Portworx license server and associated images depends on your air-gapped cluster configuration:
 
@@ -85,6 +68,22 @@ How you pull the Portworx license server and associated images depends on your a
       sudo docker pull <required-docker-images>
       sudo docker save <required-docker-images> | ssh root@<air-gapped-address> docker load
       ```
+
+## Prepare cloud environments
+
+If you're deploying PX-Central onto AWS, Azure, or GCP, you must create and apply an nginx ingress controller:
+
+1. Download the nginx ingress controller spec:
+
+    ```text
+    curl -o nginx-ingress-controller.yaml 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.1/nginx-ingress-controller.yaml'
+    ```
+
+2. Apply the spec:
+
+    ```text
+    kubectl apply -f nginx-ingress-controller.yaml
+    ```
 
 ## Install PX-Central on-premises
 
