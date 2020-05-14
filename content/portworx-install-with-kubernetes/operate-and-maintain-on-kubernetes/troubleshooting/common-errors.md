@@ -5,9 +5,11 @@ keywords: Troubleshoot, common errors, Kubernetes, k8s
 description: Common errors
 ---
 
-### Common errors
+#### Failed to apply spec due Forbidden: may not be used when type is ClusterIP
 
-* Failed DNS resolution:
+{{% content "shared/upgrade/upgrade-nodeport-issue.md" %}}
+
+#### Failed DNS resolution:
   * If you encounter the following error:
 
     ```
@@ -25,7 +27,7 @@ description: Common errors
 
 ---
 
-* Failure to install Portworx on SELinux:
+#### Failure to install Portworx on SELinux:
   * You may have experienced the following issue installing Portworx  (e.g. Fedora 28 host)
 
     ```
@@ -52,7 +54,7 @@ description: Common errors
 
 ---
 
-* Failure to install Portworx on Kubernetes:
+#### Failure to install Portworx on Kubernetes:
   * You may experience the following issue deploying Portworx into Kubernetes:
 
     ```
