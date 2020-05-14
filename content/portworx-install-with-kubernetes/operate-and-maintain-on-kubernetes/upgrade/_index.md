@@ -25,6 +25,8 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 1. Updates RBAC objects that are being used by Portworx with the latest set of permissions that are required
 2. Triggers RollingUpdate of the Portworx DaemonSet to the default stable image and monitors that for completion
 
+If you see any issues, review the [Troubleshooting](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/#troubleshooting) section on this page.
+
 {{% content "shared/upgrade/upgrade-to-2-1-2.md" %}}
 
 ## Upgrade Stork
@@ -158,7 +160,11 @@ curl -fsL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s 
 
 ## Troubleshooting
 
-#### Find out status of Portworx pods
+### Failed to apply spec due Forbidden: may not be used when type is ClusterIP
+
+{{% content "shared/upgrade/upgrade-nodeport-issue.md" %}}
+
+### Find out status of Portworx pods
 
 To get more information about the status of Portworx DaemonSet across the nodes, run:
 
@@ -179,7 +185,7 @@ As we can see in the example output above:
   * “minion3” has Portworx up for only 5 minutes (likely just finished upgrade and restarted Portworx)
 * if we keep on monitoring, we will observe that the upgrade will not switch to the “next” node until STATUS is “Running” and the READY is 1/1 \(meaning, the “readynessProbe” reports Portworx service is operational\).
 
-#### Find out version of all nodes in the Portworx cluster
+### Find out version of all nodes in the Portworx cluster
 
 One can run the following command to inspect the Portworx cluster:
 
