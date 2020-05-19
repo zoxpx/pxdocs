@@ -9,7 +9,7 @@ PX-Enterprise can be run in a client-only mode such that the storage available i
 
 {{<info>}}
 **NOTE:**
-There is a hard limit of 128 remote connections for remote connections from storageless nodes.
+There is a license limit of 256 for remote connections from storageless nodes.
 {{</info>}}
 
 ## Add a new storageless node to your Portworx cluster
