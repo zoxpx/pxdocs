@@ -44,7 +44,7 @@ Portworx Inc. recommends this approach in autoscaling cloud environments.
 
 {{<info>}}
 **NOTE:**
-There is a hard limit of 128 remote connections for remote connections from storageless nodes.
+There is a license limit of 256 for remote connections from storageless nodes.
 {{</info>}}
 
 ## Approach B: Hyperconverged Storage and Compute clusters
