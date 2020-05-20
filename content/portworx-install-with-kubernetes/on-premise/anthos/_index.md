@@ -6,13 +6,20 @@ keywords: Install, on-premise, anthos, kubernetes, k8s, air gapped
 description: How to install Portworx on Anthos
 ---
 
-This topic explains how to install Portworx with Kubernetes on Anthos. Follow the steps in this topic in order.
+Portworx has been certified with the following Anthos versions:
+
+* Anthos 1.1
+* Anthos 1.2
+* Anthos 1.3 (_certification pending_)
+
 
 ## Architecture
 
 {{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-shared-arch.md" %}}
 
 ## Installation
+
+This topic explains how to install Portworx with Kubernetes on Anthos. Follow the steps in this topic in order.
 
 {{<info>}}Run these steps from the anthos admin station or any other machine which has kubectl access to your cluster.{{</info>}}
 
