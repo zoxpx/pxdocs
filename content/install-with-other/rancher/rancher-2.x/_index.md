@@ -24,25 +24,23 @@ This guide provides instructions for installing Portworx on Kubernetes using Ran
 
 Perform the following steps to install Portworx:
 
-1. Navigate to the global cluster overview page. From the top navigation bar, select **Apps**:
+1. Go to your cluster, and then select the **System** namespace. The following screenshot uses a cluster named `dev` as an example:
 
-    ![Screenshot showing the location of the apps tab in Rancher](/img/rancherNavigateApps.png)
+    ![Screenshot showing the System namespace](/img/rancherSystemNamespace.png)
 
-2. Select the **Launch** button to open the catalog:
+2. From the top navigation bar, select **Apps**:
 
-    ![Screenshot showing the launch button location](/img/rancherLaunch.png)
+    ![Screenshot showing the Apps menu location](/img/rancherSelectApps.png)
 
-3. Search for the Portworx catalog and select the **View Details** button to start the Helm chart form:
+3. Select the **Launch** button to open the catalog:
 
-    ![Screenshot indicating the search and select locations](/img/rancherSearchSelect.png)
+    ![Screenshot showing the Launch button menu location](/img/rancherSelectLaunch.png)
 
-4. Populate the various required sections of the **Configuration Options** of the Helm chart form:
+4. Search for the Portworx catalog and select the **Portworx** card to start the Helm chart form:
 
-     * In the **Configuration Options** section, name your project `kube-system`, and select `System` from the **Target Projects** dropdown:
+    ![Screenshot showing how to Launch the Portworx Helm chart](/img/rancherSearchAndSelectPortworx.png)
 
-        ![Screenshot showing the Helm chart form](/img/rancherConfigOptions.png)
-
-        <!-- See the [Rancher documentation](https://rancher.com/docs/rancher/v2.x/en/catalog/multi-cluster-apps/#launching-a-multi-cluster-app) for more information. -->
+5. Populate the various required sections of the **Configuration Options** of the Helm chart form:
 
      * In the **Key Value Store Paramters** section, specify an internal or external ETCD.
 
@@ -57,7 +55,7 @@ Perform the following steps to install Portworx:
         ![Screenshot showing the PX Version section of the Helm chart form](/img/rancherPXVersion.png)
 
 
-4. Select the **Launch** button to deploy Portworx to your cluster:
+6.  Select the **Launch** button to deploy Portworx to your cluster:
 
     ![Screenshot showing the launch button of the Helm chart form](/img/rancherHelmLaunch.png)
 
