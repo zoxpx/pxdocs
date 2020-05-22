@@ -7,11 +7,6 @@ description: Run PX-Enterprise so the storage in a Portworx cluster is consumed 
 
 PX-Enterprise can be run in a client-only mode such that the storage available in a Portworx can be consumed by apps that are running on nodes that have no storage. This enables deployments to leverage the powerful PX-Enterprise features from any node without having to rely on legacy protocols and adopt containerization faster.
 
-{{<info>}}
-**NOTE:**
-There is a hard limit of 128 remote connections for remote connections from storageless nodes.
-{{</info>}}
-
 ## Add a new storageless node to your Portworx cluster
 
 ### Display the status of your Portworx cluster
