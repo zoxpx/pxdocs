@@ -42,11 +42,6 @@ Separating storage and compute clusters mean such scaling & management operation
 Portworx Inc. recommends this approach in autoscaling cloud environments.
 {{</info>}}
 
-{{<info>}}
-**NOTE:**
-There is a license limit of 256 for remote connections from storageless nodes.
-{{</info>}}
-
 ## Approach B: Hyperconverged Storage and Compute clusters
 
 ![Portworx deployment architecture hyperconverged](/img/px-deployment-arch-hyperconverged.png)
