@@ -28,7 +28,7 @@ This document presents the **non-Kubernetes** method of monitoring your Portworx
 
       ![Grafana data store File](/img/grafana_datastore.png "Grafana data store File")
 
-4. Import the Portworx provided [Cluster](https://github.com/portworx/pxdocs/blob/2.2/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Cluster_Dashboard_Jan_2019_No_AM.json), [Volume](https://github.com/portworx/pxdocs/blob/master/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Volume_Dashboard_Sep_2018.json), and [Node](https://github.com/portworx/pxdocs/blob/2.2/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Node_Dashboard_Sep_2018_No_AM.json) Grafana templates: From the dropdown on left in your Grafana dashboard, select **Dashboards** followed by **Import**, and add the cluster, volume, and node templates.
+4. Import the Portworx provided [Cluster](https://github.com/portworx/pxdocs/blob/2.2/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Cluster_Dashboard_Jan_2019_No_AM.json), [Volume](https://github.com/portworx/pxdocs/blob/2.2/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Volume_Dashboard_Sep_2018.json), and [Node](https://github.com/portworx/pxdocs/blob/2.2/content/install-with-other/operate-and-maintain/monitoring/grafana/Portworx_Node_Dashboard_Sep_2018_No_AM.json) Grafana templates: From the dropdown on left in your Grafana dashboard, select **Dashboards** followed by **Import**, and add the cluster, volume, and node templates.
 
       Once added, you can view your dashboards:
 
