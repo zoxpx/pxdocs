@@ -39,14 +39,14 @@ For details about the Portworx-specific parameters, refer to the [Portworx Volum
 
 * By default, the instructions in this document deploy everything in the `harbor` namespace, but you can change this by specifying your own namespace:
 
-```text
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: harbor
-EOF
-```
+    ```text
+    kubectl apply -f - <<EOF
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: harbor
+    EOF
+    ```
 
 * Harbor is deployed using [Helm](https://helm.sh/), so it will need to be installed and have permissions on the `harbor` namespace. You can find instructions [here](https://v2.helm.sh/docs/using_helm/#role-based-access-control).
 
@@ -55,153 +55,155 @@ EOF
 Harbor requires a PostgreSQL and Redis database.
 
 1. Apply the following spec to deploy PostgreSQL, making sure to change the password and username to your preferred values:
-```text
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-pvc
-  namespace: harbor
-  annotations:
-    volume.beta.kubernetes.io/storage-class: portworx-sc-repl3
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres
-  namespace: harbor
-  labels:
-    app: postgres
-spec:
-  ports:
-    - port: 5432
-  selector:
-    app: postgres
-  clusterIP: None
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: postgres
-  namespace: harbor
-  labels:
-    app: postgres
-spec:
-  strategy:
-    type: Recreate
-  replicas: 1
-  selector:
-    matchLabels:
-      app: postgres
-  template:
+
+    ```text
+    kubectl apply -f - <<EOF
+    apiVersion: v1
+    kind: PersistentVolumeClaim
     metadata:
+      name: postgres-pvc
+      namespace: harbor
+      annotations:
+        volume.beta.kubernetes.io/storage-class: portworx-sc-repl3
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 2Gi
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: postgres
+      namespace: harbor
       labels:
         app: postgres
     spec:
-      schedulerName: stork
-      containers:
-      - name: postgres
-        image: postgres:9.5
-        ports:
-        - containerPort: 5432
-          name: postgres
-        env:
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_PASSWORD
-          value: password
-        - name: PGDATA
-          value: /var/lib/postgresql/data/pgdata
-        volumeMounts:
-        - name: postgres-persistent-storage
-          mountPath: /var/lib/postgresql/data
-      volumes:
-      - name: postgres-persistent-storage
-        persistentVolumeClaim:
-          claimName: postgres-pvc
-EOF
-```
+      ports:
+        - port: 5432
+      selector:
+        app: postgres
+      clusterIP: None
+    ---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: postgres
+      namespace: harbor
+      labels:
+        app: postgres
+    spec:
+      strategy:
+        type: Recreate
+      replicas: 1
+      selector:
+        matchLabels:
+          app: postgres
+      template:
+        metadata:
+          labels:
+            app: postgres
+        spec:
+          schedulerName: stork
+          containers:
+          - name: postgres
+            image: postgres:9.5
+            ports:
+            - containerPort: 5432
+              name: postgres
+            env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            volumeMounts:
+            - name: postgres-persistent-storage
+              mountPath: /var/lib/postgresql/data
+          volumes:
+          - name: postgres-persistent-storage
+            persistentVolumeClaim:
+              claimName: postgres-pvc
+    EOF
+    ```
 
 2. Apply the following spec to deploy Redis:
-```text
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: redis-pvc
-  namespace: harbor
-  annotations:
-    volume.beta.kubernetes.io/storage-class: portworx-sc-repl3
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: redis
-  namespace: harbor
-spec:
-  ports:
-    - port: 6379
-      name: redis
-  clusterIP: None
-  selector:
-    app: redis
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: redis
-  namespace: harbor
-  labels:
-    app: redis
-spec:
-  selector:
-    matchLabels:
-      app: redis
-  template:
+
+    ```text
+    kubectl apply -f - <<EOF
+    apiVersion: v1
+    kind: PersistentVolumeClaim
     metadata:
+      name: redis-pvc
+      namespace: harbor
+      annotations:
+        volume.beta.kubernetes.io/storage-class: portworx-sc-repl3
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 2Gi
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: redis
+      namespace: harbor
+    spec:
+      ports:
+        - port: 6379
+          name: redis
+      clusterIP: None
+      selector:
+        app: redis
+    ---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: redis
+      namespace: harbor
       labels:
         app: redis
     spec:
-      schedulerName: stork
-      containers:
-      - name: redis
-        image: redis:3.2-alpine
-        imagePullPolicy: Always
-        args: ["--requirepass", "password"]
-        ports:
-          - containerPort: 6379
-            name: redis
-        volumeMounts:
+      selector:
+        matchLabels:
+          app: redis
+      template:
+        metadata:
+          labels:
+            app: redis
+        spec:
+          schedulerName: stork
+          containers:
+          - name: redis
+            image: redis:3.2-alpine
+            imagePullPolicy: Always
+            args: ["--requirepass", "password"]
+            ports:
+              - containerPort: 6379
+                name: redis
+            volumeMounts:
+              - name: redis-vol
+                mountPath: /data
+          volumes:
           - name: redis-vol
-            mountPath: /data
-      volumes:
-      - name: redis-vol
-        persistentVolumeClaim:
-          claimName: redis-pvc
-EOF
-```
+            persistentVolumeClaim:
+              claimName: redis-pvc
+    EOF
+    ```
 
 3. Enter the following command to create the four PostgreSQL databases Harbor requires:
 
-```text
-DB_POD=$(kubectl get pods -n harbor -l app=postgres | awk '/postgres/{print$1}')
-kubectl exec $DB_POD -n harbor -- createdb -Upostgres registry
-kubectl exec $DB_POD -n harbor -- createdb -Upostgres clair
-kubectl exec $DB_POD -n harbor -- createdb -Upostgres notary_server
-kubectl exec $DB_POD -n harbor -- createdb -Upostgres notary_signer
-```
+    ```text
+    DB_POD=$(kubectl get pods -n harbor -l app=postgres | awk '/postgres/{print$1}')
+    kubectl exec $DB_POD -n harbor -- createdb -Upostgres registry
+    kubectl exec $DB_POD -n harbor -- createdb -Upostgres clair
+    kubectl exec $DB_POD -n harbor -- createdb -Upostgres notary_server
+    kubectl exec $DB_POD -n harbor -- createdb -Upostgres notary_signer
+    ```
 
 ### Deploy Harbor
 
@@ -245,4 +247,4 @@ kubectl delete sc/portworx-sc-repl3
 
 ## Configuring snapshots
 
-Scheduled snapshots can be configured. PostgreSQL does not require any special Pre or Post rules to be added; Redis is only used for cache and temporary storage, so does not need a Pre rule to ensure it is flushed to disk. Follow [our documentation] for details. 
+Scheduled snapshots can be configured. PostgreSQL does not require any special Pre or Post rules to be added; Redis is only used for cache and temporary storage, so it does not need a Pre rule to ensure it is flushed to disk. See the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page for more details about snapsots.
