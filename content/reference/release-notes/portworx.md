@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.5.1.2
+
+May 28, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-13175 | Portworx now supports sharedv4 volumes on hosts running Flatcar OS. |
+
 ## 2.5.1
 
 April 24, 2020
