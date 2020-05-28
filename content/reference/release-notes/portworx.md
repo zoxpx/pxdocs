@@ -6,6 +6,57 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.5.1.2
+
+May 28, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-13175 | Portworx now supports sharedv4 volumes on hosts running Flatcar OS. |
+
+## 2.5.1
+
+April 24, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-11638 | Starting with 2.5.1, credentials can be configured without providing secret key or access key to use instance’s IAM capabilities to access cloud provider’s object store. Current support is limited to AWS’s EC2 instance in 2.5.1. |
+| PWX-12314 | For PX-Essentials, an improvment to the `pxctl status` command now provides the reason for why a license is expired. |
+
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-11602 | When Portworx detected an issue with container volumes, for example, if a drive was removed, OCI-Monitor resulted in Portworx pods being stuck in a `CrashLoopBackupOff` state. <br/><br/> **User Impact:** Portworx pods in users' clusters would not recover. <br/><br/> **Resolution:** When Portworx (OCI-Monitor) detects an issue with container mounts, it sends a request to Kuberenetes to reset/reinitialize the Portworx pod, which fixes the issue. |
+| PWX-12289 | For the CRI-O container runtime, when OCI-Monitor is set to `ImagePullPolicy:IfNotPresent`, it should pull the PX-Enterprise image only when the image is not present on the system. The OCI-Monitor incorrectly identified the image as present while it wasn't. <br/><br/> **User Impact:** Portworx failed to pull the required image and OCI-Monitor failed. <br/><br/> **Resolution:** The OCI-Monitor `ImagePullPolicy` handling now properly pulls images. | 
+| PWX-12292 | When using OCI-Monitor, Portworx failed to drain its pods when required. <br/><br/> **User Impact:** OCI-Monitor failed to start and upgrade operations failed. <br/><br/> **Resolution:** OCI-monitor now properly starts and Portworx upgrades. |
+| PWX-12252 | For CRI-O integrations, the OCI-Monitor did not copy the install logs into its own output. As a consequence, the OCI-Monitor did not parse/retrieve the `INFO: Module version check: Success` install log line, and always triggered the cordoning/draining of the nodes. <br/><br/> **User Impact:** Upgrades to version 2.5.0 stalled on OpenShift and/or CRI-O container-runtime Kubernetes clusters. <br/><br/> **Resolution:** Portworx application cordoning and draining during the upgrade process now works properly, allowing upgrades. |
+| PWX-12180 | Portworx didn't send license server alerts for errors packaged into the response body of a valid REST call. <br/><br/> **User Impact:** Users did not see license server alerts for these kinds of errors. <br/><br/> **Resolution:** Portworx now treats these kinds of errors in the same manner as REST errors, and raises alerts accordingly. |
+| PWX-11595 | When a Portworx node's storage is down or full, it reports `Not Ready` to Kubernetes to notify the users. In this case, the Portworx node is still available and serves storage in `read-only` mode if it's full, or proxies the storage from other nodes if local storage is not available. |
+
+## 2.5.0.1
+
+April 21, 2020
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-12322 | Portworx failed to start if NFS was in an errored state. <br/><br/> **User Impact:** Users could not start Portworx if NFS was errored. <br/><br/> **Resolution:** Users can now start Portworx if NFS is errored, and Portworx will now raise an alert instead. |
+
 ## 2.5
 
 April 3, 2020
