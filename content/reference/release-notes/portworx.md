@@ -6,6 +6,36 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.5.2
+
+May 29, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-12737 | Added support for automatic cloud disk management for non-public Azure clouds like US Government, Germany and China clouds. |
+| PWX-13082 | You can now configure the frequency with which Portworx takes its KVDB backups using the `kvdb_dump_frequency_minutes` runtime option. |
+| PWX-10216 | Added support for Vault Namespaces. |
+| PWX-11288 | Added support for Vault Kubernetes Authentication. |
+| PWX-12603 | When sharedv4 volumes are in use, Portworx uses 16 NFS threads to process them by default. You can change the total number of threads Portworx uses by running the `pxctl cluster options update --sharedv4-threads <num>` command. |
+| PWX-12512 | PX-Essential can now refresh licenses through an HTTP or HTTPS proxy. |
+| PWX-13116 | Users can now request max backups to be enumerated anywhere between > 0 and < 5000. |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-13189 | A recursive `chmod` operation in Kubernetes 1.18 and lower caused mounts with large block volumes to hang when users set a security context for a pod using `fsGroup`. <br/><br/>**User Impact:** Users with hung mounts would see mount timeouts when creating a pod referencing large block volumes, and pod creation would fail. <br/><br/>**Resolution:** Portworx, Inc. added the `allow_others` storage class label that, when set to true, will apply a permission change to the mount path. This label should only be used for Kubernetes versions lower than 1.18. Users on newer Kubernetes versions can return to using `fsGroup` over the Portworx `allow_others=true` label. | 
+| PWX-12655 | When Portworx images were uploaded to nodes via docker load command, Docker may not have set the image digest properly.<br/><br/>**User Impact:** When the image digest was not available, OCI-Monitor would not detect manually uploaded Portworx images, and would attempt to pull the Portworx image, potentially failing in air-gapped environments.<br/><br/>**Resolution:** Portworx now has improved image detection, even in cases where image digests are not available. | 
+| PWX-13171 | The `px_volume_readthroughput`, `px_volume_writethrougput` and `px_volume_iops` metrics did not update.<br/><br/>**User Impact:** Users may have seen values for these metrics reported as zero.<br/><br/>**Resolution:** Portworx once again updates these metrics. | 
+| PWX-12088 | Portworx used a version of IBM KeyProtect that caused a kernel panic if multiple threads tried to use it.<br/><br/>**User Impact:** Portworx nodes experiencing a kernel panic restarted, and some apps did not come back online after recovery.<br/><br/>**Resolution:** Portworx now uses IBM KeyProtect library v0.3.5, which solves this problem. |
+| PWX-12466 | The `--all` option for the `pxctl cloudmigrate start` CLI command has been deprecated. | 
+
 ## 2.5.1.2
 
 May 28, 2020
