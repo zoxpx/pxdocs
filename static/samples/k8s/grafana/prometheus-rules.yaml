@@ -108,3 +108,23 @@ spec:
       labels:
         issue: Portworx cluster member(s) is(are) down.
         severity: critical
+    - alert: AutopilotDeclinedActions
+      annotations:
+        description: Autopilot declined to perform an action.
+        summary: Autopilot action has been declined.
+      expr: autopilot_action_failed_count{state="declined"}
+        > 0
+      for: 2m
+      labels:
+        issue: Autopilot action has been declined.
+        severity: critical
+    - alert: AutopilotFailedActions
+      annotations:
+        description: Autopilot failed to perform an action.
+        summary: Autopilot failed to perform an action.
+      expr: autopilot_action_failed_count{state="failed"}
+        > 0
+      for: 5m
+      labels:
+        issue: Autopilot failed to perform an action.
+        severity: critical
