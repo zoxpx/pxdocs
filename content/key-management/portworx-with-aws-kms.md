@@ -4,6 +4,8 @@ keywords: Portworx, aws, kms, containers, storage, encryption
 description: Instructions on using AWS KEM key management with Portworx
 disableprevnext: true
 series: key-management
+aliases:
+    - /key-management/aws-kms
 ---
 
 Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to an AWS KMS endpoint. The Data Keys created in KMS can be used to encrypt Portworx Volumes.

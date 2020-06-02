@@ -5,6 +5,8 @@ description: Instructions on using Kubernetes secrets with Portworx
 weight: 1
 disableprevnext: true
 series: key-management
+aliases:
+  - /key-management/kubernetes-secrets
 ---
 
 Portworx can integrate with Kubernetes Secrets to store your encryption keys/secrets and credentials. This guide will help configure Portworx with Kubernetes Secrets. Kubernetes Secrets can then be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
