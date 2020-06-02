@@ -11,8 +11,6 @@ weight: 2
 
 Update `<AZURE_TENANT_ID>`, `<AZURE_CLIENT_ID>` and `<AZURE_CLIENT_SECRET>` in below command and create a secret called _px-azure_.
 
-{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
-
 ```text
 kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_TENANT_ID=<AZURE_TENANT_ID> \
                                                       --from-literal=AZURE_CLIENT_ID=<AZURE_CLIENT_ID> \
