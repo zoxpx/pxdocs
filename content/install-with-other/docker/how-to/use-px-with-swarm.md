@@ -14,7 +14,7 @@ You can use Portworx to provide storage for your Docker Swarm services. Portworx
 
 ## Install Portworx
 
-Below steps demonstrate how to set up a three-node cluster for [Jenkins](https://jenkins.io/) and use a Portworx volume.
+Below steps demonstrate how to set up a three-node cluster for [Jenkins](https://www.jenkins.io/) and use a Portworx volume.
 
 ### Create a volume
 
