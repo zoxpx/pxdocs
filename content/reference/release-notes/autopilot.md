@@ -7,6 +7,16 @@ weight: 350
 series: release-notes
 ---
 
+## 1.2.1
+
+May 30, 2020
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Description**|
+|----|
+| The [PVC resize action](/portworx-install-with-kubernetes/autopilot/reference/#openstorage-io-action-volume-resize) no longer requires a Portworx Autopilot Capacity Management license |
+
 ## 1.2.0
 
 March 20, 2020
