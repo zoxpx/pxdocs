@@ -62,7 +62,12 @@ For CentOS7, your likely public interface will be "team0" and private interface 
 For Ubuntu16, your likely public interface will be "bond0" and private interface will be "bond0:0".   Use "bond0" as the Portworx management interface, and "bond0:0" as the Portworx data interface.
 
 ### Step 7: Launch PX-Enterprise
+
+<!--
+I can't figure out the target for this link... Also, launching PX-Enterprise seem to be documented in the next paragraph
+
 [Follow the instructions to launch PX-Enterprise](/#install-with-a-container-orchestrator)
+-->
 
 Use the docker run command to launch PX-Enterprise, substituting the appropriate multipath devices and network interfaces, as identified from the previous steps.
 

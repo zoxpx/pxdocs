@@ -16,7 +16,7 @@ SSH to one of your nodes and follow the steps below to use `pxctl` to generate t
 
 ## Create user files
 
-[`pxctl`](/reference/cli/authorization/#generate_tokens) uses YAML
+[`pxctl`](/reference/cli/authorization/#generate-tokens) uses YAML
 configuration files to create tokens. You will be creating two files, one for the [storage admin](/concepts/authorization/overview/#the-administrator-role) token used for `pxctl` to communicate with Portworx
 (like _root_ in Linux), and the second for Kubernetes to provision
 and manage volumes.
@@ -92,8 +92,7 @@ the secret is saved in the environment variable `$PORTWORX_AUTH_SHARED_SECRET`.
         --token-duration=1y)
     ```
 
-3. Save the storage admin token in the `pxctl`
-[context](/reference/cli/authorization/#context):
+3. Save the storage admin token in the `pxctl` [context](/reference/cli/authorization/#contexts):
 
     ```text
     /opt/pwx/bin/pxctl context create admin --token=$ADMIN_TOKEN

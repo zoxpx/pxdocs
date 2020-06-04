@@ -67,7 +67,7 @@ Portworx requires a set of claims to be provided in order to authorize the user.
 
 ### Self-Generated Tokens
 
-Token generation can be done by any JWT compliant application which sets the claims required by Portworx. For convenience, administrators can generate user tokens using `pxctl`. See [Generating Tokens](/reference/cli/authorization/#generate_tokens).
+Token generation can be done by any JWT compliant application which sets the claims required by Portworx. For convenience, administrators can generate user tokens using `pxctl`. See [Generating Tokens](/reference/cli/authorization/#generate-tokens).
 
 ### OpenID Connect (OIDC)
 

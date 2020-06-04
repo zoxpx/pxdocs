@@ -36,7 +36,7 @@ Portworx requires the following IBM Key Protect credentials to use its APIs
 
 - **Customer Root Key [IBM_CUSTOMER_ROOT_KEY]**
 
-    Follow [this](https://cloud.ibm.com/docs/services/key-protect?topic=key-protect-create-root-keys#create-root-keys) IBM document to create a Customer Root Key
+    Follow [this](https://cloud.ibm.com/docs/key-protect?topic=key-protect-create-root-keys) IBM document to create a Customer Root Key
 
 - **Base URL [IBM_BASE_URL]**
 
@@ -173,6 +173,6 @@ While installing Portworx set the input argument `-secret_type` to `ibm-kp`.
 Based on your installation method provide the `-secret_type ibm-kp` input argument and restart Portworx on all the nodes.
 
 
-## Using IBM Key Protect with Portworx 
+## Using IBM Key Protect with Portworx
 
 {{<homelist series="ibm-key-protect-uses">}}

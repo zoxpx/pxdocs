@@ -127,7 +127,7 @@ Shared volumes or volume shares allow multiple readers and writers for applicati
 
  - [Portworx Shared Volumes Docs](/concepts/shared-volumes/)
  - [Portworx Shared volumes on Kubernets Tutorial](https://www.katacoda.com/portworx/scenarios/px-k8s-vol-shared)
- - [CLI Reference for Shared Volumes](/reference/cli/create-and-manage-volumes/#global-namespace-shared-volumes)
+ - [CLI Reference for Shared Volumes](/reference/cli/create-and-manage-volumes/#the-global-namespace)
 
 ## Capacity Management (AutoPilot)
 
@@ -190,5 +190,5 @@ When you provision volumes, Portworx places them throughout the cluster and acro
 
 #### Resources
 
- - [VolumePlacementStrategy CRD](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/#the-volumeplacementstrategy-crd)
+ - [Volume Placement Strategies](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
  - [Kubernetes StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
