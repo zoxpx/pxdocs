@@ -37,7 +37,7 @@ In above StorageClass,
 * **provisioner: kubernetes.io/portworx-volume** indicates that volumes should be provisioned by the Portworx driver
 * **parameters** provide driver specific parameters. The Kubernetes controller simply passes these parameters as-is to the underlying driver (Portworx in this example).
 * **repl: "3"** indicates that the Portworx volume needs to have 3 replicas
-* **io_profile: "db"** indicates that the Portworx volume needs to have [IO profile optimized for DB workloads](/install-with-other/operate-and-maintain/performance-and-tuning/tuning/#db).
+* **io_profile: "db"** indicates that the Portworx volume needs to have [IO profile optimized for DB workloads](/install-with-other/operate-and-maintain/performance-and-tuning/tuning/#the-db-profile).
 
 [This table](/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) lists all parameters that are supported by the Portworx driver.
 

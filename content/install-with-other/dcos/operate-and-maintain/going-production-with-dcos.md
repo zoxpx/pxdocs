@@ -221,13 +221,13 @@ shows how Prometheus can be set up to monitor Portworx
   * Perform sizing of your data needs and determine the amount and type of storage (EBS volumes) needed per ECS instance.
   * Create EBS volume [templates](/cloud-references/auto-disk-provisioning/aws/#ebs-volume-template) to match the number of EBS volumes needed per EC2 instance.
   * Create a stateful AMI to associate it with your auto-scaling group.
-  * Once everything is setup, as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This [page](/portworx-install-with-kubernetes/cloud/aws/aws-asg/#scaling-the-cluster-up) desribes how Portworx handles the volume management in a auto-scaling cluster.
+  * Once everything is setup, as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This [page](/portworx-install-with-kubernetes/cloud/aws/aws-asg/) desribes how Portworx handles the volume management in a auto-scaling cluster.
 
 #### Scaling out a cluster on-prem
 
 * The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/install-with-other/operate-and-maintain/scaling/scale-out) shows how to scale up a existing cluster by adding more nodes.
 
-* Using DC/OS, if Portworx is installed as a framework, you can also scale a Portworx cluster by using the DC/OS Portworx [framework](/install-with-other/dcos/#scaling-up-portworx-nodes).
+* Using DC/OS, if Portworx is installed as a framework, you can also scale a Portworx cluster by using the DC/OS Portworx [framework](/install-with-other/dcos/operate-and-maintain/volume-scaling/).
 
 
 ### Cluster Capacity Expansion
