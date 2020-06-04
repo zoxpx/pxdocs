@@ -37,7 +37,7 @@ This steps assumes your cluster nodes have access to a custom/private registry.
 
 {{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-local-reg.md" %}}
 
-Now that you have the images in your registry, continue with [Step 4: Run the wiper script](#step-3-run-the-wiper-script).
+Now that you have the images in your registry, continue with [Step 4: Run the wiper script](#step-4-run-the-wiper-script).
 
 ## Step 4: Run the wiper script
 
