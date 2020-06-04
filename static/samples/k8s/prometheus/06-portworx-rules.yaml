@@ -138,3 +138,11 @@ data:
           annotations:
             description: 'Error getting Portworx license on {{$labels.instance}}. Please check licenses on license server.'
             summary: 'Failed to acquire Portworx license on {{$labels.instance}}.'
+        - alert: PXBackupError
+          expr: px_backup_stats_status == 2
+          labels: 
+            issue: 'Cloudsnap backup error'
+            severity: warning
+          annotations:
+            description: 'Failed to take backup for volume {{$labels.volumename}} with error {{$labels.error_string}}.'
+            summary: 'Failed to take backup for volume {{$labels.volumename}}.'

@@ -107,3 +107,11 @@ spec:
       labels:
         issue: Portworx cluster member(s) is(are) down.
         severity: critical
+    - alert: PXBackupError
+      annotations:
+        description: Failed to take backup for volume {{$labels.volumename}} with error {{$labels.error_string}}.
+        summary: Failed to take backup for volume {{$labels.volumename}}.
+      expr: px_backup_stats_status == 2
+      labels:
+        issue: Cloudsnap backup error.
+        severity: warning
