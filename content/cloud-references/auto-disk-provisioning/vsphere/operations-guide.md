@@ -10,7 +10,7 @@ keywords: portworx, VMware, vSphere ASG
 During installation, user provides following parameters which are used to create disks (VMDKs) for the Portworx storage pools. The sum total of disks will be the starting storage capacity of your Portworx cluster.
 
 1. Prefix for names of ESXi Datastore(s) or Datastore cluster(s)
-2. Specification of type and size of disks to create. 
+2. Specification of type and size of disks to create.
 3. Access details for vCenter server
 
 The [Portworx VMware installation](/cloud-references/auto-disk-provisioning/vsphere/#installation) covers this in detail.
@@ -25,11 +25,11 @@ _You can run `pxctl` by accessing any worker node in your cluster with `ssh` or 
 
 ### Listing Portworx storage pools
 
-{{<info>}}What are *Storage pools*? 
+{{<info>}}What are *Storage pools*?
 
-Storage pools are logical groupings of your cluster's physical drives. You can create storage pools by grouping together drives of the same size and same type. A single node with different drive sizes and/or types will have multiple pools. 
+Storage pools are logical groupings of your cluster's physical drives. You can create storage pools by grouping together drives of the same size and same type. A single node with different drive sizes and/or types will have multiple pools.
 
-Within a pool, by default, the drives are written to in a RAID-0 configuration. You can configure RAID-10 for pools with at least 4 drives. When a pool is constructed, Portworx benchmarks individual drives and categorizes them as high, medium, or low based on random/sequential IOPS and latencies. 
+Within a pool, by default, the drives are written to in a RAID-0 configuration. You can configure RAID-10 for pools with at least 4 drives. When a pool is constructed, Portworx benchmarks individual drives and categorizes them as high, medium, or low based on random/sequential IOPS and latencies.
 {{</info>}}
 
 The following `pxctl` command lists all the Portworx storage pools in your cluster:
@@ -45,7 +45,7 @@ NODE                                    NODE STATUS     POOL                    
 d0e24758-8344-4547-9f27-fa69c643d7bf    Up              0 ( 9e4e525e-c133-46f0-b6b3-1c560f914963 )      Online          HIGH            100 GiB 93 GiB          7.0 GiB 0 B             AZ1     default default
 ```
 
-### Listing Portworx disks (VMDKs) 
+### Listing Portworx disks (VMDKs)
 
 {{<info>}} Where are Portworx VMDKs located?
 
@@ -73,7 +73,7 @@ Drive Set List
 
 ### Prometheus and Grafana
 
-Portworx exposes many useful metrics out of the box. These metrics are listed on [this page](/install-with-other/operate-and-maintain/monitoring/prometheus/#storage-and-network-stats).
+Portworx exposes many useful metrics out of the box. Refer to the [Portworx Metrics for monitoring](/reference/metrics/) page for the full list of metrics.
 
 Portworx also alerts users on a predefined set of alerts that are listed on the [Portworx Alerts](/install-with-other/operate-and-maintain/monitoring/portworx-alerts/) page.
 
@@ -87,7 +87,7 @@ You can increase capacity in one of two ways:
 
 As storage usage increases, you must expand the Portworx storage pools:
 
-1. Identify the Portworx storage pool you want to expand by [listing them](#listing-storage-pools-created-by-portworx). 
+1. Identify the Portworx storage pool you want to expand by [listing them](#listing-portworx-storage-pools).
 2. Enter the `pxctl service pool expand` command specifying the following:
 
      * UUID: The UUID of the pool you want to expand. This is found the **POOL** column when you listed the pools.
@@ -97,11 +97,11 @@ As storage usage increases, you must expand the Portworx storage pools:
          * **add-disk**: Portworx will create one or more VMDKs based on the required new size of the pool. After the drive is added to the pool, Portworx will rebalance the volumes onto the new VMDKs. As a result, this operation can take a while to complete.
 
     ```text
-    pxctl service pool expand -u <UUID> -s <SIZE> -o <OPERATION-TYPE> 
+    pxctl service pool expand -u <UUID> -s <SIZE> -o <OPERATION-TYPE>
     ```
- 
 
-3. Once you submit the command, Portworx will expand the storage pool in the background. You can [list the storage pools](#listing-storage-pools-created-by-portworx) periodically to check if they have finished expansion.
+
+3. Once you submit the command, Portworx will expand the storage pool in the background. You can [list the storage pools](#listing-portworx-storage-pools) periodically to check if they have finished expansion.
     ```text
     pxctl cluster provision-status
     ```
@@ -123,12 +123,12 @@ You can expand the drives backing the datastore in your storage array and then i
 #### 2. Add new datastore(s) to the Datastore cluster
 
 If you provided the prefix of a datastore cluster names to Portworx during installation, you can dynamically add new datastores to the datastore cluster. This will increase the capacity of the datastore cluster.
-  
+
 ## FAQs
 
 ### Which datastore does Portworx select when creating VMDKs?
 
 The [Portworx VMware installation](/cloud-references/auto-disk-provisioning/vsphere/#installation) takes in a prefix for the datastores or datastore clusters you want to use for Portworx using the environment variable `VSPHERE_DATASTORE_PREFIX`.
 
-* When the provided prefix is for datastores, Portworx will pick the datastore with the most free available space to create it's VMDK. 
+* When the provided prefix is for datastores, Portworx will pick the datastore with the most free available space to create it's VMDK.
 * When the provided prefix is for datastore clusters, Portworx will use vSphere storage resource manager APIs to get recommendation on the datastore to use within the datastore cluster. From the provided recommendations, Portworx uses the first datastore in the list.
