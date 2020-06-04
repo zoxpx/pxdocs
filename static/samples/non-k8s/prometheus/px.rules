@@ -110,7 +110,7 @@ Alert PortworxMemberDown
   }
 
 Alert PortworxLicenseLeaseExpired
-  IF px_alerts_license_lease_has_expired_total > 0
+  IF px_alerts_licenseleaseexpired_total > 0
   LABELS {
     severity = "critical",
     issue="Portworx license lease has expired",
@@ -132,7 +132,7 @@ Alert PortworxLicenseServerUnreachable
     }
 
 Alert PortworxLicenseLeaseExpiring
-  IF px_alerts_license_leases_expiring_total > 0
+  IF px_alerts_licenseleaseexpiring_total > 0
   LABELS {
     severity = "critical",
     issue="Portworx license lease is expiring",
