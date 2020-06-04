@@ -54,6 +54,7 @@ spec:
       annotations:
         description: Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in resync state.
         summary: Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in resync state.
+      expr: px_volume_replication_status == 2
       labels:
         issue: Portworx volume in resync state.
         severity: warning
@@ -61,6 +62,7 @@ spec:
       annotations:
         description: Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in degraded state. Please check all nodes with that volume replicas are online.
         summary: Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in degraded state.
+      expr: px_volume_replication_status == 3
       labels:
         issue: Portworx volume in degraded state.
         severity: warning
