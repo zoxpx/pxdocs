@@ -19,7 +19,7 @@ noicon: true
 |**Option**|**Description**|**Required?**|
 |----|----|----|
 | `--license-password` | License server admin user password. You must use at least one special symbol and numeric value. Supported special symbols are: [!@#$%] | Yes |
-| `--oidc` | <Enable OIDC for PX-Central components> | No |
+| `--oidc` | Enable OIDC for PX-Central components | No |
 | `--oidc-clientid` | OIDC client ID | Required if OIDC is enabled |
 | `--oidc-secret` | OIDC secret | Required if OIDC is enabled |
 | `--oidc-endpoint` | OIDC endpoint | Required if OIDC is enabled |
