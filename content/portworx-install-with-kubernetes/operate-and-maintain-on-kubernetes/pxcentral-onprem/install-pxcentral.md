@@ -27,7 +27,10 @@ For internet-connected clusters, the following ports must be open:
 | 7070 | License server | License validation | Outgoing |
 
 {{<info>}}
-**NOTE:** You must use a dedicated Kubernetes cluster with no existing Portworx installations.
+**NOTE:** 
+
+* You must use a dedicated Kubernetes cluster with no existing Portworx installations.
+* If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority.
 {{</info>}}
 
 ## Prepare air-gapped environments
@@ -122,3 +125,7 @@ Install PX-Central by downloading and running a script which deploys both Portwo
         ```
 
     The install process may take several minutes to complete.
+
+## Configure external OIDC endpoints
+
+ If you enabled an external OIDC during PX-Central installation, you must you must manually configure the redirect URI in your OIDC provider. Refer to the [Set up login redirects](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/set-up-login-redirects) article for instructions on how to do this.
