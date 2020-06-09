@@ -7,12 +7,8 @@ hidden: false
 weight: 1
 ---
 
-With Portworx, you can backup and restore stateful applications and their volumes to an external object store. Specifically, you can perform the following operations:
+With Portworx, you can backup stateful applications and their volumes to an external object store and restore to the same cluster or to a new cluster. When it comes to timing, you can perform backup operations manually whenever you wish, or you can schedule them with a schedulePolicy. You can even use Portworx's backup functionality to clone applications between namespaces by restoring to a different namespace in the same cluster. 
 
-* Backup an application
-* Restore an application
-* Clone an application between namespaces
-* Schedule application backup operations
 
 ## Prerequisites
 
@@ -37,13 +33,15 @@ Use the backupLocation CRD to specify the configuration information for your obj
 * Azure Blob Storage
 * Google Cloud Storage
 
-The example in this document uses an S3 bucket to store application backup data.
+The example in this document uses an S3 bucket to store application backup data. To create backupLocations using other object stores, see the [Stateful application CRD reference](/portworx-install-with-kubernetes/storage-operations/stateful-applications/crd-reference) section of the documentation. 
 
 ```
 "endpoint" : "bucketEndpoint.com"
 "key": "ABCDEF1234567890"
 "secret": "ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890"
 ```
+
+If you're restoring backups to a different cluster from the one you took your backups from, you must create a backupLocation CRD on your new cluster that matches the backupLocation CRD on your original cluster. 
 
 You can specify your object store credentials directly in the BackupLocation configuration as plaintext or use a Kubernetes secret:
 
@@ -56,6 +54,7 @@ You can specify your object store credentials directly in the BackupLocation con
   * **location:**
       * **type:** the object store type
       * **path:** the bucket Portworx will use for the backup
+      * **sync:** If you're restoring to a new cluster, set `sync` to true to allow your new cluster to retrieve the previous backups from your backup location.
       * **s3Config:**
           * **region:** which region your s3 bucket is located in
           * **accessKeyID:** your bucket's accessKeyID
@@ -74,6 +73,7 @@ You can specify your object store credentials directly in the BackupLocation con
     location:
       type: s3
       path: "bucket-name"
+      sync: true
       s3Config:
         region: us-east-1
         accessKeyID: ABCDEF1234567890
@@ -139,6 +139,7 @@ You can specify your object store credentials directly in the BackupLocation con
       * **type:** the object store type
       * **path:** the bucket Portworx will use for the backup
       * **secretConfig:** the Secret object containing your bucket's credentials
+      * **sync:** If you're restoring to a new cluster, set `sync` to true to allow your new cluster to retrieve the previous backups from your backup location.
 
     ```text
     apiVersion: stork.libopenstorage.org/v1alpha1
@@ -152,6 +153,7 @@ You can specify your object store credentials directly in the BackupLocation con
       type: s3
       path: "bucket-name"
       secretConfig: s3secret
+      sync: true
     ```
 
     {{<info>}}
