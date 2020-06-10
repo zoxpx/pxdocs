@@ -101,7 +101,7 @@ Create a Kubnernetes secret, save the name and namespace in which it's located f
 
 ## Install PX-Central on-premises
 
-1. To install PX-Central on-prem, generate the install script through the **PX-Backup using PX-Central** [spec generator](https://central-staging.portworx.co/specGen/wizard). If you saved your cloud credentials as a Kubernetes secret ahead of time, enter the name and namespace of your secret.
+1. To install PX-Central on-prem, generate the install script through the **PX-Backup using PX-Central** [spec generator](https://central.portworx.com/specGen/wizard). If you saved your cloud credentials as a Kubernetes secret ahead of time, enter the name and namespace of your secret.
 
 2. Once you've generated the script, paste it into the command line of the Kubernetes master node in which you want to install PX-Backup and run it:
 
