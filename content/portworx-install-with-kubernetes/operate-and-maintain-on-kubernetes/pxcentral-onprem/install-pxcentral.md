@@ -74,20 +74,28 @@ How you pull the Portworx license server and associated images depends on your a
       sudo docker save <required-docker-images> | ssh root@<air-gapped-address> docker load
       ```
 
-## Prepare cloud environments
+## Save your cloud credentials in a Kubernetes secret (Optional)
 
-If you're deploying PX-Central onto AWS, Azure, or GCP, you must create and apply an nginx ingress controller:
+As part of the installation process, the spec generator asks you to input your cloud credentials. If you don't want to specify your cloud credentials in the spec generator, you can create a Kubernetes secret and point the spec generator to that Kubernetes secret:
 
-1. Download the nginx ingress controller spec:
+Create a Kubnernetes secret, save the name and namespace in which it's located for use in the installation steps. The contents of the secret you create depend on the cloud you're using:
+
+* **AWS**:
 
     ```text
-    curl -o nginx-ingress-controller.yaml 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.2/nginx-ingress-controller.yaml'
+    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID --from-literal=AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY --namespace $PXCNAMESPACE
     ```
 
-2. Apply the spec:
+* **Azure**:
 
     ```text
-    kubectl apply -f nginx-ingress-controller.yaml
+    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=AZURE_CLIENT_SECRET=$AZURE_CLIENT_SECRET --from-literal=AZURE_CLIENT_ID=$AZURE_CLIENT_ID --from-literal=AZURE_TENANT_ID=$AZURE_TENANT_ID --namespace $PXCNAMESPACE
+    ```
+
+* **vSphere**:
+
+    ```text
+    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=VSPHERE_USER=$VSPHERE_USER --from-literal=VSPHERE_PASSWORD=$VSPHERE_PASSWORD --namespace $PXCNAMESPACE
     ```
 
 
@@ -102,7 +110,7 @@ If you're deploying PX-Central onto AWS, Azure, or GCP, you must create and appl
     ```
 
     {{<info>}}
-    **NOTE:** PX-Central is always installed with PX-Backup.
+**NOTE:**  PX-Central is installed with PX-Backup.
     {{</info>}}
 
 ## Configure external OIDC endpoints
