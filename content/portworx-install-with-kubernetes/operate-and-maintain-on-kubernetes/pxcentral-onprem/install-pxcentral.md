@@ -24,12 +24,14 @@ For internet-connected clusters, the following ports must be open:
 | :---: |:---:|:---:|:---:|
 | 31234 | PX-Central | Access from outside | Incoming |
 | 31241 | PX-Central-Keycloak | Access user auth token | Incoming | 
+| 31240 | PX-Central | Metrics store endpoint | Outgoing |
 | 7070 | License server | License validation | Outgoing |
+
 
 {{<info>}}
 **NOTE:** 
 
-* You must use a dedicated Kubernetes cluster with no existing Portworx installations.
+* You can install PX-Central on a Kubernetes cluster that are already running Portworx, or on a fresh Kubernetes cluster that does not have Portworx installed. 
 * If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority.
 {{</info>}}
 
@@ -79,7 +81,7 @@ If you're deploying PX-Central onto AWS, Azure, or GCP, you must create and appl
 1. Download the nginx ingress controller spec:
 
     ```text
-    curl -o nginx-ingress-controller.yaml 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.1/nginx-ingress-controller.yaml'
+    curl -o nginx-ingress-controller.yaml 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.2/nginx-ingress-controller.yaml'
     ```
 
 2. Apply the spec:
@@ -88,44 +90,47 @@ If you're deploying PX-Central onto AWS, Azure, or GCP, you must create and appl
     kubectl apply -f nginx-ingress-controller.yaml
     ```
 
-## Install PX-Central on-premises
+## Save your cloud credentials in a Kubernetes secret (Optional)
 
-Install PX-Central by downloading and running a script which deploys both Portworx and PX-Central:
+As part of the installation process, the spec generator asks you to input your cloud credentials. If you don't want to specify your cloud credentials in the spec generator, you can create a Kubernetes secret and point the spec generator to that Kubernetes secret:
 
-1. Download the PX-Central install script and make it executable:
+Create a Kubnernetes secret, save the name and namespace in which it's located for use in the installation steps. The contents of the secret you create depend on the cloud you're using:
+
+* **AWS**:
 
     ```text
-    curl -o install.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.1/install.sh' && chmod +x install.sh
+    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID --from-literal=AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY --namespace $PXCNAMESPACE
     ```
 
-2. Run the script with any of [the options](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/install-script-reference/) required to configure PX-Central according to your needs; note that the `--license-password` option is required:
+* **Azure**:
 
-    * The following example deploys PX-Central without OIDC:
+    ```text
+    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=AZURE_CLIENT_SECRET=$AZURE_CLIENT_SECRET --from-literal=AZURE_CLIENT_ID=$AZURE_CLIENT_ID --from-literal=AZURE_TENANT_ID=$AZURE_TENANT_ID --namespace $PXCNAMESPACE
+    ```
 
-        ```text
-        ./install.sh --license-password 'examplePassword'
-        ```
+* **vSphere**:
 
-    * The following example deploys PX-Central with OIDC:
+    ```text
+    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=VSPHERE_USER=$VSPHERE_USER --from-literal=VSPHERE_PASSWORD=$VSPHERE_PASSWORD --namespace $PXCNAMESPACE
+    ```
 
-        ```text
-        ./install.sh --oidc-clientid test --oidc-secret abc0123d-9876-zyxw-m1n2-i1j2k345678l --oidc-endpoint 192.0.2.0:12345 --license-password 'examplePassword'
-        ```
 
-    * The following example deploys PX-Central on an air-gapped environment:
+## Install PX-Central on-premises
 
-        ```text
-        ./install.sh  --license-password 'examplePassword' --air-gapped --custom-registry test.ecr.us-east-1.amazonaws.com --image-repo-name pxcentral-onprem --image-pull-secret docregistry-secret
-        ```
+<!-- change this to use the PX-Backup install method. Add a note that this says its for backup, but also works to install PX-Central -->
 
-    * The following example deploys PX-Central on an air-gapped environment with OIDC:
+1. To install PX-Central on-prem, generate the install script through the **PX-Backup using PX-Central** [spec generator](https://central-staging.portworx.co/specGen/wizard). If you saved your cloud credentials as a Kubernetes secret ahead of time, enter the name and namespace of your secret.
 
-        ```text
-        ./install.sh  --license-password 'examplePassword' --oidc-clientid test --oidc-secret abc0123d-9876-zyxw-m1n2-i1j2k345678l  --oidc-endpoint 192.0.2.0:12345 --custom-registry test.ecr.us-east-1.amazonaws.com --image-repo-name pxcentral-onprem --image-pull-secret docregistry-secret
-        ```
+2. Once you've generated the script, paste it into the command line of the Kubernetes master node in which you want to install PX-Backup and run it:
 
-    The install process may take several minutes to complete.
+    ```text
+    bash <(curl -s https://raw.githubusercontent.com/portworx/px-central-onprem/<version>/install.sh) --px-store --px-backup --admin-password 'examplePassword' --oidc --pxcentral-namespace portworx --px-license-server --license-password 'examplePassword' --px-backup-organization backup --cluster-name px-central --admin-email admin@portworx.com --admin-user admin
+    ```
+
+    {{<info>}}
+    **NOTE:** The example above installs PX-Central with PX-Backup enabled. If you don't want PX-Backup to be installed with PX-Central, remove the `--px-backup` option from the spec generator output before running it.
+    {{</info>}}
 
 ## Configure external OIDC endpoints
 
- If you enabled an external OIDC during PX-Central installation, you must you must manually configure the redirect URI in your OIDC provider. Refer to the [Set up login redirects](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/set-up-login-redirects) article for instructions on how to do this.
+ If you enabled an external OIDC during PX-Central installation, you must manually configure the redirect URI in your OIDC provider. Refer to the [Set up login redirects](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/set-up-login-redirects) article for instructions on how to do this.
