@@ -90,34 +90,8 @@ If you're deploying PX-Central onto AWS, Azure, or GCP, you must create and appl
     kubectl apply -f nginx-ingress-controller.yaml
     ```
 
-## Save your cloud credentials in a Kubernetes secret (Optional)
-
-As part of the installation process, the spec generator asks you to input your cloud credentials. If you don't want to specify your cloud credentials in the spec generator, you can create a Kubernetes secret and point the spec generator to that Kubernetes secret:
-
-Create a Kubnernetes secret, save the name and namespace in which it's located for use in the installation steps. The contents of the secret you create depend on the cloud you're using:
-
-* **AWS**:
-
-    ```text
-    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID --from-literal=AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY --namespace $PXCNAMESPACE
-    ```
-
-* **Azure**:
-
-    ```text
-    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=AZURE_CLIENT_SECRET=$AZURE_CLIENT_SECRET --from-literal=AZURE_CLIENT_ID=$AZURE_CLIENT_ID --from-literal=AZURE_TENANT_ID=$AZURE_TENANT_ID --namespace $PXCNAMESPACE
-    ```
-
-* **vSphere**:
-
-    ```text
-    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=VSPHERE_USER=$VSPHERE_USER --from-literal=VSPHERE_PASSWORD=$VSPHERE_PASSWORD --namespace $PXCNAMESPACE
-    ```
-
 
 ## Install PX-Central on-premises
-
-<!-- change this to use the PX-Backup install method. Add a note that this says its for backup, but also works to install PX-Central -->
 
 1. To install PX-Central on-prem, generate the install script through the **PX-Backup using PX-Central** [spec generator](https://central-staging.portworx.co/specGen/wizard). If you saved your cloud credentials as a Kubernetes secret ahead of time, enter the name and namespace of your secret.
 
@@ -128,7 +102,7 @@ Create a Kubnernetes secret, save the name and namespace in which it's located f
     ```
 
     {{<info>}}
-    **NOTE:** The example above installs PX-Central with PX-Backup enabled. If you don't want PX-Backup to be installed with PX-Central, remove the `--px-backup` option from the spec generator output before running it.
+    **NOTE:** PX-Central is always installed with PX-Backup.
     {{</info>}}
 
 ## Configure external OIDC endpoints
