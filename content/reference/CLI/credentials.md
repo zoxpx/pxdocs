@@ -76,7 +76,7 @@ ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
 
 ##  Create and configure credentials
 
-You can create and configure credentials in multiple ways depending on your cloud provider and how you want to manage them. 
+You can create and configure credentials in multiple ways depending on your cloud provider and how you want to manage them.
 
 ### Create credentials on AWS by passing keys in the create command
 
@@ -110,10 +110,10 @@ You can create and configure credentials for AWS by storing your secret access k
 1. Create the following environment variables, adding your own access key ID and secret access key, and provide them to the Portworx container through either daemon set parameters or the `runc install` command:
 
     ```text
-    AWS_SECRET_ACCESS_KEY=xxx 
+    AWS_SECRET_ACCESS_KEY=xxx
     AWS_ACCESS_KEY_ID=yyy
     ```
-2. Enter the `pxctl credentials create` command:    
+2. Enter the `pxctl credentials create` command:
 
     ```text
     ./pxctl credentials create \
@@ -131,7 +131,7 @@ You can create and configure credentials for AWS by storing your secret access k
 **NOTE:** This feature requires PX-Enterprise versions 2.5.1 or greater
 {{</info>}}
 
-Instead of storing your secret access key and access key ID on the host, you can grant Portworx bucket permissions using IAM. you can grant the EC2 instances on which portworx is running, or you can grant permissions for a specific bucket.
+Instead of storing your secret access key and access key ID on the host, you can grant Portworx bucket permissions using IAM. You can grant the EC2 instances on which Portworx is running, or you can grant permissions for a specific bucket.
 
 #### Grant IAM permissions for your EC2 instance in general
 
@@ -158,7 +158,7 @@ Instead of storing your secret access key and access key ID on the host, you can
         ]
     }
     ```
-    
+
 
 2. Enter the following pxctl credentials create command, specifying the S3 region for the account:
 
@@ -207,23 +207,24 @@ Instead of storing your secret access key and access key ID on the host, you can
     ```output
     Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
     ```
-    <!-- What is s3cred in these? Is it the access key ID? -->
+
+<!-- What is s3cred in these? Is it the access key ID? -->
 <!-- disabling, not release ready:
 ### Create credentials on Azure
 
 1. [Grant your Azure instance](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/tutorial-linux-vm-access-storage#grant-your-vm-access-to-an-azure-storage-container) the following permissions:
 
-  * `Storage Blob Data Reader`
-  * `Storage Blob Data Contributor`
+* `Storage Blob Data Reader`
+* `Storage Blob Data Contributor`
 
 2. Enter the following pxctl credentials create command, specifying your own Azure account name and credentials:
 
-    ```text
-    ./pxctl cred c --provider azure --azure-account-name <account-name> --use-iam azurecred
-    ```
-    ```output
-    Credentials created successfully, UUID: 12345678-a901-2bc3-4d56-7890ef1d23ab
-    ``` 
+  ```text
+  ./pxctl cred c --provider azure --azure-account-name <account-name> --use-iam azurecred
+  ```
+  ```output
+  Credentials created successfully, UUID: 12345678-a901-2bc3-4d56-7890ef1d23ab
+  ```
 -->
 
 ## Delete existing credentials
