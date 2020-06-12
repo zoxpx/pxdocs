@@ -5,6 +5,25 @@ description: Notes on Portworx releases.
 keywords: portworx, release notes
 series: release-notes
 ---
+## 2.5.0.2
+
+June 12, 2020
+
+## Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+|PWX-9401| A [bug in Kubernetes 1.13.5 and lower](https://github.com/kubernetes/kubernetes/issues/76340) caused the Portworx volume driver to occasionally save annotations from one PVC into the parameters for another. <br/><br/>**User Impact:** Portworx may have created a PVC with a different group ID than the one set in its annotations. <br/><br/>**Resolution:** Portworx now uses the group value from the PVC annotation that's fetched at runtime from the Kubernetes API during volume creation to ensure the group ID doesn't change.|
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+|PWX-10207|You can now override a volume's group field using pxctl: <br/><br/> `pxctl volume update --group <GROUP> <VOL_NAME>`|
 
 ## 2.5.1.2
 
