@@ -5,6 +5,19 @@ description: Notes on Portworx releases.
 keywords: portworx, release notes
 series: release-notes
 ---
+
+## 2.5.0.3
+
+June 12, 2020
+
+## Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-13655 | When Portworx went down or restarted, it created detailed logs. On some systems, this operation could take a long time and potentially hang.<br/><br/>**User impact:** Log collection could become unresponsive as a result of this log dump. <br/><br/>**Resolution:** Unnecessary logs were removed, eliminating the possibility for log collection to hang. |
+
 ## 2.5.0.2
 
 June 12, 2020
