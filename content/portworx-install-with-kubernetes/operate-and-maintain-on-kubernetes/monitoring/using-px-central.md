@@ -25,7 +25,7 @@ In this scenario, all the components are running alongside PX-Enterprise in the 
 
 ![singlelclustermodel](/img/PXCSingleCluster.png)
 
-### Using PX-Central (dedicated mode) with multiple PX-Cluster
+### Using PX-Central (dedicated mode) with multiple Portworx clusters
 
 In this scenario, all the components are running on a dedicated set of nodes outside of the PX-Enterprise clusters. The deployment links the clusterID for the Portworx cluster(s) to the individual services within PX-Central. Use this scenario if you are installing larger clusters, plan to scale deployment by adding additional clusters in future cluster size is small and want centralized control.
 
@@ -44,7 +44,7 @@ PX-Central can be setup for any of the above deployment scenarios by following a
 ### Pre-requisites
 
 * Have a K8S cluster running
-* Have the Prometheus Operator [spec](/samples/k8s/portworx-pxc-operator.yaml) installed.
+* Have the Prometheus Operator [spec](/samples/k8s/grafana/prometheus-operator.yaml) installed.
 
     ```text
     kubectl apply -f portworx-pxc-operator.yaml
