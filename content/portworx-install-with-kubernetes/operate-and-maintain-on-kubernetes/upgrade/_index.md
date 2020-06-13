@@ -159,7 +159,20 @@ curl -fsL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s 
 
 ## Troubleshooting
 
-#### Find out status of Portworx pods
+### The "field is immutable" error message
+
+If the you see the following error when you upgrade Stork, it means that the `kubectl apply -f stork-spec.yaml` command tries to update a label selector which is immutable:
+
+```
+The Deployment "stork-scheduler" is invalid: spec.selector: Invalid value: v1.LabelSelector{MatchLabels:map[string]string{"component":"scheduler", "name":"stork-scheduler", "tier":"control-plane"}, MatchExpressions:[]v1.LabelSelectorRequirement(nil)}: field is immutable
+```
+
+To resolve this problem:
+
+1. Delete the existing Stork deployment
+2. Resume the [upgrade process](#upgrade-stork) by applying the new spec.
+
+### Find out status of Portworx pods
 
 To get more information about the status of Portworx DaemonSet across the nodes, run:
 
@@ -180,7 +193,7 @@ As we can see in the example output above:
   * “minion3” has Portworx up for only 5 minutes (likely just finished upgrade and restarted Portworx)
 * if we keep on monitoring, we will observe that the upgrade will not switch to the “next” node until STATUS is “Running” and the READY is 1/1 \(meaning, the “readynessProbe” reports Portworx service is operational\).
 
-#### Find out version of all nodes in the Portworx cluster
+### Find out version of all nodes in the Portworx cluster
 
 One can run the following command to inspect the Portworx cluster:
 
