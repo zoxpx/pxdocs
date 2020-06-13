@@ -172,7 +172,7 @@ To resolve this problem:
 1. Delete the existing Stork deployment
 2. Resume the [upgrade process](#upgrade-stork) by applying the new spec.
 
-#### Find out status of Portworx pods
+### Find out status of Portworx pods
 
 To get more information about the status of Portworx DaemonSet across the nodes, run:
 
@@ -193,7 +193,7 @@ As we can see in the example output above:
   * “minion3” has Portworx up for only 5 minutes (likely just finished upgrade and restarted Portworx)
 * if we keep on monitoring, we will observe that the upgrade will not switch to the “next” node until STATUS is “Running” and the READY is 1/1 \(meaning, the “readynessProbe” reports Portworx service is operational\).
 
-#### Find out version of all nodes in the Portworx cluster
+### Find out version of all nodes in the Portworx cluster
 
 One can run the following command to inspect the Portworx cluster:
 
