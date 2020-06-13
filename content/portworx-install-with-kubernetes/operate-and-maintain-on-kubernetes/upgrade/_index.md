@@ -160,6 +160,19 @@ curl -fsL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s 
 
 ## Troubleshooting
 
+### The "field is immutable" error message
+
+If the you see the following error when you upgrade Stork, it means that the `kubectl apply -f stork-spec.yaml` command tries to update a label selector which is immutable:
+
+```
+The Deployment "stork-scheduler" is invalid: spec.selector: Invalid value: v1.LabelSelector{MatchLabels:map[string]string{"component":"scheduler", "name":"stork-scheduler", "tier":"control-plane"}, MatchExpressions:[]v1.LabelSelectorRequirement(nil)}: field is immutable
+```
+
+To resolve this problem:
+
+1. Delete the existing Stork deployment
+2. Resume the [upgrade process](#upgrade-stork) by applying the new spec.
+
 ### Failed to apply spec due Forbidden: may not be used when type is ClusterIP
 
 {{% content "shared/upgrade/upgrade-nodeport-issue.md" %}}
