@@ -3,7 +3,7 @@ title: Stateful Application CRD Reference
 keywords:
 description: Backup, restore, and clone stateful applications
 hidden: false
-weight: 2 
+weight: 2
 ---
 
 ## BackupLocation
@@ -173,6 +173,8 @@ metadata:
 spec:
   sourceNamespace: mysql-app
   destinationNamespace: clone-mysql
+  selectors:
+    app: mysql-app-db
 ```
 
 #### Spec Parameters
@@ -181,7 +183,7 @@ spec:
 |----|----|----|----|
 |sourceNamespace| The namespace you want to clone applications _from_ | **Default:** None | Yes |
 |destinationNamespace| The namespace you want to clone applications _to_ | **Default:** None | Yes |
-|replacePolicy| Specifies what to do if the object already exists in the destination namespace. | **Default:** `Retain`<br/><br/>**Other values:** `Delete`, `Retain`, `Fail` | No |
+|selectors| Define specific labels to determine which resources are cloned | **Default:** None | No |
 
 ## ApplicationBackupSchedule
 
