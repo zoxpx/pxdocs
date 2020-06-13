@@ -238,12 +238,22 @@ Navigate to the Prometheus web UI by going to `http://<master_ip>:<service_nodep
 
 ### Installing Grafana
 
-Download {{< direct-download url="/samples/k8s/grafana/grafana-deployment.yaml" name="grafana-deployment.yaml" >}} and apply it:
+1. Download the {{< direct-download url="/samples/k8s/pxc/grafana.yaml" name="grafana.yaml" >}} file and apply it:
 
 
-```text
-kubectl apply -f grafana-deployment.yaml
-```
+    ```text
+    kubectl apply -f grafana.yaml
+    ```
+
+2. Download and apply the following Grafana templates:
+
+    ```text
+    curl https://github.com/portworx/pxdocs/blob/master/static/samples/k8s/pxc/portworx-cluster-dashboard.json -o portworx-cluster-dashboard.json && \
+    curl https://github.com/portworx/pxdocs/blob/master/static/samples/k8s/pxc/portworx-node-dashboard.json -o portworx-node-dashboard.json && \
+    curl https://github.com/portworx/pxdocs/blob/master/static/samples/k8s/pxc/portworx-volume-dashboard.json -o portworx-volume-dashboard.json && \
+    curl https://github.com/portworx/pxdocs/blob/master/static/samples/k8s/pxc/portworx-etcd-dashboard.json -o portworx-etcd-dashboard.json && \
+    kubectl -n kube-system create configmap grafana-dashboards --from-file=portworx-cluster-dashboard.json --from-file=portworx-node-dashboard.json --from-file=portworx-volume-dashboard.json --from-file=portworx-etcd-dashboard.json
+    ```
 
 #### Grafana access details
 
