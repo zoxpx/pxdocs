@@ -16,7 +16,6 @@ A dedicated Kubernetes cluster consisting of the following:
 * 4 CPU cores
 * 8GB of memory
 * A minimum of 1 disk with 100 GB, ideally 2 disks on each node with at least 100 GB each
-* Kubernetes version 1.14.x, 1.15.x, or 1.16.x
 
 For internet-connected clusters, the following ports must be open:
 
@@ -41,21 +40,49 @@ If your cluster is internet-connected, skip this section. If your cluster is air
 
 Pull the following required docker images onto your air-gapped environment:
 
-* portworx/pxcentral-onprem-ui-backend:1.1.0
-* portworx/pxcentral-onprem-ui-frontend:1.1.0
-* portworx/pxcentral-onprem-ui-lhbackend:1.1.0
+* portworx/pxcentral-onprem-ui-backend:1.1.1
+* portworx/pxcentral-onprem-ui-frontend:1.1.1
+* portworx/pxcentral-onprem-ui-lhbackend:1.1.1
 * portworx/pxcentral-onprem-els-ha-setup:1.0.1
 * portworx/pxcentral-onprem-post-setup:1.0.1
 * portworx/pxcentral-onprem-pre-setup:1.0.1
-* portworx/px-operator:1.3.0
-* portworx/pxcentral-onprem-operator:1.0.1
-* portworx/pxcentral-onprem-api:1.0.1
+* portworx/pxcentral-onprem-operator:1.0.2
+* portworx/pxcentral-onprem-api:1.0.2
+* portworx/px-els:1.0.0
+* portworx/px-backup:1.0.1
+* docker.io/bitnami/etcd:3.4.7-debian-10-r14
+* quay.io/coreos/etcd:latest
 * pwxbuild/pxc-macaddress-config:1.0.1
-* openstorage/stork:2.3.2
+* pwxbuild/px-forwarding-proxy:1.0.0
+* portworx/px-operator:1.3.1
+* portworx/px-dev:2.5.0
+* openstorage/stork:2.4.0
 * docker.io/bitnami/postgresql:11.7.0-debian-10-r9
 * busybox:1.31
 * jboss/keycloak:9.0.2
-* docker.io/bitnami/etcd:3.4.7-debian-10-r14
+* pwxbuild/keycloak-login-theme:1.0.0
+* quay.io/cortexproject/cortex:v0.4.0
+* cassandra:3.0
+* postgres:9.6
+* nginx:1.17.8
+* consul:0.7.1
+* memcached:1.4.25
+* pwxbuild/go-dnsmasq:release-1.0.7
+* quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1
+* quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.31.1
+* jettech/kube-webhook-certgen:v1.2.0
+* mysql:5.7.22
+* grafana/grafana:6.5.2
+* k8s.gcr.io/pause:3.1
+* portworx/px-node-wiper:2.1.4
+* portworx/oci-monitor:2.5.0
+* quay.io/coreos/configmap-reload:v0.0.1
+* quay.io/prometheus/prometheus:v2.7.1
+* quay.io/coreos/prometheus-config-reloader:v0.35.0
+* quay.io/coreos/prometheus-config-reloader:v0.34.0
+* quay.io/coreos/prometheus-operator:v0.35.0
+* quay.io/coreos/prometheus-operator:v0.34.0
+* gcr.io/google_containers/kube-scheduler-amd64:v1.16.7
 
 How you pull the Portworx license server and associated images depends on your air-gapped cluster configuration:
 
