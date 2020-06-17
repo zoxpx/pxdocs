@@ -20,7 +20,7 @@ Stork version 2.2 or above is required.
 
 {{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
 
-## Creating a schedule policy
+## Create a schedule policy
 
 Schedule policies can be used to specify when a specific action has to be triggered. There are 4 sections in a schedule policy spec:
 
@@ -33,58 +33,89 @@ Schedule policies can be used to specify when a specific action has to be trigge
 Note that scheduled snapshots do not occur if the volume you are trying to snapshot is not attached to a container.
 {{</info>}}
 
-Let's look at an example of how we could create a daily and weekly policy.
+### Create a daily policy
 
-Create a daily policy with the following `policy-daily.yaml`:
+1. Create a file named `daily-policy.yaml`, specifying the following fields and values:
 
-```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: SchedulePolicy
-metadata:
-  name: daily
-policy:
-  daily:
-    time: "10:14PM"
-    retain: 3
-```
+  * **apiVersion:** with the version of the Stork scheduler (this example uses `stork.libopenstorage.org/v1alpha1`)
+  * **kind:** with the `SchedulePolicy` value
+  * **metadata.name:** with the name of the `SchedulePolicy` object (this example uses `daily`)
+  * **policy.daily.time:** with the backup time (this example uses "10:14PM")
+  * **policy.retain:** with the number of backups Portworx must retain (this example retains 3 backups)
 
-```text
-kubectl apply -f policy-daily.yaml
-```
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: SchedulePolicy
+    metadata:
+      name: daily
+    policy:
+      daily:
+        time: "10:14PM"
+        retain: 3
+    ```
 
-```output
-schedulepolicy.stork.libopenstorage.org/daily created
-```
+2. Apply the spec:
 
-Similarly, create a weekly policy with the following `policy-weekly.yaml`:
+    ```text
+    kubectl apply -f daily-policy.yaml
+    ```
 
-```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: SchedulePolicy
-metadata:
-  name: weekly
-policy:
-  weekly:
-    day: "Thursday"
-    time: "10:13PM"
-    retain: 2
-```
+    ```output
+    schedulepolicy.stork.libopenstorage.org/daily created
+    ```
 
-```text
-kubectl apply -f policy-weekly.yaml
-```
+### Create a weekly policy
 
-If you want to check the status of our schedule policy, type:
+1. Create a file named `weekly-policy`, specifying the following fields and values:
 
-```text
-storkctl get schedulepolicy
-```
+  * **apiVersion:** with the version of the Stork scheduler (this example uses `stork.libopenstorage.org/v1alpha1`)
+  * **kind:** with the `SchedulePolicy` value
+  * **metadata.name:** with the name of the `SchedulePolicy` object (this example uses `weekly`)
+  * **policy.weekly.day:** with the day of the week when Portworx must start the backup (this example uses "Thursday")
+  * **policy.weekly.time:** with the backup time (this example uses "10:13PM")
+  * **policy.retain:** with the number of backups Portworx must retain (this example retains 2 backups)
 
-```output
-NAME      INTERVAL-MINUTES   DAILY     WEEKLY             MONTHLY
-daily     N/A                10:14PM   N/A                N/A
-weekly    N/A                N/A       Thursday@10:13PM   N/A
-```
+
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: SchedulePolicy
+    metadata:
+      name: weekly
+    policy:
+      weekly:
+        day: "Thursday"
+        time: "10:13PM"
+        retain: 2
+    ```
+
+2.  Apply the spec:
+
+    ```text
+    kubectl apply -f weekly-policy.yaml
+    ```
+
+3. You can check the status of your schedule policy by entering the `storkctl get schedulepolicy` command:
+
+    ```text
+    storkctl get schedulepolicy
+    ```
+
+    ```output
+    NAME      INTERVAL-MINUTES   DAILY     WEEKLY             MONTHLY
+    daily     N/A                10:14PM   N/A                N/A
+    weekly    N/A                N/A       Thursday@10:13PM   N/A
+    ```
+
+{{<info>}}
+**NOTE:** If you do not specify the value of the `retain` field, Portworx will use the following default values:
+
+| Policy | Default value |
+|:---:|:---:|
+| Interval | 10 |
+| Daily | 30 |
+| Weekly | 7 |
+| Monthly | 12 |
+{{</info>}}
 
 ## Associate a schedule policy with a StorageClass or a Volume
 
