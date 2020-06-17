@@ -28,9 +28,8 @@ As of Portworx 1.4, we recommend using the `-j auto` option.  This allows Portwo
 If you are upgrading to 1.3 and want to add a journal device to an existing node, follow [these instructions](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/add-journal-dev).
 
 ## Volume granular performance tuning
-By default, Portworx will try to auto tune the IO profile setting for a given volume by learning from the access patterns.  However, this algorithm can be overridden and a specific profile can be chosen.
 
-The IO profile can be selected while creating the volume via the `io_profile` flag.  For example:
+Portworx optimizes performance for specific application access patterns. These can be set by specifying an `io_profile` while creating the volume. For example:
 
 ```text
 pxctl volume create --size=10 --repl=3 --io_profile=sequential demovolume
@@ -41,8 +40,6 @@ or
 ```text
 docker volume create -d pxd io_priority=high,size=10G,repl=3,io_profile=random,name=demovolume
 ```
-
-It is highly recommended letting Portworx decide the correct IO profile tuning.  If you do however override the setting, you should understand the operation of each profile setting.
 
 ### The sequential profile
 
@@ -55,9 +52,9 @@ This records the IO pattern of recent access and optimizes the read ahead and da
 ### CMS
 This is useful for content management systems, like WordPress.  This option applies to a Portworx shared (global namespace) volume.  It implements an attribute cache and supports async writes.  This increases the Portworx memory footprint by 100MB.  Use `io_profile=cms`.
 
-### The db profile
+### The db_remote profile
 
-This implements a write-back flush coalescing algorithm.  This algorithm attempts to coalesce multiple `syncs` that occur within a 50ms window into a single sync. Coalesced syncs are acknowledged only after copying to all replicas. In order to do this, the algorithm requires a minimum replication (HA factor) of 3. This mode assumes all replicas do not fail (kernel panic or power loss) simultaneously in a 50 ms window. Use `io_profile=db`.
+This implements a write-back flush coalescing algorithm.  This algorithm attempts to coalesce multiple `syncs` that occur within a 50ms window into a single sync. Coalesced syncs are acknowledged only after copying to all replicas. In order to do this, the algorithm requires a minimum replication (HA factor) of 3. This mode assumes all replicas do not fail (kernel panic or power loss) simultaneously in a 50 ms window. Use `io_profile=db_remote`.
 
 {{<info>}}
 If there are not enough nodes online, Portworx will automatically disable this algorithm.
