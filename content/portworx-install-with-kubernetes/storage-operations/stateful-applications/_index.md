@@ -271,6 +271,18 @@ The ApplicationBackupSchedule CRD associates a SchedulePolicy with an applicatio
         retain: 5
     ```
 
+    {{<info>}}
+**NOTE:** If you do not specify the value of the `retain` field, Portworx will use the following default values:
+
+| Policy | Default value |
+|:---:|:---:|
+| Interval | 10 |
+| Daily | 30 |
+| Weekly | 7 |
+| Monthly | 12 |
+    {{</info>}}
+
+
 2. Create an ApplicationBackupSchedule YAML file, specifying the following:
 
   * **name:** the applicationBackupSchedule object's name
