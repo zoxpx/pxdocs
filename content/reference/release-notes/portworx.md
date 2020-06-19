@@ -6,6 +6,20 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.5.2.1
+
+June 19, 2020
+
+## Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-13655 | When Portworx went down or restarted, it created detailed logs. On some systems, this operation could take a long time and potentially hang.<br/><br/>**User impact:** Log collection could become unresponsive as a result of this log dump. <br/><br/>**Resolution:** Unnecessary logs were removed, eliminating the possibility for log collection to hang. |
+| PWX-13777 | The Portworx pod previously passed unnecessary environment variables to the Portworx service, which sometimes caused it to restart more than it needed to. <br/><br/> **User impact:** When the Kubernetes environment changed, users may have experienced storage interruptions due to these restarts. <br/><br/> **Resolution:** The Portworx pod now passes fewer environment variables to the Portworx service, greatly reducing restarts. |
+
+
 ## 2.3.1.3
 
 June 13, 2020
