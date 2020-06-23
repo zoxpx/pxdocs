@@ -84,8 +84,7 @@ Portworx security is composed of three models:
 ### Authentication
 Portworx will determine the validity of a user through a token-based model. The token will be created by the TA and will contain information about the user in the _claims_ section. When Portworx receives a request from the user, it will check the token validity by verifying its signature, using either a shared secret or public key provided during configuration.
 
-### Authorization
-Once the token has been determined to be valid, Portworx then checks if the user is authorized to make the request. The _roles_ claim in the token must contain the name of an existing default or customer registered role in the Portworx system. A role is the name given to a set of RBAC rules which enable access to certain SDK calls. Custom roles can be created using `pxctl` or through the [OpenStorage SDK](https://libopenstorage.github.io/w/release-6.3.generated-api.html#serviceopenstorageapiopenstoragerole).
+Once the token has been determined to be valid, Portworx then checks if the user is authorized to make the request. The _roles_ claim in the token must contain the name of an existing default or customer registered role in the Portworx system. A role is the name given to a set of RBAC rules which enable access to certain SDK calls. Custom roles can be created using `pxctl` or through the [OpenStorage SDK](https://libopenstorage.github.io/w/release-6.4.generated-api.html#serviceopenstorageapiopenstoragerole).
 
 See also [Role management using pxctl](/reference/cli/role)
 
