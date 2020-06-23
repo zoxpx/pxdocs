@@ -7,6 +7,7 @@ noicon: true
 series: k8s-op-maintain
 ---
 
+<!-- 
 ## Reset your administrator password
 
 You can reset the administrator password you specified during installation by downloading and running a reset script:
@@ -22,6 +23,7 @@ You can reset the administrator password you specified during installation by do
     ```text
     ./px-central-password-reset.sh --admin-password myNewPassword
     ```
+-->
 
 ## Uninstall PX-Central on-premises
 
@@ -34,7 +36,7 @@ Uninstall PX-Central by downloading and running a script which cleans up both Po
 1. Download and the PX-Central install script:
 
     ```text
-    curl -o px-central-cleanup.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.1/cleanup.sh'
+    curl -o px-central-cleanup.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.3/cleanup.sh'
     ```
 
 2. Run the script to clean up Portworx and PX-Central:

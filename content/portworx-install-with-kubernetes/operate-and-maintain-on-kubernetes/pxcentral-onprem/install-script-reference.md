@@ -4,6 +4,7 @@ weight: 6
 keywords: Install, PX-Central, On-prem, license, GUI, k8s
 description: See the options available for the PX-Central install script.
 noicon: true
+hidden: true
 ---
 
  ```text

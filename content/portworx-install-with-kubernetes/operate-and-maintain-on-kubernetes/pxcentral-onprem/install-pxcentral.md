@@ -9,23 +9,23 @@ series: k8s-op-maintain
 
 ## Prerequisites
 
-A dedicated Kubernetes cluster consisting of the following:
+* A Kubernetes cluster consisting of the following:
 
-* 3 worker nodes
-* 50GB available `/root` disk size
-* 4 CPU cores
-* 8GB of memory
-* A minimum of 1 disk with 100 GB, ideally 2 disks on each node with at least 100 GB each
+    * 3 worker nodes
+    * 50GB available `/root` disk size
+    * 4 CPU cores
+    * 8GB of memory
+    * A minimum of 1 disk with 100 GB, ideally 2 disks on each node with at least 100 GB each
+* For internet-connected clusters, the following ports must be open:
 
-For internet-connected clusters, the following ports must be open:
-
-| Port | Component | Purpose | Incoming/Outgoing |
-| :---: |:---:|:---:|:---:|
-| 31234 | PX-Central | Access from outside | Incoming |
-| 31241 | PX-Central-Keycloak | Access user auth token | Incoming | 
-| 31240 | PX-Central | Metrics store endpoint | Outgoing |
-| 7070 | License server | License validation | Outgoing |
-
+    | Port | Component | Purpose | Incoming/Outgoing |
+    | :---: |:---:|:---:|:---:|
+    | 31234 | PX-Central | Access from outside | Incoming |
+    | 31241 | PX-Central-Keycloak | Access user auth token | Incoming | 
+    | 31240 | PX-Central | Metrics store endpoint | Outgoing |
+    | 7070 | License server | License validation | Outgoing |
+* You must have [jq](https://stedolan.github.io/jq/) installed on the node where you will run the `install.sh` script
+* Only GKE clusters provisioned on Ubuntu Node Images support Portworx. You must specify the Ubuntu node image when you create clusters.
 
 {{<info>}}
 **NOTE:** 
@@ -38,68 +38,75 @@ For internet-connected clusters, the following ports must be open:
 
 If your cluster is internet-connected, skip this section. If your cluster is air-gapped, you must pull the Portworx license server and related Docker images to either your docker registry, or your server.
 
-Pull the following required docker images onto your air-gapped environment:
+1. Run the following command to create an environment variable called `kube_version` and assign your Kubernetes version to it:
 
-* portworx/pxcentral-onprem-ui-backend:1.1.1
-* portworx/pxcentral-onprem-ui-frontend:1.1.1
-* portworx/pxcentral-onprem-ui-lhbackend:1.1.1
-* portworx/pxcentral-onprem-els-ha-setup:1.0.1
-* portworx/pxcentral-onprem-post-setup:1.0.1
-* portworx/pxcentral-onprem-pre-setup:1.0.1
-* portworx/pxcentral-onprem-operator:1.0.2
-* portworx/pxcentral-onprem-api:1.0.2
-* portworx/px-els:1.0.0
-* portworx/px-backup:1.0.1
-* docker.io/bitnami/etcd:3.4.7-debian-10-r14
-* quay.io/coreos/etcd:latest
-* pwxbuild/pxc-macaddress-config:1.0.1
-* pwxbuild/px-forwarding-proxy:1.0.0
-* portworx/px-operator:1.3.1
-* portworx/px-dev:2.5.0
-* openstorage/stork:2.4.0
-* docker.io/bitnami/postgresql:11.7.0-debian-10-r9
-* busybox:1.31
-* jboss/keycloak:9.0.2
-* pwxbuild/keycloak-login-theme:1.0.0
-* quay.io/cortexproject/cortex:v0.4.0
-* cassandra:3.0
-* postgres:9.6
-* nginx:1.17.8
-* consul:0.7.1
-* memcached:1.4.25
-* pwxbuild/go-dnsmasq:release-1.0.7
-* quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1
-* quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.31.1
-* jettech/kube-webhook-certgen:v1.2.0
-* mysql:5.7.22
-* grafana/grafana:6.5.2
-* k8s.gcr.io/pause:3.1
-* portworx/px-node-wiper:2.1.4
-* portworx/oci-monitor:2.5.0
-* quay.io/coreos/configmap-reload:v0.0.1
-* quay.io/prometheus/prometheus:v2.7.1
-* quay.io/coreos/prometheus-config-reloader:v0.35.0
-* quay.io/coreos/prometheus-config-reloader:v0.34.0
-* quay.io/coreos/prometheus-operator:v0.35.0
-* quay.io/coreos/prometheus-operator:v0.34.0
-* gcr.io/google_containers/kube-scheduler-amd64:v1.16.7
+    ```
+    kube_version=`kubectl version --short | awk -Fv '/Server Version: / {print $3}'`
+    ```
 
-How you pull the Portworx license server and associated images depends on your air-gapped cluster configuration:
+2. Pull the following required docker images onto your air-gapped environment:
 
-  * If you have a company-wide docker-registry server, pull the Portworx license server from Portworx:
+    * portworx/pxcentral-onprem-ui-backend:1.1.1
+    * portworx/pxcentral-onprem-ui-frontend:1.1.1
+    * portworx/pxcentral-onprem-ui-lhbackend:1.1.1
+    * portworx/pxcentral-onprem-els-ha-setup:1.0.1
+    * portworx/pxcentral-onprem-post-setup:1.0.1
+    * portworx/pxcentral-onprem-pre-setup:1.0.1
+    * portworx/pxcentral-onprem-operator:1.0.2
+    * portworx/pxcentral-onprem-api:1.0.2
+    * portworx/px-els:1.0.0
+    * portworx/px-backup:1.0.1
+    * docker.io/bitnami/etcd:3.4.7-debian-10-r14
+    * quay.io/coreos/etcd:latest
+    * pwxbuild/pxc-macaddress-config:1.0.1
+    * pwxbuild/px-forwarding-proxy:1.0.0
+    * portworx/px-operator:1.3.1
+    * portworx/px-dev:2.5.0
+    * openstorage/stork:2.4.0
+    * docker.io/bitnami/postgresql:11.7.0-debian-10-r9
+    * busybox:1.31
+    * jboss/keycloak:9.0.2
+    * pwxbuild/keycloak-login-theme:1.0.0
+    * quay.io/cortexproject/cortex:v0.4.0
+    * cassandra:3.0
+    * postgres:9.6
+    * nginx:1.17.8
+    * consul:0.7.1
+    * memcached:1.4.25
+    * pwxbuild/go-dnsmasq:release-1.0.7
+    * quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1
+    * quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.31.1
+    * jettech/kube-webhook-certgen:v1.2.0
+    * mysql:5.7.22
+    * grafana/grafana:6.5.2
+    * k8s.gcr.io/pause:3.1
+    * portworx/px-node-wiper:2.1.4
+    * portworx/oci-monitor:2.5.0
+    * quay.io/coreos/configmap-reload:v0.0.1
+    * quay.io/prometheus/prometheus:v2.7.1
+    * quay.io/coreos/prometheus-config-reloader:v0.35.0
+    * quay.io/coreos/prometheus-config-reloader:v0.34.0
+    * quay.io/coreos/prometheus-operator:v0.35.0
+    * quay.io/coreos/prometheus-operator:v0.34.0
+    * gcr.io/google_containers/kube-scheduler-amd64:$kube_version
+    * gcr.io/google_containers/kube-controller-manager-amd64:$kube_version
 
-       ```text
-       sudo docker pull <required-docker-images>
-       sudo docker tag <required-docker-images> <company-registry-hostname>:5000<path-to-required-docker-images>
-       sudo docker push <company-registry-hostname>:5000<path-to-required-docker-images>
-       ```
+3. Pull the Portworx license server and associated images. How you do this depends on your air-gapped cluster configuration:
 
-  * If you do not have a company-wide docker-registry server, pull the Portworx license server from portworx onto a computer that can access the internet and send it to your air-gapped cluster. The following example sends the docker image to the air-gapped cluster over ssh:
+    * If you have a company-wide docker-registry server, pull the Portworx license server from Portworx:
 
-      ```text
-      sudo docker pull <required-docker-images>
-      sudo docker save <required-docker-images> | ssh root@<air-gapped-address> docker load
-      ```
+        ```text
+        sudo docker pull <required-docker-images>
+        sudo docker tag <required-docker-images> <company-registry-hostname>:5000<path-to-required-docker-images>
+        sudo docker push <company-registry-hostname>:5000<path-to-required-docker-images>
+        ```
+
+    * If you do not have a company-wide docker-registry server, pull the Portworx license server from portworx onto a computer that can access the internet and send it to your air-gapped cluster. The following example sends the docker image to the air-gapped cluster over ssh:
+
+        ```text
+        sudo docker pull <required-docker-images>
+        sudo docker save <required-docker-images> | ssh root@<air-gapped-address> docker load
+        ```
 
 ## Save your cloud credentials in a Kubernetes secret (Optional)
 
@@ -137,7 +144,16 @@ Create a Kubnernetes secret, save the name and namespace in which it's located f
     ```
 
     {{<info>}}
-**NOTE:**  PX-Central is installed with PX-Backup.
+**NOTE:**  
+
+* PX-Central is installed with PX-Backup.
+* If you're using your Kubernetes master IP as the Keycloak endpoint, you must run the following command on all worker nodes:
+
+    ```text
+    `sudo iptables -P FORWARD ACCEPT`
+    ```
+
+    This enables port forwarding using `iptables`, making the `NodePort` service accessible through the master endpoint.
     {{</info>}}
 
 ## Configure external OIDC endpoints

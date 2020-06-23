@@ -35,7 +35,7 @@ series: k8s-op-maintain
 * Upgrade the current running PX-Central verision to a specific release:
 
     ```text
-    ./upgrade.sh --pxcentral-upgrade-version 1.0.2
+    ./upgrade.sh --pxcentral-upgrade-version 1.0.3
     ```
 
 * Specify the Kubeconfig if it is not in the default directory:
