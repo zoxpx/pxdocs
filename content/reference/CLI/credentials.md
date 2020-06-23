@@ -17,7 +17,7 @@ The cloud provider credentials are stored in an external secret store. Before yo
 
 You can use the `pxctl credentials` command to create, list, validate, or delete your cloud credentials. Then, Portworx will use these credentials, for example, to back up your volumes to the cloud.
 
-To get a glimpse of the available commands, run:
+Enter the `pxctl credentials --help` command to display the list of subcommands:
 
 ```text
 /opt/pwx/bin/pxctl credentials --help
@@ -78,17 +78,25 @@ ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
 
 You can create and configure credentials in multiple ways depending on your cloud provider and how you want to manage them.
 
-### Create credentials on AWS by passing keys in the create command
+### Create credentials on AWS by specifying your keys
 
-You can create and configure your credentials for AWS by passing your secret access key and access key ID in the `pxctl credentials create` command:
+Enter the `pxctl credentials create` command, specifying:
+
+* The `--provider` flag with the name of the cloud provider (`s3`).
+* The `--s3-access-key` flag with your secret access key
+* The `s3-secret-key` flag with your access key ID
+* The `s3-region` flag with the name of the S3 region (`us-east-1`)
+* The `--s3-endpoint` flag with the  name of the endpoint (`s3.amazonaws.com`)
+* The name of your cloud credentials
 
 ```text
 pxctl credentials create \
   --provider s3 \
-  --s3-access-key ***** \
-  --s3-secret-key ***** \
+  --s3-access-key <YOUR-SECRET-ACCESS-KEY>
+  --s3-secret-key <YOUR-ACCESS-KEY-ID> \
   --s3-region us-east-1 \
-  --s3-endpoint s3.amazonaws.com
+  --s3-endpoint s3.amazonaws.com \
+  <NAME>
 ```
 
 ```output
