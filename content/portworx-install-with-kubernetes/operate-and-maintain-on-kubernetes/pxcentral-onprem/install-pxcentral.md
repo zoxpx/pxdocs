@@ -25,7 +25,7 @@ series: k8s-op-maintain
     | 31240 | PX-Central | Metrics store endpoint | Outgoing |
     | 7070 | License server | License validation | Outgoing |
 * You must have [jq](https://stedolan.github.io/jq/) installed on the node where you will run the `install.sh` script
-* Only GKE clusters provisioned on Ubuntu Node Images support Portworx. You must specify the Ubuntu node image when you create clusters.
+* For GKE clusters, only Ubuntu OS is supported.
 
 {{<info>}}
 **NOTE:** 
