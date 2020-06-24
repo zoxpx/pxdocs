@@ -6,11 +6,37 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.5.3
+
+June 24, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-13437 | Cloudsnaps now allow for `STANDARD_IA` as the storage class for cloudsnap objects with AWS `-s3`. The storage class can be specified while creating credentials. |
+| PWX-13806 | Added support for cloud snaps on Azure government cloud. To enable this, set the enironmement variable `AZURE_ENVIRONMENT` to `AzureUsGovernmentCloud`. |
+|PWX-10207|You can now override a volume's group field using pxctl: <br/><br/> `pxctl volume update --group <GROUP> <VOL_NAME>`|
+| PWX-13375 | Portworx now accepts a new install argument `--node_pool_label` to determine which Kubernetes node labels to apply to CloudDrive sets. Portworx will only attach those DriveSets to a node if the node label passed through `--node_pool_label` matches the label on the CloudDrive set. |
+|PWX-13510| Added a new runtime option `rt_opts kvdb_failover_timeout_in_mins` to configure kvdb offline node failover timeout. The default value is set to 3 minutes.|
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+|PWX-13542| PX running on vSphere using cloud drives fails to come up when it cannot find the path of the attached disk.<br/><br/>**User impact:** Portworx will fail to initialize on the node when it fails to find the device path of the attached disk. <br/><br/>**Resolution:** Portworx will now retry upto 2 minutes to find the path of the attached disk.|
+|PWX-9401| A [bug in Kubernetes 1.13.5 and lower](https://github.com/kubernetes/kubernetes/issues/76340) caused the Portworx volume driver to occasionally save annotations from one PVC into the parameters for another. <br/><br/>**User Impact:** Portworx may have created a PVC with a different group ID than the one set in its annotations. <br/><br/>**Resolution:** Portworx now uses the group value from the PVC annotation that's fetched at runtime from the Kubernetes API during volume creation to ensure the group ID doesn't change.|
+| PWX-13459 | When using Sharedv4 volumes, if the node where the volume was attached was powered down, daemonset pods on surviving nodes became stuck in the **terminating** state. <br/><br/> **User impact:** Users saw stuck **terminating** pods that Kubernetes was unable to recover. <br/><br/> **Resolution:** Pods now terminate properly. |
+
 ## 2.5.2.1
 
 June 19, 2020
 
-## Fixes
+### Fixes
 
 The following issues have been fixed:
 
@@ -24,7 +50,7 @@ The following issues have been fixed:
 
 June 13, 2020
 
-## Fixes
+### Fixes
 
 The following issues have been fixed:
 
@@ -47,7 +73,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 
 June 12, 2020
 
-## Fixes
+### Fixes
 
 The following issues have been fixed:
 
@@ -59,7 +85,7 @@ The following issues have been fixed:
 
 June 12, 2020
 
-## Fixes
+### Fixes
 
 The following issues have been fixed:
 
@@ -79,7 +105,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 
 June 05, 2020
 
-## Fixes
+### Fixes
 
 The following issues have been fixed:
 
