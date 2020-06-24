@@ -52,8 +52,8 @@ If your cluster is internet-connected, skip this section. If your cluster is air
     * portworx/pxcentral-onprem-els-ha-setup:1.0.1
     * portworx/pxcentral-onprem-post-setup:1.0.1
     * portworx/pxcentral-onprem-pre-setup:1.0.1
-    * portworx/pxcentral-onprem-operator:1.0.2
-    * portworx/pxcentral-onprem-api:1.0.2
+    * portworx/pxcentral-onprem-operator:1.0.3
+    * portworx/pxcentral-onprem-api:1.0.3
     * portworx/px-els:1.0.0
     * portworx/px-backup:1.0.1
     * docker.io/bitnami/etcd:3.4.7-debian-10-r14
