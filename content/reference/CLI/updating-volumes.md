@@ -14,38 +14,37 @@ sudo /opt/pwx/bin/pxctl volume update --help
 
 ```output
 Update volume settings
-
 Usage:
   pxctl volume update [flags]
-
 Examples:
 pxctl volume update [flags] volName
-
 Flags:
-  -l, --label string        list of comma-separated name=value pairs to update (use empty label value to remove label)
-      --shared string       set shared setting (Valid Values: [on off]) (default "off")
-      --sticky string       set sticky setting (Valid Values: [on off]) (default "off")
-      --journal string      Journal data for this volume (Valid Values: [on off]) (default "off")
-      --early_ack string    Reply to async write requests after it is copied to shared memory (Valid Values: [on off]) (default "off")
-      --async_io string     Enable async IO to backing storage (Valid Values: [on off]) (default "off")
-      --nodiscard string    Disable discard support for this volume (Valid Values: [on off]) (default "off")
-      --io_profile string   IO Profile (Valid Values: [sequential cms db db_remote sync_shared]) (default "sequential")
-      --sharedv4 string     set sharedv4 setting (Valid Values: [on off]) (default "off")
-      --queue_depth uint    block device queue depth (Valid Range: [1 256]) (default 128)
-      --scale uint          New scale factor (Valid Range: [1 1024]) (default 1)
-  -s, --size uint           New size for the volume (GiB) (default 1)
-  -h, --help                help for update
-
+      --async_io string         Enable async IO to backing storage (Valid Values: [on off]) (default "off")
+      --early_ack string        Reply to async write requests after it is copied to shared memory (Valid Values: [on off]) (default "off")
+      --export_options string   set export options
+  -g, --group string            Set/Reset the Group field on a Volume
+  -h, --help                    help for update
+      --io_profile string       IO Profile (Valid Values: [sequential cms db db_remote sync_shared auto]) (default "auto")
+      --journal string          Journal data for this volume (Valid Values: [on off]) (default "off")
+  -l, --label string            list of comma-separated name=value pairs to update (use empty label value to remove label)
+      --nodiscard string        Disable discard support for this volume (Valid Values: [on off]) (default "off")
+      --queue_depth uint        block device queue depth (Valid Range: [1 256]) (default 128)
+      --scale uint              New scale factor (Valid Range: [1 1024]) (default 1)
+      --shared string           set shared setting (Valid Values: [on off]) (default "off")
+      --sharedv4 string         set sharedv4 setting (Valid Values: [on off]) (default "off")
+  -s, --size uint               New size for the volume (GiB) (default 1)
+      --sticky string           set sticky setting (Valid Values: [on off]) (default "off")
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 ## Sharing and unsharing volumes
@@ -415,3 +414,16 @@ Here is the output of `pxctl alerts show --type volume`:
 25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
 26	970758537931791410	Feb 26 22:58:17 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated
 ```
+
+## Update a volume's group ID
+
+To update or a new group ID to a volume, enter the `pxctl volume update` command with the `--group` option and the new group name:
+
+```text
+pxctl volume update --group <groupName> <volumeName>
+```
+```output
+Update Volume: Volume update successful for volume exampleVolume
+Warning: Updating group field will not affect the replica placement of already provisioned volumes.
+```
+
