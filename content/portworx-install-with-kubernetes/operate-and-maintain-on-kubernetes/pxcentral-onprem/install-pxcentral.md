@@ -9,7 +9,7 @@ series: k8s-op-maintain
 
 ## Prerequisites
 
-* A Kubernetes cluster consisting of the following:
+* Any Kubernetes cluster consisting of the following:
 
     * 3 worker nodes
     * 50GB available `/root` disk size
