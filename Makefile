@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 BUILDER_IMAGE?=pxdocs:developer
 SEARCH_INDEX_IMAGE?=pxdocs-search-index:developer
 DEPLOYMENT_IMAGE?=pxdocs-deployment:developer
@@ -53,7 +54,7 @@ develop: image
 
 .PHONY: publish-docker
 publish-docker:
-	docker run --rm \
+	source ./export-product-url.sh && docker run --rm \
 		--name pxdocs-publish \
 		-e VERSIONS_ALL \
 		-e VERSIONS_CURRENT \
@@ -62,6 +63,7 @@ publish-docker:
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
+		-e PRODUCT_URL \
 		-e PRODUCT_NAME \
 		-v "$(PWD):/pxdocs" \
 		$(BUILDER_IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
