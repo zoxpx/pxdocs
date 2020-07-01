@@ -80,13 +80,18 @@ You can create and configure credentials in multiple ways depending on your clou
 
 ### Create credentials on AWS by specifying your keys
 
+{{<info>}}
+**NOTE:** The `--s3-storage-class` flag requires PX-Enterprise version 2.5.3 or higher
+{{</info>}}
+
 Enter the `pxctl credentials create` command, specifying:
 
 * The `--provider` flag with the name of the cloud provider (`s3`).
 * The `--s3-access-key` flag with your secret access key
-* The `s3-secret-key` flag with your access key ID
-* The `s3-region` flag with the name of the S3 region (`us-east-1`)
+* The `--s3-secret-key` flag with your access key ID
+* The `--s3-region` flag with the name of the S3 region (`us-east-1`)
 * The `--s3-endpoint` flag with the  name of the endpoint (`s3.amazonaws.com`)
+* The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
 * The name of your cloud credentials
 
 ```text
@@ -96,6 +101,7 @@ pxctl credentials create \
   --s3-secret-key <YOUR-ACCESS-KEY-ID> \
   --s3-region us-east-1 \
   --s3-endpoint s3.amazonaws.com \
+  --s3-storage-class STANDARD \
   <NAME>
 ```
 
@@ -106,11 +112,11 @@ Credentials created successfully
 {{<info>}}
 **Note:** This command will create a bucket with the Portworx cluster ID to use for the backups.
 {{</info>}}
-
+<!-- 
 ### Create credentials on AWS by storing keys as environment variables
 
 {{<info>}}
-**NOTE:** This feature requires PX-Enterprise versions 2.5.1 or greater
+**NOTE:** This feature requires PX-Enterprise version 2.5.1 or higher
 {{</info>}}
 
 You can create and configure credentials for AWS by storing your secret access key and access key ID as environment variables. When you run the `pxctl credentials create`, Portworx uses the environment variables to create the credential:
@@ -121,17 +127,28 @@ You can create and configure credentials for AWS by storing your secret access k
     AWS_SECRET_ACCESS_KEY=xxx
     AWS_ACCESS_KEY_ID=yyy
     ```
-2. Enter the `pxctl credentials create` command:
+2. Enter the `pxctl credentials create` command, specifying:
+
+    * The `--provider` flag with the name of the cloud provider (`s3`).
+    * The `--s3-region` flag with the name of the S3 region (`us-east-1`)
+    * The `--s3-endpoint` flag with the name of the endpoint (`s3.amazonaws.com`)
+    * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+    * The `use-iam` flag
+    * The name of your cloud credentials
 
     ```text
     ./pxctl credentials create \
     --provider s3 \
     --s3-region us-east-1 \
-    --use-iam s3cred
+    --s3-endpoint s3.amazonaws.com \
+    --s3-storage-class STANDARD \
+    --use-iam \
+    <NAME>
     ```
     ```output
     Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
-    ```
+    ``` 
+    -->
 
 ### Create credentials on AWS using IAM
 
@@ -168,10 +185,21 @@ Instead of storing your secret access key and access key ID on the host, you can
     ```
 
 
-2. Enter the following pxctl credentials create command, specifying the S3 region for the account:
+2. Enter the following pxctl credentials create command, specifying the following:
+
+    * The `--provider` flag with the name of the cloud provider (`s3`).
+    * The `--s3-region` flag with the the S3 region associated with your account
+    * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+    * The `use-iam` flag
+    * The name of your cloud credentials
 
     ```text
-    ./pxctl credentials create --provider s3 --s3-region us-east-1 --use-iam <s3-credentials>
+    ./pxctl credentials create \
+    --provider s3 \
+    --s3-region us-east-1 \
+    --s3-storage-class STANDARD \
+    --use-iam \
+    <NAME>
     ```
     ```output
     Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
@@ -207,10 +235,23 @@ Instead of storing your secret access key and access key ID on the host, you can
     }
     ```
 
-2. Enter the following pxctl credentials create command, specifying the bucket's S3 region and bucket name:
+2. Enter the following pxctl credentials create command, specifying the following:
+
+    * The `--provider` flag with the name of the cloud provider (`s3`)
+    * The `--s3-region` flag with your bucket's s3 region
+    * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+    * The `--bucket` flag with your bucket's name
+    * The `use-iam` flag 
+    * The name of your cloud credentials
 
     ```text
-    ./pxctl credentials create --provider s3 --s3-region <region> --use-iam --bucket <bucket-name> <s3-credentials>
+    ./pxctl credentials create \
+    --provider s3 \
+    --s3-region <region> \
+    --s3-storage-class STANDARD \
+    --bucket <bucket-name> \
+    --use-iam \
+    <NAME>
     ```
     ```output
     Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
