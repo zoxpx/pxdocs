@@ -90,14 +90,17 @@ Aliases:
   create, c
 
 Examples:
-/opt/pwx/bin/pxctl credentials create [flags] <name>
-
+/opt/pwx/bin/pxctl cred create [flags] <name>
 Flags:
       --s3-disable-ssl
+      --use-iam                        Optional, use instance IAM for credentials, current support only for s3(ec2 IAM)
+      --disable-path-style             optional, required for virtual-host-style access
+      --use-proxy                      optional, currently supported for s3 only, requires cluster wide proxy(under cluster options)
       --provider string                Cloud provider type [s3, azure, google]
       --s3-access-key string
       --s3-secret-key string
       --s3-region string
+      --s3-storage-class string        Storage class type [STANDARD, STANDARD_IA]
       --bucket string                  Optional pre-created bucket name
       --azure-account-name string
       --azure-account-key string
@@ -105,8 +108,8 @@ Flags:
       --google-json-key-file string
       --encryption-passphrase string   Passphrase to be used for encrypting data in the cloudsnaps
       --s3-endpoint strings            Endpoint of the S3 servers, in comma separated host:port format
-  -h, --help                           help for create
-
+  -h, --help        
+                     help for create
 Global Flags:
       --ca string        path to root certificate for ssl usage
       --cert string      path to client certificate for ssl usage
@@ -152,12 +155,12 @@ If you are using _AWS_, Portworx creates a bucket (`ID` same as the cluster `UUI
 
 If you prefer that a user-specified bucket be used for cloudsnaps, specify the bucket id with the `--bucket` option while creating the credentials.
 
-##### With a user-specified bucket (applicable only from 1.5.0 onwards)
+##### With a user-specified bucket
 
 Say you are using `us-east-1 region`. If so, you should type something like the following:
 
 ```text
-pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com --bucket bucket-id my-s3-cred
+pxctl credentials create --provider s3  --s3-access-key <AccessKey> --s3-secret-key <secretKey> --s3-region us-east-1 --s3-endpoint s3.amazonaws.com --bucket bucket-id my-s3-cred
 ```
 
 If you are using a different region, replace the `--s3-region` and `--s3-endpoint` parameters with the appropriate values. For more information about region-specific endpoints, check out the "Amazon Simple Storage Service (Amazon S3)" section on [this page](https://docs.aws.amazon.com/general/latest/gr/rande.html).

@@ -23,15 +23,16 @@ The options you use to create your object store credentials differ based on whic
 
 Create the credentials by entering the `pxctl credentials create` command, specifying the following:
 
-  * `--provider` as `s3`
-  * `--s3-access-key` with your aws access key
-  * `--s3-secret-key` with your aws secret key
-  * `--s3-region` with your region
-  * `--s3-endpoint` with `s3.amazonaws.com`
-  * `clusterPair_` with the UUID of your destination cluster
+* The `--provider` flag with the name of the cloud provider (`s3`).
+* The `--s3-access-key` flag with your secret access key
+* The `--s3-secret-key` flag with your access key ID
+* The `--s3-region` flag with the name of the S3 region (`us-east-1`)
+* The `--s3-endpoint` flag with the  name of the endpoint (`s3.amazonaws.com`)
+* The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+* `clusterPair_` with the UUID of your destination cluster
 
 ```text
-/opt/pwx/bin/pxctl credentials create --provider s3 --s3-access-key <aws_access_key> --s3-secret-key <aws_secret_key> --s3-region us-east-1  --s3-endpoint s3.amazonaws.com clusterPair_<UUID_of_destination_cluster>
+/opt/pwx/bin/pxctl credentials create --provider s3 --s3-access-key <aws_access_key> --s3-secret-key <aws_secret_key> --s3-region us-east-1  --s3-endpoint s3.amazonaws.com --s3-storage-class STANDARD clusterPair_<UUID_of_destination_cluster>
 ```
 
 #### Create Microsoft Azure credentials
