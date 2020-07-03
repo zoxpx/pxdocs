@@ -84,6 +84,17 @@ If you're using this method, specify `Image Pull Policy` as **IfNotPresent** on 
 
 ## Step 3: Install Portworx
 
-Once you have loaded the Portworx images into your registry or nodes, continue with the standard installation procedure.
+Once you have loaded the Portworx images into your registry or nodes, you're ready to create an install spec using the spec generator. Determine whether you need to specify the `PX_HTTP_PROXY` environment variable during installation:
+
+### Step 3a: Specify the PX_HTTP_PROXY environment variable
+
+SharedV4 volumes require that your host run dependent services. If your host does not already have dependent services installed, Portworx will attempt to install them automatically. However, installation may fail if the hosts are not configured properly. For example: if your host is air-gapped and does not have dependent packages on intranet-accessible package repositories, or doesn't have package management configured to use the HTTP proxy server.
+
+If your air-gapped environment doesn't have a system-wide HTTP proxy, specify the  `PX_HTTP_PROXY=...` variable in the environment variables tab of the spec generator to define the HTTP proxy for Portworx installation, including the automated installation of NFS service on the host.
+
+### Step 3b: Create an install spec
+Using the Portworx [spec generator](https://central.portworx.com/specGen/home), create an install spec, making sure to enable sharedV4 support and specify the `PX_HTTP_PROXY` environment variable if you need to.
+
+Refer to the following installation topics for more installation information:
 
 {{<homelist series2="k8s-airgapped">}}
