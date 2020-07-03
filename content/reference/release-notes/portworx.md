@@ -6,6 +6,20 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.5.4
+
+July 2, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-14106 | Added support for a new environment variable: `PX_HTTP_PROXY`. This allows you to specify an HTTP proxy during Portworx installation, permitting sharedv4 volumes and package installation to work properly on air-gapped environments that lacked their own system-wide HTTP proxy. |
+| PWX-14186 | Optimized the timeouts on misconfigured air-gapped systems, so after the first failure to install NFS services, Portworx will refrain from attempting to install NFS services again for a period of 10 minutes. |
+| PWX-13011 | Reduced Portworx install/upgrade times on air-gapped environments that drop the outbound network traffic (i.e. where "curl portworx.com" command would hang). |
+
 ## 2.5.3
 
 June 24, 2020
