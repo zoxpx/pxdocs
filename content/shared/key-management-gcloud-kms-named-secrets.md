@@ -5,10 +5,6 @@ description: Shared content for all gcloud - named secrets
 hidden: true
 ---
 
-
-hidden: true
----
-
 Use the following CLI command to create a new secret in Google Cloud KMS and provide it an identifier/name:
 
 ```text

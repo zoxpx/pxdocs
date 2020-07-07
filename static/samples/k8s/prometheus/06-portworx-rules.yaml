@@ -107,7 +107,7 @@ data:
             more than 5 minutes.'
           summary: Portworx cluster member(s) is(are) down.
       - alert: PortworxLicenseLeaseExpired
-        expr: px_alerts_license_lease_has_expired_total > 0
+        expr: px_alerts_licenseleaseexpired_total > 0
         labels:
           issue: Portworx license lease has expired.
           severity: critical
@@ -123,7 +123,7 @@ data:
             description: 'Portworx instance {{$labels.instance}} is not able to reach the license server.'
             summary: 'Portworx license server is unreachable. Please check license server health and connection to license server.'
         - alert: PortworxLicenseLeaseExpiring
-          expr: px_alerts_license_leases_expiring_total > 0
+          expr: px_alerts_licenseleaseexpiring_total > 0
           labels:
             issue: Portworx license lease is expiring
             severity: critical
@@ -138,3 +138,11 @@ data:
           annotations:
             description: 'Error getting Portworx license on {{$labels.instance}}. Please check licenses on license server.'
             summary: 'Failed to acquire Portworx license on {{$labels.instance}}.'
+        - alert: PXBackupError
+          expr: px_backup_stats_status == 2
+          labels: 
+            issue: 'Cloudsnap backup error'
+            severity: warning
+          annotations:
+            description: 'Failed to take backup for volume {{$labels.volumename}} with error {{$labels.error_string}}.'
+            summary: 'Failed to take backup for volume {{$labels.volumename}}.'

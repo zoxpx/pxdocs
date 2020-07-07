@@ -65,3 +65,29 @@ To allow external clients to access the etcd cluster, we will copy out the certs
 bosh scp etcd/087aca88-83ab-4d6a-9889-631f861c1032:/var/vcap/jobs/etcd/config/etcd* etcd-certs/
 ls etcd-certs/
 ```
+
+### 4. Create a Kubernetes secret with the certs
+
+After the above steps, you should have all the etcd certs in the *etcd-certs* directory. These need to put in a Kubernetes secret so that Portworx can consume it.
+
+```text
+kubectl -n kube-system create secret generic px-kvdb-auth --from-file=etcd-certs/
+kubectl -n kube-system describe secret px-kvdb-auth
+```
+
+This should output the below and shows the etcd certs are present in the secret.
+
+```text
+Name:         px-kvdb-auth
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+etcd-ca.crt:      1679 bytes
+etcd.crt:  1680 bytes
+etcd.key:  414  bytes
+```

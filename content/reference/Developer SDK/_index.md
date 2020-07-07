@@ -24,5 +24,6 @@ The following table shows the OpenStorage SDK version released in each version o
 | v1.6.x, v1.7.x | [v0.9.x](https://libopenstorage.github.io/w/reference.html) |
 | 2.0.x | [v0.22.x](https://libopenstorage.github.io/w/reference.html) |
 | 2.1.x, 2.2.x, 2.3.x, 2.4.x | [v0.42.x](https://libopenstorage.github.io/w/reference.html) |
+| 2.5.x | [v0.42.24](https://libopenstorage.github.io/w/reference.html) |
 
 You may need to match the version of the OpenStorage SDK Client version.

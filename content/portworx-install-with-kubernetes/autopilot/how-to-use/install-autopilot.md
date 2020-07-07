@@ -24,7 +24,7 @@ NAME         TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)          AGE
 prometheus   LoadBalancer   10.0.201.44   52.175.223.52   9090:30613/TCP   11d
 ```
 
-In the example above, `http://prometheus:9090` becomes the Prometheus endpoint. Portworx uses this endpoint in the [Autopilot Configuration](#autopilot-configuration) section.
+In the example above, `http://prometheus:9090` becomes the Prometheus endpoint. Portworx uses this endpoint in the [Autopilot Configuration](/reference/crd/storage-cluster/#autopilot-configuration) section.
 
 
 {{<info>}}*Why `http://prometheus:9090`* ?
@@ -57,125 +57,15 @@ This ConfigMap serves as a configuration for Autopilot.
 
 ### Installing Autopilot
 
-To install Autopilot, apply the following YAML in your cluster:
-
-```text
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: autopilot-account
-  namespace: kube-system
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-   name: autopilot-role
-rules:
-  - apiGroups: ["*"]
-    resources: ["*"]
-    verbs: ["*"]
----
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: autopilot-role-binding
-subjects:
-- kind: ServiceAccount
-  name: autopilot-account
-  namespace: kube-system
-roleRef:
-  kind: ClusterRole
-  name: autopilot-role
-  apiGroup: rbac.authorization.k8s.io
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  annotations:
-    scheduler.alpha.kubernetes.io/critical-pod: ""
-  labels:
-    tier: control-plane
-  name: autopilot
-  namespace: kube-system
-spec:
-  selector:
-    matchLabels:
-      tier: control-plane
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
-  replicas: 1
-  template:
-    metadata:
-      annotations:
-        scheduler.alpha.kubernetes.io/critical-pod: ""
-      labels:
-        name: autopilot
-        tier: control-plane
-    spec:
-      containers:
-      - command:
-        - /autopilot
-        - -f
-        - ./etc/config/config.yaml
-        - -log-level
-        - debug
-        imagePullPolicy: Always
-        image: portworx/autopilot:1.2.0
-        resources:
-          requests:
-            cpu: '0.1'
-        securityContext:
-          privileged: false
-        name: autopilot
-        volumeMounts:
-        - name: config-volume
-          mountPath: /etc/config
-      hostPID: false
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: "name"
-                    operator: In
-                    values:
-                    - autopilot
-              topologyKey: "kubernetes.io/hostname"
-      serviceAccountName: autopilot-account
-      volumes:
-        - name: config-volume
-          configMap:
-            name: autopilot-config
-            items:
-            - key: config.yaml
-              path: config.yaml
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: autopilot
-  namespace: kube-system
-  labels:
-    name: autopilot-service
-spec:
-  ports:
-    - name: autopilot
-      protocol: TCP
-      port: 9628
-  selector:
-    name: autopilot
-    tier: control-plane
-```
+To install Autopilot, fetch the Autopilot manifest from the Portworx spec generator by clicking [here](https://install.portworx.com/?comp=autopilot)
+and apply it in your cluster.
 
 ## Upgrading Autopilot
 
 To upgrade Autopilot, change the image tag in the deployment with the `kubectl set image` command. The following example upgrades Autopilot to the 1.2.0 version:
 
 ```text
-kubectl set image deployment.v1.apps/autopilot -n kube-system autopilot=portworx/autopilot:1.2.0
+kubectl set image deployment.v1.apps/autopilot -n kube-system autopilot=portworx/autopilot:1.2.1
 ```
 ```output
 deployment.apps/autopilot image updated

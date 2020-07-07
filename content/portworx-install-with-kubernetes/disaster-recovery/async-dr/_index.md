@@ -6,7 +6,7 @@ description: How to achieve asynchronous DR across Kubernetes clusters using sch
 weight: 2
 ---
 
-## Pre-requisites
+## Prerequisites
 
 * **Version**: Portworx v2.1 or later needs to be installed on both clusters. Also requires Stork v2.2+ on both the clusters.
 * **Secret Store** : Make sure you have configured a [secret store](/key-management) on both your clusters. This will be used to store the credentials for the objectstore.
@@ -14,6 +14,8 @@ weight: 2
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
 {{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
 * **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
+* If the destination cluster runs on **GKE**, follow the steps in the [Kubemotion with Stork on GKE](/portworx-install-with-kubernetes/migration/kubemotion/gke/) page.
+* If the destination cluster runs on **EKS**, follow the steps in the [Kubemotion with Stork on EKS](/portworx-install-with-kubernetes/migration/kubemotion/eks/) page.
 
 ## Overview
 
@@ -267,7 +269,7 @@ mysqlmigrationschedule-weekly-2019-02-14-221351 1d
 Once the MigrationSchedule object is deleted, all the associated Migration objects should be deleted as well.
 
 
-## Related videos 
+## Related videos
 
 ### Set up cross-cloud application migration from Google Cloud to Microsoft Azure with Portworx on OpenShift 4.2
 

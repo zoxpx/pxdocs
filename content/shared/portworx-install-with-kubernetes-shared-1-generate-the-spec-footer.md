@@ -22,10 +22,3 @@ To install Portworx with Kubernetes, you must first generate Kubernetes manifest
     ![Screenshot showing Portworx license selector](/img/pxcentral-license.png)
 
 Portworx can also be installed using it's Helm chart by following instructions [here](/portworx-install-with-kubernetes/install-px-helm). The above method is recommended over helm as the wizard will guide you based on your environment.
-
-{{<info>}}
-**NOTE:** To deploy Portworx to an Azure Sovereign cloud, you must go to the **Customize** page and set the value of the `AZURE_ENVIRONMENT` variable. The following example screenshot shows how you can deploy Portworx to the Azure US Government cloud:
-
-![Screenshot showing the AZURE_ENVIRONMENT variable](/img/azure-sovereign-example.png)
-
-{{</info>}}

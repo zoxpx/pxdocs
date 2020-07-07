@@ -7,11 +7,11 @@ hidden: true
 disableprevnext: true
 ---
 
-{{<info>}}The deployment model on this page is still in alpha stage. If possible, users are recommendeded to use [Portworx install on PKS on vSphere using shared datastores](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-shared){{</info>}}
+{{<info>}}The deployment model on this page is still in alpha stage. If possible, users are recommendeded to use [Portworx install on PKS on vSphere using shared datastores](/portworx-install-with-kubernetes/on-premise/install-pks){{</info>}}
 
 ## Pre-requisites
 
-* This page assumes you have a running etcd cluster. If not, return to [Installing etcd on PKS](/portworx-install-with-kubernetes/on-premise/install-pks#install-etcd-pks).
+* This page assumes you have a running etcd cluster. If not, return to [Installing etcd on PKS](/portworx-install-with-kubernetes/on-premise/install-pks/#step-2-install-etcd).
 
 ## Architecture
 

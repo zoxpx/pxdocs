@@ -66,21 +66,22 @@ Before you can back up and restore a volume to a different Portworx cluster, you
 
 ### Create your cloud snapshot credentials on the source cluster
 
-The options you use to create your cloud snapshot credentials differ based on which secret store provider you use. This document uses AWS KMS.
+The options you use to create your cloud snapshot credentials differ based on which secret store provider you use. The steps in this document describe AWS KMS, but you can find instructions for creating other credentials in the [CLI reference](/reference/cli/credentials/#create-and-configure-credentials).
 
 1. Enter the `pxctl credentials create` command, specifying the following:
 
-   * The `--provider` flag with the type of the provider. Portworx supports the following providers: `s3`, `azure`, and `google`.
-   * The `--s3-access-key` flag with your access key.
-   * The `--s3-secret-key` flag with your secret key.
-   * The `--s3-region` with your region
-   * `--s3-endpoint` pointing to one of your endpoints.
-   * The name of your cloud snapshot credentials.
+      * The `--provider` flag with the name of the cloud provider (`s3`).
+      * The `--s3-access-key` flag with your secret access key
+      * The `--s3-secret-key` flag with your access key ID
+      * The `--s3-region` flag with the name of the S3 region (`us-east-1`)
+      * The `--s3-endpoint` flag with the  name of the endpoint (`s3.amazonaws.com`)
+      * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+      * The name of your cloud credentials
 
       Example:
 
       ```text
-      pxctl credentials create --provider s3 --s3-access-key <YOUR_ACCESS_KEY> --s3-secret-key <YOUR_SECRET_KEY> --s3-region us-east-1 --s3-endpoint <YOUR_ENDPOINT> <YOUR_SOURCE_S3_CRED>
+      pxctl credentials create --provider s3 --s3-access-key <YOUR_ACCESS_KEY> --s3-secret-key <YOUR_SECRET_KEY> --s3-region us-east-1 --s3-endpoint <YOUR_ENDPOINT> --s3-storage-class <YOUR_STORAGE_CLASS> <YOUR_SOURCE_S3_CRED>
       ```
 
       ```output
@@ -190,17 +191,18 @@ The options you use to create your cloud snapshot credentials differ based on wh
 
 1. Enter the `pxctl credentials create` command, specifying the following:
 
-   * The `--provider` flag with the type of the provider. Porworx supports the following providers: `s3`, `azure`, and `google`.
-   * The `--s3-access-key` flag with your access key.
-   * The `--s3-secret-key` flag with your secret key
-   * The `--s3-region` with your region
-   * `--s3-endpoint` pointing to one of your endpoints.
-   * The name of your cloud snapshot credentials.
+      * The `--provider` flag with the name of the cloud provider (`s3`).
+      * The `--s3-access-key` flag with your secret access key
+      * The `--s3-secret-key` flag with your access key ID
+      * The `--s3-region` flag with the name of the S3 region (`us-east-1`)
+      * The `--s3-endpoint` flag with the  name of the endpoint (`s3.amazonaws.com`)
+      * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+      * The name of your cloud credentials
 
       Example:
 
       ```text
-      pxctl credentials create --provider s3 --s3-access-key <YOUR_ACCESS_KEY> --s3-secret-key <YOUR_SECRET_KEY> --s3-region us-east-1 --s3-endpoint <YOUR_ENDPOINT> <YOUR_DEST_S3_CRED>
+      pxctl credentials create --provider s3 --s3-access-key <YOUR_ACCESS_KEY> --s3-secret-key <YOUR_SECRET_KEY> --s3-region us-east-1 --s3-endpoint <YOUR_ENDPOINT> --s3-storage-class <YOUR_STORAGE_CLASS> <YOUR_DEST_S3_CRED>
       ```
 
       ```output

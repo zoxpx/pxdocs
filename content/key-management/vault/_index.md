@@ -116,7 +116,7 @@ This method allows Portworx to authenticate with Vault using a Kubernetes servic
 
 ##### Step 1a: Create a ServiceAccount for vault auth delegation
 
-Run the following `kubectl create` commands to create a ServiceAccount and ClusterRoleBinding. This ServiceAccount and its associated token is used by Vault to authenticate requests from Portworx. Vault uses the [Kubernetes TokenReview API](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#tokenreview-v1-authentication-k8s-io).
+Run the following `kubectl create` commands to create a ServiceAccount and ClusterRoleBinding. This ServiceAccount and its associated token is used by Vault to authenticate requests from Portworx. Vault uses the [Kubernetes TokenReview API](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#tokenreview-v1-authentication-k8s-io).
 
 ```text
 kubectl create serviceaccount vault-auth -n kube-system
@@ -138,7 +138,7 @@ Enter the following `export` commands to get the Kubernetes ServiceAccount's JWT
 ```text
 export VAULT_SA_NAME=$(kubectl get sa vault-auth -n kube-system \
      -o jsonpath="{.secrets[*]['name']}")
-     
+
 export SA_JWT_TOKEN=$(kubectl get secret $VAULT_SA_NAME -n kube-system \
      -o jsonpath="{.data.token}" | base64 --decode; echo)
 

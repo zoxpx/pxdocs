@@ -7,7 +7,7 @@ keywords: portworx, PKS, kubernetes
 noicon: true
 ---
 
-## Step 1: PKS preparation
+## PKS preparation
 
 Before installing Portworx, let's ensure the PKS environment is prepared correctly.
 
@@ -64,48 +64,39 @@ Perform these steps on any machine where you have the bosh CLI.
 
     If you already have an existing Portworx cluster, you will need to recreate the VM instances using the bosh recreate command.
 
-## Step 2: Install Etcd
-
-Portworx uses a key-value store for it’s clustering metadata. There are couple of options here:
-
-### 2a: Install etcd your own way
-
-If you are planing to install Etcd your own way, you can skip this section and proceed to [Step 3: Installing Portworx](#install-px-pks).
-
-### 2b: Install using bosh CFCR etcd release
-
-Follow [Installing Etcd using CFCR etcd release](/portworx-install-with-kubernetes/on-premise/install-pks/install-cfcr-etcd-release) and return here once done.
-
-After the above steps, you should have all the etcd certs in the *etcd-certs* directory. These need to put in a Kubernetes secret so that Portworx can consume it.
-
-```text
-kubectl -n kube-system create secret generic px-kvdb-auth --from-file=etcd-certs/
-kubectl -n kube-system describe secret px-kvdb-auth
-```
-
-This should output the below and shows the etcd certs are present in the secret.
-
-```text
-Name:         px-kvdb-auth
-Namespace:    kube-system
-Labels:       <none>
-Annotations:  <none>
-
-Type:  Opaque
-
-Data
-====
-etcd-ca.crt:      1679 bytes
-etcd.crt:  1680 bytes
-etcd.key:  414  bytes
-```
-
-## Step 3: Installing Portworx
+## Installing Portworx
 
 For on-premise clusters, [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) supports VMware vSphere.
 
-Proceed to [Portworx install on PKS on vSphere using shared datastores](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-shared).
+### Architecture
 
-<!--
+{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-shared-arch.md" %}}
+
+### ESXi datastore preparation
+
+Create one or more shared datastore(s) or datastore cluster(s) which is dedicated for Portworx storage. Use a common prefix for the names of the datastores or datastore cluster(s). We will be giving this prefix during Portworx installation later in this guide.
+
+<!--### Generating the Portworx specs -->
+
+{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-install-common.md" %}}
+
+{{% content "portworx-install-with-kubernetes/on-premise/install-pks/vsphere-pks-generate-spec-internal-kvdb.md" %}}
+
+{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
+
+## Wipe Portworx installation
+
+Below are the steps to wipe your entire Portworx installation on PKS.
+
+1. Run cluster-scoped wipe: ```curl -fsL https://install.portworx.com/px-wipe | bash -s -- -T pks```
+2. Go to each virtual machine and delete the additional vmdks Portworx created in the shared datastore.
+
+
+<!-- commented as it's not supported
 If you have **local** datastores, proceed to [Portworx install on PKS on vSphere using local datastores](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-local).
 -->
+
+{{<info>}}
+**Install using bosh CFCR etcd release**:
+As Portworx ships with its own internal key-value store, deploying an external etcd should not be needed on PKS. If you are still prefer using bosh to deploy an external etcd, refer to [Installing Etcd using CFCR etcd release](/portworx-install-with-kubernetes/on-premise/install-pks/install-cfcr-etcd-release) and return here once done.
+{{</info>}}

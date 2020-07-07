@@ -1,6 +1,6 @@
 ---
-title: Deployment Architectures for Kubernetes-Based Stateful Applications 
-linkTitle: Deployment architectures 
+title: Deployment Architectures for Kubernetes-Based Stateful Applications
+linkTitle: Deployment architectures
 description: Understand various deployment architectures for Kubernetes-Based Stateful Applications
 keywords: Portworx, stateful applications, Kubernetes, k8s, deployment, architecture, HA, high-availability, DR, disaster recovery
 weight: 1
@@ -24,9 +24,9 @@ This section outlines the following architectures:
 {{<widelink url="/portworx-install-with-kubernetes/application-install-with-kubernetes/deployment-arch/single-dc#option-2-hyperconverged-portworx-storage-cluster" >}}Option 2- Hyperconverged Portworx storage cluster
 {{</widelink>}}
 
-## DR and multi-site HA architectures 
+## DR and multi-site HA architectures
 
-{{<widelink url="/portworx-install-with-kubernetes/application-install-with-kubernetes/deployment-arch/dr-and-multi-site#option-1-synchronous-dr-over-a-man-using-multiple-Kubernetes-clusters-with-a-single-portworx-stretch-cluster" >}}Option 1- Synchronous DR over a MAN using multiple Kubernetes clusters with a single Portworx stretch cluster
+{{<widelink url="/portworx-install-with-kubernetes/application-install-with-kubernetes/deployment-arch/dr-and-multi-site#option-1-synchronous-dr-over-a-man-using-multiple-kubernetes-clusters-with-a-single-portworx-stretch-cluster" >}}Option 1- Synchronous DR over a MAN using multiple Kubernetes clusters with a single Portworx stretch cluster
 {{</widelink>}}
 
 <br>

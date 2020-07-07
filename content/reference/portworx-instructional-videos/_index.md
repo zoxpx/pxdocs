@@ -127,7 +127,7 @@ Shared volumes or volume shares allow multiple readers and writers for applicati
 
  - [Portworx Shared Volumes Docs](/concepts/shared-volumes/)
  - [Portworx Shared volumes on Kubernets Tutorial](https://www.katacoda.com/portworx/scenarios/px-k8s-vol-shared)
- - [CLI Reference for Shared Volumes](/reference/cli/create-and-manage-volumes/#global-namespace-shared-volumes)
+ - [CLI Reference for Shared Volumes](/reference/cli/create-and-manage-volumes/#the-global-namespace)
 
 ## Capacity Management (AutoPilot)
 
@@ -190,5 +190,59 @@ When you provision volumes, Portworx places them throughout the cluster and acro
 
 #### Resources
 
- - [VolumePlacementStrategy CRD](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/#the-volumeplacementstrategy-crd)
+ - [Volume Placement Strategies](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
  - [Kubernetes StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+
+## Configuring your storage cluster
+
+Configuring Portworx storage takes into account a number of different options. General options are available for types or storage, where the key-store is, what type of scheduler to use, what backing disk will be used, enabling security and much more. In this video, we will walk through some of the widely used options for configuring your Portworx storage cluster and common considerations when planning your Portworx deployment.
+
+{{< youtube aPrjEa4FX3g >}}
+
+## Redirect-on-Write Snapshots
+
+Portworx snapshots are redirect-on-write snapshots and are thin clones. In this video, we’ll walk through what it means for snapshots to be “redirect-on-write” and how this compares to other common practices such as copy-on-write and why it helps improve overall performance of Portworx volumes.
+
+{{< youtube _Bw9jgULnm8 >}}
+
+## Topology Awareness
+
+Portworx nodes can be made aware of the rack on which they are a placed as well as the zone and region in which they are present. Portworx can use this information to influence the volume replica placement decisions. You can also provide your cluster topology information to Portworx using Kubernetes node labels and this video will explain how these labels are used for replica placement.
+
+{{< youtube Csr8HNi4nRw >}}
+
+## Management and Visibility with PX Central On-prem
+
+PX-Central is a graphical user interface that allows you to monitor and manage your Portworx clusters on-premises or in the cloud. In this lightboard we will walk through the differences with the SaaS version and explain the variations of what you can accomplish using PX Central.
+
+{{< youtube Mr_mWdfpyHg >}}
+
+## Overview of Backup and Recovery for Kubernetes
+
+In this video, get an overview of PX-Backup, the backup and recovery solution for Kubernetes from Portworx. PX-Backup installs into Kubernetes clusters just like Portworx does today, and this makes the addition of the backup and restore service completely Kubernetes-native for the end user. Once the PX-Backup pods come online, you are ready to start backing up and restoring applications and data.
+
+{{< youtube Nf1thpqqlWw >}}
+
+## Portworx Essentials vs Portworx Enterprise
+
+Select the best Portworx Enterprise Storage for you. In this video we’ll explain the differences between Portworx Essentials and Enterprise and when you would want to use one over the other.
+
+{{< youtube z5KHbQJvHdc >}}
+
+## Local High Availability, Backup & Restore and Disaster Recovery
+
+Local High Availability, Backup and Restore, and Disaster Recovery are three capabilities that are the foundation of any enterprise data protection program and they are the essential elements to consider when evaluating a Kubernetes backup tool or solution. 
+
+{{< youtube 2EjFYjUU1jc >}}
+
+## Storage Policies for Volume Provisioning
+
+Storage policies allow users to manage the storage policies of the Portworx cluster. Once defined, a storage policy ensures that the volumes being created on the Portworx cluster follow the same set of common specs/rules. This video will give an overview of how storage policies can be used and how Kubernetes environments can reference them within a StorageClass.
+
+{{< youtube r-jWev8Lh60 >}}
+
+## Monitoring and Logging for Kubernetes
+
+Portworx runs as a DaemonSet on the Kubernetes cluster which ensures that it runs on each node as part of the Kubernetes cluster. To allow access to the logs of a failed node, pod or a container in Kubernetes we would have to adopt a complete logging solution. The need to access or view logs of failed container workloads means that we would need to enable storage and the logs should have a separate life cycle than that of the container that creates it. Elasticsearch, FluentD and Kibana allow us to setup a complete logging solution for accessing logs of the Portworx pods scheduled on the Kubernetes cluster.
+
+{{< youtube EnNK03EZrSM >}}

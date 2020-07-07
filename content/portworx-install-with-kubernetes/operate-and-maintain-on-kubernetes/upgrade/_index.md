@@ -16,8 +16,7 @@ This guide describes the procedure to upgrade Portworx running as OCI container 
 To upgrade to the **{{% currentVersion %}}** release, run the following command:
 
 ```text
-PXVER='{{% currentVersion %}}'
-curl -fsL https://install.portworx.com/${PXVER}/upgrade | bash -s
+curl -fsSL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
@@ -35,22 +34,19 @@ If you see any issues, review the [Troubleshooting](/portworx-install-with-kuber
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      PXVER='{{% currentVersion %}}'
-      curl -fsL -o stork-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=stork"
+      curl -o stork.yaml -L "https://install.portworx.com/{{% currentVersion %}}?kbver=${KBVER}&comp=stork"
       ```
 
 
     If you are using your own private or custom registry for your container images, add `&reg=<your-registry-url>` to the URL. Example:
 
       ```text
-      KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      PXVER='{{% currentVersion %}}'
-      curl -fsL -o stork-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=stork&reg=artifactory.company.org:6555"
+      curl -o stork.yaml -L "https://install.portworx.com/{{% currentVersion %}}?kbver=1.17.5&comp=stork&reg=artifactory.company.org:6555"
       ```
 2. Next, apply the spec with:
 
       ```text
-      kubectl apply -f stork-spec.yaml
+      kubectl apply -f stork.yaml
       ```
 
 ## Upgrade Lighthouse
@@ -59,21 +55,19 @@ If you see any issues, review the [Troubleshooting](/portworx-install-with-kuber
 
       ```text
       KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      PXVER='{{% currentVersion %}}'
-      curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=lighthouse"
+      curl -o lh.yaml -L "https://install.portworx.com/{{% currentVersion %}}?kbver=${KBVER}&comp=lighthouse"
       ```
 
     If you are using your own private or custom registry for your container images, add `&reg=<your-registry-url>` to the URL. Example:
 
-    ```text
-    KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-    PXVER='{{% currentVersion %}}'
-    curl -fsL -o lighthouse-spec.yaml "https://install.portworx.com/${PXVER}?kbver=${KBVER}&comp=lighthouse&reg=artifactory.company.org:6555"
-    ```
+      ```text
+      KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+      curl -o lh.yaml -L "https://install.portworx.com/{{% currentVersion %}}?kbver=${KBVER}&comp=lighthouse&reg=artifactory.company.org:6555"
+      ```
 2. Apply the spec by running:
 
       ```text
-      kubectl apply -f lighthouse-spec.yaml
+      kubectl apply -f lh.yaml
       ```
 
 ## Customize the upgrade process
@@ -83,82 +77,57 @@ If you see any issues, review the [Troubleshooting](/portworx-install-with-kuber
 You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.5.0_ image.
 
 ```text
-PXVER='{{% currentVersion %}}'
-curl -fsL https://install.portworx.com/${PXVER}/upgrade | bash -s -- -t 2.5.0
+curl -fsSL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s -- -t 2.5.0
 ```
 
 ## Airgapped clusters
 
-When upgrading Portworx in Kubernetes using the curl command in examples above, a number of docker images are fetched from container registries on the Internet (e.g. docker.io, gcr.io). If your nodes don't have access to these registries, you need to first pull the required images in your cluster and then provide the precise image names to the upgrade process.
+### Step 1: Make container images available to your nodes
 
-The below sections outline the exact steps for this.
+To make container images available to nodes that do not have access to the internet, please follow the [air-gapped install](/portworx-install-with-kubernetes/on-premise/airgapped) instructions first.
 
-### Step 1: Pull the required images
+### Step 2: Run the upgrade
 
-1. If you want to upgrade to the latest {{% currentVersion %}} stable release, set the `PX_VER` environment variable to the following value:
+Once you've made the new container images available for your nodes, perform one of the following steps, depending on how you're storing your images:
 
-    ```text
-    export PX_VER=$(curl -fs https://install.portworx.com/{{% currentVersion %}}/upgrade | awk -F'=' '/^OCI_MON_TAG=/{print $2}')
-    ```
-    {{<info>}}
-**NOTE:** To upgrade to a specific release, you can manually set the `PX_VER` environment variable to the desired value. Example:
+- [Step a: Upgrade using local registry server](#step-2a-upgrade-using-local-registry-server): You can pre-load your private registry server with the required Portworx images and have Kubernetes and Portworx fetch the images from there rather than reaching out to the internet. 
+<!-- this doesn't make sense, "using images directly ON your nodes?" or "pulling images directly TO your nodes"? -->
+- [Step b: Upgrade using images directly to your nodes](#step-2b-upgrade-using-images-directly-to-your-nodes): You can load the images directly to your nodes and configure Kubernetes and Portworx to upgrade using those images. 
 
-```text
-export PX_VER=2.3.6
-```
-    {{</info>}}
+#### Step 2a: Upgrade using local registry server
 
-2. Pull the Portworx images:
-
-    ```text
-    export PX_IMGS="portworx/oci-monitor:$PX_VER portworx/px-enterprise:$PX_VER portworx/talisman:1.1.0"
-    echo $PX_IMGS | xargs -n1 docker pull
-    ```
-
-### Step 2: Loading Portworx images on your nodes
-
-If you have nodes which have access to a private registry, follow [Step 2a: Push to local registry server, accessible by air-gapped nodes](#step-2a-push-to-local-registry-server-accessible-by-air-gapped-nodes).
-
-Otherwise, follow [Step 2b: Push directly to nodes using tarball](#step-2b-push-directly-to-nodes-using-tarball).
-
-#### Step 2a: Push to local registry server, accessible by air-gapped nodes
-
-{{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-local-reg.md" %}}
-
-Now that you have the images in your registry, continue with [Step 3: Start the upgrade](#step-3-start-the-upgrade).
-
-#### Step 2b: Push directly to nodes using tarball
-
-{{% content "shared/portworx-install-with-kubernetes-on-premise-airgapped-push-to-nodes-tarball.md" %}}
-
-### Step 3: Start the upgrade
-
-Run the below script to start the upgrade on your airgapped cluster.
+If you uploaded the container images to your local registry server, you must run the upgrade script with your registry server image names:
 
 ```text
-
-# Default image names
-TALISMAN_IMAGE=portworx/talisman
-OCIMON_IMAGE=portworx/oci-monitor
-
-# Do we have container registry override?
-if [ "x$REGISTRY" != x ]; then
-   echo $REGISTRY | grep -q /
-   if [ $? -eq 0 ]; then  # REGISTRY defines both registry and repository
-      TALISMAN_IMAGE=$REGISTRY/talisman
-      OCIMON_IMAGE=$REGISTRY/oci-monitor
-   else                   # $REGISTRY contains only registry, we'll assume default repositories
-      TALISMAN_IMAGE=$REGISTRY/portworx/talisman
-      OCIMON_IMAGE=$REGISTRY/portworx/oci-monitor
-   fi
-fi
-
-[[ -z "$PX_VER" ]] || ARG_PX_VER="-t $PX_VER"
-
-curl -fsL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s -- -I $TALISMAN_IMAGE -i $OCIMON_IMAGE $ARG_PX_VER
+REGISTRY=myregistry.net:5443
+curl -fsL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s -- \
+    -I $REGISTRY/portworx/talisman -i $REGISTRY/portworx/oci-monitor -t {{% currentVersion %}}
 ```
+
+#### Step 2b: Upgrade using images directly on your nodes
+
+Fetch and run the upgrade script with the following `curl` command to override the automatically defined image locations and instruct Kubernetes and Portworx to use the images located on your nodes during the upgrade:
+
+
+```text
+curl -fsL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s -- -t {{% currentVersion %}}
+```
+
 
 ## Troubleshooting
+
+### The "field is immutable" error message
+
+If the you see the following error when you upgrade Stork, it means that the `kubectl apply -f stork.yaml` command tries to update a label selector which is immutable:
+
+```
+The Deployment "stork-scheduler" is invalid: spec.selector: Invalid value: v1.LabelSelector{MatchLabels:map[string]string{"component":"scheduler", "name":"stork-scheduler", "tier":"control-plane"}, MatchExpressions:[]v1.LabelSelectorRequirement(nil)}: field is immutable
+```
+
+To resolve this problem:
+
+1. Delete the existing Stork deployment
+2. Resume the [upgrade process](#upgrade-stork) by applying the new spec.
 
 ### Failed to apply spec due Forbidden: may not be used when type is ClusterIP
 

@@ -17,7 +17,7 @@ The cloud provider credentials are stored in an external secret store. Before yo
 
 You can use the `pxctl credentials` command to create, list, validate, or delete your cloud credentials. Then, Portworx will use these credentials, for example, to back up your volumes to the cloud.
 
-To get a glimpse of the available commands, run:
+Enter the `pxctl credentials --help` command to display the list of subcommands:
 
 ```text
 /opt/pwx/bin/pxctl credentials --help
@@ -76,19 +76,33 @@ ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
 
 ##  Create and configure credentials
 
-You can create and configure credentials in multiple ways depending on your cloud provider and how you want to manage them. 
+You can create and configure credentials in multiple ways depending on your cloud provider and how you want to manage them.
 
-### Create credentials on AWS by passing keys in the create command
+### Create credentials on AWS by specifying your keys
 
-You can create and configure your credentials for AWS by passing your secret access key and access key ID in the `pxctl credentials create` command:
+{{<info>}}
+**NOTE:** The `--s3-storage-class` flag requires PX-Enterprise version 2.5.3 or higher
+{{</info>}}
+
+Enter the `pxctl credentials create` command, specifying:
+
+* The `--provider` flag with the name of the cloud provider (`s3`).
+* The `--s3-access-key` flag with your secret access key
+* The `--s3-secret-key` flag with your access key ID
+* The `--s3-region` flag with the name of the S3 region (`us-east-1`)
+* The `--s3-endpoint` flag with the  name of the endpoint (`s3.amazonaws.com`)
+* The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+* The name of your cloud credentials
 
 ```text
 pxctl credentials create \
   --provider s3 \
-  --s3-access-key ***** \
-  --s3-secret-key ***** \
+  --s3-access-key <YOUR-SECRET-ACCESS-KEY>
+  --s3-secret-key <YOUR-ACCESS-KEY-ID> \
   --s3-region us-east-1 \
-  --s3-endpoint s3.amazonaws.com
+  --s3-endpoint s3.amazonaws.com \
+  --s3-storage-class STANDARD \
+  <NAME>
 ```
 
 ```output
@@ -98,11 +112,11 @@ Credentials created successfully
 {{<info>}}
 **Note:** This command will create a bucket with the Portworx cluster ID to use for the backups.
 {{</info>}}
-
+<!-- 
 ### Create credentials on AWS by storing keys as environment variables
 
 {{<info>}}
-**NOTE:** This feature requires PX-Enterprise versions 2.5.1 or greater
+**NOTE:** This feature requires PX-Enterprise version 2.5.1 or higher
 {{</info>}}
 
 You can create and configure credentials for AWS by storing your secret access key and access key ID as environment variables. When you run the `pxctl credentials create`, Portworx uses the environment variables to create the credential:
@@ -110,20 +124,31 @@ You can create and configure credentials for AWS by storing your secret access k
 1. Create the following environment variables, adding your own access key ID and secret access key, and provide them to the Portworx container through either daemon set parameters or the `runc install` command:
 
     ```text
-    AWS_SECRET_ACCESS_KEY=xxx 
+    AWS_SECRET_ACCESS_KEY=xxx
     AWS_ACCESS_KEY_ID=yyy
     ```
-2. Enter the `pxctl credentials create` command:    
+2. Enter the `pxctl credentials create` command, specifying:
+
+    * The `--provider` flag with the name of the cloud provider (`s3`).
+    * The `--s3-region` flag with the name of the S3 region (`us-east-1`)
+    * The `--s3-endpoint` flag with the name of the endpoint (`s3.amazonaws.com`)
+    * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+    * The `use-iam` flag
+    * The name of your cloud credentials
 
     ```text
     ./pxctl credentials create \
     --provider s3 \
     --s3-region us-east-1 \
-    --use-iam s3cred
+    --s3-endpoint s3.amazonaws.com \
+    --s3-storage-class STANDARD \
+    --use-iam \
+    <NAME>
     ```
     ```output
     Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
-    ```
+    ``` 
+    -->
 
 ### Create credentials on AWS using IAM
 
@@ -131,7 +156,7 @@ You can create and configure credentials for AWS by storing your secret access k
 **NOTE:** This feature requires PX-Enterprise versions 2.5.1 or greater
 {{</info>}}
 
-Instead of storing your secret access key and access key ID on the host, you can grant Portworx bucket permissions using IAM. you can grant the EC2 instances on which portworx is running, or you can grant permissions for a specific bucket.
+Instead of storing your secret access key and access key ID on the host, you can grant Portworx bucket permissions using IAM. You can grant the EC2 instances on which Portworx is running, or you can grant permissions for a specific bucket.
 
 #### Grant IAM permissions for your EC2 instance in general
 
@@ -158,12 +183,23 @@ Instead of storing your secret access key and access key ID on the host, you can
         ]
     }
     ```
-    
 
-2. Enter the following pxctl credentials create command, specifying the S3 region for the account:
+
+2. Enter the following pxctl credentials create command, specifying the following:
+
+    * The `--provider` flag with the name of the cloud provider (`s3`).
+    * The `--s3-region` flag with the the S3 region associated with your account
+    * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+    * The `use-iam` flag
+    * The name of your cloud credentials
 
     ```text
-    ./pxctl credentials create --provider s3 --s3-region us-east-1 --use-iam <s3-credentials>
+    ./pxctl credentials create \
+    --provider s3 \
+    --s3-region us-east-1 \
+    --s3-storage-class STANDARD \
+    --use-iam \
+    <NAME>
     ```
     ```output
     Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
@@ -199,31 +235,45 @@ Instead of storing your secret access key and access key ID on the host, you can
     }
     ```
 
-2. Enter the following pxctl credentials create command, specifying the bucket's S3 region and bucket name:
+2. Enter the following pxctl credentials create command, specifying the following:
+
+    * The `--provider` flag with the name of the cloud provider (`s3`)
+    * The `--s3-region` flag with your bucket's s3 region
+    * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+    * The `--bucket` flag with your bucket's name
+    * The `use-iam` flag 
+    * The name of your cloud credentials
 
     ```text
-    ./pxctl credentials create --provider s3 --s3-region <region> --use-iam --bucket <bucket-name> <s3-credentials>
+    ./pxctl credentials create \
+    --provider s3 \
+    --s3-region <region> \
+    --s3-storage-class STANDARD \
+    --bucket <bucket-name> \
+    --use-iam \
+    <NAME>
     ```
     ```output
     Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
     ```
-    <!-- What is s3cred in these? Is it the access key ID? -->
+
+<!-- What is s3cred in these? Is it the access key ID? -->
 <!-- disabling, not release ready:
 ### Create credentials on Azure
 
 1. [Grant your Azure instance](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/tutorial-linux-vm-access-storage#grant-your-vm-access-to-an-azure-storage-container) the following permissions:
 
-  * `Storage Blob Data Reader`
-  * `Storage Blob Data Contributor`
+* `Storage Blob Data Reader`
+* `Storage Blob Data Contributor`
 
 2. Enter the following pxctl credentials create command, specifying your own Azure account name and credentials:
 
-    ```text
-    ./pxctl cred c --provider azure --azure-account-name <account-name> --use-iam azurecred
-    ```
-    ```output
-    Credentials created successfully, UUID: 12345678-a901-2bc3-4d56-7890ef1d23ab
-    ``` 
+  ```text
+  ./pxctl cred c --provider azure --azure-account-name <account-name> --use-iam azurecred
+  ```
+  ```output
+  Credentials created successfully, UUID: 12345678-a901-2bc3-4d56-7890ef1d23ab
+  ```
 -->
 
 ## Delete existing credentials
