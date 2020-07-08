@@ -7,6 +7,22 @@ hidesections: true
 disableprevnext: true
 scrollspy-container: false
 ---
+<ul class="list-series">
+<li class="list-series__item mdl-card mdl-shadow--2dp">
+<a href="https://backup.docs.portworx.com">
+    <div class="mdl-card__title">
+    <h3 class="mdl-card__title-text">
+        PX-Backup documentation
+    </h3>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <p>PX-Backup is a Kubernetes backup solution that allows you to back up and restore applications and their data across multiple clusters.</p>
+    </div>
+    <i class="material-icons">arrow_forward_ios</i>
+</a>
+</li>
+</ul>
+
 {{<info>}}
 **ADVISORY:** Looking to upgrade to OpenShift 4.3? See the [Preparing Portworx to upgrade to OpenShift 4.3 using the Operator](/portworx-install-with-kubernetes/openshift/operator/openshift-upgrade/) article for instructions.
 {{</info>}}
