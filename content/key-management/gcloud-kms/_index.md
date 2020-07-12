@@ -160,7 +160,7 @@ Provide the following Google Cloud credentials (key value pairs) as environment 
 The service account file needs to be present on all the nodes where Portworx is running.
 {{</info>}}
 
-### Step 2: Set up Google Cloud MKS as the secrets provider for Portworx.
+### Step 2: Set up Google Cloud KMS as the secrets provider for Portworx.
 
 #### New installation
 
@@ -170,6 +170,6 @@ While installing Portworx set the input argument `-secret_type` to `gcloud-kms`.
 
 Based on your installation method provide the `-secret_type gcloud-kms` input argument and restart Portworx on all the nodes.
 
-## Using Google Cloud KMS with Portworx 
+## Using Google Cloud KMS with Portworx
 
 {{<homelist series="gcloud-secret-uses">}}

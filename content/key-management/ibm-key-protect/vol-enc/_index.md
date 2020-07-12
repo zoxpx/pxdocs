@@ -1,74 +1,119 @@
----
-title: (Other Schedulers) Encrypting Portworx Volumes using IBM Key Protect
-weight: 2
-keywords: IBM Key Protect, encrypt volume, other schedulers, non-kubernetes
-description: Instructions on using IBM Key Protect with Portworx for encrypting Portworx Volumes
-noicon: true
-series: ibm-key-protect-uses
-hidden: true
----
+You can use one of the following methods to encrypt Portworx volumes with Google Cloud KMS, depending on how you provide the secret password to Portworx:
 
-{{% content "shared/key-management-intro.md" %}}
+- [Encrypt volumes using per volume secrets](#encrypt-volumes-using-per-volume-secrets)
+- [Encrypt volumes using a cluster-wide secret](#encrypt-volumes-using-a-cluster-wide-secret)
 
-## Creating and using encrypted volumes
 
-### Using per volume secret keys
+## Encrypt volumes using per volume secrets
 
-There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to Portworx. Portworx uses IBM Key Protect APIs to generate a unique 256 bit passphrase. This passphrase will be used during encryption and decryption.
+Use per volume secrets to encrypt each volume with a different key. As a result, each volume uses its unique passphrase for encryption. Portworx uses IBM Key Protect APIs to generate a unique 256-bit passphrase.
 
-To create a volume through pxctl, run the following command
+1. Create a volume. Enter the `pxctl volume create` command specifying the `--secure` flag with the name of your encrypted volume (this example uses `enc_vol`)
 
-```text
-pxctl volume create --secure  enc_vol
-```
+    ```text
+    pxctl volume create --secure  enc_vol
+    ```
 
-```output
-Volume successfully created: 374663852714325215
-```
+<!-- We should also add the commands that attach and mount a volume. I'm not sure if the user should pass `--secret_id` argument. -->
 
-To create a volume through docker, run the following command
+**Docker users:**
 
-```text
-docker volume create --volume-driver pxd secure=true,name=enc_vol
-```
+1. You can use the following command to create an encrypted volume named `enc_vol`:
 
-To attach and mount an encrypted volume through docker, run the following command
+    ```text
+      docker volume create --volume-driver pxd secure=true,name=enc_vol
+    ```
 
-```text
-docker run --rm -it -v secure=true,name=enc_vol:/mnt busybox
-```
+2. To attach and mount an encrypted volume, enter the following command:
 
-Note that no `secret_key` needs to be passed in any of the commands.
+    ```text
+    docker run --rm -it -v secure=true,name=enc_vol:/mnt busybox
+    ```
 
-### Using cluster wide secret key
+## Encrypt volumes using a cluster-wide secret
 
-In this method a default cluster wide secret will be set for the Portworx cluster. Such a secret will be referenced by the user and Portworx as the **default** secret. Any PVC request referencing the
-secret name as `default` will use this cluster wide secret as a passphrase to encrypt the volume.
+1. Set the cluster-wide secret key. Enter the following `pxctl secrets set-cluster-key` command specifying the `--secret` parameter with your secret passphrase (this example uses `mysecretpassphrase`):
 
-To create a volume using a cluster wide secret through pxctl, run the following command
+    ```text
+    pxctl secrets set-cluster-key --secret mysecretpassphrase
+    ```
 
-```text
-pxctl volume create --secure --secret_key default enc_vol
-```
+    ```output
+    Successfully set cluster secret key!
+    ```
+    {{<info>}}
+**WARNING:** You must set the cluster-wide secret only once. If you overwrite the cluster-wide secret, the volumes encrypted with the old secret will become unusable.
+    {{</info>}}
 
-```output
-Volume successfully created: 374663852714325215
-```
+    If you've specified your cluster wide secret key in the `config.json` file, the `pxctl secrets set-cluster-key` command will overwrite it. Even if you restart your cluster, Powrtworx will use the key you passed as an argument to the `pxctl secrets set-cluster-key` command.
 
-To create a volume using a cluster wide secret through docker, run the following command
 
-```text
-docker volume create --volume-driver pxd secret_key=default,name=enc_vol
-```
+2. Create a new encrypted volume. Enter the `pxctl volume create` command, specifying the following arguments:
+  * `--secure`
+  * `--secret-key` with the `default` value
+  * the name of the encrypted volume (this example uses `enc_vol`)
 
-To attach and mount an encrypted volume through docker, run the following command
+    ```text
+    pxctl volume create --secure --secret_key default enc_vol
+    ```
 
-```text
-docker run --rm -it -v secure=true,secret_key=default,name=enc_vol:/mnt busybox
-```
+    ```
+    Volume successfully created: 374663852714325215
+    ```
 
-Note the `secret_key` is set to the value `default` to indicate Portworx to use the cluster-wide secret key
+    **Docker users:**
+    You can use the following example command to create an encrypted volume named `enc_vol`:
 
-{{<info>}}
-{{% content  "shared/key-management-shared-secret-warning-note.md" %}}
-{{</info>}}
+    ```text
+    docker volume create --volume-driver pxd secret_key=default,name=enc_vol
+    ```
+
+3. Enter the `pxctl volume list` command to list your volumes:
+
+    ```text
+    pxctl volume list
+    ```
+
+    ```output
+    ID                      NAME        SIZE    HA SHARED   ENCRYPTED   IO_PRIORITY SCALE   STATUS
+    822124500500459627   enc_vol   10 GiB  1    no yes     LOW     1   up - detached
+    ```
+
+2. Attach your volume by entering the `pxctl host attach` command with the following arguments:
+
+    * The name of your encrypted volume (this example uses `enc_vol`)
+    * The `--secret-key` flag with the `default` vaule
+
+
+    ```text
+    pxctl host attach enc_vol --secret_key default
+    ```
+
+    ```output
+    Volume successfully attached at: /dev/mapper/pxd-enc822124500500459627
+    ```
+
+3. Mount the volume by entering the `pxctl host mount` command with the following parameters:
+
+    * The name of your encrypted volume (this example uses `enc_vol`)
+    * The mount point (this example uses `mnt`)
+
+    ```text
+    pxctl host mount enc_vol /mnt
+    ```
+
+    ```output
+    Volume enc_vol successfully mounted at /mnt
+    ```
+
+    **Docker users:**
+    Enter the following example command to attach and mount an encrypted volume:
+
+    ```text
+    docker run --rm -it -v secure=true,secret_key=default,name=enc_vol:/mnt busybox
+    ```
+
+If you want to migrate encrypted volumes created through this method between two different Portworx clusters, then you must:
+
+  1. Create a secret with the same name. You can use the `--secret-id` flag to specify the name of your secret, as shown in step 1.
+  2. Make sure you provide the same **passphrase** while generating the secret.
