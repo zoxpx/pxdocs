@@ -28,7 +28,7 @@ Kubernetes supports many different types of PersistentVolumes, this step covers 
 
 #### Create MySQL Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC)
 
- `kubectl -f apply mysql-vol.yaml`
+ `kubectl apply -f mysql-vol.yaml`
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -56,7 +56,7 @@ spec:
 
 #### Create WordPress Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC)
 
-`kubectl -f apply wordpress-vol.yaml`
+`kubectl apply -f wordpress-vol.yaml`
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -99,7 +99,7 @@ A Secret is an object that stores a piece of sensitive data like a password or k
 `kubectl get secrets`
 
 
-### Deploy MySQL with Portworx 
+### Deploy MySQL with Portworx
 
 The following manifest describes a single-instance MySQL Deployment. The MySQL container mounts the Portworx PersistentVolume at /var/lib/mysql. The MYSQL_ROOT_PASSWORD environment variable sets the database password from the Secret.
 The deployment uses Stork as the scheduler to enable the pods to be placed closer to where their data is located.
