@@ -16,33 +16,53 @@ The `pxctl status` command provides an overview of your cluster, including:
 
 You can use the `pxctl status` command to view general information, check for alerts, and assist with cluster debugging.
 
-The following example outputs the status of an operational cluster with 192 GB of total storage capacity:
+The following example outputs the status of an operational cluster with 384 GB of total storage capacity:
 
 ```text
 pxctl status
 ```
 
 ```output
-Status: PX is operational
-Node ID: 0a0f1f22-374c-4082-8040-5528686b42be
-    IP: 172.31.50.10
-     Local Storage Pool: 2 pools
-    POOL    IO_PRIORITY    SIZE    USED    STATUS    ZONE    REGION
-    0    LOW        64 GiB    1.1 GiB    Online    b    us-east-1
-    1    LOW        128 GiB    1.1 GiB    Online    b    us-east-1
-    Local Storage Devices: 2 devices
-    Device    Path        Media Type        Size        Last-Scan
-    0:1    /dev/xvdf    STORAGE_MEDIUM_SSD    64 GiB        10 Dec 16 20:07 UTC
-    1:1    /dev/xvdi    STORAGE_MEDIUM_SSD    128 GiB        10 Dec 16 20:07 UTC
-    total            -            192 GiB
-Cluster Summary
-    Cluster ID: 55f8a8c6-3883-4797-8c34-0cfe783d9890
-    IP        ID                    Used    Capacity    Status
-    172.31.50.10    0a0f1f22-374c-4082-8040-5528686b42be    2.2 GiB    192 GiB        Online (This node)
-Global Storage Pool
-    Total Used        :  2.2 GiB
-    Total Capacity    :  192 GiB
+	Status: PX is operational
+	License: Trial (expires in 29 days)
+	Node ID: abb4723e-efa3-432d-ad27-f929bc658862
+		IP: 70.0.79.28
+		Local Storage Pool: 1 pool
+		POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
+		0	HIGH		raid0		128 GiB	8.4 GiB	Online	default	default
+		Local Storage Devices: 2 devices
+		Device	Path		Media Type		Size		Last-Scan
+		0:0	/dev/sdf	STORAGE_MEDIUM_MAGNETIC	128 GiB		22 Sep 19 14:48 UTC
+		total			-			128 GiB
+		Cache Devices:
+		Device	Path		Media Type		Size		Last-Scan
+		0:1	/dev/sdc	STORAGE_MEDIUM_SSD	70 GiB		22 Sep 19 14:48 UTC
+	Cluster Summary
+		Cluster ID: doc-cluster-caching-2.2.0
+		Cluster UUID: e5d79039-1333-4ac9-adf4-70019d925a4a
+		Scheduler: none
+		Nodes: 3 node(s) with storage (3 online)
+		IP		ID					SchedulerNodeName	StorageNode	Used    Capacity	Status	StorageStatus	Version		Kernel				OS
+		70.0.79.28	abb4723e-efa3-432d-ad27-f929bc658862	N/A			Yes		8.4 GiB 128 GiB		Online	Up (This node)	2.2.0.0-328a043	4.20.13-1.el7.elrepo.x86_64	CentOS Linux 7 (Core)
+		70.0.78.240	9ddf713b-0dbc-4e7b-bd6e-2ae648891072	N/A			Yes		8.4 GiB 128 GiB		Online	Up		2.2.0.0-328a043	4.20.13-1.el7.elrepo.x86_64	CentOS Linux 7 (Core)
+		70.0.79.32	0e466c6a-fef0-4752-b133-9bf257e9973a	N/A			Yes		8.4 GiB 128 GiB		Online	Up		2.2.0.0-328a043	4.20.13-1.el7.elrepo.x86_64	CentOS Linux 7 (Core)
+	Global Storage Pool
+		Total Used    	:  25 GiB
+		Total Capacity	:  384 GiB
 ```
+
+Note the following about this example output:
+
+* The `Node ID` field displays the identification string of the node on which you ran the `pxctl status` command. In this example, it's `abb4723e-efa3-432d-ad27-f929bc658862`. Beneath the `Node ID`, you can see local node and storage pool information.
+* The `Local Storage Pool` field lists the number of storage pools on the node
+* Pools are listed by their number, `0` in this example, and information is displayed in columns to the right. The capacity of the local storage pool is 128 GiB, and the amount of used storage space is 8.4 GiB.
+* Under the `Cluster Summary` section, you can see information about the nodes in your cluster. This example cluster contains three nodes:
+  * `abb4723e-efa3-432d-ad27-f929bc658862` (the local node)
+  * `9ddf713b-0dbc-4e7b-bd6e-2ae648891072`
+  * `0e466c6a-fef0-4752-b133-9bf257e9973a`
+* The amount of storage space available on the `9ddf713b-0dbc-4e7b-bd6e-2ae648891072` node is 128 GiB, and the amount of used storage space is 8.4 GiB
+* The amount of storage space  on the `0e466c6a-fef0-4752-b133-9bf257e9973a` node is 128 GiB, and the amount of used storage space is 8.4 GiB
+* The total amount of storage space available across your cluster is 384 GiB, and the amount of used storage space is 25 GiB
 
 The following example displays the status of a cluster that is in maintenance mode. Note that the status line has changed to `PX is in maintenance mode`.
 
