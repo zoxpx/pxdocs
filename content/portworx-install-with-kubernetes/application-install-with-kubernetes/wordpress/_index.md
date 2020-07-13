@@ -28,7 +28,7 @@ Kubernetes supports many different types of PersistentVolumes, this step covers 
 
 #### Create MySQL Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC)
 
- `kubectl -f apply mysql-vol.yaml`
+ `kubectl apply -f mysql-vol.yaml`
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -56,7 +56,7 @@ spec:
 
 #### Create WordPress Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC)
 
-`kubectl -f apply wordpress-vol.yaml`
+`kubectl apply -f wordpress-vol.yaml`
 
 ```yaml
 apiVersion: storage.k8s.io/v1
