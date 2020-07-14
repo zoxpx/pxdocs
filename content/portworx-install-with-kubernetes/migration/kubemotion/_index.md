@@ -130,7 +130,7 @@ In the updated spec, ensure values for all fields under options are quoted.
 
 Copy and save this to a file called `clusterpair.yaml` on the source cluster.
 
-### Creating the ClusterPair
+### Create a ClusterPair
 
 #### Apply the generated ClusterPair on the source cluster
 
@@ -246,53 +246,50 @@ If you see an error similar to the one above, you should increase the size of th
 Alternatively, you can use your own cloud (S3, Azure, or Google) instead of ObjectStore on the destination cluster. Note that the credentials must be named `clusterPair_<clusterUUID_of_destination>` and you are required to create them on both the source and the destination cluster.
 {{</info>}}
 
-### Starting a migration
+## Start a migration
 
-#### Using a spec file
+1. Create a file called `migration.yaml` file, specifying the following fields and values:
 
-In order to make the process schedulable and repeatable, you can write a YAML specification.
+  * **apiVersion:** as `stork.libopenstorage.org/v1alpha1`
+  * **kind:** as `Migration`
+  * **metadata.name:** with the name of the object that performs the migration
+  * **metadata.namespace:** with the name of the namespace in which you want to create the object
+  * **spec.clusterPair:** with the name of the `ClusterPair` object created in the [Create a ClusterPair](#create-a-clusterpair) section
+  * **spec.includeResources:** with a boolean value specifying if the migration should include PVCs and other applications specs. If you set this field to `false`, Portworx will only migrate your volumes
+  * **spec.startApplications:** with a boolean value specifying if Portworx should automatically start applications on the destination cluster. If you set this field to `false`, then the `Deployment` and `StatefulSet` objects on the destination cluster will be set to zero. Note that, on the destination cluster, Portworx uses the `stork.openstorage.org/migrationReplicas` annotation to store the number of replicas from the source cluster
+  * **spec.namespaces**: with the list of namespaces you want to migrate
+  * **spec.adminClusterPair:** with the name of the `ClusterPair` object created in the admin namespace that Portworx should use to migrate your cluster-scoped resources. Use this if your regular users lack permission to create or delete cluster-scoped resources on the destination cluster. If you don't specify this field, then STORK will use the object specified in the `spec.clusterPair` field. This feature was introduced in STORK v2.3.0.
+  * **spec.purgeDeletedResources:** with a boolean value specifying if STORK should automatically purge a resource from the destination cluster when you delete it from the source cluster. The default value is `false`. This feature was introduced in STORK v2.3.2.
 
-In that file, you will specify an object called `Migration`. This object will define the scope of the applications to move and decide whether to automatically start the applications.
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: Migration
+    metadata:
+      name: <YOUR_MIGRATION_OBJECT>
+      namespace: <YOUR_MIGRATION_NAMESPACE>
+    spec:
+      clusterPair: <YOUR_CLUSTER_PAIR>
+      includeResources: true
+      startApplications: true
+      namespaces:
+      - <NAMESPACE_TO_MIGRATE>
+      adminClusterPair: <YOUR_ADMIN_CLUSTER_PAIR>
+      purgeDeletedResources: false
+    ```
 
-Paste this to a file named `migration.yaml`.
+2. Apply the spec by entering the following command:
+
+    ```text
+    kubectl apply -f migration.yaml
+    ```
+
+{{<info>}}
+**STORK users:** You can run the following example command to create a migration:
 
 ```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: Migration
-metadata:
-  name: mysqlmigration
-  namespace: migrationnamespace
-spec:
-  # This should be the name of the cluster pair created above
-  clusterPair: remotecluster
-  # If set to false this will migrate only the Portworx volumes. No PVCs, apps, etc will be migrated
-  includeResources: true
-  # If set to false, the deployments and stateful set replicas will be set to 0 on the destination.
-  # There will be an annotation with "stork.openstorage.org/migrationReplicas" on the destinationto store the replica count from the source.
-  startApplications: true
-  # List of namespaces to migrate
-  namespaces:
-  - migrationnamespace
+storkctl create migration <YOUR_MIGRATION_OBJECT> --clusterPair <YOUR_CLUSTER_PAIR> --namespaces <NAMESPACE_TO_MIGRATE> --includeResources --startApplications -n <YOUR_NAMESPACE>
 ```
-
-Next, you can invoke this migration manually from the command line:
-
-```text
-kubectl apply -f migration.yaml
-```
-
-```output
-Migration mysqlmigration created successfully
-```
-
-or automate it through `storkctl`:
-
-```text
-storkctl create migration mysqlmigration --clusterPair remotecluster --namespaces migrationnamespace --includeResources --startApplications -n migrationnamespace
-```
-```output
-Migration mysqlmigration created successfully
-```
+{{</info>}}
 
 #### Migration scope
 
