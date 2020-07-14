@@ -30,13 +30,7 @@ data:
           "type": "panel",
           "id": "grafana-piechart-panel",
           "name": "Pie Chart",
-          "version": "1.4.0"
-        },
-        {
-          "type": "panel",
-          "id": "michaeldmoore-multistat-panel",
-          "name": "Multistat",
-          "version": "1.2.5"
+          "version": "1.5.0"
         },
         {
           "type": "datasource",
@@ -48,6 +42,12 @@ data:
           "type": "panel",
           "id": "singlestat",
           "name": "Singlestat",
+          "version": ""
+        },
+        {
+          "type": "panel",
+          "id": "stat",
+          "name": "Stat",
           "version": ""
         },
         {
@@ -74,238 +74,79 @@ data:
       "gnetId": null,
       "graphTooltip": 0,
       "id": null,
+      "iteration": 1590997440335,
       "links": [],
       "panels": [
         {
-          "aliasColors": {
-            "declined": "#F2CC0C",
-            "failed": "#C4162A",
-            "succeed": "#56A64B"
-          },
-          "breakPoint": "50%",
-          "cacheTimeout": null,
-          "combine": {
-            "label": "Others",
-            "threshold": 0
-          },
+          "collapsed": false,
           "datasource": "prometheus",
-          "fontSize": "80%",
-          "format": "short",
           "gridPos": {
-            "h": 10,
-            "w": 6,
+            "h": 1,
+            "w": 24,
             "x": 0,
             "y": 0
           },
-          "id": 18,
-          "interval": null,
-          "legend": {
-            "percentage": true,
-            "show": true,
-            "values": true
-          },
-          "legendType": "Right side",
-          "links": [],
-          "maxDataPoints": 3,
-          "nullPointMode": "connected",
-          "options": {},
-          "pieType": "pie",
-          "strokeWidth": 1,
-          "targets": [
-            {
-              "expr": "floor(sum(increase(autopilot_action_failed_count{state=\"declined\"}[$__range]))) > 0",
-              "instant": true,
-              "legendFormat": "declined",
-              "refId": "C"
-            },
-            {
-              "expr": "floor(sum(increase(autopilot_action_failed_count{state=\"failed\"}[$__range]))) > 0",
-              "instant": true,
-              "legendFormat": "failed",
-              "refId": "D"
-            },
-            {
-              "expr": "sum by (job) (increase(autopilot_action_taken_total[$__range]))",
-              "instant": true,
-              "legendFormat": "succeed",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Actions state",
-          "type": "grafana-piechart-panel",
-          "valueName": "current"
+          "id": 38,
+          "panels": [],
+          "title": "Monitoring State",
+          "type": "row"
         },
         {
-          "columns": [],
+          "cacheTimeout": null,
           "datasource": "prometheus",
-          "fontSize": "100%",
+          "description": "Shows how many autopilot rules exist on the system",
           "gridPos": {
-            "h": 5,
-            "w": 14,
-            "x": 6,
-            "y": 0
+            "h": 8,
+            "w": 6,
+            "x": 0,
+            "y": 1
           },
-          "id": 14,
-          "interval": "",
-          "options": {},
-          "pageSize": 4,
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": true
+          "id": 32,
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "fieldOptions": {
+              "calcs": [
+                "first"
+              ],
+              "defaults": {
+                "mappings": [
+                  {
+                    "id": 0,
+                    "op": "=",
+                    "text": "0",
+                    "type": 1,
+                    "value": "null"
+                  }
+                ],
+                "nullValueMode": "connected",
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "none"
+              },
+              "overrides": [],
+              "values": false
+            },
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal"
           },
-          "styles": [
-            {
-              "alias": "Time",
-              "align": "auto",
-              "dateFormat": "MM/DD/YY h:mm:ss a",
-              "link": false,
-              "pattern": "Time",
-              "type": "hidden"
-            },
-            {
-              "alias": "Declined",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": null,
-              "pattern": "Value",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "endpoint",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "instance",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "job",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "service",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "namespace",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "pod",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "metric",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "__name__",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            }
-          ],
+          "pluginVersion": "6.6.1",
           "targets": [
             {
-              "datasource": "prometheus",
-              "expr": "sum by (object) (floor(increase(autopilot_action_failed_total{object=~\".*\",state=\"declined\"}[$__range]))) > 0",
-              "format": "table",
-              "hide": false,
+              "expr": "autopilot_rules_in_system",
+              "format": "time_series",
               "instant": true,
               "legendFormat": "",
               "refId": "A"
@@ -313,41 +154,32 @@ data:
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Declined actions detail",
-          "transform": "table",
-          "type": "table"
+          "title": "Autopilot Rules",
+          "type": "stat"
         },
         {
           "columns": [],
           "datasource": "prometheus",
+          "description": "Shows how many autopilot rules are in the active state and matching existing objects",
           "fontSize": "100%",
           "gridPos": {
-            "h": 5,
-            "w": 14,
+            "h": 8,
+            "w": 6,
             "x": 6,
-            "y": 5
+            "y": 1
           },
-          "hideTimeOverride": false,
-          "id": 8,
-          "links": [],
+          "id": 67,
           "options": {},
-          "pageSize": 5,
-          "scroll": true,
+          "pageSize": null,
+          "pluginVersion": "6.6.1",
           "showHeader": true,
           "sort": {
-            "col": null,
-            "desc": false
+            "col": 0,
+            "desc": true
           },
           "styles": [
             {
-              "alias": "Time",
-              "align": "auto",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "hidden"
-            },
-            {
-              "alias": "",
+              "alias": "Autopilot Rule",
               "align": "auto",
               "colorMode": null,
               "colors": [
@@ -358,13 +190,13 @@ data:
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 2,
               "mappingType": 1,
-              "pattern": "endpoint",
+              "pattern": "rule_name",
               "thresholds": [],
-              "type": "hidden",
+              "type": "number",
               "unit": "short"
             },
             {
-              "alias": "",
+              "alias": "Objects Matching Rule",
               "align": "auto",
               "colorMode": null,
               "colors": [
@@ -373,104 +205,16 @@ data:
                 "rgba(50, 172, 45, 0.97)"
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "instance",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "job",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "pod",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "service",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "namespace",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "Failed",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
+              "decimals": 0,
               "mappingType": 1,
               "pattern": "Value",
-              "thresholds": [
-                "1"
-              ],
-              "type": "string",
-              "unit": "short",
-              "valueMaps": []
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
             },
             {
               "alias": "",
-              "align": "auto",
+              "align": "right",
               "colorMode": null,
               "colors": [
                 "rgba(245, 54, 54, 0.9)",
@@ -480,37 +224,35 @@ data:
               "decimals": 2,
               "pattern": "/.*/",
               "thresholds": [],
-              "type": "number",
+              "type": "hidden",
               "unit": "short"
             }
           ],
           "targets": [
             {
-              "datasource": "prometheus",
-              "expr": "sum by (object) (floor(increase(autopilot_action_failed_total{object=~\".*\",state=\"failed\"}[$__range]))) > 0",
+              "expr": "autopilot_objects_total",
               "format": "table",
-              "hide": false,
               "instant": true,
-              "intervalFactor": 1,
-              "legendFormat": "",
               "refId": "A"
             }
           ],
           "timeFrom": null,
-          "title": "Failed actions details",
+          "timeShift": null,
+          "title": "Active Autopilot Rules",
           "transform": "table",
           "type": "table"
         },
         {
           "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": true,
+          "colorBackground": true,
+          "colorValue": false,
           "colors": [
-            "#5794F2",
+            "rgba(41, 156, 70, 0.14)",
             "rgba(237, 129, 40, 0.89)",
             "#d44a3a"
           ],
           "datasource": "prometheus",
+          "description": "Shows how many pvc objects are covered by Autopilot",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -522,199 +264,10 @@ data:
           "gridPos": {
             "h": 4,
             "w": 6,
-            "x": 0,
-            "y": 10
+            "x": 12,
+            "y": 1
           },
-          "id": 6,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "options": {},
-          "postfix": "",
-          "postfixFontSize": "80%",
-          "prefix": "",
-          "prefixFontSize": "170%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false,
-            "ymax": null,
-            "ymin": null
-          },
-          "tableColumn": "Value",
-          "targets": [
-            {
-              "expr": "autopilot_rules_in_system",
-              "format": "table",
-              "instant": true,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": "",
-          "title": "Rules in the system",
-          "type": "singlestat",
-          "valueFontSize": "200%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "0",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "Aggregate": "last",
-          "BarPadding": 10,
-          "BaseLineColor": "#ff0000",
-          "BaseLineValue": 0,
-          "CurveType": "Linear",
-          "DateFormat": "YYYY-MM-DD HH:mm:ss",
-          "DateTimeColName": "Time",
-          "DotColor": "white",
-          "DotSize": 10,
-          "EvenRowColor": "rgba(61, 61, 64, 0.78)",
-          "FlashHighLimitBar": false,
-          "FlashLowLimitBar": false,
-          "GroupColName": "__name__",
-          "GroupCols": 1,
-          "GroupGap": 1,
-          "GroupLabelColor": "#ffffff",
-          "GroupLabelFontSize": "110%",
-          "GroupNameFilter": "",
-          "GroupSortString": "value",
-          "HighAxisColor": "#ffffff",
-          "HighBarColor": "rgb(120, 128, 0)",
-          "HighLimitBarColor": "#1f78c1",
-          "HighLimitBarFlashColor": "#ffa500",
-          "HighLimitBarFlashTimeout": 1000,
-          "HighLimitLineColor": "#70dbed",
-          "HighLimitValue": 20,
-          "HighSideMargin": 22,
-          "Horizontal": true,
-          "LabelColName": "rule_name",
-          "LabelColor": "#ffffff",
-          "LabelFontSize": "100%",
-          "LabelMargin": null,
-          "LabelNameFilter": "",
-          "LableAngle": 0,
-          "LineColor": "blue",
-          "LineWidth": 5,
-          "LowAxisColor": "#ffffff",
-          "LowBarColor": "teal",
-          "LowLimitBarColor": "#2f575e",
-          "LowLimitBarFlashColor": "#ffa500",
-          "LowLimitBarFlashTimeout": 200,
-          "LowLimitLineColor": "#2f575e",
-          "LowLimitValue": null,
-          "LowSideMargin": 22,
-          "MaxLineColor": "rgb(74, 232, 12)",
-          "MaxLineValue": 200,
-          "MinLineColor": "#FADE2A",
-          "MinLineValue": 0,
-          "OddRowColor": "rgba(33, 33, 34, 0.92)",
-          "OutOfRangeLabelColor": "#ffffff",
-          "RecolorHighLimitBar": true,
-          "RecolorLowLimitBar": true,
-          "ScaleFactor": 1,
-          "ShowBars": true,
-          "ShowBaseLine": false,
-          "ShowDate": false,
-          "ShowGroupLabels": false,
-          "ShowHighLimitLine": false,
-          "ShowLabels": true,
-          "ShowLeftAxis": true,
-          "ShowLines": false,
-          "ShowLowLimitLine": false,
-          "ShowMaxLine": false,
-          "ShowMinLine": true,
-          "ShowRightAxis": true,
-          "ShowTooltips": false,
-          "ShowValues": true,
-          "SortColName": "Value",
-          "SortDirection": "descending",
-          "TZOffsetHours": 0,
-          "TooltipDateFormat": "YYYY-MM-DD HH:mm:ss",
-          "ValueColName": "Value",
-          "ValueColor": "#ffffff",
-          "ValueDecimals": null,
-          "ValueFontSize": "100%",
-          "ValuePosition": "bar end",
-          "datasource": "prometheus",
-          "gridPos": {
-            "h": 8,
-            "w": 14,
-            "x": 6,
-            "y": 10
-          },
-          "hideTimeOverride": false,
-          "id": 2,
-          "links": [],
-          "options": {},
-          "targets": [
-            {
-              "datasource": "prometheus",
-              "expr": "sum by (rule_name) (increase(autopilot_action_taken_total[$__range]))",
-              "format": "table",
-              "hide": false,
-              "instant": false,
-              "intervalFactor": 1,
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "title": "Actions taken per rule in time period (total)",
-          "type": "michaeldmoore-multistat-panel"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorPostfix": false,
-          "colorPrefix": false,
-          "colorValue": true,
-          "colors": [
-            "#E0B400",
-            "#2f575e",
-            "#6ed0e0"
-          ],
-          "datasource": "prometheus",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "gridPos": {
-            "h": 4,
-            "w": 6,
-            "x": 0,
-            "y": 14
-          },
-          "id": 4,
+          "id": 59,
           "interval": null,
           "links": [],
           "mappingType": 1,
@@ -745,24 +298,25 @@ data:
           ],
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": true,
+            "full": false,
             "lineColor": "rgb(31, 120, 193)",
-            "show": false
+            "show": true,
+            "ymax": null,
+            "ymin": null
           },
           "tableColumn": "",
           "targets": [
             {
-              "datasource": "prometheus",
-              "expr": "autopilot_objects_with_rules_total",
+              "expr": "autopilot_objects_with_rules_total{object_type=\"volume\"}",
               "format": "time_series",
               "instant": true,
-              "intervalFactor": 1,
-              "legendFormat": "",
               "refId": "A"
             }
           ],
           "thresholds": "",
-          "title": "Objects being monitored",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Volumes",
           "type": "singlestat",
           "valueFontSize": "200%",
           "valueMaps": [
@@ -772,18 +326,733 @@ data:
               "value": "null"
             }
           ],
+          "valueName": "first"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(41, 156, 70, 0.14)",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "prometheus",
+          "description": "Shows how many storagepool objects are covered by Autopilot",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 12,
+            "y": 5
+          },
+          "id": 31,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "options": {},
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true,
+            "ymax": null,
+            "ymin": null
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "autopilot_objects_with_rules_total{object_type=\"storagepool\"}",
+              "format": "time_series",
+              "instant": true,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Storagepools",
+          "type": "singlestat",
+          "valueFontSize": "200%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "0",
+              "value": "null"
+            }
+          ],
+          "valueName": "first"
+        },
+        {
+          "collapsed": false,
+          "datasource": "prometheus",
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 9
+          },
+          "id": 46,
+          "panels": [],
+          "repeat": "action",
+          "title": "Action $action Progress",
+          "type": "row"
+        },
+        {
+          "aliasColors": {
+            "Actions Taken": "#73BF69",
+            "Actions in progress": "#FADE2A",
+            "Queued actions": "#5794F2"
+          },
+          "breakPoint": "100%",
+          "cacheTimeout": null,
+          "combine": {
+            "label": "Others",
+            "threshold": 0
+          },
+          "datasource": "prometheus",
+          "description": "Indicates a rules state for action  $action",
+          "fontSize": "80%",
+          "format": "short",
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 10
+          },
+          "id": 44,
+          "interval": null,
+          "legend": {
+            "header": "",
+            "percentage": true,
+            "show": true,
+            "values": true
+          },
+          "legendType": "Right side",
+          "links": [],
+          "maxDataPoints": 1,
+          "nullPointMode": "connected",
+          "options": {},
+          "pieType": "pie",
+          "pluginVersion": "6.6.1",
+          "repeatDirection": "h",
+          "strokeWidth": 1,
+          "targets": [
+            {
+              "expr": "sum(autopilot_rule_state_total{action=\"$action\", state=\"ActiveActionsPending\"})",
+              "format": "time_series",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Queued actions",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(autopilot_rule_state_total{action=\"$action\", state=\"ActiveActionsInProgress\"})",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Actions in progress",
+              "refId": "C"
+            },
+            {
+              "expr": "sum(autopilot_rule_state_total{action=\"$action\", state=\"ActionAwaitingApproval\"})",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Waiting for approval",
+              "refId": "B"
+            },
+            {
+              "expr": "sum(autopilot_rule_state_total{action=\"$action\", state=\"ActiveActionsTaken\"})",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Actions Taken",
+              "refId": "E"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Action $action State Overview",
+          "type": "grafana-piechart-panel",
           "valueName": "current"
+        },
+        {
+          "columns": [],
+          "datasource": "prometheus",
+          "description": "Indicates a current state of existing autopilot rules for action $action",
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 10
+          },
+          "id": 69,
+          "options": {},
+          "pageSize": null,
+          "showHeader": true,
+          "sort": {
+            "col": 6,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "",
+              "align": "center",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "state",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "Autopilot Rule",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "#FADE2A"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "rule_name",
+              "preserveFormat": false,
+              "sanitize": false,
+              "thresholds": [
+                ""
+              ],
+              "type": "string",
+              "unit": "short",
+              "valueMaps": []
+            },
+            {
+              "alias": "",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 0,
+              "mappingType": 1,
+              "pattern": "Value",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "right",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "expr": "autopilot_rule_state_total{action=\"$action\"}",
+              "format": "table",
+              "instant": true,
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Action $action State Details",
+          "transform": "table",
+          "type": "table"
+        },
+        {
+          "columns": [],
+          "datasource": "prometheus",
+          "description": "Shows the average of how long an action $action took to complete in seconds",
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 4,
+            "w": 12,
+            "x": 12,
+            "y": 16
+          },
+          "id": 20,
+          "options": {},
+          "pageSize": null,
+          "showHeader": true,
+          "sort": {
+            "col": 5,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Avg time to completion",
+              "align": "auto",
+              "colorMode": "value",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value",
+              "thresholds": [
+                "30"
+              ],
+              "type": "number",
+              "unit": "dtdurations"
+            },
+            {
+              "alias": "Autopilot rule",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "rule_name",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "expr": "(autopilot_action_duration_sum{action=\"$action\"}/autopilot_action_duration_count{action=\"$action\"})>0",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "action: {{action}}; rule:{{rule_name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Avg Duration (sec) Action $action",
+          "transform": "table",
+          "type": "table"
+        },
+        {
+          "collapsed": false,
+          "datasource": "prometheus",
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 20
+          },
+          "id": 36,
+          "panels": [],
+          "repeat": null,
+          "title": "Errors",
+          "type": "row"
+        },
+        {
+          "aliasColors": {
+            "declined": "#F2CC0C",
+            "failed": "#C4162A",
+            "successfull": "#37872D"
+          },
+          "breakPoint": "50%",
+          "cacheTimeout": null,
+          "combine": {
+            "label": "Others",
+            "threshold": 0
+          },
+          "datasource": "prometheus",
+          "description": "Shows failed and declined actions overall actions along with successfully completed action",
+          "fontSize": "80%",
+          "format": "short",
+          "gridPos": {
+            "h": 10,
+            "w": 9,
+            "x": 0,
+            "y": 21
+          },
+          "id": 48,
+          "interval": null,
+          "legend": {
+            "percentage": true,
+            "show": true,
+            "values": true
+          },
+          "legendType": "Under graph",
+          "links": [],
+          "maxDataPoints": 1,
+          "nullPointMode": "connected",
+          "options": {},
+          "pieType": "pie",
+          "strokeWidth": 1,
+          "targets": [
+            {
+              "expr": "floor(sum(increase(autopilot_action_failed_total{object=~\".*\",state=\"declined\"}[$__range])) > 0)",
+              "format": "time_series",
+              "instant": true,
+              "legendFormat": "declined",
+              "refId": "A"
+            },
+            {
+              "expr": "floor(sum(increase(autopilot_action_failed_total{object=~\".*\",state=\"failed\"}[$__range])) > 0)",
+              "instant": true,
+              "legendFormat": "failed",
+              "refId": "B"
+            },
+            {
+              "expr": "sum(autopilot_rule_state_total{state=\"ActiveActionsTaken\"})",
+              "format": "time_series",
+              "instant": true,
+              "legendFormat": "successfull",
+              "refId": "C"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Total completed/Failed/Declined Actions Overview",
+          "type": "grafana-piechart-panel",
+          "valueName": "current"
+        },
+        {
+          "columns": [],
+          "datasource": "prometheus",
+          "description": "Indicates what actions have been declined",
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 5,
+            "w": 15,
+            "x": 9,
+            "y": 21
+          },
+          "id": 14,
+          "interval": "",
+          "options": {},
+          "pageSize": 4,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Declined",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": null,
+              "pattern": "Value",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "Action",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "action",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "Autopilot object",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "object",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "datasource": "prometheus",
+              "expr": "increase(autopilot_action_failed_total{object=~\".*\",state=\"declined\"}[$__range]) > 0",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "{{action}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Declined Actions Details",
+          "transform": "table",
+          "type": "table"
+        },
+        {
+          "columns": [],
+          "datasource": "prometheus",
+          "description": "Indicates how many actions have been failed to perform. ",
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 5,
+            "w": 15,
+            "x": 9,
+            "y": 26
+          },
+          "id": 70,
+          "interval": "",
+          "options": {},
+          "pageSize": 4,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Declined",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": null,
+              "pattern": "Value",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "Action",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "action",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "Autopilot object",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "object",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "datasource": "prometheus",
+              "expr": "increase(autopilot_action_failed_total{object=~\".*\",state=\"failed\"}[$__range]) > 0",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "{{action}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Failed Actions Details",
+          "transform": "table",
+          "type": "table"
         }
       ],
-      "refresh": "30s",
+      "refresh": "10s",
       "schemaVersion": 22,
       "style": "dark",
       "tags": [],
       "templating": {
-        "list": []
+        "list": [
+          {
+            "allValue": null,
+            "current": {},
+            "datasource": "prometheus",
+            "definition": "autopilot_rule_state_total",
+            "hide": 0,
+            "includeAll": false,
+            "label": "Action",
+            "multi": true,
+            "name": "action",
+            "options": [],
+            "query": "autopilot_rule_state_total",
+            "refresh": 2,
+            "regex": "/.*action=\"([^\"]*).*/",
+            "skipUrlSync": false,
+            "sort": 0,
+            "tagValuesQuery": "",
+            "tags": [],
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "allValue": null,
+            "current": {},
+            "datasource": "prometheus",
+            "definition": "autopilot_rule_state_total",
+            "hide": 2,
+            "includeAll": false,
+            "label": "Rule",
+            "multi": false,
+            "name": "rule",
+            "options": [],
+            "query": "autopilot_rule_state_total",
+            "refresh": 1,
+            "regex": "/.*rule_name=\"([^\"]*).*/",
+            "skipUrlSync": false,
+            "sort": 0,
+            "tagValuesQuery": "",
+            "tags": [],
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "datasource": "prometheus",
+            "filters": [],
+            "hide": 0,
+            "label": "",
+            "name": "Filters",
+            "skipUrlSync": false,
+            "type": "adhoc"
+          }
+        ]
       },
       "time": {
-        "from": "now-3h",
+        "from": "now-15m",
         "to": "now"
       },
       "timepicker": {
@@ -813,8 +1082,8 @@ data:
       },
       "timezone": "",
       "title": "Autopilot",
-      "uid": "CblF5-EZk12",
-      "version": 1
+      "uid": "oi9lcckMk",
+      "version": 86
     }
   portworx-cluster-dashboard.json: |-
     {
@@ -6851,7 +7120,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 3000
+    - protocol: TCP
+      port: 3000
+      nodePort: 30009
   selector:
     app: grafana
 ---
@@ -6873,12 +7144,12 @@ spec:
         app: grafana
     spec:
       containers:
-        - image: grafana/grafana:latest
+        - image: grafana/grafana:7.0.0
           name: grafana
           imagePullPolicy: IfNotPresent
           env:
             - name: GF_INSTALL_PLUGINS
-              value: "michaeldmoore-multistat-panel, grafana-piechart-panel"
+              value: "grafana-piechart-panel"
           resources:
             limits:
               cpu: 100m
