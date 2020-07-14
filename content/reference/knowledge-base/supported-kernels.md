@@ -26,35 +26,102 @@ apt install linux-headers-$(uname -r)
 
 ```
 
-#### Portworx CentOS/RHEL supported kernels
+## Qualified distros and kernel versions
 
-Portworx Version|Latest Supported Kernel Version
--------------|-----------------------
-2.0.0|3.10.0-957.el7.x86_64
-1.7.2|3.10.0-957.el7.x86_64
-1.7.1.1|3.10.0-862.14.4.el7.x86_64
-1.7.1|3.10.0-862.14.4.el7.x86_64
-1.7.0|3.10.0-862.14.4.el7.x86_64
-1.6.1.4|3.10.0-862.14.4.el7.x86_64
-1.6.1.3|3.10.0-862.14.4.el7.x86_64
-1.6.1.2|3.10.0-862.14.4.el7.x86_64
-1.6.1.1|3.10.0-862.14.4.el7.x86_64
-1.6.1|3.10.0-862.14.4.el7.x86_64
-1.6.0|3.10.0-862.11.6.el7.x86_64
-1.5.1|3.10.0-862.11.6.el7.x86_64|
+### 2.5.3
 
-#### Portworx Ubuntu supported kernels
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+| Ubuntu 16.04	| Up to 4.4.0-116-generic #140-Ubuntu |
+| Fedora 27	| Up to 4.18.18-100.fc27.x86_64 |
+| Fedora 28	| Up to 4.18.10-200.fc28.x86_64 |
+| RHEL 7.5	| Up to 3.10.0-1127.el7.x86_64 |
+| RHEL 7.8	| Up to 3.10.0-1127.el7.x86_64 |
+| Debian 9	| Up to 4.9.0-12-amd64 #1 SMP Debian 4.9.210-1 |
 
-Portworx Version|Latest Supported Kernel Version
--------------|-----------------------
-2.0.0|4.19.5-041905-generic
-1.7.1.1|4.19.1-041901-generic
-1.7.1|4.19.0-041900-generic
-1.7.0|4.19.0-041900-generic
-1.6.1.4|4.19.0-041900-generic
-1.6.1.3|4.19.0-041900-generic
-1.6.1.2|4.18.16-041816-generic
-1.6.1.1|4.18.12-041812-generic
-1.6.1|4.18.11-041811-generic
-1.6.0|4.18.8-041808-generic
-1.5.1|4.18.7-041807-generic
+| **Cloud Distro** | **Kernel Version** |
+| --- | --- |
+| CoreOS Alpha	| Up to 4.19.106-coreos |
+| CoreOS Beta 2411.1.0 (Rhyolite)	| Up to 4.19.106-coreos |
+| CoreOS Stable 2345.3.0 (Rhyolite)	| Up to 4.19.106-coreos |
+| RHEL 8.1 (Ootpa)	| Up to 4.18.0-80.4.2.el8_0.x86_64 |
+| Ubuntu19.04	| Up to 5.0.0-1017-gcp |
+| Ubuntu18.04.4 LTS	| Up to 5.0.0-1033-gcp |
+| Amazon Linux v2	| Up to 4.14.77-81.59.amzn2.x86_64 |
+
+
+### 2.0.0
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+|CentOS/RHEL | Up to 3.10.0-957.el7.x86_64 |
+|Ubuntu | Up to 4.19.5-041905-generic |
+
+### 1.7.2
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+| CentOS/RHEL| Up to 3.10.0-957.el7.x86_64 |
+
+### 1.7.1.1
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+| CentOS/RHEL| Up to 3.10.0-862.14.4.el7.x86_64 |
+|Ubuntu | Up to 4.19.1-041901-generic |
+
+### 1.7.1
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+|CentOS/RHEL| Up to 3.10.0-862.14.4.el7.x86_64 |
+|Ubuntu| Up to 4.19.0-041900-generic |
+
+### 1.7.0
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+|CentOS/RHEL| Up to 3.10.0-862.14.4.el7.x86_64 |
+|Ubuntu| Up to 4.19.0-041900-generic |
+
+### 1.6.1.4 and 1.6.1.3
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+|CentOS/RHEL| Up to 3.10.0-862.14.4.el7.x86_64 |
+|Ubuntu| Up to 4.19.0-041900-generic |
+
+### 1.6.1.2
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+|CentOS/RHEL| Up to 3.10.0-862.14.4.el7.x86_64 |
+|Ubuntu| Up to 4.18.16-041816-generic |
+
+### 1.6.1.1
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+|CentOS/RHEL| Up to 3.10.0-862.14.4.el7.x86_64 |
+|Ubuntu| Up to 4.18.12-041812-generic |
+
+### 1.6.1
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+|CentOS/RHEL| Up to 3.10.0-862.14.4.el7.x86_64 |
+|Ubuntu|Up to 4.18.11-041811-generic |
+
+### 1.6.0
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+|CentOS/RHEL| Up to 3.10.0-862.11.6.el7.x86_64 |
+|Ubuntu|Up to 4.18.8-041808-generic |
+
+### 1.5.1
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+|CentOS/RHEL| Up to 3.10.0-862.11.6.el7.x86_64 |
+|Ubuntu|Up to 4.18.7-041807-generic |

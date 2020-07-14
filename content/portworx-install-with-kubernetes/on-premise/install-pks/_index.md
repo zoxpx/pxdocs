@@ -96,7 +96,3 @@ Below are the steps to wipe your entire Portworx installation on PKS.
 If you have **local** datastores, proceed to [Portworx install on PKS on vSphere using local datastores](/portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-local).
 -->
 
-{{<info>}}
-**Install using bosh CFCR etcd release**:
-As Portworx ships with its own internal key-value store, deploying an external etcd should not be needed on PKS. If you are still prefer using bosh to deploy an external etcd, refer to [Installing Etcd using CFCR etcd release](/portworx-install-with-kubernetes/on-premise/install-pks/install-cfcr-etcd-release) and return here once done.
-{{</info>}}

@@ -19,7 +19,7 @@ deployment-image:
 	cp -r themes/pxdocs-tooling/deploy/nginx nginx_build_folder
 	cp -r public nginx_build_folder/hugo_public
 	cat public/redirects.json | docker run --rm -i stedolan/jq -r '.[] | "rewrite ^\(.from)$$ \(.to) permanent;"' > nginx_build_folder/pxdocs-directs.conf
-	docker build -t $(DEPLOYMENT_IMAGE) nginx_build_folder
+	docker build -t $(DEPLOYMENT_IMAGE) --build-arg NGINX_REDIRECTS_FILE nginx_build_folder
 	rm -rf nginx_build_folder
 
 .PHONY: update-theme reset-theme
@@ -49,6 +49,7 @@ develop: image
 		-e TRAVIS_BRANCH \
 		-e PRODUCT_URL \
 		-e PRODUCT_NAME \
+		-e PRODUCT_NAMES_AND_INDICES \
 		-p $(PORT):1313 \
 		-v "$(PWD):/pxdocs" \
 		$(BUILDER_IMAGE) server --bind=0.0.0.0 --disableFastRender
@@ -66,6 +67,7 @@ publish-docker:
 		-e TRAVIS_BRANCH \
 		-e PRODUCT_URL \
 		-e PRODUCT_NAME \
+		-e PRODUCT_NAMES_AND_INDICES \
 		-v "$(PWD):/pxdocs" \
 		$(BUILDER_IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
 
@@ -81,6 +83,7 @@ search-index-docker:
 		-e ALGOLIA_INDEX_FILE=public/algolia.json \
 		-e PRODUCT_URL \
 		-e PRODUCT_NAME \
+		-e PRODUCT_NAMES_AND_INDICES \
 		$(SEARCH_INDEX_IMAGE)
 
 .PHONY: start-deployment-container
