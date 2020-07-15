@@ -223,15 +223,15 @@ In this video, get an overview of PX-Backup, the backup and recovery solution fo
 
 {{< youtube Nf1thpqqlWw >}}
 
-## Portworx Essentials vs Portworx Enterprise
+## {{< pxEssentials >}} vs {{< pxEnterprise >}}
 
-Select the best Portworx Enterprise Storage for you. In this video we’ll explain the differences between Portworx Essentials and Enterprise and when you would want to use one over the other.
+Select the best storage solution for you. In this video we’ll explain the differences between {{< pxEssentials >}} and {{< pxEnterprise >}} and when you would want to use one over the other.
 
 {{< youtube z5KHbQJvHdc >}}
 
 ## Local High Availability, Backup & Restore and Disaster Recovery
 
-Local High Availability, Backup and Restore, and Disaster Recovery are three capabilities that are the foundation of any enterprise data protection program and they are the essential elements to consider when evaluating a Kubernetes backup tool or solution. 
+Local High Availability, Backup and Restore, and Disaster Recovery are three capabilities that are the foundation of any enterprise data protection program and they are the essential elements to consider when evaluating a Kubernetes backup tool or solution.
 
 {{< youtube 2EjFYjUU1jc >}}
 

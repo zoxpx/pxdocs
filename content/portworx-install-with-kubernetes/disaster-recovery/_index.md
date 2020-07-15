@@ -73,5 +73,5 @@ Click on the section below to instructions on how to setup this option.
 
 ## Licensing
 
-Please note that the Disaster Recovery (PX-DR) license is not included with the PX-Enterprise Trial license.
+Please note that the Disaster Recovery (PX-DR) license is not included with the {{< pxEnterprise >}} Trial license.
 If you are interested in testing or purchasing this functionality, please reach out to us at support@portworx.com.

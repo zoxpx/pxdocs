@@ -7,7 +7,7 @@ aliases:
   - /portworx-install-with-kubernetes/on-premise/openshift/operator/2-deploy-px/
 ---
 
-The Portworx Enterprise Operator takes a custom Kubernetes resource called `StorageCluster` as input. The `StorageCluster` is a representation of your Portworx cluster configuration. Once the `StorageCluster` object is created, the Operator will deploy a Portworx cluster corresponding to the specification in the `StorageCluster` object. The Operator will watch for changes on the `StorageCluster` and update your cluster according to the latest specifications.
+The {{< pxEnterprise >}} Operator takes a custom Kubernetes resource called `StorageCluster` as input. The `StorageCluster` is a representation of your Portworx cluster configuration. Once the `StorageCluster` object is created, the Operator will deploy a Portworx cluster corresponding to the specification in the `StorageCluster` object. The Operator will watch for changes on the `StorageCluster` and update your cluster according to the latest specifications.
 
 For more information about the `StorageCluster` object and how the Operator manages changes, refer to the [StorageCluster](/reference/crd/storage-cluster) article.
 

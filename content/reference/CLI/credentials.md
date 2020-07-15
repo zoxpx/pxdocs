@@ -81,7 +81,7 @@ You can create and configure credentials in multiple ways depending on your clou
 ### Create credentials on AWS by specifying your keys
 
 {{<info>}}
-**NOTE:** The `--s3-storage-class` flag requires PX-Enterprise version 2.5.3 or higher
+**NOTE:** The `--s3-storage-class` flag requires {{< pxEnterprise >}} version 2.5.3 or higher
 {{</info>}}
 
 Enter the `pxctl credentials create` command, specifying:
@@ -112,11 +112,11 @@ Credentials created successfully
 {{<info>}}
 **Note:** This command will create a bucket with the Portworx cluster ID to use for the backups.
 {{</info>}}
-<!-- 
+<!--
 ### Create credentials on AWS by storing keys as environment variables
 
 {{<info>}}
-**NOTE:** This feature requires PX-Enterprise version 2.5.1 or higher
+**NOTE:** This feature requires {{< pxEnterprise >}} version 2.5.1 or higher
 {{</info>}}
 
 You can create and configure credentials for AWS by storing your secret access key and access key ID as environment variables. When you run the `pxctl credentials create`, Portworx uses the environment variables to create the credential:
@@ -147,13 +147,13 @@ You can create and configure credentials for AWS by storing your secret access k
     ```
     ```output
     Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
-    ``` 
+    ```
     -->
 
 ### Create credentials on AWS using IAM
 
 {{<info>}}
-**NOTE:** This feature requires PX-Enterprise versions 2.5.1 or greater
+**NOTE:** This feature requires {{< pxEnterprise >}} versions 2.5.1 or greater
 {{</info>}}
 
 Instead of storing your secret access key and access key ID on the host, you can grant Portworx bucket permissions using IAM. You can grant the EC2 instances on which Portworx is running, or you can grant permissions for a specific bucket.
@@ -241,7 +241,7 @@ Instead of storing your secret access key and access key ID on the host, you can
     * The `--s3-region` flag with your bucket's s3 region
     * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
     * The `--bucket` flag with your bucket's name
-    * The `use-iam` flag 
+    * The `use-iam` flag
     * The name of your cloud credentials
 
     ```text

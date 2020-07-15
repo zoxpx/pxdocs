@@ -42,12 +42,12 @@ hidden: true
 | `--disk-size` | Data disk size | No |
 | `--azure-client-secret` | Azure client secret | Required for deployments on Azure |
 | `--azure-client-id` | Azure client ID | Required for deployments on Azure |
-| `--azure-tenant-id` | Azure tenant ID | Required for deployments on Azure | 
+| `--azure-tenant-id` | Azure tenant ID | Required for deployments on Azure |
 | `--managed` | Provide this option if you're deploying PX-Central onto a managed k8s service cluster type. | Required for deployments on managed Kubernetes clusters |
 | `--openshift` | Provide this option if deploying PX-Central on OpenShift platform. | No |
 | `--mini` | Deploy PX-Central on mini clusters, such as Minikube, K3s, and Microk8s. | No |
 | `--all` | Install all the components of the PX-Central stack. <!-- more detail here would be helpful. -->| No |
-| `--px-store` | Install PX-Enterprise. | No |
+| `--px-store` | Install {{< pxEnterprise >}}. | No |
 | `--px-backup` | Install PX-Backup. <!-- Doesn't the default install include PX-Backup? --> | No |
 | `--px-backup-organization` | Organization ID for PX-Backup <!-- what is this? part of OIDC? --> | No |
 | `--oidc-user-access-token` | Provide OIDC user access token required while adding cluster into backup. <!-- What is this? is it specific to backup? --> | No |
@@ -55,8 +55,8 @@ hidden: true
 | `--px-license-server` | Install the license Server. | No |
 | `--pxcentral-namespace` | The namespace in which to deploy your PX-Central on-prem cluster. | No |
 | `--pks` | Specify this option if you're deploying PX-Central on-prem PKS. | No |
-| `--pks-px-disk-type` | The type of disk PX-Enterprise uses during auto disk provisioning. | No |
-| `--pks-px-disk-size` | The size of the disk PX-Enterprise uses during auto disk provisioning. | No |
+| `--pks-px-disk-type` | The type of disk {{< pxEnterprise >}} uses during auto disk provisioning. | No |
+| `--pks-px-disk-size` | The size of the disk {{< pxEnterprise >}} uses during auto disk provisioning. | No |
 | `--vsphere-vcenter-endpoint` | The vSphere vCenter endpoint. | No |
 | `--vsphere-vcenter-port` | The vSphere Vcenter port. | No |
 | `--vsphere-vcenter-datastore-prefix` | The vSphere vVenter datastore prefix. | No |
@@ -109,7 +109,7 @@ hidden: true
 * Deploy PX-Central on openshift on onprem
 
     ```text
-    ./install.sh  --license-password 'Adm1n!Ur' --openshift 
+    ./install.sh  --license-password 'Adm1n!Ur' --openshift
     ```
 
 * Deploy PX-Central on openshift on cloud
@@ -301,7 +301,7 @@ hidden: true
 * Deploy PX-Central on openshift on vsphere cloud with central OIDC with auto disk provision option
 
     ```text
-    ./install.sh --license-password 'Adm1n!Ur' --cloud vsphere --openshift --cloudstorage --vsphere-vcenter-endpoint <VCENTER_ENDPOINT> --vsphere-vcenter-port <VCENTER_PORT> --vsphere-vcenter-datastore-prefix "Phy-" --vsphere-vcenter-install-mode <INSTALL_MODE> --vsphere-insecure --vsphere-user <VCENTER_USER> --vsphere-password <VCENTER_PASSWORD> --oidc --admin-user pxadmin --admin-password Password2 --admin-email  pxadmin@portworx.com 
+    ./install.sh --license-password 'Adm1n!Ur' --cloud vsphere --openshift --cloudstorage --vsphere-vcenter-endpoint <VCENTER_ENDPOINT> --vsphere-vcenter-port <VCENTER_PORT> --vsphere-vcenter-datastore-prefix "Phy-" --vsphere-vcenter-install-mode <INSTALL_MODE> --vsphere-insecure --vsphere-user <VCENTER_USER> --vsphere-password <VCENTER_PASSWORD> --oidc --admin-user pxadmin --admin-password Password2 --admin-email  pxadmin@portworx.com
     ```
 
 * Deploy PX-Central on openshift on vsphere cloud with external OIDC with auto disk provision option

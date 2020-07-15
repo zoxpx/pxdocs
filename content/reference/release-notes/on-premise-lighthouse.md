@@ -1,6 +1,6 @@
 ---
 title: "On-Prem Lighthouse Release Notes"
-keywords: Release notes, On-Prem Lighthouse, PX-Lighthouse, PX-Enterprise
+keywords: Release notes, On-Prem Lighthouse, PX-Lighthouse, Portworx Enterprise
 meta-description: "Release notes for Lighthouse, the Portworx UI."
 description: "Release notes for Lighthouse, the Portworx UI."
 series: release-notes
@@ -11,7 +11,7 @@ weight: 300
 
 ### Key Fixes
 
-* PWX-11673 - Improved security by hiding the Apache version from outputs. 
+* PWX-11673 - Improved security by hiding the Apache version from outputs.
 
 ## Lighthouse 2.0.6 Release notes
 
@@ -115,7 +115,7 @@ To get access to Portworx PX-Lighthouse docker repository, contact us at support
 
 ## Lighthouse 1.1.3 Release notes
 
-In order to use Lighthouse 1.1.3 with authentication, please download and install PX-Enterprise 1.1.2 as well.
+In order to use Lighthouse 1.1.3 with authentication, please download and install {{< pxEnterprise >}} 1.1.2 as well.
 
 ### Key Features
 

@@ -61,21 +61,21 @@ Run the standard **ifconfig** utility to determine which network interface corre
 For CentOS7, your likely public interface will be "team0" and private interface will be "team0:0".   Use "team0" as the Portworx management interface, and "team0:0" as the Portworx data interface.
 For Ubuntu16, your likely public interface will be "bond0" and private interface will be "bond0:0".   Use "bond0" as the Portworx management interface, and "bond0:0" as the Portworx data interface.
 
-### Step 7: Launch PX-Enterprise
+### Step 7: Launch {{< pxEnterprise >}}
 
 <!--
-I can't figure out the target for this link... Also, launching PX-Enterprise seem to be documented in the next paragraph
+I can't figure out the target for this link... Also, launching {{< pxEnterprise >}} seem to be documented in the next paragraph
 
-[Follow the instructions to launch PX-Enterprise](/#install-with-a-container-orchestrator)
+[Follow the instructions to launch {{< pxEnterprise >}}](/#install-with-a-container-orchestrator)
 -->
 
-Use the docker run command to launch PX-Enterprise, substituting the appropriate multipath devices and network interfaces, as identified from the previous steps.
+Use the docker run command to launch {{< pxEnterprise >}}, substituting the appropriate multipath devices and network interfaces, as identified from the previous steps.
 
 Alternatively, you can either run the 'px_bootstrap' script from curl, or construct your own [config.json](/shared/install-with-other-docker-config-json) file.
 
-From the server node running PX-Enterprise container, you should see the following status:
+From the server node running {{< pxEnterprise >}} container, you should see the following status:
 ![PX-Cluster on Packet](/img/px-cluster-on-packet.png "PX-Cluster on Packet")
 
 
-You should also be able to monitor cluster from PX-Enterprise console:
+You should also be able to monitor cluster from {{< pxEnterprise >}} console:
 ![Packet-Cluster on Lighthouse](/img/packet-cluster-on-lighthouse.png "Packet-Cluster on Lighthouse")

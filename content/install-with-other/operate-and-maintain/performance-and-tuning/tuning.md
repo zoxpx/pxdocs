@@ -1,6 +1,6 @@
 ---
 title: Performance Tuning
-keywords: performance tuning, container level optimization, volume level optimization, px-enterprise,
+keywords: performance tuning, container level optimization, volume level optimization, Portworx Enterprise,
 description: Create, manage and inspect storage volumes with pxctl CLI. Discover how to use Docker together with Portworx!
 weight: 1
 ---
@@ -65,10 +65,10 @@ If there are not enough nodes online, Portworx will automatically disable this a
 Use this profile to set up the mount settings of your `sharedV4` volumes. This profile sets the following options:
 
 * `sync`
-    
+
     This option synchronizes all the write operations with your backend storage. If you specify this option, the server and the clients will be able to access modified data immediately.
 
-* `noac` 
-    
+* `noac`
+
     This option disables the caching for the file system and metadata (file and directory attributes) on the client-side.
 

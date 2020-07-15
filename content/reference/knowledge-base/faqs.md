@@ -72,7 +72,7 @@ Please see the documentation [here](/concepts/shared-volumes), or view our YouTu
 Portworx snapshots are redirect-on-write snapshots and are thin clones.
 
 ### What's the largest cluster size that's been tested?  Supported?
-PX-Enterprise supports 1000 nodes in the same cluster.  But this is only a QA/qualification limit.
+{{< pxEnterprise >}} supports 1000 nodes in the same cluster.  But this is only a QA/qualification limit.
 
 ### How quickly is node failure detected?
 On the order of milliseconds.
@@ -88,10 +88,10 @@ Please see the [config-json file definition](/shared/install-with-other-docker-c
 Regardless, all data requests between the container and the Portworx volume driver will be handled locally on that host.
 
 ### Does Portworx support volume encryption?
-Yes, PX-Enterprise supports data encryption-at-rest and also encryption-in-flight as data is replicated between multiple Portworx nodes within a data center or across data centers or clouds. PX-Enterprise supports encrypted volumes and integration with key management software like Vault, AWS KMS, Kubernetes Secrets etc
+Yes, {{< pxEnterprise >}} supports data encryption-at-rest and also encryption-in-flight as data is replicated between multiple Portworx nodes within a data center or across data centers or clouds. {{< pxEnterprise >}} supports encrypted volumes and integration with key management software like Vault, AWS KMS, Kubernetes Secrets etc
 
 ### How can safely backup and restore my data with Portworx?
-PX-Enterprise supports cloudsnaps which enable the DevOps engineers to periodically back the data volumes in incremental snaps and restore the volume anywhere they want.
+{{< pxEnterprise >}} supports cloudsnaps which enable the DevOps engineers to periodically back the data volumes in incremental snaps and restore the volume anywhere they want.
 
 ## Did we miss your question?
 If so, please let us know here: <a class="email" title="Submit feedback" href="mailto:support@portworx.com?subject={{site.feedback_subject_line}} feedback&body=I have some feedback about the {{page.title}} page"><i class="fa fa-envelope-o"></i> Feedback</a>

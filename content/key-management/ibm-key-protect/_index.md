@@ -10,7 +10,7 @@ series: key-management
 ---
 
 {{<info>}}
-**NOTE:** Supported from PX-Enterprise 1.7 onwards
+**NOTE:** Supported from {{< pxEnterprise >}} 1.7 onwards
 {{</info>}}
 
 Portworx integrates with IBM Key Protect to store your encryption keys/secrets and credentials. This guide will help configure Portworx with IBM Key Protect. IBM Key Protect can be used to store Portworx secrets for Volume Encryption and Cloud Credentials.

@@ -24,9 +24,9 @@ Before you can install Portworx on your OpenShift cluster, you must first instal
 
       ![Portworx project callout](/img/OpenshiftSelectKube.png)
 
-3. Search for and select the **Portworx Enterprise** Operator:
+3. Search for and select the **{{< pxEnterprise >}}** Operator:
 
-      ![select Portworx Enterprise](/img/OpenshiftOperatorSelect.png)
+      ![select {{< pxEnterprise >}}](/img/OpenshiftOperatorSelect.png)
 
 4. Select **Install** to install the Certified Portworx Operator:
 

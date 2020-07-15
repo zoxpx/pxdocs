@@ -13,7 +13,7 @@ The goal of this document is to setup a single Portworx cluster that spans acros
 * **Version**: A single Portworx cluster of v2.1 or later installed on across Kubernetes clusters and Stork v2.2.4 or later on both clusters
 * **Network Connectivity**: Ports 9001 to 9020 open between the two Kubernetes clusters
 * **External Kvdb**: A kvdb like etcd or consul setup outside of the Kubernetes clusters
-* **License**: A DR enabled PX-Enterprise license on both the source and destination clusters to use this feature
+* **License**: A DR enabled {{< pxEnterprise >}} license on both the source and destination clusters to use this feature
 
 ## Installing Portworx
 In this mode of operation, a single Portworx cluster will stretch across multiple Kubernetes clusters.

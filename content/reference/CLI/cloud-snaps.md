@@ -14,7 +14,7 @@ Portworx helps administrators running persistent container workloads, on-prem or
 
 ### Supported cloud providers
 
-PX-Enterprise supports the following cloud providers:
+{{< pxEnterprise >}} supports the following cloud providers:
 
 1.  Amazon S3 and any S3-compatible Object Storage
 2.  Azure Blob Storage
@@ -108,7 +108,7 @@ Flags:
       --google-json-key-file string
       --encryption-passphrase string   Passphrase to be used for encrypting data in the cloudsnaps
       --s3-endpoint strings            Endpoint of the S3 servers, in comma separated host:port format
-  -h, --help        
+  -h, --help
                      help for create
 Global Flags:
       --ca string        path to root certificate for ssl usage
@@ -568,7 +568,7 @@ Group Cloudsnap backup started successfully with groupID:3b1de846-1078-40e6-ac1a
 
 {{<info>}}This feature is not available in versions prior to 2.0.{{</info>}}
 
-With PX-Enterprise 2.0, Portworx has enhanced the way cloud backups are done. Now, users can resume interrupted backups or restores.
+With {{< pxEnterprise >}} 2.0, Portworx has enhanced the way cloud backups are done. Now, users can resume interrupted backups or restores.
 
 For example, if the node performing backups or restores restarts, the backup/restore will resume once that node becomes operational.
 

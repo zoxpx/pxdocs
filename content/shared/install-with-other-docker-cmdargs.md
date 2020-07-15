@@ -1,7 +1,7 @@
 ---
 title: Portworx command line arguments
 description: Command line arguments to the Portworx daemon
-keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
+keywords: portworx, px-developer, Portworx Enterprise, plugin, install, configure, container, storage, runc, oci
 hidden: true
 ---
 

@@ -27,7 +27,7 @@ Before you install Portworx on Kubernetes, ensure that you're using a supported 
 
 ## Installation
 
-Whether you're using Portworx Enterprise or Essentials, you can install Portworx on the cloud or on-premise. Proceed to one of the following sections for install instructions.
+Whether you're using {{< pxEnterprise >}} or Essentials, you can install Portworx on the cloud or on-premise. Proceed to one of the following sections for install instructions.
 
 {{<homelist series="k8s-install">}}
 

@@ -17,8 +17,8 @@ This document will walk you through how to migrate your Portworx volumes between
 
 Before we begin, please make sure the following prerequisites are met:
 
-* **Version**: The source AND destination clusters need PX-Enterprise v2.0 or later
-release. As future releases are made, the two clusters can have different PX-Enterprise versions (e.g. v2.1 and v2.3).
+* **Version**: The source AND destination clusters need {{< pxEnterprise >}} v2.0 or later
+release. As future releases are made, the two clusters can have different {{< pxEnterprise >}} versions (e.g. v2.1 and v2.3).
 
 * **Stork v2.0+** is required on the source cluster.
 

@@ -5,12 +5,12 @@ keywords: Troubleshoot, PX-Central, Kubernetes, k8s
 description: This article shows how you can unlink a Portworx Essentials cluster
 ---
 
-The maximum number of Portworx Essentials clusters that you can associate with your user account is 1. Thus, before you create a new Portworx Essentials cluster, you must first unlink your existing cluster.
+The maximum number of {{< pxEssentials >}} clusters that you can associate with your user account is 1. Thus, before you create a new {{< pxEssentials >}} cluster, you must first unlink your existing cluster.
 
-For details about the Portworx Essentials license, refer to the [Portworx Essentials](/concepts/portworx-essentials/) page.
+For details about the {{< pxEssentials >}} license, refer to the [{{< pxEssentials >}}](/concepts/portworx-essentials/) page.
 
 
-# Unlink a Portworx Essentials cluster
+# Unlink a {{< pxEssentials >}} cluster
 
 1. Navigate to <a href="https://central.portworx.com" target="tab">PX-Central</a> and log in:
 

@@ -40,7 +40,7 @@ from PCSD - Product Collaboration Systems Division
 * Software
   * Docker version 1.12
   * Centos 7.1
-  * PX-Enterprise v1.0.8
+  * {{< pxEnterprise >}} v1.0.8
 
 ### Random read performance overhead
 ![Perf Read](/img/perf-read.png)

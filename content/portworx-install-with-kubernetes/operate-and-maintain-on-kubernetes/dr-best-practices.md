@@ -5,7 +5,7 @@ keywords: disaster recovery, disaster proof, site failure, node failure, power f
 description: Disaster Recovery Best Practices for Production Deployments.
 ---
 
-PX-Enterprise comes with many data services features that enable production customers to deploy containerized workloads through many container orchestrators.
+{{< pxEnterprise >}} comes with many data services features that enable production customers to deploy containerized workloads through many container orchestrators.
 
 This page describes how to configure Portworx for high availability and disaster recovery so customers can easily recover from site-wide failures.
 

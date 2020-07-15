@@ -10,7 +10,7 @@ params:
   narrowToolbarTitle: Portworx Documentation
   wideToolbarTitle: Documentation
   description: Find out more about Portworx, the persistent storage solution for containers. Come check us out for step-by-step guides and tips!
-  keywords: portworx, px-enterprise, px-developer, containers, storage
+  keywords: Portworx, Portworx Enterprise, PX-Developer, containers, storage
   githubRepo: https://github.com/portworx/pxdocs
   algolia:
     vars:

@@ -1,7 +1,7 @@
 ---
 title: License operations using pxctl
 linkTitle: License
-keywords: pxctl, command-line tool, cli, reference, list licenses, add license, activate license, offline-activation, license transfer, list available features, px-developer, px-enterprise
+keywords: pxctl, command-line tool, cli, reference, list licenses, add license, activate license, offline-activation, license transfer, list available features, px-developer, Portworx Enterprise
 description: Learn how to manage licenses using the Portworx CLI.
 weight: 14
 ---

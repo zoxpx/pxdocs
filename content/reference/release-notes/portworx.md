@@ -182,7 +182,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 | **Improvement Number** | **Improvement Description** |
 |----|----|
 | PWX-11638 | Starting with 2.5.1, credentials can be configured without providing secret key or access key to use instance’s IAM capabilities to access cloud provider’s object store. Current support is limited to AWS’s EC2 instance in 2.5.1. |
-| PWX-12314 | For PX-Essentials, an improvment to the `pxctl status` command now provides the reason for why a license is expired. |
+| PWX-12314 | For {{< pxEssentials >}}, an improvment to the `pxctl status` command now provides the reason for why a license is expired. |
 
 
 ### Fixes
@@ -192,7 +192,7 @@ The following issues have been fixed:
 |**Issue Number**|**Issue Description**|
 |----|----|
 | PWX-11602 | When Portworx detected an issue with container volumes, for example, if a drive was removed, OCI-Monitor resulted in Portworx pods being stuck in a `CrashLoopBackupOff` state. <br/><br/> **User Impact:** Portworx pods in users' clusters would not recover. <br/><br/> **Resolution:** When Portworx (OCI-Monitor) detects an issue with container mounts, it sends a request to Kuberenetes to reset/reinitialize the Portworx pod, which fixes the issue. |
-| PWX-12289 | For the CRI-O container runtime, when OCI-Monitor is set to `ImagePullPolicy:IfNotPresent`, it should pull the PX-Enterprise image only when the image is not present on the system. The OCI-Monitor incorrectly identified the image as present while it wasn't. <br/><br/> **User Impact:** Portworx failed to pull the required image and OCI-Monitor failed. <br/><br/> **Resolution:** The OCI-Monitor `ImagePullPolicy` handling now properly pulls images. |
+| PWX-12289 | For the CRI-O container runtime, when OCI-Monitor is set to `ImagePullPolicy:IfNotPresent`, it should pull the {{< pxEnterprise >}} image only when the image is not present on the system. The OCI-Monitor incorrectly identified the image as present while it wasn't. <br/><br/> **User Impact:** Portworx failed to pull the required image and OCI-Monitor failed. <br/><br/> **Resolution:** The OCI-Monitor `ImagePullPolicy` handling now properly pulls images. |
 | PWX-12292 | When using OCI-Monitor, Portworx failed to drain its pods when required. <br/><br/> **User Impact:** OCI-Monitor failed to start and upgrade operations failed. <br/><br/> **Resolution:** OCI-monitor now properly starts and Portworx upgrades. |
 | PWX-12252 | For CRI-O integrations, the OCI-Monitor did not copy the install logs into its own output. As a consequence, the OCI-Monitor did not parse/retrieve the `INFO: Module version check: Success` install log line, and always triggered the cordoning/draining of the nodes. <br/><br/> **User Impact:** Upgrades to version 2.5.0 stalled on OpenShift and/or CRI-O container-runtime Kubernetes clusters. <br/><br/> **Resolution:** Portworx application cordoning and draining during the upgrade process now works properly, allowing upgrades. |
 | PWX-12180 | Portworx didn't send license server alerts for errors packaged into the response body of a valid REST call. <br/><br/> **User Impact:** Users did not see license server alerts for these kinds of errors. <br/><br/> **Resolution:** Portworx now treats these kinds of errors in the same manner as REST errors, and raises alerts accordingly. |
@@ -217,7 +217,7 @@ April 3, 2020
 ### New features
 
  * Introducing [PX-Central on-premises](https://2.5.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/): Deploy your own PX-Central dashboard with Portworx on your own cluster.
- * Introducing [PX Essentials](https://2.5.docs.portworx.com/concepts/portworx-essentials/): A free Portworx license for prototyping and small production clusters.
+ * Introducing [{{< pxEssentials >}}](https://2.5.docs.portworx.com/concepts/portworx-essentials/): A free Portworx license for prototyping and small production clusters.
 
 ### Improvements
 
@@ -357,7 +357,7 @@ The following issues have been fixed:
 |----|----|
 | PWX-10400 | In some situations, a busy volume remained attached even after a pod is terminated in Kubernetes.<br/><br/>**User impact:** Upgrades or other operations relying on the `kubectl drain` command got stuck on a node with these attached volumes.<br/><br/>**Resolution:** Portworx now detaches these busy volumes from terminated Kubernetes pods. |
 | PWX-10809 | Portworx ignored the `max_drive_set_count` field when deployed in disaggregated mode on cloud deployments.<br/><br/>**User Impact:** If an existing node was terminated and replaced without releasing its storage devices, Portworx sometimes brought a new node online as a storage node, exceeding the `max_drive_set_count` field value.<br/><br/>**Resolution:** Portworx now correctly enforces the `max_drive_set_count` field values. |
-| PWX-10627 | Portworx processes license expiration dates based on a combination of PX-Enterprise and AddOn licenses. If these licenses expired at different times, Portworx would not accurately report when they would expire. <br/><br/>**User Impact:** Users with these licenses may have had their cluster's node capacity reduced unexpectedly and may not have been able to start their cluster if it exceeded the remaining available license capacity.<br/><br/>**Resolution:** Portworx now aligns the license expiration dates and accurately reports when they expire. |
+| PWX-10627 | Portworx processes license expiration dates based on a combination of {{< pxEnterprise >}} and AddOn licenses. If these licenses expired at different times, Portworx would not accurately report when they would expire. <br/><br/>**User Impact:** Users with these licenses may have had their cluster's node capacity reduced unexpectedly and may not have been able to start their cluster if it exceeded the remaining available license capacity.<br/><br/>**Resolution:** Portworx now aligns the license expiration dates and accurately reports when they expire. |
 
 ## 2.3.2
 
@@ -853,7 +853,7 @@ April 19, 2019
 * PWX-8060 - Cloudsnap restores will fail when the volume is heavily fragmented
 * PWX-8064 - Reducing the HA level of an aggregated volume may cause any active cloud backups on the volume to fail. New cloud backup can be restarted once the HA level has been reduced on the volume
 * PWX-8261 - Startup issue with Debian 9 (4.19.0-0.bpo.2-cloud-amd64)
-* PWX-8297 - K8S: OCI-Mon must force-pull px-enterprise b4 reinstalling incomplete Portworx
+* PWX-8297 - K8S: OCI-Mon must force-pull px-enterprise before reinstalling incomplete Portworx
 * PWX-8311 - IKS: OCI Monitor not starting Portworx when both Docker and ContainerD services running
 * PWX-8334 - Fixed install progress-bar
 * PWX-8335 - Handle mpath device partitions in nodewipe
@@ -1836,7 +1836,7 @@ November 20, 2017
 
 ### Key Features and Enhancements
 
-* PX-Enterprise container is now available in [OCI Format](/install-with-other/docker/standalone)
+* {{< pxEnterprise >}} container is now available in [OCI Format](/install-with-other/docker/standalone)
 * Enhancements for db workloads to handle slow media
 
 ### Key Fixes
@@ -2021,7 +2021,7 @@ If you are upgrading from an older version of Portworx (1.2.8 or older) and have
 
 * Provide the ability to cancel a replication add or HA increase operation
 * Automatically decommission a storage less node in the cluster if it has been offline for longer than 48 hours
-* [Kubernetes snapshots driver for PX-Enterprise](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
+* [Kubernetes snapshots driver for {{< pxEnterprise >}}](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
 * Improve Kubernetes mount/unmount handling with POD failovers and moves
 
 ### Key Fixes
@@ -2037,7 +2037,7 @@ If you are upgrading from an older version of Portworx (1.2.8 or older) and have
 
 ### Errata
 
-* When PX-Enterprise is run on a large number of nodes, there is potential memory leak and a few nodes show high memory usage. This issue is resolved in 1.2.12.0 onwards. The workaround is to restart the PX-Enterprise container
+* When {{< pxEnterprise >}} is run on a large number of nodes, there is potential memory leak and a few nodes show high memory usage. This issue is resolved in 1.2.12.0 onwards. The workaround is to restart the {{< pxEnterprise >}} container
 
 ## 1.2.8
 
@@ -2045,7 +2045,7 @@ June 27, 2017
 
 ### Key Features and Enhancements
 
-* License Tiers for PX-Enterprise
+* License Tiers for {{< pxEnterprise >}}
 
 ## 1.2.5 Release notes
 
