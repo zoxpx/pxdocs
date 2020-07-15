@@ -39,7 +39,7 @@ You need at least 3 worker nodes in your Portworx cluster so that Portworx can r
 To install Portworx, you must have an IBM Cloud Kubernetes Service or Red Hat OpenShift on IBM Cloud cluster.
 
 1. Plan the network setup for your [Kubernetes](https://cloud.ibm.com/docs/containers?topic=containers-plan_clusters) or [OpenShift](https://cloud.ibm.com/docs/openshift?topic=openshift-plan_clusters) cluster.
-2. Decide if you want to create a multizone [Kubernetes](https://cloud.ibm.com/docs/containers?topic=containers-plan_clusters#multizone) or [OpenShift](https://cloud.ibm.com/docs/openshift?topic=openshift-ha_clusters#multizone) cluster for high availability. If you do, you must enable [VLAN spanning](https://cloud.ibm.com/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) or [Virtual Routing and Forwarding (VRF)](https://cloud.ibm.com/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud account.  
+2. Decide if you want to create a multizone [Kubernetes](https://cloud.ibm.com/docs/containers?topic=containers-plan_clusters#multizone) or [OpenShift](https://cloud.ibm.com/docs/openshift?topic=openshift-ha_clusters#multizone) cluster for high availability. If you do, you must enable [VLAN spanning](https://cloud.ibm.com/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) or [Virtual Routing and Forwarding (VRF)](https://cloud.ibm.com/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud account.
 3. Choose the worker node flavor for your [Kubernetes](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodes) or [OpenShift](https://cloud.ibm.com/docs/openshift?topic=openshift-planning_worker_nodes) cluster that you want to use. Make sure to review Step 1 to find frequently asked questions for the type of worker node that best meets the Portworx minimum requirements.
 4. Make sure that your IBM Cloud account is set up with the right [permissions](https://cloud.ibm.com/docs/containers?topic=containers-clusters#cluster_prepare) to create a cluster.
 5. Create a [Kubernetes](https://cloud.ibm.com/docs/containers?topic=containers-clusters#clusters_ui) or [OpenShift](https://cloud.ibm.com/docs/openshift?topic=openshift-openshift-create-cluster#openshift_create_cluster_console) cluster.
@@ -51,7 +51,7 @@ Every Portworx cluster must be connected to a key-value store to store Portworx 
 
 In order for your Portworx cluster to be highly available, you must ensure that the Portworx key-value store is set up to be highly available. By using an instance of [Databases for etcd](https://cloud.ibm.com/docs/containers?topic=containers-portworx#portworx_database), you can set up a highly available key-value store for your Portworx cluster. Each service instance contains three etcd data members that are added to a cluster. The etcd data members are spread across zones in an IBM Cloud location and data is replicated across all etcd data members.
 
-Alternatively, if you want to get up and running quickly, and don't need your key-value store to be highly available, you can select an internal KVBD from the `Portworx metadata key-value store` option on the deployment page. If you choose to install Portworx with the internal KVDB, then you can skip the steps that ask for the endpoints and the secret. 
+Alternatively, if you want to get up and running quickly, and don't need your key-value store to be highly available, you can select an internal KVBD from the `Portworx metadata key-value store` option on the deployment page. If you choose to install Portworx with the internal KVDB, then you can skip the steps that ask for the endpoints and the secret.
 
 ## Step 4: Set up volume encryption with IBM Key Protect
 
@@ -65,7 +65,7 @@ Review the following information in the IBM Cloud Kubernetes Service documentati
 
 ## Step 5: Install Portworx in your cluster
 
-Provision a Portworx service instance from the IBM Cloud catalog. After you create the service instance, the latest version of PX-Enterprise is installed on your cluster by using Helm. The installation includes a Portworx license. Make sure to review the costs for the license in the IBM Cloud catalog.
+Provision a Portworx service instance from the IBM Cloud catalog. After you create the service instance, the latest version of {{< pxEnterprise >}} is installed on your cluster by using Helm. The installation includes a Portworx license. Make sure to review the costs for the license in the IBM Cloud catalog.
 
 Before you begin:
 

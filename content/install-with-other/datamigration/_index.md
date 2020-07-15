@@ -21,7 +21,7 @@ This method can be used to migrate volumes between two Portworx clusters. It wil
 ## Pre-requisites
 
 * **Version**: The source AND destination clusters need the v2.0 or later
-release of PX-Enterprise on both clusters. As future releases are made, the two clusters can have different PX-Enterprise versions (e.g. v2.1 and v2.3).
+release of {{< pxEnterprise >}} on both clusters. As future releases are made, the two clusters can have different {{< pxEnterprise >}} versions (e.g. v2.1 and v2.3).
 * **Secret Store** : Make sure you have configured a [secret store](/key-management) on both your clusters.
 This will be used to store the credentials for the objectstore.
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be

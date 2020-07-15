@@ -172,7 +172,7 @@ Failure domains in terms of RACK information can be passed in as described [here
   pxctl volume create --daily @08:00 --daily @18:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
   ```
 
-* Here is more information on how to setup [snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots) in PX-Enterprise.
+* Here is more information on how to setup [snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots) in {{< pxEnterprise >}}.
 
 * For DR, it is recommended to setup cloudsnaps as well. This is covered in detail in the Day 3 - Cloudsnaps section
 

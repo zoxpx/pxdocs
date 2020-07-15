@@ -5,9 +5,9 @@ description: Setup a production ready Portworx cluster Google Cloud Platform (GC
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
 ---
 
-Before installing _Portworx-Enterprise_, make sure your environment meets the following requirements:
+Before installing {{< pxEnterprise >}}, make sure your environment meets the following requirements:
 
-* **Image type**: Only GKE clusters provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images) support Portworx. You must specify the **Ubuntu** node image when you create clusters. 
+* **Image type**: Only GKE clusters provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images) support Portworx. You must specify the **Ubuntu** node image when you create clusters.
 
 * **Resource requirements**: Portworx requires that each node in the Kubernetes cluster has at least 4 CPUs and 4 GB memory for Portworx. It is important to keep this in mind when selecting the machine types during cluster creation.
 
@@ -16,4 +16,4 @@ Before installing _Portworx-Enterprise_, make sure your environment meets the fo
     * Compute Admin
     * Service Account User
     * Kubernetes Engine Cluster Viewer
-  
+

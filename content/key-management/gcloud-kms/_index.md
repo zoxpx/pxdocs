@@ -11,7 +11,7 @@ series: key-management
 
 
 {{<info>}}
-**NOTE:** Supported from PX-Enterprise 2.0.2 onwards
+**NOTE:** Supported from {{< pxEnterprise >}} 2.0.2 onwards
 {{</info>}}
 
 Portworx integrates with Google Cloud KMS to store your Portworx secrets for Volume Encryption and Cloud Credentials. This guide will help configure Portworx with Google Cloud KMS.

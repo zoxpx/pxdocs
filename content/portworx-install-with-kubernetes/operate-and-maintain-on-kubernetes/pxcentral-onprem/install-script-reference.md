@@ -51,7 +51,7 @@ noicon: true
 
 * Deploy PX-Central without OIDC with user input kubeconfig:
 
-    ```text  
+    ```text
     ./install.sh --license-password 'examplePassword' --kubeconfig /tmp/test.yaml
     ```
 

@@ -19,7 +19,7 @@ weight: 2
 
 ## Overview
 
-With asynchronous DR, you can replicate Kubernetes applications and their data between two Kubernetes clusters. Here, a separate PX-Enterprisecluster runs under each Kubernetes cluster.
+With asynchronous DR, you can replicate Kubernetes applications and their data between two Kubernetes clusters. Here, a separate {{< pxEnterprise >}} cluster runs under each Kubernetes cluster.
 
 * The active Kubernetes cluster asynchronously backs-up apps, configuration and data to a standby Kubernetes cluster.
 * The standby Kubernetes cluster has running controllers, configuration and PVCs that map to a local volumes.

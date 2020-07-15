@@ -40,7 +40,7 @@ On GCP Marketplace, you have 2 options for installing Portworx.
 
 Before we start installing Portworx, here are a few things you should keep in mind:
 
-* When installing PX-Enterprise from the GCP Marketplace it will automatically
+* When installing {{< pxEnterprise >}} from the GCP Marketplace it will automatically
 install on all the worker nodes in your GKE cluster.
 * The marketplace installer will also create some Service Accounts to be used by
 the various components. It is recommended to let the installer create these
@@ -49,7 +49,7 @@ service accounts instead of choosing pre-existing ones.
 billing information based on the number of nodes to GCP. Please refer to the
 marketplace listing for the pricing information.
 
-Now, let’s look more closely at how to install PX-Enterprise from the marketplace.
+Now, let’s look more closely at how to install {{< pxEnterprise >}} from the marketplace.
 
 * First, use the search bar at the top to search for Portworx. You should see something like the following:
 
