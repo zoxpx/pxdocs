@@ -16,7 +16,7 @@ Secrets is an DC/OS Enterprise only feature
 {{</info>}}
 
 {{<info>}}
-**Note:**  Supported from PX-Enterprise 1.4 onwards
+**Note:**  Supported from {{< pxEnterprise >}} 1.4 onwards
 {{</info>}}
 
 ## Configuring DC/OS Secrets with Portworx

@@ -7,30 +7,30 @@ series: concepts
 keywords: portworx, essentials
 ---
 
-Portworx Essentials is a free Portworx license with limited functionality that allows you to run small production or proof-of-concept workloads. Essentials limits capacity and advanced features, but otherwise functions the same way as the fully-featured PX-Enterprise version of Portworx.
+{{< pxEssentials >}} is a free Portworx license with limited functionality that allows you to run small production or proof-of-concept workloads. Essentials limits capacity and advanced features, but otherwise functions the same way as the fully-featured {{< pxEnterprise >}} version of Portworx.
 
-The Portworx Essentials license requires that your clusters be connected to the internet and send usage data to PX-Central. Portworx Essentials clusters connect with PX-Central once per hour to renew license leases. Lease periods last for 24 hours, ensuring that any temporary interruptions to your connectivity do not impact your cluster.
+The {{< pxEssentials >}} license requires that your clusters be connected to the internet and send usage data to PX-Central. {{< pxEssentials >}} clusters connect with PX-Central once per hour to renew license leases. Lease periods last for 24 hours, ensuring that any temporary interruptions to your connectivity do not impact your cluster.
 
-To get started with Portworx Essentials, sign up and generate a spec on [PX-Central](https://central.portworx.com/). Licenses for Essentials are generated automatically and activate when your cluster connects to PX-Central.
+To get started with {{< pxEssentials >}}, sign up and generate a spec on [PX-Central](https://central.portworx.com/). Licenses for Essentials are generated automatically and activate when your cluster connects to PX-Central.
 
-## Portworx Essentials available features and limitations
+## {{< pxEssentials >}} available features and limitations
 
-The following tables list what features Portworx Essentials supports and any limitations it may have:
+The following tables list what features {{< pxEssentials >}} supports and any limitations it may have:
 
-### Portworx Essentials
+### {{< pxEssentials >}}
 
 | **Feature** | **Support** |
 |----|----|
-| Maximum Portworx Essentials licenses per user  | 1 |
-| Maximum clusters per Portworx Essentials license | 1 |
+| Maximum {{< pxEssentials >}} licenses per user  | 1 |
+| Maximum clusters per {{< pxEssentials >}} license | 1 |
 | Maximum nodes per cluster | 5 |
 | Host type supported | VMs and bare metal servers |
 | Max containers mounting volumes per host | 30 |
 | Host storage capacity limits | 1TB per host |
 | Cluster storage capacity limits | 5TB per cluster |
 | Support (includes updates, upgrades) | [Online Support](https://forums.portworx.com) |
-| Telemetry requirement (install/operate) | Users must have telemetry enabled in order to use Portworx Essentials.|
-| Licensing | Users must have a Portworx Essentials license (available for free at PX-Central)|
+| Telemetry requirement (install/operate) | Users must have telemetry enabled in order to use {{< pxEssentials >}}.|
+| Licensing | Users must have a {{< pxEssentials >}} license (available for free at PX-Central)|
 
 ### PX-Store
 
@@ -85,11 +85,11 @@ The following tables list what features Portworx Essentials supports and any lim
 
 ## Related Topics
 
-Get started with Portworx Essentials now:
+Get started with {{< pxEssentials >}} now:
 
 * [Install Portworx](/portworx-install-with-kubernetes/)
 * [Deploy stateful applications on on Kubernetes with Portworx](/portworx-install-with-kubernetes/application-install-with-kubernetes/)
 
-Find answers to common questions on the Portworx Essentials FAQ:
+Find answers to common questions on the {{< pxEssentials >}} FAQ:
 
 * [Portworx FAQ](https://forums.portworx.com/t/portworx-essentials-faq/346)

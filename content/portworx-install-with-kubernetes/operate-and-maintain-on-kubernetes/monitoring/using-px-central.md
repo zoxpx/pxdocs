@@ -5,9 +5,9 @@ description: How to deploy and control Portworx using PX-Central
 ---
 
 ## Overview
-With PX-Enterprise 2.0, Portworx, Inc. just released PX-Central to simplify management, monitoring and metadata services for one or more Portworx clusters on Kubernetes. Using this single pane of glass, enterprises can easily manage the state of their hybrid- and multi-cloud Kubernetes applications with embedded monitoring and metrics directly in the Portworx user interface.
+With {{< pxEnterprise >}} 2.0, Portworx, Inc. just released PX-Central to simplify management, monitoring and metadata services for one or more Portworx clusters on Kubernetes. Using this single pane of glass, enterprises can easily manage the state of their hybrid- and multi-cloud Kubernetes applications with embedded monitoring and metrics directly in the Portworx user interface.
 
-A Portworx cluster needs to be updated to PX-Enterprise 2.0 before using PX-Central. In the first release, PX-Central includes the following components:
+A Portworx cluster needs to be updated to {{< pxEnterprise >}} 2.0 before using PX-Central. In the first release, PX-Central includes the following components:
 
 ### Key features
 
@@ -30,19 +30,19 @@ A Portworx cluster needs to be updated to PX-Enterprise 2.0 before using PX-Cent
 
 ### Using PX-Central with a single Portworx cluster
 
-In this scenario, all the components are running alongside PX-Enterprise in the same cluster. The deployment links the clusterID for the Portworx cluster to the individual services within PX-Central. Use this scenario if you are installing for the first time, cluster size is small and you don’t plan to setup multiple clusters initially.
+In this scenario, all the components are running alongside {{< pxEnterprise >}} in the same cluster. The deployment links the clusterID for the Portworx cluster to the individual services within PX-Central. Use this scenario if you are installing for the first time, cluster size is small and you don’t plan to setup multiple clusters initially.
 
 ![singlelclustermodel](/img/PXCSingleCluster.png)
 
 ### Using PX-Central (dedicated mode) with multiple Portworx clusters
 
-In this scenario, all the components are running on a dedicated set of nodes outside of the PX-Enterprise clusters. The deployment links the clusterID for the Portworx cluster(s) to the individual services within PX-Central. Use this scenario if you are installing larger clusters, plan to scale deployment by adding additional clusters in future cluster size is small and want centralized control.
+In this scenario, all the components are running on a dedicated set of nodes outside of the {{< pxEnterprise >}} clusters. The deployment links the clusterID for the Portworx cluster(s) to the individual services within PX-Central. Use this scenario if you are installing larger clusters, plan to scale deployment by adding additional clusters in future cluster size is small and want centralized control.
 
 ![multiclustermodeded](/img/PXCMultiClusterDedicated.png)
 
 ### Using PX-Central (shared mode) with multiple Portworx clusters
 
-In this scenario, all the components are running on one of the PX-Enterprise clusters and connected to others. The deployment links the Portworx cluster(s) to the individual services within PX-Central. Use this scenario only if you have a larger first cluster and are not sure when you will add additional clusters.
+In this scenario, all the components are running on one of the {{< pxEnterprise >}} clusters and connected to others. The deployment links the Portworx cluster(s) to the individual services within PX-Central. Use this scenario only if you have a larger first cluster and are not sure when you will add additional clusters.
 
 ![multiclustermodesha](/img/PXCMultiClusterShared.png)
 
@@ -72,7 +72,7 @@ In the Portworx spec generator page on [PX-Central](https://central.portworx.com
 
 ### Multi-Cluster requirements
 
-  If your cluster has more than 20 nodes or is resource intensive we recommend using this installation to create a dedicated monitoring cluster, and let this cluster monitor the others. If not consider using the single cluster installation (above). The steps below will help you setup PX-Central and first PX-Enterprise cluster.
+  If your cluster has more than 20 nodes or is resource intensive we recommend using this installation to create a dedicated monitoring cluster, and let this cluster monitor the others. If not consider using the single cluster installation (above). The steps below will help you setup PX-Central and first {{< pxEnterprise >}} cluster.
 
   Since this is going to be the cluster that monitors the other clusters we need the `Prometheus` installation to watch the other clusters' `Prometheus` instances. To do this we are going to use `Federation` and we'll need the below secret for this.
 
@@ -161,7 +161,7 @@ ID                    PEER URLs            CLIENT URLs            LEADER    HEAL
 
 *Prometheus*
 
-Verify Prometheus is up and running by logging into Prometheus (external_ip:port). Click the ‘targets’ from Status dropdown as shown below to verify if all the targets are scraped. In the example below, you can see the PX-kvdb nodes (port:9019) and PX-Enterprise (port:9001) cluster nodes as targets
+Verify Prometheus is up and running by logging into Prometheus (external_ip:port). Click the ‘targets’ from Status dropdown as shown below to verify if all the targets are scraped. In the example below, you can see the PX-kvdb nodes (port:9019) and {{< pxEnterprise >}} (port:9001) cluster nodes as targets
 
 ![prometheustargets](/img/PrometheusTargets.png)
 

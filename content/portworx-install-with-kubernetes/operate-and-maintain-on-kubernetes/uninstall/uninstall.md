@@ -73,4 +73,4 @@ During uninstall, the Portworx configuration files under `/etc/pwx/` directory a
 
 ## Related topics
 
-* [Unlink a Portworx Essentials cluster](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/unlink-a-portworx-essentials-cluster/)
+* [Unlink a {{< pxEssentials >}} cluster](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/unlink-a-portworx-essentials-cluster/)

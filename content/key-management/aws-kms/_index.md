@@ -12,7 +12,7 @@ noicon: true
 Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This document will show you how to spin up a Portworx cluster which is connected to an AWS KMS endpoint. The data keys created in KMS can be used to encrypt Portworx volumes.
 
 {{<info>}}
-This feature is supported from PX-Enterprise 1.4 onwards.
+This feature is supported from {{< pxEnterprise >}} 1.4 onwards.
 {{</info>}}
 
 ## Configuring AWS KMS with Portworx

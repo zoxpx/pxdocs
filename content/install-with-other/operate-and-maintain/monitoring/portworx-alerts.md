@@ -80,7 +80,7 @@ Each alert has a severity from one of the following levels:
 55|ObjectstoreFailure|ALARM|NODE|Triggered when an object store error is detected.
 56|ObjectstoreSuccess|NOTIFY|NODE|Triggered upon a successful object store operation.
 57|ObjectstoreStateChange|NOTIFY|NODE|Triggered in response to a state change.
-58|LicenseExpiring|WARN|Cluster|Warning triggers 7 days before the installed PX-Enterprise or Trial license will expire (e.g. "PX-Enterprise license will expire in 6 days, 12:00"). It will also keep triggering after the license has expired (e.g. "Trial license expired 4 days, 06:22 ago").
+58|LicenseExpiring|WARN|Cluster|Warning triggers 7 days before the installed {{< pxEnterprise >}} or Trial license will expire (e.g. "PX-Enterprise license will expire in 6 days, 12:00"). It will also keep triggering after the license has expired (e.g. "Trial license expired 4 days, 06:22 ago").
 59|VolumeExtentDiffSlow|WARN|VOLUME| Volume extent diff is taking too long.
 60|VolumeExtentDiffOk|WARN|VOLUME| Volume extent diff is okay.
 61|SharedV4SetupFailure|WARN|NODE|Triggered when the creation of a sharedv4 volume fails.

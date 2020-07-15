@@ -14,13 +14,13 @@ description: Are you ready for production?
 
 ### Configuring the Server or the Compute Infrastructure
 
-* Ensure that at the minimum 4 cores and 4GB of RAM are allocated for Portworx 
+* Ensure that at the minimum 4 cores and 4GB of RAM are allocated for Portworx
 * Ensure the base operating system of the server supports linux kernel 3.10+
 * Ensure the shared mount propagation is enabled
 
 ### Configuring the Networking Infrastructure
 
-* Ensure all the required ports are open as defined in the PX-Enterprise requirements
+* Ensure all the required ports are open as defined in the {{< pxEnterprise >}} requirements
 * Configure separate networks for Data and Management networks to isolate the traffic
 
 
