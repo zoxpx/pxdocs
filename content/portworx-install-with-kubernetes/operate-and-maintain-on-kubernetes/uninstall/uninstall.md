@@ -17,7 +17,7 @@ When uninstalling Portworx from your cluster, you have 2 choices:
 
 {{<info>}}The commands used in this section are DISRUPTIVE and will lead to loss of all your data volumes. Proceed with CAUTION.{{</info>}}
 
-{{<info>}}**Airgapped clusters**: If your nodes are airgapped and don’t have access to common internet registries, use [Wipe Portworx in an airgapped cluster](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/px-wipe-airgapped) instead.{{</info>}}
+{{<info>}}**Airgapped clusters**: If your nodes are airgapped and don’t have access to common internet registries, use [Wipe Portworx in an airgapped cluster](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/px-wipe-airgapped/) instead.{{</info>}}
 
 You can use the following command to wipe your entire Portworx cluster:
 ```text
