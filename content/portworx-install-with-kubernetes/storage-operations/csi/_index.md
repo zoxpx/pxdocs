@@ -389,9 +389,9 @@ You can create ephemeral inline volumes with CSI. These volumes are created duri
 
 You may also use ephemeral inline volumes with deployments and other application types. See this [Kubernetes blog](https://kubernetes.io/blog/2020/01/21/csi-ephemeral-inline-volumes/) for more information and example use cases.
 
-## Upgrade
+## Migration to CSI PVCs
 
-Currently upgrades are _not_ supported. You will need to deploy using CSI onto a new Kubernetes cluster. The Kubernetes community is working very hard to make this possible in the near future.
+Currently, you cannot migrate or convert PVCs created using the native Kubernetes driver to the CSI driver. However, this is not required and both types of PVCs can co-exist on the same cluster.
 
 ## Contribute
 
