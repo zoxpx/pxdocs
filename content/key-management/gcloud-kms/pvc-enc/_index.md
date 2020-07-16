@@ -99,7 +99,7 @@ spec:
 
 ### Encryption using named secrets
 
-In this method Portworx will use the named secret created by you for encrypting and decrypting a volume. To create a named secret follow [this document](/key-management/gcloud-kms#creating-named-secrets).
+In this method Portworx will use the named secret created by you for encrypting and decrypting a volume. <!-- To create a named secret follow [this document](/key-management/gcloud-kms#creating-named-secrets). //TODO: This section doesn't exist. We can add it or remove the link -->
 
 #### Step 1: Create a Named Secret
 
