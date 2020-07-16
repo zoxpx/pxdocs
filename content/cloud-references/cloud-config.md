@@ -34,7 +34,7 @@ portworx:
 
 **dataiface**:  Host ethernet interface used for backend activity, such as replication and resync.  Ex: "enp5s0f1"
 
-**loggingurl**: Endpoint used communicating to {{< pxEnterprise >}} control (aka "Lighthouse").  Primary use is system statistics.   Ex:  "http://lighthouse.portworx.com/api/stats/listen"
+**loggingurl**: Endpoint used communicating to {{< pxEnterprise >}} control (aka "Lighthouse").  Primary use is system statistics.  <!-- This breaks likchecker Ex:  "http://lighthouse.portworx.com/api/stats/listen" -->
 
 **kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.
 

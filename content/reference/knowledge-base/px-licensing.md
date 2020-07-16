@@ -137,11 +137,11 @@ The normal functionality may be restored at any time, by purchasing and installi
 
 * The Trial license can be upgraded into a {{< pxEnterprise >}} license by contacting
 support@portworx.com, and activating via the activation code or via the
-license file (see [{{< pxEnterprise >}}](#px-enterprise-license) below for details)
+license file (see [{{< pxEnterprise >}}](#portworx-enterprise-license) below for details)
 * The Trial license itself cannot be upgraded or extended with another Trial, or downgraded into PX-Developer license.
 
 
-### {{< pxEnterprise >}} License
+### Portworx Enterprise License
 
 The {{< pxEnterprise >}} license is our most flexible license, which comes with a number of options.
 Please reach out to support@portworx.com  to determine which type of {{< pxEnterprise >}} license will work best for your needs.

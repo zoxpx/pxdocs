@@ -92,7 +92,7 @@ Once you've made the new container images available for your nodes, perform one 
 
 - [Step a: Upgrade using local registry server](#step-2a-upgrade-using-local-registry-server): You can pre-load your private registry server with the required Portworx images and have Kubernetes and Portworx fetch the images from there rather than reaching out to the internet. 
 <!-- this doesn't make sense, "using images directly ON your nodes?" or "pulling images directly TO your nodes"? -->
-- [Step b: Upgrade using images directly to your nodes](#step-2b-upgrade-using-images-directly-to-your-nodes): You can load the images directly to your nodes and configure Kubernetes and Portworx to upgrade using those images. 
+- [Step b: Upgrade using images directly to your nodes](#step-2b-upgrade-using-images-directly-on-your-nodes): You can load the images directly to your nodes and configure Kubernetes and Portworx to upgrade using those images. 
 
 #### Step 2a: Upgrade using local registry server
 
