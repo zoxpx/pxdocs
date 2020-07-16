@@ -352,9 +352,9 @@ You can clone CSI-enabled volumes, duplicating both the volume and content withi
       kubectl apply -f clonePVC.yaml
       ```
 
-## Upgrade
+## Migration to CSI PVCs
 
-Currently upgrades are _not_ supported. You will need to deploy using CSI onto a new Kubernetes cluster. The Kubernetes community is working very hard to make this possible in the near future.
+Currently, you cannot migrate or convert PVCs created using the native Kubernetes driver to the CSI driver. However, this is not required and both types of PVCs can co-exist on the same cluster.
 
 ## Contribute
 
