@@ -47,8 +47,8 @@ Once you've created a cloud snapshot, you can restore it to a new PVC or the ori
 
 ### References
 
-* To create PVCs from existing snapshots, read [Creating PVCs from cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-cloud#creating-pvcs-from-cloud-snapshots).
-* To create PVCs from group snapshots, read [Creating PVCs from group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group#restoring-from-group-snapshots).
+* For details about how you can restore a snapshot to a new PVC or the original PVC, see the [Restore cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-cloud#restore-cloud-snapshots) section.
+* To create PVCs from group snapshots, read [Creating PVCs from group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group#).
 
 
 ##  Back up a volume and restore it to a different Portworx cluster

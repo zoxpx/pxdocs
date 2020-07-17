@@ -57,7 +57,7 @@ Conditions compare the `key` field with the `values` field using the `operator` 
 
 ### actions
 
-Defines what action to take when the conditions are met. See [Supported Actions](#supported-actions) for all actions that you can specify here.
+Defines what action to take when the conditions are met. See the [Supported Actions](#supported-autopilot-actions) section for the list of actions that you can specify.
 
 ```text
 action:

@@ -106,4 +106,4 @@ If running on **AWS**, continue at [Portworx install with AWS Auto Scaling Group
 
 If running on **GCP**, continue at [Portworx install on Google Cloud Platform](/cloud-references/auto-disk-provisioning/gcp).
 
-If running on **VMware vSphere**, continue at [Portworx install on PKS on vSphere](/portworx-install-with-kubernetes/on-premise/install-pks/#step-3-installing-portworx).
+If running on **VMware vSphere**, continue at [Portworx install on PKS on vSphere](/portworx-install-with-kubernetes/on-premise/install-pks/#installing-portworx).

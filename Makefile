@@ -86,21 +86,9 @@ search-index-docker:
 		-e PRODUCT_NAMES_AND_INDICES \
 		$(SEARCH_INDEX_IMAGE)
 
-.PHONY: start-deployment-container
-start-deployment-container:
-	docker run -d \
-		--name pxdocs-deployment \
-		$(DEPLOYMENT_IMAGE)
-
-.PHONY: stop-deployment-container
-stop-deployment-container:
-	docker rm -f pxdocs-deployment
-
 .PHONY: check-links
 check-links:
-	docker run --rm \
-		--link pxdocs-deployment:pxdocs-deployment \
-		linkchecker/linkchecker http://pxdocs-deployment --check-extern --ignore-url=https?:\/\/[www]*[\.]*[support]*\.rackspace\.com[\/a-z\-]* --ignore-url=https?:\/\/[www]*[\.]*\.youtube\.com[\/a-zA-Z0-9\-\?\=\_\&]*
+	rm -rf htmltest/bin && cd htmltest && curl https://htmltest.wjdp.uk | bash && bin/htmltest -c .htmltest.yml && cd ..	
 
 .PHONY: publish
 publish: image publish-docker

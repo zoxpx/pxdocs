@@ -11,7 +11,7 @@ disableprevnext: true
 
 ## Pre-requisites
 
-* This page assumes you have a running etcd cluster. If not, return to [Installing etcd on PKS](/portworx-install-with-kubernetes/on-premise/install-pks#install-etcd-pks).
+* This page assumes you have a running etcd cluster. If not, return to [Installing etcd on PKS](/portworx-install-with-kubernetes/on-premise/install-pks/install-cfcr-etcd-release/).
 
 ## Architecture
 
@@ -31,8 +31,8 @@ On each ESXi host in the cluster, create a local datastore which is dedicated fo
 
 ## Portworx installation
 
-1. Create a secret using [this template](#pks-px-vsphere-secret). Replace values replace values corresponding to your vSphere environment.
-2. Deploy the Portworx spec using [this template](#pks-px-spec). Replace values replace values corresponding to your vSphere environment.
+1. Create a secret. <!-- using [this template](#pks-px-vsphere-secret). Replace values replace values corresponding to your vSphere environment. //TODO: I can't find this template** -->
+2. Deploy the Portworx spec. <!-- using [this template](#pks-px-spec). Replace values replace values corresponding to your vSphere environment. //TODO: Ditto -->
 
 Once you have the spec, proceed below.
 

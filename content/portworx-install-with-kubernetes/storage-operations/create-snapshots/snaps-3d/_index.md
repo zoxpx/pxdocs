@@ -196,5 +196,5 @@ spec:
 
 ## References
 
-* To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-local#pvc-from-snap).
-* To create PVCs from group snapshots, read [Creating PVCs from group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group#restoring-from-group-snapshots).
+* For details about how you can restore a snapshot to a new PVC or the original PVC, see the [Restore snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-local/#restore-snapshots) section.
+* For details about how you can create PVCs from group snapshots, see the [Creating PVCs from group snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group#restoring-from-group-snapshots) section.
