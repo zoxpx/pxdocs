@@ -1337,7 +1337,7 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 * Support port mapping used by Portworx from 9001-9015 to a custom port number range by passing the starting
   port number in [install arguments](/install-with-other/docker/standalone)
 * Provide ability to do a [license transfer](/reference/knowledge-base/px-licensing) from one cluster to another cluster
-* Add support for [cloudsnap deletes](/reference/cli/cloud-snaps#pxctl-cloudsnap-delete)
+* Add support for [cloudsnap deletes](/reference/cli/cloud-snaps#deleting-a-cloud-backup)
 
 ### Key Fixes
 

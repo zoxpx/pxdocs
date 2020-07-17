@@ -24,7 +24,7 @@ NAME         TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)          AGE
 prometheus   LoadBalancer   10.0.201.44   52.175.223.52   9090:30613/TCP   11d
 ```
 
-In the example above, `http://prometheus:9090` becomes the Prometheus endpoint. Portworx uses this endpoint in the [Autopilot Configuration](#autopilot-configuration) section.
+In the example above, `http://prometheus:9090` becomes the Prometheus endpoint. Portworx uses this endpoint in the [Autopilot Configuration](/reference/crd/storage-cluster/#autopilot-configuration) section.
 
 
 {{<info>}}*Why `http://prometheus:9090`* ?

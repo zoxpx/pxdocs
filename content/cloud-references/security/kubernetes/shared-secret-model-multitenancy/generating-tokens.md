@@ -30,7 +30,7 @@ environment variable `$PORTWORX_AUTH_SHARED_SECRET`.
 
 ## Generate a storage admin token
 
-[`pxctl`](/reference/cli/authorization/#generate_tokens) uses yaml
+[`pxctl`](/reference/cli/authorization/#generate-tokens) uses yaml
 configuration files to create tokens. You must to create a token for the
 [storage admin](/concepts/authorization/overview/#the-administrator-role)
 used for `pxctl` to manage Portworx
@@ -60,7 +60,7 @@ used for `pxctl` to manage Portworx
     ```
 
 3. Save the storage admin token in the `pxctl`
-[context](/reference/cli/authorization/#context):
+[context](/reference/cli/authorization/#contexts):
 
     ```text
     /opt/pwx/bin/pxctl context create admin --token=$ADMIN_TOKEN

@@ -82,7 +82,7 @@ Next, let's edit the  **ClusterPair** spec. Under `spec.options`, add  the follo
    1. **ip**: the IP address of one of the Portworx nodes on the destination cluster
    2. **port**: the port on which the Portworx API server is listening for requests.
       Default is 9001 if not specified
-   3. **token**: the cluster token generated in the [previous step](#get-cluster-token-from-destination-cluster)
+   3. **token**: the cluster token generated in the [previous step](#show-your-destination-cluster-token)
 
 The updated **ClusterPair** should look like this:
 

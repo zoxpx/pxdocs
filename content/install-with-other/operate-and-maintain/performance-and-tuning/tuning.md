@@ -52,7 +52,7 @@ This optimizes the read ahead algorithm for sequential access.  Use `io_profile=
 
 This records the IO pattern of recent access and optimizes the read ahead and data layout algorithms for short term random patterns.  Use `io_profile=random`.
 
-### CMS
+### The CMS profile
 This is useful for content management systems, like WordPress.  This option applies to a Portworx shared (global namespace) volume.  It implements an attribute cache and supports async writes.  This increases the Portworx memory footprint by 100MB.  Use `io_profile=cms`.
 
 ### The db profile

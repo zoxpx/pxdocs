@@ -67,7 +67,7 @@ If you are using self-signed tokens, you then need to determine if you will be
 using a shared-secret or an RSA or ECDSA public/private key pair.  Creating a
 JWT is a standard process and there are many applications and libraries for multiple
 languages to generate tokens.  For convenience, Portworx has added support to
-[`pxctl`](/reference/cli/authorization/#generate_tokens) to generate tokens.
+[`pxctl`](/reference/cli/authorization/#generate-tokens) to generate tokens.
 
 Self signed tokens must also contain the identifier of the _issuer_. This value
 in the JWT claims is set as `iss` and is used by Portworx to determine if the
