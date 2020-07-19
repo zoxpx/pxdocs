@@ -8,9 +8,7 @@ hidden: true
 Portworx provides a Docker-based installation utility to help deploy the Portworx OCI bundle. You can install this bundle by running the following Docker container on your host system:
 
 ```text
-# Uncomment appropriate `REL` below to select desired Portworx release
-REL="/2.4"  # 2.4 Portworx v2.4 release
-#REL="/2.3" # 2.2 Portworx v2.3 release
+REL="/{{% currentVersion %}}"  # Portworx v{{% currentVersion %}} release
 
 latest_stable=$(curl -fsSL "https://install.portworx.com$REL/?type=dock&stork=false&aut=false" | awk '/image: / {print $2}')
 
