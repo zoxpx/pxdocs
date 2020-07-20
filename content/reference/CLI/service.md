@@ -264,7 +264,7 @@ Global Flags:
 You can add physical drives to a server using the `pxctl service drive add` command. The following example shows how to add a physical drive:
 
 ```text
-pxctl service drive add /dev/mapper/volume-3bfa72dd -o start
+pxctl service drive add --drive /dev/mapper/volume-3bfa72dd -o start
 ```
 
 ```output
