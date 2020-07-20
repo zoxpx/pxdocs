@@ -231,7 +231,7 @@ USAGE:
 ```
 
 ```text
-pxctl service drive add /dev/mapper/volume-3bfa72dd
+pxctl service drive add --drive /dev/mapper/volume-3bfa72dd -o start
 ```
 
 ```output
@@ -483,4 +483,4 @@ Pool 0 DELETED.
 
 {{<info>}}
 **NOTE:** New pools created after a pool deletion increment from the last pool ID. A new pool created after this example would have a pool ID of 2
-{{</info>}}  
+{{</info>}}
