@@ -231,7 +231,7 @@ USAGE:
 ```
 
 ```text
-pxctl service drive add /dev/mapper/volume-3bfa72dd
+pxctl service drive add --drive /dev/mapper/volume-3bfa72dd -o start
 ```
 
 ```output
