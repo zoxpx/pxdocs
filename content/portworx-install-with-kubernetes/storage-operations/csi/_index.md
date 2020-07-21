@@ -22,7 +22,7 @@ The following table shows the core features supported by CSI and which minimum v
 | Feature | Portworx version | Supported Kubernetes version | Alpha Kubernetes version |
 | --- | --- | --- | --- |
 | [Provision, attach, and mount volumes](/portworx-install-with-kubernetes/storage-operations/csi/#create-and-use-persistent-volumes) | 2.2 | 1.13.12 |  |
-| [CSI Snapshots](/portworx-install-with-kubernetes/storage-operations/csi/#take-snapshots-of-csi-enabled-volumes) | 2.2 | 1.16 | 1.13.12 |
+| [CSI Snapshots](/portworx-install-with-kubernetes/storage-operations/csi/#take-snapshots-of-csi-enabled-volumes) | 2.2 | 1.17 | 1.13.12 |
 | Stork [^1] | 2.2 | 1.13 |  |
 | Volume Expansion (resizing) | 2.2 | 1.16 | 1.14 |
 | [Ephemeral Inline Volumes](/portworx-install-with-kubernetes/storage-operations/csi/#ephemeral-inline-volumes-with-csi) | 2.5 | 1.16 | 1.15 |
