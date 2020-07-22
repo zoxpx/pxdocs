@@ -36,7 +36,7 @@ export GCP_PROJECT_ID=production-apps-210001
 export GCP_ZONE=us-west1-b
 export LATEST_VERSION=2.5
 export PRODUCT_NAME=PX-Enterprise
-VERSIONS_BASE_URL=docs.portworx.com
+export VERSIONS_BASE_URL=docs.portworx.com
 #Docker builds cannot use uppercase characters in the image name
 export LOWER_CASE_BRANCH=$(echo -n $TRAVIS_BRANCH | awk '{print tolower($0)}')
 export BUILDER_IMAGE="pxdocs:$TRAVIS_COMMIT"
