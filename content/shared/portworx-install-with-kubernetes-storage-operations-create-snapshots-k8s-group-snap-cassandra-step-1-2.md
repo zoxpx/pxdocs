@@ -14,10 +14,10 @@ Following spec creates a replica 3 cassandra statefulset. Each replica pod will 
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-    name: portworx-repl2
+  name: portworx-repl2
 provisioner: kubernetes.io/portworx-volume
 parameters:
-   repl: "2"
+  repl: "2"
 ---
 apiVersion: v1
 kind: Service

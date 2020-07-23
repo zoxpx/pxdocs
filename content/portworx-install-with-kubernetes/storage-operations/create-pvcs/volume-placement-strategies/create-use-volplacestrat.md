@@ -31,14 +31,14 @@ Create your VolumePlacementStrategy along with your other storage resources:
       apiVersion: portworx.io/v1beta2
       kind: VolumePlacementStrategy
       metadata:
-      name: postgres-volume-affinity
+        name: postgres-volume-affinity
       spec:
-      volumeAffinity:
-        - matchExpressions:
-          - key: app
-            operator: In
-            values:
-              - postgres
+        volumeAffinity:
+          - matchExpressions:
+            - key: app
+              operator: In
+              values:
+                - postgres
       ```
 
 3. Save and apply your spec with the `kubectl apply` command:

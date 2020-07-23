@@ -83,14 +83,14 @@ Consider the following example: assume you have an application that relies on mu
 apiVersion: portworx.io/v1beta2
 kind: VolumePlacementStrategy
 metadata:
-name: webserver-volume-affinity
+  name: webserver-volume-affinity
 spec:
-volumeAffinity:
-  - matchExpressions:
-    - key: app
-      operator: In
-      values:
-        - webserver
+  volumeAffinity:
+    - matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - webserver
 ```
 
 Consider another example: Assume you're running an app that performs replication internally, such as Cassandra. If you don't distribute volumes across failure zones, a node failure may disrupt services. You can avoid this by creating a VolumePlacementStrategy, which distributes your app's volumes over multiple failure zones:
@@ -99,7 +99,7 @@ Consider another example: Assume you're running an app that performs replication
 apiVersion: portworx.io/v1beta2
 kind: VolumePlacementStrategy
 metadata:
-name: webserver-volume-affinity
+  name: webserver-volume-affinity
 spec:
   volumeAntiAffinity:
   - topologyKey: failure-domain.beta.kubernetes.io/zone

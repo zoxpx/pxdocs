@@ -37,14 +37,14 @@ Create and apply a `PersistentVolumeClaim` spec, specifying `storageClassName` w
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-   name: px-shared-pvc
+  name: px-shared-pvc
 spec:
-   storageClassName: portworx-csi-shared-sc
-   accessModes:
-     - ReadWriteMany
-   resources:
-     requests:
-       storage: 2Gi
+  storageClassName: portworx-csi-shared-sc
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
 ```
 
 ### Step 3 : Deploy your application

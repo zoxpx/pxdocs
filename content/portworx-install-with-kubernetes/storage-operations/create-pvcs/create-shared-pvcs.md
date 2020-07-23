@@ -69,15 +69,15 @@ Example:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-   name: px-shared-pvc
-   annotations:
-     volume.beta.kubernetes.io/storage-class: px-shared-sc
+  name: px-shared-pvc
+  annotations:
+    volume.beta.kubernetes.io/storage-class: px-shared-sc
 spec:
-   accessModes:
-     - ReadWriteMany
-   resources:
-     requests:
-       storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
 ```
 
 Note the accessMode for this PVC is set to `ReadWriteMany` so the Kubernetes allows mounting this PVC on multiple pods.
