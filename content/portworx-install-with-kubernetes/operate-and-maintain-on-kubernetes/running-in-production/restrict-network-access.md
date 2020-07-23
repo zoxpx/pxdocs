@@ -87,8 +87,8 @@ Apply the following NetworkPolicy in each namespace you have user pods. This wil
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-    name: block-9001-for-non-system-users
-    namespace: default
+  name: block-9001-for-non-system-users
+  namespace: default
 spec:
   podSelector: {}
   policyTypes:

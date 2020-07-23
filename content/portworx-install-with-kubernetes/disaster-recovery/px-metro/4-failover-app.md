@@ -53,8 +53,8 @@ Let's create a new file named `clusterdomainupdate.yaml` that specifies an objec
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterDomainUpdate
 metadata:
- name: deactivate-us-east-1a
- namespace: kube-system
+  name: deactivate-us-east-1a
+  namespace: kube-system
 spec:
   # Name of the metro domain that needs to be activated/deactivated
   clusterdomain: us-east-1a

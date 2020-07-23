@@ -50,8 +50,8 @@ Start by creating a new file named `clusterdomainupdate.yaml`. In this file, let
 apiVersion: stork.libopenstorage.org/v1alpha1
 kind: ClusterDomainUpdate
 metadata:
- name: activate-us-east-1a
- namespace: kube-system
+  name: activate-us-east-1a
+  namespace: kube-system
 spec:
   # Name of the metro domain that needs to be activated/deactivated
   clusterdomain: us-east-1a
