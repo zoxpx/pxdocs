@@ -15,7 +15,7 @@ The minimum supported size for a Portworx cluster is three nodes. Each node must
 |-------------------------|------------|
 |     CPU | 4 cores|
 |     RAM | 4GB|
-| Disk (/var) | 2GB free |
+| Disk <ul><li>`/var`</li><li>`/opt`</li></ul> | <ul><li>2GB free</li><li>3GB free</li></ul> |
 |Backing drive | 8GB (minimum required)<br/>128 GB (minimum recommended)|
 |Storage drives | Storage drives must be unmounted block storage: raw disks, drive partitions, LVM, or cloud block storage. |
 |Ethernet NIC card | 10 GB (recommended)|
