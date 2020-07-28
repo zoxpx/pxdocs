@@ -126,7 +126,7 @@ Set the default cluster-wide secret, and specify the secret name as `default`. P
 **WARNING:** You must set the cluster-wide secret only once. If you overwrite the cluster-wide secret, the volumes encrypted with the old secret will become unusable.
     {{</info>}}
 
-    If you've specified your cluster wide secret key in the `config.json` file, the `pxctl secrets set-cluster-key` command will overwrite it. Even if you restart your cluster, Powrtworx will use the key you passed as an argument to the `pxctl secrets set-cluster-key` command.
+    If you've specified your cluster wide secret key in the `config.json` file, the `pxctl secrets set-cluster-key` command will overwrite it. Even if you restart your cluster, Portworx will use the key you passed as an argument to the `pxctl secrets set-cluster-key` command.
 
 2. Create a new encrypted volume. Enter the `pxctl volume create` command, specifying the following arguments:
   * `--secure`
