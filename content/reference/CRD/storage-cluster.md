@@ -156,7 +156,7 @@ This section provides details about the fields used to configure the storage for
 | spec.<br>storage.<br>forceUseDisks | If set to `true`, Portworx uses a device even if there's a file system on it. Note that Portworx may wipe the drive before using it. | `boolean` | `false` |
 | spec.<br>storage.<br>devices[] | Specifies the list of devices Portworx should use. | `string array` | None |
 | spec.<br>storage.<br>journalDevice | Specifies the device Portworx uses for journaling. | `string` | None |
-| spec.<br>storage.<br>systemMetadataDevice | Indicates the device Portworx uses to store metadata. For better performance, specify a system metadata device when using Powrtworx with the internal KVdb. | `string` | None |
+| spec.<br>storage.<br>systemMetadataDevice | Indicates the device Portworx uses to store metadata. For better performance, specify a system metadata device when using Portworx with the internal KVdb. | `string` | None |
 
 [^2]: Note that Portworx ignores this filed if you specify the storage devices using the `spec.storage.devices` field.
 
