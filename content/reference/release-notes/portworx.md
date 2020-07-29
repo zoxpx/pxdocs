@@ -6,6 +6,30 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.5.5
+
+July 29, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-14102 | You can now export a sharedV4 volume outside of a Portworx cluster using specific IP addresses. |
+| PWX-12151 | You can now add labels to a sharedv4 volume so that the remote mount/client uses NFSv4. For more information, refer to the [Updating volumes using pxctl](/reference/cli/updating-volumes/) article. |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-14333 | When both the `multipathd` device and the backing device contain the KVDB volume label, Portworx sometimes mistakenly picked up the backing device and failed to mount it. <br/><br/>**User impact:** Portworx failed to come up on the nodes where internal KVDB was running.<br/><br/>**Resolution:** Portworx now chooses the `multipathd` device when both `multipathd` and the backing device contain the KVDB volume label. |
+| PWX-14399 | A bug introduced in Portworx version 2.5.0, broke the documented procedure to perform a KVDB recovery from dump files.<br/><br/>**User Impact:** Users had to manually update the config maps and change the labels on the disk to perform the recovery.<br/><br/>**Resolution:** You can now recover your KVDB from dump files with a single command using the [documented procedure](/concepts/internal-kvdb/#recovery). |
+| PWX-14164 | Prior to this version, the `pxctl cloudsnap list -a` command sometimes failed to return all cloudsnaps in an objectstore. <br/><br/>**Resolution:** Portworx now returns all cloudsnaps in an objectstore. |
+| PWX-14160 | The Portworx SDK did not return disks and pools in the response. <br/><br/>**User impact:** Users of the [Portworx SDK](/reference/developer-sdk/) or `pxctl -j cluster list` would see empty `Disks` and `Pools` fields in the response. <br/><br/>**Resolution:** The Portworx SDK handler now populates these 2 missing fields. |
+| PWX-14648 | Portworx did not honor the storage class parameter `export_options` during volume creation. <br/><br/>**User impact:** any export options provided to the storage class were not included when the storage class was used. <br/><br/> **Resolution:** Parse export_options when they are set as storage class parameters. |
 
 ## 2.5.4.1
 

@@ -427,3 +427,22 @@ Update Volume: Volume update successful for volume exampleVolume
 Warning: Updating group field will not affect the replica placement of already provisioned volumes.
 ```
 
+## Access a sharedv4 volume outside of a Kubernetes cluster
+
+By default, sharedv4 volumes can be accessed only within the Portworx cluster. However, you may need to access a sharedv4 volume outside of your Portworx/Kubernetes cluster. For example, if a traditional non-Kubernetes application running on a VM needs to access data from a Kubernetes app running in the Kubernetes cluster.
+
+To access a sharedv4 volume outside of the Kubernetes cluster, add the `allow_ips` label to the volume you wish to export, specifying a comma separated list of IP addresses of non-portworx Kubernetes nodes you wish to mount your sharedV4 volume to:
+
+<!-- what's the actual full command here? it seems like the instructions would have this be a kubectl thing, not pxctl. -->
+
+```text
+pxctl volume update <vol_name> --label allow_ips=<Kubernetes-IP-1>,<Kubernetes-IP-2>
+```
+
+## Enable NFSv4 for a sharedv4 volume
+
+By default, sharedv4 volumes use the NFSv3 protocol. You can instruct Portworx to use NFSv4 for a specific sharedv4 volume by adding the following label:
+
+```text
+pxctl volume update <vol_name> --label nfs_v4=true
+```
