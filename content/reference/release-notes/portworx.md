@@ -10,6 +10,10 @@ series: release-notes
 
 July 29, 2020
 
+### Notes
+
+* Portworx 2.5.5 supports OpenShift 4.5.3
+
 ### Improvements
 
 Portworx has upgraded or enhanced functionality in the following areas:
@@ -30,6 +34,7 @@ The following issues have been fixed:
 | PWX-14164 | Prior to this version, the `pxctl cloudsnap list -a` command sometimes failed to return all cloudsnaps in an objectstore. <br/><br/>**Resolution:** Portworx now returns all cloudsnaps in an objectstore. |
 | PWX-14160 | The Portworx SDK did not return disks and pools in the response. <br/><br/>**User impact:** Users of the [Portworx SDK](/reference/developer-sdk/) or `pxctl -j cluster list` would see empty `Disks` and `Pools` fields in the response. <br/><br/>**Resolution:** The Portworx SDK handler now populates these 2 missing fields. |
 | PWX-14648 | Portworx did not honor the storage class parameter `export_options` during volume creation. <br/><br/>**User impact:** any export options provided to the storage class were not included when the storage class was used. <br/><br/> **Resolution:** Parse export_options when they are set as storage class parameters. |
+| PWX-13149 | On larger workloads, systems that have lots of overwrites on volumes with a node down sometimes causes Portworx run into an assertion failure while updating the in-core metadata and restart.<br/><br/>**User impact:** Portworx containers restart and continue to work.<br/><br/> **Resolution:** With this fix, Portworx will no longer assert or restart during this scenario.|
 
 ## 2.5.4.1
 
