@@ -35,7 +35,7 @@ The following issues have been fixed:
 | PWX-14160 | The Portworx SDK did not return disks and pools in the response. <br/><br/>**User impact:** Users of the [Portworx SDK](/reference/developer-sdk/) or `pxctl -j cluster list` would see empty `Disks` and `Pools` fields in the response. <br/><br/>**Resolution:** The Portworx SDK handler now populates these 2 missing fields. |
 | PWX-14648 | Portworx did not honor the storage class parameter `export_options` during volume creation. <br/><br/>**User impact:** any export options provided to the storage class were not included when the storage class was used. <br/><br/> **Resolution:** Parse export_options when they are set as storage class parameters. |
 | PWX-13149 | On larger workloads, systems that have lots of overwrites on volumes with a node down sometimes causes Portworx run into an assertion failure while updating the in-core metadata and restart.<br/><br/>**User impact:** Portworx containers restart and continue to work.<br/><br/> **Resolution:** With this fix, Portworx will no longer assert or restart during this scenario.|
-
+| PWX-14389 | On vSphere 6.7 and above, Portworx created thin provisioned vmdks even if the user provided `zeroedthick` as the type. <br/><br/>**User impact:** Users couldn't create thick provisioned vmdks on Portworx. <br/><br/> **Resolution:** Portworx now correctly creates thick provisioned vmdks when `zeroedthick` is specified. |
 ## 2.5.4.1
 
 July 27, 2020
