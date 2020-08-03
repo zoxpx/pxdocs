@@ -128,4 +128,4 @@ If you want to permanently decommision the node, you can skip **Step 5. (Optiona
 
 ## Step 5. (Optional) Rejoin node to the cluster
 
-If you want {<productName>} to start again on this node and join as a new node, follow the [node rejoin steps](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/k8s-node-rejoin).
+If you want Portworx to start again on this node and join as a new node, follow the [node rejoin steps](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/k8s-node-rejoin).
