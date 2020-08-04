@@ -35,6 +35,17 @@ If you're installing Portworx on OpenShift on a cloud environment, Portworx requ
 
 Ensure ports 17001-17020 on worker nodes are reachable from master and other worker nodes.
 
+## Create secret for Portworx Essentials
+
+If running a **{{< pxEssentials >}}** cluster, then create the following secret with
+your [Essential Entitlement ID](https://central.portworx.com/profile)
+
+```text
+kubectl -n kube-system create secret generic px-essential \
+  --from-literal=px-essen-user-id=YOUR_ESSENTIAL_ENTITLEMENT_ID \
+  --from-literal=px-osb-endpoint='https://pxessentials.portworx.com/osb/billing/v1/register'
+```
+
 ## Install Portworx using the OpenShift console
 
 To install Portworx with OpenShift, you will first generate `StorageCluster` spec that you will deploy in your cluster.
