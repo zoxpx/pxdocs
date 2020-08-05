@@ -82,7 +82,7 @@ For a more detailed setup, maintenance and tuning information refer the followin
 * [Maintenance](https://etcd.io/docs/v3.3.12/op-guide/maintenance/)
 * [Tuning](https://etcd.io/docs/v3.3.12/tuning/)
 * [Recovery from failure](https://etcd.io/docs/v3.3.12/op-guide/recovery/)
-* [Consul](https://www.consul.io/intro/getting-started/join.html)
+* [Consul](https://learn.hashicorp.com/consul)
 
 ### Securing with certificates in Kubernetes
 
