@@ -133,7 +133,7 @@ Create a `VolumeSnapshotSchedule`, specifying:
     * **annotations:**
       * **portworx/snapshot-type:** with the `cloud` or `local` value, depending on what environment you want store your snapshots in
       * **portworx/cloud-cred-id:** with your cloud environment credentials
-      * **stork/snapshot-restore-namespaces:** with other namespaces snapshots taken with this policy can restore to
+      * **stork.libopenstorage.org/snapshot-restore-namespaces:** with other namespaces snapshots taken with this policy can restore to
   * **spec:**
     * **schedulePolicyName:** with the name of the schedule policy you defined in the steps above
     * **suspend:** with a boolean value specifying if the schedule should be in a suspended state
@@ -153,7 +153,7 @@ metadata:
   annotations:
     portworx/snapshot-type: cloud
     portworx/cloud-cred-id: <cred_id>
-    stork/snapshot-restore-namespaces: otherNamespace
+    stork.libopenstorage.org/snapshot-restore-namespaces: otherNamespace
 spec:
   schedulePolicyName: testpolicy
   suspend: false
