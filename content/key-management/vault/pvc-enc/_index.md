@@ -1,25 +1,38 @@
 ---
-title: Encrypt Kubernetes PVCs with Vault
+title: Encrypting Kubernetes PVCs with Vault
 weight: 1
 keywords: Vault Key Management, Hashicorp, encrypt PVC, Kubernetes, k8s
-description: Learn how you can encrypt Kubernetes PVCs with Vault
+description: Instructions on using Vault with Portworx for encrypting PVCs in Kubernetes
 noicon: true
 series: vault-secret-uses
 series2: k8s-pvc-enc
 hidden: true
 ---
 
-You can use one of the following methods to encrypt Kubernetes PVCs with Vault, depending on how you provide the secret password to Portworx:
+{{% content "shared/key-management-intro.md" %}}
 
-- [Encrypt volumes using per volume secrets](#encrypt-volumes-using-per-volume-secrets)
-- [Encrypt volumes using a cluster wide secret](#encrypt-volumes-using-a-cluster-wide-secret)
+There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to Portworx.
 
-## Encrypt volumes using per volume secrets
+### Encryption using Storage Class
 
-Use per volume secrets to encrypt each volume with a different key. As a result, each volume uses its unique passphrase for encryption.
+In this method, Portworx will use the cluster wide secret key to encrypt PVCs.
 
-{{% content "shared/pvc-enc-per-volume.md" %}}
+#### Step 1: Set a cluster wide secret
 
-## Encrypt volumes using a cluster wide secret
+{{% content "shared/key-management-set-cluster-wide-secret.md" %}}
 
-{{% content "shared/pvc-enc-cluster-wide.md" %}}
+{{% content "shared/key-management-storage-class-encryption.md" %}}
+
+### Encryption using PVC annotations
+
+In this method, each PVC can be encrypted with its own secret key.
+
+#### Step 1: Create a Storage Class
+
+{{% content "shared/key-management-enc-storage-class-spec.md" %}}
+
+#### Step 2: Create a PVC with annotation
+
+{{% content "shared/key-management-other-providers-pvc-encryption.md" %}}
+
+__Important: Make sure secret `your_secret_key` exists in Vault__
