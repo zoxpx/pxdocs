@@ -82,11 +82,22 @@ As you can see, the command gives details on the features allowed under the curr
 
 ## Activate a license
 
-The easiest way to activate a license is to get an **activation id** from Portworx, Inc.. Next, run the following:
+The easiest way to activate a license is to get an **activation id** from Portworx, Inc.. Next, run the following command on your Portworx node:
 
 ```text
 pxctl license activate <activation-id>
 ```
+
+{{<info>}}
+**NOTE:** You can also execute the `pxctl license activate` command inside a Pod as follows:
+
+```text
+PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
+kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl license activate <activation-id>
+```
+
+{{</info>}}
+
 
 However, there are cases where the servers are configured without access to the Internet. Such customers should request an offline-activation license file, and install it like this:
 
