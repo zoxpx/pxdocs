@@ -1,260 +1,390 @@
 ---
-title: How to run WordPress and MySQL on Kubernetes using Portworx
-linkTitle: Wordpress
-keywords: portworx, Wordpress, container, Kubernetes, storage
-description: Learn how to deploy a Wordpress site with MySQL using Kubernetes
+title: WordPress with Portworx on Kubernetes
+linkTitle: WordPress
+keywords: WordPress, install, kubernetes, k8s, MySQL
+description: Deploy WordPress and MySQL with Portworx on Kubernetes
 noicon: true
 ---
 
-## Summary
+This reference architecture document shows how you can deploy WordPress, an open-source content management system, with Portworx on Kubernetes. This architecture provides the following benefits:
 
-This document explains about how to deploy a WordPress site and a MySQL database using Kubernetes. Portworx solves two critical issues for WordPress running in containers.  Running a high performance, HA MySQL database and using shared volumes for file uploads.
+* Portworx enables reliable and persistent storage to ensure WordPress runs with HA
+* Portworx enables shared volumes for file uploads
+* Kubernetes automatically replicates your MySQL data
+* You can horizontally scale the WordPress container using multi-writer semantics for the file-uploads directory <!-- I don't understand the meaning of this sentence -->
+* The cluster automatically repairs itself in the event of a node failure
 
-By combining these two features of Portworx with a Kubernetes cluster we get a WordPress instance with the following abilities:
 
-* automatically replicate the MySQL data for HA
-* horizontally scale the WordPress PHP container using multi-writer semantics for the file-uploads directory
-* automatically repair itself in the event of a node failure
+<!-- We can probably just remove the following paragraphs
 
 This document makes use of Kubernetes storage primitives PersistentVolumes (PV) and PersistentVolumeClaims (PVC).
 
 A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by an administrator, and a PersistentVolumeClaim (PVC) is a set amount of storage in a PV. PersistentVolumes and PersistentVolumeClaims are independent from Pod lifecycles and preserve data through restarting, rescheduling, and even deleting Pods in kubernetes.
+-->
+
+
+<!-- I'm not sure this paragraph is still relevant. I suggest we remove it
 
 `Note:` The spec files provided in this tutorial are using beta Deployment APIs and are specific to Kubernetes version 1.8 and above. If you wish to use this tutorial with an earlier version of Kubernetes, please update the beta API appropriately, or reference earlier versions of kubernetes.
 
-### Create Portworx PersistentVolume
+-->
 
-Kubernetes supports many different types of PersistentVolumes, this step covers Portworx volumes. Both WordPress and MySQL will use Portworx as PersistentVolumes and PersistentVolumeClaims to store data.
+## Prerequisites
 
-#### Create MySQL Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC)
-
- `kubectl apply -f mysql-vol.yaml`
-
-```yaml
-apiVersion: storage.k8s.io/v1beta1
-kind: StorageClass
-metadata:
-  name: portworx-sc-repl3
-provisioner: kubernetes.io/portworx-volume
-parameters:
-  repl: "3"
-  priority_io: "high"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pvc-1
-  annotations:
-    volume.beta.kubernetes.io/storage-class: portworx-sc-repl3
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
-```
-
-#### Create WordPress Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC)
-
-`kubectl apply -f wordpress-vol.yaml`
-
-```yaml
-apiVersion: storage.k8s.io/v1beta1
-kind: StorageClass
-metadata:
-  name: portworx-sc-repl3-shared
-provisioner: kubernetes.io/portworx-volume
-parameters:
-  repl: "3"
-  priority_io: "high"
-  shared: "true"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: wp-pv-claim
-  labels:
-    app: wordpress
-  annotations:
-    volume.beta.kubernetes.io/storage-class: portworx-sc-repl3-shared
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
-```
-
-### Create a Secret for MySQL Password
-
-A Secret is an object that stores a piece of sensitive data like a password or key. The manifest files are already configured to use a Secret, but you have to create your own Secret. Note: To protect the Secret from exposure, neither get nor describe show its contents.
-
-#### Create the Secret object from the following command:
-
-`kubectl create secret generic mysql-pass --from-file=password.txt`
+* You must have a Kubernetes cluster with a minimum of three worker nodes.
+* Portworx is installed on your Kubernetes cluster. For details about how you can install Portworx on Kubernetes, see the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page.
+* You must have Stork installed on your Kubernetes cluster. For details about how you can install Stork, see the [Stork](/portworx-install-with-kubernetes/storage-operations/stork) page.
 
 
-#### Verify that the Secret exists by running the following command:
+## Dynamically provision a volume for MySQL
 
-`kubectl get secrets`
+1. Create a file called `mysql-sc.yaml`, specifying the following fields and values:
 
+  * **apiVersion:** as `storage.k8s.io/v1`
+  * **kind:** as `StorageClass`
+  * **metadata.name:** with the name of your `StorageClass` object (this example uses `mysql-sc`)
+  * **provisioner:** as `kubernetes.io/portworx-volume`. For details about the Portworx-specific parameters, refer to the [Portworx Volume](https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume) section of the Kubernetes website.
+  * **parameters.repl:** with the number of replicas Portworx should create (this example creates two replicas)
+  * **parameters.priority_io:** with the type of the storage pool (this example uses a high-priority storage pool)
 
-### Deploy MySQL with Portworx
-
-The following manifest describes a single-instance MySQL Deployment. The MySQL container mounts the Portworx PersistentVolume at /var/lib/mysql. The MYSQL_ROOT_PASSWORD environment variable sets the database password from the Secret.
-The deployment uses stork as the scheduler to enable the pods to be placed closer to where their data is located.
-
-#### Deploy MySQL from the mysql.yaml file:
-
-`kubectl create -f mysql.yaml`
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: wordpress-mysql
-  labels:
-    app: wordpress
-spec:
-  ports:
-    - port: 3306
-  selector:
-    app: wordpress
-    tier: mysql
-  clusterIP: None
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: wordpress-mysql
-  labels:
-    app: wordpress
-spec:
-  strategy:
-    type: Recreate
-  template:
+    ```text
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
     metadata:
+      name: mysql-sc
+    provisioner: kubernetes.io/portworx-volume
+    parameters:
+      repl: "3"
+      priority_io: "high"
+    ```
+
+    For more details about how you can configure a storage class, see the [Using Dynamic Provisioning](/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) section of the Portworx documentation.
+
+2. Apply the spec:
+
+    ```text
+    kubectl apply -f mysql-sc.yaml.yaml
+    ```
+
+3. Create a file called `mysql-pvc.yaml` with the following content:
+
+    ```text
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: mysql-pvc
+      annotations:
+        volume.beta.kubernetes.io/storage-class: mysql-sc
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 2Gi
+    ```
+
+    {{<info>}}
+**NOTE:** This PVC references the `mysql-sc` storage class. As a result, Kubernetes will automatically create a new PVC for each replica.
+    {{</info>}}
+
+4. Apply the spec:
+
+    ```text
+    kubectl apply -f mysql-pvc.yaml
+    ```
+
+## Dynamically provision a volume for WordPress
+
+1. Create a file called `wordpress-sc.yaml` with the following content:
+
+    ```text
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+      name: wordpress-sc
+    provisioner: kubernetes.io/portworx-volume
+    parameters:
+      repl: "3"
+      priority_io: "high"
+      shared: "true"
+    ```
+
+    {{<info>}}
+**NOTE:** The `shared: "true"` flag creates a globally shared namespace volume which can be used by multiple Pods.
+    {{</info>}}
+
+2. Apply the spec:
+
+    ```text
+    kubectl apply -f wordpress-sc.yaml
+    ```
+
+3. Create a file called `wordpress-pvc.yaml` with the following content:
+
+    ```text
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: wp-pvc
       labels:
+        app: wordpress
+      annotations:
+        volume.beta.kubernetes.io/storage-class: wordpress-sc
+    spec:
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 1Gi
+    ```
+
+    {{<info>}}
+**NOTE:** This PVC references the `wordpress-sc` storage class. As a result, Kubernetes will automatically create a new PVC for each replica.
+    {{</info>}}
+
+4. Apply the spec:
+
+    ```text
+    kubectl apply -f wordpress-pvc.yaml
+    ```
+
+## Create a Kubernetes secret for storing your MySQL password
+
+A secret is an object that contains sensitive data. To create a secret, you can use the `kubectl create secret` command. Note that, to protect your sensitive data, the `kubectl get` and `kubectl describe` commands do not display the content of a secret.
+
+1. Use the `echo` command to save your MySQL password to a file called `./password.txt`, replacing `<YOUR-PASSWORD>` with your actual password:
+
+    ```text
+    echo -n '<YOUR-PASSWORD' > ./password.txt
+    ```
+
+2. To create a new secret, enter the `kubectl create secret` command, specifying:
+
+  * The `generic` parameter. This instructs Kubernetes to create a secret based on a file, directory, or specified literal value.
+  * The name of your secret (this example uses `mysql-pass`)
+  * The `--from-file` flag with the name of the file in which you stored your password
+
+    ```text
+    kubectl create secret generic mysql-pass --from-file=./password.txt
+    ```
+
+3. Use the `kubectl get secrets` command to verify that Kubernetes created the secret:
+
+    ```text
+    kubectl get secrets
+    ```
+
+## Deploy MySQL
+
+1. Create a file named `mysql-service.yaml` with the following content:
+
+    ```text
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: wordpress-mysql
+      labels:
+        app: wordpress
+    spec:
+      ports:
+        - port: 3306
+      selector:
         app: wordpress
         tier: mysql
-    spec:
-      # Use the stork scheduler to enable more efficient placement of the pods
-      schedulerName: stork
-      containers:
-      - image: mysql:5.6
-        imagePullPolicy:
-        name: mysql
-        env:
-          # $ kubectl create secret generic mysql-pass --from-file=password.txt
-          # make sure password.txt does not have a trailing newline
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: password.txt
-        ports:
-        - containerPort: 3306
-          name: mysql
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: mysql-pvc-1
-```
+      clusterIP: None
+    ```
 
+2. Apply the spec:
 
-### Deploy WordPress
+    ```text
+    kubectl apply -f mysql-service.yaml
+    ```
 
-The following manifest describes a three-instance WordPress Deployment and Service. It uses many of the same features like a Portworx PVC for persistent storage and a Secret for the password. But it also uses a different setting: type: NodePort. This setting exposes WordPress to traffic from outside of the cluster
-This deployment also uses stork as the scheduler to enable the pods to be placed closer to where their data is located.
+3. Create a file named `mysql-deployment.yaml` with the following content:
 
-#### Deploy WordPress from the wordpress.yaml file:
-
-`kubectl create -f wordpress-deployment.yaml`
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: wordpress
-  labels:
-    app: wordpress
-spec:
-  ports:
-    - port: 80
-      nodePort: 30303
-  selector:
-    app: wordpress
-    tier: frontend
-  type: NodePort
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: wordpress
-  labels:
-    app: wordpress
-spec:
-  replicas: 3
-  strategy:
-    type: Recreate
-  template:
+    ```text
+    apiVersion: apps/v1
+    kind: Deployment
     metadata:
+      name: wordpress-mysql
       labels:
         app: wordpress
-        tier: frontend
     spec:
-      # Use the stork scheduler to enable more efficient placement of the pods
-      schedulerName: stork
-      containers:
-      - image: wordpress:4.8-apache
-        name: wordpress
-        imagePullPolicy:
-        env:
-        - name: WORDPRESS_DB_HOST
-          value: wordpress-mysql
-        - name: WORDPRESS_DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: password.txt
-        ports:
-        - containerPort: 80
-          name: wordpress
-        volumeMounts:
-        - name: wordpress-persistent-storage
-          mountPath: /var/www/html
-      volumes:
-      - name: wordpress-persistent-storage
-        persistentVolumeClaim:
-          claimName: wp-pv-claim
-```
+      selector:
+        matchLabels:
+          app: wordpress
+      strategy:
+        type: Recreate
+      template:
+        metadata:
+          labels:
+            app: wordpress
+            tier: mysql
+        spec:
+          # Use the Stork scheduler to enable more efficient placement of the pods
+          schedulerName: stork
+          containers:
+          - image: mysql:5.6
+            imagePullPolicy:
+            name: mysql
+            env:
+              # $ kubectl create secret generic mysql-pass --from-file=password.txt
+              # make sure password.txt does not have a trailing newline
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: password.txt
+            ports:
+            - containerPort: 3306
+              name: mysql
+            volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+          volumes:
+          - name: mysql-persistent-storage
+            persistentVolumeClaim:
+              claimName: mysql-pvc
+    ```
 
-#### Verify Pods and Get WordPress Service by running the following command:
+    Note the following about this `Deployment`:
+    * Kubernetes creates a single-instance MySQL database
+    * Kubernetes creates an environment variable called `MYSQL_ROOT_PASSWORD` that contains your MySQL password
+    * Portworx mounts the Portworx persistent volume in the `/var/lib/mysql` directory
+    * The Stork scheduler will place your Pods closer to where their data is located
 
-`kubectl get pods`
+4. Apply the spec:
 
-`kubectl get services wordpress`
+    ```text
+    kubectl apply -f mysql-deployment.yaml
+    ```
 
-### Cleaning up
+## Deploy WordPress
 
-* Deleting secret for mysql
+1. Create a file called `wordpress-service.yaml` with the following content:
 
-`kubectl delete secret mysql-pass`
+    ```text
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: wordpress
+      labels:
+        app: wordpress
+    spec:
+      ports:
+        - port: 80
+          nodePort: 30303
+      selector:
+        app: wordpress
+        tier: frontend
+      type: NodePort
+    ```
 
-* Deleting wordpress
+    Note that the `spec.type` field is set to `NodePort`. Kubernetes exposes the service on each node and makes it accessible from outside the cluster. For more details, see the [Type NodePort](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport) section of the Kubernetes documentation.
 
-`kubectl delete -f wordpress-deployment.yaml`
+2. Apply the spec:
 
-`kubectl delete -f wordpress-vol.yaml`
+    ```text
+    kubectl apply -f wordpress-service.yaml
+    ```
 
-* Deleting mysql for wordpress
+3. Create a file called `wordpress-deployment.yaml` with the following content:
 
-`kubectl delete -f mysql.yaml`
+    ```text
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: wordpress
+      labels:
+        app: wordpress
+    spec:
+      selector:
+        matchLabels:
+          app: wordpress
+      replicas: 3
+      strategy:
+        type: Recreate
+      template:
+        metadata:
+          labels:
+            app: wordpress
+            tier: frontend
+        spec:
+          # Use the Stork scheduler to enable more efficient placement of the pods
+          schedulerName: stork
+          containers:
+          - image: wordpress:4.8-apache
+            name: wordpress
+            imagePullPolicy:
+            env:
+            - name: WORDPRESS_DB_HOST
+              value: wordpress-mysql
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: password.txt
+            ports:
+            - containerPort: 80
+              name: wordpress
+            volumeMounts:
+            - name: wordpress-persistent-storage
+              mountPath: /var/www/html
+          volumes:
+          - name: wordpress-persistent-storage
+            persistentVolumeClaim:
+              claimName: wp-pvc
+    ```
 
-`kubectl delete -f mysql-vol.yaml`
+    Note the following about this `Deployment`
+    * Portworx will create three replicas of each volume
+    * The Stork scheduler will place your Pods closer to where their data is located
+    * Kubernetes will create an environment variable called `WORDPRESS_DB_PASSWORD` that contains your MySQL password
 
+4. Apply the spec:
+
+    ```text
+    kubectl apply -f wordpress-deployment.yaml
+    ```
+
+## Validate the cluster functionality
+
+1. List your Pods:
+
+    ```text
+    kubectl get pods
+    ```
+
+2. Display your services:
+
+    ```text
+    kubectl get services
+    ```
+
+## Clean up
+
+1. Enter the following command to delete the Kubernetes secret:
+
+    ```text
+    kubectl delete secret mysql-pass
+    ```
+
+2. Use the `kubectl delete` to delete your WordPress deployment and PVC:
+
+    ```text
+    kubectl delete -f wordpress-deployment.yaml
+    kubectl delete -f wordpress-pvc.yaml
+    ```
+
+3. Use the `kubectl delete` to delete your MySQL deployment and PVC:
+
+    ```text
+    kubectl delete -f mysql-deployment.yaml
+    kubectl delete -f mysql-pvc.yaml
+    ```
+
+<!-- I don't understand the following paragraph. Do we even use a `hostPath`?
+Reference: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
 
 `Note:` Portworx PersistentVolume would allow you to recreate the Deployments and Services at this point without losing data, but hostPath loses the data as soon as the Pod stops running...
+-->
