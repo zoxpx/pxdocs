@@ -417,15 +417,11 @@ pxctl service node-wipe
 ```
 
 ```output
-This is a distruptive operation.
+This is a disruptive operation.
 It will delete all PX configuration files from this node. Data on the storage disks attached on this node will be irrevocably deleted.
-Are you sure you want to proceed ? (Y/N): y
-This is a distruptive operation.
-It will delete all PX configuration files from this node. Data on the storage disks attached on this node will be irrevocably deleted.
+Executing manual log rotation logs...
 Failed to set pxd timeout. Wipe command might take more time to finish.
-Are you sure you want to wipe data from the disk: ' /dev/sdb ' (Y/N): y
-/dev/sdb: 8 bytes were erased at offset 0x00010040 (btrfs): 5f 42 48 52 66 53 5f 4d
-Removed PX footprint from device /dev/sdb.
+Removed PX footprint from device /dev/sdc.
 Wiped node successfully.
 ```
 

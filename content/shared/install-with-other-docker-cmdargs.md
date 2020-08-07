@@ -14,11 +14,15 @@ Below is the list of arguments you can pass to `px-runc`:
 -k <kvdb://host:port>     [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
 -b                        Use in-built kvdb. Provide the kvdb endpoints required for bootstrap with -k option.
 -s <device path>          [REQUIRED unless -a/-A are used] Specify storage devices that PX should use for storing the data
--T <type>                 Specify backend storage type (<type> is dmthin, btrfs, mdraid or lvm)
--cache <device path>      Specify storage devices that PX should use for caching
+-xs <omit device path>    Specify storage devices that PX should NOT use for storing the data (useful with -a/-A)
+-T <type>                 Specify backend storage type (<type> is mdraid or lvm)
+-cache [<device path>]    Specify storage devices that PX should use for caching
 -dedicated_cache          Constrain cache drive assignment from given -cache drives only
--j <device path>          Specify a journal device for PX, or "auto" (recommended)
+-j <device path>          Specify storage device that PX should use for storing the journal data
 -metadata <device path>   Specify storage device that PX should use for storing the system meta data
+-kvdb_dev <device path>   Specify storage device that PX should use for storing internal kvdb data
+-oci <dir>                Specify OCI directory (dfl: /opt/pwx/oci)
+-sysd <file>              Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
 -e key=value              Specify extra environment variables
 -v <dir:dir[:shared,ro]>  Specify extra mounts
 -d <ethX>                 Specify the data network interface
@@ -29,13 +33,7 @@ Below is the list of arguments you can pass to `px-runc`:
 -A                        Instructs PX to use any available, unused and unmounted drives or partitions
 -x <swarm|kubernetes>     Specify scheduler type (if PX running in scheduler environment)
 -r <startport>            Start of the portrange Portworx will use for communication (dfl: 9001)
-```
-
-* additional PX-OCI -specific options:
-
-```text
--oci <dir>                Specify OCI directory (dfl: /opt/pwx/oci)
--sysd <file>              Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
+-marketplace_name         [OPTIONAL] pass in the marketplace name if installing via a 3rd party marketplace
 ```
 
 ##### KVDB options
@@ -46,26 +44,25 @@ Below is the list of arguments you can pass to `px-runc`:
 -cert <file>              Specify location of certificate for ETCD authentication
 -key <file>               Specify location of certificate key for ETCD authentication
 -acltoken <token>         Specify ACL token for Consul authentication
-# internal-kvdb-options:
++internal-kvdb-options:
 -kvdb_cluster_size <#>    Size of the internal kvdb cluster (dfl: 3)
 -kvdb_recovery            Starts the nodes in kvdb recovery mode
 ```
 
-##### Secrets options
+##### Cluster domain options
 
 ```text
--secret_type <type>        Specify the secrets type for cloudsnap and encryption features (<type> is aws-kms, dcos, docker, ibm-kp, k7s, kvdb, vault, gcloud-kms or azure-kv)
--cluster_secret_key <key>  Specify cluster-wide secret for AWS KMS or Vault and volume encryption
+-cluster_domain <name>    Cluster Domain Name for this cluster
 ```
 
 ##### PX-API options
 
 ```text
 # px-api-ssl-options:
--apirootca <file>             Specify self-signed root CA certificate file
--apicert <file>               Specify node certificate file
--apikey <file>                Specify node certificate key file
--apidisclientauth             Disable api client authentication
+-apirootca <file>         Specify self-signed root CA certificate file
+-apicert <file>           Specify node certificate file
+-apikey <file>            Specify node certificate key file
+-apidisclientauth         Disable api client authentication
 # px-authentication-options:
 -oidc_issuer   <URL>          Location of OIDC service (e.g. https://accounts.google.com)
 -oidc_client_id <id>          Client id provided by the OIDC
@@ -74,6 +71,38 @@ Below is the list of arguments you can pass to `px-runc`:
 -jwt_rsa_pubkey_file <file>   JSON Web Token RSA Public file path
 -jwt_ecds_pubkey_file <file>  JSON Web Token ECDS Public file path
 -username_claim <claim>       Claim key from the token to use as the unique id of the user (<claim> is sub, email or name; dfl: sub)
+```
+
+##### Volume options
+
+```text
+-disable-sharedv4         Disable sharedv4 volume support. When set, NFS dependencies will not be installed.
+-raid <0|10>              Specify which RAID-level should PX use with local storage (dfl: 0)
+```
+
+{{<info>}}
+The `-raid <0|10>` option is different than the volume replication factor.  For example, Portworx nodes using `-raid 10` and hosting volumes with a replication factor of 3, will keep 6 copies of the data.
+{{</info>}}
+
+##### CSI options
+
+```text
+-csiversion <ver>         Specify which CSI version to use (<ver> is 1.0 or 0.3; dfl: 1.0)
+```
+
+##### secrets options
+
+```text
+-secret_type <type>       Specify the secrets type (<type> is aws-kms, dcos, docker, ibm-kp, k8s, kvdb, vault, gcloud-kms or azure-kv)
+-cluster_secret_key <id>  Specify cluster-wide secret ID
+```
+
+##### Auto-scaling group options
+
+```text
+-max_drive_set_count <#>         Specify maximum number of drive sets PX can create
+-max_storage_nodes_per_zone <#>  Specify the maximum number of storage nodes per zone in PX cluster
+-node_pool_label <key>           Specify the scheduler node label key with which nodes are grouped into node pools
 ```
 
 ##### Resource control options
@@ -87,17 +116,6 @@ Below is the list of arguments you can pass to `px-runc`:
 --memory-swap <bytes>         Specify maximum ammount of RAM+SWAP memory Portworx can use
 --memory-swappiness <0-100>   Specify percentage of container's anonymous pages host can swap out
 ```
-
-##### Misc options
-
-```text
--raid <0|10>              Specify which RAID-level should PX use with local storage (dfl: 0)
--cluster_domain <name>    Cluster Domain Name for this cluster
-```
-
-{{<info>}}
-The `-raid <0|10>` option is different than the volume replication factor.  For example, Portworx nodes using `-raid 10` and hosting volumes with a replication factor of 3, will keep 6 copies of the data.
-{{</info>}}
 
 <a name="env-variables"></a>
 
