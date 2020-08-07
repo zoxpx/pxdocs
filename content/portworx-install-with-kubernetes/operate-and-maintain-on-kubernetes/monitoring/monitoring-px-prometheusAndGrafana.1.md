@@ -226,50 +226,53 @@ kubectl apply -f prometheus-cluster.yaml
 
 #### Prometheus access details
 
-Prometheus can be be accessed using a NodePort service.
-
-First get the node port that prometheus is using
+Find out what endpoint prometheus has, by default it deploys as a ClusterIP
 
   ```text
   kubectl get svc -n kube-system prometheus
   ```
 
-Navigate to the Prometheus web UI by going to `http://<master_ip>:<service_nodeport>`. You should be able to navigate to the `Targets` and `Rules` section of the Prometheus dashboard which lists the Portworx cluster endpoints as well as the Alerting rules as specified earlier.
+Navigate to the Prometheus web UI by going to the service ip. You should be able to navigate to the `Targets` and `Rules` section of the Prometheus dashboard which lists the Portworx cluster endpoints as well as the Alerting rules as specified earlier.
 
 ### Installing Grafana
 
-1. Download the {{< direct-download url="/samples/k8s/pxc/grafana.yaml" name="grafana.yaml" >}} file and apply it:
+1. Download {{< direct-download url="/samples/k8s/pxc/grafana-dashboard-config.yaml" name="grafana-dashboard-config.yaml" >}} file and create the configmap:
 
+    ```text
+    kubectl -n kube-system create configmap grafana-dashboard-config --from-file=grafana-dashboard-config.yaml
+    ```
+
+2. Download {{< direct-download url="/samples/k8s/pxc/grafana-datasource.yaml" name="grafana-datasource.yaml" >}} file and create the configmap:
+    If you are using your own prometheus set-up make sure to edit this file to point to the right prometheus instance.
+
+    ```text
+    kubectl -n kube-system create configmap grafan-source-config --from-file=grafana-datasource.yaml
+    ```
+
+3. Download and apply the following Grafana templates:
+
+    ```text
+    curl https://raw.githubusercontent.com/portworx/pxdocs/master/static/samples/k8s/pxc/portworx-cluster-dashboard.json -o portworx-cluster-dashboard.json && \
+    curl https://raw.githubusercontent.com/portworx/pxdocs/master/static/samples/k8s/pxc/portworx-node-dashboard.json -o portworx-node-dashboard.json && \
+    curl https://raw.githubusercontent.com/portworx/pxdocs/master/static/samples/k8s/pxc/portworx-volume-dashboard.json -o portworx-volume-dashboard.json && \
+    curl https://raw.githubusercontent.com/portworx/pxdocs/master/static/samples/k8s/pxc/portworx-etcd-dashboard.json -o portworx-etcd-dashboard.json && \
+    kubectl -n kube-system create configmap grafana-dashboards --from-file=portworx-cluster-dashboard.json --from-file=portworx-node-dashboard.json --from-file=portworx-volume-dashboard.json --from-file=portworx-etcd-dashboard.json
+    ```
+4. Finally, download the {{< direct-download url="/samples/k8s/pxc/grafana.yaml" name="grafana.yaml" >}} file and apply it:
 
     ```text
     kubectl apply -f grafana.yaml
     ```
 
-2. Download and apply the following Grafana templates:
-
-    ```text
-    curl https://github.com/portworx/pxdocs/blob/master/static/samples/k8s/pxc/portworx-cluster-dashboard.json -o portworx-cluster-dashboard.json && \
-    curl https://github.com/portworx/pxdocs/blob/master/static/samples/k8s/pxc/portworx-node-dashboard.json -o portworx-node-dashboard.json && \
-    curl https://github.com/portworx/pxdocs/blob/master/static/samples/k8s/pxc/portworx-volume-dashboard.json -o portworx-volume-dashboard.json && \
-    curl https://github.com/portworx/pxdocs/blob/master/static/samples/k8s/pxc/portworx-etcd-dashboard.json -o portworx-etcd-dashboard.json && \
-    kubectl -n kube-system create configmap grafana-dashboards --from-file=portworx-cluster-dashboard.json --from-file=portworx-node-dashboard.json --from-file=portworx-volume-dashboard.json --from-file=portworx-etcd-dashboard.json
-    ```
-
 #### Grafana access details
 
-Grafana can be be accessed using a NodePort service.
-
-First get the node port that grafana is using
+Find out what endpoint grafana has, by default it deploys as a ClusterIP
 
   ```text
   kubectl get svc -n kube-system grafana
   ```
 
-Access the Grafana dashboard by navigating to `http://<master_ip>:<service_nodeport>`. You would need to create a datasource for the Portworx Grafana dashboard metrics to be populated.
-Navigate to Configurations --> Datasources.
-Create a datasource named `prometheus`. Enter the Prometheus endpoint as obtained in the install verification step for Prometheus from the above section.
-
-![grafanadatasource](/img/datasource-creation-grafana.png)
+Access the Grafana dashboard by navigating to the service ip.
 
 ### Post install verification
 
