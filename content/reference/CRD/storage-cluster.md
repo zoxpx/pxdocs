@@ -26,7 +26,7 @@ metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.1.2
+  image: portworx/oci-monitor:2.5.5
   kvdb:
     internal: true
   storage:
@@ -42,7 +42,7 @@ metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.1.2
+  image: portworx/oci-monitor:2.5.5
   kvdb:
     endpoints:
     - etcd:http://etcd-1.net:2379
@@ -66,7 +66,7 @@ metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.1.2
+  image: portworx/oci-monitor:2.5.5
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
@@ -100,7 +100,7 @@ metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.1.2
+  image: portworx/oci-monitor:2.5.5
   imagePullPolicy: Always
   imagePullSecret: regsecret
   customImageRegistry: docker.private.io/repo
@@ -113,6 +113,37 @@ spec:
   env:
   - name: VAULT_ADDRESS
     value: "http://10.0.0.1:8200"
+```
+
+* Portworx with node specific overrides. Use different devices or no devices on different set of nodes.
+
+```text
+apiVersion: core.libopenstorage.org/v1alpha1
+kind: StorageCluster
+metadata:
+  name: portworx
+  namespace: kube-system
+spec:
+  image: portworx/oci-monitor:2.5.5
+  storage:
+    devices:
+    - /dev/sda
+    - /dev/sdb
+  nodes:
+  - selector:
+      labelSelector:
+        matchLabels:
+          px/storage: "nvme"
+    storage:
+      devices:
+      - /dev/nvme1
+      - /dev/nvme2
+  - selector:
+      labelSelector:
+        matchLabels:
+          px/storage: "false"
+    storage:
+      devices: []
 ```
 
 ## StorageCluster Schema
@@ -146,7 +177,7 @@ This section explains the fields used to configure Portworx with a KVdb. Note th
 | --- | --- | --- | --- |
 | spec.<br>kvdb.<br>internal | Specifies if Portworx starts with the [internal KVdb](/concepts/internal-kvdb). | `boolean` | `true` |
 | spec.<br>kvdb.endpoints[]<br> | A list of endpoints for your external key-value database like ETCD or Consul. This field takes precedence over the `spec.kvdb.internal` field. That is, if you specify the endpoints, Portworx ignores the `spec.kvdb.internal` field and it uses the external KVdb. | `[]string` | None |
-| spec.<br>kvdb.<br>authSecret | Indicates the name of the secret Portworx uses to authenticate against your KVdb. The secret must be placed in the same namespace as the `StorageCluster` object. The secret should provide the following information: <br> -  The username and password stored under the `username` and `password` keys, if you're using a username/password authentication schema. <br> - The CA certificate stored under the `kvdb-ca.crt` key and the certificate key stored under the `kvdb.key`, if you're using certificates for authentication. <br> - The ACL token stored under the `acl-token` key, if you're using ACL tokens for authentication. | string | None |
+| spec.<br>kvdb.<br>authSecret | Indicates the name of the secret Portworx uses to authenticate against your KVdb. The secret must be placed in the same namespace as the `StorageCluster` object. The secret should provide the following information: <br> -  The username and password stored under the `username` and `password` keys, if you're using a username/password authentication schema. <br> - The CA certificate stored under the `kvdb-ca.crt` key and the certificate key stored under the `kvdb.key`, if you're using certificates for authentication. <br> - The ACL token stored under the `acl-token` key, if you're using ACL tokens for authentication. | `string` | None |
 
 ### Storage configuration
 
@@ -242,7 +273,7 @@ This section provides details on how to deploy and manage Lighthouse.
 
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
-| spec.<br>userInterface.<br>enabled | Enables or disables Lighthouse at any given time. | boolean | `false` |
+| spec.<br>userInterface.<br>enabled | Enables or disables Lighthouse at any given time. | `boolean` | `false` |
 | spec.<br>userInterface.<br>image | Specifies the Lighthouse image. | `string` | None |
 | spec.<br>userInterface.<br>lockImage | Enables locking Lighthouse to the given image. When set to false, the Portworx Operator will overwrite the Lighthouse image to a recommended image for given Portworx version. | `boolean` | `false` |
 
@@ -252,10 +283,25 @@ This section provides details on how to deploy and manage Autopilot.
 
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
-| spec.<br>autopilot.<br>enabled | Enables or disables Autopilot at any given time. | boolean | `false` |
+| spec.<br>autopilot.<br>enabled | Enables or disables Autopilot at any given time. | `boolean` | `false` |
 | spec.<br>autopilot.<br>image | Specifies the Autopilot image. | `string` | None |
 | spec.<br>autopilot.<br>lockImage | Enables locking Autopilot to the given image. When set to false, the Portworx Operator will overwrite the Autopilot image to a recommended image for given Portworx version. | `boolean` | `false` |
 | spec.<br>autopilot.<br>providers | List of data providers for Autopilot. | `[]object` | None |
 | spec.<br>autopilot.<br>providers.<br>name | Unique name of the data provider. | `string` | None |
 | spec.<br>autopilot.<br>providers.<br>type | Type of the data provider. For instance, `prometheus` | `string` | None |
 | spec.<br>autopilot.<br>providers.<br>params | Map of key-value params for the provider. | `map[string]string` | None |
+
+### Node specific configuration
+
+This section provides details on how to override certain cluster level configuration for individual or group of nodes.
+
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>nodes[] | A list of node specific configurations. | `[]object` | None |
+| spec.<br>nodes[].<br>selector | Selector for the node(s) to which the configuration in this section will be applied. | `object` | None |
+| spec.<br>nodes[].<br>selector.<br>.nodeName | Name of the node to which this configuration will be applied. Node name takes precendence over `selector.labelSelector`. | `string` | None |
+| spec.<br>nodes[].<br>selector.<br>.labelSelector | [Kubernetes style label selector](https://github.com/kubernetes/apimachinery/blob/master/pkg/apis/meta/v1/types.go) for nodes to which this configuration will be applied. | `object` | None |
+| spec.<br>nodes[].<br>network | Specify network configuration for the selected nodes, similar to the one [specified at cluster level](#network-configuration). If this network configuration is empty, then cluster level values are used. | `object` | None |
+| spec.<br>nodes[].<br>storage | Specify storage configuration for the selected nodes, similar to the one [specified at cluster level](#storage-configuration). If some of the config is left empty, the cluster level storage values are passed to the nodes. If you don't want to use a cluster level value and set the field to empty, then explicitly set an empty value for it so no value is passed to the nodes. For instance, set `spec.nodes[0].storage.kvdbDevice: ""`, to not use kvdb device for the selected nodes. | `object` | None |
+| spec.<br>nodes[].<br>env | Specify extra environment variables for the selected nodes. Cluster level environment variables are combined with these and sent to the selected nodes. If same variable is present at cluster level, then the node level variable takes precedence. | `object` | None |
+| spec.<br>nodes[].<br>runtimeOptions | Specify runtime options for the selected nodes. If specified, cluster level options are ignored and only these runtime options are passed to the nodes.  | `object` | None |
