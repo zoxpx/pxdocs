@@ -320,6 +320,7 @@ You can restore an application by applying an ApplicationRestore object.
 
 ```text
 annotations:
+  openshift.io/sa.scc.mcs: s0:c26,c25
   openshift.io/sa.scc.supplemental-groups: 1001990000/10000
   openshift.io/sa.scc.uid-range: 1001990000/10000
 ```
@@ -391,6 +392,7 @@ You can clone an application to a different namespace or within the same namespa
 
     ```text
     annotations:
+      openshift.io/sa.scc.mcs: s0:c26,c25
       openshift.io/sa.scc.supplemental-groups: 1001990000/10000
       openshift.io/sa.scc.uid-range: 1001990000/10000
     ```
