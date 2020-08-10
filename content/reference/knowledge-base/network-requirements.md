@@ -5,6 +5,7 @@ keywords: Network, Communication ports, Firewall, Troubleshooting
 description: Description on networking ports Portworx requires on Kubernetes for a functioning cluster
 series: kb
 weight: 5
+hidden: true
 ---
 
 Being a distributed storage system, Portworx requires access to certain ports on the host.
