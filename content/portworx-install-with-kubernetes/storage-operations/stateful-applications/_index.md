@@ -7,7 +7,7 @@ hidden: false
 weight: 1
 ---
 
-With Portworx, you can backup stateful applications and their volumes to an external object store and restore to the same cluster or to a new cluster. When it comes to timing, you can perform backup operations manually whenever you wish, or you can schedule them with a schedulePolicy. You can even use Portworx's backup functionality to clone applications between namespaces by restoring to a different namespace in the same cluster. 
+With Portworx, you can backup stateful applications and their volumes to an external object store and restore to the same cluster or to a new cluster. When it comes to timing, you can perform backup operations manually whenever you wish, or you can schedule them with a schedulePolicy. You can even use Portworx's backup functionality to clone applications between namespaces by restoring to a different namespace in the same cluster.
 
 
 ## Prerequisites
@@ -33,7 +33,7 @@ Use the backupLocation CRD to specify the configuration information for your obj
 * Azure Blob Storage
 * Google Cloud Storage
 
-The example in this document uses an S3 bucket to store application backup data. To create backupLocations using other object stores, see the [Stateful application CRD reference](/portworx-install-with-kubernetes/storage-operations/stateful-applications/crd-reference) section of the documentation. 
+The example in this document uses an S3 bucket to store application backup data. To create backupLocations using other object stores, see the [Stateful application CRD reference](/portworx-install-with-kubernetes/storage-operations/stateful-applications/crd-reference) section of the documentation.
 
 ```
 "endpoint" : "bucketEndpoint.com"
@@ -41,7 +41,7 @@ The example in this document uses an S3 bucket to store application backup data.
 "secret": "ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890"
 ```
 
-If you're restoring backups to a different cluster from the one you took your backups from, you must create a backupLocation CRD on your new cluster that matches the backupLocation CRD on your original cluster. 
+If you're restoring backups to a different cluster from the one you took your backups from, you must create a backupLocation CRD on your new cluster that matches the backupLocation CRD on your original cluster.
 
 You can specify your object store credentials directly in the BackupLocation configuration as plaintext or use a Kubernetes secret:
 
@@ -322,6 +322,7 @@ You can restore an application by applying an ApplicationRestore object.
 
 ```text
 annotations:
+  openshift.io/sa.scc.mcs: s0:c26,c25
   openshift.io/sa.scc.supplemental-groups: 1001990000/10000
   openshift.io/sa.scc.uid-range: 1001990000/10000
 ```
@@ -393,6 +394,7 @@ You can clone an application to a different namespace or within the same namespa
 
     ```text
     annotations:
+      openshift.io/sa.scc.mcs: s0:c26,c25
       openshift.io/sa.scc.supplemental-groups: 1001990000/10000
       openshift.io/sa.scc.uid-range: 1001990000/10000
     ```
