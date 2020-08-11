@@ -29,87 +29,87 @@ You can access a full NFS share in Portworx as a proxy volume. Application using
     {{</info>}}
   * **parameters.proxy_nfs_exportpath:** With the export path on the NFS server. 
 
-  ```text
-  kind: StorageClass
-  apiVersion: storage.k8s.io/v1
-  metadata:
-    name: portworx-proxy-volume-volume
-  provisioner: kubernetes.io/portworx-volume
-  parameters:
-    proxy_endpoint: "nfs:<nfs-share-endpoint>"
-    proxy_nfs_exportpath: "/<mount-path>"
-  allowVolumeExpansion: true
-  ```
+    ```text
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
+    metadata:
+      name: portworx-proxy-volume-volume
+    provisioner: kubernetes.io/portworx-volume
+    parameters:
+      proxy_endpoint: "nfs:<nfs-share-endpoint>"
+      proxy_nfs_exportpath: "/<mount-path>"
+    allowVolumeExpansion: true
+    ```
 
 2. Apply the spec:
 
-  ```text
-  kubectl create -f <storageclass-name>.yaml
-  ```
+    ```text
+    kubectl create -f <storageclass-name>.yaml
+    ```
 
 3. Create the Portworx proxy volume PVC spec, specifying your own values for the following:
 
   * **spec.accessModes:** With the access mode you want to assign to your volumes.
   * **spec.resources.requests.storage:** With the amount of storage you want to allocate to a created volume.
 
-  ```text
-  kind: PersistentVolumeClaim
-  apiVersion: v1
-  metadata:
-    name: nfs-data
-    labels:
-      app: nginx
-  spec:
-    storageClassName: portworx-proxy-volume-volume
-    accessModes:
-      - <access-mode>
-    resources:
-      requests:
-        storage: <storage-amount>
-  ```
+    ```text
+    kind: PersistentVolumeClaim
+    apiVersion: v1
+    metadata:
+      name: nfs-data
+      labels:
+        app: nginx
+    spec:
+      storageClassName: portworx-proxy-volume-volume
+      accessModes:
+        - <access-mode>
+      resources:
+        requests:
+          storage: <storage-amount>
+    ```
 
 4. Apply the spec:
 
-  ```text          
-  kubectl create -f <pvc-name>.yaml
-  ```
+    ```text          
+    kubectl create -f <pvc-name>.yaml
+    ```
 
 5. Create a Deployment spec that uses the proxy-volume PVC:
 
-  ```text
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    name: nginx
-  spec:
-    replicas: 3
-    selector:
-      matchLabels:
-        app: nginx
-    template:
-      metadata:
-        labels:
+    ```text
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: nginx
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
           app: nginx
-      spec:
-        containers:
-        - name: nginx
-          image: bitnami/nginx
-          ports:
-          - containerPort: 80
-          volumeMounts:
+      template:
+        metadata:
+          labels:
+            app: nginx
+        spec:
+          containers:
+          - name: nginx
+            image: bitnami/nginx
+            ports:
+            - containerPort: 80
+            volumeMounts:
+            - name: nginx-persistent-storage
+              mountPath: /usr/share/nginx/html
+          volumes:
           - name: nginx-persistent-storage
-            mountPath: /usr/share/nginx/html
-        volumes:
-        - name: nginx-persistent-storage
-          persistentVolumeClaim:
-            claimName: nfs-data
-  ```
+            persistentVolumeClaim:
+              claimName: nfs-data
+    ```
 
 5. Apply the spec:
 
-  ```text 
-  kubectl create -f <pod-name>.yaml
-  ```
+    ```text 
+    kubectl create -f <pod-name>.yaml
+    ```
 
 ## Accessing a sub-path of an external NFS share
 
@@ -123,23 +123,23 @@ You can associate a sub-path of an NFS share with Portworx as a proxy volume. Un
     {{</info>}}
   * **parameters.proxy_endpoint:** With the export path on the NFS server. 
 
-  ```text
-  kind: StorageClass
-  apiVersion: storage.k8s.io/v1
-  metadata:
-    name: portworx-proxy-volume-volume
-  provisioner: kubernetes.io/portworx-volume
-  parameters:
-    proxy_endpoint: "nfs:<nfs-share-endpoint>"
-    proxy_nfs_exportpath: "/<mount-path>"
-  allowVolumeExpansion: true
-  ```
+    ```text
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
+    metadata:
+      name: portworx-proxy-volume-volume
+    provisioner: kubernetes.io/portworx-volume
+    parameters:
+      proxy_endpoint: "nfs:<nfs-share-endpoint>"
+      proxy_nfs_exportpath: "/<mount-path>"
+    allowVolumeExpansion: true
+    ```
 
 2. Apply the spec:
 
-  ```text
-  kubectl create -f <storageclass-name>.yaml
-  ```
+    ```text
+    kubectl create -f <storageclass-name>.yaml
+    ```
 
 3. Create the Portworx proxy volume PVC spec, specifying your own values for the following:
 
@@ -151,68 +151,68 @@ You can associate a sub-path of an NFS share with Portworx as a proxy volume. Un
   * **spec.accessModes:** With the access mode you want to assign to your volumes.
   * **spec.resources.requests.storage:** With the amount of storage you want to allocate to a created volume.
 
-  ```text
-  kind: PersistentVolumeClaim
-  apiVersion: v1
-  metadata:
-    name: nfs-data
-    annotations:
-      px/proxy-nfs-subpath: "<path>/<sub-path>"
-    labels:
-      app: nginx
-  spec:
-    storageClassName: portworx-proxy-volume-volume
-    accessModes:
-      - <access-mode>
-    resources:
-      requests:
-        storage: <storage-amount>
-  ```
-
-  {{<info>}}
-**NOTE:** This PVC can only access the `<sub-path>` directory and its contents.
-  {{</info>}}
-          
-4. Apply the spec:
-
-  ```text
-  kubectl create -f <pvc-for-sub-path-name>.yaml
-  ```
-
-5. Create a Deployment spec that uses the proxy-volume PVC you created in the step above:
-
-```text
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: nginx
-  template:
+    ```text
+    kind: PersistentVolumeClaim
+    apiVersion: v1
     metadata:
+      name: nfs-data
+      annotations:
+        px/proxy-nfs-subpath: "<path>/<sub-path>"
       labels:
         app: nginx
     spec:
-      containers:
-      - name: nginx
-        image: bitnami/nginx
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: nginx-persistent-storage
-          mountPath: /usr/share/nginx/html
-      volumes:
-      - name: nginx-persistent-storage
-        persistentVolumeClaim:
-          claimName: nfs-data
-```
+      storageClassName: portworx-proxy-volume-volume
+      accessModes:
+        - <access-mode>
+      resources:
+        requests:
+          storage: <storage-amount>
+    ```
 
-5. Apply the spec:
+    {{<info>}}
+**NOTE:** This PVC can only access the `<sub-path>` directory and its contents.
+    {{</info>}}
+          
+4. Apply the spec:
 
-```text
-kubectl create -f <pod-name>.yaml
-```
+    ```text
+    kubectl create -f <pvc-for-sub-path-name>.yaml
+    ```
+
+5. Create a Deployment spec that uses the proxy-volume PVC you created in the step above:
+
+    ```text
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: nginx
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: nginx
+      template:
+        metadata:
+          labels:
+            app: nginx
+        spec:
+          containers:
+          - name: nginx
+            image: bitnami/nginx
+            ports:
+            - containerPort: 80
+            volumeMounts:
+            - name: nginx-persistent-storage
+              mountPath: /usr/share/nginx/html
+          volumes:
+          - name: nginx-persistent-storage
+            persistentVolumeClaim:
+              claimName: nfs-data
+    ```
+
+6. Apply the spec:
+
+    ```text
+    kubectl create -f <pod-name>.yaml
+    ```
 
