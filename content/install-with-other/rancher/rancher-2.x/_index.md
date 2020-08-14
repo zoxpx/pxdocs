@@ -42,7 +42,7 @@ Perform the following steps to install Portworx:
 
 5. Populate the various required sections of the **Configuration Options** of the Helm chart form:
 
-     * In the **Key Value Store Paramters** section, specify an internal or external ETCD.
+     * (Skip this section if you're installing Portworx Essentials ) In the **Key Value Store Paramters** section, specify an internal or external ETCD.
 
         ![Screenshot showing the KVDB section of the Helm chart form](/img/rancherKvdb.png)
 
@@ -59,9 +59,20 @@ Perform the following steps to install Portworx:
 
     ![Screenshot showing the launch button of the Helm chart form](/img/rancherHelmLaunch.png)
 
-
     Depending on your network and cluster performance, it may take between 5 and 20 minutes to install Portworx. Once the installation is completed, the Portworx processes will be shown as green.
+    
+## Troubleshooting
 
+If pods remain in **unavailable** state, check the pod events to see all Kubernetes events related to the selected pod:
+    
+   * Go to **portworx** in **Workloads** section   
+   * Then click on the unavailable pod
+   * Expand the **Events** section
+   
+   ![Screenshot showing the pod](/img/rancherPod.png)
+   
+   ![Screenshot showing the events section](/img/rancherEvent.png)
+    
 ## Post-Install
 
 Once you have a running Portworx installation, below sections are useful.
