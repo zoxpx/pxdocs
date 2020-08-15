@@ -63,15 +63,13 @@ Perform the following steps to install Portworx:
     
 ## Troubleshooting
 
-If pods remain in **unavailable** state, check the pod events to see all Kubernetes events related to the selected pod:
+If pods remain in **Unavailable** state, check the pod events to see all Kubernetes events related to the selected pod:
     
-   * Go to **portworx** in **Workloads** section   
-   * Then click on the unavailable pod
-   * Expand the **Events** section
-   
-   ![Screenshot showing the pod](/img/rancherPod.png)
-   
-   ![Screenshot showing the events section](/img/rancherEvent.png)
+1. Navigate to **Portworx** in **Workloads** section.   
+![Screenshot showing the pod](/img/rancherPod.png)    
+2. Select the unavailable pod.
+3. Expand the **Events** section.   
+![Screenshot showing the events section](/img/rancherEvent.png)
     
 ## Post-Install
 
