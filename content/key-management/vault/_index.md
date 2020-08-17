@@ -65,6 +65,9 @@ Portworx requires the following Vault credentials to use its APIs
 
     Name of the Kubernetes Auth Role created in vault for Portworx. This field is set only when using Kubernetes Auth Method.
 
+- **Vault Namespace [VAULT_NAMESPACE]**
+
+    This option allows you to set a global vault namespace for the Portworx cluster. All vault requests by PX will use this vault namespace if an override is not provided. 
 
 
 ## Kubernetes users
@@ -100,6 +103,7 @@ data:
   VAULT_CLIENT_CERT: <base64 encoded file path where the Client Certificate is present on all the nodes>
   VAULT_CLIENT_KEY: <base64 encoded file path where the Client Key is present on all the nodes>
   VAULT_TLS_SERVER_NAME: <base64 encoded value of the TLS server name>
+  VAULT_NAMESPACE: <base64 encoded value of the global vault namespace for portworx>
 ```
 
 Portworx will look for this secret with name `px-vault` under the `portworx` namespace. While installing Portworx it creates a kubernetes role binding which grants access to reading kubernetes secrets only from the `portworx` namespace.
@@ -188,6 +192,7 @@ data:
   VAULT_TLS_SERVER_NAME: <base64 encoded value of the TLS server name>
   VAULT_AUTH_METHOD: a3ViZXJuZXRlcw== // base64 encoded value of "kubernetes"
   VAULT_AUTH_KUBERNETES_ROLE: cG9ydHdvcng= // base64 encoded value of the kubernetes auth role "portworx"
+  VAULT_NAMESPACE: <base64 encoded value of the global vault namespace for portworx>
 ```
 
 {{<info>}}
@@ -288,6 +293,9 @@ Provide the following Vault credentials (key value pairs) as environment variabl
 - [Optional] VAULT_CLIENT_KEY=<file path where the Client Key is present on all the nodes>
 - [Optional] VAULT_TLS_SERVER_NAME=<TLS server name>
 
+{{<info>}}
+**NOTE:** Providing VAULT_NAMESPACE as environment variable is not supported. Please specify the vault namespace through pxctl commands as shown in subsequent sections.
+{{</info>}}
 
 ### Step 2: Set up Vault as the secrets provider for Portworx.
 

@@ -20,11 +20,11 @@ Encrypted volume successfully created: 374663852714325215
 To create a **shared encrypted** volume run the following command:
 
 ```text
-pxctl volume create --shared --secret_key key1 --secure --size 10 enc_shared_vol
+pxctl volume create --sharedv4 --secret_key key1 --secure --size 10 enc_shared_vol
 ```
 
 ```output
-Encrypted Shared volume successfully created: 77957787758406722
+Encrypted Sharedv4 volume successfully created: 77957787758406722
 ```
 
 To create an **encrypted** volume using a specific secret through docker, run the following command:
