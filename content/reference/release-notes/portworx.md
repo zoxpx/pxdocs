@@ -6,6 +6,30 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.5.6
+
+August 17, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-14845 | Added a new px install argument (VAULT_NAMESPACE), allowing you to set a global vault namespace for Portworx. Provide this argument as a part of the `px-vault` Kubernetes secret. | 
+| PWX-13173 | Added support for providing the `vault-namespace` argument in `pxctl` commands: <ul><li>setting cluster-wide secrets: `/opt/pwx/bin/pxctl set-cluster-key --secret_options=vault-namespace=portworx`</li><li>create volume: `/opt/pwx/bin/pxctl volume create --secure --secret_key=pwx/custom-key --secret_options=vault-namespace=portworx px-vol` </li><li>host attach: `/opt/pwx/bin/pxctl host attach --secret_key=pwx/custom-key --secret_options=vault-namespace=portworx 57416092699073855`</li></ul> |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-14777 | If credentials were deleted from Kubernetes secrets while there were multiple pending references to them in a Portworx cluster, Portworx generated an alert for every pending reference. <br/><br/>**User impact:** Users received an excessive number of alerts. <br/><br/> **Resolution:** Portworx now generates only one alert every hour. Portworx, Inc. advises against deleting credentials if there are schedules managed by Stork. |
+| PWX-14034 | Portworx did not read all the vault credentials for Kubernetes authentication methods provided in a Kubernetes secret. <br/><br/>**User impact:** Portworx Vault authentication failed.<br/><br/>**Resolution:** With 2.5.6, Portworx now reads all the Kubernetes authentication related input arguments from the Kubernetes secret and Portworx Vault authentication will succeed. | 
+| PWX-14937 | Added a fix to allow pool expand using the add-disk operation on storage pools that have a journal partition. <br/><br/>**User impact:** If users installed Portworx with cloud drive provisioning using the auto-journal (`-j auto`), expanding the pool with the `add-disk` operation type failed with a "not supported" error message. Users also saw the same error when using Autopilot to expand the pools. <br/><br/>**Resolution:** If Portworx was installed using the auto-journal, it can now expand pools using the `add-disk` operation type. |
+| PWX-15094 | A nil panic in Portworx sometimes occurred when Portworx successfully created a Vault client while Vault was in an error state.<br/><br/>**User impact:** Portworx returned an error: "too many open file handles" for subsequent vault operations.<br/><br/>**Resolution:** Portworx no longer panics when Vault is experiencing an error. |
+
 ## 2.5.5
 
 July 29, 2020
