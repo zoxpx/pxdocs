@@ -6,7 +6,7 @@ description: Open the NFS ports required for sharedv4 volumes to work.
 hidden: true
 ---
 
-SharedV4 volumes require specific open NFS ports to allow for communication between nodes in your cluster. Depending on how your cluster is configured, your firewall may block some of these ports or your NFS ports may differ from the defaults. To solve this, you may need to manually assign NFS ports and ensure your firewall or ACL allows them to communicate. 
+SharedV4 volumes require specific open NFS ports to allow for communication between nodes in your cluster. Depending on how your cluster is configured, your firewall may block some of these ports or your NFS ports may differ from the defaults. To solve this, you may need to manually assign NFS ports and ensure your firewall or ACL allows them to communicate.
 
 This document provides instructions for detecting and opening NFS ports according to various cluster configurations you may have.
 
@@ -19,9 +19,9 @@ All of the use-cases in this document require the default Portworx ranges be ope
 
 Enter the `rpcinfo` command with the `-p` flag to find which ports NFS is using on your node:
 
-    ```text
-    rpcinfo -p
-    ```
+```text
+rpcinfo -p
+```
 
 SharedV4 volumes communicate over the following ports:
 
