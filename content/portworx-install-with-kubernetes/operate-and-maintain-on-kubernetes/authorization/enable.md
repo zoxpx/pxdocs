@@ -88,3 +88,12 @@ kubectl create secret generic mysecret \
 
 You will now need to apply the change to update the Stork deployment and the Portworx DaemonSet. Wait until the update is complete and all pods are ready
 with `1/1`.
+
+
+## Upgrading to Authorization enabled
+
+Prior to 2.6, users must be certain that all [PVCs have user tokens secrets](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/manage) associated with them. If this is not the case, Kubernetes users will not be able to use any Portworx PVCs or create new ones. This means that in order to upgrade to `auth enabled` without any disruption, the admin must add token secrets to all PVCs.
+
+Starting with Portworx 2.6+, upgrading from `auth disabled` to `auth enabled` will not cause any issues for Kubernetes end users. This is because the [system guest role](/concepts/authorization/overview#guest-access) will allow Kubernetes users to create and use [public volumes](/concepts/authorization/overview#public-volumes). However, users are encouraged to make their volumes private by adding authorization to their PVCs.
+
+Once the admin has ensured all necessary volumes are private and users are comfortable with PX Security, the [guest role may be disabled](/reference/cli/role/#disabling-the-system-guest-role) to tighten security even further.

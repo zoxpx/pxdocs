@@ -7,9 +7,7 @@ series: k8s-op-maintain-auth
 ---
 
 ## Creating volumes
-Portwox authorization provides a method of protection for creating volumes
-through Kubernetes. Users must provide a token when requesting volumes. These
-tokens must be saved in a Secret, normally in the same namespace as the PVC.
+Portwox authorization provides a method of protection for creating volumes through Kubernetes. Users must provide a token when requesting volumes in order to create a private volume. These tokens must be saved in a Secret, normally in the same namespace as the PVC.
 
 The key in the Secret which holds the token must be named `auth-token`.
 

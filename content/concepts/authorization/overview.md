@@ -119,6 +119,21 @@ Similar to the `root` user in a Linux system, Portworx has the concept of a syst
 }
 ```
 
+## Guest Access
+
+Starting with version 2.6, Portworx introduced a new concept called Guest Role Access. The guest role allows your users to access and manipulate public volumes. The new `system.guest` role is now used whenever a user does not pass a token to any Portworx operation or SDK call. This role, by default, allows all standard user operations such as Create, Delete, Mount and Unmount for [public volumes](#public-volumes).
+
+Volumes are public if they are created before security was enabled or without a token. This simplifies the process for upgrading from `auth disabled` to `auth enabled` for Portworx 2.6+. Additionally, the admin may [mark a volume as public](/reference/cli/volume-access/#mark-a-volume-as-public) to expose it to the guest role. 
+
+The role is mutable and is named `system.guest`. This allows the admin to change how the auth system behaves when an unauthenticated user interacts with it. Strict admins may [disable the guest role entirely](/reference/cli/role/#disabling-the-system-guest-role) if they wish.  
+
+## Public volumes
+A volume is public if it does not have any ownership associated with it. Ownership is added based on the token a volume is created with. If a volume is not public, it has ownership and is considered private. 
+
+In addition, volumes may be [explicitly marked public via pxctl](/reference/cli/volume-access/#mark-a-volume-as-public).
+
+The [system.guest](#guest-access) can always access public volumes.
+
 ## References
 
 For more information, see also:

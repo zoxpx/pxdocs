@@ -17,6 +17,9 @@ Portworx comes with a few standard roles that you can use when issuing tokens to
 *   __system.admin:__ can run any command
 *   __system.view:__ can only run read-only commands
 *   __system.user:__ can only access volume lifecycle commands
+*   __system.public:__ similar to system.user, but for public volumes only.
+
+All of these roles are immutable, except for system.public. Admins may [update the system.public role](/reference/cli/role/#updating-the-system-guest-role) to change how Portworx RBAC handles unauthenticated users.
 
 ## Custom Roles
 
@@ -129,27 +132,26 @@ __Example configuration (role.json):__
 
 The following example configuration only allows access to volume enumerate commands and all inspect APIs for every service.
 ```text
- {
-     "name": "test.view",
-     "rules": [
-       {
-         "services": [
-           "volumes"
-         ],
-         "apis": [
-           "*enumerate*"
-         ]
-       },
-       {
-         "services": [
-           "*"
-         ],
-         "apis": [
-           "inspect*"
-         ]
-       }
-     ]
-  }
+{
+ 	"name": "test.view",
+ 	"rules": [{
+ 			"services": [
+ 				"volumes"
+ 			],
+ 			"apis": [
+ 				"*enumerate*"
+ 			]
+ 		},
+ 		{
+ 			"services": [
+ 				"*"
+ 			],
+ 			"apis": [
+ 				"inspect*"
+ 			]
+ 		}
+ 	]
+}
 ```
 ### Services and APIs
 
@@ -175,3 +177,81 @@ groups: ["*"]
 ```
 
 This token will now allow access to whichever services and APIs were defined in the custom role `test.view`.
+
+## Updating the System Guest role
+
+Updating the `system.guest` role will change how Portworx authorization handles users that do not pass a token to any Portworx operation or SDK call. For more information, see the [Guest Role overview.](/concepts/authorization/overview#guest-access). 
+
+### Disabling the System Guest role
+
+To disable the system.guest role, perform the following steps: 
+
+1. On one of your Portworx nodes, create the following `role.json` file:
+    
+    ```text
+    {
+      "name": "system.guest",
+      "rules": [{
+        "services": [
+          "!*"
+        ],
+        "apis": [
+          "!*"
+        ]
+      }]
+    }
+    ```
+
+2. Run the following `pxctl role update` command, specifying your `role.json` config:
+
+    ```text
+    pxctl role update --role-config role.json
+    ```
+
+### Re-enabling the system.guest role
+
+To re-enable the `system.guest` role to its default behavior, perform the following steps:
+
+1. Create the following `role.json` file:
+
+    ```text
+    {
+      "name": "system.guest",
+      "rules": [{
+          "services": [
+            "mountattach",
+            "volume",
+            "cloudbackup",
+            "migrate"
+          ],
+          "apis": [
+            "*"
+          ]
+        },
+        {
+          "services": [
+            "identity"
+          ],
+          "apis": [
+            "version"
+          ]
+        },
+        {
+          "services": [
+            "cluster",
+            "node"
+          ],
+          "apis": [
+            "inspect*",
+            "enumerate*"
+          ]
+        }
+      ]
+    }
+    ```
+
+2. Run the following `pxctl role update` command, specifying your `role.json` config:
+
+    ```text
+    pxctl role update --role-config role.json
+    ```
