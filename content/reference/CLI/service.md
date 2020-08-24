@@ -273,13 +273,133 @@ Are you sure you want to proceed ? (Y/N): y
 Adding device  /dev/mapper/volume-3bfa72dd ...
 Drive add  successful. Requires restart.
 ```
-<!-- need to test this full operation to confirm the syntax -->
 
 {{<info>}}
-To add physical drives, you must place the server in [maintenance mode](#place-portworx-in-maintenance-mode) first.
+**NOTE:** To add physical drives, you must place the server in [maintenance mode](#place-portworx-in-maintenance-mode) first.
 {{</info>}}
 
-To rebalance the storage across the drives, use the `pxctl service drive rebalance`. This is useful after prolonged operation of a node.
+## Rebalance storage across drives
+
+Over time, your cluster's storage may become unbalanced, with some pools and drives filled to capacity and others utilized less. This can occur for a number of reasons, such as:
+
+* Adding new nodes or pools
+* Increasing the size of pools by increasing the size of underlying drives or adding new drives
+* Volumes being removed from only a subset of nodes
+
+If your cluster's storage is unbalanced, you can use the `pxctl service pool rebalance` command to redistribute the volume replicas. This command determines which pools are over-loaded and under-loaded, and moves volume replicas from the former to the latter. This ensures that all pools on the nodes are evenly loaded. 
+
+{{<info>}}
+**NOTE:** You can run this cluster-wide command from any of your Portworx nodes. 
+{{</info>}}
+
+### Start a rebalance operation
+
+Use the `submit` subcommand to start the rebalance operation, which returns a job ID:
+
+```text
+pxctl service pool rebalance submit
+```
+```output
+This command will start rebalance for: 
+ - all storage pools for checking if they are over-loaded
+ - all storage pools for checking if they are under-loaded 
+which meet either of following conditions:
+
+1. Pool's provision space is over 20% or under 20% of mean value across pools
+2. Pool's used space is over 20% or under 20% of mean value across pools
+*Note: --remove-repl-1-snapshots is off, space from such snapshots will not be reclaimed
+
+Do you wish to proceed ?  (Y/N): Y
+Pool rebalance request: 859941020356581382 submitted successfully.
+For latest status: pxctl service pool rebalance status --job-id 859941020356581382
+```
+
+{{<info>}}
+**NOTE:** The rebalance operation runs as a background service.
+{{</info>}}
+
+### List running rebalance jobs
+
+Enter the `list` subcommand to see all currently running jobs:
+
+```text
+pxctl service pool rebalance list
+```
+```output
+JOB			STATE	CREATE TIME			STATUS
+859941020356581382	RUNNING	2020-08-11T11:16:12.928785518Z
+### Monitor a rebalance operation
+
+Monitor the status of a rebalance operation, as well as all the steps it has taken so far, by entering the `status` subcommand with the `--job-id` flag and the ID of a running rebalance job:
+
+```text
+pxctl service pool rebalance status --job-id 859941020356581382
+```
+```output
+Rebalance summary:
+Job ID             : 859941020356581382
+Job State          : DONE
+Last updated       : Sun, 23 Aug 2020 22:08:31 UTC
+Total running time : 4 minutes and 25 seconds
+Job summary
+    - Provisioned space balanced : 827 GiB done, 0 B pending
+    - Used space balanced        : 17 GiB done, 0 B pending
+    - Volume replicas balanced   : 42 done, 0 pending
+Rebalance actions:
+Replica add action:
+        Volume             : 956462089713112944
+        Pool               : 728cb696-c6e3-417e-a269-eaca75365214
+        Node               : d186025f-a89c-4e29-bb7e-489393d6636b
+        Replication set ID : 0
+        Start              : Sun, 23 Aug 2020 22:04:06 UTC
+        End                : Sun, 23 Aug 2020 22:04:27 UTC
+        Work summary
+            - Provisioned space balanced : 20 GiB done, 0 B pending
+Replica remove action:
+        Volume             : 956462089713112944
+        Pool               : 51b79960-39d4-4c71-8c5d-5e34a2b712e3
+        Node               : 7a1d3cfb-1343-402c-b0e1-81b36fef6177
+        Replication set ID : 0
+        Start              : Sun, 23 Aug 2020 22:04:06 UTC
+        End                : Sun, 23 Aug 2020 22:04:29 UTC
+        Work summary
+            - Provisioned space balanced : 20 GiB done, 0 B pending
+```      
+
+### Pause or terminate a running rebalance operation
+
+If you need to temporarily suspend a running rebalance operation, you can pause it. Otherwise, you can cancel it entirely:
+
+* Use the `cancel` subcommand subcommand with the `--job-id` flag and the ID of a running rebalance job to terminate a running rebalance operation:
+
+   ```text
+   pxctl service pool rebalance cancel --job-id 859941020356581382
+   ```
+
+* Use `pause` subcommand subcommand with the `--job-id` flag and the ID of a running rebalance job to terminate a running rebalance operation:
+
+   ```text
+   pxctl service pool rebalance pause --job-id 859941020356581382
+   ```
+
+### pxctl service pool rebalance reference
+
+Rebalance storage pools
+
+```
+pxctl service pool rebalance [command] [flags]
+```
+
+#### Commands
+
+|**Command**|**Description**|
+|----|----|
+| cancel |    Cancels a rebalance job specified with the `--job-ID` flag and a valid job ID |
+| list   |    Lists rebalance jobs in the system |
+| pause  |    Pauses a rebalance job specified with the `--job-ID` flag and a valid job ID |
+| resume |    Resumes a rebalance job specified with the `--job-ID` flag and a valid job ID  |
+| status |    Shows the status of a rebalance job specified with the `--job-ID` flag and a valid job ID |
+| submit |    Start a new rebalance job |
 
 ## Display drive information
 
