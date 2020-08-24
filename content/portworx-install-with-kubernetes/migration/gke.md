@@ -1,5 +1,5 @@
 ---
-title: "Kubemotion with Stork on GKE"
+title: "Migration with Stork on GKE"
 keywords: migration, migrate, PX-Motion, GKE, Google Kubernetes Engine, k8s, gcloud, Stork, cloud
 description: How to migrate stateful appliations to GKE
 hidden: true

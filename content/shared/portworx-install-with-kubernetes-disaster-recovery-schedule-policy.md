@@ -55,10 +55,16 @@ The following validations rules are defined:
 To display a policy, run `storkctl get` with the name of the policy as a parameter:
 
 ```text
-storkctl get schedulepolicy
+storkctl -n <namespace> get schedulepolicy
 ```
-
 ```output
 NAME           INTERVAL-MINUTES   DAILY     WEEKLY             MONTHLY
 testpolicy     1                  10:14PM   Thursday@10:13PM   14@8:05PM
 ```
+
+Alternatively, you can run `kubectl get schedulepolicy` with the `-n` flag and your policy's namespace:
+
+```text
+kubectl -n <namespace> get schedulepolicy
+```
+<!-- need output -->

@@ -899,7 +899,7 @@ April 19, 2019
   * [Metro DR](/portworx-install-with-kubernetes/disaster-recovery/px-metro)
   * [Asynchronous DR](/portworx-install-with-kubernetes/disaster-recovery/async-dr)
 * [Automated application level scheduled snaps and cloudsnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/scheduled)
-* [Automated app-consistent cluster to cluster migration](/portworx-install-with-kubernetes/migration/kubemotion/#pre-and-post-exec-rules)
+* [Automated app-consistent cluster to cluster migration](/portworx-install-with-kubernetes/migration/#pre-and-post-exec-rules)
 * [Optimized incremental cloudsnap restores](/reference/cli/cloud-snaps/#restore-from-a-cloud-backup)
 
 ### Key Fixes
