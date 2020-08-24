@@ -507,6 +507,56 @@ Enter the `pxctl service pool update` command with the pool ID and the `--labels
 pxctl service pool update 0 --labels  ioprofile=,media_type=
 ```
 
+## Delete a pool from a node
+
+If you have a node with multiple pools and you can’t decommission the entire node, you can delete a pool instead. You may need to do this in one of the following scenarios:
+
+   * If there's a problem with the drives on one of your pools, you can delete the pool and reinitialize it either without the problematic drive, or with a new drive.
+   * If you've added more capacity to a pool than you need, you can delete your pool and reinitialize it with fewer drives. 
+
+{{<info>}}
+**NOTE:** 
+* If you want to _increase_ the size of a storage pool, use the `pxctl service drive add` command.
+* Portworx won’t delete a pool until you have manually drained the pool of any volumes.
+{{</info>}}
+
+{{<info>}}
+**WARNING:** `pxctl service pool delete` is a destructive operation, and all deleted data is not recoverable. Ensure you've taken proper precautions and understand the impact of this operation before running it.
+{{</info>}}
+
+Perform the following steps to delete a pool from a node, and optionally, reinitialize it:
+
+1. Once you have identified which pool you want to delete, list all volumes on that pool:
+
+   ```text
+   pxctl volume list --pool-uid <pool-uuid>
+   ```
+
+2. For each volume on the node, sequentially reduce its replication factor to `1` to isolate the volumes located in your pool. The following example command reduces the replication factor from `3` to `2`:
+
+   ```text
+   pxctl volume ha-update --repl=2 --node <node-id> <volume-name>
+   ```
+   
+3. Verify that your pool is empty by listing all volumes on the pool again:
+
+   ```text
+   pxctl volume list --pool-uid <pool-uuid>
+   ```
+
+4. Once your pool is empty, delete your pool:
+
+   ```text
+    pxctl service pool delete <pool-id>
+   ```
+
+5. (Optional) Reinitialize your pool by entering the `pxctl drive add` command, specifying whatever new and existing drives you want to add:
+
+   ```text
+   pxctl service drive add --drive /path/to/drive -o start
+   ```
+
+
 ### pxctl service pool show
 
 Show storage pool information
