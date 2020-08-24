@@ -701,8 +701,10 @@ If the restore command fails, it shows the reason why it failed.
 Note that the restored volume will not be attached or mounted automatically.
 
 {{<info>}}
-{{% content "shared/reference-CLI-optimized-restores-definition.md" %}}
-For more details about optimized restores, visit the [Enabling optimized restores](/reference/cli/cluster/#enabling-optimized-restores) section.
+**NOTE:**
+
+* As long as the backup was taken from a Portworx cluster of version 2.0 or great, Portworx restores cloudsnaps with the same `repl` value of the volume the backup was taken from. 
+* With {{< pxEnterprise >}} 2.1.0, users can choose to do optimized restores.  Optimized restores create a snapshot of every successful restore and use that snapshot for the next incremental restore of the same volume. For more details about optimized restores, visit the [Enabling optimized restores](/reference/cli/cluster/#enabling-optimized-restores) section.
 {{</info>}}
 
 
