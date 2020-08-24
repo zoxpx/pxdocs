@@ -11,7 +11,7 @@ This is a reference section describing how to manage Portworx authorization in
 Kubernetes
 
 {{<info>}}
-For a step by step setup of guide of how to enable Portworx authorization, please see
+**NOTE:** For a step-by-step setup guide showing how to enable Portworx authorization, please refer to 
 [Securing your Portworx system](/cloud-references/security/).
 {{</info>}}
 
