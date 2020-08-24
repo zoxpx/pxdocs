@@ -1,6 +1,6 @@
 ---
-title: "Kubemotion with Stork on EKS"
-keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion, eks
+title: "Migration with Stork on EKS"
+keywords: cloud, backup, restore, snapshot, DR, migration, migration, eks
 description: How to migrate stateful appliations to EKS
 hidden: true
 ---

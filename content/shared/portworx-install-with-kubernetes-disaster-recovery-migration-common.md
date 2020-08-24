@@ -10,7 +10,7 @@ hidden: true
 If there is a failure or you want more information about what resources were migrated you can `describe` the migration object using `kubectl`:
 
 ```text
-kubectl describe migration mysqlmigration
+kubectl -n <migrationnamespace> describe migration mysqlmigration
 ```
 
 ```output
@@ -103,4 +103,4 @@ spec:
 
 * [Migrating to GKE](/portworx-install-with-kubernetes/cloud/gcp/gke)
 * [Migrating to EKS](/portworx-install-with-kubernetes/cloud/aws/aws-eks/)
-* [Configuring a namespace as a cluster namespace](/portworx-install-with-kubernetes/migration/kubemotion/cluster-admin-namespace)
+* [Configuring a namespace as a cluster namespace](/portworx-install-with-kubernetes/migration/cluster-admin-namespace)

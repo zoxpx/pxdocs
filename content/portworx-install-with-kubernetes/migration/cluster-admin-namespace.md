@@ -1,6 +1,7 @@
 ---
-title: "Set up a Cluster Admin namespace for Kubemotion"
-keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion
+title: "Set up a Cluster Admin namespace for Migration"
+linkTitle: Set up a Cluster Admin namespace
+keywords: cloud, backup, restore, snapshot, DR, migration, 
 description: How to designate a namespace as the cluster admin namespace
 ---
 

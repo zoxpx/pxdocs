@@ -14,8 +14,8 @@ weight: 2
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
 {{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
 * **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
-* If the destination cluster runs on **GKE**, follow the steps in the [Kubemotion with Stork on GKE](/portworx-install-with-kubernetes/migration/kubemotion/gke/) page.
-* If the destination cluster runs on **EKS**, follow the steps in the [Kubemotion with Stork on EKS](/portworx-install-with-kubernetes/migration/kubemotion/eks/) page.
+* If the destination cluster runs on **GKE**, follow the steps in the [Migration with Stork on GKE](/portworx-install-with-kubernetes/migration/gke/) page.
+* If the destination cluster runs on **EKS**, follow the steps in the [Migration with Stork on EKS](/portworx-install-with-kubernetes/migration/eks/) page.
 
 ## Overview
 
@@ -41,6 +41,30 @@ The following Kubernetes resources are supported as part of the Asynchronous DR 
 * ClusterRole
 * ClusterRoleBinding
 * Ingress
+
+Asynchronous DR also supports the following CRDs out-of-the-box:
+
+* CassandraDatacenter
+* CouchbaseBucket
+* CouchbaseCluster
+* CouchbaseEphemeralBucket
+* CouchbaseMemcachedBucket
+* CouchbaseReplication
+* CouchbaseUser
+* CouchbaseGroup
+* CouchbaseRoleBinding
+* CouchbaseBackup
+* CouchbaseBackupRestore
+* IBPCA
+* IBPConsole
+* IBPOrderer
+* IBPPeer
+* RedisEnterpriseCluster
+* RedisEnterpriseDatabase
+
+## Add CRDs
+
+If Portworx doesn't have the CRD you need, you can register a new one. Refer to the [Application Registration](/portworx-install-with-kubernetes/storage-operations/stateful-applications/application-registration/) document for instructions on how to do this. 
 
 ## Enable load balancing on cloud clusters
 
@@ -112,7 +136,7 @@ You can enable disaster recovery mode by specifying the following fields in the 
 
 * `ip`, with the IP address of the remote Portworx node
 * `port`, with the port of the remote Portworx node
-* `token`, with the token of the destination cluster. To retrieve the token, run the `pxctl cluster token show` command on a node in the destination cluster. Refer to the [Show your destination cluster token](https://docs.portworx.com/portworx-install-with-kubernetes/migration/kubemotion/#show-your-destination-cluster-token) section from the [Kubemotion with Stork on Kubernetes](https://docs.portworx.com/portworx-install-with-kubernetes/migration/kubemotion/) page for details.
+* `token`, with the token of the destination cluster. To retrieve the token, run the `pxctl cluster token show` command on a node in the destination cluster. Refer to the [Show your destination cluster token](https://docs.portworx.com/portworx-install-with-kubernetes/migration/#show-your-destination-cluster-token) section from the [Migration with Stork on Kubernetes](https://docs.portworx.com/portworx-install-with-kubernetes/migration/) page for details.
 * `mode`: by default, every seventh migration is a full migration. If you specify `mode: DisasterRecovery`, then every migration is incremental.
 
 ```text

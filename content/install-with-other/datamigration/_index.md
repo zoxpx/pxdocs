@@ -11,7 +11,7 @@ aliases:
 ---
 
 {{<info>}}
-This document presents the **non-Kubernetes** method of migrating volumes between two Portworx clusters. Please refer to the [Kubemotion with Stork](/portworx-install-with-kubernetes/migration/kubemotion) page if you are running Portworx on Kubernetes.
+This document presents the **non-Kubernetes** method of migrating volumes between two Portworx clusters. Please refer to the [Migration with Stork on Kubernetes](/portworx-install-with-kubernetes/migration) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
 ## Overview

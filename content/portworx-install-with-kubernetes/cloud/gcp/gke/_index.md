@@ -77,7 +77,7 @@ After the above command completes, let’s check that everything is properly set
 
 ```text
 gcloud config set container/cluster px-demo
-gcloud container clusters get-credentials px-demo
+gcloud container clusters get-credentials --region <region-name> px-demo
 ```
 
 Next, we need to open access to the Compute API. Run the following command:
