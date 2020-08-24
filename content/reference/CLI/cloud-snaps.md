@@ -220,6 +220,47 @@ Note: Replace `<bucket-name>` with name of your user-provided bucket.
 pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com my-s3-cred
 ```
 
+##### Configure a cluster-wide proxy
+
+You can set up a cluster-wide proxy for Portworx to use when uploading cloud snaps to an S3 bucket. Portworx uses this proxy setting in conjunction with the `--use-proxy` flag on cloudsnap credentials to to send backup data through the proxy. Perform the steps in this section to configure a cluster-wide proxy and create credentials that use it.
+
+{{<info>}}
+**NOTE:** This proxy is currently used only by cloudsnaps, the rest of the Portworx network traffic does not use this proxy.
+{{</info>}}
+
+1. Update your Portworx cluster-wide options by entering the `pxctl cluster options update` command with the `--px-http-proxy` flag and the url of your proxy:
+
+    ```text
+    pxctl cluster options update --px-http-proxy http://192.0.2.0:9999
+    ```
+
+2. Create credentials for your cloudsnap with or without a user-specified bucket, specifying the `--use-proxy` flag:
+
+    * With a user-specified bucket:
+
+    ```text
+    pxctl credentials create --use-proxy \
+    --provider s3  \
+    --s3-access-key <AccessKey> \
+    --s3-secret-key <secretKey> \
+    --s3-region us-east-1 \
+    --s3-endpoint s3.amazonaws.com \
+    --bucket bucket-id \
+    credentialName
+    ```
+
+    * Without a user-specified bucket:
+
+    ```text
+    pxctl credentials create --use-proxy \
+    --provider s3 \
+    --s3-access-key <AccessKey> \
+    --s3-secret-key <secretKey> \
+    --s3-region us-east-1 \
+    --s3-endpoint s3.amazonaws.com \
+    credentialName
+    ```
+
 #### Google Cloud
 
 1. Make sure the user or service account used by Portworx has the following roles:
