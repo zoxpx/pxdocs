@@ -4,6 +4,27 @@ keywords: storageclass, csi, security, authorization
 weight: 40
 ---
 
+# StorageClass for non-CSI
+
+The following StorageClass enables your tenants to create volumes
+using their token stored in a secret in their namespace.
+
+```text
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: multitenant
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "1"
+  openstorage.io/auth-secret-name: px-k8s-user
+  openstorage.io/auth-secret-namespace: ${pvc.namespace}
+```
+
+Note the value `${pvc.namespace}`. This will ensure that the Portworx
+provisioner gets the appropriate token which is tied to the namespace
+of the PVC.
+
 # StorageClass for CSI
 
 The following CSI StorageClass enables your tenants to create volumes

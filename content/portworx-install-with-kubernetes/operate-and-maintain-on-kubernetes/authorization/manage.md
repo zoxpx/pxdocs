@@ -7,46 +7,11 @@ series: k8s-op-maintain-auth
 ---
 
 ## Creating volumes
-Portwox authorization provides a method of protection for creating volumes through Kubernetes. Users must provide a token when requesting volumes in order to create a private volume. These tokens must be saved in a Secret, normally in the same namespace as the PVC.
+Portwox authorization provides a method of protection for creating volumes
+through Kubernetes. PVCs must refer to a StorageClass which point to the
+Kubernetes Secret containing the token for the user.
 
-The key in the Secret which holds the token must be named `auth-token`.
-
-Then the annotations of the PVC can be used to point to the secret holding the
-token. The following table shows the annotation keys used to point to the
-secret:
-
-| Name | Description |
-| ---- | ----------- |
-| `openstorage.io/auth-secret-name` | Name of the secret which has the token |
-| `openstorage.io/auth-secret-namespace` | Optional key which contains the namespace of the secret reference by `auth-secret-name`. If omitted, the namespace of the PVC will be used as default |
-
-Here is an example:
-
-* Create a secret with the token:
-
-```text
-kubectl create secret generic px-secret \
-  -n default --from-literal=auth-token=ey..hs
-```
-
-* Create a PVC request for a 2Gi volume with the appropriate authorization:
-
-```text
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: pvc-auth
-  annotations:
-    volume.beta.kubernetes.io/storage-class: portworx-sc
-    openstorage.io/auth-secret-name: px-secret
-    openstorage.io/auth-secret-namespace: default
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
-```
+For more information, refer to the [Securing your Portworx system](/cloud-references/security/) article of the Portworx documentation.
 
 ## Stork
 When using CRDs consumed by Stork, you must use the same authorization model
