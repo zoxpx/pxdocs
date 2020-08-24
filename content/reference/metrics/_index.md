@@ -9,9 +9,9 @@ noicon: true
 ## backup_stats stats
 | Name | Description |
 | :--- | :--- |
-| px_backup_stats_status | Status for this backup (0=InProgress,1=Done) |
-| px_backup_stats_size | Size in bytes for this backup |
-| px_backup_stats_duration_seconds | Duration in seconds for this backup |
+| px_backup_stats_backup_status | Status for this backup (0=InProgress,1=Done,2=Failed) |
+| px_backup_stats_backup_size | Size in bytes for this backup |
+| px_backup_stats_backup_duration_seconds | Duration in seconds for this backup |
 
 ## cluster stats
 | Name | Description |
@@ -64,6 +64,35 @@ noicon: true
 | px_disk_stats_read_seconds_total | Total time spend reading in seconds for this disk |
 | px_disk_stats_write_seconds_total | Total time spend writing in seconds for this disk |
 
+## kvdb stats
+| Name | Description |
+| :--- | :--- |
+| px_kvdb_get_requests_total | Total number of get requests for a key |
+| px_kvdb_snapshot_requests_total | Total number of kvdb snapshot requests for a list of prefixes |
+| px_kvdb_put_requests_total | Total number of put requests for a key |
+| px_kvdb_create_requests_total | Total number of create requests for a key |
+| px_kvdb_update_requests_total | Total number of update requests for a key |
+| px_kvdb_enumerate_requests_total | Total number of enumerate requests for a key |
+| px_kvdb_delete_requests_total | Total number of delete requests for a key |
+| px_kvdb_keys_requests_total | Total number of list key requests for a prefix |
+| px_kvdb_cas_requests_total | Total number of compare and sets for a key |
+| px_kvdb_cad_requests_total | Total number of compare and deletes for a key |
+| px_kvdb_lock_requests_total | Total number of lock requests for a key |
+| px_kvdb_unlock_requests_total | Total number of unlock requests for a key |
+| px_kvdb_watchkey_requests_total | Total number of watch requests for a key from a node |
+| px_kvdb_watchtree_requests_total | Total number of watch requests for a prefix from a node |
+| px_kvdb_adduser_requests_total | Total number of add user requests |
+| px_kvdb_removeuser_requests_total | Total number of remove user requests |
+| px_kvdb_grantuser_access_requests_total | Total number of grant access requests for a user |
+| px_kvdb_revokeuser_access_requests_total | Total number of revoke access requests for a user |
+| px_kvdb_addmember_requests_total | Total number of add member requests from a node |
+| px_kvdb_removemember_requests_total | Total number of remove member requests from a node |
+| px_kvdb_updatemember_requests_total | Total number of update member requests from a node |
+| px_kvdb_listmembers_requests_total | Total number of list member requests from a node |
+| px_kvdb_setendpoints_requests_total | Total number of set endpoint requests from a node |
+| px_kvdb_getendpoints_requests_total | Total number of get endpoint requests from a node |
+| px_kvdb_defragment_requests_total | Total number of defragment requests from a node |
+
 ## network_io stats
 | Name | Description |
 | :--- | :--- |
@@ -71,6 +100,8 @@ noicon: true
 | px_network_io_received_bytes | Number of bytes received during this interval |
 | px_network_io_sent_bytes_total | Total number of bytes sent |
 | px_network_io_received_bytes_total | Total number of bytes received |
+| px_network_io_reservation_waits | Total number of SM waits for reservation |
+| px_network_io_reservation_wake_ups | Total number of SM wake ups after getting the reservation |
 
 ## node_stats stats
 | Name | Description |
@@ -108,8 +139,9 @@ noicon: true
 | px_pool_stats_num_flushes | Number of flush(sync) operations since last interval for this pool |
 | px_pool_stats_flushms | Latency for flush for this pool |
 | px_pool_stats_provisioned_bytes | Provisioned storage space in bytes for this pool |
-| px_pool_stats_status | Status of this Pool (0=Offline,1=Online) |
+| px_pool_stats_status | Status of this Pool (0=Offline,1=Online,2=Full,3=NotFound,4=Maintenance) |
 | px_pool_stats_available_bytes | Available storage space in bytes for this pool |
+| px_pool_stats_used_bytes | Used storage space in bytes for this pool |
 | px_pool_stats_total_bytes | Total storage space in bytes for this pool |
 | px_pool_stats_written_bytes_total | Total bytes written for this pool |
 | px_pool_stats_flushed_bytes_total | Total number of flushed bytes |
@@ -139,6 +171,15 @@ noicon: true
 | px_px_cache_migrate_promote | Number of blocks promoted to the cache |
 | px_px_cache_migrate_demote | Number of block demoted from the cache |
 
+## rebalance stats
+| Name | Description |
+| :--- | :--- |
+| px_rebalance_rebalance job state | Rebalance job state (0 = pending, 1 = running, 2 = done, 3 = paused, 4 = cancelled) |
+| px_rebalance_provision_space_rebalanced_bytes_total | Total provisioned space rebalanced (only counts add (since remove has equal value as add)) |
+| px_rebalance_used_space_rebalanced_bytes_total | Total used space rebalanced (only counts add (since remove has equal value as add)) |
+| px_rebalance_volumes_rebalanced_total | Total volumes affected by rebalance operation |
+| px_rebalance_overloaded_pools_total | Number of overloaded pools |
+
 ## volume stats
 | Name | Description |
 | :--- | :--- |
@@ -147,8 +188,14 @@ noicon: true
 | px_volume_halevel | Configured HA level for this volume |
 | px_volume_currhalevel | Current HA level for this volume |
 | px_volume_iopriority | Configured IO priority for this volume |
+| px_volume_elapsed_time_since_detached_seconds | Seconds elapsed since the volume is detached |
+| px_volume_elapsed_time_since_attached_seconds | Seconds elapsed since the volume is attached |
 | px_volume_attached | Attached state for this volume (0=detached,1=attached) |
 | px_volume_status | Status for this volume (https://libopenstorage.github.io/w/master.generated-api.html#volumestatus) |
+| px_volume_state | State for this volume (https://libopenstorage.github.io/w/master.generated-api.html#volumestate) |
+| px_volume_attached_state | Attached state for this volume (valid only if volume is attached) (https://libopenstorage.github.io/w/master.generated-api.html#attachstate) |
+| px_volume_fs_health_status | Filesystem health status for this volume (https://libopenstorage.github.io/w/master.generated-api.html#filesystemhealthstatus) |
+| px_volume_replication_status | Replication Status for this volume (0 : up, 1 : not in quorum, 2 : resync state, 3 : degraded, 4 : detached, 5 : restore) |
 | px_volume_fs_usage_bytes | Used storage space in bytes as reported by the filesystem for this volume |
 | px_volume_fs_capacity_bytes | Total storage space in bytes as reported by the filesystem for this volume |
 | px_volume_vol_read_bytes | Number of successfully read bytes during this interval for this volume. **Deprecated**, use volume_read_bytes. |
@@ -186,3 +233,5 @@ noicon: true
 | px_volume_dev_read_seconds_total | Total time spend reading in seconds for this disk as reported by the kernel pxd device for this volume |
 | px_volume_dev_write_seconds_total | Total time spend writing in seconds for this disk as reported by the kernel pxd device for this volume |
 | px_volume_unique_blocks | Size(in bytes) of unique blocks for this volume |
+| px_volume_timestamp_records | Number of timestamp records accumulated |
+| px_volume_timestamp_records_per_node | Number of timestamp records accumulated for a node |
