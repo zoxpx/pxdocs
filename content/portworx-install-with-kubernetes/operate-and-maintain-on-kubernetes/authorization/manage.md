@@ -11,7 +11,7 @@ Portwox authorization provides a method of protection for creating volumes
 through Kubernetes. PVCs must refer to a StorageClass which point to the
 Kubernetes Secret containing the token for the user.
 
-For more information please see [Securing your Portworx system](/cloud-references/security/).
+For more information, refer to the [Securing your Portworx system](/cloud-references/security/) article of the Portworx documentation.
 
 ## Stork
 When using CRDs consumed by Stork, you must use the same authorization model
