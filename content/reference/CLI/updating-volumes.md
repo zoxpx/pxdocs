@@ -289,131 +289,148 @@ For more information about dynamically resizing a volume (PVC) using Kubernetes 
 
 ## Update a volume's replication factor
 
-`pxctl volume ha-update` can be used to increase or decrease the replication factor for a given Portworx volume.
+You can use the `pxctl volume ha-update` command to increase or decrease the replication factor for a given Portworx volume.
 
 {{% content "shared/max-replication-factor.md" %}}
 
-### Increasing the replication factor
+### Increase the replication factor
 
-Say there was a volume named `clitest` with the replication factor set to 1. Let's look at how to increase it.
+Follow the instructions below to increase a volume's replication factor and create replicas on a node or storage pool:
+
+1. Identify a node or pool you want to create a replica on. The following example uses a node ID found using the `cluster list` command:
+
+	```text
+	pxctl cluster list
+	```
+
+	```output
+	Cluster ID: MY_CLUSTER_ID
+	Status: OK
+
+	Nodes in the cluster:
+	ID					DATA IP		CPU		MEM TOTAL	MEM FREE	CONTAINERS	VERSION		STATUS
+	fa18451d-9091-45b4-a241-d816357f634b	10.99.117.133	0.5		8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
+	b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8	10.99.117.137	0.250313	8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
+	bb605ca6-c014-4e6c-8a23-55c967d1a963	10.99.117.135	0.625782	8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
+	```
 
 
-Start by listing the nodes in the cluster:
+2. Begin replicating your volume to your target node or storage pool by entering the following `pxctl volume ha-update` command, specifying:
 
-```text
-pxctl cluster list
-```
+	* `--repl=` with the new number of replicas you want to create. This must be equal to your volume's current replication factor plus one.
+	* `--node` with the node ID, node IP address, or pool UUID you want to create the replica(s) on.
+	* The volume you want to increase the replication factor for.
 
-```output
-Cluster ID: MY_CLUSTER_ID
-Status: OK
+	```text
+	pxctl volume ha-update \
+	--repl=2 \
+	--node <node-ID|pool-uuid|node-IP> 
+	<volume-name>
+	```
 
-Nodes in the cluster:
-ID					DATA IP		CPU		MEM TOTAL	MEM FREE	CONTAINERS	VERSION		STATUS
-fa18451d-9091-45b4-a241-d816357f634b	10.99.117.133	0.5		8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
-b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8	10.99.117.137	0.250313	8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
-bb605ca6-c014-4e6c-8a23-55c967d1a963	10.99.117.135	0.625782	8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
-```
+3. Monitor the replication operation by entering the following `pxctl alerts show` command:
+
+	```text
+	pxctl alerts show --type volume
+	```
+
+	```output
+	AlertID	VolumeID		Timestamp			Severity	AlertType			Description
+	25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: exampleVolume) HA updated from 1 to 2
+	```
+
+4. Once the replication completes and the new node is added to the replication set, enter the `pxctl volume inspect` command to verify the new replica exists:
+
+	```text
+	pxctl volume inspect <volume-name>
+	```
+
+	```output
+	Volume	:  970758537931791410
+		Name            	 :  exampleVolume
+		Size            	 :  1.0 GiB
+		Format          	 :  ext4
+		HA              	 :  2
+		IO Priority     	 :  LOW
+		Creation time   	 :  Feb 26 08:17:20 UTC 2017
+		Shared          	 :  yes
+		Status          	 :  up
+		State           	 :  detached
+		Attributes      	 :  sticky
+		Reads           	 :  0
+		Reads MS        	 :  0
+		Bytes Read      	 :  0
+		Writes          	 :  0
+		Writes MS       	 :  0
+		Bytes Written   	 :  0
+		IOs in progress 	 :  0
+		Bytes used      	 :  33 MiB
+		Replica sets on nodes:
+			Set  0
+				Node 	 :  10.99.117.133
+				Node 	 :  10.99.117.137
+	```
 
 
-Next, make it so the volume is replicated to `NodeID b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8` by running:
-
-```text
-pxctl volume ha-update --repl=2 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8 clitest
-```
-
-Once the replication completes and the new node is added to the replication set, `pxctl volume inspect` will show both nodes:
-
-```text
-pxctl volume inspect clitest
-```
-
-```output
-Volume	:  970758537931791410
-	Name            	 :  clitest
-	Size            	 :  1.0 GiB
-	Format          	 :  ext4
-	HA              	 :  2
-	IO Priority     	 :  LOW
-	Creation time   	 :  Feb 26 08:17:20 UTC 2017
-	Shared          	 :  yes
-	Status          	 :  up
-	State           	 :  detached
-	Attributes      	 :  sticky
-	Reads           	 :  0
-	Reads MS        	 :  0
-	Bytes Read      	 :  0
-	Writes          	 :  0
-	Writes MS       	 :  0
-	Bytes Written   	 :  0
-	IOs in progress 	 :  0
-	Bytes used      	 :  33 MiB
-	Replica sets on nodes:
-		Set  0
-			Node 	 :  10.99.117.133
-			Node 	 :  10.99.117.137
-```
-
-`pxctl alerts show --type volume` will show when the replication is complete:
-
-```text
-pxctl alerts show --type volume
-```
-
-```output
-AlertID	VolumeID		Timestamp			Severity	AlertType			Description
-25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
-```
 
 ### Decreasing the replication factor
 
-The `ha-update` command can be used to reduce the replication factor as well. Continuing our example with `clitest`, let's reduce the volume's replication factor:
+The `ha-update` command can be used to reduce the replication factor as well. Follow the instructions below to decrease a volume's replication factor and remove replicas from a node or storage pool:
 
-```text
-pxctl volume ha-update  --repl=1 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8 clitest
-```
 
-```output
-Update Volume Replication: Replication update started successfully for volume clitest
-```
+1. Begin removal of your volume's replica from your target node or storage pool by entering the following `pxctl volume ha-update` command, specifying:
 
-Once the replication factor has been reduced to 1, the output of the `volume inspect` command would look something like this:
+	* `--repl=` with the new number of replicas. This must be equal to your volume's current replication factor minus one.
+	* `--node` with the node ID, node IP address, or pool UUID you want to remove a replica from.
+	* The volume you want to decrease the replication factor for.
 
-```text
-pxctl volume inspect clitest
-```
+	```text
+	pxctl volume ha-update  \
+	--repl=1 \
+	--node <node-ID|pool-uuid|node-IP> \
+	<volume-name>
+	```
+	```output
+	Update Volume Replication: Replication update started successfully for volume exampleVolume
+	```
 
-```output
-Volume	:  970758537931791410
-	Name            	 :  clitest
-	Size            	 :  1.0 GiB
-	Format          	 :  ext4
-	HA              	 :  1
-	IO Priority     	 :  LOW
-	Creation time   	 :  Feb 26 08:17:20 UTC 2017
-	Shared          	 :  yes
-	Status          	 :  up
-	State           	 :  detached
-	Attributes      	 :  sticky
-	Reads           	 :  0
-	Reads MS        	 :  0
-	Bytes Read      	 :  0
-	Writes          	 :  0
-	Writes MS       	 :  0
-	Bytes Written   	 :  0
-	IOs in progress 	 :  0
-	Bytes used      	 :  33 MiB
-	Replica sets on nodes:
-		Set  0
-			Node 	 :  10.99.117.133
-```
+2. Monitor the replication operation by entering the following `pxctl alerts show` command:
+    ```text
+    pxctl alerts show --type volume
+    ```
+	```output
+	26	970758537931791410	Feb 26 22:58:17 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: exampleVolume) HA updated
+	```
 
-Here is the output of `pxctl alerts show --type volume`:
+3. Once the replica reduction completes, enter the `pxctl volume inspect` command to verify the target replica has been removed:
 
-```text
-25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
-26	970758537931791410	Feb 26 22:58:17 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated
-```
+	```text
+	pxctl volume inspect exampleVolume
+	```
+	```output
+	Volume	:  970758537931791410
+		Name            	 :  exampleVolume
+		Size            	 :  1.0 GiB
+		Format          	 :  ext4
+		HA              	 :  1
+		IO Priority     	 :  LOW
+		Creation time   	 :  Feb 26 08:17:20 UTC 2017
+		Shared          	 :  yes
+		Status          	 :  up
+		State           	 :  detached
+		Attributes      	 :  sticky
+		Reads           	 :  0
+		Reads MS        	 :  0
+		Bytes Read      	 :  0
+		Writes          	 :  0
+		Writes MS       	 :  0
+		Bytes Written   	 :  0
+		IOs in progress 	 :  0
+		Bytes used      	 :  33 MiB
+		Replica sets on nodes:
+			Set  0
+				Node 	 :  10.99.117.133
+	```
 
 ## Update a volume's group ID
 

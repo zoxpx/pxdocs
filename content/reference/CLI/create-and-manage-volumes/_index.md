@@ -177,6 +177,10 @@ These options can also be passed in through the scheduler or using the inline vo
 
 Use the `--nodes=LocalNode` flag to create a volume and place at least one replica of the volume on the node where the command is run. This is useful when you use a script to create a volume locally on a node.
 
+{{<info>}}
+**NOTE:** You can provide a node ID, node IP address, or pool UUID to the `--nodes` flag.
+{{</info>}}
+
 As an example, here's how you can create a volume named `localVolume` and place a replica of the volume on the local node:
 
 ```text
