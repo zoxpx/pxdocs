@@ -4,12 +4,7 @@ weight: 4
 keywords: create proxy volumes, PVC, kubernetes, k8s
 description: Proxy an external data source onto a Portworx volume. 
 series: k8s-vol
-display: hidden
 ---
-
-{{<info>}}
-**NOTE:** This feature is available as a preview in Portworx version 2.6.0-rc4.
-{{</info>}}
 
 Portworx proxy volumes proxy an external data source onto a Portworx volume. The actual data for these volumes resides on the external data source and does not consume any storage from the Portworx storage pools.
 

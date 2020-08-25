@@ -22,8 +22,8 @@ Before you install Portworx on Kubernetes, ensure that you're using a supported 
 | **Type** | **Supported Kubernetes Version** |
 |---|---|
 | On-prem Kubernetes | <ul><li>1.11</li><li>1.12</li><li>1.13</li><li>1.14</li><li>1.15</li><li>1.16</li><li>1.17</li><li>1.18</li></ul> |
-| Managed Kubernetes | <ul><li>**KOPS:** 1.14</li><li>**GKE:** 1.15</li><li>**AKS:** 1.14</li><li>**EKS:** 1.16</li><li>**IKS:** 1.15</li><li>**PKS:** 1.15</li></ul> |
-| Distribution Kubernetes | <ul><li>**Openshift 3.11:** 1.11</li><li>**Openshift 4.2:** 1.14</li><li>**Openshift 4.3:** 1.16</li><li>**RKE:** 1.16.7</li><li>**Anthos** 1.2, 1.3 </li></ul> |
+| Managed Kubernetes | <ul><li>**KOPS:** 1.16</li><li>**GKE:** 1.15</li><li>**AKS:** 1.14</li><li>**EKS:** 1.16</li><li>**IKS:** 1.15</li><li>**PKS:** 1.15</li></ul> |
+| Distribution Kubernetes | <ul><li>**Openshift 3.11:** 1.11</li><li>**Openshift 4.2:** 1.14</li><li>**Openshift 4.3:** 1.16</li><li>**Openshift 4.4:** 1.17</li><li>**Openshift 4.5:** 1.18</li><li>**RKE:** 1.16</li><li>**Anthos** 1.2, 1.3, 1.4 </li></ul> |
 
 ## Installation
 

@@ -28,6 +28,37 @@ apt install linux-headers-$(uname -r)
 
 ## Qualified distros and kernel versions
 
+### 2.6
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+| CentOS 7.5 | 5.4.12-1.el7.elrepo.x86_64 |
+| CentOS 7.8-vanilla | 3.10.0-1127.el7.x86_64 |
+| CentOS 8.2-vanilla | 4.18.0-193.el8.x86_64 |
+| Ubuntu 16.04	| Up to 4.4.0-116-generic |
+| Ubuntu 2004 | 5.4.0-42-generic |
+| Fedora 27	| Up to 4.13.9-300.fc27.x86_64 |
+| Fedora 28	| Up to 5.0.16-100.fc28.x86_64 |
+| RHEL 7.5	| Up to 3.10.0-1127.el7.x86_64 |
+| RHEL 7.6	| Up to 3.10.0-1127.el7.x86_64 |
+| RHEL 7.8	| Up to 3.10.0-1127.el7.x86_64 |
+| RHEL 8.2	| 4.18.0-193.14.3.el8_2.x86_64 |
+| Debian 9	| Up to 4.9.0-12-amd64 |
+
+| **Cloud Distro** | **Kernel Version** |
+| --- | --- |
+| CoreOS Alpha	| 4.9.123-coreos |
+| CoreOS Beta 2411.1.0 (Rhyolite)	| 4.9.123-coreos |
+| CoreOS Stable 2345.3.0 (Rhyolite)	| 4.9.123-coreos |
+| Amazon Linux v2	| 4.14.186-146.268.amzn2.x86_64 |
+
+<!-- 
+| RHEL 8.1 (Ootpa)	|  |
+| Ubuntu19.04	|  |
+| Ubuntu18.04.4 LTS	|  |
+-->
+
+
 ### 2.5.3
 
 | **Linux Distro**	| **Kernel Version** |
