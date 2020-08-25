@@ -286,10 +286,10 @@ Over time, your cluster's storage may become unbalanced, with some pools and dri
 * Increasing the size of pools by increasing the size of underlying drives or adding new drives
 * Volumes being removed from only a subset of nodes
 
-If your cluster's storage is unbalanced, you can use the `pxctl service pool rebalance` command to redistribute the volume replicas. This command determines which pools are over-loaded and under-loaded, and moves volume replicas from the former to the latter. This ensures that all pools on the nodes are evenly loaded. 
+If your cluster's storage is unbalanced, you can use the `pxctl service pool rebalance` command to redistribute the volume replicas. This command determines which pools are over-loaded and under-loaded, and moves volume replicas from the former to the latter. This ensures that all pools on the nodes are evenly loaded.
 
 {{<info>}}
-**NOTE:** You can run this cluster-wide command from any of your Portworx nodes. 
+**NOTE:** You can run this cluster-wide command from any of your Portworx nodes.
 {{</info>}}
 
 ### Start a rebalance operation
@@ -300,9 +300,9 @@ Use the `submit` subcommand to start the rebalance operation, which returns a jo
 pxctl service pool rebalance submit
 ```
 ```output
-This command will start rebalance for: 
+This command will start rebalance for:
  - all storage pools for checking if they are over-loaded
- - all storage pools for checking if they are under-loaded 
+ - all storage pools for checking if they are under-loaded
 which meet either of following conditions:
 
 1. Pool's provision space is over 20% or under 20% of mean value across pools
@@ -328,6 +328,8 @@ pxctl service pool rebalance list
 ```output
 JOB			STATE	CREATE TIME			STATUS
 859941020356581382	RUNNING	2020-08-11T11:16:12.928785518Z
+```
+
 ### Monitor a rebalance operation
 
 Monitor the status of a rebalance operation, as well as all the steps it has taken so far, by entering the `status` subcommand with the `--job-id` flag and the ID of a running rebalance job:
@@ -364,7 +366,7 @@ Replica remove action:
         End                : Sun, 23 Aug 2020 22:04:29 UTC
         Work summary
             - Provisioned space balanced : 20 GiB done, 0 B pending
-```      
+```
 
 ### Pause or terminate a running rebalance operation
 
@@ -372,15 +374,15 @@ If you need to temporarily suspend a running rebalance operation, you can pause 
 
 * Use the `cancel` subcommand subcommand with the `--job-id` flag and the ID of a running rebalance job to terminate a running rebalance operation:
 
-   ```text
-   pxctl service pool rebalance cancel --job-id 859941020356581382
-   ```
+    ```text
+    pxctl service pool rebalance cancel --job-id 859941020356581382
+    ```
 
 * Use `pause` subcommand subcommand with the `--job-id` flag and the ID of a running rebalance job to terminate a running rebalance operation:
 
-   ```text
-   pxctl service pool rebalance pause --job-id 859941020356581382
-   ```
+    ```text
+    pxctl service pool rebalance pause --job-id 859941020356581382
+    ```
 
 ### pxctl service pool rebalance reference
 
@@ -632,10 +634,11 @@ pxctl service pool update 0 --labels  ioprofile=,media_type=
 If you have a node with multiple pools and you can’t decommission the entire node, you can delete a pool instead. You may need to do this in one of the following scenarios:
 
    * If there's a problem with the drives on one of your pools, you can delete the pool and reinitialize it either without the problematic drive, or with a new drive.
-   * If you've added more capacity to a pool than you need, you can delete your pool and reinitialize it with fewer drives. 
+   * If you've added more capacity to a pool than you need, you can delete your pool and reinitialize it with fewer drives.
 
 {{<info>}}
-**NOTE:** 
+**NOTE:**
+
 * If you want to _increase_ the size of a storage pool, use the `pxctl service drive add` command.
 * Portworx won’t delete a pool until you have manually drained the pool of any volumes.
 {{</info>}}
@@ -648,33 +651,33 @@ Perform the following steps to delete a pool from a node, and optionally, reinit
 
 1. Once you have identified which pool you want to delete, list all volumes on that pool:
 
-   ```text
-   pxctl volume list --pool-uid <pool-uuid>
-   ```
+    ```text
+    pxctl volume list --pool-uid <pool-uuid>
+    ```
 
 2. For each volume on the node, sequentially reduce its replication factor to `1` to isolate the volumes located in your pool. The following example command reduces the replication factor from `3` to `2`:
 
-   ```text
-   pxctl volume ha-update --repl=2 --node <node-id> <volume-name>
-   ```
-   
+    ```text
+    pxctl volume ha-update --repl=2 --node <node-id> <volume-name>
+    ```
+
 3. Verify that your pool is empty by listing all volumes on the pool again:
 
-   ```text
-   pxctl volume list --pool-uid <pool-uuid>
-   ```
+    ```text
+    pxctl volume list --pool-uid <pool-uuid>
+    ```
 
 4. Once your pool is empty, delete your pool:
 
-   ```text
+    ```text
     pxctl service pool delete <pool-id>
-   ```
+    ```
 
 5. (Optional) Reinitialize your pool by entering the `pxctl drive add` command, specifying whatever new and existing drives you want to add:
 
-   ```text
-   pxctl service drive add --drive /path/to/drive -o start
-   ```
+    ```text
+    pxctl service drive add --drive /path/to/drive -o start
+    ```
 
 
 ### pxctl service pool show
@@ -770,4 +773,4 @@ Pool 0 DELETED.
 
 {{<info>}}
 **NOTE:** New pools created after a pool deletion increment from the last pool ID. A new pool created after this example would have a pool ID of 2
-{{</info>}}  
+{{</info>}}

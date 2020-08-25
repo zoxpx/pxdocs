@@ -222,13 +222,13 @@ pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-
 
 ##### Configure a cluster-wide proxy
 
-You can set up a cluster-wide proxy for Portworx to use when uploading cloud snaps to an S3 bucket. Portworx uses this proxy setting in conjunction with the `--use-proxy` flag on cloudsnap credentials to to send backup data through the proxy. Perform the steps in this section to configure a cluster-wide proxy and create credentials that use it.
+You can set up a cluster-wide proxy for Portworx to use when uploading cloud snaps to an S3 bucket. Portworx uses this proxy setting in conjunction with the `--use-proxy` flag on cloudsnap credentials to send backup data through the proxy. Perform the steps in this section to configure a cluster-wide proxy and create credentials that use it.
 
 {{<info>}}
 **NOTE:** This proxy is currently used only by cloudsnaps, the rest of the Portworx network traffic does not use this proxy.
 {{</info>}}
 
-1. Update your Portworx cluster-wide options by entering the `pxctl cluster options update` command with the `--px-http-proxy` flag and the url of your proxy:
+1. Update your Portworx cluster-wide options by entering the `pxctl cluster options update` command with the `--px-http-proxy` flag and the URL of your proxy:
 
     ```text
     pxctl cluster options update --px-http-proxy http://192.0.2.0:9999
@@ -703,7 +703,7 @@ Note that the restored volume will not be attached or mounted automatically.
 {{<info>}}
 **NOTE:**
 
-* As long as the backup was taken from a Portworx cluster of version 2.0 or great, Portworx restores cloudsnaps with the same `repl` value of the volume the backup was taken from. 
+* As long as the backup was taken from a Portworx cluster of version 2.0 or greater, Portworx restores cloudsnaps with the same `repl` value of the volume the backup was taken from.
 * With {{< pxEnterprise >}} 2.1.0, users can choose to do optimized restores.  Optimized restores create a snapshot of every successful restore and use that snapshot for the next incremental restore of the same volume. For more details about optimized restores, visit the [Enabling optimized restores](/reference/cli/cluster/#enabling-optimized-restores) section.
 {{</info>}}
 
