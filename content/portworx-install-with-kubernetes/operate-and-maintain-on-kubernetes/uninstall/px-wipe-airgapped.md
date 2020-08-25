@@ -12,12 +12,12 @@ When wiping Portworx in Kubernetes, a number of docker images are fetched from r
 
 ## Step 1: Download the wiper script
 
-[Download the wiper script](https://install.portworx.com/{{% currentVersion %}}/px-wipe) and save it to any node which has kubectl access to your cluster.
+[Download the wiper script](https://install.portworx.com/2.5/px-wipe) and save it to any node which has kubectl access to your cluster.
 
 Alternately, you can also use `curl`:
 
 ```text
-curl -o px-wipe.sh -L https://install.portworx.com/{{% currentVersion %}}/px-wipe
+curl -o px-wipe.sh -L https://install.portworx.com/2.5/px-wipe
 ```
 
 ## Step 2: Download the images that the wiper script will use
@@ -26,8 +26,8 @@ If you followed the [air-gapped install](/portworx-install-with-kubernetes/on-pr
 
 If you did not, or require different versions of images uploaded, please follow one of the steps below:
 
-- [Step 2a: Push to local registry server](#step-2a-push-to-local-registry-server-accessible-by-air-gapped-nodes): If you have access to a local registry server on an intranet, you can place the images that the wiper script will use there. 
-- [Step 2b: Push directly to your nodes](#step-2b-push-directly-to-your-nodes): If you do not have access to a local registry server on an intranet, you must place the images directly on your nodes. 
+- [Step 2a: Push to local registry server](#step-2a-push-to-local-registry-server-accessible-by-air-gapped-nodes): If you have access to a local registry server on an intranet, you can place the images that the wiper script will use there.
+- [Step 2b: Push directly to your nodes](#step-2b-push-directly-to-your-nodes): If you do not have access to a local registry server on an intranet, you must place the images directly on your nodes.
 
 ### Step 2a: Push to local registry server, accessible by air-gapped nodes
 
