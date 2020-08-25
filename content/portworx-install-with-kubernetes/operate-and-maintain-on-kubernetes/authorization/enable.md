@@ -9,7 +9,7 @@ series: k8s-op-maintain-auth
 Before proceeding with this document, please review the [Security](/concepts/authorization) model used by Portworx.
 
 {{<info>}}
-For a step by step setup of guide of how to enable Portworx authorization, please see
+**NOTE:** For a step by step setup of guide of how to enable Portworx authorization, please see
 [Securing your Portworx system](/cloud-references/security/).
 {{</info>}}
 
