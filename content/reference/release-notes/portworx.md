@@ -12,10 +12,10 @@ August 25, 2020
 
 ### New features
 
-* Announcing guest (public) role access: the guest role allows your users to access and manipulate public volumes.
+* [Announcing guest (public) role access](https://docs.portworx.com/concepts/authorization/overview/#guest-access): the guest role allows your users to access and manipulate public volumes.
 * Portworx now features K3s support: deploy Portworx on the K3s distribution.
-* Check out proxy volumes (NFS): use this feature to proxy an external NFS share onto your volumes.
-* Introducing automatic cluster-wide capacity distribution and balancing. 
+* [Check out proxy volumes (NFS)](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-proxy-volume-pvcs/): use this feature to proxy an external NFS share onto your volumes.
+* Introducing automatic cluster-wide capacity distribution and balancing. You can also run [rebalance operations manually](https://docs.portworx.com/reference/cli/service/#rebalance-storage-across-drives).
 
 ### Improvements
 
@@ -115,7 +115,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
-| PWX-14845 | Added a new px install argument (VAULT_NAMESPACE), allowing you to set a global vault namespace for Portworx. Provide this argument as a part of the `px-vault` Kubernetes secret. | 
+| PWX-14845 | Added a new px install argument (VAULT_NAMESPACE), allowing you to set a global vault namespace for Portworx. Provide this argument as a part of the `px-vault` Kubernetes secret. |
 | PWX-13173 | Added support for providing the `vault-namespace` argument in `pxctl` commands: <ul><li>setting cluster-wide secrets: `/opt/pwx/bin/pxctl set-cluster-key --secret_options=vault-namespace=portworx`</li><li>create volume: `/opt/pwx/bin/pxctl volume create --secure --secret_key=pwx/custom-key --secret_options=vault-namespace=portworx px-vol` </li><li>host attach: `/opt/pwx/bin/pxctl host attach --secret_key=pwx/custom-key --secret_options=vault-namespace=portworx 57416092699073855`</li></ul> |
 
 ### Fixes
@@ -125,7 +125,7 @@ The following issues have been fixed:
 |**Issue Number**|**Issue Description**|
 |----|----|
 | PWX-14777 | If credentials were deleted from Kubernetes secrets while there were multiple pending references to them in a Portworx cluster, Portworx generated an alert for every pending reference. <br/><br/>**User impact:** Users received an excessive number of alerts. <br/><br/> **Resolution:** Portworx now generates only one alert every hour. Portworx, Inc. advises against deleting credentials if there are schedules managed by Stork. |
-| PWX-14034 | Portworx did not read all the vault credentials for Kubernetes authentication methods provided in a Kubernetes secret. <br/><br/>**User impact:** Portworx Vault authentication failed.<br/><br/>**Resolution:** With 2.5.6, Portworx now reads all the Kubernetes authentication related input arguments from the Kubernetes secret and Portworx Vault authentication will succeed. | 
+| PWX-14034 | Portworx did not read all the vault credentials for Kubernetes authentication methods provided in a Kubernetes secret. <br/><br/>**User impact:** Portworx Vault authentication failed.<br/><br/>**Resolution:** With 2.5.6, Portworx now reads all the Kubernetes authentication related input arguments from the Kubernetes secret and Portworx Vault authentication will succeed. |
 | PWX-14937 | Added a fix to allow pool expand using the add-disk operation on storage pools that have a journal partition. <br/><br/>**User impact:** If users installed Portworx with cloud drive provisioning using the auto-journal (`-j auto`), expanding the pool with the `add-disk` operation type failed with a "not supported" error message. Users also saw the same error when using Autopilot to expand the pools. <br/><br/>**Resolution:** If Portworx was installed using the auto-journal, it can now expand pools using the `add-disk` operation type. |
 | PWX-15094 | A nil panic in Portworx sometimes occurred when Portworx successfully created a Vault client while Vault was in an error state.<br/><br/>**User impact:** Portworx returned an error: "too many open file handles" for subsequent vault operations.<br/><br/>**Resolution:** Portworx no longer panics when Vault is experiencing an error. |
 | PWX-14924 | A driver bug caused Portworx with PX-Security enabled to send unauthorized requests to the volumes API, which were rejected.<br/><br/>**User impact:** Users were unable to create PVCs, which appeared stuck in the `Pending` state.<br/><br/>**Resolution:** Portworx with PX-Security can once again create PVCs. |
