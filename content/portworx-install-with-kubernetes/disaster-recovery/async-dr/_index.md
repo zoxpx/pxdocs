@@ -112,7 +112,7 @@ You can enable disaster recovery mode by specifying the following fields in the 
 
 * `ip`, with the IP address of the remote Portworx node
 * `port`, with the port of the remote Portworx node
-* `token`, with the token of the destination cluster. To retrieve the token, run the `pxctl cluster token show` command on a node in the destination cluster. Refer to the [Show your destination cluster token](https://docs.portworx.com/portworx-install-with-kubernetes/migration/kubemotion/#show-your-destination-cluster-token) section from the [Kubemotion with Stork on Kubernetes](https://docs.portworx.com/portworx-install-with-kubernetes/migration/kubemotion/) page for details.
+* `token`, with the token of the destination cluster. To retrieve the token, run the `pxctl cluster token show` command on a node in the destination cluster. Refer to the [Show your destination cluster token](/portworx-install-with-kubernetes/migration/kubemotion/#show-your-destination-cluster-token) section from the [Kubemotion with Stork on Kubernetes](/portworx-install-with-kubernetes/migration/kubemotion/) page for details.
 * `mode`: by default, every seventh migration is a full migration. If you specify `mode: DisasterRecovery`, then every migration is incremental.
 
 ```text
