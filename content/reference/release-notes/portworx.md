@@ -13,10 +13,10 @@ August 25, 2020
 
 ### New features
 
-* Announcing guest (public) role access: the guest role allows your users to access and manipulate public volumes.
+* [Announcing guest (public) role access](/concepts/authorization/overview/#guest-access): the guest role allows your users to access and manipulate public volumes.
 * Portworx now features K3s support: deploy Portworx on the K3s distribution.
-* Check out proxy volumes (NFS): use this feature to proxy an external NFS share onto your volumes.
-* Introducing automatic cluster-wide capacity distribution and balancing. 
+* [Check out proxy volumes (NFS)](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-proxy-volume-pvcs): use this feature to proxy an external NFS share onto your volumes.
+* Introducing automatic cluster-wide capacity distribution and balancing. You can also run [rebalance operations manually](/reference/cli/service/#rebalance-storage-across-drives). 
 
 ### Improvements
 
