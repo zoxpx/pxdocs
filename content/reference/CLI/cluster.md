@@ -14,7 +14,7 @@ First, let's get an overview of the available commands:
 /opt/pwx/bin/pxctl cluster --help
 ```
 
-```
+```output
 Manage the cluster
 
 Usage:
@@ -59,7 +59,7 @@ To list all nodes in your Portworx cluster, run:
 pxctl cluster list
 ```
 
-```
+```output
 Cluster ID: 8ed1d365-fd1b-11e6-b01d-0242ac110002
 Status: OK
 
@@ -78,7 +78,7 @@ Use the following command to get information on a node in the cluster:
 pxctl cluster inspect 492596eb-94f3-4422-8cb8-bc72878d4be5
 ```
 
-```
+```output
 ID       	:  492596eb-94f3-4422-8cb8-bc72878d4be5
 Mgmt IP  	:  147.75.99.189
 Data IP  	:  147.75.99.189
@@ -97,7 +97,7 @@ Here is how to delete a node:
 pxctl cluster delete bf9eb27d-415e-41f0-8c0d-4782959264bc
 ```
 
-```
+```output
 node bf9eb27d-415e-41f0-8c0d-4782959264bc deleted successfully
 ```
 
@@ -107,7 +107,7 @@ To get help, run:
 pxctl cluster delete --help
 ```
 
-```
+```output
 Delete a node
 
 Usage:
@@ -147,7 +147,7 @@ To list the nodes in your Portworx cluster based on IO Priority (high, medium an
 pxctl cluster provision-status --io_priority low
 ```
 
-```
+```output
 Node					Node Status	Pool	Pool Status	IO_Priority	Size	Available	Used	Provisioned	ReserveFactor	Zone	Region
 492596eb-94f3-4422-8cb8-bc72878d4be5	Online		0	Online		LOW		100 GiB	99 GiB		1.0 GiB	0 B		default	default
 492596eb-94f3-4422-8cb8-bc72878d4be5	Online		1	Online		LOW		200 GiB	199 GiB		1.0 GiB	0 B		50		default	default
@@ -161,7 +161,7 @@ To get help, type the following:
 pxctl cluster provision-status --help
 ```
 
-```
+```output
 NAME:
    pxctl cluster provision-status - Show cluster provision status
 
