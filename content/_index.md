@@ -11,9 +11,9 @@ scrollspy-container: false
 <li class="list-series__item mdl-card mdl-shadow--2dp">
 <a href="https://backup.docs.portworx.com">
     <div class="mdl-card__title">
-    <h3 class="mdl-card__title-text">
+    <homelistseriestitle class="mdl-card__title-text">
         PX-Backup documentation
-    </h3>
+    </homelistseriestitle>
     </div>
     <div class="mdl-card__supporting-text">
         <p>PX-Backup is a Kubernetes backup solution that allows you to back up and restore applications and their data across multiple clusters.</p>
