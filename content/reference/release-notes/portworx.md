@@ -94,6 +94,18 @@ The following issues have been fixed:
 | PWX-10674 | Node decommission in certain cases would keep the cloud drives around and not delete them. <br/><br/>**User impact:** Cloud drives used to linger around in cloud after owned node is decommissioned.<br/><br/>**Resolution:** Node decommission now removes the cloud drives which were left undeleted in certain cases. |
 | PWX-8385 | Portworx, Inc. discovered a security issue in the method used to provide the secret location to Portworx from a PVC. <br/><br/>**User Impact**: Users could point to a secret in a namespace they could not access in the annotations of a PVC. <br/><br/>**Resolution:** In 2.6, Portworx no longer supports using annotations in the PVC to create volumes. Instead, it uses the same secure method used by CSI and has the StorageClass reference the secret and the secret namespace. |
 
+## 2.5.8
+
+September 1, 2020
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-15622 | sharedv4 volume mounts timed-out. <br/><br/>**User Impact:** In a slower network or on overloaded nodes, sharedv4 (NFS) volume mounts can timeout and attempt multiple retries. The affected pod never becomes operational and repeatedly shows the `signal: killed` error. <br/><br/>**Resolution:** sharedv4 volume mount operations now wait 2 minutes before timing-out. You can also specify an option to configure the timeout to larger values if required:<br/> `pxctl cluster options update --sharedv4-mount-timeout-sec <value>` |
+
 ## 2.5.7
 
 August 26, 2020
