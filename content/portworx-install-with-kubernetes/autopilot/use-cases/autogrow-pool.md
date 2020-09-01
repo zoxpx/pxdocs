@@ -1,6 +1,6 @@
 ---
 title: "Automatically expand Portworx storage pools"
-linkTitle: "Automatically expand storage pools by usage"
+linkTitle: "Expand storage pools by usage"
 keywords: autopilot, storage pool
 description: "Auto-expand storage pools"
 weight: 200
