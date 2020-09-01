@@ -15,6 +15,7 @@ weight: 300
 ## Example
 
 The following example Autopilot rule will rebalance all storage pools which meet either of following conditions:
+
 * Pool's **provision** space is _over 20%_ or _under 20%_ of mean value across pools
 * Pool's **used** space is _over 20%_ or _under 20%_ of mean value across pools
 
@@ -190,7 +191,7 @@ kubectl apply -f autopilotrule-pool-rebalance-example.yaml
 
 Now that you've created the rule, Autopilot will now detect that one specific pool is over-provisioned and it will start rebalancing the 3 volumes across the pools. 
 
-1. Enter the following command to retrieve all the events generated for the `pool-rebalance` rule:
+Enter the following command to retrieve all the events generated for the `pool-rebalance` rule:
 
 ```text
 kubectl get events --field-selector involvedObject.kind=AutopilotRule,involvedObject.name=pool-rebalance --all-namespaces --sort-by .lastTimestamp
