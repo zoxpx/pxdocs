@@ -282,8 +282,3 @@ default     9m48s       Normal   Transition   AutopilotRule   rule: pvc-5c9a6451
 ```
 
 
-### Known issues
-
-Portworx is aware of the following known issues:
-
-* If a PVC has been restored from a snapshot or backup, Autopilot will fail to detect if the underlying volume for the PVC has met its rule conditions. This will be fixed in an upcoming Autopilot release.
