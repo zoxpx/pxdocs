@@ -207,6 +207,8 @@ Below should now show that the provisioned space for all your pools are balanced
 kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status --output-type wide
 ```
 
+<!---
 ### More rebalance examples
 
 * [Rebalance pools by their absolute provisioned and used space](/portworx-install-with-kubernetes/autopilot/use-cases/examples/rebalance/aut-rebalance-absolute-usage)
+-->
