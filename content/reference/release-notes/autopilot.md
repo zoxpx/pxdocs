@@ -7,9 +7,9 @@ weight: 350
 series: release-notes
 ---
 
-## 1.3.0-RC1
+## 1.3.0
 
-Aug 31, 2020
+Sep 02, 2020
 
 Portworx has upgraded or enhanced functionality in the following areas:
 
@@ -29,7 +29,7 @@ The following issues have been fixed:
 |AUT-83|Autopilot pool expand should never bring PX out of quorum<br/><br/>**User impact:** In certain situations where 2 or more pools have non-intersection volumes, Autopilot can triggered expand on multiple pools at the same time which can bring the PX cluster out of quorum.<br/><br/>**Resolution:** Autopilot will now perform expansion on only one pool at a given time. Subsequent pools will have their actions in pending state until the previous one is complete.|
 |AUT-87|If an action is declined, Autopilot will now perform exponential backoff before retrying it.<br/><br/>**User impact:** If an action was declined due to the maxsize being hit in the AutopilotRule for a PVC resize, Autopilot used to aggressively retry flooding logs and events.<br/><br/>**Resolution:** Autopilot will now perform exponential backoff.|
 |AUT-169|Autopilot loses track of volume for rule when PX-Backup backs up and restores to same namespace.<br/><br/>**User impact:** If a user has a PVC that was restored from a backup or pre-provisioned, Autopilot would not be able to track the metrics of the PVC correctly.<br/><br/>**Resolution:** Autopilot was incorrect assuming the volume name of a PVC by using the PVC UUID. Instead now, it will use the actual volume name from the PVC spec.|
-
+|AUT-209|Fixed an issue where Autopilot incorrectly determines that conditions are not met for an object.<br/><br/>**User impact:** There are situations where the prometheus API reports empty metrics when it is initializing and it hasn't scrapped it's targets. If Autopilot queries prometheus during such times, it will find empty metrics and will be misled to consider the conditions as not being met for that object. <br/><br/>**Resolution:** Autopilot will no longer accept metrics from Prometheus if a Portworx metrics target is not healthy. The Portworx metrics target will become healthy when Prometheus has initialized completely and has been able to perform a successful scrape.|
 
 ## 1.2.1
 

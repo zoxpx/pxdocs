@@ -62,20 +62,14 @@ and apply it in your cluster.
 
 ## Upgrading Autopilot
 
-To upgrade Autopilot, change the image tag in the deployment with the `kubectl set image` command. The following example upgrades Autopilot to the 1.2.1 version:
+To upgrade Autopilot, change the image tag in the deployment with the `kubectl set image` command. The following example upgrades Autopilot to the 1.3.0 version:
 
 ```text
-kubectl set image deployment.v1.apps/autopilot -n kube-system autopilot=portworx/autopilot:1.2.1
+kubectl set image deployment.v1.apps/autopilot -n kube-system autopilot=portworx/autopilot:1.3.0
 ```
 ```output
 deployment.apps/autopilot image updated
 ```
 
 {{<info>}}**NOTE:** The command above assumes Autopilot is installed in the `kube-system` namespace. Change the namespace according to where it's installed in your cluster.{{</info>}}
-
-Similarly, to upgrade to 1.3.0-rc1, use
-
-```text
-kubectl set image deployment.v1.apps/autopilot -n kube-system autopilot=portworx/autopilot:1.3.0-rc1
-```
 
