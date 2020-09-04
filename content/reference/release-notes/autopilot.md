@@ -15,7 +15,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 
 |**Improvement Number**|**Improvement Description**|
 |----|----|
-|AUT-113|Added support to **rebalance volumes** Portworx storage pools. Refer to [documentation](/portworx-install-with-kubernetes/autopilot/use-cases/rebalance-pool/) for more details.|
+|AUT-113|Added support to **rebalance Portworx storage pools**. Refer to [documentation](/portworx-install-with-kubernetes/autopilot/use-cases/rebalance-pool/) for more details.|
 |AUT-136|Added support to users to require **approval** before actions are taken for a AutopilotRule. Refer to [documentation](/portworx-install-with-kubernetes/autopilot/how-to-use/approvals/) for more details.|
 |AUT-138|Added support for `requiredMatches` in the `AutopilotRule` CRD. This allows users to specify number of conditions that are required to match in the rule. See the [Automatically rebalance Portworx storage pools](/portworx-install-with-kubernetes/autopilot/use-cases/rebalance-pool/) use case on example on how this can be used.|
 |AUT-144|Added support for Autopilot to create **Github Pull Requests** to approvals for it's actions. This enables users to integrate **GitOps** workflows with Autopilot. Refer to [documentation](/portworx-install-with-kubernetes/autopilot/how-to-use/approvals/walkthrough-github/) for more details.|
