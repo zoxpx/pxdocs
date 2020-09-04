@@ -30,11 +30,3 @@ To enable Autopilot action approvals in your cluster, following one of the follo
 
 {{<homelist series="aut-approval-walkthroughs">}}
  
-## Known issues
-
-Following are the known issues in Autopilot 1.3.0 related to Action approvals.
-
-#### Updating an AutopilotRule to not require approvals
-
-* **Issue**: If an AutopilotRule has `enforcement: approvalRequired` and is later updated to remove the `enforcement`, existing approvals that resulted from that rule will not be cancelled. 
-* **Workaround**:  Delete the AutopilotRule and recreate it without the `enforcement`. This will cancel existing approvals and no subsequent approvals will be generated for that AutopilotRule.
