@@ -17,9 +17,9 @@ Portworx comes with a few standard roles that you can use when issuing tokens to
 *   __system.admin:__ can run any command
 *   __system.view:__ can only run read-only commands
 *   __system.user:__ can only access volume lifecycle commands
-*   __system.public:__ similar to system.user, but for public volumes only.
+*   __system.guest:__ similar to system.user, but for public volumes only.
 
-All of these roles are immutable, except for system.public. Admins may [update the system.public role](/reference/cli/role/#updating-the-system-guest-role) to change how Portworx RBAC handles unauthenticated users.
+All of these roles are immutable, except for system.guest. Admins may [update the system.guest role](/reference/cli/role/#updating-the-system-guest-role) to change how Portworx RBAC handles unauthenticated users.
 
 ## Custom Roles
 
