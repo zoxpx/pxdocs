@@ -10,6 +10,7 @@ This document describes how to use Portworx **sharedv4** (ReadWriteMany) volumes
 
 ## Prerequisites
 
+* sharedv4 volumes must not be disabled on your cluster
 * NFS ports between nodes [must be open](/portworx-install-with-kubernetes/storage-operations/create-pvcs/open-nfs-ports/)
 
 ## Provision a Sharedv4 Volume

@@ -32,6 +32,10 @@ The minimum supported size for a Portworx cluster is three nodes. Each node must
 |Key-value store | Portworx needs a key-value store to perform its operations. As such, install a clustered key-value database \(`etcd` or `consul`\) with a three node cluster.<br><br>With Portworx 2.0, you can use Internal KVDB during installation. In this mode, Portworx will create and manage an internal key-value store (kvdb) cluster.<br><br>If you plan of using your own etcd, refer to [Etcd for Portworx](/reference/knowledge-base/etcd) for details on recommendations for installing and tuning etcd.|
 |Disable swap|Please disable swap on all nodes that will run the Portworx software.  Ensure that the swap device is not automatically mounted on server reboot.|
 
+## Air-gapped prerequisites
+
+If you intend to use the `sharedv4` feature, your host systems must be running the NFS service. For more information on options for installing the NFS service, refer to the installation article for air-gapped clusters. 
+
 ## Installation
 
 For Kubernetes, continue below,
