@@ -7,12 +7,7 @@ series: k8s-op-maintain
 keywords: authorization, security, kubernetes, k8s
 ---
 
-This is a reference section describing how to manage Portworx authorization in
+This section describes how to enable and manage Portworx authorization in
 Kubernetes
-
-{{<info>}}
-**NOTE:** For a step-by-step setup guide showing how to enable Portworx authorization, please refer to 
-[Securing your Portworx system](/cloud-references/security/).
-{{</info>}}
 
 {{<homelist series="k8s-op-maintain-auth">}}
