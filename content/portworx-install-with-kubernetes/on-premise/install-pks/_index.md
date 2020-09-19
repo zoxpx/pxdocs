@@ -84,6 +84,14 @@ Create one or more shared datastore(s) or datastore cluster(s) which is dedicate
 
 {{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
 
+{{<info>}}
+**NOTE:** Some errors, such as incorrect vSphere user credentials, are only shown in the container logs. To display these errors, use the `kubectl logs` command:
+
+```text
+kubectl logs portworx-pod -n kube-system
+```
+{{</info>}}
+
 ## Wipe Portworx installation
 
 Below are the steps to wipe your entire Portworx installation on PKS.

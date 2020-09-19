@@ -42,11 +42,12 @@ kubectl apply -f px-spec.yaml
      ```
 
      {{<info>}}
-     **NOTE:** In your output, the image pulled will differ based on your chosen Portworx license type and version.
+**NOTE:** In your output, the image pulled will differ based on your chosen Portworx license type and version.
      {{</info>}}
 
+#####  Monitor the cluster status
 
-#####  Monitor Portworx cluster status
+Use the `pxctl status` command to display the status of your Portworx cluster:
 
 ```text
 PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
