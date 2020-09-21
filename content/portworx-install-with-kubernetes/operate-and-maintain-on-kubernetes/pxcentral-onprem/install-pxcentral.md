@@ -12,25 +12,25 @@ series: k8s-op-maintain
 * Any Kubernetes cluster consisting of the following:
 
     * 3 worker nodes
-    * 50GB available `/root` disk size
     * 4 CPU cores
     * 8GB of memory
     * A minimum of 1 disk with 100 GB, ideally 2 disks on each node with at least 100 GB each
+    * If your Kubernetes cluster does not have Portworx installed, verify that you have at least 50GB of available disk space on the `/root` file system.
 * For internet-connected clusters, the following ports must be open:
 
     | Port | Component | Purpose | Incoming/Outgoing |
     | :---: |:---:|:---:|:---:|
     | 31234 | PX-Central | Access from outside | Incoming |
-    | 31241 | PX-Central-Keycloak | Access user auth token | Incoming | 
+    | 31241 | PX-Central-Keycloak | Access user auth token | Incoming |
     | 31240 | PX-Central | Metrics store endpoint | Outgoing |
     | 7070 | License server | License validation | Outgoing |
 * You must have [jq](https://stedolan.github.io/jq/) installed on the node where you will run the `install.sh` script
 * For GKE clusters, only Ubuntu OS is supported.
 
 {{<info>}}
-**NOTE:** 
+**NOTE:**
 
-* You can install PX-Central on a Kubernetes cluster that are already running Portworx, or on a fresh Kubernetes cluster that does not have Portworx installed. 
+* You can install PX-Central on a Kubernetes cluster that are already running Portworx, or on a fresh Kubernetes cluster that does not have Portworx installed.
 * If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority.
 {{</info>}}
 
@@ -144,7 +144,7 @@ Create a Kubnernetes secret, save the name and namespace in which it's located f
     ```
 
     {{<info>}}
-**NOTE:**  
+**NOTE:**
 
 * PX-Central is installed with PX-Backup.
 * If you're using your Kubernetes master IP as the Keycloak endpoint, you must run the following command on all worker nodes:
