@@ -6,6 +6,25 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.0.1
+
+September 22, 2020
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-16005 | Added support for fetching tokens per vault namespace |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-15705 | Application backups can't work with the newer security model of 2.6.0. <br/><br/>**User impact:** Application backups failed after upgrading to Portworx 2.6.0. <br/><br/>**Resolution:** The auth model now works with the older style of auth annotations.
 
 ## 2.6.0
 
