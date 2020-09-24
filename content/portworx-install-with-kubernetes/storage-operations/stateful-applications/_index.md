@@ -385,7 +385,7 @@ mysql-6d69b99774-2bv4m   0/1     Pending   0          3s
 
 ## Clone an Application
 
-You can clone an application to a different namespace or within the same namespace. You must create the `ApplicationClone` object in the **admin** namespace, which is `kube-system` by default.
+You can clone an application to a different namespace. You must create the `ApplicationClone` object in the **admin** namespace, which is `kube-system` by default.
 
 {{<info>}}
 **NOTE:**
