@@ -1,20 +1,16 @@
 ---
-title: PKS (cloud)
-linkTitle: PKS
-logo: /logos/pks.png
-keywords: Install, PKS, Pivotal Container Service, Kubernetes, k8s, Bosh Director
-description: How to install and manage PKS
-weight: 4
-noicon: true
+title: on-prem-pks-common-install
+description: shared install for pks on-prem
+hidden: true
 ---
 
-## Step 1: PKS preparation
+## PKS preparation
 
 Before installing Portworx, let's ensure the PKS environment is prepared correctly.
 
 ### Enable privileged containers and kubectl exec
 
-Ensure that following options are enabled on all plans on the PKS tile:
+Ensure that following options are enabled on all plans on the PKS tile.
 
   * Enable Privileged Containers
   * Disable DenyEscalatingExec (This is useful to run kubectl exec to run pxctl commands)
@@ -32,6 +28,7 @@ Perform these steps on any machine where you have the bosh CLI.
 1. Create and upload the release.
 
     Replace _director-environment_ below with the environment which points to the Bosh Director.
+
     ```text
     git clone https://github.com/portworx/portworx-stop-bosh-release.git
     cd portworx-stop-bosh-release
@@ -43,6 +40,7 @@ Perform these steps on any machine where you have the bosh CLI.
 2. Add the addon to the Bosh Director.
 
     First let's fetch your current Bosh Director runtime config.
+
     ```text
     bosh -e director-environment runtime-config
     ```
@@ -53,6 +51,7 @@ Perform these steps on any machine where you have the bosh CLI.
 
 
     Once we have the runtime config file prepared, let's update it in the Director.
+
     ```text
     bosh -e director-environment update-runtime-config runtime-configs/director-runtime-config.yaml
     ```
@@ -63,47 +62,6 @@ Perform these steps on any machine where you have the bosh CLI.
 
     If you already have an existing Portworx cluster, you will need to recreate the VM instances using the bosh recreate command.
 
-## Step 2: Install Etcd
+## Installing Portworx
 
-Portworx uses a key-value store for it’s clustering metadata. There are couple of options here:
-
-### 2a: Install etcd your own way
-
-If you are planing to install Etcd your own way, you can skip this section and proceed to [Step 3: Installing Portworx](#step-3-installing-portworx).
-
-### 2b: Install using bosh CFCR etcd release
-
-Follow [Installing Etcd using CFCR etcd release](/portworx-install-with-kubernetes/on-premise/install-pks/install-cfcr-etcd-release) and return here once done.
-
-After the above steps, you should have all the etcd certs in the *etcd-certs* directory. These need to put in a Kubernetes secret so that Portworx can consume it.
-
-```text
-kubectl -n kube-system create secret generic px-kvdb-auth --from-file=etcd-certs/
-kubectl -n kube-system describe secret px-kvdb-auth
-```
-
-This should output the below and shows the etcd certs are present in the secret.
-```
-Name:         px-kvdb-auth
-Namespace:    kube-system
-Labels:       <none>
-Annotations:  <none>
-
-Type:  Opaque
-
-Data
-====
-etcd-ca.crt:      1679 bytes
-etcd.crt:  1680 bytes
-etcd.key:  414  bytes
-```
-
-## Step 3: Installing Portworx
-
-Portworx supports [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) on various platforms.
-
-If running on **AWS**, continue at [Portworx install with AWS Auto Scaling Groups](/portworx-install-with-kubernetes/cloud/aws/aws-asg).
-
-If running on **GCP**, continue at [Portworx install on Google Cloud Platform](/cloud-references/auto-disk-provisioning/gcp).
-
-If running on **VMware vSphere**, continue at [Portworx install on PKS on vSphere](/portworx-install-with-kubernetes/on-premise/install-pks/daemonset/#installing-portworx).
+For on-premise clusters, [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) supports VMware vSphere.
