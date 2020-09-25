@@ -1,10 +1,10 @@
 ---
-title: Elastic Kubernetes Service (EKS) using eksctl
+title: Install Portworx on AWS EKS using eksctl and the Daemonset
+linkTitle: Install using the Daemonset
 keywords: Install, on cloud, EKS, Elastic Kubernetes Service, AWS, Amazon Web Services, Kubernetes, k8s, eksctl
 description: Install Portworx on an AWS EKS (Elastic Kubernetes Service) cluster using eksctl.
-weight: 2
+weight: 3
 noicon: true
-series: px-k8s
 ---
 
 This article provides instructions for installing Portworx on Elastic Kubernetes Service (EKS) using the Weaveworks `eksctl` command-line utility.
