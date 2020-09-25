@@ -1,13 +1,16 @@
 ---
-title: 2. Deploy Portworx on AKS
+title: Install Portworx on AKS using the Operator
+linkTitle: Install using the Operator
 keywords: on cloud, AKS, Azure Kubernetes Service, Microsoft, Kubernetes, k8s
 description: Learn about applying the spec with Portwork on Azure Kubernetes Service.
-weight: 2
+weight: 3
 ---
 
 ## Install
 
-{{% content "shared/portworx-install-with-kubernetes-shared-1-generate-the-spec-footer.md" %}}
+{{% content "shared/operator-install.md" %}}
+
+{{% content "shared/portworx-install-with-kubernetes-shared-generate-the-spec-footer-operator.md" %}}
 
 {{<info>}}
 **NOTE:** To deploy Portworx to an Azure Sovereign cloud, you must go to the **Customize** page and set the value of the `AZURE_ENVIRONMENT` variable. The following example screenshot shows how you can deploy Portworx to the Azure US Government cloud:
@@ -16,6 +19,8 @@ weight: 2
 
 {{</info>}}
 
-{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
+{{% content "shared/operator-apply-the-spec.md" %}}
+
+{{% content "shared/operator-monitor.md" %}}
 
 {{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}

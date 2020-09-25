@@ -8,7 +8,7 @@ description: Learn how to deploy on AWS with Kubernetes.
 keywords: Install, on cloud, AWS, Amazon Web Services, Kubernetes, k8s
 ---
 
-This page describes using Portworx with Kubernetes on AWS.
+Choose the relevant installation steps for Portworx with Kubernetes on AWS.
 
 ## Install
 
