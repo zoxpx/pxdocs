@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.0.2
+
+September 25, 2020
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-16160 | Environment variables were not anonymized. <br/><br/> **User Impact:** Sensitive information regarding secrets may potentially have been printed in the logs. <br/><br/> **Resolution:** Portworx now anonymizes all environment variables. |
+
 ## 2.6.0.1
 
 September 22, 2020
