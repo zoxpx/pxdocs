@@ -4,10 +4,11 @@ weight: 6
 keywords: Install, PX-Central, On-prem, license, GUI, k8s
 description: Learn how to install PX-Central On-prem.
 noicon: true
+hidden: true
 series: k8s-op-maintain
 ---
 
-<!-- 
+<!--
 ## Reset your administrator password
 
 You can reset the administrator password you specified during installation by downloading and running a reset script:

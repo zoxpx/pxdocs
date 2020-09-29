@@ -1,9 +1,10 @@
 ---
 title: Set up login redirects
-weight: 6
+weight: 7
 keywords: Install, PX-Central, On-prem, license, GUI, k8s, Okta, Auth0
 description: See how you can integrate PX-Central with Okta and Auth0.
 noicon: true
+hidden: true
 ---
 
 If you configure PX-Central to use an external OIDC provider, then you must manually configure the redirect URI in your OIDC provider.

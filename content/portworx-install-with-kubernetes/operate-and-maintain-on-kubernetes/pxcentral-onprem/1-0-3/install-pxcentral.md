@@ -4,6 +4,7 @@ weight: 2
 keywords: Install, PX-Central, On-prem, license, GUI, k8s
 description: Learn how to install PX-Central On-prem.
 noicon: true
+hidden: true
 series: k8s-op-maintain
 ---
 
@@ -12,10 +13,10 @@ series: k8s-op-maintain
 * Any Kubernetes cluster consisting of the following:
 
     * 3 worker nodes
+    * 50GB available `/root` disk size
     * 4 CPU cores
     * 8GB of memory
     * A minimum of 1 disk with 100 GB, ideally 2 disks on each node with at least 100 GB each
-    * If your Kubernetes cluster does not have Portworx installed, verify that you have at least 50GB of available disk space on the `/root` file system.
 * For internet-connected clusters, the following ports must be open:
 
     | Port | Component | Purpose | Incoming/Outgoing |

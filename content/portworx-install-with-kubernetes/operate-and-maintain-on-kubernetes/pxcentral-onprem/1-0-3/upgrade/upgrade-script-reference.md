@@ -5,6 +5,7 @@ keywords: upgrade, reference,
 weight: 8
 noicon: true
 series: k8s-op-maintain
+hidden: true
 ---
 
 ```text
