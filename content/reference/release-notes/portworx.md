@@ -42,6 +42,11 @@ The following issues have been fixed:
 
 August 25, 2020
 
+### Notes
+
+* If you're upgrading an auth-enabled Portworx cluster to Portworx 2.6.0, you must upgrade Stork to version 2.4.5. 
+* Operator versions prior to 1.4 and Autopilot currently do not support auth-enabled clusters running Portworx 2.6.0. Support for this is planned for a future release
+
 ### New features
 
 * [Announcing guest (public) role access](/concepts/authorization/overview/#guest-access): the guest role allows your users to access and manipulate public volumes.
