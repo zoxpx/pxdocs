@@ -11,6 +11,13 @@ series: k8s-op-maintain
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
+{{<info>}}
+**NOTE:** 
+
+* If you're upgrading an auth-enabled Portworx cluster to Portworx 2.6.0, you must upgrade Stork to version 2.4.5. 
+* Operator versions prior to 1.4 and Autopilot currently do not support auth-enabled clusters running Portworx 2.6.0. Support for this is planned for a future release
+{{</info>}}
+
 ## Upgrade Portworx
 
 To upgrade to the **{{% currentVersion %}}** release, run the following command:
