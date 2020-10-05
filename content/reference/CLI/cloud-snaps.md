@@ -332,17 +332,36 @@ pxctl cloudsnap backup --help
 ```
 
 ```output
-NAME:
-   pxctl cloudsnap backup - Backup a snapshot to cloud
+Backup a snapshot to cloud
 
-USAGE:
-   pxctl cloudsnap backup [command options] [arguments...]
+Usage:
+  pxctl cloudsnap backup [flags]
 
-OPTIONS:
-   --volume value, -v value       source volume
-   --full, -f                     force a full backup
-   --cred-id value, --cr value    Cloud credentials ID to be used for the backup
+Aliases:
+  backup, b
 
+Examples:
+/opt/pwx/bin/pxctl cloudsnap backup [flags] volName
+
+Flags:
+      --cred-id string   Cloud credentials ID to be used for the backup
+  -d, --delete-local     Deletes local snap created for backup after backup is done, also forces next backup to be full
+  -i, --frequency uint   Maximum number of incremental cloudsnaps after which full is forced, default 7
+  -f, --full             Force a full backup
+  -h, --help             help for backup
+      --label pairs      list of comma-separated name=value pairs
+      
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 As an example, to back up a volume named `volume1`, you would use something like:
