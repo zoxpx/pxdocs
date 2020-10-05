@@ -6,6 +6,49 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.1 
+
+October 2, 2020
+
+### New features
+
+* [Introducing Portworx on the AWS Marketplace](/portworx-install-with-kubernetes/cloud/aws/aws-marketplace/): deploy Portworx from the AWS Marketplace and pay through the AWS Marketplace Metering Service. 
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-16005 | Added support for fetching tokens per vault namespace. | 
+| PWX-14307 | Users can instruct Portworx to delete the local snaps created for cloudsnaps after the backup is complete through the `pxctl --delete-local` option. This causes the subsequent backups to be full. | 
+| PWX-15987 | The pool expand alert now includes additional information about the cluster ID in the event metrics. |
+| PWX-15427 | Volume resize operation status alerts export metrics to Prometheus with additional context, such as: volumeid, clusterid, pvc name, namespace. |
+| PWX-13524 | You can now use a network interface for cloudsnap endpoints. This is a cluster-level setting.  |
+| PWX-16063 | Introducing a new `px-cache` configuration parameter to control the cache block size for advanced users: `px-runc arg: -cache_blocksize <size>`. | 
+| PWX-15897 | Improved Portworx NFS handling in multiple ways: <ul><li>If an unmount operation of the sharedv4 export path fails with `EBUSY`, Portworx restarts the NFS server and tries again.</li><li>If setting the NFS thread count fails - remount the proc FS and set the thread count.</li><li>The NFS thread count now defaults to 128. Portworx now logs an alert if the system is detected as `busy` and requires more NFS threads.|
+| PWX-15036 | Traditionally, Portworx installed via Pay-as-you-go or marketplace mode will go into maintenance mode if it is unable to report usage within 72 hours. You can now configure a longer time period, up to 7 days(168 hours), by passing rtOpts `billing_timeout_hours` to the Portworx DaemonSet. If you set an invalid rtOpts value, Portworx returns to 72 hours.| 
+| PWX-11884 | Portworx now supports per volume encryption with scaled volumes. DCOS users who use Portworx scaled volumes can provide a volume spec in the following manner to create a scaled volume which uses "mysecret" secret key for encryption: <br/><code>secret_key=mysecret,secure=true,name=myscaledvolume,scale=3</code>	|
+| PWX-14950 | Portworx now supports the ability to read vSphere usernames and passwords from a Kubernetes secret directly instead of mounting them inside the Portworx spec.| 
+| PWX-15698 | Added a new command, `pxctl service node-usage <node-id>`, that displays all volumes/snapshots with their storage usage and exclusive usage bytes for a given node. Since it traverses through the filesystem, this is an expensive command, and should be used with caution and infrequently. <br/><br/>This change also removes support for or deprecates capacity usage of single volume: `pxctl volume usage` is no longer supported. |
+| PWX-16246 | px-runc now features the `-cache_blocksize <value>` option, which configures cache blocks size for px-cache. this option supports values of 1MB and above and a power of 2. |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-15130 | OCI-Monitor could have left zombie processes when installing Portworx for the first time.<br/><br/>**User impact:** In most cases these zombies were harmless, but they had the potential to lock up the `yum` package system on CentOS hosts in rare circumstances.<br/><br/>**Resolution:** OCI-Monitor now properly cleans up zombie processes.|
+| PWX-16240 | The `ETCD_PASSWORD` environment variable was shown in plaintext on `px-runc` and the OCI-Monitor's logs. <br/><br/>**User impact:** The ETCD_PASSWORD environment variable was shown in plaintext in the Portworx/Kubernetes logs. <br/><br/>**Resolution:** The ETCD_PASSWORD is no longer shown in plaintext in the logs.|
+| PWX-15806 | KVDB backups are stored under `/var/lib/osd/kvdb_backup` and one of the internal directories of Portworx where storage is mounted. On storageless nodes, KVDB backup files were not getting rotated from the internal directories since there is no storage.<br/><br/>**User Impact**: The backup files could end up filling the root filesystem of the node.<br/><br/>**Resolution**: Only dump the KVDB backup files under `/var/lib/osd/kvdb_backup` which get rotated periodically. |
+| PWX-15705 | Application backups can't work with the newer security model of 2.6.0. <br/><br/>**User impact:** Application backups failed after upgrading to Portworx 2.6.0. <br/><br/>**Resolution:** The auth model now works with the older style of auth annotations. |
+| PWX-16006 | Under certain circumstances, Portworx doesn't apply all Kubernetes node labels to storage pools.<br/><br/>**User impact:** PVCs using replica affinity on those labels are stuck in the pending state<br/><br/>**Resolution:**  Portworx now performs the Kubernetes node update later in the initialization process. |
+| PWX-15961 | If you reconfigured a network device and attempted to restore a cloud backup on a volume from a snapshot, Portworx tried to use the IP of the previous network device in the restore and the cloud backup failed. <br/><br/>**User impact:** Users saw the following error message: "Failed to create backup: Volume attached on unknown () node", and had to manually attach and detach the volume. <br/><br/>**Resolution:** Portworx now updates the network device when they're reconfigured. |
+| PWX-15770 | Portworx sometimes couldn't complete volume export/attach/mount operations for NFS pods before timing-out.<br/><br/>**User impact:** The affected pods failed to deploy. </br><br/>**Resolution:** Portworx no longer retries NFS mount operations in a loop on failure. The timeout for the NFS `unmount` command starts at 2 minutes, and if retried in a loop, an API Mount request can scale up to more than 4 minutes.|
+| PWX-15622 | sharedv4 volume mounts timed-out. <br/><br/>**User Impact:** In a slower network or on overloaded nodes, sharedv4 (NFS) volume mounts can timeout and attempt multiple retries. The affected pod never becomes operational and repeatedly shows the `signal: killed` error. <br/><br/>**Resolution:** sharedv4 volume mount operations now wait 2 minutes before timing-out. You can also specify an option to configure the timeout to larger values if required:<br/> `pxctl cluster options update --sharedv4-mount-timeout-sec <value>` |
+
+
 ## 2.6.0.2
 
 September 25, 2020
