@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.1.1
+
+October 7, 2020
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-16013 | On certain kernel versions, such as variants of AKS ubuntu kernel 4.15.0, and under certain conditions, the filesystem IO on the backing storage pool sometimes hung due to a kernel bug. <br/><br/> **User impact:** Impacted Portworx pods displayed a 'healthy' node as 'unhealthy', causing downtime for affected users. <br/><br/> **Impact:** This fix patches the filesystem kernel module in variants of AKS ubuntu kernel 4.15.0 and reinserts the patched kernel module, fixing the issue for users on this kernel. |
+
 ## 2.6.1 
 
 October 2, 2020
