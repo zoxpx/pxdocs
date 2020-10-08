@@ -35,7 +35,8 @@ export GCP_CLUSTER_ID=production-app-cluster
 export GCP_PROJECT_ID=production-apps-210001
 export GCP_ZONE=us-west1-b
 export LATEST_VERSION=2.6
-export PRODUCT_NAME=PX-Enterprise
+export PRODUCT_NAME="Portworx Enterprise"
+export PRODUCT_INDEX_NAME=PX-Enterprise
 export VERSIONS_BASE_URL=docs.portworx.com
 #Docker builds cannot use uppercase characters in the image name
 export LOWER_CASE_BRANCH=$(echo -n $TRAVIS_BRANCH | awk '{print tolower($0)}')
@@ -45,9 +46,9 @@ export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-$LOWER_CASE_BRANCH:$TRAVI
 export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
 export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
 export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
-export ALGOLIA_INDEX_NAME="${PRODUCT_NAME}-${VERSIONS_TAG}"
+export ALGOLIA_INDEX_NAME="${PRODUCT_INDEX_NAME}-${VERSIONS_TAG}"
 export OTHER_PRODUCT_NAMES_AND_INDICES=PX-Backup=PX-Backup-1-1
-export PRODUCT_NAMES_AND_INDICES="${PRODUCT_NAME}=${PRODUCT_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
+export PRODUCT_NAMES_AND_INDICES="${PRODUCT_NAME}=${PRODUCT_INDEX_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
 if [ "${VERSIONS_BASE_URL}" '==' "docs.portworx.com" ]; then export NGINX_REDIRECTS_FILE=px-enterprise-redirects.conf ; fi
 if [ "${VERSIONS_BASE_URL}" '==' "backup.docs.portworx.com" ]; then export NGINX_REDIRECTS_FILE=px-backup-redirects.conf ; fi
 # build images
