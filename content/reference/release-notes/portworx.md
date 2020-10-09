@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.1.2
+
+October 9, 2020
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-16417 | Portworx would not recognize the multipath devices. <br/><br/>**User impact:** Portworx nodes came up as a storageless node. <br/><br/>**Resolution:** Portworx now properly opens /etc/multipath.conf and recognizes Multipath devices. |
+
 ## 2.6.1.1
 
 October 7, 2020
