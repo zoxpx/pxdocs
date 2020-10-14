@@ -24,5 +24,4 @@ tenant.
 # Prerequisites
 
 * You must be running Portworx version 2.1 or greater on Kubernetes
-* You must have the PX-Security feature enabled
-* You must have CSI enabled
+* You must have Operator version 1.4 or greater

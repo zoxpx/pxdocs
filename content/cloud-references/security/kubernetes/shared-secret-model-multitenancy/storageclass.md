@@ -1,5 +1,5 @@
 ---
-title: "Step 4: Set up the StorageClass"
+title: "Step 3: Set up the StorageClass"
 keywords: storageclass, csi, security, authorization
 weight: 40
 ---
@@ -24,11 +24,11 @@ metadata:
 provisioner: pxd.portworx.com
 parameters:
   repl: "1"
-  csi.storage.k8s.io/provisioner-secret-name: px-k8s-user
+  csi.storage.k8s.io/provisioner-secret-name: px-user-token
   csi.storage.k8s.io/provisioner-secret-namespace: ${pvc.namespace}
-  csi.storage.k8s.io/node-publish-secret-name: px-k8s-user
+  csi.storage.k8s.io/node-publish-secret-name: px-user-token
   csi.storage.k8s.io/node-publish-secret-namespace: ${pvc.namespace}
-  csi.storage.k8s.io/controller-expand-secret-name: px-k8s-user
+  csi.storage.k8s.io/controller-expand-secret-name: px-user-token
   csi.storage.k8s.io/controller-expand-secret-namespace: ${pvc.namespace}
 allowVolumeExpansion: true
 ```

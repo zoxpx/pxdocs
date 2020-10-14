@@ -135,12 +135,19 @@ You can also mix these two methods to form your own hybrid approach.
 
 ### Using hardcoded values
 
-This example secures a storage class by specifying hardcoded values for the token and namespace. Users who create PVCs based on this StorageClass will always have their PVCs use the `px-secret` StorageClass under the `portworx` namespace.
+This example secures a storage class by specifying hardcoded values for the token and namespace. Users who create PVCs based on this StorageClass will always have their PVCs use the `px-user-token` StorageClass under the `portworx` namespace.
 
-1. enter the `kubectl create secret` command to create a token:
+1. Find or create your token secret:
 
+    For operator installs, a user token is automatically created and refreshed under `px-user-token` in your `StorageCluster` namespace.
     ```text
-    kubectl create secret generic px-secret -n portworx --from-literal=auth-token=$token
+    USER_TOKEN=$(kubectl get secrets px-user-token -n portworx -o json | jq -r '.data["auth-token"]' | base64 -d)
+    ```
+
+    For all other configurations, [create your own token secret](/cloud-references/security/kubernetes/shared-secret-model/generating-tokens/):
+    ```text
+    kubectl create secret generic px-user-token \
+      -n portworx --from-literal=auth-token=$USER_TOKEN
     ```
 
 2. Modify the storageClass, adding the following parameters:
@@ -153,9 +160,9 @@ This example secures a storage class by specifying hardcoded values for the toke
     provisioner: pxd.portworx.com
     parameters:
       repl: "1"
-      csi.storage.k8s.io/provisioner-secret-name: px-secret
+      csi.storage.k8s.io/provisioner-secret-name: px-user-token
       csi.storage.k8s.io/provisioner-secret-namespace: portworx
-      csi.storage.k8s.io/node-publish-secret-name: px-secret
+      csi.storage.k8s.io/node-publish-secret-name: px-user-token
       csi.storage.k8s.io/node-publish-secret-namespace: portworx
     ```
 
@@ -186,7 +193,7 @@ This example secures a storage class by hardcoding the token and namespace. User
 2. Make sure your user also creates a secret in their PVC's namespace with the same name as the PVC. For example, a PVC named "px-mysql-pvc" must have an associated secret named "px-mysql-pvc". Enter the following command to create the secret:
 
     ```text
-    kubectl create secret generic px-mysql-pvc -n portworx --from-literal=auth-token=$token
+    kubectl create secret generic px-mysql-pvc -n portworx --from-literal=auth-token=$USER_TOKEN
     ```
 
 <!--
@@ -246,7 +253,7 @@ Given you already have a [CSI PVC and StorageClass](/portworx-install-with-kuber
       driver: pxd.portworx.com
       deletionPolicy: Delete
       parameters:
-        csi.storage.k8s.io/snapshotter-secret-name: px-secret
+        csi.storage.k8s.io/snapshotter-secret-name: px-user-token
         csi.storage.k8s.io/snapshotter-secret-namespace: portworx
       ```
 

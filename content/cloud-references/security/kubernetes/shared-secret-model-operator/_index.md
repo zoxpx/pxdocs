@@ -1,5 +1,5 @@
 ---
-title: Secure your storage with a DaemonSet
+title: Secure your storage with the Operator
 description: Simple security setup using shared secrets and leveraging user authentication observed by Kubernetes
 keywords: portworx, kubernetes, security, jwt, secret, sharedsecret
 weight: 10
@@ -25,4 +25,4 @@ Perform the steps in the following sections to set up PX-Security according to t
 # Prerequisites
 
 * You must be running Portworx version 2.1 or greater on Kubernetes
-* You must have the PX-Security feature enabled
+* You must have Operator version 1.4 or greater
