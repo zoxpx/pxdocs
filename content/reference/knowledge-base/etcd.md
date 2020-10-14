@@ -85,10 +85,10 @@ For a more detailed setup, maintenance and tuning information refer the followin
 
 ### Securing with certificates in Kubernetes
 
-SSL certificates for etcd can be stored as Kubernetes secrets. Three files are required - in this example, the CA certificate is `etcd-ca.crt`, the etcd certificate `etcd.crt` and the etcd key `etcd.key`. These files should be copied to a directory on the Kubernetes master (`etcd-secrets`). Next, create a secret from these files:
+SSL certificates for etcd can be stored as Kubernetes secrets. Three files are required - in this example, the CA certificate is `kvdb-ca.crt`, the etcd certificate `kvdb.crt` and the etcd key `kvdb.key`. These files should be copied to a directory on the Kubernetes master (`kvdb-secrets`). Next, create a secret from these files:
 
 ```text
-kubectl -n kube-system create secret generic px-kvdb-auth --from-file=etcd-secrets/
+kubectl -n kube-system create secret generic px-kvdb-auth --from-file=kvdb-secrets/
 ```
 
 ```output
@@ -109,9 +109,9 @@ Type:  Opaque
 
 Data
 ====
-etcd-ca.crt:      1679 bytes
-etcd.crt:  1680 bytes
-etcd.key:  414  bytes
+kvdb-ca.crt:      1679 bytes
+kvdb.crt:  1680 bytes
+kvdb.key:  414  bytes
 ```
 
 Use the Portworx spec generator in [PX-Central](https://central.portworx.com), selecting "Certificate Auth" under the etcd section, ensuring the filenames match those specified.
