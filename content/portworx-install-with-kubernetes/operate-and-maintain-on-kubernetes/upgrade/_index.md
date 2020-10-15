@@ -35,6 +35,19 @@ If you see any issues, review the [Troubleshooting](/portworx-install-with-kuber
 
 {{% content "shared/upgrade/upgrade-to-2-1-2.md" %}}
 
+### Upgrade Portworx using Helm
+
+If you installed Portworx using Helm, enter the `helm upgrade` command to upgrade Portworx, specifying:
+
+* The name of your release (this example uses `my-release`)
+* The `--set` flag with the `imageVersion` option and the version you want to upgrade to (this example uses {{% currentVersion %}})
+* The `-f` flag with the path to your `values.yaml` file (this example uses `./helm/charts/portworx/values.yaml`)
+* The path to your chart directory (this example uses `./helm/charts/portworx`)
+
+```text
+helm upgrade my-release --set imageVersion={{% currentVersion %}} -f ./helm/charts/portworx/values.yaml  ./helm/charts/portworx
+```
+
 ## Upgrade Stork
 
 1.  On a machine that has kubectl access to your cluster, enter the following commands to download the latest Stork specs:
@@ -97,9 +110,9 @@ To make container images available to nodes that do not have access to the inter
 
 Once you've made the new container images available for your nodes, perform one of the following steps, depending on how you're storing your images:
 
-- [Step a: Upgrade using local registry server](#step-2a-upgrade-using-local-registry-server): You can pre-load your private registry server with the required Portworx images and have Kubernetes and Portworx fetch the images from there rather than reaching out to the internet. 
+- [Step a: Upgrade using local registry server](#step-2a-upgrade-using-local-registry-server): You can pre-load your private registry server with the required Portworx images and have Kubernetes and Portworx fetch the images from there rather than reaching out to the internet.
 <!-- this doesn't make sense, "using images directly ON your nodes?" or "pulling images directly TO your nodes"? -->
-- [Step b: Upgrade using images directly to your nodes](#step-2b-upgrade-using-images-directly-on-your-nodes): You can load the images directly to your nodes and configure Kubernetes and Portworx to upgrade using those images. 
+- [Step b: Upgrade using images directly to your nodes](#step-2b-upgrade-using-images-directly-on-your-nodes): You can load the images directly to your nodes and configure Kubernetes and Portworx to upgrade using those images.
 
 #### Step 2a: Upgrade using local registry server
 
