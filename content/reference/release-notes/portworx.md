@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.1.3
+
+October 14, 2020
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-10434 | When upgrading to the 2.6.x releases on certain platforms where the CPU does not support the SSE4.2 instruction set, Portworx encountered a checksum mismatch on the log file. <br/><br/>**User impact:** The node would go into storageless mode after the upgrade. <br/><br/>**Resolution:** This patch fixes the log replay so that it does the CPU capability check and uses the right checksum type to verify the log checksum. |
+
 ## 2.6.1.2
 
 October 9, 2020
