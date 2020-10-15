@@ -67,7 +67,7 @@ Portworx requires the following Vault credentials to use its APIs
 
 - **Vault Namespace [VAULT_NAMESPACE]**
 
-    This option allows you to set a global vault namespace for the Portworx cluster. All vault requests by PX will use this vault namespace if an override is not provided. 
+    This option allows you to set a global vault namespace for the Portworx cluster. All vault requests by PX will use this vault namespace if an override is not provided.
 
 
 ## Kubernetes users
@@ -109,7 +109,10 @@ data:
 Portworx will look for this secret with name `px-vault` under the `portworx` namespace. While installing Portworx it creates a kubernetes role binding which grants access to reading kubernetes secrets only from the `portworx` namespace.
 
 {{<info>}}
-**NOTE:** If the VAULT_TOKEN provided in the secret above is refreshed, you must manually update this secret.
+**NOTE:**
+
+* If the VAULT_TOKEN provided in the secret above is refreshed, you must manually update this secret.
+* If you installed Portworx using the Operator, then you must create the Kubernetes secret in the same namespace in which you deployed Portworx.
 {{</info>}}
 
 Now that you've configured Vault using the Vault auth method, proceed to [Step 2](#step-2-setup-vault-as-the-secrets-provider-for-portworx).
@@ -171,6 +174,18 @@ vault write auth/kubernetes/role/portworx \
         ttl=<ttl>
 ```
 
+{{<info>}}
+**NOTE:** If you deployed Portworx using the Operator, then you must enter the following command to create a Kubernetes auth role, replacing `<namespace>` with the namespace in which you deployed Portworx:
+
+```text
+vault write auth/kubernetes/role/portworx \
+        bound_service_account_names=portworx \
+        bound_service_account_namespaces=<namespace> \
+        policies=portworx \
+        ttl=<ttl>
+```
+{{</info>}}
+
 ##### Step 1e: Provide Vault credentials to Portworx
 
 Portworx reads the Vault credentials required to authenticate with Vault through a Kubernetes secret. Create a Kubernetes secret with the name `px-vault` in the `portworx` namespace. You can refer to the following example Kubernetes secret spec when creating yours:
@@ -201,6 +216,10 @@ data:
 
 Portworx will look for this secret with name `px-vault` under the `portworx` namespace. While installing Portworx it creates a kubernetes role binding which grants access to reading kubernetes secrets only from the `portworx` namespace.
 
+{{<info>}}
+**NOTE:** If you installed Portworx using the Operator, then you must create the Kubernetes secret in the same namespace in which you deployed Portworx.
+{{</info>}}
+
 ### Step 2: Setup Vault as the secrets provider for Portworx
 
 #### New Installation
@@ -212,6 +231,10 @@ When generating the [Portworx Kubernetes spec file](https://central.portworx.com
 For an existing Portworx cluster follow these steps to configure Vault as the secrets provider
 
 ##### Step 2a: Add Permissions to access kubernetes secrets
+
+{{<info>}}
+**NOTE:** If you deployed Portworx using the Operator, then you can skip this section as the installer already added these permissions.
+{{</info>}}
 
 Portworx needs permissions to access the `px-vault` secret created in Step 1. The following Kubernetes spec grants Portworx access to all the secrets defined under the `portworx` namespace
 
@@ -275,6 +298,10 @@ containers:
 ```
 
 Editing the DaemonSet will restart all the Portworx pods.
+
+{{<info>}}
+**NOTE:** If you installed Portworx using the Operator, then you must edit your `StorageCluster` object, setting the value of the `specs.secretsProvider` field to `vault`.
+{{</info>}}
 
 ## Other users {#other-users}
 
