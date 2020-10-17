@@ -15,7 +15,7 @@ This guide shows you how you can easily deploy Portworx on the [**packet.net** h
 
 Other supported bare metal cloud providers are
 
-* Scaleway Use this image: https://www.scaleway.com/imagehub/docker/
+* Scaleway (use this image: https://github.com/scaleway-community/scaleway-docker)
 * Digital Ocean
 * Rackspace
 
