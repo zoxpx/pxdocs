@@ -1,123 +1,40 @@
 ---
 title: "Enable security in Portworx"
 keywords: authorization, portworx, security, rbac, jwt
+hidden: true
 ---
 
 
-This document guides you through editing the Portworx manifest YAML file as shown in
-the Enabling authorization section [example](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/enable/#example).
-
-This procedure instructs Kubernetes to create and provide Portworx with
-environment variables whose values are retrieved securely from the Secret object
-created in the Generate shared secrets section.
+This document guides you through enabling Portworx Security in your cluster by adding a single flag to your `StorageCluster` object.
 
 ## Prerequisites
 
-* If you do not already have a manifest, visit [PX-Central](https://central.portworx.com)
-to generate and download a deployment YAML for your configuration.
-* You must have a value for the [token issuer](/concepts/authorization/install/#configuration). The issuer is a string value which must identify the token generator. This value will be used by Portworx to identify the token generator. In the examples below the issuer is set to `portworx.com`, but you are encouraged to change it.
+* You must have Portworx Operator 1.4 or greater 
 
-## Using Portworx DaemonSet
+## Overview
 
-If you are deploying Portworx without the Portworx operator, then perform the following steps to enable security in Portworx:
+The Operator includes first-class support for Portworx Security in the `StorageCluster` spec. This means that the operator will auto-generate the following for you if security is enabled:
 
-<!-- the way this was written has me questioning whether I'm supposed to have done something already. Do users 'edit the Portworx YAML manifest' as part of these steps, or somewhere before them? -->
+* Shared Secret stored under the secret `px-shared-secret`
+* Admin token stored under the secret `px-admin-token` 
+* User token stored under the secret `px-user-token`
 
-1. Add issuer to the `portworx` DaemonSet under `portworx/oci-monitor` container args:
+### Enabling Security in your cluster
 
-    ```
-       ... "-jwt_issuer", "portworx.com"]
-    ```
-
-2. Add references to the shared keys as environment variables to
-`portworx/oci-monitor`:
+1. Enable security under `spec.security` of your StorageCluster:
 
     ```text
-        - name: "PORTWORX_AUTH_JWT_SHAREDSECRET"
-          valueFrom:
-            secretKeyRef:
-              name: pxkeys
-              key: shared-secret
-        - name: "PORTWORX_AUTH_SYSTEM_KEY"
-          valueFrom:
-            secretKeyRef:
-              name: pxkeys
-              key: system-secret
-        - name: "PORTWORX_AUTH_STORK_KEY"
-          valueFrom:
-            secretKeyRef:
-              name: pxkeys
-              key: stork-secret
+    apiVersion: core.libopenstorage.org/v1
+    kind: StorageCluster
+    metadata:
+      name: portworx
+      namespace: kube-system
+    spec:
+      image: portworx/oci-monitor:2.6.0.1
+      security:
+        enabled: true
     ```
 
-3. Add references to the shared key to `openstorage/stork`:
+2. You can now apply the StorageCluster spec and wait until Portworx is ready. 
 
-    ```text
-        - name: "PX_SHARED_SECRET"
-          valueFrom:
-            secretKeyRef:
-              name: pxkeys
-              key: stork-secret
-    ```
-
-4. You can now apply the manifest and wait until Portworx is ready.
-
-## Using Portworx Operator
-
-If you are deploying Portworx using the Portworx operator, then perform the following steps to enable security:
-
-1. Add issuer and references to the shared keys as environment variables under `spec.env` of your StorageCluster:
-
-    ```text
-       apiVersion: core.libopenstorage.org/v1alpha1
-       kind: StorageCluster
-       metadata:
-         name: px-cluster
-         namespace: kube-system
-       spec:
-         ...
-         env:
-         - name: "PORTWORX_AUTH_JWT_ISSUER"
-           value: "portworx.com"
-         - name: "PORTWORX_AUTH_JWT_SHAREDSECRET"
-           valueFrom:
-             secretKeyRef:
-               name: pxkeys
-               key: shared-secret
-         - name: "PORTWORX_AUTH_SYSTEM_KEY"
-           valueFrom:
-             secretKeyRef:
-               name: pxkeys
-               key: system-secret
-         - name: "PORTWORX_AUTH_STORK_KEY"
-           valueFrom:
-             secretKeyRef:
-               name: pxkeys
-               key: stork-secret
-    ```
-
-2. Add references to the shared key under `spec.stork.env` section of your StorageCluster:
-
-    ```text
-       apiVersion: core.libopenstorage.org/v1alpha1
-       kind: StorageCluster
-       metadata:
-         name: px-cluster
-         namespace: kube-system
-       spec:
-         ...
-         stork:
-           enabled: true
-           env:
-           - name: "PX_SHARED_SECRET"
-             valueFrom:
-               secretKeyRef:
-                 name: pxkeys
-                 key: stork-secret
-    ```
-
-3. You can now apply the `StorageCluster` spec and wait until Portworx is ready.
-
-<!-- are there any instructions for this? -->
-
-Once you've enabled security in Portworx, continue to the **Generate tokens** section.
+Once you've enabled security in Portworx, continue to the next section.

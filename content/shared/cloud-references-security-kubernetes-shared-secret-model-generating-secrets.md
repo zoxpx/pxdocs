@@ -1,6 +1,7 @@
 ---
 title: "Generate shared secrets"
 keywords: portworx, sharedsecret, generate, secret
+hidden: true
 ---
 
 This guide uses a model based on [shared secrets](/concepts/authorization/overview/#security-tokens) as the method to create and verify tokens. The goal is to store the shared secrets in a secure Kubernetes Secret object to then provide to Portworx.

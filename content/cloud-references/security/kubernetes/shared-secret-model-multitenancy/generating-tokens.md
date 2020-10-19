@@ -1,5 +1,5 @@
 ---
-title: "Step 3: Generate tokens"
+title: "Step 2: Generate multitenant tokens"
 keywords: multitenancy, generate, token, jwt, pxctl, authorization, security
 weight: 30
 ---
@@ -23,7 +23,7 @@ environment variable `$PORTWORX_AUTH_SHARED_SECRET`.
 
     ```text
     PORTWORX_AUTH_SHARED_SECRET=$(kubectl -n kube-system get \
-          secret pxkeys -o json \
+          secret px-shared-secret -o json \
         | jq -r '.data."shared-secret"' \
         | base64 -d)
     ```
@@ -106,11 +106,11 @@ You can find more information on the rules of each of the value on the
         --token-duration=1y)
     ```
 
-3. Save the tenant Kubernetes token in a secret called `<tenant namespace>/px-k8s-user`:
+3. Save the tenant Kubernetes token in a secret called `<tenant namespace>/px-user-token`:
 
     ```text
     kubectl -n <tenant namespace> create secret \
-      generic px-k8s-user --from-literal=auth-token=$TENANT_TOKEN
+      generic px-user-token --from-literal=auth-token=$TENANT_TOKEN
     ```
 
 Kubernetes storage classes can now be set up to use this secret to

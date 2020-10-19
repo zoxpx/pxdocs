@@ -5,4 +5,4 @@ weight: 20
 series: ra-shared-secrets-model
 ---
 
-{{% content "shared/cloud-references-security-kubernetes-shared-secret-model-enabling-security.md" %}}
+{{% content "shared/cloud-references-security-kubernetes-shared-secret-model-enabling-security-daemonset.md" %}}
