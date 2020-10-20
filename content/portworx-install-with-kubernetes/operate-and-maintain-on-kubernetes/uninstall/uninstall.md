@@ -1,14 +1,14 @@
 ---
-title: Uninstall from Kubernetes cluster
-weight: 2
+title: Uninstall Portworx from a Kubernetes cluster using the DaemonSet
+weight: 3
 keywords: Uninstall, air gapped, Kubernetes, k8s
 meta-description: Steps to uninstall Portworx from a Kubernetes cluster
 description: Steps to uninstall Portworx from the entire Kubernetes cluster
 series: k8s-uninstall
-linkTitle: Uninstall
+linkTitle: Uninstall using the DaemonSet
 ---
 
-When uninstalling Portworx from your cluster, you have 2 choices:
+If you installed Portworx using the DaemonSet method, you can follow the steps in this article to uninstall it from your cluster. When uninstalling, you have 2 choices:
 
 1. Stop Portworx and remove the Kubernetes specs and completely wipe the data. If this is what you want, continue to [Delete/Wipe Portworx](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall/#delete-wipe-portworx-cluster-configuration).
 2. Stop Portworx and remove the Kubernetes specs without wiping the data. If this is what you want, continue to [Uninstall](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall/#uninstall).

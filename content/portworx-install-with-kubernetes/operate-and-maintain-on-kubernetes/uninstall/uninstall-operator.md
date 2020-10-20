@@ -1,10 +1,13 @@
 ---
-title: Uninstall Portworx using the Operator
-keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
-description: Learn how to uninstall Portworx on Openshift using the Operator.
-weight: 5
+title: Uninstall Portworx from a Kubernetes cluster using the Operator
+linkTitle: Uninstall using the Operator
+keywords: portworx, container, kubernetes, storage, k8s, uninstall, wipe, cleanup
+description: Learn how to uninstall Portworx using the Operator.
+weight: 2
 aliases:
   - /portworx-install-with-kubernetes/on-premise/openshift/operator/uninstall/
+  - /portworx-install-with-kubernetes/openshift/operator/uninstall
+series: k8s-uninstall
 ---
 
 If you're using the Portworx Operator, you can uninstall Portworx by adding a delete strategy to your `StorageCluster` object, then deleting it. When uninstalling, you may choose to either keep the the data on your drives, or wipe them completely.
@@ -15,10 +18,10 @@ If you're using the Portworx Operator, you can uninstall Portworx by adding a de
 
 ## Uninstall Portworx
 
-1. Enter the `oc edit` command to modify your storage cluster:
+1. Enter the `kubectl edit` command to modify your storage cluster:
 
       ```text
-      oc edit -n kube-system <storagecluster_name>
+      kubectl edit -n kube-system <storagecluster_name>
       ```
 
 2. Modify your `StorageCluster` object, adding the `deleteStrategy` field with either the `Uninstall` or `UninstallAndWipe` type:
@@ -26,7 +29,7 @@ If you're using the Portworx Operator, you can uninstall Portworx by adding a de
     * Uninstall Portworx only:
 
         ```text
-        apiVersion: core.libopenstorage.org/v1alpha1
+        apiVersion: core.libopenstorage.org/v1
         kind: StorageCluster
         metadata:
           name: portworx
@@ -42,7 +45,7 @@ If you're using the Portworx Operator, you can uninstall Portworx by adding a de
         {{</info>}}
 
         ```text
-        apiVersion: core.libopenstorage.org/v1alpha1
+        apiVersion: core.libopenstorage.org/v1
         kind: StorageCluster
         metadata:
           name: portworx
@@ -52,8 +55,8 @@ If you're using the Portworx Operator, you can uninstall Portworx by adding a de
             type: UninstallAndWipe
         ```
 
-3. Enter the `oc delete` command, specifying the name of your `StorageCluster` object:
+3. Enter the `kubectl delete` command, specifying the name of your `StorageCluster` object:
 
 ```text
-oc delete <your-storagecluster>
+kubectl delete <your-storagecluster>
 ```

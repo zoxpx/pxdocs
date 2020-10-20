@@ -1,6 +1,6 @@
 ---
 title: "Wipe Portworx from an air-gapped cluster"
-weight: 3
+weight: 4
 keywords: Uninstall, air gapped, wiper script, Kubernetes, k8s
 meta-description: Steps to wipe Portworx in an airgapped cluster
 description: Steps to wipe Portworx in an airgapped cluster
