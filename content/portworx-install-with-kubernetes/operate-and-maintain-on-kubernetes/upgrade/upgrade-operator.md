@@ -1,10 +1,12 @@
 ---
-title: Upgrade Portworx using the Operator
-keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
-description: Find out how to upgrade Portworx on OpenShift using Operator.
-weight: 3
+title: Upgrade Portworx on Kubernetes using the Operator
+linkTitle: Upgrade using the Operator
+keywords: portworx, container, kubernetes, storage, k8s, upgrade
+description: Find out how to upgrade Portworx using the Operator.
+weight: 2
 aliases:
   - /portworx-install-with-kubernetes/on-premise/openshift/operator/upgrade/
+  - /portworx-install-with-kubernetes/openshift/operator/upgrade
 ---
 
 {{<info>}}
@@ -19,16 +21,16 @@ If you're using the Portworx Operator, you can upgrade or change your Portworx v
 
 ## Upgrade Portworx
 
-1. Enter the `oc edit` command to modify your storage cluster:
+1. Enter the `kubectl edit` command to modify your storage cluster:
 
       ```text
-      oc edit -n kube-system <storagecluster_name>
+      kubectl edit -n kube-system <storagecluster_name>
       ```
 
 2. Change the `spec.image` value to the version you want to update Portworx to:
 
       ```text
-      apiVersion: core.libopenstorage.org/v1alpha1
+      apiVersion: core.libopenstorage.org/v1
       kind: StorageCluster
       metadata:
         name: portworx
@@ -60,7 +62,7 @@ To override the operator selected Stork image, edit the `StorageCluster` object 
 modify the `spec.stork.image` field, entering your desired Stork version
 
 ```text
-apiVersion: core.libopenstorage.org/v1alpha1
+apiVersion: core.libopenstorage.org/v1
 kind: StorageCluster
 metadata:
   name: portworx
@@ -77,7 +79,7 @@ To override the operator selected Autopilot image, edit the `StorageCluster` obj
 modify the `spec.autopilot.image` field, entering your desired Autopilot version
 
 ```text
-apiVersion: core.libopenstorage.org/v1alpha1
+apiVersion: core.libopenstorage.org/v1
 kind: StorageCluster
 metadata:
   name: portworx
@@ -94,7 +96,7 @@ To override the operator selected Lighthouse image, edit the `StorageCluster` ob
 modify the `spec.userInterface.image` field, entering your desired Lighthouse version
 
 ```text
-apiVersion: core.libopenstorage.org/v1alpha1
+apiVersion: core.libopenstorage.org/v1
 kind: StorageCluster
 metadata:
   name: portworx
