@@ -2,7 +2,7 @@
 title: Create proxy volume PVCs
 weight: 4
 keywords: create proxy volumes, PVC, kubernetes, k8s
-description: Proxy an external data source onto a Portworx volume. 
+description: Proxy an external data source onto a Portworx volume.
 series: k8s-vol
 display: hidden
 ---
@@ -12,6 +12,10 @@ display: hidden
 {{</info>}}
 
 Portworx proxy volumes proxy an external data source onto a Portworx volume. The actual data for these volumes resides on the external data source and does not consume any storage from the Portworx storage pools.
+
+{{<info>}}
+**NOTE:** Portworx does not support this feature for Windows NFS servers.
+{{</info>}}
 
 You can use proxy volumes to proxy an external NFS share onto your volumes. If you have an NFS share residing outside of a Kubernetes cluster and you wish to access it within an application pod, you can create a Portworx proxy volume that points to this external NFS share. Portworx acts as a medium and makes the external NFS data available to the pods running in Kubernetes.
 
@@ -23,11 +27,11 @@ You can access a full NFS share in Portworx as a proxy volume. Application using
 
 1. Create a storage class spec for proxy volumes, specifying your own values for the following:
 
-  * **parameters.proxy_endpoint:** With the endpoint of the external NFS share Portworx is reflecting from. 
+  * **parameters.proxy_endpoint:** With the endpoint of the external NFS share Portworx is reflecting from.
     {{<info>}}
 **NOTE:** The <!-- optional? --> `nfs:` prefix instructs Portworx to use the NFS protocol for reflecting an external datasource.
     {{</info>}}
-  * **parameters.proxy_nfs_exportpath:** With the export path on the NFS server. 
+  * **parameters.proxy_nfs_exportpath:** With the export path on the NFS server.
 
     ```text
     kind: StorageClass
@@ -70,7 +74,7 @@ You can access a full NFS share in Portworx as a proxy volume. Application using
 
 4. Apply the spec:
 
-    ```text          
+    ```text
     kubectl create -f <pvc-name>.yaml
     ```
 
@@ -107,7 +111,7 @@ You can access a full NFS share in Portworx as a proxy volume. Application using
 
 5. Apply the spec:
 
-    ```text 
+    ```text
     kubectl create -f <pod-name>.yaml
     ```
 
@@ -117,11 +121,11 @@ You can associate a sub-path of an NFS share with Portworx as a proxy volume. Un
 
 1. Create a storage class spec for proxy volumes, specifying your own values for the following:
 
-  * **parameters.proxy_endpoint:** With the endpoint of the external NFS share Portworx is reflecting from. 
+  * **parameters.proxy_endpoint:** With the endpoint of the external NFS share Portworx is reflecting from.
     {{<info>}}
 **NOTE:** The <!-- optional? --> `nfs:` prefix instructs Portworx to use the NFS protocol for reflecting an external datasource.
     {{</info>}}
-  * **parameters.proxy_endpoint:** With the export path on the NFS server. 
+  * **parameters.proxy_endpoint:** With the export path on the NFS server.
 
     ```text
     kind: StorageClass
@@ -172,7 +176,7 @@ You can associate a sub-path of an NFS share with Portworx as a proxy volume. Un
     {{<info>}}
 **NOTE:** This PVC can only access the `<sub-path>` directory and its contents.
     {{</info>}}
-          
+
 4. Apply the spec:
 
     ```text
