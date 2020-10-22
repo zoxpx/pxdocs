@@ -14,7 +14,8 @@ Autopilot is a rule-based engine that responds to changes from a monitoring sour
 With Autopilot, your cluster can react dynamically without your intervention to events such as:
 
 * Resizing PVCs when it is running out of capacity
-* Scaling Portworx storage pools to accomodate increasing usage
+* Scaling Portworx storage pools to accommodate increasing usage
+* Rebalancing volumes across Portworx storage pools when they come unbalanced
 
 The following sections will cover everything from installation to end-to-end examples.
 

@@ -1,5 +1,5 @@
 ---
-title: "Step 2: Enable security in Portworx"
+title: "Step 1: Enable security in Portworx"
 keywords: authorization, portworx, security, rbac, jwt
 weight: 20
 ---

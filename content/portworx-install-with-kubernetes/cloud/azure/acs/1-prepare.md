@@ -1,9 +1,11 @@
 ---
-title: 1. Prepare Your ACS Platform
+title: Prepare Your ACS Platform
 keywords: Install, on cloud, ACS, Azure Container Service, Microsoft, Kubernetes, k8s
 description: Learn about preparing Portworx on Kubernetes with ACS.
-weight: 1
+weight: 2
 ---
+
+<!-- We should delete this entire section and link to azure documentation for setting this up. It should be a prerequisite for deploying portworx. -->
 
 ### Install the Azure Container Service Engine
 

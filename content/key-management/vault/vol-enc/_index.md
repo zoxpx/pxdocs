@@ -46,6 +46,18 @@ You can use one of the following methods to encrypt Portworx volumes with Google
     Encrypted Shared volume successfully created: 77957787758406722
     ```
 
+    If you are using Vault Namespaces, and your secret key `key1` resides in a namespace called `ns1` then use the following command to create
+    an encrypted volume
+
+
+    ```text
+    pxctl volume create --secure --secret_key key1 --secret_options=vault-namespace=ns1 enc_vol
+    ```
+
+    ```output
+    Encrypted volume successfully created: 374663852714325215
+    ```
+
     **Docker users:**
 
     Use the following command to create an encrypted volume named `enc_vol`:
@@ -111,12 +123,13 @@ You can use one of the following methods to encrypt Portworx volumes with Google
 
 ## Encrypt volumes using a cluster-wide secret
 
-Set the default cluster-wide secret, and specify the secret name as `default`. Portworx will use the cluster-wide secret as a passphrase to encrypt your volume.
+A cluster wide secret key is a common key that can be used to encrypt all your volumes. This common key needs to be pre-created in Vault.
+Portworx will use this cluster-wide secret as a passphrase to encrypt your volume.
 
-1. Set the cluster-wide secret key. Enter the following `pxctl secrets set-cluster-key` command specifying the `--secret` parameter with your secret passphrase (this example uses `mysecretpassphrase`):
+1. Set the cluster-wide secret key. Enter the following `pxctl secrets set-cluster-key` command specifying the `--secret` parameter with the secret name you created in Vault (this example uses `mysecret`):
 
     ```text
-    pxctl secrets set-cluster-key --secret mysecretpassphrase
+    pxctl secrets set-cluster-key --secret mysecret
     ```
 
     ```output
@@ -126,7 +139,12 @@ Set the default cluster-wide secret, and specify the secret name as `default`. P
 **WARNING:** You must set the cluster-wide secret only once. If you overwrite the cluster-wide secret, the volumes encrypted with the old secret will become unusable.
     {{</info>}}
 
-    If you've specified your cluster wide secret key in the `config.json` file, the `pxctl secrets set-cluster-key` command will overwrite it. Even if you restart your cluster, Portworx will use the key you passed as an argument to the `pxctl secrets set-cluster-key` command.
+    
+    If you are using Vault Namespaces use the following command to set the cluster-wide secret key in a specific vault namespace (this example uses `ns1` as the vault namespace)
+
+    ```text
+    pxctl secrets set-cluster-key --secret_options=vault-namespace=ns1 --secret mysecret
+    ```
 
 2. Create a new encrypted volume. Enter the `pxctl volume create` command, specifying the following arguments:
   * `--secure`

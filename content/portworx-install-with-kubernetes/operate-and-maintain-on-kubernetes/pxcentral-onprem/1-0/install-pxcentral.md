@@ -24,7 +24,7 @@ For internet-connected clusters, the following ports must be open:
 | Port | Component | Purpose | Incoming/Outgoing |
 | :---: |:---:|:---:|:---:|
 | 31234 | PX-Central | Access from outside | Incoming |
-| 31241 | PX-Central-Keycloak | Access user auth token | Incoming | 
+| 31241 | PX-Central-Keycloak | Access user auth token | Incoming |
 | 7070 | License server | License validation | Outgoing |
 
 {{<info>}}
@@ -96,7 +96,7 @@ Install PX-Central by downloading and running a script which deploys both Portwo
     curl -o install.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.1/install.sh' && chmod +x install.sh
     ```
 
-2. Run the script with any of [the options](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/install-script-reference/) required to configure PX-Central according to your needs; note that the `--license-password` option is required:
+2. Run the script with any of [the options](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/1-0-3/install-script-reference/) required to configure PX-Central according to your needs; note that the `--license-password` option is required:
 
     * The following example deploys PX-Central without OIDC:
 

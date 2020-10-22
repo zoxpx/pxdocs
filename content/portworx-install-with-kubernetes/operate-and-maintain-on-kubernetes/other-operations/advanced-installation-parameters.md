@@ -12,7 +12,7 @@ Portworx supports two RAID level configurations for local storage: RAID 0, and R
 
 Follow these steps to specify the RAID level Portworx should use at installation.
 
-1. Use the steps from the [Generate the specs](/portworx-install-with-kubernetes/on-premise/other/#generate-the-specs) section to generate a Kubernetes manifest.
+1. Use the steps from the [Generate the specs](/portworx-install-with-kubernetes/on-premise/other/daemonset/#generate-the-specs) section to generate a Kubernetes manifest.
 
 2. Download the manifest and use the `args` section of the Portworx `DaemonSet` to specify the RAID level.
 
@@ -36,4 +36,4 @@ Follow these steps to specify the RAID level Portworx should use at installation
       "-x", "kubernetes"]
     ```
 
-3. Continue with the steps from the [Apply the specs](/portworx-install-with-kubernetes/on-premise/other/#apply-the-specs) section.
+3. Continue with the steps from the [Apply the specs](/portworx-install-with-kubernetes/on-premise/other/daemonset/#apply-the-specs) section.

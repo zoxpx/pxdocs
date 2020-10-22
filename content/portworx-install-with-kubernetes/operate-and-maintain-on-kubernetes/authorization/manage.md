@@ -7,9 +7,7 @@ series: k8s-op-maintain-auth
 ---
 
 ## Creating volumes
-Portwox authorization provides a method of protection for creating volumes
-through Kubernetes. Users must provide a token when requesting volumes. These
-tokens must be saved in a Secret, normally in the same namespace as the PVC.
+Portwox authorization provides a method of protection for creating volumes through Kubernetes. Users must provide a token when requesting volumes in order to create a private volume. These tokens must be saved in a Secret, normally in the same namespace as the PVC.
 
 The key in the Secret which holds the token must be named `auth-token`.
 
@@ -22,33 +20,41 @@ secret:
 | `openstorage.io/auth-secret-name` | Name of the secret which has the token |
 | `openstorage.io/auth-secret-namespace` | Optional key which contains the namespace of the secret reference by `auth-secret-name`. If omitted, the namespace of the PVC will be used as default |
 
-Here is an example:
+## Create a Secure PVC
 
-* Create a secret with the token:
+1. Find or create your token secret:
 
-```text
-kubectl create secret generic px-secret \
-  -n default --from-literal=auth-token=ey..hs
-```
+    For operator installs, a user token is automatically created and refreshed under `px-user-token` in your `StorageCluster` namespace.
+    ```text
+    USER_TOKEN=$(kubectl get secrets px-user-token -n kube-system -o json | jq -r '.data["auth-token"]' | base64 -d)
+    ```
 
-* Create a PVC request for a 2Gi volume with the appropriate authorization:
+    For all other configurations, [create your own token secret](/cloud-references/security/kubernetes/shared-secret-model/generating-tokens/):
+    ```text
+    kubectl create secret generic px-user-token \
+      -n kube-system --from-literal=auth-token=$USER_TOKEN
+    ```
 
-```text
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: pvc-auth
-  annotations:
-    volume.beta.kubernetes.io/storage-class: portworx-sc
-    openstorage.io/auth-secret-name: px-secret
-    openstorage.io/auth-secret-namespace: default
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
-```
+2. Create a PVC request, specifying your volume size, accessModes, and authorizations:
+
+    ```text
+    kind: PersistentVolumeClaim
+    apiVersion: v1
+    metadata:
+      name: pvc-auth
+      annotations:
+        volume.beta.kubernetes.io/storage-class: portworx-sc
+        openstorage.io/auth-secret-name: px-user-token
+        openstorage.io/auth-secret-namespace: default
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 2Gi
+    ```
+
+For creation of secure CSI volumes, see [Securing your CSI volumes](/portworx-install-with-kubernetes/storage-operations/csi/#secure-your-volumes).
 
 ## Stork
 When using CRDs consumed by Stork, you must use the same authorization model
@@ -60,7 +66,7 @@ kind: VolumeSnapshot
 metadata:
   name: mysql-snap1
   annotations:
-    openstorage.io/auth-secret-name: px-secret
+    openstorage.io/auth-secret-name: px-user-token
     openstorage.io/auth-secret-namespace: default
 spec:
   persistentVolumeClaimName: mysql-data

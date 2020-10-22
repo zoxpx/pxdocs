@@ -220,6 +220,47 @@ Note: Replace `<bucket-name>` with name of your user-provided bucket.
 pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com my-s3-cred
 ```
 
+##### Configure a cluster-wide proxy
+
+You can set up a cluster-wide proxy for Portworx to use when uploading cloud snaps to an S3 bucket. Portworx uses this proxy setting in conjunction with the `--use-proxy` flag on cloudsnap credentials to send backup data through the proxy. Perform the steps in this section to configure a cluster-wide proxy and create credentials that use it.
+
+{{<info>}}
+**NOTE:** This proxy is currently used only by cloudsnaps, the rest of the Portworx network traffic does not use this proxy.
+{{</info>}}
+
+1. Update your Portworx cluster-wide options by entering the `pxctl cluster options update` command with the `--px-http-proxy` flag and the URL of your proxy:
+
+    ```text
+    pxctl cluster options update --px-http-proxy http://192.0.2.0:9999
+    ```
+
+2. Create credentials for your cloudsnap with or without a user-specified bucket, specifying the `--use-proxy` flag:
+
+    * With a user-specified bucket:
+
+    ```text
+    pxctl credentials create --use-proxy \
+    --provider s3  \
+    --s3-access-key <AccessKey> \
+    --s3-secret-key <secretKey> \
+    --s3-region us-east-1 \
+    --s3-endpoint s3.amazonaws.com \
+    --bucket bucket-id \
+    credentialName
+    ```
+
+    * Without a user-specified bucket:
+
+    ```text
+    pxctl credentials create --use-proxy \
+    --provider s3 \
+    --s3-access-key <AccessKey> \
+    --s3-secret-key <secretKey> \
+    --s3-region us-east-1 \
+    --s3-endpoint s3.amazonaws.com \
+    credentialName
+    ```
+
 #### Google Cloud
 
 1. Make sure the user or service account used by Portworx has the following roles:
@@ -291,17 +332,36 @@ pxctl cloudsnap backup --help
 ```
 
 ```output
-NAME:
-   pxctl cloudsnap backup - Backup a snapshot to cloud
+Backup a snapshot to cloud
 
-USAGE:
-   pxctl cloudsnap backup [command options] [arguments...]
+Usage:
+  pxctl cloudsnap backup [flags]
 
-OPTIONS:
-   --volume value, -v value       source volume
-   --full, -f                     force a full backup
-   --cred-id value, --cr value    Cloud credentials ID to be used for the backup
+Aliases:
+  backup, b
 
+Examples:
+/opt/pwx/bin/pxctl cloudsnap backup [flags] volName
+
+Flags:
+      --cred-id string   Cloud credentials ID to be used for the backup
+  -d, --delete-local     Deletes local snap created for backup after backup is done, also forces next backup to be full
+  -i, --frequency uint   Maximum number of incremental cloudsnaps after which full is forced, default 7
+  -f, --full             Force a full backup
+  -h, --help             help for backup
+      --label pairs      list of comma-separated name=value pairs
+      
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 As an example, to back up a volume named `volume1`, you would use something like:
@@ -660,8 +720,10 @@ If the restore command fails, it shows the reason why it failed.
 Note that the restored volume will not be attached or mounted automatically.
 
 {{<info>}}
-{{% content "shared/reference-CLI-optimized-restores-definition.md" %}}
-For more details about optimized restores, visit the [Enabling optimized restores](/reference/cli/cluster/#enabling-optimized-restores) section.
+**NOTE:**
+
+* As long as the backup was taken from a Portworx cluster of version 2.0 or greater, Portworx restores cloudsnaps with the same `repl` value of the volume the backup was taken from.
+* With {{< pxEnterprise >}} 2.1.0, users can choose to do optimized restores.  Optimized restores create a snapshot of every successful restore and use that snapshot for the next incremental restore of the same volume. For more details about optimized restores, visit the [Enabling optimized restores](/reference/cli/cluster/#enabling-optimized-restores) section.
 {{</info>}}
 
 

@@ -1,7 +1,7 @@
 ---
 title: "Configure role-based access control for Stork"
 linkTitle: "Configure RBAC for Stork"
-keywords: cloud, backup, restore, snapshot, DR, migration, kubemotion, stork, rbac, role, clusterrole
+keywords: cloud, backup, restore, snapshot, DR, migration, stork, rbac, role, clusterrole
 description: Learn how to configure role-based access control to allow your users to perform Stork operations.
 noicon: true
 weight: 11

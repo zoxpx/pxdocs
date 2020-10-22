@@ -14,7 +14,7 @@ weight: 3
 |---------------------------	|---------------------------------------------------------------------------------------------------------------------------------------------------------------------	|-----------	|------------	|
 | **selector**              	| Selects the objects affected by this rule using a matchLabels label selector. [Syntax](#selector).                                                                  	| no        	| empty      	|
 | **namespaceSelector**     	| Selects the namespaces affected by this rule using a matchLabels label selector. [Syntax](#namespaceselector).                                                      	| yes       	| all        	|
-| **conditions**            	| Defines the metrics that need to be for the rule's actions to trigger. All conditions are AND'ed. [Syntax](#conditions).                                            	| no        	| empty      	|
+| [**conditions**](#conditions) | Defines the metrics that need to be for the rule's actions to trigger. All conditions are AND'ed. [Syntax](#conditions).                                            	| no        	| empty      	|
 | **actions**               	| Defines what action to take when the conditions are met. [Syntax](#actions). See [Supported Autopilot actions](#supported-autopilot-actions) for all actions that you can specify here. 	| no        	| empty      	|
 | **pollInterval**          	| Defines the interval in seconds at which the conditions for the rule are queried from the metrics provider.                                                         	| yes       	| 10 seconds 	|
 | **actionsCoolDownPeriod** 	| Defines the duration in seconds for which autopilot will not re-trigger any actions once they have been executed.                                                   	| yes       	| 5 minutes  	|
@@ -43,15 +43,24 @@ namespaceSelector:
 
 Defines the metrics that need to be for the rule's actions to trigger.
 
+Conditions compare the `key` field with the `values` field using the `operator` field. Condition keys can contain logic and use monitoring values.
+
 ```text
 conditions:
   - key: "<condition-formula>"
     operator: <logical-operator>
     values:
     - "<comparator>"
-```
+``` 
 
-Conditions compare the `key` field with the `values` field using the `operator` field. Condition keys can contain logic and use monitoring values.
+It follows the below schema.
+
+| Field                     	| Description                                                                                                                                                                                           	| Optional? 	| Default    	|
+|---------------------------	|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------	|------------	|
+| **key**                    	| This is the metrics query that would be sent to the monitoring provider (e.g prometheus).                                                                                                             	| no        	| empty      	|
+| **operator**                 	| This is the logical operator to use to compare the results of the query in key above to the values. Supported operators are: <ul><li>`In`<li>`NotIn`<li>`Lt`<li>`Gt`<li>`LtEq`<li>`GtEq`<li>`InRange`<li>`NotInRange`</ul>  | no        	| empty      	|
+| **values**                  	| This is the value or list of values against which the key and operator are compared. <ul><li>`In`, `NotIn` need a list of values<li> `Gt`, `Lt`, `GtEq`, `LtEq` need a single numerical value.<li>`InRange`, `NotInRange` need exactly 2 numerical values</ul>                                                                                                           	|     no    	| empty      	|
+
 
 {{<info>}}Multiple conditions are combined using a logical AND.{{</info>}}
 
@@ -129,6 +138,19 @@ Expand the pool by 100Gi by resizing disks
       scalesize: "100Gi"
       scaletype: "resize-disk"
 ```
+
+#### Use cases
+
+* [Automatically expand storage pools by usage](/portworx-install-with-kubernetes/autopilot/use-cases/autogrow-pool/)
+* [Expand all storage pools](/portworx-install-with-kubernetes/autopilot/use-cases/autogrow-all-pools/)
+
+### openstorage.io.action.storagepool/rebalance
+
+This action performs a rebalance operation on Portworx Storage Pools.
+
+#### Use cases
+
+ * [Automatically rebalance storage pools based on provisioned and used space](/portworx-install-with-kubernetes/autopilot/use-cases/rebalance-pool/)
 
 ## Autopilot Events
 

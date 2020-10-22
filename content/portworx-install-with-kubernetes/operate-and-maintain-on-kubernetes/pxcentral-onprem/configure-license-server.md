@@ -1,7 +1,7 @@
 ---
 title: Add licenses to your clusters using PX-Central on-prem
 linkTitle: Add licenses using PX-Central on-prem
-weight: 4
+weight: 2
 keywords: PX-Central, On-prem, license, GUI, k8s
 description: Learn how to add licenses to your clusters using PX-Central On-prem.
 noicon: true
@@ -17,9 +17,20 @@ Your PX-Central on-prem deployment includes a highly-available license server an
 
 ## Add a license to PX-Central
 
-1. From the PX-Central landing page, select the **License** icon to navigate to the **License Server List** page.
-2. Select the **Licenses** link on the **Main** license server to go to the license management page.
-3. Select the **Add License** button and paste your license key into the text field.
-4. Select the **Add License** button to add your license.
+1. From the PX-Central landing page, select the **License** icon to navigate to the **License Entitlements** page:
+
+    ![Select the license icon](/img/select-the-license-icon.png)
+
+2. <!-- On the tile for your cluster, --> Select the **Licenses** link to go to the license management page:
+
+    ![Select the licenses link](/img/select-the-licenses-link.png)
+
+3. Select the **Import License** button:
+
+    ![Select the import license button](/img/select-the-import-license-button.png)
+
+4. Paste your license key into the **License Key** text field or upload it from a file, and then select the **Import License** button to add your license:
+
+    ![Add your license](/img/add-your-license.png)
 
 <!-- verification failed with "Auth failed" message, probably due to testing config. -->

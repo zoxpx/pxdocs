@@ -14,7 +14,7 @@ First, let's get an overview of the available commands:
 /opt/pwx/bin/pxctl cluster --help
 ```
 
-```
+```output
 Manage the cluster
 
 Usage:
@@ -59,7 +59,7 @@ To list all nodes in your Portworx cluster, run:
 pxctl cluster list
 ```
 
-```
+```output
 Cluster ID: 8ed1d365-fd1b-11e6-b01d-0242ac110002
 Status: OK
 
@@ -78,7 +78,7 @@ Use the following command to get information on a node in the cluster:
 pxctl cluster inspect 492596eb-94f3-4422-8cb8-bc72878d4be5
 ```
 
-```
+```output
 ID       	:  492596eb-94f3-4422-8cb8-bc72878d4be5
 Mgmt IP  	:  147.75.99.189
 Data IP  	:  147.75.99.189
@@ -97,7 +97,7 @@ Here is how to delete a node:
 pxctl cluster delete bf9eb27d-415e-41f0-8c0d-4782959264bc
 ```
 
-```
+```output
 node bf9eb27d-415e-41f0-8c0d-4782959264bc deleted successfully
 ```
 
@@ -107,7 +107,7 @@ To get help, run:
 pxctl cluster delete --help
 ```
 
-```
+```output
 Delete a node
 
 Usage:
@@ -147,7 +147,7 @@ To list the nodes in your Portworx cluster based on IO Priority (high, medium an
 pxctl cluster provision-status --io_priority low
 ```
 
-```
+```output
 Node					Node Status	Pool	Pool Status	IO_Priority	Size	Available	Used	Provisioned	ReserveFactor	Zone	Region
 492596eb-94f3-4422-8cb8-bc72878d4be5	Online		0	Online		LOW		100 GiB	99 GiB		1.0 GiB	0 B		default	default
 492596eb-94f3-4422-8cb8-bc72878d4be5	Online		1	Online		LOW		200 GiB	199 GiB		1.0 GiB	0 B		50		default	default
@@ -161,7 +161,7 @@ To get help, type the following:
 pxctl cluster provision-status --help
 ```
 
-```
+```output
 NAME:
    pxctl cluster provision-status - Show cluster provision status
 
@@ -239,18 +239,45 @@ Update cluster wide options
 
 Usage:
   pxctl cluster options update [flags]
-
 Flags:
-      --resync-repl-add string               Enable or disable repl-add based resync (Valid Values: [on off]) (default "off")
-      --domain-policy string                 Domain policy for domains (Valid Values: [strict eventual]) (default "strict")
-      --optimized-restores string            Enable or disable optimized restores (Valid Values: [on off]) (default "off")
-      --disable-provisioning-labels string   Semi-colon separate string
-      --provisioning-commit-labels string    Json, example of global rule followed by node specific and pool specific rule: '[{'OverCommitPercent': 200, 'SnapReservePercent': 30},{'OverCommitPercent': 50, 'SnapReservePercent':30, 'LabelSelector':{'node':'node-1,node-2', 'poolLabel':'poolValue'},]'
-      --auto-decommission-timeout uint       Timeout (in minutes) after which storage-less nodes will be automatically decommissioned. Timeout cannot be set to zero. (default 20)
-      --internal-snapshot-interval uint      Interval (in minutes) after which internal snapshots are rotated (default 30)
-      --repl-move-timeout uint               Timeout (in minutes) after which offline replicas will be moved to available nodes. Set timeout to zero to disable replica move. (default 1440)
-      --re-add-wait-timeout uint             Timeout (in minutes) after which re-add will abort and new replication node is added instead. Set timeout to zero to disable replica move. (default 1440)
-  -h, --help                                 help for update
+      --auto-decommission-timeout uint                  Timeout (in minutes) after which storage-less nodes will be automatically decommissioned. Timeout cannot be set to zero. (default 20)
+      --cloudsnap-abort-timeout-minutes uint            Timeout in minutes for stalled cloudsnap abort. Should be => 10 minutes (default 10)
+      --cloudsnap-catalog string                        Enable or disable cloudsnap catalog collection (Valid Values: [on off]) (default "off")
+      --cloudsnap-max-threads uint                      Number of cloudsnap threads doing concurrent uploads/downloads. Valid values  >= 2  and <= 16, others automatically rounded (default 16)
+      --cloudsnap-nw-interface string                   network interface name used by cloudsnaps(data, mgmt, eth0, etc)
+      --concurrent-api-limit uint                       Maximum number of concurrent api invocations allowed (default 20)
+      --disable-provisioning-labels string              Semi-colon separate string
+      --disabled-temporary-kvdb-loss-support string     Enable or disable temporary kvdb loss support (Valid Values: [on off]) (default "off")
+      --domain-policy string                            Domain policy for domains (Valid Values: [strict eventual]) (default "strict")
+  -h, --help                                            help for update
+      --internal-snapshot-interval uint                 Interval (in minutes) after which internal snapshots are rotated (default 30)
+      --license-expiry-check days                       Number of days to raise alert before license expires. Set to zero to disable alerts. (default 7)
+      --license-expiry-check-interval string            Interval for license expiry checks.  Valid only if 'license-expiry-check' is defined. (default "6h")
+      --optimized-restores string                       Enable or disable optimized restores (Valid Values: [on off]) (default "off")
+      --provisioning-commit-labels string               Json, example of global rule followed by node specific and pool specific rule: '[{'OverCommitPercent': 200, 'SnapReservePercent': 30},{'OverCommitPercent': 50, 'SnapReservePercent':30, 'LabelSelector':{'node':'node-1,node-2', 'poolLabel':'poolValue'},]'
+      --px-http-proxy string                            proxy to be used by px services(cloudsnap, etc) (default "off")
+      --re-add-wait-timeout uint                        Timeout (in minutes) after which re-add will abort and new replication node is added instead. Set timeout to zero to disable replica move. (default 1440)
+      --repl-move-timeout uint                          Timeout (in minutes) after which offline replicas will be moved to available nodes. Set timeout to zero to disable replica move. (default 1440)
+      --repl-move-timestamp-records-threshold uint      Timestamp record threshold after which offline replicas will be moved to available nodes. Set threshold to zero to disable replica move. (default 134217728)
+      --resync-repl-add string                          Enable or disable repl-add based resync (Valid Values: [on off]) (default "off")
+      --runtime-options string                          Comma seprated key value pairs for runtime options
+      --runtime-options-action string                   Specify type of action for runtime options (Valid Values: [update-global delete-global update-node-specific delete-node-specific]) (default "update-global")
+      --runtime-options-selector string                 Comma seprated key value labels for node specific runtime options.
+      --sharedv4-mount-timeout-sec uint                 Timeout in seconds for sharedv4 (NFS) mount commands. (default 120)
+      --sharedv4-threads uint                           Number of sharedv4 threads. This will affect sharedv4 volume performance as well as the amount of CPU and memory consumed for handling sharedv4 volumes. (default 16)
+      --snapshot-schedule-option string                 for detached volumes none will not generate schedule snapshots, optimized will generated one, always will generate them always (Valid Values: [none always optimized]) (default "optimized")
+      --uniqueblocks-size-sched-interval-minutes uint   Configure periodic interval to query unique blocks size for volumes. (default 720)
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 Use the following command to enable optimized restores:
@@ -277,6 +304,22 @@ Re-add timeout (minutes)             :  1440
 Resync repl-add                      :  off
 Domain policy                        :  strict
 Optimized Restores                   :  on
+```
+
+## Use a network interface for cloudsnaps
+
+By default, cloudsnaps do not use a specific network interface to upload/download the cloudsnap data. Instead, the underlying Go libraries determine the network interface. If you need to use a specific network interface, you can set one using the `--cloudsnap-nw-interface` option. Setting this option directs Portworx to use the specified interface for all cloudsnap related operations. 
+
+This is a cluster-wide setting, meaning that the chosen network interface must be available on all nodes. If the chosen network interface is not available, Portworx falls-back to the "no interface chosen" default behavior. 
+
+To enable this feature, enter the following `pxctl cluster options update` command with the `--cloudsnap-nw-interface` option and specify your desired network interface and confirm at the prompt:
+
+```text
+pxctl cluster options update --cloudsnap-nw-interface <your-network-interface>
+```
+```output
+Currently cloudsnap network interface is set to :data, changing this will affect new cloudsnaps and not the current onesDo you still want to change this now? (Y/N): y
+Successfully updated cluster wide options
 ```
 
 ### Related topics

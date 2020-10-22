@@ -1,5 +1,5 @@
 ---
-title: Secure your storage with a shared secret
+title: Secure your storage with a DaemonSet
 description: Simple security setup using shared secrets and leveraging user authentication observed by Kubernetes
 keywords: portworx, kubernetes, security, jwt, secret, sharedsecret
 weight: 10
@@ -10,7 +10,7 @@ series: ra-kubernetes-security
 
 Kubernetes provides a great authentication model for its users, but storage
 systems could be exposed to malicious requests. Portworx Security provides a
-method to requests, further providing deployers with a complete secured system.
+method to protect against such requests, further providing deployers with a complete secured system.
 
 The following reference architecture describes how to setup Portworx security
 to authenticate PVC requests from Kubernetes. This model leverages Kubernetes

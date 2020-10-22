@@ -14,7 +14,7 @@ Before installing Portworx, let's ensure the PKS environment is prepared correct
 
 ### Enable privileged containers and kubectl exec
 
-Ensure that following options are enabled on all plans on the PKS tile.
+Ensure that following options are enabled on all plans on the PKS tile:
 
   * Enable Privileged Containers
   * Disable DenyEscalatingExec (This is useful to run kubectl exec to run pxctl commands)
@@ -106,4 +106,4 @@ If running on **AWS**, continue at [Portworx install with AWS Auto Scaling Group
 
 If running on **GCP**, continue at [Portworx install on Google Cloud Platform](/cloud-references/auto-disk-provisioning/gcp).
 
-If running on **VMware vSphere**, continue at [Portworx install on PKS on vSphere](/portworx-install-with-kubernetes/on-premise/install-pks/#installing-portworx).
+If running on **VMware vSphere**, continue at [Portworx install on PKS on vSphere](/portworx-install-with-kubernetes/on-premise/install-pks/daemonset/#installing-portworx).

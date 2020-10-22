@@ -39,6 +39,11 @@ pxctl volume access add <volume> --collaborator user1:a
 pxctl volume access remove <volume> --collaborator user1
 ```
 
+#### Mark a volume as public
+```text
+pxctl volume access add <volume> --public r
+```
+
 #### Show volume access ####
 
 ```text

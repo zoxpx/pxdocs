@@ -98,11 +98,11 @@ the secret is saved in the environment variable `$PORTWORX_AUTH_SHARED_SECRET`.
     /opt/pwx/bin/pxctl context create admin --token=$ADMIN_TOKEN
     ```
 
-4. Save the Kubernetes token in a secret called `portworx/px-k8s-user`:
+4. Save the Kubernetes token in a secret called `portworx/px-user-token`:
 
     ```text
     kubectl -n portworx create secret \
-      generic px-k8s-user --from-literal=auth-token=$KUBE_TOKEN
+      generic px-user-token --from-literal=auth-token=$KUBE_TOKEN
     ```
 
 You can now set up Kubernetes storage classes to use this secret to

@@ -1,6 +1,6 @@
 ---
 title: Set up login redirects
-weight: 7
+weight: 6
 keywords: Install, PX-Central, On-prem, license, GUI, k8s, Okta, Auth0
 description: See how you can integrate PX-Central with Okta and Auth0.
 noicon: true

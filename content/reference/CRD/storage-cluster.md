@@ -57,6 +57,40 @@ spec:
     enabled: true
 ```
 
+* Portworx with Security enabled.
+
+```text
+apiVersion: core.libopenstorage.org/v1
+kind: StorageCluster
+metadata:
+  name: portworx
+  namespace: kube-system
+spec:
+  image: portworx/oci-monitor:2.6.0.1
+  security:
+    enabled: true
+```
+
+* Portworx with Security enabled, guest access disabled, a custom self signed issuer/secret location, and five day token lifetime.
+
+```text
+apiVersion: core.libopenstorage.org/v1
+kind: StorageCluster
+metadata:
+  name: portworx
+  namespace: kube-system
+spec:
+  image: portworx/oci-monitor:2.6.0.1
+  security:
+    enabled: true
+    auth:
+      guestAccess: 'Disabled'
+      selfSigned:
+        issuer: 'openstorage.io'
+        sharedSecret: 'my-k8s-secret'
+        tokenLifetime: '5d'
+```
+
 * Portworx with update and delete strategies, and placement rules.
 
 ```text
@@ -156,8 +190,9 @@ This section explains the fields used to configure the `StorageCluster` object.
 | spec.<br> imagePullPolicy | Specifies the image pull policy for all the images deployed by the operator. It can take one of the following values: `Always` or `IfNotPresent` | `string` | `Always` |
 | spec.<br>imagePullSecret | If Portworx pulls images from a secure repository, you can use this field to pass it the name of the secret. Note that the secret should be in the same namespace as the `StorageCluster` object. | `string` | None |
 | spec.<br>customImageRegistry | The custom container registry server Portworx uses to fetch the Docker images. You may include the repository as well. | `string` | None |
-| spec.<br>secretsProvider | The name of the secrets provider Portworx uses to store your credentials. To use features like cloud snapshots or volume encryption, you must configure a secret store provider. Refer to the [Secret store management page](/key-management/) page for more details. | `string` |  None |
+| spec.<br>secretsProvider | The name of the secrets provider Portworx uses to store your credentials. To use features like cloud snapshots or volume encryption, you must configure a secret store provider. Refer to the [Secret store management page](/key-management/) for more details. | `string` |  None |
 | spec.<br>runtimeOptions | A collection of key-value pairs that overwrites the runtime options. | `map[string]string` | None |
+| spec.<br>security | An object for specifying Portworx Security configurations. Refer to the [Operator Security page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/enable/) for more details. | `object` | None |
 | spec.<br>featureGates | A collection of key-value pairs specifying which Portworx features should be enabled or disabled. [^1] | `map[string]string` | None |
 | spec.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826). Similar to how environment variables are provided in Kubernetes, you can directly provide values to Portworx or import them from a source like a `Secret`, `ConfigMap`, etc. | `[]object` | None |
 
@@ -305,3 +340,13 @@ This section provides details on how to override certain cluster level configura
 | spec.<br>nodes[].<br>storage | Specify storage configuration for the selected nodes, similar to the one [specified at cluster level](#storage-configuration). If some of the config is left empty, the cluster level storage values are passed to the nodes. If you don't want to use a cluster level value and set the field to empty, then explicitly set an empty value for it so no value is passed to the nodes. For instance, set `spec.nodes[0].storage.kvdbDevice: ""`, to not use kvdb device for the selected nodes. | `object` | None |
 | spec.<br>nodes[].<br>env | Specify extra environment variables for the selected nodes. Cluster level environment variables are combined with these and sent to the selected nodes. If same variable is present at cluster level, then the node level variable takes precedence. | `object` | None |
 | spec.<br>nodes[].<br>runtimeOptions | Specify runtime options for the selected nodes. If specified, cluster level options are ignored and only these runtime options are passed to the nodes.  | `object` | None |
+
+### Security Configuration
+
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>security.<br>enabled | Enables or disables Security at any given time. | `boolean` | `false` |
+| spec.<br>security.<br>auth.<br>guestAccess | Determines how the guest role will be updated in your cluster. The options are Enabled, Disabled, or Managed. Managed will cause the operator to ignore updating the system.guest role. Enabled and Disabled will allow or disable guest role access, respectively. | `string` | Enabled |
+| spec.<br>security.<br>auth.<br>selfSigned.<br>tokenLifetime | The length operator-generated tokens will be alive until being refreshed. | `string` | 24h |
+| spec.<br>security.<br>auth.<br>selfSigned.<br>issuer | The issuer name to be used when configuring Portworx Security. This field maps to the `PORTWORX_AUTH_JWT_ISSUER` environment variable in the Portworx Daemonset. | `string` | operator.portworx.io |
+| spec.<br>security.<br>auth.<br>selfSigned.<br>sharedSecret | The Kubernetes secret name for retrieving and storing your shared secret. This field can be used to add a pre-existing shared secret or for customizing which secret name the operator will use for its auto-generated shared secret key. This field maps to the `PORTWORX_AUTH_JWT_SHAREDSECRET` environment variable in the Portworx Daemonset. | `string` | px-shared-secret |
