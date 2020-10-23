@@ -1,21 +1,22 @@
 ---
-title: Cassandra Snapshots
-keywords: Cassandra, snapshots, snaps, 3DSnaps, application consistent, stateful applications, kubernetes, k8s
-description: Learn to take a snapshot of Cassandra volumes on Kubernetes
+title: Snapshots
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+description: Cassandra snapshots
 linkTitle: Snapshots
+weight: 5
 ---
 
-## Managing Snapshots
+When you create a snapshot, Cassandra first flushes the application's memory. Then, it creates a hard-link to the `SSTable` files. This means that the snapshots are application-consistent, but the data stored on the underlying volume can be corrupted. Thus, if a failure occurs on the underlying volume, the data will be corrupted.
 
-Cassandra snapshots first flush application memory, then create a hardlink to the `SSTable` files. This means that the snaps are application consistent \(mem is flushed\) but the snap data itself is still within the volume, so if something were to happen to the underlying volume, you still have a corrupted volume and can’t properly roll back. So these snaps are useful to going back to a point in time
+A Portworx snapshot is a distinct volume from the one Cassandra is using, meaning that you can run a second instance of Cassandra in parallel using that volume. You can also use a Portworx snapshots to go back to a point in time where the issue is not present.
 
-Portworx snaps create a real usable volume which is distinct and separate from the volume cassandra is currently using. That means you can can standup a parallel second instance of cassandra from that volume and so on. However it is crash consistent \(cassandra’s memory is not flushed\)
+<!--
+I don't understand this:
+However, PX snaps are crash consistent \(Cassandra’s memory is not flushed\)
+-->
 
-### Best Practice
+Portworx, Inc. recommends you use 3DSnaps for Cassandra as they are application-consistent
 
-It is recommended to use 3DSnaps for Cassandra as they are application-consistent.
+###  Related topics
 
-* [3DSnaps overview](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d)
-* [Cassandra example for 3DSnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d/#cassandra)
-
-{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}
+Refer to the [Configuring 3DSnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d) page for more details about how you can create 3DSnaps.
