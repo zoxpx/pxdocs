@@ -246,7 +246,7 @@ Navigate to the Prometheus web UI by going to the service ip. You should be able
     If you are using your own prometheus set-up make sure to edit this file to point to the right prometheus instance.
 
     ```text
-    kubectl -n kube-system create configmap grafan-source-config --from-file=grafana-datasource.yaml
+    kubectl -n kube-system create configmap grafana-source-config --from-file=grafana-datasource.yaml
     ```
 
 3. Download and apply the following Grafana templates:
