@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.1.4
+
+October 30, 2020
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-16432 | `Multipathd` configuration files were not correctly set up for blacklisting Portworx devices. <br/><br/> **User impact:** Incorrect entries in the `Multipathd` configuration file caused other devices to be handled incorrectly on the host. <br/><br/> **Resolution:** This fix disables the updates to the `Multipathd` configuration file by default, and adds an option to enable the updates through the `runc` install argument `-enable-mpcfg-update`.
+
 ## 2.6.1.3
 
 October 14, 2020
