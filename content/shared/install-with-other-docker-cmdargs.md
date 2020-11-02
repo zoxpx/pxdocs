@@ -78,6 +78,7 @@ Below is the list of arguments you can pass to `px-runc`:
 ```text
 -disable-sharedv4         Disable sharedv4 volume support. When set, NFS dependencies will not be installed.
 -raid <0|10>              Specify which RAID-level should PX use with local storage (dfl: 0)
+-enable-mpcfg-update     Enable Multipath configuration update to blacklist PX devnodes.
 ```
 
 {{<info>}}
