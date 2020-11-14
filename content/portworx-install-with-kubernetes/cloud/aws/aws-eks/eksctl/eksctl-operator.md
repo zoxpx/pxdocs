@@ -9,6 +9,10 @@ noicon: true
 
 This article provides instructions for installing Portworx on Elastic Kubernetes Service (EKS) using the Weaveworks `eksctl` command-line utility.
 
+{{<info>}}
+**NOTE:** You can follow these procedures to deploy Portworx on AWS Outposts.
+{{</info>}}
+
 ## Prerequisites
 
 Before you can install Portworx on EKS using `pxctl`, you must meet the following prerequisites:

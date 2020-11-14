@@ -9,6 +9,10 @@ noicon: true
 
 This topic explains how to install Portworx with EKS (Elastic Kubernetes Service). Follow the steps in this topic in order.
 
+{{<info>}}
+**NOTE:** You can follow these procedures to deploy Portworx on AWS Outposts.
+{{</info>}}
+
 ## Prepare
 
 #### Granting Portworx the needed AWS permissions
