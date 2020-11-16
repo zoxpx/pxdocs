@@ -6,6 +6,23 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.1.5
+
+November 16, 2020
+
+### Notes
+
+* Added support for OCP 4.6.1
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-16796 | For Portworx Essentials users, Portworx ignored the proxy username and password set as part of `PX_HTTP_PROXY`, causing license renewal to fail.<br/><br/>**User impact:** Portworx Essentials clusters entered 'license expired' mode when `PX_HTTP_PROXY` was set. <br/><br/>**Resolution:** Portworx Essentials now honors the `Username` and `Password` fields given as part of `PX_HTTP_PROXY` to successfully make connections with the proxy. |
+| PWX-16775 | The Google object store did not have pagination for object enumeration, which caused any list call to list everything in the bucket.<br/><br/>**User impact:** Cloudsnap backups and restores failed to start and the request timed out. Listing cloudsnaps through `pxctl` also timed-out.<br/><br/>**Resolution:** Added pagination to object enumeration with the Google object store. |
+
 ## 2.6.1.4
 
 October 30, 2020
@@ -16,7 +33,7 @@ The following issues have been fixed:
 
 |**Issue Number**|**Issue Description**|
 |----|----|
-| PWX-16432 | `Multipathd` configuration files were not correctly set up for blacklisting Portworx devices. <br/><br/> **User impact:** Incorrect entries in the `Multipathd` configuration file caused other devices to be handled incorrectly on the host. <br/><br/> **Resolution:** This fix disables the updates to the `Multipathd` configuration file by default, and adds an option to enable the updates through the `runc` install argument `-enable-mpcfg-update`.
+| PWX-16432 | `Multipathd` configuration files were not correctly set up for blacklisting Portworx devices. <br/><br/> **User impact:** Incorrect entries in the `Multipathd` configuration file caused other devices to be handled incorrectly on the host. <br/><br/> **Resolution:** This fix disables the updates to the `Multipathd` configuration file by default, and adds an option to enable the updates through the `runc` install argument `-enable-mpcfg-update`. |
 
 ## 2.6.1.3
 
