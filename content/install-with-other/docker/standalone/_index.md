@@ -33,10 +33,10 @@ To install and setup the Portworx OCI bundle, perform the following steps:
 
     If you are running Ubuntu 16.04, CentOS 7 or CoreOS v94 or newer, `systemd` is already installed, and no actions are required.
 
-* **Schedulers**: If you are installing Portworx into a Kubernetes or Mesosphere DC/OS cluster, Portworx Inc. recommends using [Stork](https://github.com/libopenstorage/stork).
+* **Schedulers**: If you are installing Portworx into a Kubernetes or Mesosphere DC/OS cluster, {{<companyName>}} recommends using [Stork](https://github.com/libopenstorage/stork).
 * **Firewall**: Ensure ports 9001-9022 are open on the cluster nodes that run Portworx.
 * **NTP**: Ensure all nodes running Portworx are time-synchronized by installing and running the NTP service.
-* **KVdb**: Portworx requires a key-value database like etcd or consul. Portworx Inc. recommends a highly available etcd cluster with persistent storage. See the [etcd installation](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) page for more details.
+* **KVdb**: Portworx requires a key-value database like etcd or consul. {{<companyName>}} recommends a highly available etcd cluster with persistent storage. See the [etcd installation](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) page for more details.
 * **Storage**: At least one Portwox node should have extra storage available, either as an unformatted partition or as a disk-drive. Note that Portworx automatically formats any storage devices you pass as parameters to the `px-runc` installer. The following example command passes the `/dev/sdb` and `/dev/sdc3` storage devices as parameters:
 
     ```

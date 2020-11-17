@@ -24,7 +24,7 @@ If the size of your Mesos cluster is larger than the maximum number of nodes sup
 or if it is not possible to install Portworx on all nodes in the Mesos cluster,
 then you will need to use Mesos "constraints", in order to restrict/constrain jobs that use Portworx volumes to only run
 on Mesos-slave nodes where Portworx is running.   (Please check the Portworx release notes for maximum Portworx cluster size).
-Otherwise, Portworx, Inc. recommends simply deploying Portworx on all nodes in a Mesos cluster, thereby avoiding the need to use "constraints".
+Otherwise, {{<companyName>}} recommends simply deploying Portworx on all nodes in a Mesos cluster, thereby avoiding the need to use "constraints".
 
 The following steps are required only for configuring and using "constraints".
 

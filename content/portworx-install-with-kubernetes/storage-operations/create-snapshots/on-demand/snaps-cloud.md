@@ -60,7 +60,7 @@ This section shows how you can back up a volume and restore it to a different Po
 Before you can back up and restore a volume to a different Portworx cluster, you must meet the following prerequisites:
 
 * **Two running Portworx clusters** <!-- Do we want to specify the minimum Portworx version? -->. Refer to the [Installation](/start-here-installation/#installation) page for details about how to install Portworx.
-* **An object store**. Cloud snapshots work with Amazon S3, Azure Blob, Google Cloud Storage, or any S3 compatible object store. If you don't have an object store, Portworx, Inc. recommends using MinIO. See the [MinIO Quickstart Guide](https://docs.min.io/) page for details about installing MinIO.
+* **An object store**. Cloud snapshots work with Amazon S3, Azure Blob, Google Cloud Storage, or any S3 compatible object store. If you don't have an object store, {{<companyName>}} recommends using MinIO. See the [MinIO Quickstart Guide](https://docs.min.io/) page for details about installing MinIO.
 * **A secret store provider**. Refer to the [Secret store management](/key-management/) page for details about configuring a secret store provider.
 
 

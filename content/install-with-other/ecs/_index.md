@@ -19,7 +19,7 @@ In this example, we create an ECS cluster called `ecs-demo1` using default AWS A
 
 
 As of this guide is written, the default ECS AMI uses Docker 1.12.6.
-Note that Portworx, Inc. recommends a minimum cluster size of 3 nodes.
+Note that {{<companyName>}} recommends a minimum cluster size of 3 nodes.
 
 #### Create the cluster in the console
 Log into the ECS console and create an ecs cluster called "ecs-demo1".

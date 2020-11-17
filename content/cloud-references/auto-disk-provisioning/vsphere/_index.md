@@ -24,7 +24,7 @@ This guide explains how the Portworx Dynamic Disk Provisioning feature works wit
 
 ## Availability across failure domains
 
-Since Portworx is a storage overlay that automatically replicates your data, we recommend using multiple availability zones when creating your VMware vSphere based cluster. Portworx automatically detects regions and zones that are populated using known Kubernetes node labels. You can also label nodes with custom labels to inform Portworx about region, zones and racks. Refer to the [Cluster Topology awareness](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology/) page for more details.
+Since Portworx is a storage overlay that automatically replicates your data, {{<companyName>}} recommends using multiple availability zones when creating your VMware vSphere based cluster. Portworx automatically detects regions and zones that are populated using known Kubernetes node labels. You can also label nodes with custom labels to inform Portworx about region, zones and racks. Refer to the [Cluster Topology awareness](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology/) page for more details.
 
 ## Installation
 

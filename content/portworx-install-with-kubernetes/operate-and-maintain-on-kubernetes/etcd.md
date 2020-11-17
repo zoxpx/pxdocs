@@ -8,7 +8,7 @@ description: ETCD configuration for Portworx.
 Portworx requires a key-value database such as etcd for configuring storage. A highly available clustered etcd with persistent storage is preferred.
 
 ### Requirements
-For production Portworx clusters we recommend the following configuration of an etcd cluster:
+For production Portworx clusters {{<companyName>}} recommends the following configuration of an etcd cluster:
 
 1. Etcd Version > 3.1.x
 2. Minimum 3 nodes
@@ -36,14 +36,14 @@ Follow [this](https://github.com/portworx/px-docs/blob/gh-pages/etcd/ansible/ind
 
 ### Tuning Etcd
 
-Etcd provides multiple knobs to fine tune the cluster based on your needs. We recommend fine tuning the following three settings.
+Etcd provides multiple knobs to fine tune the cluster based on your needs. {{<companyName>}} recommends fine tuning the following three settings.
 
 #### Compaction
 
 etcd keeps an exact history of its keyspace, this history should be periodically compacted to avoid performance degradation and eventual storage space exhaustion. Regular compaction ensures that the memory usage of the etcd process is under check.
 The keyspace can be compacted automatically with etcd's time windowed history retention policy, or manually with `etcd`.
 
-We recommend keeping history for last 3 hours. While setting up etcd you can specify the retention policy in the following way:
+{{<companyName>}} recommends keeping history for last 3 hours. While setting up etcd you can specify the retention policy in the following way:
 
 ```text
 etcd --auto-compaction-retention=3
@@ -53,7 +53,7 @@ etcd --auto-compaction-retention=3
 
 The space quota in etcd ensures the cluster operates in a reliable fashion. Without a space quota, etcd may suffer from poor performance if the keyspace grows excessively large, or it may simply run out of storage space, leading to unpredictable cluster behavior.
 
-We recommend setting the space quota to max value of 8Gi. While setting up etcd you can specify the space quota in the following way:
+{{<companyName>}} recommends setting the space quota to max value of 8Gi. While setting up etcd you can specify the space quota in the following way:
 
 ```text
 etcd --quota-backend-bytes=$((8*1024*1024*1024))

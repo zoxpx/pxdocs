@@ -15,7 +15,7 @@ I don't understand this:
 However, PX snaps are crash consistent \(Cassandra’s memory is not flushed\)
 -->
 
-Portworx, Inc. recommends you use 3DSnaps for Cassandra as they are application-consistent
+{{<companyName>}} recommends you use 3DSnaps for Cassandra as they are application-consistent
 
 ###  Related topics
 

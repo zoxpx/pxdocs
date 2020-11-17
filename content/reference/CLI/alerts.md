@@ -180,7 +180,7 @@ Type    ID    Resource    Severity    Count    LastSeen    FirstSeen    Descript
 ```
 
 {{<info>}}
-Portworx, Inc. recommends setting up monitoring with Prometheus and AlertsManager. If you are using Portworx with Kubernetes, head over to [this page](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/). If you are using Portworx with other orchestrators, check out [this page](/install-with-other/operate-and-maintain/monitoring/alerting/).
+{{<companyName>}} recommends setting up monitoring with Prometheus and AlertsManager. If you are using Portworx with Kubernetes, head over to [this page](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/). If you are using Portworx with other orchestrators, check out [this page](/install-with-other/operate-and-maintain/monitoring/alerting/).
 {{</info>}}
 
 

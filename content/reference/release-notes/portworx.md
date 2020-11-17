@@ -1011,7 +1011,7 @@ _User Impact:_ With 2.1.2, Portworx now supports the disabling of path-style enf
 
 **PWX-9352** - Upgrading from 2.0.3.7 to 2.1.1 fails.
 
-_User Impact:_  If you have internal KVDB clusters, upgrading from 2.0.3.7 to 2.1.1 is not supported. Portworx recommends upgrading from 2.0.3.7 to 2.1.2.
+_User Impact:_  If you have internal KVDB clusters, upgrading from 2.0.3.7 to 2.1.1 is not supported. {{<companyName>}} recommends upgrading from 2.0.3.7 to 2.1.2.
 
 **PWX-8730** - Allow storageless nodes to join when licenses have been exhausted if offline storageless nodes remain.
 
@@ -1117,7 +1117,7 @@ _User Impact:_ Previously, if the OCI-Monitor restarted Portworx any time it det
 
 _User Impact:_ Portworx fails to attach a cloud drive with the following error messages: `Failed to detach disk...`, and `Failed to attach drive...`
 
-_Recommendations:_ Portworx is working with Microsoft to resolve this issue, in the meantime, we recommend deleting the impacted VM manually in Azure and allowing it to redeploy.
+_Recommendations:_ Portworx is working with Microsoft to resolve this issue, in the meantime, {{<companyName>}} recommends deleting the impacted VM manually in Azure and allowing it to redeploy.
 
 ## 2.1.1
 
@@ -1235,7 +1235,7 @@ _Recommendations_: Don't use LVM partitions as a journal device. Upgrade to 2.0.
 
 _Customer Impact_: In this case, if the customer was using the raw LVM volume for another application, that volume will be deactivated.
 
-_Recommendations_: Portworx recommends inspecting the system beforehand and to use volume names for LVM volumes that do not overlap with the existing volumes. To completely avoid the issue, Portworx recommends upgrading to 2.0.3.7.
+_Recommendations_: {{<companyName>}} recommends inspecting the system beforehand and to use volume names for LVM volumes that do not overlap with the existing volumes. To completely avoid the issue, Portworx recommends upgrading to 2.0.3.7.
 
 **Issue: PWX-8717** - Adding a journal device to a storage-less node right after a storage device was added results in Portworx crashing and restarting.
 
@@ -1976,7 +1976,7 @@ February 28, 2018
 ### Key Features and Enhancements
 
 * Support SELinux enable in kernels 4.12.x and above
-* Support automatic kernel upgrades. If you expect your environment to upgrade kernels automatically, Portworx recommends upgrading to 1.2.22.0
+* Support automatic kernel upgrades. If you expect your environment to upgrade kernels automatically, {{<companyName>}} recommends upgrading to 1.2.22.0
 
 ## 1.2.20.0
 

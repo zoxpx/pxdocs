@@ -56,7 +56,7 @@ Perform the following steps to deploy this example:
 
 ### Create specs
 
-{{<info>}}**Other rebalance rules:** If you have other AutopilotRules in the cluster for pool rebalance, Portworx, Inc. recommends you delete them for this test. This will make it easier to confirm that the rule in this example was triggered. {{</info>}}
+{{<info>}}**Other rebalance rules:** If you have other AutopilotRules in the cluster for pool rebalance, {{<companyName>}} recommends you delete them for this test. This will make it easier to confirm that the rule in this example was triggered. {{</info>}}
 
 {{<info>}}**TESTING ONLY:** The specs below cause all volumes to initially land on a single Portworx node. This allows you to test the rebalance rule later on, and rebalance the volumes across all nodes. {{</info>}}
 

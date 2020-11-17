@@ -59,7 +59,7 @@ uname -r
 
 * Portworx classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` and they offer the levels  `high`, `medium` and `low`
 
-* The `io_priority` of a pool is determined automatically by Portworx. If the intention is to run low latency transactional workloads like databases on Portworx, then Portworx, Inc. recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
+* The `io_priority` of a pool is determined automatically by Portworx. If the intention is to run low latency transactional workloads like databases on Portworx, then {{<companyName>}} recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
 
 * This [page](/concepts/class-of-service) offers more information on different io_prioirty levels
 
@@ -142,7 +142,7 @@ Failure domains in terms of RACK information can be passed in as described [here
   pxctl volume update dbasevol --sticky=off
   ```
 
-* For applications that require shared access from multiple containers running in different hosts, Portworx, Inc. recommends running shared volumes. Shared volumes can be configured as follows:
+* For applications that require shared access from multiple containers running in different hosts, {{<companyName>}} recommends running shared volumes. Shared volumes can be configured as follows:
 
   ```text
   pxctl volume create wordpressvol --shared --size=100 --repl=3
@@ -178,7 +178,7 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 ### Alerts and Monitoring for Production
 
-Portworx, Inc. recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
+{{<companyName>}} recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
 
 While Prometheus can be deployed as a container within the container orchestrator, many of Portworx, Inc.'s production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
@@ -273,7 +273,7 @@ shows how Prometheus can be set up to monitor Portworx
 
 * Work with Portworx, Inc.'s support team before planning major upgrades. Ensure all volumes have the latest snapshots before performing the upgrade.
 * Ensure kernel-devel packages are installed after a OS migration.
-* If Portworx is run as a OCI container, Docker Upgrades and Restarts do not impact Portworx runtime. So recommend running Portworx as a OCI container.
+* If Portworx is run as a OCI container, Docker Upgrades and Restarts do not impact Portworx runtime. {{<companyName>}} recommends you run Portworx as a OCI container.
 
 ## Day 3 Operations
 
