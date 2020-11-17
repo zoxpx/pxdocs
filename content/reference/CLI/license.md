@@ -28,6 +28,7 @@ Available Commands:
   activate    Activate license from a license server
   add         Add a license from a file
   list        List available licenses
+  setls       Set license server
   transfer    Transfer license to remote PX cluster
 
 Flags:
@@ -104,3 +105,38 @@ However, there are cases where the servers are configured without access to the 
 ```text
 pxctl license add <license file>
 ```
+
+## Connect to a license server
+
+You can connect a Portworx cluster to a license server using the `pxctl license setls` command. To see the list of available flags, enter the `-h` flag:
+
+```text
+pxctl license setls --help 
+```
+```output
+Set license server
+
+Usage:
+  pxctl license setls [flags]
+
+Examples:
+  pxctl license setls http://hostname:7070/fne/bin/capability
+
+Flags:
+      --add feat1[,feat2,...]   add license features (feat1[,feat2,...] format)
+      --ca-path files           extra root CA files (/usr/share/ca-certificates/extra/root-corp.crt[,/path2/lvl2-corp.crt] format)
+  -h, --help                    help for setls
+      --import-unknown-ca       auto-import self-signed root CA certificate
+  -i, --interval .M.w.d.h.m.s   license borrow interval (.M.w.d.h.m.s [e.g. 1w15m] or number)
+```
+
+Connect your Portworx cluster to a license server by entering the `pxctl license setls` command with the following:
+
+* **Optional:** The `--add` option with a comma delimited list of additional feature licenses you want to add. This will add any of the specified feature licenses, as long as the license server has enough available feature license seats. 
+* The license server endpoint.
+
+```text
+pxctl license setls --add <feature-license>,<feature-license> <license-server-endpoint>
+```
+
+
