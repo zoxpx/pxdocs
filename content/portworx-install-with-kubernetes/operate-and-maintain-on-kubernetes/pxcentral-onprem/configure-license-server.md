@@ -34,3 +34,7 @@ Your PX-Central on-prem deployment includes a highly-available license server an
     ![Add your license](/img/add-your-license.png)
 
 <!-- verification failed with "Auth failed" message, probably due to testing config. -->
+
+## Related topics
+
+* For information on how to connect a cluster to a license server using `pxctl`, refer to the [pxctl setls command reference](/reference/cli/license/#connect-to-a-license-server).
