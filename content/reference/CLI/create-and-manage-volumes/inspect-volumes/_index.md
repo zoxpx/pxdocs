@@ -55,7 +55,7 @@ By knowing what the fields from above mean, you can get a deeper insight into yo
  pxctl volume create testVol --repl=2
  ```
 
- For applications that require node level availability and read parallelism across nodes, Portworx recommends setting a replication factor of 2 or 3. Note that the maximum replication factor is 3.
+ For applications that require node level availability and read parallelism across nodes, {{<companyName>}} recommends setting a replication factor of 2 or 3. Note that the maximum replication factor is 3.
 
 You can also modify the replication factor of a volume by running the `pxctl volume ha-update` and passing it the following flags:
 

@@ -71,7 +71,7 @@ kubectl create -f clusterdomainupdate.yaml
 
 ### Stop the application on the source cluster (if accessible)
 
-If your source Kubernetes cluster is still alive and is accessible, we recommend you to stop the applications before failing them over to the destination cluster.
+If your source Kubernetes cluster is still alive and is accessible, {{<companyName>}} recommends you to stop the applications before failing them over to the destination cluster.
 
 You can stop the applications from running by changing the replica count of your deployments and statefulsets to 0. In this way, your application resources will persist in Kubernetes, but the actual application would not be running.
 

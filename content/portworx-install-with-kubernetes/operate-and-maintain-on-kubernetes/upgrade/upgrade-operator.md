@@ -53,7 +53,7 @@ The Portworx Operator refers to the [release manifest](https://install.portworx.
 every Portworx release.
 
 {{<info>}}
-**NOTE:** Portworx does __not__ recommend you update individual component versions unless absolutely necessary.
+**NOTE:** {{<companyName>}} does __not__ recommend you update individual component versions unless absolutely necessary.
 {{</info>}}
 
 ### Force upgrade Stork

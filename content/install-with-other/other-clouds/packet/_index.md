@@ -27,10 +27,10 @@ For quick/easy deployment of Portworx on Packet.net, please refer to the [Terrap
 ### Step 1: Provision Server
 When chosing an instance, verify that you meet the [minimum requirements](/start-here-installation/#installation-prerequisites)
 
-Portworx recommends a minimum cluster size of 3 nodes.
+{{<companyName>}} recommends a minimum cluster size of 3 nodes.
 
 ### Step 2: Install Docker for the appropriate OS Version
-Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
+{{<companyName>}} recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
 
 ### Step 3: Deploy and Attach Block Storage Volume to Packet Server
 Follow the instuctions on Packet's instructions for [installing and attaching to block storage](https://github.com/packethost/packet-block-storage).

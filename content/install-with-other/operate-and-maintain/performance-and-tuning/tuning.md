@@ -22,7 +22,7 @@ Cloud providers match the drive's performance based on it's size.  So if you sel
 {{</info>}}
 
 {{<info>}}
-As of Portworx 1.4, we recommend using the `-j auto` option.  This allows Portworx to create its own journal partition on the best drive.
+As of Portworx 1.4, {{<companyName>}} recommends using the `-j auto` option.  This allows Portworx to create its own journal partition on the best drive.
 {{</info>}}
 
 If you are upgrading to 1.3 and want to add a journal device to an existing node, follow [these instructions](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/add-journal-dev).

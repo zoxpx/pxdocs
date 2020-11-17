@@ -39,7 +39,7 @@ Separating storage and compute clusters mean such scaling & management operation
 
 {{<info>}}
 **NOTE:**
-Portworx Inc. recommends this approach in autoscaling cloud environments.
+{{<companyName>}} recommends this approach in autoscaling cloud environments.
 {{</info>}}
 
 ## Approach B: Hyperconverged Storage and Compute clusters

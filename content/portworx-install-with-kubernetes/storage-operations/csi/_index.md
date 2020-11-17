@@ -27,7 +27,7 @@ The following table shows the core features supported by CSI and which minimum v
 | Volume Expansion (resizing) | 2.2 | 1.16 | 1.14 |
 | [Ephemeral Inline Volumes](/portworx-install-with-kubernetes/storage-operations/csi/#ephemeral-inline-volumes-with-csi) | 2.5 | 1.16 | 1.15 |
 
-Portworx, Inc. does not recommend that you use alpha Kubernetes features in production as the API and core functionality are not finalized. Users that adopt alpha features in production may need to perform costly manual upgrades.
+{{<companyName>}} does not recommend that you use alpha Kubernetes features in production as the API and core functionality are not finalized. Users that adopt alpha features in production may need to perform costly manual upgrades.
 
 [^1]: Note that only Stork 2.3.0 or later is supported with CSI.
 
@@ -304,7 +304,7 @@ CSI volume snapshotting is alpha from Kubernetes 1.12 until 1.16. In order to ta
 In addition, you must use a [1.x release of the external snapshotter](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v1.2.2) that will create and understand the nessesary alpha APIs. 
 
 {{<info>}}
-**WARNING:** Portworx, Inc. recommends that you do __NOT__ use CSI alpha, as there are significant API and reliability changes introduced in the Kubernetes 1.17 with snapshotting beta. Migrating any alpha CSI snapshotting objects to beta will require significant extra work. 
+**WARNING:** {{<companyName>}} recommends that you do __NOT__ use CSI alpha, as there are significant API and reliability changes introduced in the Kubernetes 1.17 with snapshotting beta. Migrating any alpha CSI snapshotting objects to beta will require significant extra work. 
 {{</info>}}
 
 ## Create shared CSI-enabled volumes

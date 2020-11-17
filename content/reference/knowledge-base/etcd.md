@@ -15,7 +15,7 @@ This page list various approaches for installing an external ETCD cluster and pr
 
 ### Requirements
 
-For production Portworx clusters, Portworx, Inc. recommends the following configuration of an etcd cluster:
+For production Portworx clusters, {{<companyName>}} recommends the following configuration of an etcd cluster:
 
 1. Etcd Version > 3.1.x
 2. Minimum 3 nodes
@@ -43,14 +43,14 @@ Follow [this](https://github.com/portworx/px-docs/blob/gh-pages/etcd/ansible/ind
 
 ### Tuning Etcd
 
-Etcd provides multiple knobs to fine tune the cluster based on your needs. We recommend fine tuning the following three settings.
+Etcd provides multiple knobs to fine tune the cluster based on your needs. {{<companyName>}} recommends fine tuning the following three settings.
 
 #### Compaction
 
 etcd keeps an exact history of its keyspace, this history should be periodically compacted to avoid performance degradation and eventual storage space exhaustion. Regular compaction ensures that the memory usage of the etcd process is under check.
 The keyspace can be compacted automatically with etcd's time windowed history retention policy, or manually with `etcd`.
 
-We recommend keeping history for last 3 hours. While setting up etcd you can specify the retention policy in the following way:
+{{<companyName>}} recommends keeping history for last 3 hours. While setting up etcd you can specify the retention policy in the following way:
 
 ```text
 etcd --auto-compaction-retention=3
@@ -60,7 +60,7 @@ etcd --auto-compaction-retention=3
 
 The space quota in etcd ensures the cluster operates in a reliable fashion. Without a space quota, etcd may suffer from poor performance if the keyspace grows excessively large, or it may simply run out of storage space, leading to unpredictable cluster behavior.
 
-We recommend setting the space quota to max value of 8Gi. While setting up etcd you can specify the space quota in the following way:
+{{<companyName>}} recommends setting the space quota to max value of 8Gi. While setting up etcd you can specify the space quota in the following way:
 
 ```text
 etcd --quota-backend-bytes=$((8*1024*1024*1024))
@@ -68,7 +68,7 @@ etcd --quota-backend-bytes=$((8*1024*1024*1024))
 
 #### Snapshots
 
-Etcd provides a command to take snapshots of its keyspace which can be used to restore the etcd cluster in case of a complete disaster. We recommend running the following command as a part of a cron job which will take periodic snapshots
+Etcd provides a command to take snapshots of its keyspace which can be used to restore the etcd cluster in case of a complete disaster. {{<companyName>}} recommends running the following command as a part of a cron job which will take periodic snapshots
 
 ```text
 ETCDCTL_API=3 etcdctl --endpoints="<comma-separated-etcd-url>" snapshot save </path/to/snapshot-file> --command-timeout=60s

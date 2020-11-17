@@ -7,7 +7,7 @@ hidden: true
 disableprevnext: true
 ---
 
-{{<info>}}The deployment model on this page is still in alpha stage. If possible, users are recommendeded to use [Portworx install on PKS on vSphere using shared datastores](/portworx-install-with-kubernetes/on-premise/install-pks){{</info>}}
+{{<info>}}The deployment model on this page is still in alpha stage. If possible, {{<companyName>}} recommends you use [Portworx install on PKS on vSphere using shared datastores](/portworx-install-with-kubernetes/on-premise/install-pks){{</info>}}
 
 ## Pre-requisites
 

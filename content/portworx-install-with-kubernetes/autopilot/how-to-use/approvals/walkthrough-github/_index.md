@@ -14,7 +14,7 @@ weight: 200
 {{<info>}}**NOTE:** This guide uses [Flux](https://fluxcd.io/) as your GitOps operator. However, the concepts will apply to other GitOps implementations as well.{{</info>}}
 
 * Autopilot 1.3.0 and above
-* Portworx, Inc. recommends you go through the [Action approvals using kubectl](/portworx-install-with-kubernetes/autopilot/how-to-use/approvals/walkthrough) guide first if you haven't done so already. It will make you familiar with basic approval concepts, which are applicable here.
+* {{<companyName>}} recommends you go through the [Action approvals using kubectl](/portworx-install-with-kubernetes/autopilot/how-to-use/approvals/walkthrough) guide first if you haven't done so already. It will make you familiar with basic approval concepts, which are applicable here.
 
 ## Overview 
 
@@ -31,7 +31,7 @@ Let's look at above 4 steps in detail.
 
 Perform the steps in the [Get started with Flux](https://docs.fluxcd.io/en/latest/tutorials/get-started/#get-started-with-flux) section of the Flux documentation to implement GitOps using Flux. 
 
-* Before using Flux for Autopilot, Portworx, Inc. recommends you test if the GitOps integration works in general. Use the example specs provided in the get started guide above to verify it. 
+* Before using Flux for Autopilot, {{<companyName>}} recommends you test if the GitOps integration works in general. Use the example specs provided in the get started guide above to verify it. 
 * By default, Flux has a 5 minute git poll interval. To save time during testing, you can edit to `flux` deployment in the `flux` namespace and add `--git-poll-interval=30s` in the args to change this to 30 seconds.
 
 ## Step 2: Provide access to your Github repository used for GitOps

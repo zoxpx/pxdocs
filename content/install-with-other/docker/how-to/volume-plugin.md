@@ -33,7 +33,7 @@ docker volume create --driver pxd \
 
 ```
 
-Docker looks in its cache before sending the request to create to Portworx. For this reason, we recommend to not mix-and-match create and delete operations with pxctl and docker. If a volume with the same name is created again, it is a No-op.
+Docker looks in its cache before sending the request to create to Portworx. For this reason, {{<companyName>}} recommends to not mix-and-match create and delete operations with pxctl and docker. If a volume with the same name is created again, it is a No-op.
 
 #### Use of options in docker volume create
 

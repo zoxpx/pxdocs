@@ -61,4 +61,4 @@ Follow this guide to select your appropriate [instance type](https://aws.amazon.
 
 ## Multi Zone Availability
 
-Since Portworx is a replicated storage solution, we recommend using multiple availability zones when creating your EC2 based cluster.  Follow this site for more information on geographical availability of your instances: [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
+Since Portworx is a replicated storage solution, {{<companyName>}} recommends using multiple availability zones when creating your EC2 based cluster.  Follow this site for more information on geographical availability of your instances: [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)

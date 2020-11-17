@@ -7,7 +7,7 @@ weight: 2
 
 Portworx operates typically within less than 3% overhead of the underlying storage hardware.
 
-Note that Portworx recommends the following:
+Note that {{<companyName>}} recommends the following:
 
 * Minimum resources per server:
   * 4 CPU cores

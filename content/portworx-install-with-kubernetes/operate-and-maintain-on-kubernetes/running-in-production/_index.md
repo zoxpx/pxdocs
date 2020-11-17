@@ -52,7 +52,7 @@ series: k8s-op-maintain
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID \(if available\) and give the block device from a HW RAID volume for Portworx to manage.
 * Portworx classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` \(or `priority_io` in kubernetes px spec\) and they offer the levels `high`, `medium` and `low`
-* The `priority_io` of a pool is determined automatically by Portworx. If the intention is to run low latency transactional workloads like databases on Portworx, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
+* The `priority_io` of a pool is determined automatically by Portworx. If the intention is to run low latency transactional workloads like databases on Portworx, then {{<companyName>}} recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
 
 **Working with drives with AWS Auto scaling group**
 
@@ -171,7 +171,7 @@ Failure domains in terms of RACK information can be passed in as described [here
         sticky: "true"
       ```
 
-* For applications that require shared access from multiple containers running in different hosts, Portworx, Inc. recommends running shared volumes. Shared volumes can be configured as follows by adding `shared: "true"` to the storage class:
+* For applications that require shared access from multiple containers running in different hosts, {{<companyName>}} recommends running shared volumes. Shared volumes can be configured as follows by adding `shared: "true"` to the storage class:
 
       ```text
       kind: StorageClass
@@ -256,7 +256,7 @@ This [page](/concepts) gives more details on different volume types, how to crea
 
 #### Alerts and Monitoring for Production
 
-Portworx, Inc. recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
+{{<companyName>}} recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
 
 {{<info>}}
 **Note:**
@@ -347,7 +347,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 * Work with the Portworx, Inc. support team before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
 * Ensure kernel-devel packages are installed after a OS migration
-* If Portworx is run as a OCI container, Docker Upgrades and Restarts do not impact Portworx runtime. So recommend running Portworx as a OCI container
+* If Portworx is run as a OCI container, Docker Upgrades and Restarts do not impact Portworx runtime. {{<companyName>}} recommends you run Portworx as a OCI container
 
 ### Day 3 Operations
 

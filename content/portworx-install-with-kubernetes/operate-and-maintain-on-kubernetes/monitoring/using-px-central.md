@@ -72,7 +72,7 @@ In the Portworx spec generator page on [PX-Central](https://central.portworx.com
 
 ### Multi-Cluster requirements
 
-  If your cluster has more than 20 nodes or is resource intensive we recommend using this installation to create a dedicated monitoring cluster, and let this cluster monitor the others. If not consider using the single cluster installation (above). The steps below will help you setup PX-Central and first {{< pxEnterprise >}} cluster.
+  If your cluster has more than 20 nodes or is resource intensive {{<companyName>}} recommends using this installation to create a dedicated monitoring cluster, and let this cluster monitor the others. If not consider using the single cluster installation (above). The steps below will help you setup PX-Central and first {{< pxEnterprise >}} cluster.
 
   Since this is going to be the cluster that monitors the other clusters we need the `Prometheus` installation to watch the other clusters' `Prometheus` instances. To do this we are going to use `Federation` and we'll need the below secret for this.
 
