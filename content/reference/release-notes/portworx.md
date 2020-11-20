@@ -6,6 +6,19 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.1.6
+
+November 20, 2020
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-16429 | An issue with applying labels on new pools caused new drive add operations using the `pxctl service drive add` command to fail. <br/><br/>**User impact:** If users tried to add a new Portworx pool to the node, their `pxctl service drive add` command failed with an error message about labels being too long. This prevented users from creating new pools.<br/><br/>**Resolution:** Portworx no longer applies the Kubernetes labels to the backend storage pools. |
+| PWX-16941 | Portworx installation failed when users set the `VSPHERE_INSTALL_MODE=local` flag to enable the vSphere cloud drive provisioning feature.<br/><br/>**User impact:** Portworx failed to initialize when used in the mode above.<br/><br/>**Resolution:** Portworx now properly initializes when vSphere cloud drive provisioning is enabled. |
+
 ## 2.6.1.5
 
 November 16, 2020
