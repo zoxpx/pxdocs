@@ -10,6 +10,10 @@ series: release-notes
 
 November 20, 2020
 
+### Notes
+
+* Portworx licenses for DR are now enabled to work on IBM Cloud.
+
 ### Fixes
 
 The following issues have been fixed:
