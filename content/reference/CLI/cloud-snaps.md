@@ -664,6 +664,9 @@ Note that the restored volume will not be attached or mounted automatically.
 For more details about optimized restores, visit the [Enabling optimized restores](/reference/cli/cluster/#enabling-optimized-restores) section.
 {{</info>}}
 
+### The naming scheme for cloud backups
+
+{{% content "shared/cloud-snaps-naming-scheme.md" %}}
 
 ### Deleting a Cloud Backup
 

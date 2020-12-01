@@ -261,3 +261,8 @@ Example:
       1021141073379827532	Restore-869510655149846346-556794585	1 GiB	1	no	no		HIGH		up - detached	no
       79001397979145130	samvol					1 GiB	1	no	no		HIGH		up - detached	no
       ```
+
+## The naming scheme for cloud backups
+
+{{% content "shared/cloud-snaps-naming-scheme.md" %}}
+
