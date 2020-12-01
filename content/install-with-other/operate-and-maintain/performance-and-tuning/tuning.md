@@ -54,7 +54,7 @@ This is useful for content management systems, like WordPress.  This option appl
 
 ### The db_remote profile
 
-This implements a write-back flush coalescing algorithm.  This algorithm attempts to coalesce multiple `syncs` that occur within a 50ms window into a single sync. Coalesced syncs are acknowledged only after copying to all replicas. In order to do this, the algorithm requires a minimum replication (HA factor) of 3. This mode assumes all replicas do not fail (kernel panic or power loss) simultaneously in a 50 ms window. Use `io_profile=db_remote`.
+This implements a write-back flush coalescing algorithm.  This algorithm attempts to coalesce multiple `syncs` that occur within a 50ms window into a single sync. Coalesced syncs are acknowledged only after copying to all replicas. In order to do this, the algorithm requires a minimum replication (HA factor) of 2. This mode assumes all replicas do not fail (kernel panic or power loss) simultaneously in a 50 ms window. Use `io_profile=db_remote`.
 
 {{<info>}}
 If there are not enough nodes online, Portworx will automatically disable this algorithm.
