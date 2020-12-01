@@ -726,6 +726,9 @@ Note that the restored volume will not be attached or mounted automatically.
 * With {{< pxEnterprise >}} 2.1.0, users can choose to do optimized restores.  Optimized restores create a snapshot of every successful restore and use that snapshot for the next incremental restore of the same volume. For more details about optimized restores, visit the [Enabling optimized restores](/reference/cli/cluster/#enabling-optimized-restores) section.
 {{</info>}}
 
+### The naming scheme for cloud backups
+
+{{% content "shared/cloud-snaps-naming-scheme.md" %}}
 
 ### Deleting a Cloud Backup
 
