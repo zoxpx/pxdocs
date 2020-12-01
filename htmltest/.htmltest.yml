@@ -7,6 +7,7 @@ IgnoreURLs:
 - "https://cloud.ibm.com/docs/"
 - "https://docs.mesosphere.com"
 - "https://www.katacoda.com"
+- "https://katacoda.com"
 IgnoreDirs:
 - "css"
 - "icons"
