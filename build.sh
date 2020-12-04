@@ -55,7 +55,7 @@ export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-
 export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
 export ALGOLIA_INDEX_NAME="${PRODUCT_INDEX_NAME}-${VERSIONS_TAG}"
 # A comma-separated list of other product names and indices, in the form of`<product-name>=<product-index>`.
-export OTHER_PRODUCT_NAMES_AND_INDICES=PX-Backup=PX-Backup-1-1
+export OTHER_PRODUCT_NAMES_AND_INDICES=PX-Backup=PX-Backup-1-2
 # A comma-separated list of all product names and indices, in the form of `<product-name>=<product-index>`.
 export PRODUCT_NAMES_AND_INDICES="${PRODUCT_NAME}=${PRODUCT_INDEX_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
 # Each product has its own list of redirects. For each product, we use the `VERSIONS_BASE_URL` environment variable to determine the name of the file where the redirects are stored, and then we save that name in the `NGINX_REDIRECTS_FILE` environment variable
