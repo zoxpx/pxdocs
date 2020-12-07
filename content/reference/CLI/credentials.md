@@ -310,6 +310,18 @@ Credential validated successfully
 Don't forget to replace `<uuid or name>` with the actual `uuid` or `name` of the credentials you want to delete.
 {{</info>}}
 
+## Delete pending credential references from the KVDB
+
+ Requests to delete cloudsnaps are long-running operations, and are executed asynchronously in the background. Portworx stores these requests in the KVDB so that it can resume delete operations if the node restarts or is otherwise interrupted. Portworx periodically retires these delete requests as part of a cleanup routine. 
+
+ If the credentials for these cloudsnaps are configured through Kubernetes secrets, the credential object must be available at the time Portworx attempts to delete it. If the credential object is deleted while the cloudsnap delete requests are pending, these delete requests will fail and continue to remain in the KVDB where they will continue to log alerts about the failure to delete.
+
+ If this happens in your cluster, you can use the use the `pxctl credentials delete-refs` command to delete these pending references to credentials from the KVDB:
+
+```text
+pxctl credentials delete-refs <name-or-UUID>
+```
+
 ## Related topics
 
 * For information about integrating Portworx with Kubernetes Secrets, refer to the [Kubernetes Secrets](/key-management/kubernetes-secrets/) page.
