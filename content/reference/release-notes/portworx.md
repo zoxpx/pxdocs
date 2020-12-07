@@ -28,6 +28,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 | PWX-14705 | You can now set the "Sender" for the email alerts as follows: `sv email set --recipient="email1@portworx.com;email2@portworx.com"`.	|
 | PWX-16678 | Portwox now displays alerts when it overrides the user-provided value for the `maxStorageNodesPerZone` parameter. |
 | PWX-16655 | Portworx now supports the `pxctl service pool cache status <pool>` command in all operational modes. The following CLI `pxctl` commands have been moved to only be supported in "pool maintenance" mode and deprecated from "maintenance" mode:<ul><li>`pxctl service pool cache flush <pool-id>`</li><li>`pxctl service pool cache enable <pool-id>`</li><li>`pxctl service pool cache disable <pool-id>`</li><li>`pxctl service pool cache configure <pool-id>`</li></ul> |
+| PWX-13377 | Applied the latest OS updates to resolve most of the vulnerabilities detected. |
 
 
 
@@ -65,6 +66,11 @@ The following issues have been fixed:
 | PWX-16386 | On certain slower systems, a sharedv4 volume wasn't mounted over NFS as soon as it was exported on the server. <br/><br/>**User impact:** Portworx showed the `access denied by server` error. <br/><br/>**Resolution** Portworx now detects this error scenario and retries the NFS mount. | 
 | PWX-17477 | In clusters that have seen more than 3000 unsuccessful node add attempts, Portworx, on addition of another node running the 2.6.x release, encountered a node index overflow. <br/><br/<>**User Impact:** Other nodes in the cluster could dump a core. <br/><br/>**Resolution:** This patch fixes the node index allocation workflow and prevents the new node from joining the cluster. |
 | PWX-17206 | A part-probe inside the container took a long time to finish.<br/><br/>**User impact:** Portworx took a long time to reach the "Ready" state after a node restart. <br/><br/>**Resolution:** Portworx now uses a host-based part-probe to resolve this issue. |
+| PWX-14925 | Portworx drives showed as `offline` in the `pxctl status` and `pxctl service pool show` commands<br/><br/>**User impact:** When a drive was added to Portworx, the `pxctl status` and `pxctl service pool show` commands showed the drive as offline when the commands were run from the Portworx oci-monitor pod.<br/><br/>**Resolution:** In the oci-monitor pod, `pxctl` now gets the updated information about the newly added drives from the Portworx container. |
+| PWX-15984 | A large number of cloudsnap delete requests were stuck pending in the KVDB.<br/><br/>**User impact:** Cloudsnaps were not deleted from the cloud, or cloudsnap delete requests did not make much progress.<br/><br/>**Resolution:** Improvements to cloudsnap delete operations reduce processing times. |
+| PWX-16681 | Restore failed when the incremental chain is broken due to either deleted cloudsnaps or deleted local snaps in the source cluster.<br/><br/>**User impact:** Async migration continuously fails.<br/><br/>**Resolution:** To automatically resume async DR, migration now deletes local cloudsnaps if a restore fails, triggering a full backup to fix the issue. |
+| OC-196 | An issue with Portworx upgrades from v2.4, 2.5 to v2.6 on Kubernetes with floating licenses caused an excess number of licenses to be consumed. <br/><br/>**User impact:** When upgrading from v2.4, 2.5 to v2.6 on Kubernetes, Portworx temporarily consumed the double amount of license leases.<br/><br/>**Resolution:** The upgrade to Portworx now properly recycles the license leases during the upgrade procedure, no longer consuming more licenses than it should have. |
+
 
 
 
