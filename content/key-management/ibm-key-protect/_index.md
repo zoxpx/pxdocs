@@ -1,9 +1,9 @@
 ---
-title: IBM Key Protect
+title: IBM key management services
 logo: /logos/ibm.png
 weight: 1
-keywords: IBM Key Protect, encryption keys, secrets, Volume Encryption, Cloud Credentials
-description: Instructions on using IBM Key Protect with Portworx
+keywords: IBM Key Protect, HPCS, encryption keys, secrets, Volume Encryption, Cloud Credentials
+description: Instructions on using IBM Key Protect or HPCS with Portworx
 disableprevnext: true
 noicon: true
 series: key-management
@@ -13,16 +13,16 @@ series: key-management
 **NOTE:** Supported from {{< pxEnterprise >}} 1.7 onwards
 {{</info>}}
 
-Portworx integrates with IBM Key Protect to store your encryption keys/secrets and credentials. This guide will help configure Portworx with IBM Key Protect. IBM Key Protect can be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
+Portworx integrates with IBM Key Protect and Hyper Protect Crypto Services (HPCS) to store your encryption keys/secrets and credentials. This guide helps you configure Portworx with IBM Key Protect or HPCS. IBM Key Protect and HPCS can be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
 
-Portworx requires the following IBM Key Protect credentials to use its APIs
+Portworx requires the following IBM Key Protect or HPCS credentials to use its APIs:
 
 - **Service Instance ID [IBM_SERVICE_INSTANCE_ID]**
 
-    The Instance ID of the IBM Key Protect service can be found by running the following command
+    The Instance ID of the IBM Key Protect or HPCS service can be found by running the following command
 
     ```text
-    ibmcloud resource service-instance <name of your key protect service>
+    ibmcloud resource service-instance <name-of-your-service>
     ```
 
     This should output something like. The ID from the below CRN is `0647c737-906d-blah-8a68-2c187e11b29b`
@@ -40,7 +40,11 @@ Portworx requires the following IBM Key Protect credentials to use its APIs
 
 - **Base URL [IBM_BASE_URL]**
 
-    BaseURL specifies the URL where your Key Protect instance resides. It is region specific. Default value which will be used is: `https://keyprotect.us-south.bluemix.net`
+    The base URL specifies the URL where your Key Protect or HPCS instance resides. It is region specific. The default value Portworx uses is: `https://keyprotect.us-south.bluemix.net`.
+
+    {{<info>}}
+**NOTE:** If you're using IBM HPCS, take the key management endpoint URL from the overview page of your HPCS service on IBM Cloud.
+    {{</info>}}
 
 - **Token URL [IBM_TOKEN_URL]**
 
@@ -49,7 +53,7 @@ Portworx requires the following IBM Key Protect credentials to use its APIs
 
 ## For Kubernetes Users
 
-### Step 1: Provide IBM Key Protect credentials to Portworx.
+### Step 1: Provide IBM key management credentials to Portworx.
 
 Portworx reads the IBM credentials required to authenticate with IBM Key Protect through a Kubernetes secret. Create a Kubernetes secret with the name `px-ibm` in the `portworx` namespace. Following is an example kubernetes secret spec
 
@@ -68,22 +72,26 @@ data:
 
 Portworx is going to look for this secret with name `px-ibm` under the `portworx` namespace. While installing Portworx it creates a Kubernetes role binding which grants access to reading Kubernetes secrets only from the `portworx` namespace.
 
-### Step 2: Set up IBM Key Protect as the secrets provider for Portworx.
+### Step 2: Set up IBM key management as the secrets provider for Portworx.
 
 #### New installation
 
 ##### Using helm chart
 
-While deploying Portworx using helm chart on an IKS cluster, by default Portworx is configured to use IBM Key Protect as a secrets provider. Follow [these instructions](https://github.com/portworx/helm/blob/master/charts/portworx/README.md) to install the helm chart.
+While deploying Portworx using helm chart on an IKS cluster, by default Portworx is configured to use IBM Key Protect and HPCS as a secrets provider. Follow [these instructions](https://github.com/portworx/helm/blob/master/charts/portworx/README.md) to install the helm chart.
 
 In a non-IKS cluster, set the `secretType` as `ibm-kp` in the helm chart's values.yml configuration file.
+
+{{<info>}}
+**NOTE:** Use the `ibm-kp` `secretType` for both IBM Key Protect and HPCS. 
+{{</info>}}
 
 ##### Using the Portworx spec generator
 When generating the Portworx Kubernetes spec file on the Portworx spec generator page in [PX-Central](https://central.portworx.com), select `IBM Key Protect` from the "Secrets type" list.
 
 #### Existing installation
 
-For an existing Portworx cluster follow these steps to configure IBM Key Protect as the secrets provider
+For an existing Portworx cluster follow these steps to configure IBM Key Protect or HPCS as the secrets provider
 
 ##### Step 2a: Add Permissions to access kubernetes secrets
 
@@ -127,7 +135,7 @@ EOF
 
 ##### Step 2b: Edit the Portworx DaemonSet
 
-Edit the Portworx DaemonSet `secret_type` field to `ibm-kp`, so that all the new Portworx nodes will also start using IBM Key Protect.
+Edit the Portworx DaemonSet `secret_type` field to `ibm-kp`, so that all the new Portworx nodes will also start using IBM  or HPCS.
 
 ```text
 kubectl edit daemonset portworx -n kube-system
@@ -152,7 +160,7 @@ Editing the daemonset will restart all the Portworx pods.
 
 ## Other users
 
-### Step 1: Provide IBM Key Protect credentials to Portworx.
+### Step 1: Provide IBM key management services credentials to Portworx.
 
 Provide the following IBM credentials (key value pairs) as environment variables to Portworx
 
@@ -162,7 +170,7 @@ Provide the following IBM credentials (key value pairs) as environment variables
 - [Optional] IBM_BASE_URL=[base_url] → only required if the instance is in a different region
 - [Optional] IBM_TOKEN_URL=[token_url] → only required if the different than the default token url
 
-### Step 2: Set up IBM Key Protect as the secrets provider for Portworx.
+### Step 2: Set up IBM key management services as the secrets provider for Portworx.
 
 #### New installation
 
@@ -173,6 +181,6 @@ While installing Portworx set the input argument `-secret_type` to `ibm-kp`.
 Based on your installation method provide the `-secret_type ibm-kp` input argument and restart Portworx on all the nodes.
 
 
-## Using IBM Key Protect with Portworx
+## Using IBM key management services with Portworx
 
 {{<homelist series="ibm-key-protect-uses">}}
