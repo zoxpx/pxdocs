@@ -6,6 +6,77 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.2
+
+December 7, 2020
+
+### New features
+
+* [Announcing a new command](/reference/cli/cloud-drives-asg/#transfer-cloud-drives-to-a-storageless-node) for transferring a Portworx cloud driveset from one storage node to a storageless node. This command is currently supported only for Google Cloud Platform, and is not supported when Portworx is installed using an internal KVDB. 
+* Portworx now allows you to [drain/remove volume attachments](/reference/cli/service/#drain-volume-attachments) from a node through the `pxctl service node drain-attachments` command.
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-17154 | Portworx now supports a `NO_PROXY` environment variable with a licensing code that defines which hosts will _not_ use an HTTP proxy for licensing actions. In addition, `PX_HTTP_PROXY` and `PX_HTTPS_PROXY` environment variables will be _ignored_ when using license-servers and floating licenses, unless you specify the `PX_FORCE_HTTP_PROXY=1` environment variable (i.e. Portworx will assume local-access when working with Floating licenses). | 
+| PWX-16410 | Portworx now supports K3s v1.19. | 
+| PWX-15234 | You can now delete pending references to credentials from the KVDB.| 
+| PWX-16602 | Portworx now allows for a runtime option to disable zero detection for converting zero-filled buffer to discard. |
+| PWX-14705 | You can now set the "Sender" for the email alerts as follows: `sv email set --recipient="email1@portworx.com;email2@portworx.com"`.	|
+| PWX-16678 | Portwox now displays alerts when it overrides the user-provided value for the `maxStorageNodesPerZone` parameter. |
+| PWX-16655 | Portworx now supports the `pxctl service pool cache status <pool>` command in all operational modes. The following CLI `pxctl` commands have been moved to only be supported in "pool maintenance" mode and deprecated from "maintenance" mode:<ul><li>`pxctl service pool cache flush <pool-id>`</li><li>`pxctl service pool cache enable <pool-id>`</li><li>`pxctl service pool cache disable <pool-id>`</li><li>`pxctl service pool cache configure <pool-id>`</li></ul> |
+
+
+
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-16137 | A race-condition between Portworx and Docker occurred at startup. <br/><br/>**User impact:** If the node cannot install NFS-packages (i.e. air-gapped host environments), and runs Portworx with the Docker container-runtime, users might encounter a race-condition on node reboot that leads to Docker creating new local volumes instead of using existing Portworx volumes. <br/><br/>**Resolution:** Portworx now detects and prevents Docker from creating new local volumes on node reboot.|
+| PWX-16136 | Portworx pods hung when the `dbus` service became unresponsive.<br/><br/>**User impact:** In situations where the `dbus` service running on the host became unresponsive, the Portworx pod wasn't able to upgrade Portworx or propagate configuration changes. <br/><br/>**Resolution:** Portworx now detects when the `dbus` service is unresponsive and fails over to different methods to run the Portworx upgrades or change configuration. |
+| PWX-16413 | A harmless warning was sometimes displayed during Portworx installation. <br/><br/>**User impact:** When installed into the staging area, Portworx displayed a warning when setting up the services; these warnings were safe to ignore, but caused unnecessary confusion. <br/><br/>**Resolution:** These warnings are no longer displayed. | 
+| PWX-16420 | Portworx pods running on Ubuntu/20.04 nodes did not proxy the `portworx-output.service` logs to the OCI-Monitor display. <br/><br/>**User impact:** On Ubuntu/20.04, the Portworx pods did not proxy the Portworx service logs. This made troubleshooting difficult on Kubernetes deployments that do not provide SSH access to the hosts. <br/><br/>**Resolution:** The Portworx pods now correctly proxy the Portworx service logs. |
+| PWX-16418 | When running on Kubernetes nodes using the ContainerD container runtime, Portworx installs and upgrades sometimes failed.<br/><br/>**User impact:** If a Portworx installation or upgrade was interrupted on the nodes using the ContainerD container runtime, further attempts to install or upgrade Portworx sometimes failed until the node was rebooted.<br/><br/>**Resolution:** Portworx now performs a more thorough cleanup before each install and upgrade operation, solving this issue. |
+| PWX-16853 | Multipart license expiration was not clear. <br/><br/>**User impact:** When running Portworx on a multipart license (i.e. a license composed out of several parts/ActivationIDs), different parts of the license could expire at different times. The `pxctl status` and `pxctl license list` commands didn't provide any indication that some parts of the license would expire sooner. <br/><br/> **Resolution:** The `pxctl status` and `pxctl license list` commands now display a notice if a part of the license will expire sooner than the overall license. |
+| PWX-16769 | License updates sometimes failed to propagate across all nodes. <br/><br/>**User impact:** For users with ETCD as the KVDB and aggressive ETCD compactions, some of the nodes in Portworx cluster skipped the automatic application of updated licenses. Users had to restart the Portworx service to pick up the changes.<br/><br/>**Resolution:** Portworx no longer skips license updates when aggressive ETCD compactions are used.| 
+| PWX-16793 | Sometimes Portworx installation timed out while installing NFS packages. <br/><br/>**User impact:** Some host environments may have a large amount of package repositories or have a slow internet connection, which could lead into timeouts while installing NFS services during Portworx installation or upgrade, which ultimately results in inability to use SharedV4 volumes that depend on NFS. <br/><br/>**Resolution:** Portworx installs have been sped up and avoid timeouts with NFS services installations. |
+| PWX-17057 | With Linux kernel 4.20.x and above, NFS pool stats are incremented at much slower pace than an hour or it may not increment at all if there are no exports. <br/><br/>**User impact:** With Portworx versions prior to 2.6.2, there may have been false alarms about all NFS threads being busy when there were no exports. <br/><br/>**Resolution:** Portworx no longer processes the NFS pool stats when there are no NFS exports. |
+| PWX-16775 | The Google object store did not have pagination for object enumeration, which caused any list call to list everything in the bucket.<br/><br/>**User impact:** Cloudsnap backups and restores failed to start and the request timed out. Listing cloudsnaps through `pxctl` also timed-out.<br/><br/>**Resolution:** Added pagination to object enumeration with the Google object store. |
+| PWX-16796 | Proxy username and password were ignored as part of `PX_HTTP_PROXY` on Portworx Essentials causing license renewal to fail. <br/><br/>**User impact:** Portworx essentials clusters went into "license expired" mode with PX_HTTP_PROXY <br/><br/>**Resolution:** Portworx essentials now honors Username and Password fields given as part of `PX_HTTP_PROXY` to successfully make connections with proxy |
+| PWX-16072 | When Portworx was installed in PAYG mode, the cluster license expired after being unable to connect to that billing server instead of going into maintenance mode. <br/><br/>**User Impact:** When a PAYG node license expired, users had to recommission the node. <br/><br/>**Resolution:** Portworx PAYG nodes now enter maintenance mode correctly when the billing server is unreachable.| 
+| PWX-16429 | Adding a new drive using the `pxctl service drive add` command was failing due to an issue with applying labels on the new pool. <br/><br/>**User impact:** If users wanted to add a new Portworx pool to the node, their command to add a new drive using `pxctl service drive add` failed with an error message about labels being too long. This prevented users from creating new pools. <br/><br/>**Resolution:** The Kubernetes labels are being skipped to be applied to the backend storage pools. |
+| PWX-16206 | Portworx failed to correctly detect the value of the `maxStorageNodesPerZone` parameter when running on GKE. <br/><br/>**User impact:** When running on GKE with autoscaling enabled, Portworx did not detect the preferred value to use for the `maxStorageNodesPerZone` parameter for its cloud drives. As a result, Portworx would run without or with an incorrect value for the `maxStorageNodesPerZone` parameter. This resulted in issues when the cluster size was scaled and unintended nodes became become storage nodes. <br/><br/>**Resolution:** The calculation for the value of the `maxStorageNodesPerZone`parameter on the GKE autoscaling min pool size values has been fixed. In addition to this, if the minimum number of nodes in the cluster is lower than the total number of zones, and at least one Portworx node will now be made a storage node in a given zone. |
+| PWX-16554 | An incorrect check prevented HA level restoration for volumes with HA level 3 under some conditions during decommission operation.<br/<br/> **User impact:** Decommission operation failed to restore HA level for affected volumes if the volume had HA level 3 under some conditions. </br><br/>**Resolution:** When you decommission a node, Portworx now properly restores the HA level.  | 
+| PWX-16407 | DR migration sometimes became stuck in the "Active" state when Portworx restarted while migration was beginning . <br/><br/>**User impact:** Any additional DRs also became stuck and did not finish. <br/><br/>**Resolution:** Portworx now handles this situation better.| 
+| PWX-16495 | Currently, the KVDB lock is held over the Inspect API. If the remote node didn't respond, Portworx held the KVDB lock for more than 3 minutes and the node where the Attach was issued asserted. <br/><br/> **User impact:** The Portworx service could assert and restart if it tried to remotely detach a volume from a peer node but the request to do that took more than 3 minutes. <br/><br/>**Resolution:** Portworx will not assert and restart if such a request gets stuck or does not return within a given timeout. |
+| PWX-13527 | Internal KVDB startup would fail. This would usually require a wipe of the node and re-install. <br/><br/>**User impact:** Users saw the following error: "Operation cannot be fulfilled on configmaps". <br/><br/>**Resolution**: Portworx will now detect such errors received from Kubernetes and will retry the operation instead of exiting.	| 
+| PWX-16384 | When a node with a sharedv4 encrypted volume attached was rebooted, the volume was not re-exported over NFS for other nodes to consume. <br/><br/>**User impact:** Since it's an encrypted volume, it couldn't be attached without a passphrase. <br/><br/>**Resolution:** Portworx now triggers a restart of the app, which will reattach the encrypted sharedv4 volume. |
+| PWX-16729 | A particular race condition caused an unmount of a sharedv4 volume to succeed without actually removing the underlying NFS mountpoint. <br/><br/>**User impact:** This caused the pod using the sharedv4 volume to be stuck in the "Terminating" state. <br/><br/>**Resolution:** Portworx no longer experiences this race condition. |
+| PWX-16715  |In certain cloud deployments, API calls to the instance metadata service or the cloud management portals are blocked or routed through a proxy. <br/><br/>**User impact:** In these cases, Portworx calls to the cloud were blocked indefinitely, causing Portworx to fail to initialize. <br/><br/>**Resolution:** Portworx now invokes all the cloud and instance metadata APIs with a timeout and will avoid getting blocked indefinitely. | 
+| PWX-14101  | For certain providers like vSphere, when a cloud drive created by Portworx was deleted out of band, Portworx ignored it, created a new disk, and started as a brand new node. <br/><br/>**User impact:** This caused an issue if there were no additional licenses in the cluster. <br/><br/>**Resolution:** If a disk is deleted out of band or is moved to another datastore in vShpere, Portworx now errors-out and does not create new drives.| 
+| PWX-16465 | Portworx held a lock while performing operations in the `dm-crypt` layer, or while making an external KMS API call for encrypted volumes. If either of them took longer than the expected amount of time, Portworx asserted. <br/><br/>**User impact:** In certain scenarios, Portworx restarted while attaching encrypted volumes.<br/><br/>**Resolution:** Portworx will no longer assert if any calls get stuck in the "dm-crypt" layer or if the HTTPS calls to the KMS providers timeout. |
+| PWX-15043  |  The `pxctl volume inspect` command output did not show the "Mount Options" field for NFS proxy volumes. <br/><br/>**User Impact:** You could not see the "Mount Options" field for NFS proxy volumes, even if you explicitly provided the mount options while creating such a volume. <br/><br/>**Resolution:** The `pxctl volume inspect` command output now shows the "Mount Options" field for NFS proxy volumes. | 
+| PWX-16386 | On certain slower systems, a sharedv4 volume wasn't mounted over NFS as soon as it was exported on the server. <br/><br/>**User impact:** Portworx showed the `access denied by server` error. <br/><br/>**Resolution** Portworx now detects this error scenario and retries the NFS mount. | 
+| PWX-17477 | In clusters that have seen more than 3000 unsuccessful node add attempts, Portworx, on addition of another node running the 2.6.x release, encountered a node index overflow. <br/><br/<>**User Impact:** Other nodes in the cluster could dump a core. <br/><br/>**Resolution:** This patch fixes the node index allocation workflow and prevents the new node from joining the cluster. |
+
+
+
+### Known issues (Errata)
+
+Portworx is aware of the following issues, check future release notes for fixes on these issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-17217 | Portworx fails to exit maintenance mode after `drive add` operations showed as "done". <br/><br/>**User impact:** If a user restarts Portworx, the `add drive status` command may return “done” while the md reshape operation was still in progress. Even when the reshape is done, the in-core status of the mountpoint wont change, and users can't exit maintenance mode.<br/><br/>**Recommendations:** If you're stuck in maintenance mode as a result of this issue, you can restart Portworx to clear it. |
+| PWX-17531 | A port conflict between containerd and the secure port used by the PVC controller causes the controller to enter the "CrashLoopBackup" mode. <br/><br/>**User Impact:** Users running on Kubernetes clusters using containerd saw their Portworx PVC controller pods enter the "CrashLoopBackup" mode. <br/><br/>**Recommendations:** You can fix this issue by adding the `--secure-port=9031` flag to the `portworx-pvc-controller` deployment, which can be found in the namespace on which you installed Portworx (kube-system by default). If you are using a custom start port for the Portworx installation, add `30` to the configured start port and use that number for the `--secure-port` parameter (e.g. if using 10000, use 10030). |
+
+
 ## 2.6.1.6
 
 November 20, 2020
