@@ -64,6 +64,8 @@ The following issues have been fixed:
 | PWX-15043  |  The `pxctl volume inspect` command output did not show the "Mount Options" field for NFS proxy volumes. <br/><br/>**User Impact:** You could not see the "Mount Options" field for NFS proxy volumes, even if you explicitly provided the mount options while creating such a volume. <br/><br/>**Resolution:** The `pxctl volume inspect` command output now shows the "Mount Options" field for NFS proxy volumes. | 
 | PWX-16386 | On certain slower systems, a sharedv4 volume wasn't mounted over NFS as soon as it was exported on the server. <br/><br/>**User impact:** Portworx showed the `access denied by server` error. <br/><br/>**Resolution** Portworx now detects this error scenario and retries the NFS mount. | 
 | PWX-17477 | In clusters that have seen more than 3000 unsuccessful node add attempts, Portworx, on addition of another node running the 2.6.x release, encountered a node index overflow. <br/><br/<>**User Impact:** Other nodes in the cluster could dump a core. <br/><br/>**Resolution:** This patch fixes the node index allocation workflow and prevents the new node from joining the cluster. |
+| PWX-17206 | A part-probe inside the container took a long time to finish.<br/><br/>**User impact:** Portworx took a long time to reach the "Ready" state after a node restart. <br/><br/>**Resolution:** Portworx now uses a host-based part-probe to resolve this issue. |
+
 
 
 
