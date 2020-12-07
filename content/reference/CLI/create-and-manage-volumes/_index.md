@@ -537,3 +537,26 @@ To get extended info about the usage of your Portworx volumes, run the `pxctl vo
 ```text
 pxctl volume usage 13417687767517527
 ```
+
+## Understand copy-on-write features
+
+By default, Portworx uses features present in the underlying file system to take snapshots through copy-on-write and checksum storage blocks.
+
+When using the copy-on-write feature to take snapshots, overwriting a block does not update it in place. Instead, every overwrite allocates or updates a new block, and the filesystem metadata is updated to point to this new block. This technique is called redirect-on-write. When using this feature, a block overwrite almost always involves block updates in multiple areas: the target block, any linked indirect file blocks, filesystem metadata blocks, and filesystem metadata indirect file blocks. In a background process separate from the overwrite operation, the old block is freed only if it's not being referenced by a snapshot/clone.
+
+Alongside copy-on-write, the file system checksums all blocks to detect lost writes and stores the checksum values in a different location away from their associated data. 
+
+While these combined features increase the integrity of the data stored on the filesystem, they also increase the read and write overhead on the drives that use them, slowing down performance and increasing latency during file operations. 
+
+Depending on your use-case, you may wish to trade off the integrity copy-on-write features offer for increased performance and lower latency. You can do so on a per-volume basis through the `pxctl` command.
+
+### Disable copy-on-write features for a volume
+
+Enter the `pxctl volume update` command with the `--cow_ondemand off` flag, followed by the ID of the volume you want to disable copy-on-write features for:
+
+  ```text
+  pxctl volume update  --cow_ondemand off <volume-ID>
+  ```
+  ```output
+  Update Volume: Volume update successful for volume 850767800314736346
+  ```
