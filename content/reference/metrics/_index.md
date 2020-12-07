@@ -93,6 +93,12 @@ noicon: true
 | px_kvdb_getendpoints_requests_total | Total number of get endpoint requests from a node |
 | px_kvdb_defragment_requests_total | Total number of defragment requests from a node |
 
+## kvdb_health_state stats
+| Name | Description |
+| :--- | :--- |
+| px_kvdb_health_state_node_view | This node's kvdb state (1 = healthy, 2 = not healthy) |
+| px_kvdb_health_state_cluster_view | This node's view of other node's kvdb state (1 = healthy, 2 = not healthy) |
+
 ## network_io stats
 | Name | Description |
 | :--- | :--- |
@@ -170,11 +176,12 @@ noicon: true
 | px_px_cache_mode | Mode of the cache |
 | px_px_cache_migrate_promote | Number of blocks promoted to the cache |
 | px_px_cache_migrate_demote | Number of block demoted from the cache |
+| px_px_cache_io_mbps | Approx cache bandwidth from cache internal actions |
 
 ## rebalance stats
 | Name | Description |
 | :--- | :--- |
-| px_rebalance_rebalance job state | Rebalance job state (0 = pending, 1 = running, 2 = done, 3 = paused, 4 = cancelled) |
+| px_rebalance_rebalance_job_state | Rebalance job state (0 = pending, 1 = running, 2 = done, 3 = paused, 4 = cancelled) |
 | px_rebalance_provision_space_rebalanced_bytes_total | Total provisioned space rebalanced (only counts add (since remove has equal value as add)) |
 | px_rebalance_used_space_rebalanced_bytes_total | Total used space rebalanced (only counts add (since remove has equal value as add)) |
 | px_rebalance_volumes_rebalanced_total | Total volumes affected by rebalance operation |
