@@ -774,3 +774,127 @@ Pool 0 DELETED.
 {{<info>}}
 **NOTE:** New pools created after a pool deletion increment from the last pool ID. A new pool created after this example would have a pool ID of 2
 {{</info>}}
+
+## Control volume attachments for a node
+
+Portworx allows you to control volume attachments on a node. You can disable new volume attachments on a node by running the `pxctl service node cordon-attachments`. This operation is called as "cordoning attachments" for a node.
+
+You can re-enable volume attachments by running  `pxctl service node uncordon-attachments`. This operation is called as "uncordoning attachments" from a node.
+
+### Cordon attachments on a node
+
+1. Identify which node you want to cordon attachments from by entering the `pxctl cluster list` command: 
+   
+   ```
+   pxctl cluster list
+   ```
+   
+   Find the ID of your node in the first column:
+
+   ```output
+   Cluster ID: local-ddryeu-20-11-17-01-27-43-px-int
+   Cluster UUID: fd4fdefa-0830-4453-9f24-091e20d68ad1
+   Status: OK
+
+   Nodes in the cluster:
+   ID					SCHEDULER_NODE_NAME		DATA IP		CPU		MEM TOTAL	MEM FREE	CONTAINERS	VERSION			Kernel				OS			STATUS
+   1cfdb2a5-da08-4158-9883-7fa9e52c59e0	nathan-docs-root-lasher-3	70.0.55.225	3.193277	6.1 GB		4.5 GB		N/A		2.6.2.0-b5b1d0c		3.10.0-862.3.2.el7.x86_64	CentOS Linux 7 (Core)	Online
+   c7181271-c4fc-472a-9e5f-28b223b256a0	nathan-docs-root-lasher-0	70.0.31.114	12.827004	6.1 GB		4.5 GB		N/A		2.6.2.0-562f049		3.10.0-862.3.2.el7.x86_64	CentOS Linux 7 (Core)	Online
+   2c7dc008-147a-435d-a1ff-a2a1f157f6be	nathan-docs-root-lasher-2	70.0.59.32	3.109244	6.1 GB		4.5 GB		N/A		2.6.2.0-562f049		3.10.0-862.3.2.el7.x86_64	CentOS Linux 7 (Core)	Online
+   ```
+
+2. Enter the `pxctl service node cordon-attachments` command with the `--node string` flag followed by the ID of the node you want to cordon:
+
+   ```text
+   pxctl service node cordon-attachments --node <node-ID>
+   ```
+   ```output
+   Volume attachments cordoned on node 1cfdb2a5-da08-4158-9883-7fa9e52c59e0.
+   Note: Volumes which are already attached on this node will stay attached.
+   To drain existing attachments use: pxctl service node cordon-attachments submit --node 1cfdb2a5-da08-4158-9883-7fa9e52c59e0
+   ```
+
+### Uncordon attachments from a node
+
+To re-enable volume attachments on a node, enter the `pxctl service node uncordon-attachments` command with the `--node string` flag followed by the ID of the node you want to remove the cordon for:
+
+```text
+pxctl service node uncordon-attachments --node <node-ID>
+```
+```output
+Volume attachments re-enabled on node 1cfdb2a5-da08-4158-9883-7fa9e52c59e0.
+```
+
+## Drain volume attachments
+
+If you have a node with volumes attached to it, you can remove them using the `pxctl service node drain-attachments` command. This command executes volume drain operations as a background job, and will delete all the pods that are using the volumes which are attached on this node. 
+
+### Start volume attachment drain operations
+
+1. Identify which node you want to drain of sharedv4 volumes by entering the `pxctl cluster list` command: 
+   
+   ```
+   pxctl cluster list
+   ```
+   
+   Find the ID of your desired node in the first column:
+
+   ```output
+   Cluster ID: local-ddryeu-20-11-17-01-27-43-px-int
+   Cluster UUID: fd4fdefa-0830-4453-9f24-091e20d68ad1
+   Status: OK
+
+   Nodes in the cluster:
+   ID					SCHEDULER_NODE_NAME		DATA IP		CPU		MEM TOTAL	MEM FREE	CONTAINERS	VERSION			Kernel				OS			STATUS
+   1cfdb2a5-da08-4158-9883-7fa9e52c59e0	nathan-docs-root-lasher-3	70.0.55.225	3.193277	6.1 GB		4.5 GB		N/A		2.6.2.0-b5b1d0c		3.10.0-862.3.2.el7.x86_64	CentOS Linux 7 (Core)	Online
+   c7181271-c4fc-472a-9e5f-28b223b256a0	nathan-docs-root-lasher-0	70.0.31.114	12.827004	6.1 GB		4.5 GB		N/A		2.6.2.0-562f049		3.10.0-862.3.2.el7.x86_64	CentOS Linux 7 (Core)	Online
+   2c7dc008-147a-435d-a1ff-a2a1f157f6be	nathan-docs-root-lasher-2	70.0.59.32	3.109244	6.1 GB		4.5 GB		N/A		2.6.2.0-562f049		3.10.0-862.3.2.el7.x86_64	CentOS Linux 7 (Core)	Online
+   ```
+
+2. enter the submit command:
+   
+   ```text
+   pxctl service node drain-attachments submit --node <node-id>
+   ```
+   ```
+   Drain volume attachments request: 624258766140697912 submitted successfully for node 1cfdb2a5-da08-4158-9883-7fa9e52c59e0
+   For latest status: pxctl service node drain-attachments status --job-id 624258766140697912
+   ```
+
+   {{<info>}}
+   **NOTE:** The drain command will disable new volume attachments on the node. To re-enable attachments on this node, run the `pxctl service node uncordon-attachments` command.
+   {{</info>}}
+
+### List volume attachment drain operations
+
+If you want to a list of drain operations Portworx has performed, enter the `pxctl service node drain-attachments list` command:
+
+```
+pxctl service node drain-attachments list
+```
+```
+JOB			TYPE			STATE	CREATE TIME
+624258766140697912	DRAIN_ATTACHMENTS	DONE	2020-11-23T22:49:45.769448246Z
+```
+
+### Monitor volume attachment drain operations
+
+To monitor specific jobs, enter the `pxctl service node drain-attachments status` command with `--job-id` flag, followed by the ID of the specific job you want to see the status for: 
+
+```
+pxctl service node drain-attachments status --job-id 624258766140697912
+```
+```
+Drain Volume Attachments Summary:
+
+NodeID                   : 1cfdb2a5-da08-4158-9883-7fa9e52c59e0
+Job ID                   : 624258766140697912
+Job State                : DONE
+Last updated             : Mon, 23 Nov 2020 22:50:17 UTC
+Status                   : all volume attachments removed from this node
+
+Job summary
+Total number of volumes attached on this node                   : 0
+Total number of volume attachments removed from this node       : 0
+Total number of pending volume attachments                      : 0
+```
