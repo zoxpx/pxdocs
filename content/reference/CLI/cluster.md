@@ -338,3 +338,77 @@ Successfully updated cluster wide options
 | OverCommitPercent | The maximum storage percentage volumes can provision against backing storage | Any integer over 100 |
 | SnapReservePercent | The percent of the previously specified maximum storage storage percentage that is reserved for snapshots | Any integer under 100 |
 | labelSelector | The key values for labels or node IDs you wish to apply this rule to | Enumerated string: `node` with a comma separated list of node IDs <br/> Any existing label key and value. |
+
+## Configure cache flush operations
+
+On systems with a large amount of memory and heavy IO activity, system memory and page cache experience a lot of activity, resulting in significant memory pressure. On these systems, the Portworx storage process may slow down or get stuck trying to allocate memory. 
+
+To prevent Portworx from slowing or getting stuck, you can preemptively drop system memory pages which are not currently in use, i.e. pages which are inactive and not dirty.
+
+You can configure cache flush operations for all nodes on the cluster using flags with the `pxctl cluster options update` command. 
+
+{{<info>}}
+**NOTE:** 
+
+* This command is intended for advanced users only. 
+* This operation drops all cached pages for all devices and may impact read performance; you should only apply the config when necessary.
+* Legacy support for cache flush was enabled through an environment variable: `PX_ENABLE_CACHE_FLUSH="true"`. As long as the cache flush feature has not been enabled, Portworx still checks for this env var when a node starts and will enable cache flushing if it's set to `true`. If you disable cache flush using the `pxctl` command, cache flush will be disabled regardless of whether the env var is set to `true` or not.  
+{{</info>}}
+
+### Enable cache flush operations
+
+Enter the `pxctl cluster options update` command with the `--cache-flush` flag set to `enabled`:
+
+```text
+pxctl cluster options update --cache-flush enabled
+```
+```output
+Successfully updated cluster wide options
+```
+
+### Disable cache flush operations
+
+Enter the `pxctl cluster options update` command with the `--cache-flush` flag set to `disabled`:
+
+```text
+pxctl cluster options update --cache-flush disabled
+```
+```output
+Successfully updated cluster wide options
+```
+
+### Configure the cache flush interval
+
+Enter the `pxctl cluster options update` command with the `--cache-flush-seconds` flag followed by your desired cache flush interval in seconds:
+
+```text
+pxctl cluster options update --cache-flush-seconds 60
+```
+```output
+Successfully updated cluster wide options
+```
+
+{{<info>}}
+**NOTE:** You can specify the `--cache-flush-seconds` flag alongside the `--cache-flush` flag in a single command:
+
+```text
+pxctl cluster options update --cach-flush enabled --cache-flush-seconds 300
+```
+{{</info>}}
+
+### Check cache flush configuration
+
+To see if cache flush is enabled and see what the current interval is, enter the `pxctl cluster options list` command:
+
+```text
+pxctl cluster options list
+```
+```output
+
+...
+
+Cache flush                                             : enabled
+Cache flush interval in seconds                         : 30
+```
+
+
