@@ -2,7 +2,7 @@
 title: Disable pool caching
 keywords: storage pool, pool caching, px-cache
 description:
-weight: 400
+weight: 6
 hidden: true
 ---
 
@@ -73,17 +73,17 @@ You can use the following commands to check if caching is enabled:
 ## Disable pool caching
 
 
-1. Enter maintenance mode:
+1. Enter pool maintenance mode:
 
-	```text
-	pxctl service maintenance --enter
-	```
+    ```text
+    pxctl service pool maintenance --enter
+    ```
 
-	```output
-	This is a disruptive operation, PX will restart in maintenance mode.
-	Are you sure you want to proceed ? (Y/N): y
-	Entering Maintenance mode...
-	```
+    ```output
+    Pool transition operation will restart PX.
+    Are you sure you want to proceed ? (Y/N): Y
+    Pool transition request submitted.
+    ```
 
 2. If your cache is running in the default `writeback` mode, you must flush your cache before disabling it:
 
@@ -113,15 +113,16 @@ You can use the following commands to check if caching is enabled:
     Pool 0 detached cache successfully
     ```
 
-4. Exit maintenance mode:
+4. Exit pool maintenance mode:
 
-	```text
-	pxctl service maintenance --exit
-	```
-
-	```output
-	Exiting Maintenance mode...
-	```
+    ```text
+    pxctl service pool maintenance --exit
+    ```
+    ```output
+    Pool transition operation will restart PX.
+    Are you sure you want to proceed ? (Y/N): Y
+    Pool transition request submitted.
+    ```
 
 5. At this point, you can run the `pxctl service pool cache status` command to see if caching is disabled:
 

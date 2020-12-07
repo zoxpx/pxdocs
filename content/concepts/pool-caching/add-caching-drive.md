@@ -2,7 +2,7 @@
 title: Add a caching drive to a storage pool
 keywords: storage pool, pool caching, px-cache
 description:
-weight: 200
+weight: 2
 hidden: true
 ---
 

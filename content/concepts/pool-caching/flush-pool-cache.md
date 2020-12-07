@@ -1,8 +1,8 @@
 ---
-title: Enable pool caching
+title: Flush a pool's cache
 keywords: storage pool, pool caching, px-cache
 description:
-weight: 4
+weight: 5
 hidden: true
 ---
 
@@ -47,7 +47,7 @@ You can use the following commands to check if caching is disabled:
 		Total Capacity	:  384 GiB
 	```
 
-2. Run the `pxctl service pool cache status` command with the id of your storage pool as a parameter:
+2. Enter the `pxctl service pool cache status` command with the ID of your storage pool:
 
 	```text
 	pxctl service pool cache status 0
@@ -71,8 +71,7 @@ You can use the following commands to check if caching is disabled:
 		Tunables: migration_threshold=20480
 	```
 
-
-## Enable pool caching
+## Flush a pool's cache
 
 1. Enter pool maintenance mode:
 
@@ -86,20 +85,38 @@ You can use the following commands to check if caching is disabled:
     Pool transition request submitted.
     ```
 
+2. Enter the `pxctl service pool cache flush` command, specifying the `<pool_id>` of the pool you want to flush the cache of:
 
-2.  Enter the `pxctl service pool cache enable` command, specifying the `<pool_id>` of the pool you want to disable caching for:
+    `pxctl service pool cache flush <pool_id>`
 
-    `pxctl service pool cache enable <pool_id>`
+	Depending on how many dirty blocks are in the cache, the operation will either run immediately, or in the background:
 
-    The following example enables caching for a pool with an ID of `0`:
+    * The following example runs immediately and flushes the cache on pool `0`:
 
-    ```text
-    pxctl service pool cache enable 0
-    ```
+        ```text
+        pxctl service pool cache flush 0
+        ```
+      	```output
+      	Pool 0 has completed flush successfully
+      	```
 
-    ```output
-    Pool 0 attached cache successfully
-    ```
+    * The following example runs in the background and flushes the cache on pool `0`:
+
+        ```text
+        pxctl service pool cache flush 0
+        ```
+      	```output
+      	Pool 0 flush cache initiated(has 12 dirty blocks)
+      	```
+
+		You can check the status of a background cache flush operation by entering the `pxctl service pool cache flush` command with the pool ID and the `-o status` flag:
+
+		```text
+		pxctl service pool cache flush 0 -o status
+		```
+		```output
+		Pool 0 has completed flush successfully
+		```
 
 4. Exit pool maintenance mode:
 
@@ -111,23 +128,3 @@ You can use the following commands to check if caching is disabled:
     Are you sure you want to proceed ? (Y/N): Y
     Pool transition request submitted.
     ```
-
-4. At this point you can run the `pxctl service pool cache status` command to see if caching is enabled:
-
-	```text
-	PX Cache Configuration and Status:
-	Pool ID:  0
-		Enabled:  true
-		Members:  [/dev/sdc]
-		TotalBlocks: 71660
-		UsedBlocks: 10
-		DirtyBlocks: 6
-		ReadHits: 13
-		ReadMisses: 10
-		WriteHits: 14
-		WriteMisses: 8
-		BlockSize: 1048576
-		Mode: writeback
-		Policy: smq
-		Tunables: migration_threshold=20480
-	```

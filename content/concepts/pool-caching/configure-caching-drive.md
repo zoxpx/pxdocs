@@ -2,7 +2,7 @@
 title: Configure a storage pool's caching properties
 keywords: storage pool, pool caching, px-cache
 description:
-weight: 300
+weight: 3
 hidden: true
 ---
 
@@ -12,16 +12,16 @@ Before you can configure a storage pool's cache, pool caching must be **disabled
 
 ## Configure a storage pool's cache
 
-1. Enter maintenance mode:
+1. Enter pool maintenance mode:
 
     ```text
-    pxctl service maintenance --enter
+    pxctl service pool maintenance --enter
     ```
 
     ```output
-    This is a disruptive operation, PX will restart in maintenance mode.
-    Are you sure you want to proceed ? (Y/N): y
-    Entering Maintenance mode...
+    Pool transition operation will restart PX.
+    Are you sure you want to proceed ? (Y/N): Y
+    Pool transition request submitted.
     ```
 
 2. Enter the `pxctl service pool cache configure` command, specifying:
@@ -57,7 +57,7 @@ Before you can configure a storage pool's cache, pool caching must be **disabled
     **Note:** Use caution when running this command. If you misconfigure the `tunable` arguments, Portworx may behave unexpectedly or perform poorly.
     {{</info>}}
 
-3. Run the `pxctl service pool cache status` command  with the id of the pool as a parameter to check if the new settings are applied:
+3. Run the `pxctl service pool cache status` command with the id of the pool as a parameter to check if the new settings are applied:
 
     ```text
     pxctl service pool cache status 0
@@ -81,12 +81,13 @@ Before you can configure a storage pool's cache, pool caching must be **disabled
       Tunables: migration_threshold=2048000
     ```
 
-4. Exit maintenance mode:
+4. Exit pool maintenance mode:
 
     ```text
-    pxctl service maintenance --exit
+    pxctl service pool maintenance --exit
     ```
-
     ```output
-    Exiting Maintenance mode...
+    Pool transition operation will restart PX.
+    Are you sure you want to proceed ? (Y/N): Y
+    Pool transition request submitted.
     ```
