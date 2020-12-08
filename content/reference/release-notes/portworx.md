@@ -14,6 +14,7 @@ December 7, 2020
 
 * [Announcing a new command](/reference/cli/cloud-drives-asg/#transfer-cloud-drives-to-a-storageless-node) for transferring a Portworx cloud driveset from one storage node to a storageless node. This command is currently supported only for Google Cloud Platform, and is not supported when Portworx is installed using an internal KVDB. 
 * Portworx now allows you to [drain/remove volume attachments](/reference/cli/service/#drain-volume-attachments) from a node through the `pxctl service node drain-attachments` command.
+* Portworx [now supports](/key-management/ibm-key-protect/) IBM Hyper Protect Crypto Services (IBM HPCS) as a key management store.
 
 ### Improvements
 
