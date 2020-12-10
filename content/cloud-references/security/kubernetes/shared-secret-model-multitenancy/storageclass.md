@@ -6,8 +6,8 @@ weight: 40
 
 # StorageClass for non-CSI
 
-The following StorageClass enables your tenants to create volumes
-using their token stored in a secret in their namespace.
+The following StorageClass allows your tenants to create volumes
+using their token stored in a secret in their namespace:
 
 ```text
 kind: StorageClass

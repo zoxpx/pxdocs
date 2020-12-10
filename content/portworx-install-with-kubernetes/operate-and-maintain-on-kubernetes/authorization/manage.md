@@ -8,10 +8,10 @@ series: k8s-op-maintain-auth
 
 ## Creating volumes
 Portwox authorization provides a method of protection for creating volumes
-through Kubernetes. PVCs must refer to a StorageClass which point to the
+through Kubernetes. PVCs must refer to a StorageClass which points to the
 Kubernetes Secret containing the token for the user.
 
-For more information please see [Securing your Portworx system](/cloud-references/security/).
+For more information, please see [Securing your Portworx system](/cloud-references/security/).
 
 ## Stork
 When using CRDs consumed by Stork, you must use the same authorization model
