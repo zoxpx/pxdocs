@@ -1,4 +1,4 @@
-FROM alpine:latest 
+FROM alpine:latest
 MAINTAINER Kai Davenport <kai@portworx.com>
 
 ENV HUGO_VERSION 0.42.1
