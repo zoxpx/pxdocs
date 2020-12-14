@@ -66,7 +66,7 @@ This data locality is important for performance and simplified operations. Howev
 
 The benefits of running Hadoop with Portworx are:
 
-* Enable Hadoop to run on a cloud-native storage infrastructure that is managed the same way, whether you run on-premise or in any public cloud
+* Enable Hadoop to run on a cloud-native storage infrastructure that is managed the same way, whether you run on-premises or in any public cloud
 * Faster recovery times during a failure for Data, Name and Journal nodes.
 * Increased resource utilization because multiple Hadoop clusters can be safely run on the same hosts
 * Improved Hadoop performance with data locality or hyperconvergence
@@ -75,7 +75,7 @@ The benefits of running Hadoop with Portworx are:
 
 ![Running Hadoop in containers with Portworx](/img/px-hadoop-docker-containers-architecture.png)
 
-#### Enable Hadoop to run on a cloud-native storage infrastructure that is managed the same way, whether you run on-premise or in any public cloud
+#### Enable Hadoop to run on a cloud-native storage infrastructure that is managed the same way, whether you run on-premises or in any public cloud
 
 The goal behind creating a PaaS is to host multiple application deployments on the same set of hardware resources regardless of the infrastructure type \(private or public cloud\). This way you get maximum resource utilization for any application on any platform.
 

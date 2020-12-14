@@ -22,7 +22,7 @@ Portworx parses these labels to update it's understanding of the cluster topolog
 |     failure-domain.beta.kubernetes.io/region | Region in which the node resides|
 |     failure-domain.beta.kubernetes.io/zone | Zone in which the node resides|
 
-### On-premise
+### On-premises
 
 You can label Kubernetes nodes with following labels to inform Portworx about region and zone of the nodes.
 
