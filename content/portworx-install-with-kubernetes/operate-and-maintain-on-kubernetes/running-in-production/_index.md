@@ -60,7 +60,7 @@ Portworx supports automatic management of EBS volumes. If you are using AWS ASG 
 
 #### Portworx node topology
 
-Portworx replicated volumes distributes data across failure domains. For on-premise installations, this ensures that a power failure to a rack does not result in data unavailability. For cloud deployments this ensures data availability across zones.
+Portworx replicated volumes distributes data across failure domains. For on-premises installations, this ensures that a power failure to a rack does not result in data unavailability. For cloud deployments this ensures data availability across zones.
 
 #### Topology in cloud environments
 
@@ -85,7 +85,7 @@ POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
 
 This node is in us-east-1. If Portworx is started in other zones, then when a volume with greater than 1 replication factor is created, it will have the replicas automatically created in other nodes in other zones.
 
-#### Topology in on-premise deployments:
+#### Topology in on-premises deployments:
 
 Failure domains in terms of RACK information can be passed in as described [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology)
 

@@ -64,4 +64,4 @@ Perform these steps on any machine where you have the bosh CLI.
 
 ## Installing Portworx
 
-For on-premise clusters, [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) supports VMware vSphere.
+For on-premises clusters, [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) supports VMware vSphere.

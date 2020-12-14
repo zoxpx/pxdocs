@@ -2,7 +2,7 @@
 title: Install Portworx on-prem using the DaemonSet
 linkTitle: Install using the DaemonSet
 weight: 3
-keywords: Install, on-premise, kubernetes, k8s, air gapped
+keywords: Install, on-premises, kubernetes, k8s, air gapped
 description: How to install Portworx with Kubernetes
 noicon: true
 ---

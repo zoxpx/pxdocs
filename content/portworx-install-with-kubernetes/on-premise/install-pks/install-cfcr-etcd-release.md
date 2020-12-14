@@ -1,6 +1,6 @@
 ---
 title: Installing Etcd using CFCR etcd release
-keywords: Install, on-premise, PKS, Pivotal Container Service, kubernetes, k8s, air gapped, etcd, bosh, cfcr
+keywords: Install, on-premises, PKS, Pivotal Container Service, kubernetes, k8s, air gapped, etcd, bosh, cfcr
 hidden: true
 ---
 

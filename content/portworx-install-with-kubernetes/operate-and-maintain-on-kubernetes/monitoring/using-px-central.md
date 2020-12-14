@@ -114,7 +114,7 @@ In the Portworx spec generator page on [PX-Central](https://central.portworx.com
         kubectl get svc -n kube-system  px-lighthouse
         ```
     * Now go to `http://<external_ip>`
-* If you are running **on premise**, Lighthouse can be accessed using a NodePort service
+* If you are running **on-premises**, Lighthouse can be accessed using a NodePort service
     * First get the node port that lighthouse is using
 
         ```text

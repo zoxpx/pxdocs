@@ -3,7 +3,7 @@ title: Install Portworx on PKS using the Operator
 linkTitle: Install using the Operator
 logo: /logos/pks.png
 weight: 2
-description: Install, on-premise, PKS, Pivotal Container Service, kubernetes, k8s, air gapped
+description: Install, on-premises PKS, Pivotal Container Service, kubernetes, k8s, air gapped
 keywords: portworx, PKS, kubernetes
 noicon: true
 ---
