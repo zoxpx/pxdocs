@@ -12,6 +12,7 @@ Portworx has been certified with the following Anthos versions:
 * Anthos 1.1
 * Anthos 1.2
 * Anthos 1.3 
+* Anthos 1.4
 
 
 ## Architecture
