@@ -8,6 +8,7 @@ IgnoreURLs:
 - "https://docs.mesosphere.com"
 - "https://www.katacoda.com"
 - "https://katacoda.com"
+- "https://twitter.com/portwx"
 IgnoreDirs:
 - "css"
 - "icons"
