@@ -28,14 +28,14 @@ The steps in this document walk you through the process of installing Portworx a
 1. Export your Kubernetes version by entering the following command:
 
     ```text
-    KBVER=$(kubectl version --short | awk -Fv '/Server Version: / {print $3}')
+    KBVER=$(kubectl version --short | awk -F'[v+_-]' '/Server Version: / {print $3}')
     ```
 
     {{<info>}}
-If the current node doesn't have `kubectl` installed, you can set the `KBVER` variable manually by running `export KBVER=<YOUR_KUBERNETES_VERSION>`. For example, if your Kubernetes version is `1.17.5`, run the following command:
+If the current node doesn't have `kubectl` installed, you can set the `KBVER` variable manually by running `export KBVER=<YOUR_KUBERNETES_VERSION>`. For example, if your Kubernetes version is `1.19.3`, run the following command:
 
 ```text
-KBVER=1.17.5
+KBVER=1.19.3
 ```
     {{</info>}}
 
@@ -54,7 +54,7 @@ Skip these steps if you are not using the Portworx Operator.
 1. Download the version manifest
 
     ```text
-    wget -O versions https://install.portworx.com/$PXVER/version
+    curl -o versions https://install.portworx.com/$PXVER/version
     ```
 
 2. Store the version manifest
@@ -215,13 +215,13 @@ Specify the `PX_HTTP_PROXY` variable in the environment variables tab of the spe
 Append the `&misc=-disable-sharedv4` parameter to the end of the URL created by the spec generator. For example, the following output `kubectl` command:
 
 ```
-kubectl apply -f 'https://install.portworx.com/2.5?mc=false&kbver=1.17.3&b=true&c=px-cluster-0f123456-a12b-345c-678d-e90f1ab234c2&stork=true&st=k8s'
+kubectl apply -f 'https://install.portworx.com/2.5?mc=false&kbver=1.19.3&b=true&c=px-cluster-0f123456-a12b-345c-678d-e90f1ab234c2&stork=true&st=k8s'
 ```
 
 becomes:
 
 ```
-kubectl apply -f 'https://install.portworx.com/2.5?mc=false&kbver=1.17.3&b=true&c=px-cluster-0f123456-a12b-345c-678d-e90f1ab234c22&stork=true&st=k8s&misc=-disable-sharedv4'
+kubectl apply -f 'https://install.portworx.com/2.5?mc=false&kbver=1.19.3&b=true&c=px-cluster-0f123456-a12b-345c-678d-e90f1ab234c22&stork=true&st=k8s&misc=-disable-sharedv4'
 ```
 
 ### Create an install spec
