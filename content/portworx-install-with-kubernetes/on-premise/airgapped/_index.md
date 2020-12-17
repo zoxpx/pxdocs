@@ -15,14 +15,14 @@ This document walks you through the process of installing Portworx into an air-g
 1. Export your Kubernetes version by entering the following command:
 
     ```text
-    KBVER=$(kubectl version --short | awk -Fv '/Server Version: / {print $3}')
+    KBVER=$(kubectl version --short | awk -F'[v+_-]' '/Server Version: / {print $3}')
     ```
 
     {{<info>}}
-If the current node doesn't have `kubectl` installed, you can set the `KBVER` variable manually by running `export KBVER=<YOUR_KUBERNETES_VERSION>`. For example, if your Kubernetes version is `1.17.5`, run the following command:
+If the current node doesn't have `kubectl` installed, you can set the `KBVER` variable manually by running `export KBVER=<YOUR_KUBERNETES_VERSION>`. For example, if your Kubernetes version is `1.19.3`, run the following command:
 
 ```text
-KBVER=1.17.5
+KBVER=1.19.3
 ```
     {{</info>}}
 
