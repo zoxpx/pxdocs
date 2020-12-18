@@ -6,13 +6,14 @@ description: Find out how to upgrade Portworx for OpenShift 4.3 using Operator.
 weight: 4
 ---
 
-Before you can upgrade your OpenShift environment to 4.3, you must upgrade Portworx to 2.3.5 and expose a new port range so that Portworx can continue to operate. Perform the following steps to upgrade Portworx to 2.3.5 in preparation for upgrading your OpenShift environment:
+Before you can upgrade your OpenShift environment to 4.3, you must upgrade Portworx to 2.3.5 (or newer) and expose a new port range so that Portworx can continue to operate.
+Please perform the following steps:
 
-1. From the OpenShift console, upgrade the Portworx Operator to version 1.1.1 newer.
+1. From the OpenShift console, upgrade the Portworx Operator to version 1.1.1 or newer.
 
-2. [Upgrade Portworx](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/upgrade-operator) to 2.3.5.
+2. [Upgrade Portworx](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/upgrade-operator) to 2.3.5 or newer.
 
-3. Verify that all of your nodes have upgraded to 2.3.5:
+3. Verify that all of your nodes have upgraded Portworx version (e.g. 2.3.5):
 
     ```text
     oc get storagenode -n kube-system
@@ -24,7 +25,7 @@ Before you can upgrade your OpenShift environment to 4.3, you must upgrade Portw
     node-3   8c182888-280a-4738-abf8-3bccaadeb359   Online   2.3.5.0-a5a0ba1   3m
     ```
 
-4. Open the port ranges on your cloud provider and operating system to allow traffic on ports 17001 - 17020.
+4. Open the port ranges on your cloud provider and cluster nodes to allow network traffic on ports 17001 - 17020.
 
 5. Change your Portworx cluster's start port:
 
@@ -36,13 +37,21 @@ Before you can upgrade your OpenShift environment to 4.3, you must upgrade Portw
     2. Change the `startPort` value in your `StorageCluster` spec to `17001`:
 
         ```text
-        apiVersion: core.libopenstorage.org/v1alpha1	      
-        kind: StorageCluster	      
-        metadata:	      
-          name: portworx	        
-          namespace: kube-system	        
-        spec:	      
+        apiVersion: core.libopenstorage.org/v1alpha1
+        kind: StorageCluster
+        metadata:
+          name: portworx
+          namespace: kube-system
+        spec:
           startPort: 17001
         ```
 
-Once Portworx is running on 2.3.5 and you've changed the port range, you may upgrade OpenShift to 4.3.
+6. Remove "immutable" flags from Portworx configuration files, as well as the ostree-snapshots:
+
+    ```text
+    if [ -f /etc/pwx/.private.json ] && [ -d /ostree/deploy/rhcos/deploy ]; then
+      chattr -i /etc/pwx/.private.json /ostree/deploy/rhcos/deploy/*/etc/pwx/.private.json;
+    fi
+    ```
+
+Once these operations have been completed, you may upgrade OpenShift to 4.3 or newer.
