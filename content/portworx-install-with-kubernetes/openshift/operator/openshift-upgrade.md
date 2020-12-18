@@ -49,8 +49,8 @@ Please perform the following steps:
 6. Remove "immutable" flags from Portworx configuration files, as well as the ostree-snapshots:
 
     ```text
-    if [ -f /etc/pwx/.private.json ] && [ -d /ostree/deploy/rhcos/deploy ]; then
-      chattr -i /etc/pwx/.private.json /ostree/deploy/rhcos/deploy/*/etc/pwx/.private.json;
+    if [ -f /etc/pwx/.private.json ] && [ -d /ostree/deploy/rhcos/deploy ]; then \
+      chattr -i /etc/pwx/.private.json /ostree/deploy/rhcos/deploy/*/etc/pwx/.private.json; \
     fi
     ```
 
