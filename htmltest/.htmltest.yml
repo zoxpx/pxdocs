@@ -9,6 +9,7 @@ IgnoreURLs:
 - "https://www.katacoda.com"
 - "https://katacoda.com"
 - "https://twitter.com/portwx"
+- "https://learn.hashicorp.com/consul"
 IgnoreDirs:
 - "css"
 - "icons"
