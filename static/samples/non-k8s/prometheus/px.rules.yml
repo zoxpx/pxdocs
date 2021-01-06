@@ -1,5 +1,8 @@
+# EDITOR's NOTE: Please keep rules in this file in sync with static/samples/k8s/prometheus/06-portworx-rules.yaml
+groups:
 - name: px.rules
   rules:
+  # --- Portworx Volume Alerts ---
   - alert: PortworxVolumeUsageCritical
     expr: 100 * (px_volume_usage_bytes / px_volume_capacity_bytes) > 80
     for: 5m
@@ -22,8 +25,8 @@
       summary: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}%
         used.
   - alert: PortworxVolumeWillFill
-    expr: (px_volume_usage_bytes / px_volume_capacity_bytes) > 0.7 and predict_linear(px_cluster_disk_available_bytes[1h],
-      14 * 86400) < 0
+    expr: (px_volume_usage_bytes / px_volume_capacity_bytes) > 0.7
+      and predict_linear(px_cluster_disk_available_bytes[1h], 14 * 86400) < 0
     for: 10m
     labels:
       issue: Disk volume {{$labels.volumeid}} on {{$labels.host}} is predicted to
@@ -34,9 +37,9 @@
         full and has been predicted to fill within 2 weeks for more than 10 minutes.
       summary: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over 70%
         full and is predicted to fill within 2 weeks.
+  # --- Portworx Storage Alerts ---
   - alert: PortworxStorageUsageCritical
-    expr: 100 * (1 - px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes)
-      < 20
+    expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes)) < 20
     for: 5m
     labels:
       issue: Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is high.
@@ -46,8 +49,7 @@
         80% used for more than 10 minutes.
       summary: Portworx storage capacity is at {{$value}}% used.
   - alert: PortworxStorageUsage
-    expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes))
-      < 30
+    expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes)) < 30
     for: 5m
     labels:
       issue: Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is critical.
@@ -58,8 +60,8 @@
       summary: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}%
         used.
   - alert: PortworxStorageWillFill
-    expr: (100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes)))
-      < 30 and predict_linear(px_cluster_disk_available_bytes[1h], 14 * 86400) < 0
+    expr: (100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes))) < 30
+      and predict_linear(px_cluster_disk_available_bytes[1h], 14 * 86400) < 0
     for: 10m
     labels:
       issue: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is predicted
@@ -70,6 +72,7 @@
         70% full and has been predicted to fill within 2 weeks for more than 10 minutes.
       summary: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 70%
         full and is predicted to fill within 2 weeks.
+  # --- Portworx Cluster Alerts ---
   - alert: PortworxStorageNodeDown
     expr: max(px_cluster_status_nodes_storage_down) > 0
     for: 5m
@@ -89,13 +92,56 @@
       description: Portworx cluster Quorum Unhealthy for more than 5 minutes.
       summary: Portworx Quorum Unhealthy.
   - alert: PortworxMemberDown
-    expr: (max(px_cluster_status_cluster_size) - count(px_cluster_status_cluster_size))
-      > 0
+    expr: (max(px_cluster_status_cluster_size) - count(px_cluster_status_cluster_size)) > 0
     for: 5m
     labels:
       issue: Portworx cluster member(s) is(are) down.
       severity: critical
     annotations:
-      description: '{{$value}} Portworx cluster member(s) has(have) been down for
+      description: 'Portworx cluster member(s) has(have) been down for
         more than 5 minutes.'
       summary: Portworx cluster member(s) is(are) down.
+  # --- Portworx License Alerts ---
+  - alert: PortworxLicenseExpiry
+    # Tuneable license-expiry alert, reported by each node individually, works for both regular and floating licenses.
+    # - note: if #days drops into negative, the license has already expired
+    # - ALERT-based alternatives:
+    #   expr: px_alerts_licenseexpired_total > 0 (LicenseExpired) Raised when regular license has expired
+    #   expr: px_alerts_licenseexpiring_total > 0 (LicenseExpiring) Raised when regular license is about to expire
+    #   expr: px_alerts_licenseleaseexpired_total > 0 (LicenseLeaseExpired) Raised when floating license has expired on a node
+    #   expr: px_alerts_licenseleaseexpiring_total > 0 (LicenseLeaseExpiring) Raised when floating license is about to expire on a node
+    expr: px_node_status_license_expiry < 5
+    labels:
+      issue: Portworx license (or license lease) expiring.
+      severity: warning
+    annotations:
+      summary: Portworx license (or license lease) expiring in {{$value}} days.
+      description: Portworx node {{$labels.node}} of cluster {{$labels.cluster}} reports
+        its license (or license lease) expiring in {{$value}} days.
+  - alert: PortworxLicenseServerDown
+    expr: px_alerts_licenseserverdown_total > 0
+    labels:
+      severity: warning
+      issue: Portworx license server is unreachable
+    annotations:
+      summary: Portworx instance {{$labels.instance}} is not able to reach the license server.
+      description: Portworx license server is unreachable. Please check license
+        server health and connection to license server.
+  - alert: PortworxLicenseSetupError
+    expr: px_alerts_floatinglicensesetuperror > 0
+    labels:
+      issue: Error setting up Portworx license
+      severity: critical
+    annotations:
+      summary: Failed to set up Portworx license on {{$labels.instance}}.
+      description: Failed to set up Portworx license on {{$labels.instance}}.
+        Please check licenses and/or license server.
+  # --- Miscellanies Alerts ---
+  - alert: PXBackupError
+    expr: px_backup_stats_status == 2
+    labels:
+      issue: Cloudsnap backup error
+      severity: warning
+    annotations:
+      description: Failed to take backup for volume {{$labels.volumename}} with error {{$labels.error_string}}.
+      summary: Failed to take backup for volume {{$labels.volumename}}.

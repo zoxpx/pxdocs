@@ -4,8 +4,8 @@ Alert PortworxVolumeUsageCritical
   FOR 5m
   LABELS {
     severity = "critical",
-    issue="Portworx volume {{$labels.volumeid}} usage on {{$labels.host}} is high.",
-    }
+    issue = "Portworx volume {{$labels.volumeid}} usage on {{$labels.host}} is high.",
+  }
   ANNOTATIONS {
     summary = "Portworx volume capacity is at {{$value}}% used.",
     description = "Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over 80% used for more than 10 minutes.",
@@ -16,8 +16,8 @@ Alert PortworxVolumeUsage
   FOR 5m
   LABELS {
     severity = "warning",
-    issue="Portworx volume {{$labels.volumeid}} usage on {{$labels.host}} is critical.",
-    }
+    issue = "Portworx volume {{$labels.volumeid}} usage on {{$labels.host}} is critical.",
+  }
   ANNOTATIONS {
     summary = "Portworx volume {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}% used.",
     description = "Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over 70% used for more than 10 minutes.",
@@ -28,8 +28,8 @@ Alert PortworxVolumeWillFill
   FOR 10m
   LABELS {
     severity = "warning",
-    issue="Disk volume {{$labels.volumeid}} on {{$labels.host}} is predicted to fill within 2 weeks.",
-    }
+    issue = "Disk volume {{$labels.volumeid}} on {{$labels.host}} is predicted to fill within 2 weeks.",
+  }
   ANNOTATIONS {
     summary = "Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over 70% full and is predicted to fill within 2 weeks.",
     description = "Disk volume {{$labels.volumeid}} on {{$labels.host}} is over 70% full and has been predicted to fill within 2 weeks for more than 10 minutes.",
@@ -41,8 +41,8 @@ Alert PortworxStorageUsageCritical
   FOR 5m
   LABELS {
     severity = "critical",
-    issue="Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is high.",
-    }
+    issue = "Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is high.",
+  }
   ANNOTATIONS {
     summary = "Portworx storage capacity is at {{$value}}% used.",
     description = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 80% used for more than 10 minutes.",
@@ -53,8 +53,8 @@ Alert PortworxStorageUsage
   FOR 5m
   LABELS {
     severity = "warning",
-    issue="Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is critical.",
-    }
+    issue = "Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is critical.",
+  }
   ANNOTATIONS {
     summary = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}% used.",
     description = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 70% used for more than 10 minutes.",
@@ -65,21 +65,21 @@ Alert PortworxStorageWillFill
   FOR 10m
   LABELS {
     severity = "warning",
-    issue="Portworx storage {{$labels.volumeid}} on {{$labels.host}} is predicted to fill within 2 weeks.",
-    }
+    issue = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is predicted to fill within 2 weeks.",
+  }
   ANNOTATIONS {
     summary = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 70% full and is predicted to fill within 2 weeks.",
     description = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 70% full and has been predicted to fill within 2 weeks for more than 10 minutes.",
   }
 
-#Portworx Cluster Alerts
+# --- Portworx Cluster Alerts ---
 Alert PortworxStorageNodeDown
   IF max(px_cluster_status_nodes_storage_down) > 0
   FOR 5m
   LABELS {
     severity = "critical",
-    issue="Portworx Storage Node is Offline.",
-    }
+    issue = "Portworx Storage Node is Offline.",
+  }
   ANNOTATIONS {
     summary = "Portworx Storage Node is Offline.",
     description = "Portworx Storage Node has been offline for more than 5 minutes.",
@@ -90,8 +90,8 @@ Alert PortworxQuorumUnhealthy
   FOR 5m
   LABELS {
     severity = "critical",
-    issue="Portworx Quorum Unhealthy.",
-    }
+    issue = "Portworx Quorum Unhealthy.",
+  }
   ANNOTATIONS {
     summary = "Portworx Quorum Unhealthy.",
     description = "Portworx cluster Quorum Unhealthy for more than 5 minutes.",
@@ -102,53 +102,51 @@ Alert PortworxMemberDown
   FOR 5m
   LABELS {
     severity = "critical",
-    issue="Portworx cluster member(s) is(are) down.",
-    }
+    issue = "Portworx cluster member(s) is(are) down.",
+  }
   ANNOTATIONS {
     summary = "Portworx cluster member(s) is(are) down.",
     description = "{{$value}} Portworx cluster member(s) has(have) been down for more than 5 minutes.",
   }
 
-Alert PortworxLicenseLeaseExpired
-  IF px_alerts_licenseleaseexpired_total > 0
+# --- Portworx License Alerts ---
+
+# Tuneable license-expiry alert, reported by each node individually, works for both regular and floating licenses.
+# - note: if #days drops into negative, the license has already expired
+# - ALERT-based alternatives:
+#   IF px_alerts_licenseexpired_total > 0 (LicenseExpired) Raised when regular license has expired
+#   IF px_alerts_licenseexpiring_total > 0 (LicenseExpiring) Raised when regular license is about to expire
+#   IF px_alerts_licenseleaseexpired_total > 0 (LicenseLeaseExpired) Raised when floating license has expired on a node
+#   IF px_alerts_licenseleaseexpiring_total > 0 (LicenseLeaseExpiring) Raised when floating license is about to expire on a node
+Alert PortworxLicenseExpiry
+  IF px_node_status_license_expiry < 5
   LABELS {
-    severity = "critical",
-    issue="Portworx license lease has expired",
-    }
+    severity = "warning",
+    issue = "Portworx license (or license lease) expiring.",
+  }
   ANNOTATIONS {
-    summary = "Portworx license lease has expired on {{$labels.instance}}. Please check licenses on license server.",
-    description = "Portworx license lease for {{$labels.instance}} has expired."
+    summary = "Portworx license (or license lease) expiring in {{$value}} days.",
+    description = "Portworx node {{$labels.node}} reports its license (or license lease) expiring in {{$value}} days.",
   }
 
-Alert PortworxLicenseServerUnreachable
-  IF px_alerts_node_could_not_contact_license_server_total > 0
-    LABELS {
-      severity = "critical",
-      issue="Portworx license server is unreachable",
-      }
-    ANNOTATIONS {
-      summary = "Portworx license server is unreachable. Please check license server health and connection to license server.",
-      description = "Portworx instance {{$labels.instance}} is not able to reach the license server.."
-    }
-
-Alert PortworxLicenseLeaseExpiring
-  IF px_alerts_licenseleaseexpiring_total > 0
+Alert PortworxLicenseServerDown
+  IF px_alerts_licenseserverdown_total > 0
   LABELS {
-    severity = "critical",
-    issue="Portworx license lease is expiring",
-    }
+    severity = "warning",
+    issue = "Portworx license server is unreachable.",
+  }
   ANNOTATIONS {
-    summary = "Portworx license lease is about to expire on {{$labels.instance}}. Please check licenses on license server.",
-    description = "Portworx license lease for {{$labels.instance}} is expiring."
+    summary = "Portworx license server is unreachable.",
+    description = "Portworx instance {{$labels.instance}} is not able to reach the license server. Please check license server health and network connection to license server.",
   }
 
-Alert PXFloatingLicenseSetupError
-  IF px_alerts_floating_license_setup_error > 0
+Alert PortworxLicenseSetupError
+  IF px_alerts_floatinglicensesetuperror > 0
   LABELS {
     severity = "critical",
-    issue="Error setting up Portworx license server on the cluster",
-    }
+    issue = "Error setting up Portworx license",
+  }
   ANNOTATIONS {
-    summary = "Failed to acquire Portworx license on {{$labels.instance}}.",
-    description = "Error getting Portworx license on {{$labels.instance}}. Please check licenses on license server."
+    summary = "Failed to set up Portworx license on {{$labels.instance}}.",
+    description = "Failed to set up Portworx license on {{$labels.instance}}. Please check licenses and/or license server",
   }
