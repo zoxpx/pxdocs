@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.2.1
+
+January 7, 2020
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-17725 | Migration cloud snapshots sometimes failed due to overlapping extents when being transferred to  the cloud. <br/><br/> **User impact:**  Users saw migrations partially pass. <br/><br/>**Resolution:** Cloud snapshots now handle the transfer of overlapping extents more gracefully to achieve successful cloud snapshots and migrations. |
+
 ## 2.6.2
 
 December 7, 2020
