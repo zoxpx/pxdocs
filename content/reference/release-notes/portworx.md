@@ -8,7 +8,7 @@ series: release-notes
 
 ## 2.6.2.1
 
-January 7, 2020
+January 7, 2021
 
 ### Fixes
 
