@@ -6,6 +6,30 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.3
+
+January 15, 2021
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-17546 | Portworx deployments no longer use network ports 6060 and 6061. |
+| PWX-16412| Added support for proxy via the `PX_HTTP_PROXY` environment variable for usage-based reporting APIs. |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-17663 | In certain scenarios where the PV to PVC mapping was changed out of band, Portworx showed incorrect "Volume Consumers" under the volume inspect command output. <br/><br/>**User impact:** Users saw incorrect values in the volume inspect command output. <br/><br/>**Resolution:** Portworx now correctly shows values for "Volume Consumers" in the inspect command output. |
+| PWX-17155 | Sharedv4 volume consumers were tracked based on nodeID, which changes when a storageless node becomes storage node. <br/><br/>**User impact:** The sharedv4 pods running on a storageless lost access to the mounted sharedv4 volume when that node that was restarted to assume role of storage node. <br/><br/>**Resolution:** Portworx now uses nodeIP instead of nodeID to track the sharedv4 clients as the node IP remains the same when the role changes from storageless to storage node. |
+| PWX-17699 | Portworx created the incorrect type of vSphere disks when using Portworx disk provisioning. <br/><br/>**User impact:** Portworx incorrectly parsed the `lazyzeroedthick` disk type provided by users in the vSphere cloud drives spec, and instead created the default `eagerzeroedthick` disks. <br/><br/>**Resolution:** Portworx now correctly parses the spec and created thes correct disk type. |
+| PWX-17450 | Volume mount operations inside pods on destination clusters sometimes failed after async DR/Migration. <br/><br/>**User impact:** Users sometimes needed to restart their pods after DR/Migration to correct failed volume mounts. <br/><br/>**Resolution:** These volume mount operations no longer fail. |
+
 ## 2.6.2.1
 
 January 7, 2021
