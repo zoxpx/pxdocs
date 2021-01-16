@@ -4,7 +4,7 @@ weight: 7
 keywords: Install, PX-Central, On-prem, license, GUI, k8s
 description: Learn how to upgrade PX-Central On-prem.
 noicon: true
-series: k8s-op-maintain-1-1-0
+series: k8s-op-maintain-1-2-0
 hidden: true
 ---
 

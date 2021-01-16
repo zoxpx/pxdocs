@@ -4,7 +4,7 @@ weight: 5
 keywords: add cluster, PX-Central, On-prem, license, GUI, k8s
 description: Learn how to add clusters to your PX-Central on-prem dashboard.
 noicon: true
-series: k8s-op-maintain
+series: k8s-op-maintain-1-0
 hidden: true
 ---
 

@@ -4,7 +4,7 @@ description: Reference information for the PX-Central on-prem upgrade script
 keywords: upgrade, reference,
 weight: 8
 noicon: true
-series: k8s-op-maintain
+series: k8s-op-maintain-1-0-3
 hidden: true
 ---
 

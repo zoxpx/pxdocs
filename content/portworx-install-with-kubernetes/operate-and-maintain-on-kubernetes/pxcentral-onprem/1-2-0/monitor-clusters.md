@@ -5,7 +5,7 @@ weight: 4
 keywords: monitor cluster, PX-Central, On-prem, license, GUI, k8s
 description: Learn how to monitor your clusters using PX-Central on-prem.
 noicon: true
-series: k8s-op-maintain-1-1-0
+series: k8s-op-maintain-1-2-0
 hidden: true
 ---
 

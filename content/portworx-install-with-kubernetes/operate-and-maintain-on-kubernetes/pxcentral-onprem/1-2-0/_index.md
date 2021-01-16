@@ -5,7 +5,7 @@ weight: 1
 keywords: Operate, PX-Central, On-prem, license, GUI, k8s
 description: Learn about PX-Central On-premises and the operations you can perform with it
 noicon: true
-series: k8s-op-maintain-1-1-0
+series: k8s-op-maintain-1-2-0
 hidden: true
 ---
 
@@ -15,4 +15,3 @@ PX-Central on-premises is a graphical user interface that allows you to monitor 
 * Add and manage Portworx licenses through the license server
 * View and manage your volumes
 * Take snapshots
-

@@ -4,7 +4,7 @@ description: Upgrade your version of PX-Central on-premises
 keywords: upgrade,
 weight: 10
 noicon: true
-series: k8s-op-maintain
+series: k8s-op-maintain-1-0-3
 hidden: true
 ---
 
