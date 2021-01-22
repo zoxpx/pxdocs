@@ -21,7 +21,7 @@ If you're using the Portworx Operator, you can uninstall Portworx by adding a de
 1. Enter the `kubectl edit` command to modify your storage cluster:
 
       ```text
-      kubectl edit -n kube-system <storagecluster_name>
+      kubectl edit -n kube-system storagecluster <storagecluster_name>
       ```
 
 2. Modify your `StorageCluster` object, adding the `deleteStrategy` field with either the `Uninstall` or `UninstallAndWipe` type:

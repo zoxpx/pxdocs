@@ -5,7 +5,7 @@ weight: 5
 keywords: monitor cluster, PX-Central, On-prem, license, GUI, k8s
 description: Learn how to display the list of cloud snapshots in PX-Central on-prem.
 noicon: true
-series: k8s-op-maintain
+series: k8s-op-maintain-1-1-0
 hidden: true
 ---
 

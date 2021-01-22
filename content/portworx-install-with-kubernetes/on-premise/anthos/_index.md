@@ -9,10 +9,12 @@ description: How to install Portworx on Anthos
 
 Portworx has been certified with the following Anthos versions:
 
-* Anthos 1.1
-* Anthos 1.2
-* Anthos 1.3 
-* Anthos 1.4
+* 1.1
+* 1.2
+* 1.3 
+* 1.4
+* 1.5
+* 1.6, including Anthos on bare metal
 
 
 ## Architecture

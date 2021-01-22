@@ -5,7 +5,7 @@ keywords: add cluster, PX-Central, On-prem, license, GUI, k8s
 description: Learn how to add clusters to your PX-Central on-prem dashboard.
 noicon: true
 hidden: true
-series: k8s-op-maintain
+series: k8s-op-maintain-1-0-3
 ---
 
 Once you've installed PX-Central, you're ready to add the clusters you'll manage with it.

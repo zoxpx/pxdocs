@@ -5,7 +5,7 @@ weight: 1
 keywords: Operate, PX-Central, On-prem, license, GUI, k8s
 description: Learn about PX-Central On-premises and the operations you can perform with it
 noicon: true
-series: k8s-op-maintain
+series: k8s-op-maintain-1-1-0
 hidden: true
 ---
 

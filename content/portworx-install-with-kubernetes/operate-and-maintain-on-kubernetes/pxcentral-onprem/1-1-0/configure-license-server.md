@@ -5,7 +5,7 @@ weight: 2
 keywords: PX-Central, On-prem, license, GUI, k8s
 description: Learn how to add licenses to your clusters using PX-Central On-prem.
 noicon: true
-series: k8s-op-maintain
+series: k8s-op-maintain-1-1-0
 hidden: true
 ---
 

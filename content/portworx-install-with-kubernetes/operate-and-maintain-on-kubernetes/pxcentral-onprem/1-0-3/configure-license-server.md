@@ -6,7 +6,7 @@ keywords: PX-Central, On-prem, license, GUI, k8s
 description: Learn how to add licenses to your clusters using PX-Central On-prem.
 noicon: true
 hidden: true
-series: k8s-op-maintain
+series: k8s-op-maintain-1-0-3
 ---
 
 Your PX-Central on-prem deployment includes a highly-available license server and backup server by default. From PX-Central, you can add and manage licenses for any of your attached Portworx clusters.

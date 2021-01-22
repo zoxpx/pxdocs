@@ -4,7 +4,7 @@ description: Upgrade your version of PX-Central on-premises
 keywords: Upgrade, PX-Central, On-prem, license, GUI, k8s
 weight: 1
 noicon: true
-series: k8s-op-maintain
+series: k8s-op-maintain-1-1-0
 hideSections: true
 hidden: true
 ---

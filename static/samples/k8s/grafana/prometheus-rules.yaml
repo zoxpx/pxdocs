@@ -196,3 +196,36 @@ spec:
       labels:
         issue: Portworx volume resize failure.
         severity: critical
+  - name: Portworx License Alerts
+    rules:
+    - alert: PortworxLicenseExpiry
+      # Tuneable license-expiry alert, reported by each node individually, works for both regular and floating licenses.
+      # - note: if #days drops into negative, the license has already expired
+      # - ALERT-based alternatives:
+      #   expr: px_alerts_licenseexpired_total > 0 (LicenseExpired) Raised when regular license has expired
+      #   expr: px_alerts_licenseexpiring_total > 0 (LicenseExpiring) Raised when regular license is about to expire
+      #   expr: px_alerts_licenseleaseexpired_total > 0 (LicenseLeaseExpired) Raised when floating license has expired on a node
+      #   expr: px_alerts_licenseleaseexpiring_total > 0 (LicenseLeaseExpiring) Raised when floating license is about to expire on a node
+      annotations:
+        description: Portworx node {{$labels.node}} of cluster {{$labels.cluster}} reports its license (or license lease) expiring in {{$value}} days.
+        summary: Portworx license (or license lease) expiring in {{$value}} days.
+      expr: px_node_status_license_expiry < 5
+      labels:
+        issue: Portworx license (or license lease) expiring.
+        severity: warning
+    - alert: PortworxLicenseServerDown
+      annotations:
+        description: Portworx license server is unreachable. Please check license server health and connection to license server.
+        summary: Portworx instance {{$labels.instance}} is not able to reach the license server.
+      expr: px_alerts_licenseserverdown_total > 0
+      labels:
+        issue: Portworx license server is unreachable
+        severity: warning
+    - alert: PortworxLicenseSetupError
+      annotations:
+        description: Failed to set up Portworx license on {{$labels.instance}}. Please check licenses and/or license server.
+        summary: Failed to set up Portworx license on {{$labels.instance}}.
+      expr: px_alerts_floatinglicensesetuperror > 0
+      labels:
+        issue: Error setting up Portworx license
+        severity: critical
